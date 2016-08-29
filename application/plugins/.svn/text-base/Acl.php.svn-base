@@ -1,0 +1,148 @@
+<?php
+
+/**
+ * Plugin Access control list
+ * @author Juan Garfias
+ * @version 1.0 Portal Factura Electrónica
+ * Create July,30th 2014
+ *
+ */
+class Plugin_Acl extends Zend_Controller_Plugin_Abstract {
+
+public function preDispatch(Zend_Controller_Request_Abstract $request)
+    {    
+    	if (isset ( $_SESSION ['data_user_agency'] ['id_tipo_usuario'] )){
+    		$id_tipo_usuario = $_SESSION ['data_user_agency'] ['id_tipo_usuario'];
+    		$id_gvc = @$_SESSION['user_permission_values']['gestion_viajes_corporativos'];
+    		$id_tax = @$_SESSION['user_permission_values']['Comprobantes_fiscales_proveedores'];
+    		$id_account = @$_SESSION['user_permission_values']['contabilidad'];
+    	} else {
+    		$id_tipo_usuario = '';
+    		$id_gvc = '';
+    		$id_tax = '';
+    		$id_account = '';
+    	}
+    	
+    	$actionName=$request->getActionName();
+    		
+    	$controllerName=$request->getControllerName();
+    	 
+    	/** Creating the ACL object */
+    	$acl = new Zend_Acl();
+    	
+    	/** Creating Roles */
+    	$acl->addRole(new Zend_Acl_Role('superadmin'))
+    	->addRole(new Zend_Acl_Role('admin'))
+    	->addRole(new Zend_Acl_Role('guest'))
+    	->addRole(new Zend_Acl_Role('custom'));
+    	
+    	// 		Resources
+    	$acl->add(new Zend_Acl_Resource('icaav'));
+    	$acl->add(new Zend_Acl_Resource('gvc'));
+    	$acl->add(new Zend_Acl_Resource('suppliers'));
+    	$acl->add(new Zend_Acl_Resource('accountancy'));
+    	//echo "<pre>".print_r($_SESSION,true)."</pre><hr/>";die;
+    	
+    	$acl->allow('superadmin', 'icaav');
+    	$acl->allow('admin', 'icaav');
+    	$acl->allow('guest', 'icaav');
+    	$acl->allow('custom', 'icaav');
+    	
+    	// 		GVC MODULE
+    	if( $id_gvc == 1 ){
+    		$id_gvc = 1;
+    		$id_sells = 1;
+    		$id_bi = 1;
+    		switch ($_SESSION ['user_permission_values'] ['sub_gvc']){
+    			case '1':
+    				$roleName = 'superadmin';
+    				$acl->allow('superadmin', 'gvc');
+    				break;
+    			case '2':
+    				$roleName = 'admin';
+    				$acl->allow('admin', 'gvc', 'index');
+    				$acl->allow('admin', 'gvc', 'flights');
+    				break;
+    			case '3':
+    				$roleName = 'guest';
+    				$acl->allow('guest', 'gvc', 'index');
+    				$acl->allow('guest', 'gvc', 'flights');
+    				break;
+    			case '4':
+    				$roleName = 'custom';
+    				$acl->allow('custom', 'gvc', 'index');
+    				break;
+    			default:
+    				$roleName = '';
+    				break;
+    		}
+    	} else {$id_gvc = 0;$id_sells=0;$id_bi=0;}
+    	// 		CFP MODULE
+    	if( $id_tax == 1 ){
+    		$id_suppliers = 1;
+    		switch ($_SESSION['user_permission_values']['sub_cfp']){
+    			case '1':
+    				$roleName = 'superadmin';
+    				$acl->allow('superadmin', 'suppliers');
+    				break;
+    			case '2':
+    				$roleName = 'admin';
+    				$acl->allow('admin', 'suppliers');
+    				break;
+    			case '3':
+    				$roleName = 'guest';
+    				$acl->allow('guest', 'suppliers');
+    				break;
+    			case '4':
+    				$roleName = 'custom';
+    				$acl->allow('custom', 'suppliers');
+    				break;
+    			default:
+    				$roleName = '';
+    				break;
+    		}
+    	} else $id_suppliers = 0;
+    	// 		AVSA MODULE
+    	if( $id_account == 1 ){
+    		$id_accountancy = 1;
+    		switch ($_SESSION['user_permission_values']['sub_conta']){
+    			case '1':
+    				$roleName = 'superadmin';
+    				$acl->allow('superadmin', 'accountancy');
+    				break;
+    			case '2':
+    				$roleName = 'admin';
+    				$acl->allow('admin', 'accountancy');
+    				break;
+    			case '3':
+    				$roleName = 'guest';
+    				$acl->allow('guest', 'accountancy');
+    				break;
+    			case '4':
+    				$roleName = 'custom';
+    				$acl->allow('custom', 'accountancy');
+    				break;
+    			default:
+    				$roleName = '';
+    				break;
+    		}
+    	} else $id_accountancy = 0;
+    	
+    	$_SESSION ['permission'] ['gvc'] = $id_gvc;
+    	$_SESSION ['permission'] ['suppliers'] = $id_suppliers;
+    	$_SESSION ['permission'] ['sells'] = $id_sells;
+    	$_SESSION ['permission'] ['bi'] = $id_bi;
+    	$_SESSION ['permission'] ['accountancy'] = $id_accountancy;
+// 		echo $roleName.'-'. $controllerName.'-'. $actionName;die;
+ 		// if the resource exists in the ACL
+		if ( $acl->has($controllerName, $actionName)==true ) {
+	 
+			$isAllowed = $acl->isAllowed(@$roleName, $controllerName, $actionName);	 	                            
+			if(!$isAllowed){							 
+				$request->setControllerName("error");
+				$request->setActionName("denied");
+	 		}
+		}  
+	 				
+	}	
+}

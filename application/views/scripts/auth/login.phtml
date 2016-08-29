@@ -1,0 +1,16 @@
+<div class="container">
+      <form  class="form-signin" method="<?php echo $this->form->getMethod() ?>" action="<?php echo $this->form->getAction()?>">
+        <h2 class="form-signin-heading">Bienvenido, ingrese sus credenciales.</h2>
+        <label for="inputEmail" class="sr-only">Usuario</label>
+        <?php echo $this->form->username;?>
+        <label for="inputPassword" class="sr-only">Password</label>
+          <?php echo $this->form->password;?>
+        <?php if ( $this->error != ''){?>
+        <div class="alert alert-danger" role="alert"><?= $this->error ?></div>
+        <?php }?>
+        
+        <?php echo $this->form->submit;?>
+        
+      </form>
+	
+</div> <!-- /container -->

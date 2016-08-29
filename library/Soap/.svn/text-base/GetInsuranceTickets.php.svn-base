@@ -1,0 +1,130 @@
+<?php
+/**
+ * Xml
+* @author Juan Garfias Vázquez
+* Create August, 5th 2014
+*/
+Class GetInsuranceTickets{
+
+	/**
+	 * Xml Response training datas
+	 * @author Juan Garfias 
+	 * @param string $xmlRequest
+	 */
+	public function Execute( $xmlRequest ) {
+
+		// Initializing the params array to sent it to the information Hotel model
+		$xmlResponse = '';
+		$xmlClass = new Xml();
+		
+		$validate = $xmlClass->XmlValidate($xmlRequest);
+
+		if($validate !== TRUE){
+			//return $validate;
+		}
+		
+		$xml = new DOMDocument();
+		$xml->loadXML($xmlRequest);
+		
+		$responseElement = $xml->documentElement;
+		$path = new DOMXPath($xml);
+		 
+		$getCredentials = $path->query('//GetInsuranceTicketsRequest', $responseElement);
+		$user = $getCredentials->item(0)->getAttribute('user');
+		$password = $getCredentials->item(0)->getAttribute('password');
+		
+		//$login= new Model_DbTable_XmlAccess();
+		// Validate Login
+		$pass = sha1($password);
+		$xmlAcceso = new Model_DbTable_XmlAccess();
+		$dataAccess = $xmlAcceso->getUser($user,$pass);
+		
+		if ($dataAccess['activo'] != 1) {
+			// Error 1031
+			$xmlResponse = $xmlClass->XmlError(1031);
+			return $xmlResponse;
+		} else {
+			// Get the account data to xml services
+			$id_agencia = $dataAccess['id_agencia'];
+		}
+
+
+		
+		
+		$getTicketNumber = $path->query('//TicketNumber', $responseElement);
+		$ticketNumber = trim($getTicketNumber->item(0)->textContent);
+		
+		$getDateOfPurchase = $path->query('//DateOfPurchase', $responseElement);
+		$dateOfPurchase = trim($getDateOfPurchase->item(0)->textContent);
+		
+		//$searchParam = $getType->item(0)->textContent;
+		
+		$defineQueryType='unselected';
+		
+		if( trim($ticketNumber) == '' && strlen($dateOfPurchase)==10) {
+			$defineQueryType='date';
+		} else if(trim($ticketNumber) != ''){
+			$defineQueryType='ticket';
+		}
+		
+		// Evaluate if the params are correct.
+		if ( $defineQueryType == 'unselected' ){
+			// Error 1171
+			$xmlResponse = $xmlClass->XmlError(1171);
+			return $xmlResponse;
+		}
+		
+		$agency= new Application_Model_DbTable_Agencys();
+		$dataAgency= $agency->getAgencyById($id_agencia);
+		$rfc=$dataAgency['rfc'];
+		
+		$searchParamsTickes=array(
+							'rfc'=>$rfc,
+							'tipo'=>$defineQueryType,
+							'ticket'=>$ticketNumber,
+							'date'=>$dateOfPurchase
+							);
+		
+		$resultSearch=new Application_Model_DbTable_Tickets();
+		$result = $resultSearch->getInsurancetickets( $searchParamsTickes );
+		
+		if(count($result)==0){
+			// Error 1181
+			$xmlResponse = $xmlClass->XmlError(1181);
+			return $xmlResponse;
+		}
+		
+		$xmlResponse = '<?xml version="1.0" encoding="UTF-8"?>';
+		$xmlResponse .= '<GetInsuranceTicketsResponse>';
+
+		$xmlResponse.= '<TicketList>';		
+		
+		foreach ( $result as $ticket ){
+			$xmlResponse.= '<Ticket>';
+			$xmlResponse.= '<Number><![CDATA['.$ticket['numero_boleto'].']]></Number>';
+			$xmlResponse.= '<RFC><![CDATA['.trim($ticket['rfc_receptor']).']]></RFC>';
+			$xmlResponse.= '<DateOfPurchase>'.substr ($ticket['fecha_compra'],0,10).'</DateOfPurchase>';
+			$xmlResponse.= '<PurchaseAmount>'.$ticket['monto_compra'].'</PurchaseAmount>';
+			$xmlResponse.= '<PassengerName><![CDATA['.$ticket['nombre_pasajero'].']]></PassengerName>';
+			$xmlResponse.= '<Route><![CDATA['.$ticket['ruta'].']]></Route>';
+			$xmlResponse.= '<IATANumber>'.$ticket['numero_iata'].'</IATANumber>';
+			$xmlResponse.= '<AmountOfInsurance>'.$ticket['importe_seguro'].'</AmountOfInsurance>';
+			$xmlResponse.= '<Company><![CDATA['.$ticket['empresa'].']]></Company>';
+			$xmlResponse.= '<Street><![CDATA['.$ticket['calle'].']]></Street>';
+			$xmlResponse.= '<OutsideNumber><![CDATA['.$ticket['exterior'].']]></OutsideNumber>';
+			$xmlResponse.= '<InternalNumber><![CDATA['.$ticket['interior'].']]></InternalNumber>';
+			$xmlResponse.= '<DelegationOrMunicipality><![CDATA['.$ticket['deleg_municipio'].']]></DelegationOrMunicipality>';
+			$xmlResponse.= '<Cologne><![CDATA['.$ticket['colonia'].']]></Cologne>';
+			$xmlResponse.= '<City><![CDATA['.$ticket['ciudad'].']]></City>';
+			$xmlResponse.= '<Estate><![CDATA['.$ticket['estado'].']]></Estate>';
+			$xmlResponse.= '<Country><![CDATA['.$ticket['pais'].']]></Country>';
+			$xmlResponse.= '<CP>'.$ticket['cp'].'</CP>';
+			$xmlResponse.= '</Ticket>';
+		}
+		$xmlResponse .= '</TicketList>';
+		$xmlResponse .= '</GetInsuranceTicketsResponse>';
+
+		return $xmlResponse;
+	}
+}
+?>

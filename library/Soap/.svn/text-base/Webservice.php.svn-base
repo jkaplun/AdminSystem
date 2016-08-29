@@ -1,0 +1,175 @@
+<?php
+require_once "Soap.php";
+/**
+* Webservice Server
+*
+* @copyright  Copyright (c) 2009-2014 Travel Net World Servicio y Turismo S.A. de C.V.  
+* @author	  Jorge Kaplun	
+* Create July, 8th 2014	 	 
+*  
+*/
+Class Webservice
+{
+	/**
+	 * Training web service
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 */
+	public function trainingWebService($xmlRequest) {
+		require_once "XmlTraining.php";
+		$xmlTraining = new XmlTraining();
+		$xmlResponse = $xmlTraining->Execute($xmlRequest);
+	
+		return $xmlResponse;
+	}
+	
+	/**
+	 * Get Tickets With Travel insurance.
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 * Create August, 5th 2014
+	 */
+	public function getInsuranceTickets($xmlRequest) {
+		require_once "GetInsuranceTickets.php";
+		$xmlGetInsuranceTickets = new GetInsuranceTickets();
+		$xmlResponse = $xmlGetInsuranceTickets->Execute($xmlRequest);
+	
+		return $xmlResponse;
+	}
+	
+
+	/**
+	 * Add Tickets With Travel insurance.
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 * Create August, 14th 2014
+	 */
+	public function addInsuranceTickets($xmlRequest) {
+		require_once "AddInsuranceTickets.php";
+		$xmlAddInsuranceTickets = new AddInsuranceTickets();
+		$xmlResponse = $xmlAddInsuranceTickets->Execute($xmlRequest);
+	
+		return $xmlResponse;
+	}
+	
+	/**
+	 * Get CFDI from de DB
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 */
+	public function getCFDISuppliers($xmlRequest) {
+		require_once "GetCFDISuppliers.php";
+		$getSuppliers = new GetCFDISuppliers();
+		$xmlResponse = $getSuppliers->Execute($xmlRequest);
+	
+		return $xmlResponse;
+	}
+	
+	/**
+	 * Update Payment Status
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 */
+	public function updatePaymentStatusCFDI($xmlRequest) {
+		require_once "UpdatePaymentStatusCFDI.php";
+		$updateCFDI = new UpdatePaymentStatusCFDI();
+		$xmlResponse = $updateCFDI->Execute($xmlRequest);
+	
+		return $xmlResponse;
+	}
+	
+	
+	/**
+	 * Get search of avaiable folios for Icaav.
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 */
+	public function availableFolios($xmlRequest) {
+		$classNameFile='AvailableFolios';
+		require_once $classNameFile.".php";
+		$webService = new $classNameFile();
+		$xmlResponse = $webService->Execute($xmlRequest);
+
+		return $xmlResponse;
+	}
+	
+	/**
+	 * Add one folio to the client.
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 */
+	public function addFolio($xmlRequest) {
+		$classNameFile='AddFolio';
+		require_once $classNameFile.".php";
+		$webService = new $classNameFile();
+		$xmlResponse = $webService->Execute($xmlRequest);
+	
+		return $xmlResponse;
+	}
+	
+	/**
+	 * Get configuration values for the icaav compilation.
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 */
+	public function getCompilationValues($xmlRequest) {
+		$classNameFile='GetCompilationValues';
+		require_once $classNameFile.".php";
+		$webService = new $classNameFile();
+		$xmlResponse = $webService->Execute($xmlRequest);
+	
+		return $xmlResponse;
+	}
+	
+	/**
+	 * Update the number of folios used from icaav to the admin.
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 */
+	public function syncFolios($xmlRequest) {
+		$classNameFile='SyncFolios';
+		require_once $classNameFile.".php";
+		$webService = new $classNameFile();
+		$xmlResponse = $webService->Execute($xmlRequest);
+	
+		return $xmlResponse;
+	}
+	
+
+	/**
+	 * Update the number of folios used from icaav to the admin.
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 */
+	public function portalUserAdmin($xmlRequest) {
+		$classNameFile='PortalUserAdmin';
+		require_once $classNameFile.".php";
+		$webService = new $classNameFile();
+		$xmlResponse = $webService->Execute($xmlRequest);
+	
+		return $xmlResponse;
+	}
+	
+}
+
+?>

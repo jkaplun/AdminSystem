@@ -1,0 +1,189 @@
+<?php
+/**
+ * Get CFDIs downloaded from email
+ * BookingHotel
+ * The purpose of this is make the booking
+ * @author Juan Garfias Vazquez
+ * Create May 07, 2015
+ * Modified:
+*/
+Class GetCFDISuppliers{
+
+	/**
+	 * Xml Response training datas
+	 * @author Juan Garfias 
+	 * @param string $xmlRequest
+	 */
+	public function Execute($xmlRequest){
+
+		// Initializing the params array to sent it to the information Hotel model
+		$params = array(
+				'PaymentStatus'=>'',
+				'RFC'=>'',
+				'DateType'=>'',
+				'FromDate'=>'',
+				'ToDate'=>'',
+				'AuthorizedStatus'=>'',
+				'CFDIReceivedStatus'=>'',
+				'StatusPurchaseOrder'=>'',
+				'GetXML'=>'',
+				'GetPDF'=>'',
+				'UUID'=>'',
+				'id_empresa_icaav_web'=>''	
+		);
+		$xmlResponse = '';
+		$xmlClass = new Xml();
+		
+		$validate = $xmlClass->XmlValidate($xmlRequest);
+		
+		if($validate !== TRUE){
+			//return $validate;
+		}
+		
+		$xml = new DOMDocument();
+		$xml->loadXML($xmlRequest);
+		
+		$responseElement = $xml->documentElement;
+		$path = new DOMXPath($xml);
+			
+		$getCredentials = $path->query('//GetCFDISuppliersRequest', $responseElement);
+		$user = $getCredentials->item(0)->getAttribute('user');
+		$password = $getCredentials->item(0)->getAttribute('password');
+		
+		//$login= new Model_DbTable_XmlAccess();
+		// Validate Login
+		$pass = sha1($password);
+		$xmlAcceso = new Model_DbTable_XmlAccess();
+		$dataAccess = $xmlAcceso->getPortalUser($user,$pass);
+		
+		// Making the response structure
+				
+		if ($dataAccess['activo'] != 1) {
+			// Error 1031
+			$xmlResponse = $xmlClass->XmlError(1031);
+			return $xmlResponse;
+		} else {
+			// Get the account data to xml services
+			$params2['id_empresa_icaav_web']= $dataAccess['id_empresa_icaav_web'];
+			/*
+			if ( trim($dataAccess['id_empresa_icaav_web']) == '') {
+				// Error 1031
+				//$xmlResponse = $xmlClass->XmlError(1031);
+				//return $xmlResponse;
+			}*/
+		}
+
+		$xmlValue = $path->query('//PaymentStatus', $responseElement);
+		$params['PaymentStatus'] = trim($xmlValue->item(0)->textContent);
+		
+		$xmlValue = $path->query('//RFC', $responseElement);
+		$params['RFC'] = trim($xmlValue->item(0)->textContent);
+		
+		$xmlValue = $path->query('//DateType', $responseElement);
+		$params['DateType'] = trim($xmlValue->item(0)->textContent);
+		
+		$xmlValue = $path->query('//FromDate', $responseElement);
+		$params['FromDate'] = trim($xmlValue->item(0)->textContent);
+		
+		$xmlValue = $path->query('//ToDate', $responseElement);
+		$params['ToDate'] = trim($xmlValue->item(0)->textContent);
+		
+		$xmlValue = $path->query('//AuthorizedStatus', $responseElement);
+		$params['AuthorizedStatus'] = trim($xmlValue->item(0)->textContent);
+		
+		$xmlValue = $path->query('//CFDIReceivedStatus', $responseElement);
+		$params['CFDIReceivedStatus'] = trim($xmlValue->item(0)->textContent);
+		
+		$xmlValue = $path->query('//StatusPurchaseOrder', $responseElement);
+		$params['StatusPurchaseOrder'] = trim($xmlValue->item(0)->textContent);
+		
+		$xmlValue = $path->query('//GetXML', $responseElement);
+		$params['GetXML'] = trim($xmlValue->item(0)->textContent);
+		
+		$xmlValue = $path->query('//GetPDF', $responseElement);
+		$params['GetPDF'] = trim($xmlValue->item(0)->textContent);
+		
+		$xmlValue = $path->query('//UUID', $responseElement);
+		$params['UUID'] = trim($xmlValue->item(0)->textContent);
+		
+		
+		// Make de Array for send to the model service for search the CFDI's
+		$params2['GetXML'] = ($params['GetXML']!='')?$params['GetXML']:'';
+		$params2['GetPDF'] = ($params['GetPDF']!='')?$params['GetPDF']:'';
+		
+		$params2['estatus_pagado']=($params['PaymentStatus']=='P')?'pagados':(($params['PaymentStatus']=='U')?'no_pagados':0);
+		$params2['rfc'] = ($params['RFC']!='')?$params['RFC']:'';
+		$params2['uuid'] = ($params['UUID']!='')?$params['UUID']:'';
+		
+		if ($params['FromDate'] !='' && $params['ToDate']!='' && ( $params['DateType']=='T' || $params['DateType']=='R' || $params['DateType']=='W' || $params['DateType']=='P' || $params['DateType']=='S' ) ){
+			
+			switch($params['DateType']){
+				case 'T':
+					$params2['dateType']='comprobantes_fiscales.fecha';
+					break;
+				case 'R':
+					$params2['dateType']='comprobantes_fiscales.fecha_recepcion_cfdi';
+					break;
+				case 'W':
+					$params2['dateType']='ordenes_de_compra.fecha_solicitud_de_compra';
+					break;
+				case 'P':
+					$params2['dateType']='ordenes_de_compra.fecha_registro_pago';
+					break;
+				case 'S':
+					$params2['dateType']='ordenes_de_compra.fecha_programacion_pago';
+					break;					
+			}
+			
+			$params2['fromDate'] = $params['FromDate'];
+			$params2['toDate'] = $params['ToDate'];
+		} else {
+			$error = 'Formato de fechas invalido.';
+		}
+		$params2['statusPurchaseOrder']=$params['StatusPurchaseOrder'];
+		
+		if($params['AuthorizedStatus']=='A'){
+			$params2['estatus_autorizacion'] = 'autorizados';
+		} else if($params['AuthorizedStatus']=='P') {
+			$params2['estatus_autorizacion'] = 'pendientes';
+		}
+		
+		$purchaseOrders=new Application_Model_DbTable_PurchaseOrders();
+		$array = $purchaseOrders->getPurchaseOrdersAll($params2);
+	
+		// Making the response structure
+		$xmlResponse = "<?xml version='1.0' encoding='UTF-8'?>\n";
+		$xmlResponse .= "<getCFDISuppliersResponse>\n";
+		
+		$suppliers = new Application_Model_Services_Suppliers();
+		foreach ($array as $cfdi){
+			$xmlResponse .= "<SupplierCFDI>";
+			$xmlResponse .= "<UUID>".($cfdi['uuid'])."</UUID>";
+			$xmlResponse .= "<PaidDate>".($cfdi['fecha_registro_pago'])."</PaidDate>";
+			$xmlResponse .= "<ScheduledPaymentDate>".($cfdi['fecha_programacion_pago'])."</ScheduledPaymentDate>";
+			$xmlResponse .= "<PaidDescription><![CDATA[".($cfdi['descripcion_pago'])."]]></PaidDescription>";
+			$xmlResponse .= "<RFC>".($cfdi['rfc'])."</RFC>";
+			$xmlResponse .= "<Supplier><![CDATA[".($cfdi['denominacion'])."]]></Supplier>";
+			$xmlResponse .= "<CFDIReceivedDate>".($cfdi['fecha_recepcion_cfdi'])."</CFDIReceivedDate>";
+			$xmlResponse .= "<TimbradoDate>".($cfdi['fecha'])."</TimbradoDate>";
+			
+			if( $params2['GetXML']=='Y'){
+				$xmlResponse .= "<CFDIXml><![CDATA[".base64_encode($cfdi['xml_sat'])."]]></CFDIXml>";
+				$xmlResponse .= "<XmlFileName>".($cfdi['xml_file_name'])."</XmlFileName>";
+			} 
+			// GET THE PDF FILE FROM THE DIRECTORY.
+			if( $params2['GetPDF']=='Y'){
+				$contenido = $suppliers->getPdfCfdi($cfdi['id_comprobantes_fiscales']);
+				$xmlResponse .= "<PDF><![CDATA[".base64_encode($contenido['content'])."]]></PDF>";
+				$xmlResponse .= "<PDFFileName>".($cfdi['pdf_file_name'])."</PDFFileName>";
+			}
+
+			$xmlResponse .= "</SupplierCFDI>";
+		}
+		
+		$xmlResponse .= "</getCFDISuppliersResponse>";
+
+		return  $xmlResponse;
+	}
+}
+?>

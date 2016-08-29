@@ -1,0 +1,176 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Administraci&oacute;n de usuarios.</div>
+  <div class="panel-body">
+
+	<form method="post" id="filtroformusers">
+		<div class="form-group">
+			<label for="exampleInputEmail1">Nombre de Usuario</label> <input type="text" class="form-control" id="usuario"	placeholder="Usuario" name="usuario">
+		</div>
+		<button type="submit" class="btn btn-default">Buscar</button>
+	</form>
+	
+	
+	<br>
+	
+	<a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+	  Agregar Usuario
+	</a>
+	<div class="collapse" id="collapseExample">
+	  <div class="well">
+	    <form method="post" id="formnewuser">
+	    <input name="accion" value="agregar" type="hidden">
+		  <div class="form-group">
+		    <label for="exampleInputName2">Nombre Completo del Usuario</label>
+		    <input type="text" class="form-control" id="nombre_real" name="nombre_real">
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleInputName2">Username</label>
+		    <input type="text" class="form-control" id="username" name="username">
+		  </div>
+		  <div class="form-group">
+		    <label for="password">Contrase&ntilde;a</label>
+		    <input type="password" class="form-control" id="password" name="password" >
+		  </div>
+		  <div class="form-group">
+		    <label for="passwordConfirm">Confirmar Contrase&ntilde;a</label>
+		    <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" >
+		  </div>
+		  <div class="form-group">
+		    <label for="rol">Rol del Usuario</label>
+		    <select class="form-control" id="rol" name="rol">
+		    	<option value="1">Administrador</option>
+		    	<option value="2">Gerencial</option>
+		    	<option value="3">Operador</option>		    
+		    </select>
+		  </div>
+		  <button type="submit" class="btn btn-default" onclick="submitFormNewUser()">Guardar</button>
+		</form>
+	  </div>
+	</div>
+  </div>
+</div>
+	<div class="row" align="right">
+		<?=$this->paginationControl ($this->paginator, 'Sliding');?>
+	</div>
+<pre>Se muestran <?php echo $this->countArray ?> usuarios.</pre>
+
+  <table class="table table-bordered" >
+  <thead>
+  	<tr>
+  	<th>ID</th>
+  	<th>Username</th>
+  	<th>Nombre Real</th>
+  	<th>Estatus</th>
+  	<th>Rol</th>
+  	<th>Editar</th>
+  	</tr>
+  </thead>
+  <tbody align="center">
+  <?php foreach ($this->paginator as $registro) { ?>
+	<tr
+	<?php 
+			if ( $registro['activo'] == 0 ){
+				echo 'class="bg-warning"';
+			}
+	?>
+	>
+		<td><?php echo $registro['id_user'] ?></td>
+		<td><?php echo $registro['username'] ?></td>
+		<td><?php echo $registro['realname'] ?></td>
+		<td>
+			<?php 
+			if ( $registro['activo'] == 1 ){
+				echo 'Activo';
+			} else {
+				echo 'Inactivo';
+			}
+			 
+			
+			?>
+		</td>
+		<td>
+			<?php
+			
+			switch ($registro['id_rol']) {
+				case 1:
+					echo 'Administrador';
+					break;
+				case 2:
+					echo 'Gerencial';
+					break;
+				case 3:
+					echo 'Operador';
+					break;
+			}
+			
+			?>
+		</td>
+		<td>
+		  	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"
+		  	 onclick="datosform_edita_usuario('<?php echo $registro['id_user'] ?>','<?php echo $registro['username'] ?>','<?php echo $registro['realname'] ?>','<?php echo $registro['activo'] ?>','<?php echo $registro['id_rol'] ?>')">
+				<i class="fa fa-pencil-square-o"></i>
+			</button>
+		</td>
+	</tr>
+	<?php } ?>
+  </tbody>
+  <tfoot>
+</table>
+  
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      
+      <form method="post" id="formedituser">
+      	<input type="hidden" name="edita_id_user" id="edita_id_user">
+      	<input name="accion" value="editar" type="hidden">
+	      <div class="modal-body">
+	        
+			  <div class="form-group">
+			    <label for="exampleInputName2">Nombre Completo del Usuario</label>
+			    <input type="text" class="form-control" id="edita_nombre_real" name="edita_nombre_real">
+			  </div>
+			  <div class="form-group">
+			    <label for="password">Nueva Contrase&ntilde;a</label>
+			    <input type="password" class="form-control" id="edita_password" name="edita_password" >
+			  </div>
+			  <div class="form-group">
+			    <label for="passwordConfirm">Confirmar Nueva Contrase&ntilde;a</label>
+			    <input type="password" class="form-control" id="edita_passwordConfirm" name="edita_passwordConfirm" >
+			  </div>
+			  <div class="form-group">
+			    <label for="rol">Rol del Usuario</label>
+			    <select class="form-control" id="edita_rol" name="edita_rol">
+			    	<option value="1">Administrador</option>
+			    	<option value="2">Gerencial</option>
+			    	<option value="3">Operador</option>		    
+			    </select>
+			  </div>
+			  <div class="form-group">
+			    <label for="rol">Estatus</label>
+			    <select class="form-control" id="edita_activo" name="edita_activo">
+			    	<option value="1">Activo</option>
+			    	<option value="0">Inactivo</option>
+			    </select>
+			  </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	        <button type="button" class="btn btn-primary" onclick="submitForm()">Guardar</button>
+	      </div>
+      </form>
+      
+      
+      
+    </div>
+  </div>
+</div>

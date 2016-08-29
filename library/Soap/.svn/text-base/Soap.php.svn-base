@@ -1,0 +1,105 @@
+<?php
+/**
+ * Xml 
+ * @author Jorge Kaplun
+ * Create July 8, 2014
+ */
+Class Xml {
+	
+	/**
+	* To check if the xml is valid
+	* @Author Omar Espinoza
+	* Create: Febraury 13, 2013
+	* Modifications:
+	* @param String $xml
+	*/
+	public function XmlValidate($xml) {
+		$resp = "";
+				
+		// Chek if valid xml
+		$xmlLoad =  simplexml_load_string($xml );
+		if($xmlLoad === FALSE){
+			// error: 1021
+    		$resp = $this->XmlError(1021);
+		} else {
+			// Is valid
+			$resp = TRUE;
+		}
+				
+		return $resp;
+	}
+		
+	public function XmlError($error, $text) { 		 
+		$xml   = "<?xml version='1.0' encoding='UTF-8'?>";
+		switch($error){			 
+			case 1010:
+ 				$text  = "Invalid Request";
+				break;
+ 			case 1021:
+ 				$text  = "Invalid Xml";
+				break;
+ 			case 1031:
+ 				$text  = "Access denied";
+				break;
+ 			case 1041:
+ 				$text  = "Booking not found";
+				break;				
+			case 1051:
+ 				$text  = "City code not found";
+				break;
+			case 1061:
+ 				$text  = "Language code not found";
+				break;
+			case 1071:
+ 				$text  = "Invalid check in date yyyy-mm-dd";
+				break;													
+			case 1081:
+ 				$text  = "Invalid check out date yyyy-mm-dd";
+				break;	
+			case 1091:
+ 				$text  = "Currency code not found";
+				break;																	
+			case 1100:
+ 				$text  = "Records not found";
+				break;
+			case 1111:
+ 				$text  = "Hotel Data Invalid";
+				break;
+			case 1121:
+ 				$text  = "Broker Field is invalid";
+				break;
+			case 1131:
+ 				$text  = "The Currency Exchange is invalid";
+				break;
+			case 1141:
+ 				$text  = "The Amount Data is incomplete";
+				break;
+			case 1151:
+ 				$text  = "The Destination Data is incorrect";
+				break;
+			case 1161:
+ 				$text  = "The Data to cancel booking is incomplete";
+				break;
+			case 1171:
+				$text  = "Inconsistency in the selection";
+				break;
+			case 1181:
+				$text  = "The tickets does not exist.";
+				break;
+			case 1191:
+				$text  = "Invalid date format yyyy-mm-dd";
+				break;
+			default: 
+				// 1000.- Error not found
+				$error = "1000";
+ 		}
+		
+   		$xml .= "<error>";
+   		$xml .= "<code>{$error}</code>";
+   		$xml .= "<text>{$text}</text>";
+   		$xml .= "</error>";
+   		
+   		return $xml;
+	}
+}
+?>

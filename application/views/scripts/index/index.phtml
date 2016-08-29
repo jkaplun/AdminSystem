@@ -1,0 +1,10 @@
+<div class="panel panel-default">
+	<div class="panel-body">
+	<?php if ($this->guardado == 0 ){?>
+		<?php include 'form_registro.phtml';?>
+		<?php } else { ?>
+			<div class="alert alert-success" role="alert">Registrado Correctamente.</div>
+			<a class="btn btn-primary btn-lg" href="<?= $this->baseUrl() ?>" role="button">Nuevo Registro</a>
+		<?php } ?>
+	</div>
+</div>

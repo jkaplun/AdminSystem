@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<base href="<?= $this->baseUrl() ?>">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="<?= $this->baseUrl() ?>/css/bootstrap.min.css">
+	<script src="<?= $this->baseUrl() ?>/js/jquery.js"></script></head>
+	<script src="<?= $this->baseUrl() ?>/js/bootstrap.min.js"></script></head>
+	<script src="<?= $this->baseUrl() ?>/js/carousel.js"></script></head>
+	<script src="<?= $this->baseUrl() ?>/js/datepicker/js/datepicker.min.js"></script>    
+	<script src="<?= $this->baseUrl() ?>/js/datepicker/js/bootstrap-datepicker.es.js"></script>   
+	<link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/js/datepicker/css/bootstrap-datepicker3.min.css">
+	<link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/font-awesome.min.css">
+	<?php echo $this->InlineScript();  ?>
+    <?php echo $this->headLink(); ?>
+<body>
+<?php if(isset($_SESSION['Zend_Auth']['USER_VALUES'])){?>
+
+	<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['id_rol'] ==1) {?>
+	<ul class="nav nav-tabs">
+	  <li role="presentation" <?php if($this->activemenu=='1'){ ?> class="active" <?php }?>><a href="<?php echo $this->url(array('controller'=>'index','action'=>'index'));?>">Nuevo Registro</a></li>
+	  <li role="presentation" <?php if($this->activemenu=='2'){ ?> class="active" <?php }?>><a href="<?php echo $this->url(array('controller'=>'index','action'=>'seguimiento'));?>">Seguimiento</a></li>
+		<li class="dropdown <?php if($this->activemenu=='3'){ ?>active<?php }?>" role="presentation">
+			<a class="dropdown-toggle" aria-expanded="true" aria-haspopup="true" role="button" href="#" data-toggle="dropdown">
+			Estadisticas
+			<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu">
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=1">Lugar de Origen</a>
+				</li>
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=2">Escolaridad</a>
+				</li>
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=3">Registros por Edad</a>
+				</li>
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=4">Tiempo de Radicar en EUA</a>
+				</li>
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=5">Genero</a>
+				</li>
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=6">Estatus de Seguimiento</a>
+				</li>
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=7">Registros por Usuario</a>
+				</li>
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=8">Por Estado USA</a>
+				</li>
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=9">Todas</a>
+				</li>
+			</ul>
+		</li>	  
+
+	  <li role="presentation" <?php if($this->activemenu=='4'){ ?> class="active" <?php }?>><a href="<?php echo $this->url(array('controller'=>'admin','action'=>'index'));?>">Administraci&oacute;n</a></li>
+		<ul class="nav nav-tabs navbar-right">
+			<li role="presentation"><a href="#" data-toggle="modal" data-target="#myModalUserEdit">Usuario: <?php echo $_SESSION['Zend_Auth']['USER_VALUES']['realname']; ?></a></li>
+			<li role="presentation"><a href="<?php echo $this->url(array('controller'=>'auth','action'=>'logout'));?>">Salir&nbsp;&nbsp;&nbsp;</a></li>
+		</ul>
+	</ul>
+	 
+	<?php }?>
+	<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['id_rol'] ==2) {?>
+	<ul class="nav nav-tabs">
+		<li role="presentation" <?php if($this->activemenu=='1'){ ?> class="active" <?php }?>><a href="<?php echo $this->url(array('controller'=>'index','action'=>'index'));?>">Nuevo Registro</a></li>
+	  	<li role="presentation" <?php if($this->activemenu=='2'){ ?> class="active" <?php }?>><a href="<?php echo $this->url(array('controller'=>'index','action'=>'seguimiento'));?>">Seguimiento</a></li>
+	  
+		<li class="dropdown <?php if($this->activemenu=='3'){ ?>active<?php }?>" role="presentation">
+			<a class="dropdown-toggle" aria-expanded="true" aria-haspopup="true" role="button" href="#" data-toggle="dropdown">
+			Estadisticas
+			<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu">
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=1">Lugar de Origen</a>
+				</li>
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=2">Escolaridad</a>
+				</li>
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=3">Registros por Edad</a>
+				</li>
+					<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=4">Tiempo de Radicar en EUA</a>
+				</li>
+					<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=5">Genero</a>
+				</li>
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=6">Estatus de Seguimiento</a>
+				</li>
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=7">Registros por Usuario</a>
+				</li>
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=8">Por Estado USA</a>
+				</li>
+				<li>
+					<a href="<?php echo $this->url(array('controller'=>'chart','action'=>'index'));?>?chart=9">Todas</a>
+				</li>
+			</ul>
+		</li>
+		<ul class="nav nav-tabs navbar-right">
+			<li role="presentation"><a href="#" data-toggle="modal" data-target="#myModalUserEdit">Usuario: <?php echo $_SESSION['Zend_Auth']['USER_VALUES']['realname']; ?></a></li>
+			<li role="presentation"><a href="<?php echo $this->url(array('controller'=>'auth','action'=>'logout'));?>">Salir&nbsp;&nbsp;&nbsp;</a></li>
+		</ul>
+	</ul>
+
+	<?php }?>
+	
+	<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['id_rol'] ==3) {?>
+	<ul class="nav nav-tabs">
+	  <li role="presentation" <?php if($this->activemenu=='1'){ ?> class="active" <?php }?>><a href="<?php echo $this->url(array('controller'=>'index','action'=>'index'));?>">Nuevo Registro</a></li>
+	  <li role="presentation" <?php if($this->activemenu=='2'){ ?> class="active" <?php }?>><a href="<?php echo $this->url(array('controller'=>'index','action'=>'seguimiento'));?>">Seguimiento</a></li>
+		<ul class="nav nav-tabs navbar-right">
+			<li role="presentation"><a href="#" data-toggle="modal" data-target="#myModalUserEdit">Usuario: <?php echo $_SESSION['Zend_Auth']['USER_VALUES']['realname']; ?></a></li>
+			<li role="presentation"><a href="<?php echo $this->url(array('controller'=>'auth','action'=>'logout'));?>">Salir&nbsp;&nbsp;&nbsp;</a></li>
+		</ul>
+	</ul>
+	<?php }?>
+
+<?php } ?>
+<div class="container">
+<br>
+<?php echo $this->layout()->content; ?>
+</div>
+
+<?php if(isset($_SESSION['Zend_Auth']['USER_VALUES'])){?>
+<!-- Modal -->
+<div class="modal fade" id="myModalUserEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Cambiar datos de usuario</h4>
+      </div> 
+      <form method="post" id="formupdateuser">
+      	<input type="hidden" name="actualiza_id_user" id="actualiza_id_user" value="<?php echo $_SESSION['Zend_Auth']['USER_VALUES']['id_user']?>">
+      	<input name="accion" value="editar" type="hidden">
+	      <div class="modal-body">
+	        
+			  <div class="form-group">
+			    <label for="exampleInputName2">Nombre Completo del Usuario</label>
+			    <input type="text" class="form-control" id="actualiza_nombre_real" name="actualiza_nombre_real" value="<?php echo $_SESSION['Zend_Auth']['USER_VALUES']['realname']?>">
+			  </div>
+			  <div class="form-group">
+			    <label for="password">Nueva Contrase&ntilde;a</label>
+			    <input type="password" class="form-control" id="actualiza_password" name="actualiza_password" >
+			  </div>
+			  <div class="form-group">
+			    <label for="passwordConfirm">Confirmar Nueva Contrase&ntilde;a</label>
+			    <input type="password" class="form-control" id="actualiza_passwordConfirm" name="actualiza_passwordConfirm" >
+			  </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	        <button type="button" class="btn btn-primary" onclick="submitFormEditUser()">Guardar</button>
+	      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+function submitFormEditUser(){
+	
+	var newpass = $.trim($('#actualiza_password').val());
+	var confirmpass = $.trim($('#actualiza_passwordConfirm').val());
+	var realname = $.trim($('#actualiza_nombre_real').val());
+	var id_user = $.trim($('#actualiza_id_user').val());
+	
+	if (newpass != '' ){
+
+
+
+		if ( newpass.length >= 6 ){
+			if ( newpass == confirmpass){
+				$.ajax({
+					  url: "public/index/ajax",
+					  method: "post",
+					  data: { accion_ajax : 'update_user' , id_user:id_user, newpass:newpass, realname:realname},
+					  dataType: "json"
+					})  .done(function( item ) {
+						window.location = "public/auth/logout"
+					  });
+			} else {
+				alert('Los passwords no coinciden.');
+			}
+		} else {
+			alert ("El password debe de contener minimo 6 caracteres.");
+			}
+		
+	} else {
+		$.ajax({
+			  url: "public/index/ajax",
+			  method: "post",
+			  data: { accion_ajax : 'update_user' , id_user:id_user, newpass:newpass, realname:realname},
+			  dataType: "json"
+			})  .done(function( item ) {
+				window.location = "public/auth/logout"
+			  });
+	}
+}
+</script>
+<?php } ?>
+
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<?php
+/**
+ * Xml
+* @author Juan Garfias Vázquez
+* Create July 22, 2015
+*/
+Class PortalUserAdmin{
+
+	/**
+	 * Xml Response training datas
+	 * @author Juan Garfias 
+	 * @param string $xmlRequest
+	 */
+	public function Execute($xmlRequest){
+		
+		// Initializing the params array to sent it to the information Hotel model
+		$params = array();
+		$xmlResponse = "";
+		$xmlClass = new Xml();
+
+		$validate = $xmlClass->XmlValidate($xmlRequest);
+
+		if($validate !== TRUE){
+			//return $validate;
+		}
+
+		$xml = new DOMDocument();
+		$xml->loadXML($xmlRequest);
+		 
+		$responseElement = $xml->documentElement;
+		$path = new DOMXPath($xml);
+		 
+		$getCredentials = $path->query('//PortalUserAdminRequest', $responseElement);
+		$user = $getCredentials->item(0)->getAttribute('user');
+		$password = $getCredentials->item(0)->getAttribute('password');
+		
+		// Validate Login
+		$pass = sha1($password);
+		$xmlAcceso = new Model_DbTable_XmlAccess();
+		$dataAccess = $xmlAcceso->getUser($user,$pass);
+		
+		// Making the response structure
+		if ($dataAccess['activo'] != 1) {
+			// Error 1031
+			$xmlResponse = $xmlClass->XmlError(1031);
+			return $xmlResponse;
+		}
+		
+		$array= array(
+				'rfc' => '',
+				'user' => '',
+				'password' => '',
+				'newpassword' => '',
+				'operation' => '',
+				'name' => '',
+				'activo' => ''
+		);
+		
+		$getinfo = $path->query('//RFC', $responseElement);
+		$array['rfc'] = $getinfo->item(0)->textContent;
+		$getinfo = $path->query('//User', $responseElement);
+		$array['user'] = $getinfo->item(0)->textContent;
+		$getinfo = $path->query('//Password', $responseElement);
+		$array['password'] = $getinfo->item(0)->textContent;
+		$getinfo = $path->query('//NewPassword', $responseElement);
+		$array['newpassword'] = $getinfo->item(0)->textContent;
+		$getinfo = $path->query('//Operation', $responseElement);
+		$array['operation'] = $getinfo->item(0)->textContent;
+		$getinfo = $path->query('//Name', $responseElement);
+		$array['name'] = $getinfo->item(0)->textContent;
+		$getinfo = $path->query('//StatusAccess', $responseElement);
+		$array['activo'] = $getinfo->item(0)->textContent;
+		
+		$error=0;
+		
+		if( !($array['operation']=='A' || $array['operation']=='U') ){
+			$error=1;
+		}
+		
+		if($error==1){
+			// Error 1021
+			$xmlResponse = $xmlClass->XmlError(1021);
+			return $xmlResponse;
+		}
+		
+		$sp = new Application_Model_DbTable_StoredProcedures();
+
+		if($array['operation']=='U'){
+			
+			
+			if($array['newpassword']=='' && $array['activo']==''){
+				$xmlResponse = $xmlClass->XmlError(1021);
+				return $xmlResponse;
+			}
+			
+			if($array['newpassword']!=''){
+				$array['password']=$array['newpassword'];
+			}
+			
+			if($array['activo']!=''){
+				if( !($array['activo']==0 || $array['activo']==1) ){
+					$xmlResponse = $xmlClass->XmlError(1021);
+					return $xmlResponse;
+				}
+			}
+		}
+		
+		$result = $sp->usersForSupplierPortal($array);
+		
+		// Making the response structure
+		$xmlResponse = "<?xml version='1.0' encoding='UTF-8'?>";
+		$xmlResponse .= "<PortalUserAdminResponse>";
+		$xmlResponse .= "<Message>".($result[0]['resultado'])."</Message>";
+		$xmlResponse .= "<StatusKey>".($result[0]['clave_estatus'])."</StatusKey>";
+		$xmlResponse .= "</PortalUserAdminResponse>";
+
+		return  $xmlResponse;
+	}
+}
+?>

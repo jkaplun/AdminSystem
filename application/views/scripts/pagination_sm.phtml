@@ -1,0 +1,27 @@
+<?php 
+if ($this->pageCount > 1): ?> 
+
+
+<ul id="pagination" class="pagination pagination-sm">
+<!-- Previous page link --> 
+<?php if (isset($this->previous)): ?> 
+<li><a href="javascript:void(0)" data-page="<?= $this->previous;?>">&laquo;</a> </li>
+<?php endif; ?> 
+
+<!-- Numbered page links -->
+<?php foreach ($this->pagesInRange as $page): ?> 
+<?php if ($page != $this->current): ?>
+<li><a href="javascript:void(0)" data-page="<?= $page;?>"><?= $page; ?> </a></li>
+			
+<?php else: ?>
+<li class="active"><a ><?= $page; ?></a></li>  
+<?php endif; ?>
+<?php endforeach; ?>
+
+<!-- Next page link --> 
+<?php if (isset($this->next)): ?> 
+<li><a href="javascript:void(0)" data-page="<?= $this->next;?>">&raquo;</a></li> 
+<?php endif; ?> 
+</ul>
+ 
+<?php endif; ?>

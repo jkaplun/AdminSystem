@@ -1,0 +1,296 @@
+<?php
+/**
+ * Xml
+* @author Juan Garfias Vázquez
+* Create August, 14th 2014
+*/
+Class AddInsuranceTickets{
+
+	
+	private $ticketsDB;
+		
+	public function __construct(){
+		$this->ticketsDB 		= new Application_Model_DbTable_Tickets();
+	}
+	
+	/**
+	 * Xml Response Add Insurance Tickets
+	 * @author Juan Garfias 
+	 * @param string $xmlRequest
+	 */
+	public function Execute( $xmlRequest ) {
+
+		// Initializing the params array to sent it to the information Hotel model
+		$params = array();
+		$xmlResponse = '';
+		$xmlClass = new Xml();
+		
+		$validate = $xmlClass->XmlValidate($xmlRequest);
+
+		if($validate !== TRUE){
+			return $validate;
+		}
+		
+		$xml = new DOMDocument();
+		$xml->loadXML($xmlRequest);
+		
+		$responseElement = $xml->documentElement;
+		$path = new DOMXPath($xml);
+		 
+		$getCredentials = $path->query('//AddInsuranceTicketsRequest', $responseElement);
+		$user = $getCredentials->item(0)->getAttribute('user');
+		$password = $getCredentials->item(0)->getAttribute('password');
+		
+		// Validate Login
+		$pass = sha1($password);
+		$xmlAcceso = new Model_DbTable_XmlAccess();
+		$dataAccess = $xmlAcceso->getUser($user,$pass);
+		
+		if ($dataAccess['activo'] != 1) {
+			// Error 1031
+			$xmlResponse = $xmlClass->XmlError(1031);
+			return $xmlResponse;
+		} else {
+			// Get the account data to xml services
+			$_SESSION['Zend_Auth']['storage']->id_agencia = $dataAccess['id_agencia'];
+		}
+		
+		$getTickets = $path->query('//AddInsuranceTicketsRequest/TicketList/Ticket', $responseElement);
+		
+	
+		
+		$ticketArray=array();
+		$i=0;
+		foreach($getTickets as $ticket){
+			$value=$path->query('IssueRFC', $ticket);
+			$ticketArray[$i][0] = trim($value->item(0)->textContent);
+			$value=$path->query('IssueName', $ticket);
+			$ticketArray[$i][1] = trim($value->item(0)->textContent);
+			$value=$path->query('IATANumber', $ticket);
+			$ticketArray[$i][2] = trim($value->item(0)->textContent);
+			$value=$path->query('SupplierCode', $ticket);
+			$ticketArray[$i][3] = trim($value->item(0)->textContent);
+			$value=$path->query('SupplierName', $ticket);
+			$ticketArray[$i][4] =  utf8_decode(html_entity_decode(trim($value->item(0)->textContent)));
+			$value=$path->query('Series', $ticket);
+			$ticketArray[$i][5] = trim($value->item(0)->textContent);
+			$value=$path->query('Folio', $ticket);
+			$ticketArray[$i][6] = trim($value->item(0)->textContent);
+			$value=$path->query('TicketNumber', $ticket);
+			$ticketArray[$i][7] = trim($value->item(0)->textContent);
+			$value=$path->query('CXSSerie', $ticket);
+			$ticketArray[$i][8] = trim($value->item(0)->textContent);
+			$value=$path->query('CXSFolio', $ticket);
+			$ticketArray[$i][9] = trim($value->item(0)->textContent);
+			$value=$path->query('DatePurchase', $ticket);
+			$ticketArray[$i][10] = trim($value->item(0)->textContent);
+			$value=$path->query('PurchaseAmount', $ticket);
+			$ticketArray[$i][11] = trim($value->item(0)->textContent);
+			$value=$path->query('CustomerCodeReceptor', $ticket);
+			$ticketArray[$i][12] = trim($value->item(0)->textContent);
+			$value=$path->query('ReceptorName', $ticket);
+			$ticketArray[$i][13] =  utf8_decode(html_entity_decode(trim($value->item(0)->textContent)));
+			$value=$path->query('ReceptorRFC', $ticket);
+			$ticketArray[$i][14] = trim($value->item(0)->textContent);
+			$value=$path->query('ReceptorStreet', $ticket);
+			$ticketArray[$i][15] =  utf8_decode(html_entity_decode(trim($value->item(0)->textContent)));
+			$value=$path->query('ReceptorOutsideNumber', $ticket);
+			$ticketArray[$i][16] =  utf8_decode(html_entity_decode(trim($value->item(0)->textContent)));
+			$value=$path->query('ReceptorInsideNumber', $ticket);
+			$ticketArray[$i][17] = utf8_decode(html_entity_decode(trim($value->item(0)->textContent)));
+			$value=$path->query('ReceptorColonia', $ticket);
+			$ticketArray[$i][18] = utf8_decode(html_entity_decode(trim($value->item(0)->textContent)));
+			$value=$path->query('ReceptorDelegationOrMunicipality', $ticket);
+			$ticketArray[$i][19] =  utf8_decode(html_entity_decode(trim($value->item(0)->textContent)));
+			$value=$path->query('ReceptorCity', $ticket);
+			$ticketArray[$i][20] =  utf8_decode(html_entity_decode(trim($value->item(0)->textContent)));
+			$value=$path->query('ReceptorEstate', $ticket);
+			$ticketArray[$i][21] =  utf8_decode(html_entity_decode(trim($value->item(0)->textContent)));
+			$value=$path->query('ReceptorCountry', $ticket);
+			$ticketArray[$i][22] = utf8_decode(html_entity_decode(trim($value->item(0)->textContent)));
+			$value=$path->query('ReceptorCP', $ticket);
+			$ticketArray[$i][23] = trim($value->item(0)->textContent);
+			$value=$path->query('ReceptorEmail', $ticket);
+			$ticketArray[$i][24] = trim($value->item(0)->textContent);
+			$value=$path->query('Coments', $ticket);
+			$ticketArray[$i][25] = trim($value->item(0)->textContent);
+			$value=$path->query('PassengerName', $ticket);
+			$ticketArray[$i][26] = utf8_decode(html_entity_decode(trim($value->item(0)->textContent)));
+			$value=$path->query('Route', $ticket);
+			$ticketArray[$i][27] = trim($value->item(0)->textContent);
+			$value=$path->query('PassengerInsurance', $ticket);
+			$ticketArray[$i][28] = trim($value->item(0)->textContent);
+			$value=$path->query('InsuranceAmount', $ticket);
+			$ticketArray[$i][29] = trim($value->item(0)->textContent);
+			$value=$path->query('GDS', $ticket);
+			$ticketArray[$i][30] = trim($value->item(0)->textContent);	
+			$value=$path->query('PCC', $ticket);
+			$ticketArray[$i][31] = trim($value->item(0)->textContent);
+			$value=$path->query('PNR', $ticket);
+			$ticketArray[$i][32] = trim($value->item(0)->textContent);
+			$value=$path->query('IdInsurance', $ticket);
+			$ticketArray[$i]['IdInsurance'] = trim($value->item(0)->textContent);
+			$value=$path->query('DepartureDate', $ticket);
+			$ticketArray[$i][33] = trim($value->item(0)->textContent);
+			$value=$path->query('Flights', $ticket);
+			$ticketArray[$i][34] = trim($value->item(0)->textContent);
+			$i++;
+		}
+		
+		
+		//$ticketsDB=new Application_Model_DbTable_Tickets();
+		foreach($ticketArray as $line){	
+			// Count elements
+			if (count ( $line ) < 32) {
+				$logError .= '<ErrorDescription>No estan presentes todos los campos necesarios</ErrorDescription>';
+				$errorOnTicket = true;
+			} else {
+				
+				// Validate Mandatory fields
+				$errorOnTicket = false;
+
+			// iata must have 7 digits
+					if ($line[2] == '') {
+						$errorOnTicket = true;
+						$logError .= '<ErrorDescription>IATA requerido</ErrorDescription>';
+					}else{
+						$line[2] = substr(str_replace(array('-', ' '), "", $line[2]), 0, 7);
+						 if (!ctype_digit($line[2])) {
+							$logError .= '<ErrorDescription>IATA no valida</ErrorDescription>';
+							$errorOnTicket = true;
+						 }
+					}
+					
+					// airline code
+					if ($line[3] == '') {
+						$errorOnTicket = true;
+						$logError .= '<ErrorDescription>clave proveedor requerido</ErrorDescription>';
+					}
+					
+					// airline name
+					if ($line[4] == '') {
+						$errorOnTicket = true;
+						$logError .= '<ErrorDescription>nombre proveedor requerido</ErrorDescription>';
+					}
+					
+					// ticket number
+					if ($line[7] == '') {
+						$errorOnTicket = true;
+						$logError .= '<ErrorDescription>numero boleto requerido</ErrorDescription>';
+					}
+					
+					// buy date 
+					if ($line[10] == '') {
+						$errorOnTicket = true;
+						$logError .= '<ErrorDescription>fecha compra requerido</ErrorDescription>';
+					}else{
+						$line[10] = str_replace(array(' '), "", $line[10]);
+						if (!preg_match('/^[0-9]{4}[-](0[1-9]|1[0-2])[-](0[1-9]|[1-2][0-9]|3[0-1])$/',$line[10])){
+							$logError .= '<ErrorDescription>fecha compra no valida';
+							$errorOnTicket = true;
+						}
+					}
+					// Amount
+					if ($line[11] != '') {
+						$line[11] = str_replace(array(' '), "", $line[11]);
+						if (!is_numeric($line[11])){
+							$logError .= '<ErrorDescription>monto compra no valido</ErrorDescription>';
+							$errorOnTicket = true;
+						}
+					}
+					
+					// rfc
+					if ($line[14] == '') {
+						$errorOnTicket = true;
+						$logError .= '<ErrorDescription>rfc receptor requerido</ErrorDescription>';
+					}
+					
+					// 
+					if ($line[28] == '') {
+						$errorOnTicket = true;
+						$logError .= '<ErrorDescription>seguro pasajero requerido</ErrorDescription>';
+					}else{
+						$line[28] = strtoupper(str_replace(array(' '), "", $line[28]));
+						if(!($line[28] == 'S' or $line[28] == 'N')){
+							$logError .= '<ErrorDescription>seguro pasajero no valido</ErrorDescription>';
+							
+							$errorOnTicket = true;
+						}
+						
+						
+						if( $line[33]!='' ) {
+							$checkDate= new Zend_Date();
+							
+							if( !$checkDate->isDate( $line[33] , 'YYYY-mm-dd' ) ){
+								$logError .= '<ErrorDescription>formato de fecha invalido'.$line[33].'</ErrorDescription>';
+								$errorOnTicket = true;
+							}
+						}
+						
+					}
+			}
+			if ($errorOnTicket) {
+				$fileLog .= "<Ticket>
+							<TicketNumber>".$line [7]."</TicketNumber>
+								<Status>ErrorData</Status>
+								<Coment>$logError</Coment>
+							</Ticket>";
+			} else {
+				
+				$ifExistTicket=$this->ticketsDB->validateInsuranceTicketIfExist(
+													array('numero_boleto'=>$line [7],
+															'rfc_emisor'=>$line[0],
+															'clave_proveedor'=>$line[3]));
+				$existTicket=0;	
+				$existTicket=count($ifExistTicket);
+				$inserted = $this->ticketsDB->generateTicketData ( $line );
+				/*
+				$xmlResponse = '<?xml version="1.0" encoding="UTF-8"?>';
+				$xmlResponse .= '<AddInsuranceTicketsResponse>';
+				$xmlResponse .= '<TicketLog>'.$inserted.'</TicketLog>';
+				$xmlResponse .= '</AddInsuranceTicketsResponse>';
+				return $xmlResponse;
+*/
+				if ($inserted == true) {
+
+					$data=array('numero_boleto'=>$line [7],
+								'id_aseguradora'=>$line ['IdInsurance'],
+								'rfc_emisor'=>$line[0],
+								'rfc_receptor'=>$line[14],
+								'clave_proveedor'=>$line[3],
+								'seguro_pasajero'=>$line[28],
+								'importe_seguro'=>$line[29],
+					 			'fecha_salida_boleto'=>$line[33],
+								'segmentos_vuelos' => $line[34]
+					 			);
+					
+					$confirm=$this->ticketsDB->addInsuranceToTicket($data, $existTicket);
+					
+					$fileLog .= "<Ticket>
+									<TicketNumber>".$line [7]."</TicketNumber>
+									<Status>Success</Status>
+											<addInsurance>$confirm</addInsurance>
+									<Coment>Agregado correctamente.</Coment>
+								</Ticket>";
+					
+				} else {
+					$fileLog .= "<Ticket>
+								<TicketNumber>".$line [7]."</TicketNumber>
+									<Status>ErrorStoredProcedure</Status>
+									<Coment>Error. No se insertaron los datos en la base de datos</Coment>
+								 </Ticket>";
+				}
+				
+			}
+		}
+
+		$xmlResponse = '<?xml version="1.0" encoding="UTF-8"?>';
+		$xmlResponse .= '<AddInsuranceTicketsResponse>';
+		$xmlResponse .= '<TicketLog>'.$fileLog.'</TicketLog>';
+		$xmlResponse .= '</AddInsuranceTicketsResponse>';
+		
+		return utf8_encode($xmlResponse);
+		
+	}
+}
+?>

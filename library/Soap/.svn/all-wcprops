@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/e_invoice/!svn/ver/555/trunk/library/Soap
+END
+UpdatePaymentStatusCFDI.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/e_invoice/!svn/ver/605/trunk/library/Soap/UpdatePaymentStatusCFDI.php
+END
+AddFolio.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/e_invoice/!svn/ver/588/trunk/library/Soap/AddFolio.php
+END
+PortalUserAdmin.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/e_invoice/!svn/ver/596/trunk/library/Soap/PortalUserAdmin.php
+END
+GetCFDISuppliers.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/e_invoice/!svn/ver/604/trunk/library/Soap/GetCFDISuppliers.php
+END
+Soap.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/e_invoice/!svn/ver/585/trunk/library/Soap/Soap.php
+END
+AddInsuranceTickets.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/e_invoice/!svn/ver/488/trunk/library/Soap/AddInsuranceTickets.php
+END
+GetCompilationValues.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/e_invoice/!svn/ver/591/trunk/library/Soap/GetCompilationValues.php
+END
+Webservice.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/e_invoice/!svn/ver/596/trunk/library/Soap/Webservice.php
+END
+XmlTraining.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/e_invoice/!svn/ver/249/trunk/library/Soap/XmlTraining.php
+END
+GetInsuranceTickets.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/e_invoice/!svn/ver/582/trunk/library/Soap/GetInsuranceTickets.php
+END
+AvailableFolios.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/e_invoice/!svn/ver/588/trunk/library/Soap/AvailableFolios.php
+END
+SyncFolios.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/e_invoice/!svn/ver/590/trunk/library/Soap/SyncFolios.php
+END

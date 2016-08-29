@@ -1,0 +1,72 @@
+<?php
+/**
+ * Xml
+* @author Juan Garfias Vázquez
+* Create July 17, 2014
+*/
+Class GetCompilationValues{
+
+	/**
+	 * Xml Response training datas
+	 * @author Juan Garfias 
+	 * @param string $xmlRequest
+	 */
+	public function Execute($xmlRequest){
+
+		// Initializing the params array to sent it to the information Hotel model
+		$params = array();
+		$xmlResponse = "";
+		$xmlClass = new Xml();
+		
+		$validate = $xmlClass->XmlValidate($xmlRequest);
+		
+		if($validate !== TRUE){
+			$xmlResponse = $xmlClass->XmlError(1021);
+			return $xmlResponse;
+		}
+		
+		$xml = new DOMDocument();
+		$xml->loadXML($xmlRequest);
+			
+		$responseElement = $xml->documentElement;
+		$path = new DOMXPath($xml);
+		
+		$getCredentials = $path->query('//GetCompilationValuesRequest', $responseElement);
+		$user = $getCredentials->item(0)->getAttribute('user');
+		$password = $getCredentials->item(0)->getAttribute('password');
+		
+		// Validate Login
+		$pass = sha1($password);
+		$xmlAcceso = new Model_DbTable_XmlAccess();
+		$dataAccess = $xmlAcceso->getUser($user,$pass);
+		
+		// Making the response structure
+		
+		if ($dataAccess['activo'] != 1) {
+			// Error 1031
+			$xmlResponse = $xmlClass->XmlError(1031);
+			return $xmlResponse;
+		}
+		
+		$array= array('client_user'=>'','client_pasw'=>'');
+		$getinfo = $path->query('//ClientUser', $responseElement);
+		$array['client_user'] = $getinfo->item(0)->textContent;
+		
+		$getinfo = $path->query('//ClientPassword', $responseElement);
+		$array['client_pasw'] = $getinfo->item(0)->textContent;
+		
+		$admin = new Application_Model_DbTable_Admin();
+		$result = $admin->getCompilationValues($array);
+		
+		// Making the response structure
+		$xmlResponse = "<?xml version='1.0' encoding='UTF-8'?>";
+		$xmlResponse .= "<GetCompilationValuesResponse>";
+		
+		foreach( $result[0] as $key => $value)
+			$xmlResponse .= "<$key><![CDATA[".utf8_encode(trim($value))."]]></$key>";
+		
+		$xmlResponse .= "</GetCompilationValuesResponse>";
+		return  $xmlResponse;
+	}
+}
+?>

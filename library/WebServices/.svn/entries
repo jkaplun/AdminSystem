@@ -1,0 +1,37 @@
+10
+
+dir
+560
+http://192.168.20.4/e_invoice/trunk/library/WebServices
+http://192.168.20.4/e_invoice
+
+
+
+2015-05-07T23:17:48.404676Z
+556
+jgarfias
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+f6839fb5-fdd9-43e7-91d5-b292c5ad2c4e
+
+EDX
+dir
+
+Edicom
+dir
+
+FE
+dir
+
