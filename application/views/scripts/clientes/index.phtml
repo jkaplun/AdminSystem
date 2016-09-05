@@ -1,0 +1,12 @@
+<h1>Mi resultado es : <?= $this->resultado['resultado'] ?></h1>
+<h1>RFC de la empresa : <?= $this->resultado['clientes']['MIG']['RFC'] ?></h1>
+
+<?php foreach ( $this->resultado['clientes'] as $key => $value) {  ?>
+<br> RFC : <?= $value['RFC'] ?>
+<?php } ?>
+
+<hr>
+
+<?php foreach ( $this->clientes as $value) {  ?>
+<br> RFC : <?= $value['rfc'] ?> - <?= $value['nombre'] ?> 
+<?php } ?>
