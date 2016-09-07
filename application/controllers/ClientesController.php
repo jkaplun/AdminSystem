@@ -26,6 +26,14 @@ class ClientesController extends Zend_Controller_Action
     	$clientes = new Application_Model_DbTable_Clientes();
     	
     	$this->view->clientes = $clientes->getClientes();
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	//echo "<pre>".print_r($resultado,true)."</pre>";
     	//die;
     	//die("entra");
