@@ -33,7 +33,7 @@ class Application_Form_Auth_Login extends Zend_Form
 		// Submit
 		$submit = new Zend_Form_Element_Submit('submit');
 		$submit	->setLabel("Iniciar")
-		->setAttrib("class","btn btn-default")
+		->setAttrib("class","btn btn-lg btn-success btn-block")
 		->removeDecorator('label')
 		->removeDecorator('HtmlTag')
 		->removeDecorator('Errors')

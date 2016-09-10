@@ -14,8 +14,7 @@ class AuthController extends Zend_Controller_Action
 	
 	public function loginAction()
 	{
-		
-		
+        $this->_helper->layout->setLayout('layout_login');		
 		$loginForm = new Application_Form_Auth_Login();
 
 		if ($loginForm->isValid($_POST)) {
@@ -55,10 +54,10 @@ class AuthController extends Zend_Controller_Action
 				} else {
 					switch ($_SESSION['Zend_Auth']['USER_VALUES']['id_rol']){
 						case 1:
-							$this->_redirect('/admin');
+							$this->_redirect('/');
 							break;
 						case 2:
-							$this->_redirect('/chart');
+							$this->_redirect('/');
 							break;
 						case 3:
 							$this->_redirect('/');
