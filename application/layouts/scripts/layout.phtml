@@ -14,13 +14,15 @@
     <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/metisMenu/metisMenu.min.css" >
     <!-- DataTables CSS -->
     <link href="<?= $this->baseUrl() ?>/css_complete/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
-
     <!-- DataTables Responsive CSS -->
     <link href="<?= $this->baseUrl() ?>/css_complete/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
  	<!-- Custom CSS -->
     <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/dist/css/sb-admin-2.css">
     <!-- Custom Fonts -->
     <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/font-awesome/css/font-awesome.min.css" >
+
+
+	<link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/bootstrap-select/css/bootstrap-select.min.css">
 
 	<link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/datepicker/css/bootstrap-datepicker3.min.css">
 	<link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/font-awesome.min.css">
@@ -36,6 +38,7 @@
 	<script src="<?= $this->baseUrl() ?>/css_complete/bootstrap/js/bootstrap.min.js"></script>
     <script src="<?= $this->baseUrl() ?>/css_complete/metisMenu/metisMenu.min.js"></script>
     <script src="<?= $this->baseUrl() ?>/js/sb-admin-2.js"></script>
+    <script src="<?= $this->baseUrl() ?>/css_complete/bootstrap-select/js/bootstrap-select.min.js"></script>
 	<script src="<?= $this->baseUrl() ?>/js/carousel.js"></script>
 	<script src="<?= $this->baseUrl() ?>/css_complete/datepicker/js/datepicker.min.js"></script>    
 	<script src="<?= $this->baseUrl() ?>/css_complete/datepicker/js/bootstrap-datepicker.es.js"></script>   
@@ -240,7 +243,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li class="active">
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Ordenes de Servicio</a>
+                            <a href="<?= $this->baseUrl() ?>/ordenes/"><i class="fa fa-files-o fa-fw"></i> Ordenes de Servicio</a>
                         </li>
                     </ul>
                 </div>
