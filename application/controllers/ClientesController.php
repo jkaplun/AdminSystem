@@ -3,13 +3,18 @@
 class ClientesController extends Zend_Controller_Action
 {
 
+
+	private $clientes;
+	 
     public function init()
     {
+    	$this->clientes = new Application_Model_DbTable_Clientes();
         /* Initialize action controller here */
+    	$this->_helper->layout->setLayout('layout');
     }
 
     public function indexAction(){
-    	
+
     	$a = 7;
     	$b = 1.3;
     	
@@ -21,21 +26,22 @@ class ClientesController extends Zend_Controller_Action
     								 'Microsoft' => array('RFC'=> 'POIPOIIOP')
     			)
     	);
-    	//echo "<pre>".print_r($this->view->resultado,true)."</pre>";
- 
-    	$clientes = new Application_Model_DbTable_Clientes();
+
+    	$this->view->clientes = $this->clientes->getClientes();
     	
-    	$this->view->clientes = $clientes->getClientes();
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	//echo "<pre>".print_r($resultado,true)."</pre>";
-    	//die;
-    	//die("entra");
+    	$this->view->formulario = new Application_Form_Clientes_AgregarCliente();
+
     }
+    
+    public function agregarAction(){
+    	$params=$this->_request->getParams();
+
+    	echo "<pre>".print_r($params,true)."</pre>";
+    	
+    	die;
+    	
+    }
+    
+    
+    
 }

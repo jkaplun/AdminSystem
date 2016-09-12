@@ -32,21 +32,20 @@ public function preDispatch(Zend_Controller_Request_Abstract $request)
     	// 		Resources
     	$acl->add(new Zend_Acl_Resource('index'));
     	$acl->add(new Zend_Acl_Resource('admin'));
-    	$acl->add(new Zend_Acl_Resource('chart'));
     	
     		switch ($rol){
     			case '1':
     				$roleName = 'superadmin';
-    				$acl->allow('superadmin', array('index','admin','chart'));
+    				$acl->allow('superadmin', array('index','admin'));
     				break;
     			case '2':
     				$roleName = 'gerencial';
-    				$acl->allow('gerencial', array('index','chart'));
+    				$acl->allow('gerencial', array('index'));
     				break;
     			case '3':
     				$roleName = 'operador';
     				$acl->allow('operador', array('index'));
-    				$acl->deny('operador', array('chart'));
+    				//$acl->deny('operador', array('chart'));
     				
     				break;
     			default:
