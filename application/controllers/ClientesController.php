@@ -36,11 +36,57 @@ class ClientesController extends Zend_Controller_Action
     public function agregarAction(){
     	$params=$this->_request->getParams();
 
-    	echo "<pre>".print_r($params,true)."</pre>";
-    	
-    	die;
+        $data = array(
+            'rfc' => $params['rfc'],
+            'nombre' => $params['nombre']
+            );
+        $this->clientes->insert($data);
+
+    	$this->_redirect('clientes/');
     	
     }
+    
+    public function eliminarAction(){
+        $params=$this->_request->getParams();
+
+        $where = "idclientes = {$params['idclientes']}";
+
+        $this->clientes->delete($where);
+
+        $this->_redirect('clientes/');
+        
+    }
+    
+    public function actualizarAction(){
+        $params=$this->_request->getParams();
+
+        $data = array(
+            'rfc' => $params['rfc'],
+            'nombre' => $params['nombre']
+            );
+
+        $where = "idclientes = {$params['idclientes']}";
+
+        $this->clientes->update($data, $where);
+
+        $this->_redirect('clientes/');
+    }
+
+    public function preEditarAction(){
+
+        $params=$this->_request->getParams();
+
+        $clientes = $this->clientes->find($params['idclientes'])->toArray();
+
+        $this->view->formulario = new Application_Form_Clientes_AgregarCliente();
+        $this->view->formulario->setAction('public/clientes/actualizar');
+
+        $this->view->formulario->populate($clientes[0]);
+
+
+    }
+
+
     
     
     

@@ -1,8 +1,4 @@
-<div id="page-wrapper" style="min-height: 184px;">
-<div class="container-fluid">
-<div class="row">
-<div class="col-lg-12">
-<h1 class="page-header">Blank</h1>
+
 
 <h1>Mi resultado es : <?= $this->resultado['resultado'] ?></h1>
 <h1>RFC de la empresa : <?= $this->resultado['clientes']['MIG']['RFC'] ?></h1>
@@ -15,15 +11,13 @@
 
 <?php foreach ( $this->clientes as $value) {  ?>
 <br> RFC : <?= $value['rfc'] ?> - <?= $value['nombre'] ?> 
+<a style="color : red" href="public/clientes/eliminar?idclientes=<?=$value['idclientes'] ?>">Eliminar</a>
+<a style="color : red" href="public/clientes/pre-editar?idclientes=<?=$value['idclientes'] ?>">Editar</a>
 <?php } ?>
+
 
 <br>
 
 <?= $this->formulario ?>
 
-
-</div>
-</div>
-</div>
-</div>
 

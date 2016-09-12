@@ -32,11 +32,12 @@ public function preDispatch(Zend_Controller_Request_Abstract $request)
     	// 		Resources
     	$acl->add(new Zend_Acl_Resource('index'));
     	$acl->add(new Zend_Acl_Resource('admin'));
+        $acl->add(new Zend_Acl_Resource('clientes'));
     	
     		switch ($rol){
     			case '1':
     				$roleName = 'superadmin';
-    				$acl->allow('superadmin', array('index','admin'));
+    				$acl->allow('superadmin', array('index','admin','clientes'));
     				break;
     			case '2':
     				$roleName = 'gerencial';

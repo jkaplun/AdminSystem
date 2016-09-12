@@ -29,7 +29,7 @@ class Application_Form_Clientes_AgregarCliente extends Zend_Form
 		->setAttrib("class","form-control")
 		->setAttrib("autocomplete","off")
 		->setAttrib("placeholder",utf8_encode("Nombre"))
-		->setAttrib("maxlength","15")
+		->setAttrib("maxlength","45")
 		;
 		// $username->setRequired(true);
 		
@@ -41,10 +41,12 @@ class Application_Form_Clientes_AgregarCliente extends Zend_Form
 		->removeDecorator('HtmlTag')
 		->removeDecorator('Errors')
 		;
-		
+
+		$idcliente = new Zend_Form_Element_Hidden('idclientes');
+
 		$this
 		->setMethod('post')
 		->setAction('public/clientes/agregar')
-		->addElements(array($rfc, $nombre, $submit));
+		->addElements(array($rfc, $nombre, $submit,$idcliente));
 		}
 }
