@@ -1,23 +1,108 @@
+	<h1 class="page-header">Agencias de Viaje</h1>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="bs-docs-example no-code">
+			  Seleccionar: <select class="selectpicker" data-live-search="true" data-width="auto">
+					<option>Curso</option>
+					<option>Demostracion</option>
+					<option>Desarrollo</option>
+					<option>Implementacion</option>
+					<option>Paginas Web</option>
+					<option>Reportarse</option>
+					<option>Reportarse Urgente</option>
+					<option>Revision MIG</option>
+					<option>Soporte en Sitio</option>
+					<option>Soporte Interno</option>
+					<option>Soporte Remoto</option>
+					<option>Soporte Telefonico</option>
+					<option>Ventas</option>
+			  </select>
+			  <button type="button" class="btn btn-outline btn-success btn-lg " onclick="buscar()">Buscar</button>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>	
+	<br/>
+	<div class="row" id="datosAgencia" style='display:none;'>
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+                <div class="panel-heading">
+                    Nombre de la Agencia
+                </div>
+                <div class="panel-body">
+					  <div class="panel-group" id="accordion">
+					    <div class="panel panel-info">
+					      <div class="panel-heading">
+					        <h4 class="panel-title">
+					          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Datos Generales</a>
+					        </h4>
+					      </div>
+					      <div id="collapse1" class="panel-collapse collapse in">
+					        <div class="panel-body">
+								<div class="row">
+									<div class="col-md-4">
+								        <h4>Direcci&oacute;n</h4>
+								        <address>
+								            795 Folsom Ave, Suite 600
+								            <br>San Francisco, CA 94107
+								        </address>
+									</div>
+									<div class="col-md-4">
+								        <h4>Contacto</h4>
+								        <address>
+								            <abbr title="Phone">P:</abbr>(123) 456-7890
+								            <br /><abbr title="Phone">Tel:</abbr>(123) 456-7890
+								            <br /><abbr title="Phone">Tel:</abbr>(123) 456-7890
+								        </address>
+									</div>
+									<div class="col-md-4">
+										<h4>Correos</h4>
+										<address>
+										    <a href="mailto:#" style="color: #007eae;">first.last@example.com</a>
+										</address>
+									</div>
+								</div>        	
+					        </div>
+					      </div>
+					    </div>
+					    <div class="panel panel-info">
+					      <div class="panel-heading">
+					        <h4 class="panel-title">
+					          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Licencias</a>
+					        </h4>
+					      </div>
+					      <div id="collapse2" class="panel-collapse collapse">
+					        <div class="panel-body">
+					        	1
+					        </div>
+					      </div>
+					    </div>
+					    <div class="panel panel-info">
+					      <div class="panel-heading">
+					        <h4 class="panel-title">
+					          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Configuraciones</a>
+					        </h4>
+					      </div>
+					      <div id="collapse3" class="panel-collapse collapse">
+					        <div class="panel-body">
+					        	2
+					        </div>
+					      </div>
+					    </div>
+					</div>
+                </div>
+                <div class="panel-footer">
+                    Observaciones:
+                </div>
+            </div>
+		</div>
+	</div>	
 
 
-<h1>Mi resultado es : <?= $this->resultado['resultado'] ?></h1>
-<h1>RFC de la empresa : <?= $this->resultado['clientes']['MIG']['RFC'] ?></h1>
-
-<?php foreach ( $this->resultado['clientes'] as $key => $value) {  ?>
-<br> RFC : <?= $value['RFC'] ?>
-<?php } ?>
-
-<hr>
-
-<?php foreach ( $this->clientes as $value) {  ?>
-<br> RFC : <?= $value['rfc'] ?> - <?= $value['nombre'] ?> 
-<a style="color : red" href="public/clientes/eliminar?idclientes=<?=$value['idclientes'] ?>">Eliminar</a>
-<a style="color : red" href="public/clientes/pre-editar?idclientes=<?=$value['idclientes'] ?>">Editar</a>
-<?php } ?>
-
-
-<br>
-
-<?= $this->formulario ?>
-
-
+<script type="text/javascript">
+	function buscar(){
+		document.getElementById('datosAgencia').style.display = 'block';
+	}
+</script>

@@ -12,5 +12,18 @@ class OrdenesController extends Zend_Controller_Action
     {    
 
     }
+
+    public function atencionOrdenAction()
+    {    
+
+
+    }
+
+    public function monitoreoOrdenAction()
+    {    
+
+
+    }
+
 }
 
