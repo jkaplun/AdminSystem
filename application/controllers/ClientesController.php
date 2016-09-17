@@ -8,28 +8,28 @@ class ClientesController extends Zend_Controller_Action
 	 
     public function init()
     {
-    	$this->clientes = new Application_Model_DbTable_Clientes();
+    	//$this->clientes = new Application_Model_DbTable_Clientes();
         /* Initialize action controller here */
     	$this->_helper->layout->setLayout('layout');
     }
 
     public function indexAction(){
 
-    	$a = 7;
-    	$b = 1.3;
+    //	$a = 7;
+    //	$b = 1.3;
     	
-    	$this->view->resultado = array( "resultado" => ($a + $b) ,
-    			'nombre' => 'Juan',
-    			'appellido' => 'Garfias',
-    			'clientes' => array( 'MIG' => array('RFC' => 'MIG2345234sad', 'direccion' => 'calle cerrada') ,
-    								 'FORD' => array('RFC'=> 'ABCDESFSA'), 
-    								 'Microsoft' => array('RFC'=> 'POIPOIIOP')
-    			)
-    	);
+    //	$this->view->resultado = array( "resultado" => ($a + $b) ,
+    //			'nombre' => 'Juan',
+    //			'appellido' => 'Garfias',
+    //			'clientes' => array( 'MIG' => array('RFC' => 'MIG2345234sad', 'direccion' => 'calle cerrada') ,
+    //								 'FORD' => array('RFC'=> 'ABCDESFSA'), 
+    //								 'Microsoft' => array('RFC'=> 'POIPOIIOP')
+    //			)
+    //	);
 
-    	$this->view->clientes = $this->clientes->getClientes();
+    //	$this->view->clientes = $this->clientes->getClientes();
     	
-    	$this->view->formulario = new Application_Form_Clientes_AgregarCliente();
+    //	$this->view->formulario = new Application_Form_Clientes_AgregarCliente();
 
     }
     
