@@ -6755,3 +6755,24 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+
+
+.imageBody {
+  background-image: url(../../../img/login.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+}
+
+@media only screen and (max-width: 767px) {
+ /* .imageBody {
+    background-image: url(images/background-photo-mobile-devices.jpg);
+  }*/
+}
+
+
+
+
