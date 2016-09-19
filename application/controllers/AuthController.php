@@ -16,54 +16,47 @@ class AuthController extends Zend_Controller_Action
 	{
         $this->_helper->layout->setLayout('layout_login');		
 		$loginForm = new Application_Form_Auth_Login();
+		$params=$this->_request->getParams();
+		
+		
 		if( $this->_request->isPost() ){
 			
 			if ($loginForm->isValid($_POST)) {
 				$dbAdapter = Zend_Db_Table_Abstract::getDefaultAdapter();
 				$adapter = new Zend_Auth_Adapter_DbTable(
 						$dbAdapter,
-						'users',
-						'username',
-						'password',
-						'SHA(password)'
+						'usuario_admin',
+						'clave',
+						'pwd',
+						'SHA(pwd)'
 						);
 	
-				$adapter->setIdentity($loginForm->getValue('username'));
-				$adapter->setCredential(sha1($loginForm->getValue('password')));
+				$adapter->setIdentity($params['clave']);
+				$adapter->setCredential(sha1($params['pwd']));
 	
 				$auth   = Zend_Auth::getInstance();
 				$result = $auth->authenticate($adapter);
-				//echo '<pre>'.print_r($result,true).'</pre>';die;
-	
+
 				if ($result->isValid()) {
 					
 					// Save logged user data in (default) namespace session Zend_Auth
 					$auth = Zend_Auth::getInstance();
 					$authStorage = $auth->getStorage();
 					$authStorage->write($result);
-					$username = $loginForm->getValue('username');
-					$password = $loginForm->getValue('password');
-					$userDetails= new Application_Model_DbTable_Users();
+
+					$userDetails= new Application_Model_DbTable_UsuarioAdmin();
 				
-					$userDetailsResult=$userDetails->getUserValues(array('usuario'=>$username,'password'=>$password));
-					$_SESSION['Zend_Auth']['USER_VALUES'] = $userDetailsResult;
-					//echo '<pre>'.print_r($_SESSION['Zend_Auth']['USER_VALUES']['id_rol'],true).'</pre>';die;
-					
-					if($_SESSION['Zend_Auth']['USER_VALUES']['activo']==0){
+					$_SESSION['Zend_Auth']['USER_VALUES'] = $userDetails->getUserValues(
+							array(
+									'clave'=>$params['clave'],
+									'pwd'=>$params['pwd'])
+							);
+						
+					if($_SESSION['Zend_Auth']['USER_VALUES']['activo']=='N'){
 						unset($_SESSION);
-						$this->view->error='El usuario esta inactivo.';
+						$this->view->error='El usuario est&acute; inactivo.';
 					} else {
-						switch ($_SESSION['Zend_Auth']['USER_VALUES']['id_rol']){
-							case 1:
-								$this->_redirect('/');
-								break;
-							case 2:
-								$this->_redirect('/');
-								break;
-							case 3:
-								$this->_redirect('/');
-								break;
-						}
+							$this->_redirect('/');
 						return;
 					}
 				} else {
@@ -71,7 +64,7 @@ class AuthController extends Zend_Controller_Action
 	
 					switch ($result->getCode()) {
 						case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
-							$this->view->error='El usuario no esta registrado.';
+							$this->view->error='El usuario no est&acute; registrado.';
 							break;
 						case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
 							$this->view->error='Password Incorrecto.';

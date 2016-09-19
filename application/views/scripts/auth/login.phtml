@@ -10,10 +10,10 @@
 			            <form  class="form-signin" method="<?php echo $this->form->getMethod() ?>" action="<?php echo $this->form->getAction()?>">
                             <fieldset>
                                 <div class="form-group">
-                                    <?php echo $this->form->username;?>
+                                    <?php echo $this->form->clave;?>
                                 </div>
                                 <div class="form-group">
-					                <?php echo $this->form->password;?>
+					                <?php echo $this->form->pwd;?>
                                 </div>
                                     <?php if ( $this->error != ''){?>
                   						<div class="alert alert-danger" role="alert"><?= $this->error ?></div>

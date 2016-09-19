@@ -52,8 +52,7 @@
 <body>
 	<?php if(isset($_SESSION['Zend_Auth']['USER_VALUES'])){?>
 
-	<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['id_rol'] ==1) {?>
-	
+
 	<div id="wrapper">
 	    <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="padding-top: 15px;padding-bottom: 10px;margin-bottom: 0px;">
@@ -148,7 +147,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <?php echo $_SESSION['Zend_Auth']['USER_VALUES']['realname']; ?> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i> <?php echo $_SESSION['Zend_Auth']['USER_VALUES']['nombre']; ?> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
 						<li role="presentation"><a href="#" data-toggle="modal" data-target="#myModalUserEdit"><i class="fa fa-user fa-fw"></i> Perfil </a></li>
@@ -269,14 +268,6 @@
 
 	</div>
 		 
-	<?php }?>
-	<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['id_rol'] ==2) {?>
-
-	<?php }?>
-	
-	<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['id_rol'] ==3) {?>
-
-	<?php }?>
 
 	<?php } ?>
 

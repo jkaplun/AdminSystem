@@ -6,7 +6,7 @@ class Application_Form_Auth_Login extends Zend_Form
 	public function init()
 	{
 		// Username
-		$user = new Zend_Form_Element_Text('username');
+		$user = new Zend_Form_Element_Text('clave');
 		$user->setRequired(true)
 		->addErrorMessage("- Es necesario que introduzca el usuario.")
 		->removeDecorator('label')
@@ -20,7 +20,7 @@ class Application_Form_Auth_Login extends Zend_Form
 		// $username->setRequired(true);
 		
 		// Password
-		$password = new Zend_Form_Element_Password('password');
+		$password = new Zend_Form_Element_Password('pwd');
 		$password->setRequired(true)
 		->addErrorMessage("- Es necesario que introduzca el password.")
 		->removeDecorator('label')
