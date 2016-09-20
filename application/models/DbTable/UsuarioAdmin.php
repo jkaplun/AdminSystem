@@ -26,11 +26,18 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
 		$select = $this->_db->select()->
 		from ( $this->_name, 
 				array(
-						'id_user',
-						'username',
-						'realname',
-						'activo',
-						'id_rol'))
+						'clave',
+						'pwd' ,
+						'nombre',
+						'apellido_paterno',
+						'apellido_materno',
+						'puesto',
+						'email',
+						'admin',
+						'supervisor',
+						'folios',
+						'compila',
+						'activo'))
 				->where($cond);;
 	
 		//echo $select;die;
