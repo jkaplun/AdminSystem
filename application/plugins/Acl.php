@@ -11,8 +11,10 @@ class Plugin_Acl extends Zend_Controller_Plugin_Abstract {
 
 public function preDispatch(Zend_Controller_Request_Abstract $request)
     {    
-
-    	$roleName = 'usuario';
+    	$roleName = '';
+    	if(isset( $_SESSION['Zend_Auth'])){
+    		$roleName = 'usuario';
+    	}
     	
     	$actionName=$request->getActionName();
     	$controllerName=$request->getControllerName();
@@ -31,24 +33,24 @@ public function preDispatch(Zend_Controller_Request_Abstract $request)
     	
         $acl->allow('usuario', array('index'));
         
-        
-    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['admin'] == 'S'){
-    		$acl->allow('usuario', array('usuarios','ordenes','clientes'));
-    		//$acl->deny('usuario', array('clientes'));
-    	}	
-    	
-    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['supervisor'] == 'S'){
-    		//$acl->allow('usuario', array('reportes'));
-    	}
-    	
-    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['folios'] == 'S'){
-    		//$acl->allow('usuario', array('folios'));
-    	}
-    	
-    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['compila'] == 'S'){
-    		//$acl->allow('usuario', array('compila'));
-    	}
-    	
+        if ( $roleName != '') {
+	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['admin'] == 'S'){
+	    		$acl->allow('usuario', array('usuarios','ordenes','clientes'));
+	    		//$acl->deny('usuario', array('clientes'));
+	    	}	
+	    	
+	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['supervisor'] == 'S'){
+	    		//$acl->allow('usuario', array('reportes'));
+	    	}
+	    	
+	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['folios'] == 'S'){
+	    		//$acl->allow('usuario', array('folios'));
+	    	}
+	    	
+	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['compila'] == 'S'){
+	    		//$acl->allow('usuario', array('compila'));
+	    	}
+        }
     	/*	
     		switch ($rol){
     			case '1':
