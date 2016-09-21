@@ -17,27 +17,22 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
 	public function getAllUsers ($values)
 	{
 		
-		$cond = 'username is not null ';
+		$cond = 'clave is not null ';
 		
-		if( trim(@$values['usuario']) !=''){
-			$cond .= ' and username like "%'.$values['usuario'].'%"';
+		if( trim(@$values['usuario_admin']) !=''){
+			$cond .= ' and clave like "%'.$values['usuario_admin'].'%"';
 		}
 		
 		$select = $this->_db->select()->
 		from ( $this->_name, 
 				array(
+						'id_usuario',
 						'clave',
-						'pwd' ,
 						'nombre',
 						'apellido_paterno',
 						'apellido_materno',
-						'puesto',
-						'email',
-						'admin',
-						'supervisor',
-						'folios',
-						'compila',
-						'activo'))
+						'activo',
+						'email'))
 				->where($cond);;
 	
 		//echo $select;die;
