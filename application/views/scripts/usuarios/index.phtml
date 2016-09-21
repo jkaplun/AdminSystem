@@ -147,7 +147,7 @@
 						<div class="form-group input-group">
 			                <span class="input-group-addon"><i class="fa fa-suitcase"></i>
 			                </span>
-			                <input type="text" class="form-control" placeholder="Puesto" id="edita_puesto">
+			                <?= $this->form->puesto ?>
 			            </div>
 		    		</div>
 		    		<div class="col-md-6">
@@ -163,10 +163,7 @@
 		    		<div class="col-md-6">
 						<div class="form-group input-group">
 			                <span class="input-group-addon">Estatus</span>
-			                <select class="form-control" id="edita_activo" name="edita_activo">
-						    	<option value="1">Activo</option>
-						    	<option value="0">Inactivo</option>
-						   </select>
+			                <?= $this->form->activo ?>
 			            </div>	    		
 		    		</div>	    			    		
 		    	</div>
@@ -177,19 +174,13 @@
 		    		<div class="col-md-6">
 						<div class="form-group input-group">
 			                <span class="input-group-addon" >Admin</span>
-			                <select class="form-control" id="edita_activo" name="edita_activo">
-						    	<option value="1">Activo</option>
-						    	<option value="0">Inactivo</option>
-						   </select>
+			                <?= $this->form->admin ?>
 			            </div>	   
 		    		</div>
 		    		<div class="col-md-6">
 						<div class="form-group input-group">
 			                <span class="input-group-addon" >Supervisor</span>
-			                <select class="form-control" id="edita_activo" name="edita_activo">
-						    	<option value="1">Activo</option>
-						    	<option value="0">Inactivo</option>
-						   </select>
+			                <?= $this->form->supervisor ?>
 			            </div>	    		
 		    		</div>	    			    		
 		    	</div>
@@ -197,19 +188,13 @@
 		    		<div class="col-md-6">
 						<div class="form-group input-group">
 			                <span class="input-group-addon" >Folios</span>
-			                <select class="form-control" id="edita_activo" name="edita_activo">
-						    	<option value="1">Activo</option>
-						    	<option value="0">Inactivo</option>
-						   </select>
+			                <?= $this->form->folios ?>
 			            </div>	   
 		    		</div>
 		    		<div class="col-md-6">
 						<div class="form-group input-group">
 			                <span class="input-group-addon" >Compila</span>
-			                <select class="form-control" id="edita_activo" name="edita_activo">
-						    	<option value="1">Activo</option>
-						    	<option value="0">Inactivo</option>
-						   </select>
+			                <?= $this->form->compila ?>
 			            </div>	    		
 		    		</div>	    			    		
 		    	</div>
@@ -217,7 +202,7 @@
 	    </div>
 	    <div class="modal-footer">     
 	       <button type="button" class="btn btn-primary btn-circle btn-lg" ><i class="fa fa-edit"></i></button>
-	       <button type="button" class="btn btn-success btn-circle btn-lg" onclick="submitForm()"><i class="fa fa-save"></i></button>
+	       <span type="button" class="btn btn-success btn-circle btn-lg" onclick="submitForm()"><i class="fa fa-save"></i></span>
 	    </div>
      </form>
    </div>
