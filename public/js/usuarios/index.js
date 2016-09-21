@@ -7,31 +7,16 @@ function datosform_edita_usuario(json_values){
 	console.log(json_values);
 	var obj = jQuery.parseJSON( json_values );
 	$('#myModalLabel').html(obj.nombre+' '+obj.apellido_paterno +' - '+ obj.clave);
-	
-	$('#edita_nombre_real').val(realname);
-	$('#edita_rol').val(id_rol);
-	$('#edita_id_user').val(id_user);
-	$('#edita_activo').val(activo);
+	 
+	populate('formedituser',obj);
+
 	
 }
 
 function populate(frm, data) {   
     $.each(data, function(key, value){  
-    var $ctrl = $('[name='+key+']', frm);  
-    switch($ctrl.attr("type"))  
-    {  
-        case "text" :   
-        case "hidden":  
-        $ctrl.val(value);   
-        break;   
-        case "radio" : case "checkbox":   
-        $ctrl.each(function(){
-           if($(this).attr('value') == value) {  $(this).attr("checked",value); } });   
-        break;  
-        default:
-        $ctrl.val(value); 
-    }  
-    });  
+    	$("#"+key).val(value);
+    });
 }
 
 function submitForm(){

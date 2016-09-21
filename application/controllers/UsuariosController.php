@@ -19,11 +19,12 @@ class UsuariosController extends Zend_Controller_Action
     	 
     	 $users = new Application_Model_DbTable_UsuarioAdmin();
     	 $params=$this->_request->getParams();
-
+    	 $this->view->form = new Application_Form_Usuarios_Usuarios();
+    	 
+    	 
+    	 
     	 if( $this->_request->isPost() ){
-    	 	echo '<pre>'.print_r($params,true).'</pre>';die;
-    	 	$users = new Application_Model_DbTable_UsuarioAdmin();
-    		
+    	 	echo '<pre>'.print_r($params,true).'</pre>';die;    		
     	 	if ( $params['accion'] == 'editar' ){
 	     		$data = array(
 	     				'nombre' => trim($params['edita_nombre']),
