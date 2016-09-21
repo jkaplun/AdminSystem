@@ -1,6 +1,10 @@
 <?php
-// located at application/forms/Auth/Login.php
- 
+
+/**
+ * 
+ * @author Juan Garfias
+ *
+ */
 class Application_Form_Clientes_AgregarCliente extends Zend_Form
 {
 	public function init()
