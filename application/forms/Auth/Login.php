@@ -1,11 +1,6 @@
 <?php
 // located at application/forms/Auth/Login.php
  
-/**
- * 
- * @author Juan Garfias
- *
- */
 class Application_Form_Auth_Login extends Zend_Form
 {
 	public function init()
