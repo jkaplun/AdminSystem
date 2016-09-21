@@ -29,6 +29,7 @@ class Application_Form_Usuarios_Usuarios extends Zend_Form
 		->setAttrib("maxlength","45")
 		;
 		
+		
 		// Password
 		$password_conf = new Zend_Form_Element_Password('pwd_conf');
 		$password_conf->setRequired(true)
