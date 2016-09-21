@@ -1,7 +1,7 @@
 <?php
 // located at application/forms/Usuarios/Usuarios.php
  
-class Application_Form_Auth_Usuarios extends Zend_Form
+class Application_Form_Usuarios_Usuarios extends Zend_Form
 {
 	public function init()
 	{
@@ -26,6 +26,19 @@ class Application_Form_Auth_Usuarios extends Zend_Form
 		->setAttrib("autocomplete","off")
 		->setAttrib("class","form-control")
 		->setAttrib("placeholder","Password")
+		->setAttrib("maxlength","45")
+		;
+		
+		
+		// Password
+		$password_conf = new Zend_Form_Element_Password('pwd_conf');
+		$password_conf->setRequired(true)
+		->addErrorMessage("- Es necesario que introduzca el password.")
+		->removeDecorator('label')
+		->removeDecorator('HtmlTag')
+		->setAttrib("autocomplete","off")
+		->setAttrib("class","form-control")
+		->setAttrib("placeholder","Confirmar Password")
 		->setAttrib("maxlength","45")
 		;
 		
@@ -155,13 +168,12 @@ class Application_Form_Auth_Usuarios extends Zend_Form
 		->removeDecorator('HtmlTag')
 		->removeDecorator('Errors')
 		;
-
 		$id_usuario = new Zend_Form_Element_Hidden('id_usuario');
 		
 		$this
 		->setMethod('post')
 		->addElements(array(
-				$clave, $password, $nombre, $apellido_paterno, 
+				$clave, $password, $password_conf, $nombre, $apellido_paterno, 
 				$apellido_materno, $puesto, $email, /*$admin, 
 				$supervisor, $folios, $compila*/$permisos, $activo, $id_usuario, $submit
 				));
