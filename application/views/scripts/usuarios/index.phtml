@@ -12,7 +12,9 @@
 						<div class="col-md-10">
 						</div>
 						<div class="col-md-2" align="right">
-						    <button type="button" class="btn btn-primary btn-circle" data-dismiss="modal">&nbsp;<i class="fa fa-plus"></i>&nbsp;<i class="fa fa-user"></i>&nbsp;</button>
+						    <button type="button" class="btn btn-primary btn-circle" data-dismiss="modal" onclick="abrirModalAgregarUsuario()" data-toggle="modal" data-target="#myModal">
+						    &nbsp;<i class="fa fa-plus"></i>&nbsp;<i class="fa fa-user"></i>&nbsp;
+						    </button>
 						</div>
 					</div>
 					<br/>
@@ -28,7 +30,7 @@
 							</tr>
 						</thead>
 						<tbody align="center">
-							<?php foreach ($this->paginator as $registro) { ?>
+							<?php foreach ($this->registros as $registro) { ?>
 							<tr
 								<?php 
 									if ( $registro['activo'] == 0 ){
@@ -50,8 +52,8 @@
 								</td>
 								<td><?php echo $registro['email'] ?></td>
 								<td>
-									<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"
-									onclick="datosform_edita_usuario('<?php echo $registro['id_usuario'] ?>','<?php echo $registro['clave'] ?>','<?php echo $registro['nombre'] ?>','<?php echo $registro['apellido_materno'] ?>','<?php echo $registro['apellido_paterno'] ?>','<?php echo $registro['activo'] ?>')">
+									<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" value='<?= json_encode($registro) ?>'
+									onclick="datosform_edita_usuario(this.value)">
 									<i class="fa fa-info-circle"></i>
 									</button>
 								</td>
@@ -87,173 +89,129 @@
      <form method="post" id="formedituser">
       	<input type="hidden" name="edita_id_user" id="edita_id_user">
       	<input name="accion" value="editar" type="hidden">
-      	<div class="modal-footer" style="padding-top: 10px;padding-bottom: 0px;">     
-	       <button type="button" class="btn btn-default btn-circle btn-lg" ><i class="fa fa-edit"></i></button>
-	       <button type="button" class="btn btn-default btn-circle btn-lg" onclick="submitForm()"><i class="fa fa-save"></i></button>
+
+	    <div class="modal-body">
+			<fieldset>
+				<legend>Datos Generales:</legend>
+		    	<div class="row">
+		    		<div class="col-md-4">
+						<div class="form-group input-group">
+			                <span class="input-group-addon"><i class="fa fa-user"></i>
+			                </span>
+			                <input type="text" class="form-control" placeholder="Nombre" id="edita_nombre">
+			            </div>
+		    		</div>
+		    		<div class="col-md-4">
+						<div class="form-group input-group">
+			                <span class="input-group-addon"><i class="fa fa-user"></i>
+			                </span>
+			                <input type="text" class="form-control" placeholder="Apellido Paterno" id="edita_apellido_paterno">
+			            </div>	    		
+		    		</div>
+		    		<div class="col-md-4">
+						<div class="form-group input-group">
+			                <span class="input-group-addon"><i class="fa fa-user"></i>
+			                </span>
+			                <input type="text" class="form-control" placeholder="Apellido Materno" id="edita_apellido_materno">
+			            </div>	    		
+		    		</div>	    			    		
+		    	</div>
+	
+		    	<div class="row">
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon"><i class="fa fa-lock"></i>
+			                </span>
+			                <input type="text" class="form-control" placeholder="Nueva Contrase&ntilde;a" id="edita_password">
+			            </div>
+		    		</div>
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon"><i class="fa fa-lock"></i>
+			                </span>
+			                <input type="text" class="form-control" placeholder="Confirmar Nueva Contrase&ntilde;a" id="edita_passwordConfirm">
+			            </div>	    		
+		    		</div>	    			    		
+		    	</div>
+	
+		    	<div class="row">
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon"><i class="fa fa-suitcase"></i>
+			                </span>
+			                <input type="text" class="form-control" placeholder="Puesto" id="edita_puesto">
+			            </div>
+		    		</div>
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon"><i class="fa fa-envelope"></i>
+			                </span>
+			                <input type="text" class="form-control" placeholder="Email" id="edita_email">
+			            </div>	    		
+		    		</div>	    			    		
+		    	</div>
+	
+		    	<div class="row">
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon">Estatus</span>
+			                <select class="form-control" id="edita_activo" name="edita_activo">
+						    	<option value="1">Activo</option>
+						    	<option value="0">Inactivo</option>
+						   </select>
+			            </div>	    		
+		    		</div>	    			    		
+		    	</div>
+			</fieldset>
+			<fieldset>
+				<legend>Permisos:</legend>
+		    	<div class="row">
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon" >Admin</span>
+			                <select class="form-control" id="edita_activo" name="edita_activo">
+						    	<option value="1">Activo</option>
+						    	<option value="0">Inactivo</option>
+						   </select>
+			            </div>	   
+		    		</div>
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon" >Supervisor</span>
+			                <select class="form-control" id="edita_activo" name="edita_activo">
+						    	<option value="1">Activo</option>
+						    	<option value="0">Inactivo</option>
+						   </select>
+			            </div>	    		
+		    		</div>	    			    		
+		    	</div>
+		    	<div class="row">
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon" >Folios</span>
+			                <select class="form-control" id="edita_activo" name="edita_activo">
+						    	<option value="1">Activo</option>
+						    	<option value="0">Inactivo</option>
+						   </select>
+			            </div>	   
+		    		</div>
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon" >Compila</span>
+			                <select class="form-control" id="edita_activo" name="edita_activo">
+						    	<option value="1">Activo</option>
+						    	<option value="0">Inactivo</option>
+						   </select>
+			            </div>	    		
+		    		</div>	    			    		
+		    	</div>
+	    	</fieldset>
 	    </div>
-	    <div class="modal-body" style="padding-top: 0px;">
-
-	    	<h4 style="border-bottom: 2px solid #31708f;padding-bottom: 5px;">Datos Generales</h4>
-
-	    	<div class="row">
-	    		<div class="col-md-4">
-					<div class="form-group input-group">
-		                <span class="input-group-addon"><i class="fa fa-user"></i>
-		                </span>
-		                <input type="text" class="form-control" placeholder="Nombre" id="edita_nombre">
-		            </div>
-	    		</div>
-	    		<div class="col-md-4">
-					<div class="form-group input-group">
-		                <span class="input-group-addon"><i class="fa fa-user"></i>
-		                </span>
-		                <input type="text" class="form-control" placeholder="Apellido Paterno" id="edita_apellido_paterno">
-		            </div>	    		
-	    		</div>
-	    		<div class="col-md-4">
-					<div class="form-group input-group">
-		                <span class="input-group-addon"><i class="fa fa-user"></i>
-		                </span>
-		                <input type="text" class="form-control" placeholder="Apellido Materno" id="edita_apellido_materno">
-		            </div>	    		
-	    		</div>	    			    		
-	    	</div>
-
-	    	<div class="row">
-	    		<div class="col-md-6">
-					<div class="form-group input-group">
-		                <span class="input-group-addon"><i class="fa fa-lock"></i>
-		                </span>
-		                <input type="text" class="form-control" placeholder="Nueva Contrase&ntilde;a" id="edita_password">
-		            </div>
-	    		</div>
-	    		<div class="col-md-6">
-					<div class="form-group input-group">
-		                <span class="input-group-addon"><i class="fa fa-lock"></i>
-		                </span>
-		                <input type="text" class="form-control" placeholder="Confirmar Nueva Contrase&ntilde;a" id="edita_passwordConfirm">
-		            </div>	    		
-	    		</div>	    			    		
-	    	</div>
-
-	    	<div class="row">
-	    		<div class="col-md-6">
-					<div class="form-group input-group">
-		                <span class="input-group-addon"><i class="fa fa-suitcase"></i>
-		                </span>
-		                <input type="text" class="form-control" placeholder="Puesto" id="edita_puesto">
-		            </div>
-	    		</div>
-	    		<div class="col-md-6">
-					<div class="form-group input-group">
-		                <span class="input-group-addon"><i class="fa fa-envelope"></i>
-		                </span>
-		                <input type="text" class="form-control" placeholder="Email" id="edita_email">
-		            </div>	    		
-	    		</div>	    			    		
-	    	</div>
-
-	    	<div class="row">
-	    		<div class="col-md-6">
-					<div class="form-group input-group">
-		                <span class="input-group-addon">Estatus</span>
-		                <select class="form-control" id="edita_activo" name="edita_activo">
-					    	<option value="1">Activo</option>
-					    	<option value="0">Inactivo</option>
-					   </select>
-		            </div>	    		
-	    		</div>	    			    		
-	    	</div>
-
-	    	<h4 style="border-bottom: 2px solid #31708f;padding-bottom: 5px;">Permisos</h4>
-
-	    	<div class="row">
-	    		<div class="col-md-6">
-					<div class="form-group input-group">
-		                <span class="input-group-addon" style="min-width: 150px;">Admin</span>
-		                <select class="form-control" id="edita_activo" name="edita_activo">
-					    	<option value="1">Activo</option>
-					    	<option value="0">Inactivo</option>
-					   </select>
-		            </div>	   
-	    		</div>
-	    		<div class="col-md-6">
-					<div class="form-group input-group">
-		                <span class="input-group-addon" style="min-width: 150px;">Supervisor</span>
-		                <select class="form-control" id="edita_activo" name="edita_activo">
-					    	<option value="1">Activo</option>
-					    	<option value="0">Inactivo</option>
-					   </select>
-		            </div>	    		
-	    		</div>	    			    		
-	    	</div>
-	    	<div class="row">
-	    		<div class="col-md-6">
-					<div class="form-group input-group">
-		                <span class="input-group-addon" style="min-width: 150px;">Folios</span>
-		                <select class="form-control" id="edita_activo" name="edita_activo">
-					    	<option value="1">Activo</option>
-					    	<option value="0">Inactivo</option>
-					   </select>
-		            </div>	   
-	    		</div>
-	    		<div class="col-md-6">
-					<div class="form-group input-group">
-		                <span class="input-group-addon" style="min-width: 150px;">Compila</span>
-		                <select class="form-control" id="edita_activo" name="edita_activo">
-					    	<option value="1">Activo</option>
-					    	<option value="0">Inactivo</option>
-					   </select>
-		            </div>	    		
-	    		</div>	    			    		
-	    	</div>
+	    <div class="modal-footer">     
+	       <button type="button" class="btn btn-primary btn-circle btn-lg" ><i class="fa fa-edit"></i></button>
+	       <button type="button" class="btn btn-success btn-circle btn-lg" onclick="submitForm()"><i class="fa fa-save"></i></button>
 	    </div>
      </form>
    </div>
  </div>
 </div>
-
-   <!-- DataTables JavaScript -->
-   <script src="<?= $this->baseUrl() ?>/css_complete/datatables/js/jquery.dataTables.min.js"></script>
-   <script src="<?= $this->baseUrl() ?>/css_complete/datatables-plugins/dataTables.bootstrap.min.js"></script>
-   <script src="<?= $this->baseUrl() ?>/css_complete/datatables-responsive/dataTables.responsive.js"></script>
-
-   <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-   <script>
-    $(document).ready(function() {
-        $('#dataTable-usuarios').DataTable({
-            responsive: true,
-            "language":{
-    "sProcessing":     "Procesando...",
-    "sLengthMenu":     "Mostrar _MENU_ registros",
-    "sZeroRecords":    "No se encontraron resultados",
-    "sEmptyTable":     "Ningún dato disponible en esta tabla",
-    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-    "sInfoPostFix":    "",
-    "sSearch":         "Buscar:",
-    "sUrl":            "",
-    "sInfoThousands":  ",",
-    "sLoadingRecords": "Cargando...",
-    "oPaginate": {
-        "sFirst":    "Primero",
-        "sLast":     "Último",
-        "sNext":     "Siguiente",
-        "sPrevious": "Anterior"
-    },
-    "oAria": {
-        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-    }
-}
-
-        });
-    });
-   </script>
-
-
-
-
-
-

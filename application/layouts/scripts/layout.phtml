@@ -47,10 +47,9 @@
 
 	
 	<?php echo $this->InlineScript();  ?>
- <?php echo $this->headLink(); ?>
+ 	<?php echo $this->headLink(); ?>
 </head>
 <body>
-	<?php if(isset($_SESSION['Zend_Auth']['USER_VALUES'])){?>
 
 
 	<div id="wrapper">
@@ -267,10 +266,6 @@
         </nav>
 
 	</div>
-		 
-
-	<?php } ?>
-
     <div id="page-wrapper" style="min-height: 184px;">
         <div class="container-fluid">
         <div class="row">
@@ -282,7 +277,6 @@
 </div>
 </div>
 
-	<?php if(isset($_SESSION['Zend_Auth']['USER_VALUES'])){?>
 		<!-- Modal -->
 		<div class="modal fade" id="myModalUserEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
@@ -356,6 +350,5 @@
 				}
 			}
 		</script>
-	<?php } ?>
 </body>
 </html>
