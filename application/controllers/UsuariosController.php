@@ -81,6 +81,7 @@ class UsuariosController extends Zend_Controller_Action
         
         $mensajesDeError = $form->getMessages();
         $cantidadDeErrores = count($mensajesDeError);
+        echo($params['puesto']);
         if ($cantidadDeErrores == 0)
         {
             if ($params['pwd'] == $params['pwd_conf'])
@@ -196,4 +197,3 @@ class UsuariosController extends Zend_Controller_Action
     }
 
 }
-
