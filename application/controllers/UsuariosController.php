@@ -111,7 +111,7 @@ class UsuariosController extends Zend_Controller_Action
                         // se inserta en la base de datos al nuevo usuario
                         $idNuevoUsuario = $this->usuario_admin->insert($data);
                         // se inyecta el ID, estado y descripción en la respuesta al cliente
-                        $data['id']=$idNuevoUsuario;
+                        $data['id_usuario']=$idNuevoUsuario;
                         $data['estado']='ok';
                         $data['descripcion']='El usuario ha sido guardado exitosamente';
                         // se responde al cliente
@@ -122,7 +122,7 @@ class UsuariosController extends Zend_Controller_Action
                     { // else cuando el email es incorrecto
   
                        // se inyecta el ID, estado y descripción en la respuesta al cliente
-                        $data['id']='0';
+                        $data['id_usuario']='0';
                         $data['estado']='error';
                         $data['descripcion']='Email en formato incorrecto';
                          // se responde al cliente
@@ -134,7 +134,7 @@ class UsuariosController extends Zend_Controller_Action
                 { // else cuando ya existe una clave igual (??) 
 
                        // se inyecta el ID, estado y descripción en la respuesta al cliente
-                        $data['id']='0';
+                        $data['id_usuario']='0';
                         $data['estado']='error';
                         $data['descripcion']='Ya existe una clave igual';
                         // se responde al cliente
@@ -146,7 +146,7 @@ class UsuariosController extends Zend_Controller_Action
             { // else cuando las contraeñas no coinciden
 
                      // se inyecta el ID, estado y descripción en la respuesta al cliente
-                        $data['id']='0';
+                        $data['id_usuario']='0';
                         $data['estado']='error';
                         $data['descripcion']='Passwords diferentes';
                         // se responde al cliente
@@ -166,8 +166,13 @@ class UsuariosController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
+        //echo $params['id_usuario'];
+
+        //echo '<pre>'.print_r($params,true).'</pre>';die;  
+
     
         $data = array(
+                'id_usuario' => $params['id_usuario'],
                 'clave' => $params['clave'],
                 'pwd' => $params['pwd'],
                 'nombre' => $params['nombre'],
@@ -186,6 +191,10 @@ class UsuariosController extends Zend_Controller_Action
     
         $this->usuario_admin->update($data, $where);
     
+        $data['estado']='ok';
+        $data['descripcion']='El usuario ha sido actualizado exitosamente';
+
+        $this->_helper->json($data);
         $this->_redirect('usuarios/');
     }
     

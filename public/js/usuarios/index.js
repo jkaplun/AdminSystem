@@ -4,11 +4,16 @@
 
 
 
-// en esta variable (urlAction) se almacena la url a la que accederá la petición AJAX, 
+// en esta variable (ajaxAction) se almacena la url a la que accederá la petición AJAX, 
 // se le asigna un valor dentro de las siguientes fuciones:
 // - datosform_edita_usuario(json_values) -> actualizar
 // - abrirModalAgregarUsuario -> agregar
 var ajaxAction;
+
+var dataTable;
+
+//Variable donde se almacena el id que asigna la base de datos al usuario
+var idDataBaseUser="";
 
 
 var path="public/usuarios/";
@@ -18,10 +23,10 @@ var path="public/usuarios/";
 
 
 function datosform_edita_usuario(json_values){
-
 	ajaxAction="actualizar";
-	console.log(json_values);
 	var obj = jQuery.parseJSON( json_values );
+	//$("#"+obj.id_usuario).addClass('selected');
+	idDataBaseUser =obj.id_usuario;
 	$('#myModalLabel').html(obj.nombre+' '+obj.apellido_paterno +' - '+ obj.clave);
 	 
 	populate(obj);
@@ -37,14 +42,22 @@ function populate(data) {
 
 function submitForm(){
 	//var form = $("#formnewuser").serialize() ;
-	
+	var addIdDataBaseParameter="";
+
+	if(ajaxAction=="actualizar"){
+		addIdDataBaseParameter="&id_usuario="+idDataBaseUser;
+
+	}
+	console.log("parametros a mandar: ");
+	console.log($("#formedituser").serialize() + addIdDataBaseParameter );
 	$.ajax({
 		  url: path + ajaxAction,
 		  method: "post",
-		  data: $("#formedituser").serialize() ,
+		  data: $("#formedituser").serialize() + addIdDataBaseParameter ,
 		  dataType: "json"
-		}).done(function(res) { 
-			
+		})
+		.done(function(res) { 
+
 		if (ajaxAction == "agregar"){
 			agregarAjaxDone(res);
 		}else{
@@ -53,7 +66,10 @@ function submitForm(){
 
 
 
-  });// end ajax done 
+  })// end ajax done 
+		.fail(function() {
+    	alert( "error" );
+  });
 
 } //end submitForm()
 
@@ -86,8 +102,31 @@ function abrirModalAgregarUsuario(){
 function agregarAjaxDone(res){
 	if(res.estado == "ok"){ // si la respuesta es correcta:
 	      console.log(res); 
+
+			agregarUsuarioEnTabla(res);
+
+ 	} // end if(res.estado == "ok"){
+ 		alert(res.descripcion); 
+} // end agregarAjaxDone()
+
+
+
+function actualizarAjaxDone(res){
+	//var userTable = $('#dataTable-usuarios').DataTable();  
+
+	agregarUsuarioEnTabla(res);
+	//dataTable.row('.selected').remove().draw( false );
+	alert(res.descripcion);
+
+}
+
+
+function agregarUsuarioEnTabla(res){
+
+	      idDataBaseUser=res.id_usuario;
 	      var userTable = $('#dataTable-usuarios').DataTable();  
 	      var estatusUsuario;
+
 
 	      if(res.activo == "S"){
 	      	estatusUsuario="Activo";
@@ -99,34 +138,46 @@ function agregarAjaxDone(res){
 	      var nombreCompleto= res.nombre+" "+ res.apellido_paterno+ " " + res.apellido_materno; 
 	      // se agrega la nueva columna a la tabla 
 	      userTable.row.add( [ 
-	        res.id, res.clave, nombreCompleto, estatusUsuario,  res.email, "x" 
-	        ]).draw() 
-	 
-
-	      userTable.page( 'last' ).draw( 'page' ); 
+	        res.id_usuario, res.clave, nombreCompleto, estatusUsuario,  res.email, "x" 
+	        ]).draw();
 
 	      var boton = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" value=' + JSON.stringify(res) +  
 	      ' onclick="datosform_edita_usuario(this.value)">' +  
 	      '<i class="fa fa-info-circle"></i>'+ 
 	      '</button>'  
 	 
-	       $('#dataTable-usuarios tr:last-child td:last-child').html(boton); 
+
+	      //var previousRow=res.id_usuario-1;
+	 		//$("#"+res.id_usuario).closest('tr').next('tr').css('background',"red");
+	 		//$("#"+res.id_usuario).closest('tr').next('tr').attr('id', res.id_usuario);
+
+
+
+	 		//$("#"+res.id_usuario)
+	 
+
+	      if(ajaxAction=="agregar"){
+	      userTable.page( 'last' ).draw( 'page' ); 
+
+	      $('#dataTable-usuarios tr:last-child td:last-child').html(boton); 
+	      $('#dataTable-usuarios tr:last-child').attr('id', res.id_usuario);
+	  	  }else{
+	  	  	$("#"+res.id_usuario).closest('tr').next('tr').attr('id', res.id_usuario);
+	  	  	dataTable.row('#'+res.id_usuario).remove().draw( false );
+	  	  	$("#"+res.id_usuario + " td:last-child").html(boton);
+	  	  }
+
+	  		
+
+
+	       
 	       $('#myModal').modal('toggle'); 
-
-
- 	} // end if(res.estado == "ok"){
- 		alert(res.descripcion); 
-} // end agregarAjaxDone()
-
-
-
-function actualizarAjaxDone(res){
-	//pending
 
 }
 
+
 $(document).ready(function() {
-    $('#dataTable-usuarios').DataTable({
+    dataTable = $('#dataTable-usuarios').DataTable({
         responsive: true,
         "language":{
 			"sProcessing":     "Procesando...",
@@ -154,7 +205,6 @@ $(document).ready(function() {
 		}
 
     }); // end     $('#dataTable-usuarios').DataTable({
-
 
 
 

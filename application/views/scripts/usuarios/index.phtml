@@ -30,7 +30,7 @@
 						</thead>
 						<tbody align="center">
 							<?php foreach ($this->registros as $registro) { ?>
-							<tr
+							<tr id='<?php echo $registro['id_usuario'] ?>'
 								<?php 
 									if ( $registro['activo'] == 0 ){
 										echo 'class="bg-warning"';
@@ -50,7 +50,7 @@
 								?>
 								</td>
 								<td><?php echo $registro['email'] ?></td>
-								<td>
+								<td >
 									<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" value='<?= json_encode($registro) ?>'
 									onclick="datosform_edita_usuario(this.value)">
 									<i class="fa fa-info-circle"></i>
@@ -202,7 +202,7 @@
 	    </div>
 	    <div class="modal-footer">     
 	       <button type="button" class="btn btn-primary btn-circle btn-lg" ><i class="fa fa-edit"></i></button>
-	       <span type="button" class="btn btn-success btn-circle btn-lg" onclick="submitForm()"><i class="fa fa-save"></i></span>
+	       <span id="submitBtn" type="button" class="btn btn-success btn-circle btn-lg" onclick="submitForm()"><i class="fa fa-save"></i></span>
 	    </div>
      </form>
    </div>
