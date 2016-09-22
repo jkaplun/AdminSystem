@@ -81,6 +81,7 @@ class UsuariosController extends Zend_Controller_Action
         
         $mensajesDeError = $form->getMessages();
         $cantidadDeErrores = count($mensajesDeError);
+        echo($params['puesto']);
         if ($cantidadDeErrores == 0)
         {
             if ($params['pwd'] == $params['pwd_conf'])
@@ -108,7 +109,7 @@ class UsuariosController extends Zend_Controller_Action
                         );
                         $idNuevoUsuario = $this->usuario_admin->insert($data);
                         $response = array(
-                                //'id' => $idNuevoUsuario,
+                                'id' => $idNuevoUsuario,
                                 'estado' => 'guardado', // error - success
                                 'description' => 'El usuario ha sido guardado'
                         );
@@ -131,7 +132,7 @@ class UsuariosController extends Zend_Controller_Action
                     $response = array(
                             'id' => '0',
                             'estado' => 'error', // error - success
-                            'description' => 'Ya existe una clave igual'
+                            'description' => 'Ya existe una clave igual',
                     );
                     $this->_helper->json($response);
                     $this->_redirect('usuarios/');
