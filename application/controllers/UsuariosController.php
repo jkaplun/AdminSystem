@@ -83,13 +83,13 @@ class UsuariosController extends Zend_Controller_Action
         $cantidadDeErrores = count($mensajesDeError);
         if ($cantidadDeErrores == 0)
         {
-            if ($data['pwd'] == $data['pwd_conf'])
+            if ($params['pwd'] == $params['pwd_conf'])
             {
-                $usuarios = $this->usuario_admin->obtenerUsuarioPorClave($data['clave']);
+                $usuarios = $this->usuario_admin->obtenerUsuarioPorClave($params['clave']);
                 if (count($usuarios) == 0)
                 {
                     $utiles = new Application_Model_Services_Utiles();
-                    $esEmailCorrecto = $utiles->comprobar_email($data['email']);
+                    $esEmailCorrecto = $utiles->comprobar_email($params['email']);
                     if($esEmailCorrecto)
                     {
                         $data = array(
@@ -108,7 +108,7 @@ class UsuariosController extends Zend_Controller_Action
                         );
                         $idNuevoUsuario = $this->usuario_admin->insert($data);
                         $response = array(
-                                'id' => $idNuevoUsuario,
+                                //'id' => $idNuevoUsuario,
                                 'estado' => 'guardado', // error - success
                                 'description' => 'El usuario ha sido guardado'
                         );
@@ -153,16 +153,6 @@ class UsuariosController extends Zend_Controller_Action
             $this->_helper->json($mensajesDeError);
             $this->_redirect('usuarios/');
         }
-        
-        $response = array(
-                'id' => '1',
-                'estado' => 'error', // error - success
-                'description' => 'usuario duplicado'
-        );
-
-        // Regresa respuesta al cliente.
-        $this->_helper->json($response);
-        $this->_redirect('usuarios/');
     }
     
     public function actualizarAction(){
