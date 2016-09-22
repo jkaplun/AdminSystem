@@ -15,6 +15,10 @@ class ClientesController extends Zend_Controller_Action
 
     public function indexAction(){
 
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/agencias/index.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
     //	$a = 7;
     //	$b = 1.3;
     	
