@@ -75,28 +75,9 @@ class UsuariosController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
-        
-        
-        $form = new Application_Form_Usuarios_Usuarios();
-        
-        $mensajesDeError = $form->getMessages();
-        $cantidadDeErrores = count($mensajesDeError);
-        echo($params['puesto']);
-        if ($cantidadDeErrores == 0)
-        {
-            if ($params['pwd'] == $params['pwd_conf'])
-            {
-				$contraEncrip = sha1($params['pwd']);
-                $usuarios = $this->usuario_admin->obtenerUsuarioPorClave($params['clave']);
-                if (count($usuarios) == 0)
-                {
-                    $utiles = new Application_Model_Services_Utiles();
-                    $esEmailCorrecto = $utiles->comprobar_email($params['email']);
-                    if($esEmailCorrecto)
-                    {
-                        $data = array(
+        $data = array(
                                 'clave' => $params['clave'],
-                                'pwd' => $contraEncrip,
+                                //'pwd' => $contraEncrip, se define más abajo
                                 'nombre' => $params['nombre'],
                                 'apellido_paterno' => $params['apellido_paterno'],
                                 'apellido_materno' => $params['apellido_materno'],
@@ -108,46 +89,73 @@ class UsuariosController extends Zend_Controller_Action
                                 'compila' => $params['compila'],
                                 'activo' => $params['activo']
                         );
+        
+        $form = new Application_Form_Usuarios_Usuarios();
+        
+        $mensajesDeError = $form->getMessages();
+        $cantidadDeErrores = count($mensajesDeError);
+        if ($cantidadDeErrores == 0)
+        {
+            if ($params['pwd'] == $params['pwd_conf'])
+            { // ¿Qué se verifica aquí?
+				$contraEncrip = sha1($params['pwd']);
+                $usuarios = $this->usuario_admin->obtenerUsuarioPorClave($params['clave']);
+                $data['pwd']=$contraEncrip;
+                if (count($usuarios) == 0)
+                { // ¿Qué se verifica aquí?
+                    $utiles = new Application_Model_Services_Utiles();
+                    $esEmailCorrecto = $utiles->comprobar_email($params['email']);
+                    if($esEmailCorrecto)
+                    { // si el emal es correcto:
+                      
+                        // se inserta en la base de datos al nuevo usuario
                         $idNuevoUsuario = $this->usuario_admin->insert($data);
-                        array_push($params, 
-                        		array('id'=>$idNuevoUsuario), 
-                        		array('estado'=>'guardado'),
-                        		array('descripcion' => 'El usuario ha sido guardado'));
-                        $this->_helper->json($params);
+                        // se inyecta el ID, estado y descripción en la respuesta al cliente
+                        $data['id']=$idNuevoUsuario;
+                        $data['estado']='ok';
+                        $data['descripcion']='El usuario ha sido guardado exitosamente';
+                        // se responde al cliente
+                        $this->_helper->json($data);
                         $this->_redirect('usuarios/');
                     }
                     else 
-                    {
-                        array_push($params, 
-                        		array('id'=>'0'), 
-                        		array('estado'=>'error'),
-                        		array('descripcion' => 'Email en formato incorrecto'));
-                        $this->_helper->json($params);
+                    { // else cuando el email es incorrecto
+  
+                       // se inyecta el ID, estado y descripción en la respuesta al cliente
+                        $data['id']='0';
+                        $data['estado']='error';
+                        $data['descripcion']='Email en formato incorrecto';
+                         // se responde al cliente
+                        $this->_helper->json($data);
                         $this->_redirect('usuarios/');
                     }
                 }
                 else 
-                {
-                    array_push($params, 
-                        		array('id'=>'0'), 
-                        		array('estado'=>'error'),
-                        		array('descripcion' => 'Ya existe una clave igual'));
-                        $this->_helper->json($params);
+                { // else cuando ya existe una clave igual (??) 
+
+                       // se inyecta el ID, estado y descripción en la respuesta al cliente
+                        $data['id']='0';
+                        $data['estado']='error';
+                        $data['descripcion']='Ya existe una clave igual';
+                        // se responde al cliente
+                        $this->_helper->json($data);
                         $this->_redirect('usuarios/');
                 }
             }
             else 
-            {
-                array_push($params, 
-                        		array('id'=>'0'), 
-                        		array('estado'=>'error'),
-                        		array('descripcion' => 'Passwords diferentes'));
-                        $this->_helper->json($params);
+            { // else cuando las contraeñas no coinciden
+
+                     // se inyecta el ID, estado y descripción en la respuesta al cliente
+                        $data['id']='0';
+                        $data['estado']='error';
+                        $data['descripcion']='Passwords diferentes';
+                        // se responde al cliente
+                        $this->_helper->json($data);
                         $this->_redirect('usuarios/');
             }
         }
         else 
-        {
+        { // ¿Para qué es este else?
             $this->_helper->json($mensajesDeError);
             $this->_redirect('usuarios/');
         }

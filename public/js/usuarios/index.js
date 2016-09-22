@@ -28,6 +28,8 @@ function submitForm(){
 		  data: $("#formedituser").serialize() ,
 		  dataType: "json"
 		})  .done(function( item ) {
+			console.log("ajax realizado")
+			console.log(item);
 	});
 
 }
@@ -52,7 +54,7 @@ function submitFormNewUser(){
 
 function abrirModalAgregarUsuario(){
 	$('#myModalLabel').html("Agregar Usuario");
-	$("#formedituser").reset();
+	//$("#formedituser").reset();
 
 }
 
