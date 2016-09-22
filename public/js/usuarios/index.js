@@ -2,8 +2,24 @@
  * javascript for UsuariosController
  */
 
+
+
+// en esta variable (urlAction) se almacena la url a la que accederá la petición AJAX, 
+// se le asigna un valor dentro de las siguientes fuciones:
+// - datosform_edita_usuario(json_values) -> actualizar
+// - abrirModalAgregarUsuario -> agregar
+var ajaxAction;
+
+
+var path="public/usuarios/";
+//var urlAgregr= "public/usuarios/agregar";
+//var urlEditar= "public/usuarios/actualizar";
+
+
+
 function datosform_edita_usuario(json_values){
-	
+
+	ajaxAction="actualizar";
 	console.log(json_values);
 	var obj = jQuery.parseJSON( json_values );
 	$('#myModalLabel').html(obj.nombre+' '+obj.apellido_paterno +' - '+ obj.clave);
@@ -23,16 +39,23 @@ function submitForm(){
 	//var form = $("#formnewuser").serialize() ;
 	
 	$.ajax({
-		  url: "public/usuarios/agregar",
+		  url: path + ajaxAction,
 		  method: "post",
 		  data: $("#formedituser").serialize() ,
 		  dataType: "json"
-		})  .done(function( item ) {
-			console.log("ajax realizado")
-			console.log(item);
-	});
+		}).done(function(res) { 
+			
+		if (ajaxAction == "agregar"){
+			agregarAjaxDone(res);
+		}else{
+			actualizarAjaxDone(res);
+		}
 
-}
+
+
+  });// end ajax done 
+
+} //end submitForm()
 
 
 function submitFormNewUser(){
@@ -54,7 +77,51 @@ function submitFormNewUser(){
 
 function abrirModalAgregarUsuario(){
 	$('#myModalLabel').html("Agregar Usuario");
-	//$("#formedituser").reset();
+	document.getElementById("formedituser").reset();
+	ajaxAction="agregar";
+
+}
+
+
+function agregarAjaxDone(res){
+	if(res.estado == "ok"){ // si la respuesta es correcta:
+	      console.log(res); 
+	      var userTable = $('#dataTable-usuarios').DataTable();  
+	      var estatusUsuario;
+
+	      if(res.activo == "S"){
+	      	estatusUsuario="Activo";
+	      } else{
+	      	estatusUsuario="Inactivo";
+	      }
+
+
+	      var nombreCompleto= res.nombre+" "+ res.apellido_paterno+ " " + res.apellido_materno; 
+	      // se agrega la nueva columna a la tabla 
+	      userTable.row.add( [ 
+	        res.id, res.clave, nombreCompleto, estatusUsuario,  res.email, "x" 
+	        ]).draw() 
+	 
+
+	      userTable.page( 'last' ).draw( 'page' ); 
+
+	      var boton = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" value=' + JSON.stringify(res) +  
+	      ' onclick="datosform_edita_usuario(this.value)">' +  
+	      '<i class="fa fa-info-circle"></i>'+ 
+	      '</button>'  
+	 
+	       $('#dataTable-usuarios tr:last-child td:last-child').html(boton); 
+	       $('#myModal').modal('toggle'); 
+
+
+ 	} // end if(res.estado == "ok"){
+ 		alert(res.descripcion); 
+} // end agregarAjaxDone()
+
+
+
+function actualizarAjaxDone(res){
+	//pending
 
 }
 
@@ -86,5 +153,10 @@ $(document).ready(function() {
 			}
 		}
 
-    });
-});
+    }); // end     $('#dataTable-usuarios').DataTable({
+
+
+
+
+
+});// end $(document).ready(function() {
