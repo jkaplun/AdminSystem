@@ -109,45 +109,41 @@ class UsuariosController extends Zend_Controller_Action
                                 'activo' => $params['activo']
                         );
                         $idNuevoUsuario = $this->usuario_admin->insert($data);
-                        $response = array(
-                                'id' => $idNuevoUsuario,
-                                'estado' => 'guardado', // error - success
-                                'description' => 'El usuario ha sido guardado'
-                        );
-                        $this->_helper->json($response);
+                        array_push($params, 
+                        		array('id'=>$idNuevoUsuario), 
+                        		array('estado'=>'guardado'),
+                        		array('descripcion' => 'El usuario ha sido guardado'));
+                        $this->_helper->json($params);
                         $this->_redirect('usuarios/');
                     }
                     else 
                     {
-                        $response = array(
-                                'id' => '0',
-                                'estado' => 'error', // error - success
-                                'description' => 'Email en formato incorrecto'
-                        );
-                        $this->_helper->json($response);
+                        array_push($params, 
+                        		array('id'=>'0'), 
+                        		array('estado'=>'error'),
+                        		array('descripcion' => 'Email en formato incorrecto'));
+                        $this->_helper->json($params);
                         $this->_redirect('usuarios/');
                     }
                 }
                 else 
                 {
-                    $response = array(
-                            'id' => '0',
-                            'estado' => 'error', // error - success
-                            'description' => 'Ya existe una clave igual',
-                    );
-                    $this->_helper->json($response);
-                    $this->_redirect('usuarios/');
+                    array_push($params, 
+                        		array('id'=>'0'), 
+                        		array('estado'=>'error'),
+                        		array('descripcion' => 'Ya existe una clave igual'));
+                        $this->_helper->json($params);
+                        $this->_redirect('usuarios/');
                 }
             }
             else 
             {
-                $response = array(
-                        'id' => '0',
-                        'estado' => 'error', // error - success
-                        'description' => 'Passwords diferentes'
-                );
-                $this->_helper->json($response);
-                $this->_redirect('usuarios/');
+                array_push($params, 
+                        		array('id'=>'0'), 
+                        		array('estado'=>'error'),
+                        		array('descripcion' => 'Passwords diferentes'));
+                        $this->_helper->json($params);
+                        $this->_redirect('usuarios/');
             }
         }
         else 
