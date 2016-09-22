@@ -86,6 +86,7 @@ class UsuariosController extends Zend_Controller_Action
         {
             if ($params['pwd'] == $params['pwd_conf'])
             {
+				$contraEncrip = sha1($params['pwd']);
                 $usuarios = $this->usuario_admin->obtenerUsuarioPorClave($params['clave']);
                 if (count($usuarios) == 0)
                 {
@@ -95,7 +96,7 @@ class UsuariosController extends Zend_Controller_Action
                     {
                         $data = array(
                                 'clave' => $params['clave'],
-                                'pwd' => $params['pwd'],
+                                'pwd' => $contraEncrip,
                                 'nombre' => $params['nombre'],
                                 'apellido_paterno' => $params['apellido_paterno'],
                                 'apellido_materno' => $params['apellido_materno'],
