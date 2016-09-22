@@ -35,10 +35,16 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
 						'email'))
 				->where($cond);;
 	
-		//echo $select;die;
-		//$result = $this->getAdapter ()->fetchRow ( $select );
-	
 		return $this->getAdapter ()->fetchAll ( $select );
+	}
+	
+	public function obtenerUsuarioPorClave ($clave)
+	{
+		$select = $this->_db->select()->
+			from ( $this->_name, '*' )
+			->where('clave="'.$clave['clave']);
+
+		return $this->getAdapter ()->fetchRow ( $select );
 	}
 }
 

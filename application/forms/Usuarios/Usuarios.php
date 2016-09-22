@@ -32,7 +32,8 @@ class Application_Form_Usuarios_Usuarios extends Zend_Form
 		
 		// Password
 		$password_conf = new Zend_Form_Element_Password('pwd_conf');
-		$password_conf->setRequired(true)
+		$password_conf
+		->setRequired(true)
 		->addErrorMessage("- Es necesario que introduzca el password.")
 		->removeDecorator('label')
 		->removeDecorator('HtmlTag')
@@ -79,14 +80,14 @@ class Application_Form_Usuarios_Usuarios extends Zend_Form
 		;
 		
 		// Puesto
-		$puesto = new Zend_Form_Element_Text('apellido_materno');
+		$puesto = new Zend_Form_Element_Text('puesto');
 		$puesto->setRequired(true)
-		->addErrorMessage("- Es necesario que introduzca el apellido materno.")
+		->addErrorMessage("- Es necesario que introduzca el Puesto.")
 		->removeDecorator('label')
 		->removeDecorator('HtmlTag')
 		->setAttrib("class","form-control")
 		->setAttrib("autocomplete","off")
-		->setAttrib("placeholder",utf8_encode("Apellido materno"))
+		->setAttrib("placeholder",utf8_encode("Puesto"))
 		->setAttrib("maxlength","75")
 		;
 		
@@ -102,59 +103,66 @@ class Application_Form_Usuarios_Usuarios extends Zend_Form
 		->setAttrib("maxlength","100")
 		;
 		
-		$permisos = new Zend_Form_Element_MultiCheckbox('permisos');
-		$permisos->setAttribs ( array (
-				'autocomplete'=>'off'))
-				->addMultiOptions(array(
-						'admin' => utf8_encode('Administrador'),
-						'supervisor' => utf8_encode('Supervisor'),
-						'folios' => utf8_encode('Folios'),
-						'compila' => utf8_encode('Compila')
-				))
-				->setSeparator('<br>')
-				->removeDecorator('label')
-				->removeDecorator('HtmlTag');
-		
-		/*// Admin
-		$admin = new Zend_Form_Element_Checkbox('admin');
+		// Admin
+		$admin = new Zend_Form_Element_Select('admin');
 		$admin->setRequired(true)
 		->removeDecorator('label')
 		->removeDecorator('HtmlTag')
+		->addMultiOptions(array(
+				'S'=>'Activo',
+				'N'=>'Inactivo'
+		))
 		->setAttrib("class","form-control")
 		->setAttrib("autocomplete","off")
 		;
 		
 		// Supervisor
-		$supervisor = new Zend_Form_Element_Checkbox('supervisor');
+		$supervisor = new Zend_Form_Element_Select('supervisor');
 		$supervisor->setRequired(true)
 		->removeDecorator('label')
 		->removeDecorator('HtmlTag')
+		->addMultiOptions(array(
+				'S'=>'Activo',
+				'N'=>'Inactivo'
+		))
 		->setAttrib("class","form-control")
 		->setAttrib("autocomplete","off")
 		;
 		
 		// Folios
-		$folios = new Zend_Form_Element_Checkbox('folios');
+		$folios = new Zend_Form_Element_Select('folios');
 		$folios->setRequired(true)
 		->removeDecorator('label')
 		->removeDecorator('HtmlTag')
+		->addMultiOptions(array(
+				'S'=>'Activo',
+				'N'=>'Inactivo'
+		))
 		->setAttrib("class","form-control")
 		->setAttrib("autocomplete","off")
 		;
 		
 		// Compila
-		$compila = new Zend_Form_Element_Checkbox('compila');
+		$compila = new Zend_Form_Element_Select('compila');
 		$compila->setRequired(true)
 		->removeDecorator('label')
 		->removeDecorator('HtmlTag')
+		->addMultiOptions(array(
+				'S'=>'Activo',
+				'N'=>'Inactivo'
+		))
 		->setAttrib("class","form-control")
 		->setAttrib("autocomplete","off")
-		;*/
+		;
 		
 		// Activo
-		$activo = new Zend_Form_Element_Checkbox('activo');
+		$activo = new Zend_Form_Element_Select('activo');
 		$activo->setAttribs ( array (
 				'autocomplete'=>'off'))
+				->addMultiOptions(array(
+						'S'=>'Activo',
+						'N'=>'Inactivo'
+				))
 				->removeDecorator('label')
 				->setValue('si')
 				->removeDecorator('HtmlTag');
@@ -174,8 +182,10 @@ class Application_Form_Usuarios_Usuarios extends Zend_Form
 		->setMethod('post')
 		->addElements(array(
 				$clave, $password, $password_conf, $nombre, $apellido_paterno, 
-				$apellido_materno, $puesto, $email, /*$admin, 
-				$supervisor, $folios, $compila*/$permisos, $activo, $id_usuario, $submit
+				$apellido_materno, $puesto, $email, $admin, 
+				$supervisor, $folios, $compila, $activo, $id_usuario, $submit
 				));
 		}
+		
+		
 }
