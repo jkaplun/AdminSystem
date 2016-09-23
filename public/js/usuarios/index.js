@@ -2,8 +2,6 @@
  * javascript for UsuariosController
  */
 
-
-
 // en esta variable (ajaxAction) se almacena la url a la que accederá la petición AJAX, 
 // se le asigna un valor dentro de las siguientes fuciones:
 // - datosform_edita_usuario(json_values) -> actualizar
@@ -68,7 +66,7 @@ function submitForm(){
 
   })// end ajax done 
 		.fail(function() {
-    	alert( "error" );
+    	swal("Error");
   });
 
 } //end submitForm()
@@ -83,10 +81,10 @@ function submitFormNewUser(){
 		if ( newpass == confirmpass){
 			$("#formnewuser").submit();
 		} else {
-			alert('Los passwords no coinciden.');
+			swal('Los passwords no coinciden.');
 		}
 	} else {
-		alert ("El password debe de contener minimo 6 caracteres.");
+		swal ("El password debe de contener minimo 6 caracteres.");
 	}
 
 }
@@ -106,7 +104,7 @@ function agregarAjaxDone(res){
 			agregarUsuarioEnTabla(res);
 
  	} // end if(res.estado == "ok"){
- 		alert(res.descripcion); 
+ 		swal(res.descripcion); 
 } // end agregarAjaxDone()
 
 
@@ -116,7 +114,7 @@ function actualizarAjaxDone(res){
 
 	agregarUsuarioEnTabla(res);
 	//dataTable.row('.selected').remove().draw( false );
-	alert(res.descripcion);
+	swal(res.descripcion);
 
 }
 
@@ -205,6 +203,7 @@ $(document).ready(function() {
 		}
 
     }); // end     $('#dataTable-usuarios').DataTable({
+
 
 
 
