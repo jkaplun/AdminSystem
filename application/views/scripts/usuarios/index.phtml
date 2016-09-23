@@ -51,7 +51,7 @@
 								</td>
 								<td><?php echo $registro['email'] ?></td>
 								<td >
-									<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" value='<?= json_encode($registro) ?>'
+									<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#myModal" value='<?= json_encode($registro) ?>'
 									onclick="datosform_edita_usuario(this.value)">
 									<i class="fa fa-info-circle"></i>
 									</button>
@@ -203,6 +203,7 @@
 	    <div class="modal-footer">     
 	       <button type="button" class="btn btn-primary btn-circle btn-lg" ><i class="fa fa-edit"></i></button>
 	       <span id="submitBtn" type="button" class="btn btn-success btn-circle btn-lg" onclick="submitForm()"><i class="fa fa-save"></i></span>
+	       <button type="button" class="btn btn-danger btn-circle btn-lg" ><i class="fa fa-trash-o"></i></button>
 	    </div>
      </form>
    </div>
