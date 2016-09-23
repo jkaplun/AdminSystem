@@ -45,7 +45,28 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
       ->where('clave="'.$clave.'"');
 
       //echo $select;die;
+    return $this->getAdapter ()->fetchRow( $select );
+  }
+  
+  public function obtenerUsuarioPorId ($id)
+  {
+    $select = $this->_db->select()->
+      from ( $this->_name, '*' )
+      ->where('id_usuario="'.$id.'"');
+
+      //echo $select;die;
+    return $this->getAdapter ()->fetchRow( $select );
+  }
+  
+  public function obtenerUsuariosPorClave ($clave)
+  {
+    $select = $this->_db->select()->
+      from ( $this->_name, '*' )
+      ->where('clave="'.$clave.'"');
+
+      //echo $select;die;
     return $this->getAdapter ()->fetchAll ( $select );
   }
+  
 }
 
