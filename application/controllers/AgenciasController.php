@@ -1,12 +1,12 @@
 <?php
 
-class UsuariosController extends Zend_Controller_Action
+class AgenciasController extends Zend_Controller_Action
 {
 
-    private $usuario_admin;
+    private $agencia;
     public function init()
     {
-        $this->usuario_admin = new Application_Model_DbTable_UsuarioAdmin();
+        $this->usuario_admin = new Application_Model_DbTable_Agencia();
          
         //$this->view->activemenu=4;
         /* Initialize action controller here */
@@ -15,14 +15,14 @@ class UsuariosController extends Zend_Controller_Action
     public function indexAction()
     {
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/usuarios/index.js');
+         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/agencias/index.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
          
-         $users = new Application_Model_DbTable_UsuarioAdmin();
+         $agencias = new Application_Model_DbTable_Agencia();
          $params=$this->_request->getParams();
-         $this->view->form = new Application_Form_Usuarios_Usuarios();
+         $this->view->form = new Application_Form_Agencias_Agencias();
          
          
          
@@ -32,11 +32,38 @@ class UsuariosController extends Zend_Controller_Action
                 $data = array(
                         'clave' => trim($params['edita_clave']),
                         'nombre' => trim($params['edita_nombre']),
-                        'apellido_paterno' => trim($params['edita_apellido_paterno']),
-                        'apellido_materno' => trim($params['edita_apellido_materno']),
-                        'activo' => $params['edita_activo'],
-                        'puesto' => $params['edita_puesto'],
-                        'email' => $params['edita_email']
+                        'direccion' => trim($params['edita_direccion']),
+                        'colonia' => $params['edita_colonia'],
+                        'cp' => $params['edita_cp'],
+                        'clave_ciudad' => $params['edita_clave_ciudad'],
+                        'tel1' => $params['edita_tel1'],
+                        'tel2' => $params['edita_tel2'],
+                        'rfc' => $params['edita_rfc'],
+                        'email' => $params['edita_email'],
+                        'http' => $params['edita_http'],
+                        'lic_icaavwin' => $params['edita_lic_icaavwin'],
+                        'lic_iriswin' => $params['edita_lic_iriswin'],
+                        'lic_gvc' => $params['edita_lic_gvc'],
+                        'lic_centauro' => $params['edita_lic_centauro'],
+                        'version_icaav' => $params['edita_version_icaav'],
+                        'seguridad' => $params['edita_seguridad'],
+                        'factura_electronica' => $params['edita_factura_electronica'],
+                        'fe_activa' => $params['edita_fe_activa'],
+                        'cfdi' => $params['edita_cfdi'],
+                        'ftp_login' => $params['edita_ftp_login'],
+                        'ftp_pwd' => $params['edita_ftp_pwd'],
+                        'dba_pwd' => $params['edita_dba_pwd'],
+                        'layout_login' => $params['edita_layout_login'],
+                        'layout_pwd' => $params['edita_layout_pwd'],
+                        'tamara' => $params['edita_tamara'],
+                        'ibank' => $params['edita_ibank'],
+                        'amex' => $params['edita_amex'],
+                        'diot' => $params['edita_diot'],
+                        'cve_usopor_tit' => $params['edita_cve_usopor_tit'],
+                        'cve_usopor_aux' => $params['edita_cve_usopor_aux'],
+                        'id_estatus_icaav' => $params['edita_id_estatus_icaav'],
+                        'id_estatus_iris' => $params['edita_id_estatus_iris'],
+                        'id_estatus_iris' => $params['edita_id_estatus_iris'],
                 );
                 
                 if ($params['edita_password'] != '' && $params['edita_password']==$params['edita_passwordConfirm']){
@@ -52,7 +79,6 @@ class UsuariosController extends Zend_Controller_Action
             if ( $params['accion'] == 'agregar' ){
                 
                 $data = array(
-                        'clave' => trim($params['edita_clave']),
                         'nombre' => trim($params['edita_nombre']),
                         'apellido_paterno' => trim($params['edita_apellido_paterno']),
                         'apellido_materno' => trim($params['edita_apellido_materno']),
@@ -172,6 +198,7 @@ class UsuariosController extends Zend_Controller_Action
     
         	$data = array(
                 'id_usuario' => $params['id_usuario'],
+                'clave' => $params['clave'],
                 'pwd' => $params['pwd'],
                 'nombre' => $params['nombre'],
                 'apellido_paterno' => $params['apellido_paterno'],
@@ -205,8 +232,8 @@ class UsuariosController extends Zend_Controller_Action
         					$usuario = $this->usuario_admin->obtenerUsuarioPorClave($params['clave']);
         					if (!$usuario)
         					{ // Si no existe una clave igual
-        						$where = "id_usuario = {$params['id_usuario']}";
         						// 	se actualiza en la base de datos al usuario
+        						$where = "id_usuario = {$params['id_usuario']}";
         						$this->usuario_admin->update($data, $where);
         						// se inyecta el estado y descripción en la respuesta al cliente
         						$data['estado']='ok';

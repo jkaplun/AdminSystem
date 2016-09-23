@@ -31,6 +31,7 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
             'nombre',
             'apellido_paterno',
             'apellido_materno',
+        	'puesto',
             'activo',
             'email'))
         ->where($cond);;
