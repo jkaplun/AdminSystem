@@ -66,7 +66,7 @@ function submitForm(){
 
   })// end ajax done 
 		.fail(function() {
-    	swal("Error");
+    	swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );
   });
 
 } //end submitForm()
@@ -81,10 +81,10 @@ function submitFormNewUser(){
 		if ( newpass == confirmpass){
 			$("#formnewuser").submit();
 		} else {
-			swal('Los passwords no coinciden.');
+			swal('Los passwords no coinciden.', " ","error");
 		}
 	} else {
-		swal ("El password debe de contener minimo 6 caracteres.");
+		swal ("El password debe de contener minimo 6 caracteres.", " ", "error");
 	}
 
 }
@@ -102,9 +102,11 @@ function agregarAjaxDone(res){
 	      console.log(res); 
 
 			agregarUsuarioEnTabla(res);
+			swal(res.descripcion, " ", "success"); 
 
- 	} // end if(res.estado == "ok"){
- 		swal(res.descripcion); 
+ 	} else{
+ 		swal(res.descripcion, " ", "error"); 
+ 		}
 } // end agregarAjaxDone()
 
 
@@ -114,7 +116,7 @@ function actualizarAjaxDone(res){
 
 	agregarUsuarioEnTabla(res);
 	//dataTable.row('.selected').remove().draw( false );
-	swal(res.descripcion);
+	swal(res.descripcion, " ", "success");
 
 }
 
