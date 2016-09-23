@@ -155,7 +155,7 @@ class UsuariosController extends Zend_Controller_Action
             }
         }
         else 
-        { // ¿Para qué es este else?
+        { // else cuando existe un error encontrado en el form
             $this->_helper->json($mensajesDeError);
             $this->_redirect('usuarios/');
         }
@@ -167,9 +167,6 @@ class UsuariosController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
         //echo $params['id_usuario'];
-
-        //echo '<pre>'.print_r($params,true).'</pre>';die;  
-
     
         $data = array(
                 'id_usuario' => $params['id_usuario'],
@@ -186,6 +183,84 @@ class UsuariosController extends Zend_Controller_Action
                 'compila' => $params['compila'],
                 'activo' => $params['activo']
         );
+        
+        $form = new Application_Form_Usuarios_Usuarios();
+        
+        $mensajesDeError = $form->getMessages();
+        $cantidadDeErrores = count($mensajesDeError);
+        if ($cantidadDeErrores == 0)
+        {
+        	if ($params['pwd'] == $params['pwd_conf'])
+        	{ // ¿Qué se verifica aquí?
+        		$contraEncrip = sha1($params['pwd']);
+        		$usuarios = $this->usuario_admin->obtenerUsuarioPorClave($params['clave']);
+        		$data['pwd']=$contraEncrip;
+        		if (count($usuarios) == 0)
+        		{ // ¿Qué se verifica aquí?
+        			$utiles = new Application_Model_Services_Utiles();
+        			$esEmailCorrecto = $utiles->comprobar_email($params['email']);
+        			if($esEmailCorrecto)
+        			{ // si el emal es correcto:
+        
+        				// se inserta en la base de datos al nuevo usuario
+        				$idNuevoUsuario = $this->usuario_admin->insert($data);
+        				// se inyecta el ID, estado y descripción en la respuesta al cliente
+        				$data['id_usuario']=$idNuevoUsuario;
+        				$data['estado']='ok';
+        				$data['descripcion']='El usuario ha sido guardado exitosamente';
+        				// se responde al cliente
+        				$this->_helper->json($data);
+        				$this->_redirect('usuarios/');
+        			}
+        			else
+        			{ // else cuando el email es incorrecto
+        
+        				// se inyecta el ID, estado y descripción en la respuesta al cliente
+        				$data['id_usuario']='0';
+        				$data['estado']='error';
+        				$data['descripcion']='Email en formato incorrecto';
+        				// se responde al cliente
+        				$this->_helper->json($data);
+        				$this->_redirect('usuarios/');
+        			}
+        		}
+        		else
+        		{ // else cuando ya existe una clave igual (??)
+        
+        			// se inyecta el ID, estado y descripción en la respuesta al cliente
+        			$data['id_usuario']='0';
+        			$data['estado']='error';
+        			$data['descripcion']='Ya existe una clave igual';
+        			// se responde al cliente
+        			$this->_helper->json($data);
+        			$this->_redirect('usuarios/');
+        		}
+        	}
+        	else
+        	{ // else cuando las contraeñas no coinciden
+        
+        		// se inyecta el ID, estado y descripción en la respuesta al cliente
+        		$data['id_usuario']='0';
+        		$data['estado']='error';
+        		$data['descripcion']='Passwords diferentes';
+        		// se responde al cliente
+        		$this->_helper->json($data);
+        		$this->_redirect('usuarios/');
+        	}
+        }
+        else
+        { // else cuando existe un error encontrado en el form
+        $this->_helper->json($mensajesDeError);
+        $this->_redirect('usuarios/');
+        }
+        
+        
+        
+        
+        
+        
+        
+        
     
         $where = "id_usuario = {$params['id_usuario']}";
     
