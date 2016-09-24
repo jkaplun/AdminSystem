@@ -22,52 +22,8 @@ class UsuariosController extends Zend_Controller_Action
          
          $users = new Application_Model_DbTable_UsuarioAdmin();
          $params=$this->_request->getParams();
-         //$this->view->form = new Application_Form_Usuarios_Usuarios();
-         
-         
-         
-         /*if( $this->_request->isPost() ){
-            echo '<pre>'.print_r($params,true).'</pre>';die;            
-            if ( $params['accion'] == 'editar' ){
-                $data = array(
-                        'clave' => trim($params['edita_clave']),
-                        'nombre' => trim($params['edita_nombre']),
-                        'apellido_paterno' => trim($params['edita_apellido_paterno']),
-                        'apellido_materno' => trim($params['edita_apellido_materno']),
-                        'activo' => $params['edita_activo'],
-                        'puesto' => $params['edita_puesto'],
-                        'email' => $params['edita_email']
-                );
-                
-                if ($params['edita_password'] != '' && $params['edita_password']==$params['edita_passwordConfirm']){
-                    $data['password'] = sha1(trim($params['edita_password']));
-                }
-    
-                $where = "id_usuario = ".$params['edita_id_user'];
-                
-                $users->update($data, $where);
-            
-            }
-            
-            if ( $params['accion'] == 'agregar' ){
-                
-                $data = array(
-                        'clave' => trim($params['edita_clave']),
-                        'nombre' => trim($params['edita_nombre']),
-                        'apellido_paterno' => trim($params['edita_apellido_paterno']),
-                        'apellido_materno' => trim($params['edita_apellido_materno']),
-                        'activo' => $params['edita_activo'],
-                        'puesto' => $params['edita_puesto'],
-                        'email' => $params['edita_email']
-                );
-                echo '<pre>'.print_r($data,true).'</pre>';die;
-                $users->insert($data);
-            }
-            
-         }*/
-        
+         $this->view->form = new Application_Form_Usuarios_Usuarios();
          $registros = $users->getAllUsers($params);
-         
          $this->view->registros = $registros;
 
     }

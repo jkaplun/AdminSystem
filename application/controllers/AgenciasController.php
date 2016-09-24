@@ -22,6 +22,7 @@ class AgenciasController extends Zend_Controller_Action
 
          $agencia = new Application_Model_DbTable_Agencia();
          $params=$this->_request->getParams();
+         $this->view->form = new Application_Form_Usuarios_Usuarios();
          $agencias = $agencia->obtenerTodasLasAgencias($params);
           
          $this->view->agencias = $agencias;
