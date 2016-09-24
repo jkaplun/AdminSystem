@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="col-lg-11">
 		<center>
-			<h2>Nombre de la Agencia</h2>
+			<h2> <span class="text-primary" id="nombre_agencia">Nombre de la Agencia</span></h2>
 		</center>
 	</div>
 	<div class="col-lg-1" align="right">
@@ -28,16 +28,16 @@
 		<div class="bs-callout bs-callout-primary col"
 			id="callout-glyphicons-dont-mix">
 			<h5>Direcci&oacute;n</h5>
-			<address>Río Ganges 45, Cuauhtémoc, 06500 Ciudad de México.</address>
+			<address class="text-primary" id="direccion"> </address>
 			<p>
-				<i class="fa fa-phone"></i> 1:
+				<i class="fa fa-phone" ></i>  <span class="text-primary" id="telefono1"></span>
 			</p>
 			<p>
-				<i class="fa fa-phone"></i> 2:
+				<i class="fa fa-phone"></i> <span class="text-primary" id="telefono2"></span>
 			</p>
-			<p>RFC: HSBJKFDSJKFSDH</p>
-			<p>Ejecutivo Asignado: Pepe</p>
-			<p>Ejecutivo Ayuda: Luis</p>
+			<p>RFC: <span class="text-primary" id="rfc"></span> </p>
+			<p>Clave ejecutivo Asignado:  <span class="text-primary" id="cve_usopor_tit"></span>  </p>
+			<p>Clave ejecutivo Ayuda:  <span class="text-primary" id="cve_usopor_aux"> </p>
 		</div>
 	</div>
 	<div class="col-md-4">
@@ -45,12 +45,17 @@
 			id="callout-glyphicons-dont-mix">
 			<h5 align="center">Configuraci&oacute;n</h5>
 			<p>Estatus</p>
-			<p>ICAAVWin: Produccion IRISWin: Produccion</p>
-			<p>Outsourcing: OQAPDDW Personalizado: Encuesta</p>
+			<p>ICAAVWin: <span id="id_estatus_icaav" class="text-primary"></span>  </p>
+			<p>IRISWin: <span id="id_estatus_iris" class="text-primary"></span> </p>
+			<p>Outsourcing: OQAPDDW</p>
+			<p>Personalizado: Encuesta</p>
 			<p>Formatos Pagados Sin documentos</p>
-			<p>Factura Elect&oacute;nica:</p>
-			<p>Portal Proveedores: N Agencia Consolidada: N Markup: S</p>
-			<p>Contabilidad Elect&oacute;nica:S INE:N</p>
+			<p>Factura Elect&oacute;nica:  <span id="factura_electronica" class="text-primary"></span>  </p>
+			<p>Portal Proveedores:  </p>
+			<p>Agencia Consolidada: <span id="agencias_consolidadas" class="text-primary"></span> </p>
+			 <p> Markup: <span id="markup" class="text-primary"></span> </p>
+			<p>Contabilidad Elect&oacute;nica:  <span id="contabilidad_elect" class="text-primary"></span>  </p>
+			 <p>INE: <span id="ine" class="text-primary"></span>  </p>
 		</div>
 	</div>
 	<div class="col-md-4">
@@ -63,8 +68,8 @@
 				</div>
 				<div class="col-lg-8">
 					<div class="form-group input-group">
-						<span class="input-group-addon">Lic</span> <input type="text"
-							class="form-control" value="38" id="edita_puesto" disabled>
+						<span class="input-group-addon">Lic</span> <input id="lic_icaavwin" type="text"
+							class="form-control" value="" id="edita_puesto" disabled>
 					</div>
 				</div>
 <!-- 			<div class="col-lg-5">
@@ -81,7 +86,7 @@
 				<div class="col-lg-8">
 					<div class="form-group input-group">
 						<span class="input-group-addon">Lic</span> <input type="text"
-							class="form-control" value="38" id="edita_puesto" disabled>
+							class="form-control" value="" id="lic_iriswin" disabled>
 					</div>
 				</div>
 				<!-- 									<div class="col-lg-5">
@@ -98,7 +103,7 @@
 				<div class="col-lg-8">
 					<div class="form-group input-group">
 						<span class="input-group-addon">Lic</span> <input type="text"
-							class="form-control" value="38" id="edita_puesto" disabled>
+							class="form-control" value="" id="lic_centauro" disabled>
 					</div>
 				</div>
 				<!-- 									<div class="col-lg-5">
@@ -115,7 +120,7 @@
 				<div class="col-lg-8">
 					<div class="form-group input-group">
 						<span class="input-group-addon">Lic</span> <input type="text"
-							class="form-control" value="38" id="edita_puesto" disabled>
+							class="form-control" value="0" id="lic_gvc" disabled>
 					</div>
 				</div>
 <!-- 		<div class="col-lg-5">
@@ -128,8 +133,13 @@
 			<p>Globalizador: SA, WS</p>
 			<p>Producto: icaavwin</p>
 			<p>Implant AM: N</p>
-			<p>Version PB: 11 FE: CFDI Timbrado: E Boleto-E: S</p>
-			<p>Facturaci&oacute; de Boletos: Layout MIG y EDICOM Precio: MIG</p>
+			<p>Version PB: </p>
+
+			<p>CFDI:  <span id="cfdi" class="text-primary"></span>   </p>
+			<p>Timbrado:  <span id="prov_timbrado" class="text-primary"></span>   </p> 
+			<p>Boleto-E: <span id="boleto_e" class="text-primary"></span></p>
+			<p>Facturaci&oacute; de Boletos: <span id="facturacion_boleto" class="text-primary"></span></p> </p>
+			Layout MIG y EDICOM Precio: MIG</p>
 		</div>
 	</div>
 </div>

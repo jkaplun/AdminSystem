@@ -26,7 +26,7 @@ class AgenciasController extends Zend_Controller_Action
          
          $listaAgencias = array();
          foreach ( $this->view->agencias as $agencias){
-         	$listaAgencias[$agencias['clave']]=$agencias['nombre'];
+         	$listaAgencias[$agencias['id_agencia']]=$agencias['nombre'];
          }
          
          $zendForm = new Zend_Form();
@@ -142,13 +142,13 @@ class AgenciasController extends Zend_Controller_Action
                    $data['descripcion']='La agencia ha sido guardada exitosamente';
                    // se responde al cliente
                    $this->_helper->json($data);
-                   $this->_redirect('clientes/');
+                   $this->_redirect('agencias/');
                  }
                  else 
                  { // else cuando el email es incorrecto
   
                    // se inyecta el ID, estado y descripción en la respuesta al cliente
-                   $data['id_agencia']='0';
+                   //$data['id_agencia']='0';
                    $data['estado']='error';
                    $data['descripcion']='Email en formato incorrecto';
                    // se responde al cliente
@@ -290,6 +290,16 @@ class AgenciasController extends Zend_Controller_Action
             	$this->_helper->json($mensajesDeError);
             	$this->_redirect('usuarios/');
         	}
+    }
+
+   public function consultarAction(){
+
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+        $params=$this->_request->getParams(); 
+        $datosAgencia = $this->agencia->find($params['id_agencia'])->toArray();
+        $this->_helper->json($datosAgencia[0]);
+
     }
 
 }
