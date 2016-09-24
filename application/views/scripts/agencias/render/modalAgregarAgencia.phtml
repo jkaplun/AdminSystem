@@ -1,0 +1,418 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+ 	<div class="modal-dialog modal-lg" role="document">
+   		<div class="modal-content">
+		    <div class="modal-header">
+		     	<div class="row">
+		    		<div class="col-lg-10">
+						<h4 class="modal-title" id="myModalLabel"></h4>
+		    		</div>
+		    		<div class="col-lg-2" align="right">
+		       			<button type="button" class="btn btn-info btn-circle" data-dismiss="modal"><i class="fa fa-times"></i></button>
+		    		</div> 			    		
+		    	</div>
+		    </div>
+		    <div class="modal-body">
+	           	<div class="panel-body">
+	           	
+	           		<form id="form_agregar_agencia">
+	           	
+	            	<div class="panel with-nav-tabs panel-primary">
+		                <div class="panel-heading">
+		                        <ul class="nav nav-tabs">
+		                            <li class="active"><a href="#tabGenerales" data-toggle="tab">Datos Generales</a></li>
+		                            <li><a href="#tabContacto" data-toggle="tab">Contacto</a></li>
+		                            <li><a href="#tabLicencias" data-toggle="tab">Licencias</a></li>
+		                            <li><a href="#tabConfiguraciones" data-toggle="tab">Configuraciones</a></li>
+<!-- 		                            <li class="dropdown">
+		                                <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+		                                <ul class="dropdown-menu" role="menu">
+		                                    <li><a href="#tab4success" data-toggle="tab">Usuarios</a></li>
+		                                    <li><a href="#tab5success" data-toggle="tab">Success 5</a></li>
+		                                </ul>
+		                            </li> -->
+		                        </ul>
+		                </div>
+		                <div class="panel-body">
+		                    <div class="tab-content">
+		                        <div class="tab-pane fade in active" id="tabGenerales">
+
+								    <div class="form-group">
+								        <div class="row">
+								            <div class="col-xs-12">
+								                <label class="control-label">Nombre de la Agencia</label>
+								                <?= $this->form->nombre ?>
+								            </div>
+								        </div>
+								    </div>
+								    <div class="form-group">
+								        <div class="row">
+								            <div class="col-xs-12">
+								                <label class="control-label">Nombre Comercial</label>
+								                <?= $this->form->nombre_comercial ?>
+								            </div>
+								        </div>
+								    </div>								    
+								    <div class="form-group">
+								        <div class="row">
+
+								            <div class="col-xs-4">
+								                <label class="control-label">Clave de la Agencia</label>
+								                <?= $this->form->clave ?>
+								            </div>
+								            <div class="col-xs-4">
+								                <label class="control-label">RFC</label>
+								                <?= $this->form->rfc ?>
+								            </div>
+								            <div class="col-xs-4">
+								                <label class="control-label">Sucursales</label>
+								                <?= $this->form->sucursales ?>
+								            </div>
+								        </div>
+								    </div>
+								    <div class="form-group">
+								        <div class="row">
+								            <div class="col-xs-12">
+								                <label class="control-label">Adeudo</label>
+								                <?= $this->form->adeudo ?>
+								            </div>
+								        </div>
+								    </div>        
+								    <div class="form-group">
+								        <div class="row">
+								            <div class="col-xs-6">
+								                <label class="control-label">Ejecutivo Titular</label>
+								                <?= $this->form->cve_usopor_tit ?>
+								            </div>
+
+								            <div class="col-xs-6">
+								                <label class="control-label">Ejecutivo Auxiliar</label>
+								                 <?= $this->form->cve_usopor_aux ?>
+								            </div>
+								        </div>
+								    </div>						
+								</div>
+								<div class="tab-pane fade" id="tabContacto">	
+		                        	<div class="row">
+										<div class="col-lg-4">
+									        <h4 align="center">Direcci&oacute;n</h4>
+										    <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label">Ubicaci&oacute;n</label>
+															<?= $this->form->direccion ?>
+													</div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label">Colonia</label>
+										                <?= $this->form->colonia ?>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label">C&oacute;digo Postal</label>
+										                <?= $this->form->cp ?>
+										            </div>
+										        </div>
+										    </div>	 
+    
+										</div>
+										<div class="col-lg-4">
+									        <h4 align="center">Contacto</h4>
+										    <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label"><i class="fa fa-phone"></i> 1</label>
+										                <?= $this->form->tel1 ?>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label"><i class="fa fa-phone"></i> 2</label>
+										                <?= $this->form->tel2 ?>
+										            </div>
+										        </div>
+										    </div>  
+										    <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label"><i class="fa fa-globe"></i></label>
+										                <?= $this->form->http ?>
+										            </div>
+										        </div>
+										    </div>  
+										</div>
+										<div class="col-lg-4">
+											<h4 align="center">Correos</h4>
+										    <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label"><i class="fa fa-envelope-o"></i> 1</label>
+										                <?= $this->form->email ?>
+										            </div>
+										        </div>
+										    </div>
+										</div>
+									</div> 		                        
+		                        </div>
+		                        <div class="tab-pane fade" id="tabLicencias">
+									<div class="col-lg-4">
+									<h4>Licencias</h4>
+											<div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label">ICAAVWin</label>
+										                <?= $this->form->lic_icaavwin ?>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label">IRISWin</label>
+										                <?= $this->form->lic_iriswin ?>
+										            </div>
+										        </div>
+										    </div>	
+											<div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label">Centauro</label>
+										                <?= $this->form->lic_centauro ?>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label">GVC</label>
+										                <?= $this->form->lic_gvc ?>
+										            </div>
+										        </div>
+										    </div>	
+									</div>
+									<div class="col-lg-4">
+										<h4></h4>
+										<div class="row">
+										    <div class="form-group">
+										    	<h4>Facturas</h4>
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label">Formatos Pagados</label>
+										                <input type="number" min="0" class="form-control" placeholder="Formatos Pagados">
+										            </div>
+										        </div>
+										    </div>											        
+									        <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label">Factura Electr&oacute;nica</label>
+										                <?= $this->form->factura_electronica ?>
+										            </div>									            
+										        </div>
+										    </div>
+									        <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-6">
+										                <label class="control-label">CFDI</label>
+										                <?= $this->form->cfdi ?>
+										            </div>
+										            <div class="col-xs-6">
+										                <label class="control-label">Timbrado</label>
+										                <select class="form-control">
+										                    <option value="1">Si</option>
+										                    <option value="0">No</option>
+										                </select>
+										            </div>										            
+										        </div>
+										    </div>
+									        <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label">Boleto - E</label>
+										                <?= $this->form->boleto_e ?>
+										            </div>
+										        </div>
+										    </div>
+									        <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-6">
+										                <label class="control-label">Facturación de Boletos</label>
+										                 <?= $this->form->facturacion_boleto ?>
+										            </div>
+										            <div class="col-xs-6">
+										                <label class="control-label">Precio</label>
+										                <?= $this->form->prov_timbrado ?>
+										            </div>										            
+										        </div>
+										    </div>										
+									    </div>
+									</div>
+								</div> 			                        	
+		                        <div class="tab-pane fade" id="tabConfiguraciones">
+		                        	<div class="row">
+										<div class="col-lg-4">
+									        <h4>Estatus</h4>
+										    <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label">ICAAVWin</label>
+										                <?= $this->form->id_estatus_icaav ?>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-12">
+										                <label class="control-label">IRISWin</label>
+										                <?= $this->form->id_estatus_iris ?>
+										            </div>
+										        </div>
+										    </div>
+										</div>
+										<div class="col-lg-4">
+									        <h4> </h4>
+									        <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-8">
+										                <label class="control-label">Versi&oacute;n ICAAV</label>
+										                <?= $this->form->version_icaav ?>
+										            </div>								            
+										        </div>
+										    </div>
+										    <p><b>Interfase</b></p>
+									        <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-6">
+										                <label class="control-label">Amadeus</label>
+										                <select class="form-control">
+										                    <option value="1">Si</option>
+										                    <option value="0">No</option>
+										                </select>
+										            </div>
+										            <div class="col-xs-6">
+										                <label class="control-label">Sabre</label>
+										                <select class="form-control">
+										                    <option value="1">Si</option>
+										                    <option value="0">No</option>
+										                </select>
+										            </div>										            
+										        </div>
+										    </div>
+									        <div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-6">
+										                <label class="control-label">Apollo</label>
+										                <select class="form-control">
+										                    <option value="1">Si</option>
+										                    <option value="0">No</option>
+										                </select>
+										            </div>
+										            <div class="col-xs-6">
+										                <label class="control-label">Wordspan</label>
+										                <select class="form-control">
+										                    <option value="1">Si</option>
+										                    <option value="0">No</option>
+										                </select>
+										            </div>										            
+										        </div>
+										    </div>
+										</div>
+										<div class="col-lg-4">
+											<h4>Configuraciones</h4>
+											<div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-6">
+										                <label class="control-label">DIOT</label>
+										                <?= $this->form->diot ?>
+										            </div>
+										            <div class="col-xs-6">
+										                <label class="control-label">IMPLANT AM</label>
+										                <?= $this->form->implant_am ?>
+										            </div>										            
+										        </div>
+										    </div>		
+											<div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-8">
+										                <label class="control-label">Login Update</label>
+														<?= $this->form->update_login ?>
+										            </div>
+										            <div class="col-xs-4">
+										                <label class="control-label">Modificar</label>
+										                <select class="form-control">
+										                    <option value="1">Si</option>
+										                    <option value="0">No</option>
+										                </select>
+										            </div>										            
+										        </div>
+										    </div>	
+											<div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-8">
+										                <label class="control-label">Password Update</label>
+														<?= $this->form->update_pwd ?> 
+										            </div>
+										            <div class="col-xs-4">
+										                <label class="control-label">Modificar</label>
+										                <select class="form-control">
+										                    <option value="1">Si</option>
+										                    <option value="0">No</option>
+										                </select>
+										            </div>										            
+										        </div>
+										    </div>	
+											<div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-6">
+										                <label class="control-label">Agencia Consolidada</label>
+										                <?= $this->form->agencias_consolidadas ?> 
+										            </div>
+										            <div class="col-xs-6">
+										                <label class="control-label">Portal de Proveedores</label>
+										                <?= $this->form->portal_proveedores ?>
+										            </div>										            
+										        </div>
+										    </div>
+											<div class="form-group">
+										        <div class="row">
+										            <div class="col-xs-4">
+										                <label class="control-label">Contabilidad Electr&oacute;nica</label>
+										                <?= $this->form->contabilidad_elect ?>
+										            </div>
+										            <div class="col-xs-4">
+										                <label class="control-label">INE</label>
+										                <?= $this->form->ine ?>
+										            </div>	
+										            <div class="col-xs-4">
+										                <label class="control-label">Markup</label>
+										                <?= $this->form->markup ?>
+										            </div>										            
+										        </div>
+										    </div>						    					    		    
+										</div>
+									</div> 		                        	
+		                        </div>
+<!-- 		                        <div class="tab-pane fade" id="tab4success">Success 4</div>
+		                        <div class="tab-pane fade" id="tab5success">Success 5</div> -->
+		                    </div>
+		                </div>
+		            </div>
+		            </form>
+	           </div>
+	        </div>
+	      	<div class="modal-footer">     
+		       <button type="button" class="btn btn-primary btn-circle btn-lg" ><i class="fa fa-edit"></i></button>
+		       <button type="button" class="btn btn-success btn-circle btn-lg" onclick="submitForm()"><i class="fa fa-save"></i></button>
+		       <button type="button" class="btn btn-danger btn-circle btn-lg" ><i class="fa fa-trash-o"></i></button>
+		    </div>
+   		</div>
+ 	</div>
+</div>

@@ -5,26 +5,20 @@ class Application_Model_DbTable_Agencia extends Zend_Db_Table_Abstract
 
 	protected $_name = 'agencia';
 
-	public function obtenerTodasLasAgencias ($values)
+	public function obtenerTodasLasAgencias ($values = null)
 	{
+		
 		$cond = 'clave is not null ';
 
-		if( trim(@$values['agencia']) !=''){
+		if( $values != null){
 			$cond .= ' and clave like "%'.$values['agencia'].'%"';
 		}
 
 		$select = $this->_db->select()->
-		from ( $this->_name,
-				array(
-						'id_agencia',
-						'clave',
-						'nombre_comercial',
-						'adeudo',
-						'fecha_caducidad',
-						'fecha'))
-						->where($cond);;
+				from ( $this->_name,'*')
+			->where($cond);;
 
-						return $this->getAdapter ()->fetchAll ( $select );
+		return $this->getAdapter ()->fetchAll ( $select );
 	}
 
 	public function obtenerAgenciasPorNombre ($nombre)
