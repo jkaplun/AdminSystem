@@ -27,14 +27,14 @@ class Application_Model_DbTable_Agencia extends Zend_Db_Table_Abstract
 						return $this->getAdapter ()->fetchAll ( $select );
 	}
 
-	public function obtenerAgenciaPorClave ($clave)
+	public function obtenerAgenciasPorNombre ($nombre)
 	{
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
-		->where('clave="'.$clave.'"');
+		->where('nombre="'.$nombre.'"');
 
 		//echo $select;die;
-		return $this->getAdapter ()->fetchRow( $select );
+		return $this->getAdapter ()->fetchAll( $select );
 	}
 
 	public function obtenerAgenciaPorId ($id)

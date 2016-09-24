@@ -22,11 +22,11 @@ class UsuariosController extends Zend_Controller_Action
          
          $users = new Application_Model_DbTable_UsuarioAdmin();
          $params=$this->_request->getParams();
-         $this->view->form = new Application_Form_Usuarios_Usuarios();
+         //$this->view->form = new Application_Form_Usuarios_Usuarios();
          
          
          
-         if( $this->_request->isPost() ){
+         /*if( $this->_request->isPost() ){
             echo '<pre>'.print_r($params,true).'</pre>';die;            
             if ( $params['accion'] == 'editar' ){
                 $data = array(
@@ -64,7 +64,7 @@ class UsuariosController extends Zend_Controller_Action
                 $users->insert($data);
             }
             
-         }
+         }*/
         
          $registros = $users->getAllUsers($params);
          
@@ -172,6 +172,7 @@ class UsuariosController extends Zend_Controller_Action
     
         	$data = array(
                 'id_usuario' => $params['id_usuario'],
+                'clave' => $params['clave'],
                 'pwd' => $params['pwd'],
                 'nombre' => $params['nombre'],
                 'apellido_paterno' => $params['apellido_paterno'],
@@ -204,23 +205,25 @@ class UsuariosController extends Zend_Controller_Action
         				{
         					$usuario = $this->usuario_admin->obtenerUsuarioPorClave($params['clave']);
         					if (!$usuario)
-        					{ // Si no existe una clave igual
+        					{ // Si se intenta modificaar la clave
+
+        						// se inyecta el ID, estado y descripción en la respuesta al cliente
+        						$data['id_usuario']='0';
+        						$data['estado']='error';
+        						$data['descripcion']='No se permite modificar la clave';
+        						// se responde al cliente
+        						$this->_helper->json($data);
+        						$this->_redirect('usuarios/');
+        						
+        					}
+        					else
+        					{ // si la clave no se modifica
         						$where = "id_usuario = {$params['id_usuario']}";
         						// 	se actualiza en la base de datos al usuario
         						$this->usuario_admin->update($data, $where);
         						// se inyecta el estado y descripción en la respuesta al cliente
         						$data['estado']='ok';
         						$data['descripcion']='El usuario ha sido actualizado exitosamente';
-        						// se responde al cliente
-        						$this->_helper->json($data);
-        						$this->_redirect('usuarios/');
-        					}
-        					else
-        					{ // si existe una clave igual 
-        						// se inyecta el ID, estado y descripción en la respuesta al cliente
-        						$data['id_usuario']='0';
-        						$data['estado']='error';
-        						$data['descripcion']='Ya existe una clave igual';
         						// se responde al cliente
         						$this->_helper->json($data);
         						$this->_redirect('usuarios/');
