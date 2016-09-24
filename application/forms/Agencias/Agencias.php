@@ -409,14 +409,14 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         
         // Fecha
         $fecha = new Zend_Form_Element_Text('fecha');
-		$fecha->removeDecorator('label')
-		->removeDecorator('HtmlTag')
-		->removeDecorator('Errors')
-		->setAttrib("autocomplete","off")
-		->setAttrib("class","form-control datepicker")
-		->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
-		->setAttrib("maxlength","10")
-		;
+        $fecha->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->removeDecorator('Errors')
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("class","form-control datepicker")
+        ->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
+        ->setAttrib("maxlength","10")
+        ;
         $this->setMethod('post')->addElement($fecha);
         
         // Observaciones
@@ -520,14 +520,14 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         
         // Fecha de caducidad
         $fecha_caducidad = new Zend_Form_Element_Text('fecha_caducidad');
-		$fecha_caducidad->removeDecorator('label')
-		->removeDecorator('HtmlTag')
-		->removeDecorator('Errors')
-		->setAttrib("autocomplete","off")
-		->setAttrib("class","form-control datepicker")
-		->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
-		->setAttrib("maxlength","10")
-		;
+        $fecha_caducidad->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->removeDecorator('Errors')
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("class","form-control datepicker")
+        ->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
+        ->setAttrib("maxlength","10")
+        ;
         $this->setMethod('post')->addElement($fecha_caducidad);
         
         // ftp_add_login
@@ -696,14 +696,14 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         
         // fecha_actualizacion_folios
         $fecha_actualizacion_folios = new Zend_Form_Element_Text('fecha_actualizacion_folios');
-		$fecha_actualizacion_folios->removeDecorator('label')
-		->removeDecorator('HtmlTag')
-		->removeDecorator('Errors')
-		->setAttrib("autocomplete","off")
-		->setAttrib("class","form-control datepicker")
-		->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
-		->setAttrib("maxlength","10")
-		;
+        $fecha_actualizacion_folios->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->removeDecorator('Errors')
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("class","form-control datepicker")
+        ->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
+        ->setAttrib("maxlength","10")
+        ;
         $this->setMethod('post')->addElement($fecha_actualizacion_folios);    
         
         // ine
