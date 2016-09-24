@@ -28,4 +28,22 @@ class Application_Model_Services_Utiles
 			else
 				return false;
 	}
+	
+	function validarRFC($rfc)
+	{
+		$regex = '/^[A-Z]{4}([0-9]{2})(1[0-2]|0[1-9])([0-3][0-9])([ -]?)([A-Z0-9]{4})$/';
+		$esRfcValido = preg_match($regex, $rfc);
+		if($esRfcValido == 1)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
+	
+	
+	
+	
 }

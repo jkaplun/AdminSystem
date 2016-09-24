@@ -15,6 +15,7 @@ class Application_Form_Usuarios_Usuarios extends Zend_Form
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Usuario"))
         ->setAttrib("maxlength","45")
+        //->setAttrib('disabled', 'disabled');
         ;
         
         // Password
