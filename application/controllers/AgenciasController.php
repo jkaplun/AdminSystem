@@ -7,26 +7,48 @@ class AgenciasController extends Zend_Controller_Action
     public function init()
     {
         $this->agencia = new Application_Model_DbTable_Agencia();
-         
         //$this->view->activemenu=4;
         /* Initialize action controller here */
     }
 
     public function indexAction()
     {
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
+         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/agencias/index.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
-
          $agencia = new Application_Model_DbTable_Agencia();
-         $params=$this->_request->getParams();
-         $this->view->form = new Application_Form_Usuarios_Usuarios();
-         $agencias = $agencia->obtenerTodasLasAgencias($params);
-          
-         $this->view->agencias = $agencias;
 
+         
+         $selectAgencias = new Zend_Form_Element_Select('select_agencias');
+         $this->view->agencias = $agencia->obtenerTodasLasAgencias();
+         
+         $listaAgencias = array();
+         foreach ( $this->view->agencias as $agencias){
+         	$listaAgencias[$agencias['clave']]=$agencias['nombre'];
+         }
+         
+         $zendForm = new Zend_Form();
+         
+         $selectAgencias
+	        ->removeDecorator('label')
+	        ->removeDecorator('HtmlTag')
+	        ->addMultiOptions($listaAgencias)
+	        ->setAttrib("class","form-control selectpicker")
+	        ->setAttrib("data-max-options",10)
+	        ->setAttrib("data-live-search","true")
+	        ->setAttrib("title","Choose one of the following...")
+	        ->setAttrib("autocomplete","off");
+         
+         $zendForm->addElement($selectAgencias);
+         $this->view->selectAgencias=$zendForm;
+         
+         $params=$this->_request->getParams();
+         $this->view->form = new Application_Form_Agencias_Agencias();
+  
+         $this->view->prueba = 'Llega al mensaje';
+         //echo '<pre>'.print_r($agencias,true).'</pre>';die;
     }
 
     public function agregarAction(){

@@ -1,0 +1,43 @@
+<div class="panel panel-info">
+	<div class="panel-heading ">
+		<h1 class="page-header">Administraci&oacute;n de Agencias.</h1>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="input-group">
+					<label>Buscar Agencia:</label>
+				<?= $this->selectAgencias->select_agencias?>
+				</div>
+			</div>
+			<div class="col-md-8" align="right">
+				<button type="button" class="btn btn-primary btn-circle"
+					data-dismiss="modal" onclick="abrirModalAgregarAgencia()"
+					data-toggle="modal" data-target="#myModal">
+					&nbsp;<i class="fa fa-plus"></i>&nbsp;<i class="fa  fa-plane"></i>&nbsp;
+				</button>
+			</div>
+		</div>
+		<div class="salto"></div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<?= $this->render('agencias/render/datosAgencia.phtml') ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row" id="datosAgencia" style='display: none;'>
+	<div class="col-lg-12">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Nombre de la Agencia</div>
+			<div class="panel-footer">Observaciones:</div>
+		</div>
+	</div>
+</div>
+<?= $this->render('agencias/render/modalAgregarAgencia.phtml') ?>
+<script type="text/javascript">
+	function buscar(){
+		document.getElementById('datosAgencia').style.display = 'block';
+	}
+</script>

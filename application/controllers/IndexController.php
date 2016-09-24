@@ -62,17 +62,17 @@ class IndexController extends Zend_Controller_Action
     	
     	if( $params['accion_ajax'] == 'update_user' ){
     		
-    		$user = new Application_Model_DbTable_Users();
+    		$user = new Application_Model_DbTable_UsuarioAdmin();
     		
     		$data=array(
-    				'realname' => $params['realname']
+    				'nombre' => $params['realname']
     		);
     		
     		if(trim($params['newpass']) != ''){
-    			$data['password']=sha1($params['newpass']);
+    			$data['pwd']=sha1($params['newpass']);
     		}
     		
-    		$where = "id_user=".$params['id_user'];
+    		$where = "id_usuario=".$params['id_user'];
     		$user->update($data, $where);
     		
     		echo json_encode(array('1'));

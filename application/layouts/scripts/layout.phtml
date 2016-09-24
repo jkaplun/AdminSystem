@@ -29,6 +29,8 @@
 
     <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/panel.css">
     <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/utiles.css">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -127,7 +129,7 @@
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> Administracion<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?= $this->baseUrl() ?>/clientes/">Agencias</a>
+                                    <a href="<?= $this->baseUrl() ?>/agencias/">Agencias</a>
                                 </li>
                                 <li>
                                     <a href="<?= $this->baseUrl() ?>/usuarios/">Usuarios</a>
@@ -211,7 +213,8 @@
         <div class="container-fluid">
         <div class="row">
         <div class="col-lg-12">
-    <?php echo $this->layout()->content; ?>
+        <br>
+    	<?php echo $this->layout()->content; ?>
 
 </div>
 </div>
@@ -227,13 +230,13 @@
 		        <h4 class="modal-title" id="myModalLabel">Cambiar datos de usuario</h4>
 		      </div> 
 		      <form method="post" id="formupdateuser">
-		      	<input type="hidden" name="actualiza_id_user" id="actualiza_id_user" value="<?php echo $_SESSION['Zend_Auth']['USER_VALUES']['id_user']?>">
+		      	<input type="hidden" name="actualiza_id_user" id="actualiza_id_user" value="<?php echo $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario']?>">
 		      	<input name="accion" value="editar" type="hidden">
 			      <div class="modal-body">
 			        
 					  <div class="form-group">
-					    <label for="exampleInputName2">Nombre Completo del Usuario</label>
-					    <input type="text" class="form-control" id="actualiza_nombre_real" name="actualiza_nombre_real" value="<?php echo $_SESSION['Zend_Auth']['USER_VALUES']['realname']?>">
+					    <label for="exampleInputName2">Nombre del Usuario</label>
+					    <input type="text" class="form-control" id="actualiza_nombre_real" name="actualiza_nombre_real" value="<?php echo $_SESSION['Zend_Auth']['USER_VALUES']['nombre']?>">
 					  </div>
 					  <div class="form-group">
 					    <label for="password">Nueva Contrase&ntilde;a</label>
