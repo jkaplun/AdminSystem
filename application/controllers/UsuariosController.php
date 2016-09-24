@@ -164,7 +164,7 @@ class UsuariosController extends Zend_Controller_Action
         					{ // Si se intenta modificaar la clave
 
         						// se inyecta el ID, estado y descripción en la respuesta al cliente
-        						$data['id_usuario']='0';
+        						//$data['id_usuario']=$params['id_usuario'];
         						$data['estado']='error';
         						$data['descripcion']='No se permite modificar la clave';
         						// se responde al cliente
@@ -201,7 +201,7 @@ class UsuariosController extends Zend_Controller_Action
         		else
         		{ // else cuando el email es incorrecto
         			// se inyecta el ID, estado y descripción en la respuesta al cliente
-        			$data['id_usuario']='0';
+        			//$data['id_usuario']='0';
         			$data['estado']='error';
         			$data['descripcion']='Email en formato incorrecto';
         			// se responde al cliente
@@ -212,7 +212,7 @@ class UsuariosController extends Zend_Controller_Action
         	else
         	{ // else cuando las contraeñas no coinciden
         			// se inyecta el ID, estado y descripción en la respuesta al cliente
-        			$data['id_usuario']='0';
+        			//$data['id_usuario']='0';
         			$data['estado']='error';
         			$data['descripcion']='Passwords diferentes';
         			// se responde al cliente

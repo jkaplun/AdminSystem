@@ -114,9 +114,16 @@ function agregarAjaxDone(res){
 function actualizarAjaxDone(res){
 	//var userTable = $('#dataTable-usuarios').DataTable();  
 
-	agregarUsuarioEnTabla(res);
+	if(res.estado == "ok"){
+		agregarUsuarioEnTabla(res);
+		swal(res.descripcion, " ", "success");
+
+	}else{
+		swal(res.descripcion, " ", "error");
+	}
+	
 	//dataTable.row('.selected').remove().draw( false );
-	swal(res.descripcion, " ", "success");
+	
 
 }
 
@@ -141,7 +148,7 @@ function agregarUsuarioEnTabla(res){
 	        res.id_usuario, res.clave, nombreCompleto, estatusUsuario,  res.email, "x" 
 	        ]).draw();
 
-	      var boton = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" value=' + JSON.stringify(res) +  
+	      var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#myModal" value=' + JSON.stringify(res) +  
 	      ' onclick="datosform_edita_usuario(this.value)">' +  
 	      '<i class="fa fa-info-circle"></i>'+ 
 	      '</button>'  
