@@ -5,6 +5,11 @@ class Application_Form_Agencias_Agencias extends Zend_Form
 {
     public function init()
     {
+    	
+    	// id_agencia
+    	$id_agencia = new Zend_Form_Element_Hidden('id_agencia');
+    	$this->addElement($id_agencia);
+    	
         // Clave
         $clave = new Zend_Form_Element_Text('clave');
         $clave
