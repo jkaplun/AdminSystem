@@ -41,15 +41,49 @@ $("#select_agencias").change(function(){
 }); // end  $(document).ready(function() {
 
 function abrirModalAgregarAgencia(){
-	$('#myModalLabel').html("Agregar Agencia");
+	$('#myModalLabel').html("Crear Nueva Agencia");
+	
+	$("#action-form-agencia").attr('onclick','submitFormAddAgencia()');
+
 }
 
 
-function submitForm(){
-	console.log("parametros a mandar: ");
-	console.log($("#form_agregar_agencia").serialize());
+function submitFormAddAgencia(){
+	//console.log("parametros a mandar: ");
+	//console.log($("#form_agregar_agencia").serialize());
 	$.ajax({
 		  url: path + "agregar",
+		  method: "post",
+		  data: $("#form_agregar_agencia").serialize() ,
+		  dataType: "json"
+		})
+		.done(function(res) { 
+
+			if(res.estado =="ok"){
+				swal({title: res.descripcion,   
+					 text: "Redireccionando . .", 
+					 type: "success",   
+					 timer: 2800,   
+					 showConfirmButton: false
+					});
+
+				setTimeout(function(){location.reload();}, 3000);
+				
+			}else{
+				swal(res.estado, res.descripcion,"error");
+			}
+			
+  })// end ajax done 
+		.fail(function() {
+    	swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );
+  });
+} // submitForm(){
+
+function submitFormUpdateAgencia(){
+	//console.log("parametros a mandar: ");
+	//console.log($("#form_agregar_agencia").serialize());
+	$.ajax({
+		  url: path + "actualizar",
 		  method: "post",
 		  data: $("#form_agregar_agencia").serialize() ,
 		  dataType: "json"
@@ -82,47 +116,76 @@ function consultarAgencia(id_agencia){
 		  url: path + "consultar",
 		  method: "post",
 		  data: "id_agencia="+id_agencia,
-		  dataType: "json"
+		  dataType: "html"
 		})
 		.done(function(res) { 
 			console.log(res);	
+			//$("#boton-editar-agencia").val(res);
 			mostarDatosAgencia(res);
-			//datos_agencia = res;	
   })// end ajax done 
 		.fail(function() {
     	swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );
   });
+	
+	$.ajax({
+		  url: path + "consultar",
+		  method: "post",
+		  data: "id_agencia="+id_agencia,
+		  dataType: "html"
+		})
+		.done(function(res) { 
+			console.log(res);	
+			$("#boton-editar-agencia").val(res);
+			//mostarDatosAgencia(res);
+	})// end ajax done 
+			.fail(function() {
+	  	swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );
+	});
 }
 
 // Se muestran los datos de la gencia
 function mostarDatosAgencia(datosAgencia){
-	console.log("actulizando datos agencia");
+	var datosAgencia = jQuery.parseJSON( datosAgencia );
 
-	$("#nombre_agencia").html(datosAgencia.nombre);
-	$("#direccion").html(datosAgencia.direccion);
-	$("#telefono1").html(datosAgencia.tel1);
-	$("#telefono2").html(datosAgencia.tel2);
-	$("#cve_usopor_tit").html(datosAgencia.cve_usopor_tit);
-	$("#cve_usopor_aux").html(datosAgencia.cve_usopor_aux);
-	$("#rfc").html(datosAgencia.rfc);
-	$("#id_estatus_icaav").html(datosAgencia.id_estatus_icaav);
-	$("#id_estatus_iris").html(datosAgencia.id_estatus_iris);
-	$("#factura_electronica").html(datosAgencia.factura_electronica);
-	$("#agencias_consolidadas").html(datosAgencia.agencias_consolidadas);
-	$("#markup").html(datosAgencia.markup);
-	$("#contabilidad_elect").html(datosAgencia.contabilidad_elect);
-	$("#ine").html(datosAgencia.ine);
+	//jQuery.parseJSON( datosAgencia );
+	//console.log("actulizando datos agencia");
+	$("#nombre_agencia-info").html(datosAgencia.nombre);
+	$("#direccion-info").html(datosAgencia.direccion);
+	$("#telefono1-info").html(datosAgencia.tel1);
+	$("#telefono2-info").html(datosAgencia.tel2);
+	$("#cve_usopor_tit-info").html(datosAgencia.cve_usopor_tit);
+	$("#cve_usopor_aux-info").html(datosAgencia.cve_usopor_aux);
+	$("#rfc-info").html(datosAgencia.rfc);
+	$("#id_estatus_icaav-info").html(datosAgencia.id_estatus_icaav);
+	$("#id_estatus_iris-info").html(datosAgencia.id_estatus_iris);
+	$("#factura_electronica-info").html(datosAgencia.factura_electronica);
+	$("#agencias_consolidadas-info").html(datosAgencia.agencias_consolidadas);
+	$("#markup-info").html(datosAgencia.markup);
+	$("#contabilidad_elect-info").html(datosAgencia.contabilidad_elect);
+	$("#ine-info").html(datosAgencia.ine);
+	$("#lic_icaavwin-info").val(datosAgencia.lic_icaavwin);
+	$("#lic_iriswin-info").val(datosAgencia.lic_iriswin);
+	$("#lic_centauro-info").val(datosAgencia.lic_centauro);
+	$("#lic_gvc-info").val(datosAgencia.lic_gvc);
+	$("#cfdi-info").html(datosAgencia.cfdi);
+	$("#prov_timbrado-info").html(datosAgencia.prov_timbrado);
+	$("#bolet_e-info").html(datosAgencia.boleto_e);
+	$("#facturacion_boleto-info").html(datosAgencia.facturacion_boleto);
+	$("#boton-editar-agencia").val(datosAgencia);
+	$("#datos-agencia").show();
 
-	$("#lic_icaavwin").val(datosAgencia.lic_icaavwin);
-	$("#lic_iriswin").val(datosAgencia.lic_iriswin);
-	$("#lic_centauro").val(datosAgencia.lic_centauro);
-	$("#lic_gvc").val(datosAgencia.lic_gvc);
-	$("#cfdi").html(datosAgencia.cfdi);
-	$("#prov_timbrado").html(datosAgencia.prov_timbrado);
-	$("#bolet_e").html(datosAgencia.boleto_e);
-	$("#facturacion_boleto").html(datosAgencia.facturacion_boleto);
 	
-
-
 };
 
+function editarAgenciaForm(json_values){
+	$('#myModalLabel').html("Editar Datos de la Agencia");
+	var obj = jQuery.parseJSON( json_values );
+	populate(obj);
+	$("#action-form-agencia").attr('onclick','submitFormUpdateAgencia()');
+}
+
+function populate(data) {   
+    $.each(data, function(key, value){  
+    	$("#"+key).val(value);
+    });
+}

@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
  	<div class="modal-dialog modal-lg" role="document">
    		<div class="modal-content">
 		    <div class="modal-header">
@@ -16,7 +16,7 @@
 	           	<div class="panel-body">
 	           	
 	           		<form id="form_agregar_agencia">
-	           	
+	           		<?= $this->form->id_agencia ?>
 	            	<div class="panel with-nav-tabs panel-primary">
 		                <div class="panel-heading">
 		                        <ul class="nav nav-tabs">
@@ -409,9 +409,7 @@
 	           </div>
 	        </div>
 	      	<div class="modal-footer">     
-		       <button type="button" class="btn btn-primary btn-circle btn-lg" ><i class="fa fa-edit"></i></button>
-		       <button type="button" class="btn btn-success btn-circle btn-lg" onclick="submitForm()"><i class="fa fa-save"></i></button>
-		       <button type="button" class="btn btn-danger btn-circle btn-lg" ><i class="fa fa-trash-o"></i></button>
+		       <button type="button" class="btn btn-success btn-circle btn-lg" id="action-form-agencia"><i class="fa fa-save"></i></button>
 		    </div>
    		</div>
  	</div>

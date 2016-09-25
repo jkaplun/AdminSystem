@@ -104,7 +104,7 @@ class AgenciasController extends Zend_Controller_Action
                         //'ftp_add_login' => $params['ftp_add_login'],
                         //'ftp_add_pwd' => $params['ftp_add_pwd'],
                         //'ip_portal_fe' => $params['ip_portal_fe'],
-                        'prov_timbrado' => $params['prov_timbrado'],
+                        //'prov_timbrado' => $params['prov_timbrado'],
                         'facturacion_boleto' => $params['facturacion_boleto'],
                         'implant_am' => $params['implant_am'],
                         //'folios_utilizados' => $params['folios_utilizados'],
@@ -181,12 +181,12 @@ class AgenciasController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
         $data = array(
-                        'clave' => $params['clave'],
-                        'nombre' => $params['nombre'],
-                        'direccion' => $params['direccion'],
+                        'clave' => $params['clave'], 
+                        'nombre' => $params['nombre'], 
+                        'direccion' => $params['direccion'], 
                         'colonia' => $params['colonia'],
                         'cp' => $params['cp'],
-                        'clave_ciudad' => $params['clave_ciudad'],
+                        //'clave_ciudad' => $params['clave_ciudad'],
                         'tel1' => $params['tel1'],
                         'tel2' => $params['tel2'],
                         'rfc' => $params['rfc'],
@@ -197,47 +197,47 @@ class AgenciasController extends Zend_Controller_Action
                         'lic_gvc' => $params['lic_gvc'],
                         'lic_centauro' => $params['lic_centauro'],
                         'version_icaav' => $params['version_icaav'],
-                        'seguridad' => $params['seguridad'],
+                        //'seguridad' => $params['seguridad'],
                         'factura_electronica' => $params['factura_electronica'],
-                        'fe_activa' => $params['fe_activa'],
+                        //'fe_activa' => $params['fe_activa'],
                         'cfdi' => $params['cfdi'],
-                        'ftp_login' => $params['ftp_login'],
-                        'ftp_pwd' => $params['ftp_pwd'],
-                        'dba_pwd' => $params['dba_pwd'],
-                        'layout_login' => $params['layout_login'],
-                        'layout_pwd' => $params['layout_pwd'],
-                        'tamara' => $params['tamara'],
-                        'ibank' => $params['ibank'],
-                        'amex' => $params['amex'],
+                        //'ftp_login' => $params['ftp_login'],
+                        //'ftp_pwd' => $params['ftp_pwd'],
+                        //'dba_pwd' => $params['dba_pwd'],
+                        //'layout_login' => $params['layout_login'],
+                        //'layout_pwd' => $params['layout_pwd'],
+                        //'tamara' => $params['tamara'],
+                        //'ibank' => $params['ibank'],
+                        //'amex' => $params['amex'],
                         'diot' => $params['diot'],
                         'cve_usopor_tit' => $params['cve_usopor_tit'],
                         'cve_usopor_aux' => $params['cve_usopor_aux'],
                         'id_estatus_icaav' => $params['id_estatus_icaav'],
                         'id_estatus_iris' => $params['id_estatus_iris'],
-                        'fecha' => $params['fecha'],
-                        'observaciones' => $params['observaciones'],
+                        //'fecha' => $params['fecha'],
+                        //'observaciones' => $params['observaciones'],
                         'sucursales' => $params['sucursales'],
                         'adeudo' => $params['adeudo'],
                         'boleto_e' => $params['boleto_e'],
                         'update_login' => $params['update_login'],
                         'update_pwd' => $params['update_pwd'],
-                        'activa_nuevos_sp' => $params['activa_nuevos_sp'],
-                        'addenda' => $params['addenda'],
-                        'fecha_caducidad' => $params['fecha_caducidad'],
-                        'ftp_add_login' => $params['ftp_add_login'],
-                        'ftp_add_pwd' => $params['ftp_add_pwd'],
-                        'ip_portal_fe' => $params['ip_portal_fe'],
-                        'prov_timbrado' => $params['prov_timbrado'],
+                        //'activa_nuevos_sp' => $params['activa_nuevos_sp'],
+                        //'addenda' => $params['addenda'],
+                        //'fecha_caducidad' => $params['fecha_caducidad'],
+                        //'ftp_add_login' => $params['ftp_add_login'],
+                        //'ftp_add_pwd' => $params['ftp_add_pwd'],
+                        //'ip_portal_fe' => $params['ip_portal_fe'],
+                        //'prov_timbrado' => $params['prov_timbrado'],
                         'facturacion_boleto' => $params['facturacion_boleto'],
                         'implant_am' => $params['implant_am'],
-                        'folios_utilizados' => $params['folios_utilizados'],
-                        'folios_sync' => $params['folios_sync'],
+                        //'folios_utilizados' => $params['folios_utilizados'],
+                        //'folios_sync' => $params['folios_sync'],
                         'nombre_comercial' => $params['nombre_comercial'],
                         'markup' => $params['markup'],
                         'portal_proveedores' => $params['portal_proveedores'],
                         'agencias_consolidadas' => $params['agencias_consolidadas'],
                         'contabilidad_elect' => $params['contabilidad_elect'],
-                        'fecha_actualizacion_folios' => $params['fecha_actualizacion_folios'],
+                        //'fecha_actualizacion_folios' => $params['fecha_actualizacion_folios'],
                         'ine' => $params['ine'],
                 );
         
@@ -248,10 +248,13 @@ class AgenciasController extends Zend_Controller_Action
         	$cantidadDeErrores = count($mensajesDeError);
     		if ($cantidadDeErrores == 0)
         	{
-        		$esRfcValido = $utiles->validarRFC($params['rfc']);
+        		//$esRfcValido = $utiles->validarRFC($params['rfc']);
+        		$esRfcValido = true;
             	if ($esRfcValido)
             	{ // Si es RFC es válido
-                	$esEmailCorrecto = $utiles->comprobar_email($params['email']);
+                	//$esEmailCorrecto = $utiles->comprobar_email($params['email']);
+            		$esEmailCorrecto = true;
+                	
                 	if($esEmailCorrecto)
                 	{ // si el emal es correcto:
         				$where = "id_agencia = {$params['id_agencia']}";
@@ -288,7 +291,7 @@ class AgenciasController extends Zend_Controller_Action
         	else 
         	{ // else cuando existe un error encontrado en el form
             	$this->_helper->json($mensajesDeError);
-            	$this->_redirect('usuarios/');
+            	$this->_redirect('clientes/');
         	}
     }
 
@@ -298,6 +301,7 @@ class AgenciasController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams(); 
         $datosAgencia = $this->agencia->find($params['id_agencia'])->toArray();
+       
         $this->_helper->json($datosAgencia[0]);
 
     }

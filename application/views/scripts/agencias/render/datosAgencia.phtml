@@ -2,16 +2,16 @@
 <div class="row">
 	<div class="col-lg-11">
 		<center>
-			<h2> <span class="text-primary" id="nombre_agencia">Nombre de la Agencia</span></h2>
+			<h2> <span class="text-primary" id="nombre_agencia-info">Nombre de la Agencia</span></h2>
 		</center>
 	</div>
 	<div class="col-lg-1" align="right">
-		<button type="button" class="btn btn-primary btn-circle btn-lg">
+		<button type="button" class="btn btn-primary btn-circle btn-lg"
+		 id='boton-editar-agencia' onclick="editarAgenciaForm(this.value)" data-dismiss="modal" data-toggle="modal" data-target="#myModal">
 			<i class="fa fa-edit"></i>
 		</button>
 	</div>
 </div>
-
 
 <!-- Para validación posterior en otra iteración
 <div class="row">
@@ -28,16 +28,16 @@
 		<div class="bs-callout bs-callout-primary col"
 			id="callout-glyphicons-dont-mix">
 			<h5>Direcci&oacute;n</h5>
-			<address class="text-primary" id="direccion"> </address>
+			<address class="text-primary" id="direccion-info"> </address>
 			<p>
-				<i class="fa fa-phone" ></i>  <span class="text-primary" id="telefono1"></span>
+				<i class="fa fa-phone" ></i>  <span class="text-primary" id="telefono1-info"></span>
 			</p>
 			<p>
-				<i class="fa fa-phone"></i> <span class="text-primary" id="telefono2"></span>
+				<i class="fa fa-phone"></i> <span class="text-primary" id="telefono2-info"></span>
 			</p>
-			<p>RFC: <span class="text-primary" id="rfc"></span> </p>
-			<p>Clave ejecutivo Asignado:  <span class="text-primary" id="cve_usopor_tit"></span>  </p>
-			<p>Clave ejecutivo Ayuda:  <span class="text-primary" id="cve_usopor_aux"> </p>
+			<p>RFC: <span class="text-primary" id="rfc-info"></span> </p>
+			<p>Clave ejecutivo Asignado:  <span class="text-primary" id="cve_usopor_tit-info"></span>  </p>
+			<p>Clave ejecutivo Ayuda:  <span class="text-primary" id="cve_usopor_aux-info"> </p>
 		</div>
 	</div>
 	<div class="col-md-4">
@@ -45,17 +45,17 @@
 			id="callout-glyphicons-dont-mix">
 			<h5 align="center">Configuraci&oacute;n</h5>
 			<p>Estatus</p>
-			<p>ICAAVWin: <span id="id_estatus_icaav" class="text-primary"></span>  </p>
-			<p>IRISWin: <span id="id_estatus_iris" class="text-primary"></span> </p>
+			<p>ICAAVWin: <span id="id_estatus_icaav-info" class="text-primary"></span>  </p>
+			<p>IRISWin: <span id="id_estatus_iris-info" class="text-primary"></span> </p>
 			<p>Outsourcing: OQAPDDW</p>
 			<p>Personalizado: Encuesta</p>
 			<p>Formatos Pagados Sin documentos</p>
-			<p>Factura Elect&oacute;nica:  <span id="factura_electronica" class="text-primary"></span>  </p>
+			<p>Factura Elect&oacute;nica:  <span id="factura_electronica-info" class="text-primary"></span>  </p>
 			<p>Portal Proveedores:  </p>
-			<p>Agencia Consolidada: <span id="agencias_consolidadas" class="text-primary"></span> </p>
-			 <p> Markup: <span id="markup" class="text-primary"></span> </p>
-			<p>Contabilidad Elect&oacute;nica:  <span id="contabilidad_elect" class="text-primary"></span>  </p>
-			 <p>INE: <span id="ine" class="text-primary"></span>  </p>
+			<p>Agencia Consolidada: <span id="agencias_consolidadas-info" class="text-primary"></span> </p>
+			 <p> Markup: <span id="markup-info" class="text-primary"></span> </p>
+			<p>Contabilidad Elect&oacute;nica:  <span id="contabilidad_elect-info" class="text-primary"></span>  </p>
+			 <p>INE: <span id="ine-info" class="text-primary"></span>  </p>
 		</div>
 	</div>
 	<div class="col-md-4">
@@ -68,14 +68,14 @@
 				</div>
 				<div class="col-lg-8">
 					<div class="form-group input-group">
-						<span class="input-group-addon">Lic</span> <input id="lic_icaavwin" type="text"
-							class="form-control" value="" id="edita_puesto" disabled>
+						<span class="input-group-addon">Lic</span> <input id="lic_icaavwin-info" type="text"
+							class="form-control" value="" id="edita_puesto-info" disabled>
 					</div>
 				</div>
 <!-- 			<div class="col-lg-5">
 				<div class="form-group input-group">
                 	<span class="input-group-addon">AnyWhere</span>
-                	<input type="text" class="form-control" value="2" id="edita_puesto" disabled>
+                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
             	</div>	
 			</div>		 -->
 			</div>
@@ -86,13 +86,13 @@
 				<div class="col-lg-8">
 					<div class="form-group input-group">
 						<span class="input-group-addon">Lic</span> <input type="text"
-							class="form-control" value="" id="lic_iriswin" disabled>
+							class="form-control" value="" id="lic_iriswin-info" disabled>
 					</div>
 				</div>
 				<!-- 									<div class="col-lg-5">
 										<div class="form-group input-group">
 						                	<span class="input-group-addon">AnyWhere</span>
-						                	<input type="text" class="form-control" value="2" id="edita_puesto" disabled>
+						                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
 						            	</div>	
 									</div>	 -->
 			</div>
@@ -103,13 +103,13 @@
 				<div class="col-lg-8">
 					<div class="form-group input-group">
 						<span class="input-group-addon">Lic</span> <input type="text"
-							class="form-control" value="" id="lic_centauro" disabled>
+							class="form-control" value="" id="lic_centauro-info" disabled>
 					</div>
 				</div>
 				<!-- 									<div class="col-lg-5">
 										<div class="form-group input-group">
 						                	<span class="input-group-addon">AnyWhere</span>
-						                	<input type="text" class="form-control" value="2" id="edita_puesto" disabled>
+						                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
 						            	</div>	
 									</div> -->
 			</div>
@@ -120,13 +120,13 @@
 				<div class="col-lg-8">
 					<div class="form-group input-group">
 						<span class="input-group-addon">Lic</span> <input type="text"
-							class="form-control" value="0" id="lic_gvc" disabled>
+							class="form-control" value="0" id="lic_gvc-info" disabled>
 					</div>
 				</div>
 <!-- 		<div class="col-lg-5">
 				<div class="form-group input-group">
                 	<span class="input-group-addon">AnyWhere</span>
-                	<input type="text" class="form-control" value="2" id="edita_puesto" disabled>
+                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
             	</div>	
 			</div>		 -->
 			</div>
@@ -135,10 +135,10 @@
 			<p>Implant AM: N</p>
 			<p>Version PB: </p>
 
-			<p>CFDI:  <span id="cfdi" class="text-primary"></span>   </p>
-			<p>Timbrado:  <span id="prov_timbrado" class="text-primary"></span>   </p> 
-			<p>Boleto-E: <span id="boleto_e" class="text-primary"></span></p>
-			<p>Facturaci&oacute; de Boletos: <span id="facturacion_boleto" class="text-primary"></span></p> </p>
+			<p>CFDI:  <span id="cfdi-info" class="text-primary"></span>   </p>
+			<p>Timbrado:  <span id="prov_timbrado-info" class="text-primary"></span>   </p> 
+			<p>Boleto-E: <span id="boleto_e-info" class="text-primary"></span></p>
+			<p>Facturaci&oacute; de Boletos: <span id="facturacion_boleto-info" class="text-primary"></span></p> </p>
 			Layout MIG y EDICOM Precio: MIG</p>
 		</div>
 	</div>
