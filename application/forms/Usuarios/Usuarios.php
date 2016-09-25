@@ -164,6 +164,7 @@ class Application_Form_Usuarios_Usuarios extends Zend_Form
                         'S'=>'Activo',
                         'N'=>'Inactivo'
                 ))
+                ->setAttrib("class","form-control")                
                 ->removeDecorator('label')
                 ->setValue('si')
                 ->removeDecorator('HtmlTag');

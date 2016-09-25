@@ -67,7 +67,8 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Código postal"))
-        ->setAttrib("maxlength","20")
+        ->setAttrib("maxlength","5")
+        ->setAttrib("minlength","5")
         ;
         $this->addElement($cp);
         
@@ -93,7 +94,8 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Teléfono 1"))
-        ->setAttrib("maxlength","20")
+        ->setAttrib("maxlength","10")
+        ->setAttrib("minlength","10")
         ;
         $this->addElement($tel1);
         
@@ -104,7 +106,8 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Teléfono 2"))
-        ->setAttrib("maxlength","20")
+        ->setAttrib("maxlength","10")
+        ->setAttrib("minlength","10")
         ;
         $this->addElement($tel2);
         
@@ -115,7 +118,8 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("R.F.C."))
-        ->setAttrib("maxlength","20")
+        ->setAttrib("maxlength","13")
+        ->setAttrib("minlength","12")
         ;
         $this->addElement($rfc);
         
@@ -362,6 +366,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("autocomplete","off")
         ;
         $this->addElement($diot);
+
         // cve_usopor_tit
         $cve_usopor_tit = new Zend_Form_Element_Text('cve_usopor_tit');
         $cve_usopor_tit->removeDecorator('label')
