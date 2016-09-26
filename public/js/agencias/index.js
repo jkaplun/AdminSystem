@@ -57,7 +57,7 @@ $(document).ready(function() {
 
 function abrirModalAgregarAgencia(){
 	$('#myModalLabel').html("Crear Nueva Agencia");
-	
+	document.getElementById("form_agregar_agencia").reset();
 	$("#action-form-agencia").attr('onclick','submitFormAddAgencia()');
 
 }
@@ -135,27 +135,13 @@ function consultarAgencia(id_agencia){
 		})
 		.done(function(res) { 
 			console.log(res);	
-			//$("#boton-editar-agencia").val(res);
 			mostarDatosAgencia(res);
+			editarAgenciaForm(res)
   })// end ajax done 
 		.fail(function() {
     	swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );
   });
 	
-	$.ajax({
-		  url: path + "consultar",
-		  method: "post",
-		  data: "id_agencia="+id_agencia,
-		  dataType: "html"
-		})
-		.done(function(res) { 
-			console.log(res);	
-			$("#boton-editar-agencia").val(res);
-			//mostarDatosAgencia(res);
-	})// end ajax done 
-			.fail(function() {
-	  	swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );
-	});
 }
 
 // Se muestran los datos de la gencia

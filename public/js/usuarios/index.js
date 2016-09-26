@@ -20,6 +20,7 @@ var path="public/usuarios/";
 
 
 
+
 function datosform_edita_usuario(json_values){
 	ajaxAction="actualizar";
 	var obj = jQuery.parseJSON( json_values );
@@ -102,7 +103,7 @@ function agregarAjaxDone(res){
 	      console.log(res); 
 
 			agregarUsuarioEnTabla(res);
-			swal(res.descripcion, " ", "success"); 
+			swal("el usuario ha sido guardado exitosamente", " ", "success"); 
 
  	} else{
  		swal(res.descripcion, " ", "error"); 
@@ -116,7 +117,7 @@ function actualizarAjaxDone(res){
 
 	if(res.estado == "ok"){
 		agregarUsuarioEnTabla(res);
-		swal(res.descripcion, " ", "success");
+		swal("el usuario ha sido actualizado exitosamente", " ", "success");
 
 	}else{
 		swal(res.descripcion, " ", "error");
@@ -133,6 +134,7 @@ function agregarUsuarioEnTabla(res){
 	      idDataBaseUser=res.id_usuario;
 	      var userTable = $('#dataTable-usuarios').DataTable();  
 	      var estatusUsuario;
+	      var info = userTable.page.info();
 
 
 	      if(res.activo == "S"){
@@ -154,24 +156,29 @@ function agregarUsuarioEnTabla(res){
 	      '</button>'  
 	 
 
-	      //var previousRow=res.id_usuario-1;
-	 		//$("#"+res.id_usuario).closest('tr').next('tr').css('background',"red");
-	 		//$("#"+res.id_usuario).closest('tr').next('tr').attr('id', res.id_usuario);
-
-
-
-	 		//$("#"+res.id_usuario)
-	 
-
 	      if(ajaxAction=="agregar"){
 	      userTable.page( 'last' ).draw( 'page' ); 
 
 	      $('#dataTable-usuarios tr:last-child td:last-child').html(boton); 
-	      $('#dataTable-usuarios tr:last-child').attr('id', res.id_usuario);
+	      $('#dataTable-usuarios tr:last-child td:last-child').attr('id', "editarBtn"+res.id_usuario);
+	      $("#editarBtn"+res.id_usuario).closest('tr').attr('id', res.id_usuario);
+
 	  	  }else{
-	  	  	$("#"+res.id_usuario).closest('tr').next('tr').attr('id', res.id_usuario);
+
+	  	  	 userTable.page(info.page).draw( 'page' ); 
+
+	  	  	$("#"+res.id_usuario).closest('tr').next('tr').attr('id', res.id_usuario);;
+	  	  	//$("#"+res.id_usuario)
 	  	  	dataTable.row('#'+res.id_usuario).remove().draw( false );
 	  	  	$("#"+res.id_usuario + " td:last-child").html(boton);
+
+
+	  	  	if (!$("#"+res.id_usuario).length){ // es el último elemento en la tabla
+	  	  	   	//alert("ultimoElemento")
+	  	  	   	$('#dataTable-usuarios tr:last-child td:last-child').html(boton); 
+	  	  	}
+	  	  	
+
 	  	  }
 
 	  		

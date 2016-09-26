@@ -65,13 +65,13 @@ class UsuariosController extends Zend_Controller_Action
                     $esEmailCorrecto = $utiles->comprobar_email($params['email']);
                     if($esEmailCorrecto)
                     { // si el emal es correcto:
-                      
+                        unset($data['pwd']);
                         // se inserta en la base de datos al nuevo usuario
                         $idNuevoUsuario = $this->usuario_admin->insert($data);
                         // se inyecta el ID, estado y descripción en la respuesta al cliente
                         $data['id_usuario']=$idNuevoUsuario;
                         $data['estado']='ok';
-                        $data['descripcion']='El usuario ha sido guardado exitosamente';
+                        //$data['descripcion']='El usuario ha sido guardado exitosamente';
                         // se responde al cliente
                         $this->_helper->json($data);
                         $this->_redirect('usuarios/');
@@ -179,7 +179,7 @@ class UsuariosController extends Zend_Controller_Action
         						$this->usuario_admin->update($data, $where);
         						// se inyecta el estado y descripción en la respuesta al cliente
         						$data['estado']='ok';
-        						$data['descripcion']='El usuario ha sido actualizado exitosamente';
+        						//$data['descripcion']='El usuario ha sido actualizado exitosamente';
         						// se responde al cliente
         						$this->_helper->json($data);
         						$this->_redirect('usuarios/');
