@@ -1,7 +1,7 @@
 var path="public/agencias/";
 
 $(document).ready(function() {
-    $('#dataTable-agencias').DataTable({
+    $('#dataTable-usuarios-agencias').DataTable({
         responsive: true,
         "language":{
 			"sProcessing":     "Procesando...",
@@ -31,10 +31,25 @@ $(document).ready(function() {
     });
 
 
-// cuando se eliga una agencia de la lista se llama a la función cunslutar agencia
-$("#select_agencias").change(function(){
-	consultarAgencia($("#select_agencias").val());
-});
+	// cuando se eliga una agencia de la lista se llama a la función cunslutar agencia
+	$("#select_agencias").change(function(){
+		consultarAgencia($("#select_agencias").val());
+	});
+
+	soloNumeros('cp');
+	soloNumeros('lic_icaavwin');
+	soloNumeros('lic_iriswin');
+	soloNumeros('lic_gvc');
+	soloNumeros('lic_centauro');
+
+	soloLetrasNumeros('nombre')
+	soloLetrasNumeros('nombre_comercial')
+	soloLetrasNumeros('direccion')
+
+	soloLetras('colonia');
+	soloLetras('nombre');
+
+	soloLetrasDot('nombre_comercial');
 
 
 
