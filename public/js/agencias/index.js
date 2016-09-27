@@ -43,11 +43,9 @@ $(document).ready(function() {
 	soloNumeros('lic_centauro');
 
 	soloLetrasNumeros('nombre')
-	soloLetrasNumeros('nombre_comercial')
 	soloLetrasNumeros('direccion')
 
 	soloLetras('colonia');
-	soloLetras('nombre');
 
 	soloLetrasDot('nombre_comercial');
 

@@ -19,18 +19,14 @@
         var textbox = document.getElementById(inputElementId);
 
         textbox.addEventListener("keydown", function _OnNumericInputKeyDown(e) {
-			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 || //190 Dot
-		         // Allow: Ctrl+A, Command+A
-		        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
-		         // Allow: home, end, left, right, down, up
-		        (e.keyCode >= 35 && e.keyCode <= 40)) {
-		             // let it happen, don't do anything
-		             return;
+		    var regex = new RegExp("^[0-9\t]+$");
+		    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+		    if (regex.test(str)) {
+		        return true;
 		    }
-		    // Ensure that it is a number and stop the keypress
-		    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-		        e.preventDefault();
-		    }
+
+		    e.preventDefault();
+    		return false;
         });
 	
 	}
@@ -39,58 +35,46 @@
         var textbox = document.getElementById(inputElementId);
 
         textbox.addEventListener("keydown", function _OnNumericInputKeyDown(e) {
-			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 || //190 Dot
-		         // Allow: Ctrl+A, Command+A
-		        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
-		         // Allow: home, end, left, right, down, up
-		        (e.keyCode >= 35 && e.keyCode <= 40)) {
-		             // let it happen, don't do anything
-		             return;
+		    var regex = new RegExp("^[a-zA-Z \t]+$");
+		    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+		    if (regex.test(str)) {
+		        return true;
 		    }
-		    // Ensure that it is a number and stop the keypress
-		    if (!(e.keyCode >= 65 && e.keyCode <= 120) && (e.keyCode != 32 && e.keyCode != 0)){
-		        e.preventDefault();
-		    }
+
+		    e.preventDefault();
+    		return false;
         });
 	}
 
     function soloLetrasDot(inputElementId) {
         var textbox = document.getElementById(inputElementId);
 
-        textbox.addEventListener("keydown", function _OnNumericInputKeyDown(e) {
-			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || //190 Dot
-		         // Allow: Ctrl+A, Command+A
-		        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
-		         // Allow: home, end, left, right, down, up
-		        (e.keyCode >= 35 && e.keyCode <= 40)) {
-		             // let it happen, don't do anything
-		             return;
+        textbox.addEventListener("keypress", function _soloLetrasDot(e) {
+		    var regex = new RegExp("^[a-zA-Z. \t]+$");
+		    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+		    if (regex.test(str)) {
+		        return true;
 		    }
-		    // Ensure that it is a number and stop the keypress
-		    if (!(e.keyCode >= 65 && e.keyCode <= 120) && (e.keyCode != 32 && e.keyCode != 0)){
-		        e.preventDefault();
-		    }
+
+		    e.preventDefault();
+    		return false;
         });
 	}
 
 	function soloLetrasNumeros(inputElementId) {
         var textbox = document.getElementById(inputElementId);
 
-        textbox.addEventListener("keydown", function _OnNumericInputKeyDown(e) {
-			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || //190 Dot
-		         // Allow: Ctrl+A, Command+A
-		        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
-		         // Allow: home, end, left, right, down, up
-		        (e.keyCode >= 35 && e.keyCode <= 40)) {
-		             // let it happen, don't do anything
-		             return;
+        textbox.addEventListener("keypress", function _soloLetrasNumeros(e) {
+		    var regex = new RegExp("^[a-zA-Z0-9 .\t]+$");
+		    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+		    if (regex.test(str)) {
+		        return true;
 		    }
-		    // Ensure that it is a number and stop the keypress
-		    if ((!(e.keyCode >= 65 && e.keyCode <= 120) && (e.keyCode != 32 && e.keyCode != 0)) || (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)){
-		        e.preventDefault();
-		    }
+
+		    e.preventDefault();
+    		return false;
         });
 	}
 
-	
+
 // });

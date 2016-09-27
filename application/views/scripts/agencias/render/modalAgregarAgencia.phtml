@@ -12,9 +12,9 @@
 		    		</div> 			    		
 		    	</div>
 		    </div>
-		    <div class="modal-body">
-	           	<div class="panel-body">
-	           	
+		    <div class="modal-body" style="padding-top: 0px;">
+	           	<div class="panel-body" style="padding-top: 0px;padding-left: 0px;padding-bottom: 0px; padding-right: 0px;">
+	     
 	           		<form id="form_agregar_agencia">
 	           		<?= $this->form->id_agencia ?>
 	            	<div class="panel with-nav-tabs panel-primary">
@@ -96,7 +96,8 @@
 								<div class="tab-pane fade" id="tabContacto">
 									<div class="row">
 										<div class="col-md-12">
-											<h4 align="center">Direcci&oacute;n</h4>
+											<h4 class="h4Form">Direcci&oacute;n</h4>
+											<hr class="hrForm">
 											<div class="row">
 												<div class="col-md-6">
 												    <div class="form-group">
@@ -133,7 +134,8 @@
 									</div>
 									<div class="row">
 										<div class="col-md-12">
-											<h4 align="center">Contacto</h4>
+											<h4 class="h4Form">Contacto</h4>
+											<hr class="hrForm">
 											<div class="row">
 												<div class="col-md-4">
 												    <div class="form-group">
@@ -170,7 +172,8 @@
 									</div>
 									<div class="row">
 										<div class="col-md-12">
-											<h4 align="center">Correos</h4>
+											<h4 class="h4Form">Correos</h4>
+											<hr class="hrForm">
 											<div class="row">
 												<div class="col-md-4">
 												    <div class="form-group">
@@ -197,7 +200,8 @@
 		                        <div class="tab-pane fade" id="tabLicencias">
 									<div class="row">
 										<div class="col-md-12">
-											<h4>Licencias</h4>
+											<h4 class="h4Form">Licencias</h4>
+											<hr class="hrForm">
 											<div class="row">
 												<div class="col-md-3">
 													<div class="form-group">
@@ -242,7 +246,8 @@
 											</div>	
 										</div>
 										<div class="col-md-12">
-											<h4 >Facturas</h4>
+											<h4 class="h4Form">Facturas</h4>
+											<hr class="hrForm">
 											<div class="row">
 												<div class="col-md-12">
 													<div class="row">
@@ -302,150 +307,175 @@
 									</div>	
 								</div>
 
-								                        	
+
 		                        <div class="tab-pane fade" id="tabConfiguraciones">
+		                        	<h4 class="h4Form">Estatus</h4>
+		                        	<hr class="hrForm">
 		                        	<div class="row">
-										<div class="col-lg-4">
-									        <h4>Estatus</h4>
-										    <div class="form-group">
-										        <div class="row">
-										            <div class="col-xs-12">
+										<div class="col-md-12">
+				                        	<div class="row">
+												<div class="col-md-6">
+												    <div class="form-group">
 										                <label class="control-label">ICAAVWin</label>
 										                <?= $this->form->id_estatus_icaav ?>
-										            </div>
-										        </div>
-										    </div>
-										    <div class="form-group">
-										        <div class="row">
-										            <div class="col-xs-12">
+												    </div>												
+												</div>
+												<div class="col-md-6">
+												    <div class="form-group">
 										                <label class="control-label">IRISWin</label>
 										                <?= $this->form->id_estatus_iris ?>
-										            </div>
-										        </div>
-										    </div>
+												    </div>												
+												</div>
+											</div>				
 										</div>
-										<div class="col-lg-4">
-									        <h4> </h4>
-									        <div class="form-group">
-										        <div class="row">
-										            <div class="col-xs-8">
+									</div>
+		                        	<div class="row">
+										<div class="col-md-12">
+													<div class="form-group">
 										                <label class="control-label">Versi&oacute;n ICAAV</label>
 										                <?= $this->form->version_icaav ?>
-										            </div>								            
-										        </div>
-										    </div>
-										    <p><b>Interfase</b></p>
-									        <div class="form-group">
-										        <div class="row">
-										            <div class="col-xs-6">
+													</div>
+										</div>
+									</div>
+									<h4 class="h4Form">Interface</h4>
+									<hr class="hrForm">
+		                        	<div class="row">
+										<div class="col-md-12">
+				                        	<div class="row">
+												<div class="col-md-3">
+													<div class="form-group">
 										                <label class="control-label">Amadeus</label>
 										                <select class="form-control">
 										                    <option value="1">Si</option>
 										                    <option value="0">No</option>
 										                </select>
-										            </div>
-										            <div class="col-xs-6">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
 										                <label class="control-label">Sabre</label>
 										                <select class="form-control">
 										                    <option value="1">Si</option>
 										                    <option value="0">No</option>
 										                </select>
-										            </div>										            
-										        </div>
-										    </div>
-									        <div class="form-group">
-										        <div class="row">
-										            <div class="col-xs-6">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
 										                <label class="control-label">Apollo</label>
 										                <select class="form-control">
 										                    <option value="1">Si</option>
 										                    <option value="0">No</option>
 										                </select>
-										            </div>
-										            <div class="col-xs-6">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
 										                <label class="control-label">Wordspan</label>
 										                <select class="form-control">
 										                    <option value="1">Si</option>
 										                    <option value="0">No</option>
 										                </select>
-										            </div>										            
-										        </div>
-										    </div>
+													</div>
+												</div>
+											</div>
 										</div>
-										<div class="col-lg-4">
-											<h4>Configuraciones</h4>
-											<div class="form-group">
-										        <div class="row">
-										            <div class="col-xs-6">
-										                <label class="control-label">DIOT</label>
-										                <?= $this->form->diot ?>
-										            </div>
-										            <div class="col-xs-6">
-										                <label class="control-label">IMPLANT AM</label>
-										                <?= $this->form->implant_am ?>
-										            </div>										            
-										        </div>
-										    </div>		
-											<div class="form-group">
-										        <div class="row">
-										            <div class="col-xs-8">
-										                <label class="control-label">Login Update</label>
+									</div>
+
+									<h4 class="h4Form">Acceso</h4>
+									<hr class="hrForm">
+		                        	<div class="row">
+										<div class="col-md-12">
+		                        			<div class="row">
+		                        				<div class="col-lg-4">
+													<div class="form-group">
+														<label class="control-label">Login Update</label>
 														<?= $this->form->update_login ?>
-										            </div>
-										            <div class="col-xs-4">
+													</div>
+		                        				</div>
+		                        				<div class="col-lg-2">
+													<div class="form-group">
 										                <label class="control-label">Modificar</label>
 										                <select class="form-control">
 										                    <option value="1">Si</option>
 										                    <option value="0">No</option>
 										                </select>
-										            </div>										            
-										        </div>
-										    </div>	
-											<div class="form-group">
-										        <div class="row">
-										            <div class="col-xs-8">
+													</div>		                        				
+		                        				</div>
+		                        				<div class="col-lg-4">
+													<div class="form-group">
 										                <label class="control-label">Password Update</label>
 														<?= $this->form->update_pwd ?> 
-										            </div>
-										            <div class="col-xs-4">
+													</div>
+		                        				</div>
+		                        				<div class="col-lg-2">
+													<div class="form-group">
 										                <label class="control-label">Modificar</label>
 										                <select class="form-control">
 										                    <option value="1">Si</option>
 										                    <option value="0">No</option>
 										                </select>
-										            </div>										            
-										        </div>
-										    </div>	
-											<div class="form-group">
-										        <div class="row">
-										            <div class="col-xs-6">
+													</div>		                        				
+		                        				</div>		                        				
+		                        			</div>
+										</div>
+									</div>
+
+		                        	<div class="row">
+										<div class="col-md-12">
+				                        	<div class="row">
+												<div class="col-md-4">
+													<div class="form-group">
+										                <label class="control-label">DIOT</label>
+										                <?= $this->form->diot ?>
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="form-group">
+										                <label class="control-label">IMPLANT AM</label>
+										                <?= $this->form->implant_am ?>
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="form-group">
 										                <label class="control-label">Agencia Consolidada</label>
 										                <?= $this->form->agencias_consolidadas ?> 
-										            </div>
-										            <div class="col-xs-6">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>	
+
+		                        	<div class="row">
+										<div class="col-md-12">
+				                        	<div class="row">
+												<div class="col-md-3">
+													<div class="form-group">
 										                <label class="control-label">Portal de Proveedores</label>
 										                <?= $this->form->portal_proveedores ?>
-										            </div>										            
-										        </div>
-										    </div>
-											<div class="form-group">
-										        <div class="row">
-										            <div class="col-xs-4">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
 										                <label class="control-label">Contabilidad Electr&oacute;nica</label>
 										                <?= $this->form->contabilidad_elect ?>
-										            </div>
-										            <div class="col-xs-4">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
 										                <label class="control-label">INE</label>
 										                <?= $this->form->ine ?>
-										            </div>	
-										            <div class="col-xs-4">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
 										                <label class="control-label">Markup</label>
 										                <?= $this->form->markup ?>
-										            </div>										            
-										        </div>
-										    </div>						    					    		    
+													</div>
+												</div>
+											</div>
 										</div>
-									</div> 		                        	
+									</div>		                        	
 		                        </div>
 <!-- 		                        <div class="tab-pane fade" id="tab4success">Success 4</div>
 		                        <div class="tab-pane fade" id="tab5success">Success 5</div> -->
