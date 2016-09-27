@@ -1,0 +1,96 @@
+<!-- Modal -->
+<div class="modal fade" id="modalNuevaPoliza" tabindex="-1" role="dialog" aria-labelledby="modalNuevaPoliza">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+
+     <div class="modal-header">
+     	<div class="row">
+    		<div class="col-md-10">
+				<h4 class="modal-title" id="myModalLabel"></h4>
+    		</div>
+    		<div class="col-md-2" align="right">
+       			<button type="button" class="btn btn-info btn-circle" data-dismiss="modal"><i class="fa fa-times"></i></button>
+    		</div> 			    		
+    	</div>
+       
+
+     </div>
+
+<!--      <form method="post" id="formedituser"> -->
+      	<input type="hidden" name="edita_id_user" id="edita_id_user">
+      	<input name="accion" value="editar" type="hidden">
+
+	    <div class="modal-body">
+			<fieldset>
+				<div class="row">
+		    		<div class="col-md-12">
+						<div class="form-group">
+							<label class="control-label">Tipo OutSoursing</label>
+			                <select class="form-control">
+			                    <option value="1">Si</option>
+			                    <option value="0">No</option>
+			                </select>
+						</div>
+		    		</div>	    			    		
+		    	</div>
+		    	<div class="row">
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon"><i class="fa fa-clock-o"></i>
+			                </span>
+			                <input type="text" class="form-control" placeholder="Horas Anuales ICAAV">
+			            </div>
+		    		</div>
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon"><i class="fa fa-clock-o"></i>
+			                </span>
+			                <input type="text" class="form-control" placeholder="Horas Anuales IRIS">
+			            </div>	    		
+		    		</div>    			    		
+		    	</div>
+	
+		    	<div class="row">
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon"><i class="fa fa-list-alt"></i>
+			                </span>
+			                <input type="text" class="form-control" placeholder="Facturado Mensual ICAAV">
+			            </div>
+		    		</div>
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon"><i class="fa fa-list-alt"></i>
+			                </span>
+			                <input type="text" class="form-control" placeholder="Facturado Mensual IRIS">
+			            </div>	    		
+		    		</div>	    			    		
+		    	</div>
+	
+		    	<div class="row">
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon"><i class="fa fa-play"></i>
+			                </span>
+			                <input type="text" class="form-control" placeholder="Fecha Inicial">
+			            </div>
+		    		</div>
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+				                <span class="input-group-addon"><i class="fa fa-stop"></i>
+				                </span>
+				                <input type="text" class="form-control" placeholder="Fecha Final">
+			            </div>	    		
+		    		</div>	    			    		
+		    	</div>
+			</fieldset>
+	    </div>
+	    <div class="modal-footer">     
+	       <button type="button" class="btn btn-primary btn-circle btn-lg" ><i class="fa fa-edit"></i></button>
+	       <span id="submitBtn" type="button" class="btn btn-success btn-circle btn-lg" onclick="submitForm()"><i class="fa fa-save"></i></span>
+	       <button type="button" class="btn btn-danger btn-circle btn-lg" ><i class="fa fa-trash-o"></i></button>
+	    </div>
+<!--      </form> -->
+   </div>
+ </div>
+</div>

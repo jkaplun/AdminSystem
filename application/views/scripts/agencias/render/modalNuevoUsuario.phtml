@@ -1,0 +1,136 @@
+<!-- Modal -->
+<div class="modal fade" id="nuevoUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="nuevoUsuarioModal">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="row">
+					<div class="col-md-10">
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div class="col-md-2" align="right">
+							<button type="button" class="btn btn-info btn-circle" data-dismiss="modal"><i class="fa fa-times"></i></button>
+					</div> 			    		
+				</div>
+			</div>
+<!-- 		<form method="post" id="formedituser"> -->
+		  	<input type="hidden" name="edita_id_user" id="edita_id_user">
+		  	<input name="accion" value="editar" type="hidden">
+
+		    <div class="modal-body">
+				<fieldset>
+					<legend>Datos Generales:</legend>
+					<div class="row">
+			    		<div class="col-md-4">
+							<div class="form-group input-group">
+				                <span class="input-group-addon"><i class="fa fa-user"></i>
+				                </span>
+				                <input type="text" class="form-control" placeholder="Nombre">
+				            </div>
+			    		</div>	    			    		
+			    		<div class="col-md-4">
+							<div class="form-group input-group">
+				                <span class="input-group-addon"><i class="fa fa-user"></i>
+				                </span>
+				                <input type="text" class="form-control" placeholder="Apellido Paterno">
+				            </div>
+			    		</div>
+			    		<div class="col-md-4">
+							<div class="form-group input-group">
+				                <span class="input-group-addon"><i class="fa fa-user"></i>
+				                </span>
+				                <input type="text" class="form-control" placeholder="Apellido Materno">
+				            </div>	    		
+			    		</div>   			    		
+			    	</div>
+					<div class="row">
+			    		<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Puesto</label>
+				                <input type="text" class="form-control" placeholder="Puesto">
+							</div>
+			    		</div>	    			    		
+			    		<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Director</label>
+				                <select class="form-control">
+				                    <option value="1">Si</option>
+				                    <option value="0">No</option>
+				                </select>
+							</div>
+			    		</div>
+			    		<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Lider de Proyecto</label>
+				                <select class="form-control">
+				                    <option value="1">Si</option>
+				                    <option value="0">No</option>
+				                </select>
+							</div>   		
+			    		</div>   			    		
+			    	</div>
+			    	<div class="row">
+			    		<div class="col-md-4">
+							<div class="form-group input-group">
+				                <span class="input-group-addon"><i class="fa fa-user"></i>
+				                </span>
+				                <input type="text" class="form-control" placeholder="Clave">
+				            </div>
+			    		</div>			    	
+			    		<div class="col-md-4">
+							<div class="form-group input-group">
+				                <span class="input-group-addon"><i class="fa fa-lock"></i>
+				                </span>
+				                <input type="text" class="form-control" placeholder="Contraseña">
+				            </div>
+			    		</div>
+			    		<div class="col-md-4">
+							<div class="form-group input-group">
+				                <span class="input-group-addon"><i class="fa fa-lock"></i>
+				                </span>
+				                <input type="text" class="form-control" placeholder="Confirmar Contraseña">
+				            </div>	    		
+			    		</div>	    			    		
+			    	</div>
+				</fieldset>
+				<fieldset>
+					<legend>Permisos:</legend>
+			    	<div class="row">
+			    		<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Admin Fe</label>
+				                <select class="form-control">
+				                    <option value="1">Si</option>
+				                    <option value="0">No</option>
+				                </select>
+							</div>
+			    		</div>
+			    		<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Enviar Reporte MIG</label>
+				                <select class="form-control">
+				                    <option value="1">Si</option>
+				                    <option value="0">No</option>
+				                </select>
+							</div>   		
+			    		</div>	    			    		
+			    		<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Bajar Actualizaciones</label>
+				                <select class="form-control">
+				                    <option value="1">Si</option>
+				                    <option value="0">No</option>
+				                </select>
+							</div> 
+			    		</div>    			    		
+			    	</div>
+		    	</fieldset>
+		    </div>
+		    <div class="modal-footer">     
+		       <button type="button" class="btn btn-primary btn-circle btn-lg" ><i class="fa fa-edit"></i></button>
+		       <span id="submitBtn" type="button" class="btn btn-success btn-circle btn-lg" onclick="submitForm()"><i class="fa fa-save"></i></span>
+		       <button type="button" class="btn btn-danger btn-circle btn-lg" ><i class="fa fa-trash-o"></i></button>
+		    </div>
+<!-- 		 </form> -->
+		</div>
+	</div>
+</div>
