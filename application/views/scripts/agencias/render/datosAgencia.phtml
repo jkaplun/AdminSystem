@@ -13,7 +13,7 @@
 	</div>
 </div>
 
-<!-- Para validación posterior en otra iteración
+<!-- Para validaciï¿½n posterior en otra iteraciï¿½n
 <div class="row">
 	<div class="col-lg-12">
 	<div class="alert alert-danger alert-dismissable">
@@ -23,165 +23,287 @@
 	</div>
 </div>
 						 -->
-<div class="row">
-	<div class="col-md-4">
-		<div class="bs-callout bs-callout-primary col"
-			id="callout-glyphicons-dont-mix">
-			<h5>Direcci&oacute;n</h5>
-			<address class="text-primary" id="direccion-info"> </address>
-			<p>
-				<i class="fa fa-phone" ></i>  <span class="text-primary" id="telefono1-info"></span>
-			</p>
-			<p>
-				<i class="fa fa-phone"></i> <span class="text-primary" id="telefono2-info"></span>
-			</p>
-			<p>RFC: <span class="text-primary" id="rfc-info"></span> </p>
-			<p>Clave ejecutivo Asignado:  <span class="text-primary" id="cve_usopor_tit-info"></span>  </p>
-			<p>Clave ejecutivo Ayuda:  <span class="text-primary" id="cve_usopor_aux-info"> </p>
-		</div>
-	</div>
-	<div class="col-md-4">
-		<div class="bs-callout bs-callout-primary col"
-			id="callout-glyphicons-dont-mix">
-			<h5 align="center">Configuraci&oacute;n</h5>
-			<p>Estatus</p>
-			<p>ICAAVWin: <span id="id_estatus_icaav-info" class="text-primary"></span>  </p>
-			<p>IRISWin: <span id="id_estatus_iris-info" class="text-primary"></span> </p>
-			<div class="form-group input-group">
-                <span class="input-group-addon">Pólizas</span>
-                <input type="text" class="form-control" value="OQAPDDW">
-                <span class="input-group-addon"><i class="fa fa-plus"></i></span>
-            </div>
-			<p>Personalizado: Encuesta</p>
-			<p>Formatos Pagados Sin documentos</p>
-			<p>Factura Elect&oacute;nica:  <span id="factura_electronica-info" class="text-primary"></span>  </p>
-			<p>Portal Proveedores:  </p>
-			<p>Agencia Consolidada: <span id="agencias_consolidadas-info" class="text-primary"></span> </p>
-			 <p> Markup: <span id="markup-info" class="text-primary"></span> </p>
-			<p>Contabilidad Elect&oacute;nica:  <span id="contabilidad_elect-info" class="text-primary"></span>  </p>
-			 <p>INE: <span id="ine-info" class="text-primary"></span>  </p>
-		</div>
-	</div>
-	<div class="col-md-4">
-		<div class="bs-callout bs-callout-primary col"
-			id="callout-glyphicons-dont-mix">
-			<h5 align="center">Productos</h5>
-			<div class="row">
-				<div class="col-lg-3">
-					<p align="center">ICAAVWin</p>
-				</div>
-				<div class="col-lg-8">
-					<div class="form-group input-group">
-						<span class="input-group-addon">Lic</span> <input id="lic_icaavwin-info" type="text"
-							class="form-control" value="" id="edita_puesto-info" disabled>
-					</div>
-				</div>
-<!-- 			<div class="col-lg-5">
-				<div class="form-group input-group">
-                	<span class="input-group-addon">AnyWhere</span>
-                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
-            	</div>	
-			</div>		 -->
-			</div>
-			<div class="row">
-				<div class="col-lg-3">
-					<p align="center">IRISWin</p>
-				</div>
-				<div class="col-lg-8">
-					<div class="form-group input-group">
-						<span class="input-group-addon">Lic</span> <input type="text"
-							class="form-control" value="" id="lic_iriswin-info" disabled>
-					</div>
-				</div>
-				<!-- 									<div class="col-lg-5">
+	<div class="panel with-nav-tabs panel-primary">
+        <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tabInformacion" data-toggle="tab">Informaci&oacute;n General</a></li>
+                    <li><a href="#tabUsuarios" data-toggle="tab">Usuarios</a></li>
+                    <li><a href="#tabPolizas" data-toggle="tab">P&oacute;lizas</a></li>
+                </ul>
+        </div>
+        <div class="panel-body" style="padding-top: 0px;">
+        	<div class="tab-content">
+		    	<div class="tab-pane fade in active" id="tabInformacion">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="bs-callout bs-callout-primary col"
+								id="callout-glyphicons-dont-mix">
+								<h5>Direcci&oacute;n</h5>
+								<address class="text-primary" id="direccion-info"> </address>
+								<p>
+									<i class="fa fa-phone" ></i>  <span class="text-primary" id="telefono1-info"></span>
+								</p>
+								<p>
+									<i class="fa fa-phone"></i> <span class="text-primary" id="telefono2-info"></span>
+								</p>
+								<p>RFC: <span class="text-primary" id="rfc-info"></span> </p>
+								<p>Clave ejecutivo Asignado:  <span class="text-primary" id="cve_usopor_tit-info"></span>  </p>
+								<p>Clave ejecutivo Ayuda:  <span class="text-primary" id="cve_usopor_aux-info"> </p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="bs-callout bs-callout-primary col"
+								id="callout-glyphicons-dont-mix">
+								<h5 align="center">Configuraci&oacute;n</h5>
+								<p>Estatus</p>
+								<p>ICAAVWin: <span id="id_estatus_icaav-info" class="text-primary"></span>  </p>
+								<p>IRISWin: <span id="id_estatus_iris-info" class="text-primary"></span> </p>
+								<div class="form-group input-group">
+					                <span class="input-group-addon">Outsourcing</span>
+					                <input type="text" class="form-control" value="OQAPDDW">
+					                <span class="input-group-addon"><i class="fa fa-plus"></i></span>
+					            </div>
+								<p>Personalizado: Encuesta</p>
+								<p>Formatos Pagados Sin documentos</p>
+								<p>Factura Elect&oacute;nica:  <span id="factura_electronica-info" class="text-primary"></span>  </p>
+								<p>Portal Proveedores:  </p>
+								<p>Agencia Consolidada: <span id="agencias_consolidadas-info" class="text-primary"></span> </p>
+								 <p> Markup: <span id="markup-info" class="text-primary"></span> </p>
+								<p>Contabilidad Elect&oacute;nica:  <span id="contabilidad_elect-info" class="text-primary"></span>  </p>
+								 <p>INE: <span id="ine-info" class="text-primary"></span>  </p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="bs-callout bs-callout-primary col" id="callout-glyphicons-dont-mix">
+								<h5 align="center">Productos</h5>
+								<div class="row">
+									<div class="col-lg-3">
+										<p align="center">ICAAVWin</p>
+									</div>
+									<div class="col-lg-8">
 										<div class="form-group input-group">
-						                	<span class="input-group-addon">AnyWhere</span>
-						                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
-						            	</div>	
-									</div>	 -->
-			</div>
-			<div class="row">
-				<div class="col-lg-3">
-					<p align="center">Centauro</p>
-				</div>
-				<div class="col-lg-8">
-					<div class="form-group input-group">
-						<span class="input-group-addon">Lic</span> <input type="text"
-							class="form-control" value="" id="lic_centauro-info" disabled>
-					</div>
-				</div>
-				<!-- 									<div class="col-lg-5">
+											<span class="input-group-addon">Lic</span> <input id="lic_icaavwin-info" type="text"
+												class="form-control" value="" id="edita_puesto-info" disabled>
+										</div>
+									</div>
+					<!-- 			<div class="col-lg-5">
+									<div class="form-group input-group">
+					                	<span class="input-group-addon">AnyWhere</span>
+					                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
+					            	</div>	
+								</div>		 -->
+								</div>
+								<div class="row">
+									<div class="col-lg-3">
+										<p align="center">IRISWin</p>
+									</div>
+									<div class="col-lg-8">
 										<div class="form-group input-group">
-						                	<span class="input-group-addon">AnyWhere</span>
-						                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
-						            	</div>	
-									</div> -->
-			</div>
-			<div class="row">
-				<div class="col-lg-3">
-					<p align="center">GVC</p>
-				</div>
-				<div class="col-lg-8">
-					<div class="form-group input-group">
-						<span class="input-group-addon">Lic</span> <input type="text"
-							class="form-control" value="0" id="lic_gvc-info" disabled>
-					</div>
-				</div>
-<!-- 		<div class="col-lg-5">
-				<div class="form-group input-group">
-                	<span class="input-group-addon">AnyWhere</span>
-                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
-            	</div>	
-			</div>		 -->
-			</div>
-			<p>Globalizador: SA, WS</p>
-			<p>Producto: icaavwin</p>
-			<p>Implant AM: N</p>
-			<p>Version PB: </p>
+											<span class="input-group-addon">Lic</span> <input type="text"
+												class="form-control" value="" id="lic_iriswin-info" disabled>
+										</div>
+									</div>
+									<!-- 									<div class="col-lg-5">
+															<div class="form-group input-group">
+											                	<span class="input-group-addon">AnyWhere</span>
+											                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
+											            	</div>	
+														</div>	 -->
+								</div>
+								<div class="row">
+									<div class="col-lg-3">
+										<p align="center">Centauro</p>
+									</div>
+									<div class="col-lg-8">
+										<div class="form-group input-group">
+											<span class="input-group-addon">Lic</span> <input type="text"
+												class="form-control" value="" id="lic_centauro-info" disabled>
+										</div>
+									</div>
+									<!-- 									<div class="col-lg-5">
+															<div class="form-group input-group">
+											                	<span class="input-group-addon">AnyWhere</span>
+											                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
+											            	</div>	
+														</div> -->
+								</div>
+								<div class="row">
+									<div class="col-lg-3">
+										<p align="center">GVC</p>
+									</div>
+									<div class="col-lg-8">
+										<div class="form-group input-group">
+											<span class="input-group-addon">Lic</span> <input type="text"
+												class="form-control" value="0" id="lic_gvc-info" disabled>
+										</div>
+									</div>
+					<!-- 		<div class="col-lg-5">
+									<div class="form-group input-group">
+					                	<span class="input-group-addon">AnyWhere</span>
+					                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
+					            	</div>	
+								</div>		 -->
+								</div>
+								<p>Globalizador: SA, WS</p>
+								<p>Producto: icaavwin</p>
+								<p>Implant AM: N</p>
+								<p>Version PB: </p>
 
-			<p>CFDI:  <span id="cfdi-info" class="text-primary"></span>   </p>
-			<p>Timbrado:  <span id="prov_timbrado-info" class="text-primary"></span>   </p> 
-			<p>Boleto-E: <span id="boleto_e-info" class="text-primary"></span></p>
-			<p>Facturaci&oacute; de Boletos: <span id="facturacion_boleto-info" class="text-primary"></span></p> </p>
-			Layout MIG y EDICOM</p>
+								<p>CFDI:  <span id="cfdi-info" class="text-primary"></span>   </p>
+								<p>Timbrado:  <span id="prov_timbrado-info" class="text-primary"></span>   </p> 
+								<p>Boleto-E: <span id="boleto_e-info" class="text-primary"></span></p>
+								<p>Facturaci&oacute; de Boletos: <span id="facturacion_boleto-info" class="text-primary"></span></p> </p>
+								Layout MIG y EDICOM Precio: MIG</p>
+							</div>
+						</div>
+					</div>
+		    	</div>
+		    	<div class="tab-pane fade" id="tabUsuarios">
+					<div class="panel-body">
+					   	<div class="row">
+							<div class="col-md-10">
+							</div>
+							<div class="col-md-2" align="right">
+							    <button type="button" class="btn btn-primary btn-circle" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#nuevoUsuarioModal">
+							    &nbsp;<i class="fa fa-plus"></i>&nbsp;<i class="fa fa-user"></i>&nbsp;
+							    </button>
+							</div>
+						</div>
+						<br/>
+						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-usuarios-agencias">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Nombre</th>
+									<th>Apellido</th>
+									<th>Email</th>
+									<th>Tel&eacute;fono</th>
+									<th>Puesto</th>
+									<th>Admin Fe</th>
+									<th>Detalles</th>
+								</tr>
+							</thead>
+							<tbody align="center">
+								<tr>
+									<td>Leo</td>
+									<td>Leonardo</td>
+									<td>Maza Martinez</td>
+									<td>leo2@viajes.com</td>
+									<td>5566343298</td>
+									<td>Ventas</td>
+									<td>Si</td>
+									<td>Info</td>
+								</tr>							
+<!-- 								<?php foreach ($this->registros as $registro) { ?>
+								<tr id='<?php echo $registro['id_usuario'] ?>'
+									<?php 
+										if ( $registro['activo'] == 0 ){
+											echo 'class="bg-warning"';
+										}
+									?>
+									>
+									<td><?php echo $registro['id_usuario'] ?></td>
+									<td><?php echo $registro['clave'] ?></td>
+									<td><?php echo $registro['nombre'] ?> <?php echo $registro['apellido_paterno'] ?> <?php echo $registro['apellido_materno'] ?></td>
+									<td>
+									<?php 
+										if ( $registro['activo'] == 'S' ){
+										echo 'Activo';
+										} else {
+										echo 'Inactivo';
+										}
+									?>
+									</td>
+									<td><?php echo $registro['email'] ?></td>
+									<td >
+										<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#myModal" value='<?= json_encode($registro) ?>'
+										onclick="datosform_edita_usuario(this.value)">
+										<i class="fa fa-info-circle"></i>
+										</button>
+									</td>
+								</tr>
+								<?php } ?> -->
+							</tbody>
+						</table>
+					</div>
+		    	</div>
+		    	<div class="tab-pane fade" id="tabPolizas">
+					<div class="panel-body">
+					   	<div class="row">
+							<div class="col-md-10">
+							</div>
+							<div class="col-md-2" align="right">
+							    <button type="button" class="btn btn-primary btn-circle" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#modalNuevaPoliza">
+							    &nbsp;<i class="fa fa-plus"></i>&nbsp;<i class="fa fa-user"></i>&nbsp;
+							    </button>
+							</div>
+						</div>
+						<br/>
+						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas">
+							<thead>
+								<tr>
+									<th>Clave</th>
+									<th>Horas</th>
+									<th>H.ICAAV</th>
+									<th>H.IRIS</th>
+									<th>Fact ICAAV</th>
+									<th>Fact IRIS</th>
+									<th>F. Inicial</th>
+									<th>F. Final</th>
+									<th>Agotado</th>
+									<th>Garantia</th>
+									<th>Detalles</th>
+								</tr>
+							</thead>
+							<tbody align="center">
+								<tr>
+									<td>DASFAS</td>
+									<td>150</td>
+									<td>123</td>
+									<td>32</td>
+									<td>5563</td>
+									<td>3244</td>
+									<td>01/01/2016</td>
+									<td>01/01/2017</td>
+									<td>N</td>
+									<td>N</td>
+									<td>Info</td>
+								</tr>							
+							</tbody>
+						</table>
+						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas">
+							<thead>
+								<tr>
+									<th>Actualiza</th>
+									<th>Telefonico</th>
+									<th>Remoto</th>
+									<th>Conv. L.A.</th>
+									<th>Sitio</th>
+									<th>BSP Link</th>
+									<th>PaqXeven</th>
+									<th>GVC</th>
+									<th>IRISWIN</th>
+									<th></th>
+
+								</tr>
+							</thead>
+							<tbody align="center">
+								<tr>
+									<td>X</td>
+									<td>X</td>
+									<td>X</td>
+									<td>X</td>
+									<td></td>
+									<td>X</td>
+									<td>X</td>
+									<td></td>
+									<td>X</td>
+									<td>Bloquear</td>
+								</tr>							
+							</tbody>
+						</table>
+					</div>
+		    	</div>
+		    </div>
 		</div>
 	</div>
-</div>
-<div class='row'>
-
-	<!-- Para mostrar los usuarios en una iteración posterior.
-		<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-agencias">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Username</th>
-					<th>Nombre</th>
-					<th>Estatus</th>
-					<th>Correo</th>
-					<th>Detalles</th>
-				</tr>
-			</thead>
-			<tbody align="center">
-				<tr
-					
-					>
-					<td>1</td>
-					<td>jgarfias</td>
-					<td>juan penas</td>
-					<td>
-					activo
-					</td>
-					<td>correo</td>
-					<td>
-						<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#myModal" value='<?= json_encode($registro) ?>'
-						onclick="datosform_edita_usuario(this.value)">
-						<i class="fa fa-info-circle"></i>
-						</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		 -->
-
-
-</div>
