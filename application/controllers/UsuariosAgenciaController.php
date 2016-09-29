@@ -8,7 +8,6 @@ class UsuariosAgenciaController extends Zend_Controller_Action
     {
         $this->$usuario_agencia = new Application_Model_DbTable_UsuarioAgencia();
          
-        //$this->view->activemenu=4;
         /* Initialize action controller here */
     }
 
