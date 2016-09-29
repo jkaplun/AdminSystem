@@ -39,7 +39,7 @@ class AgenciasController extends Zend_Controller_Action
 	        ->setAttrib("class","form-control selectpicker")
 	        ->setAttrib("data-max-options",10)
 	        ->setAttrib("data-live-search","true")
-	        ->setAttrib("title","Choose one of the following...")
+	        ->setAttrib("title","Ingresa nombre de la agencia...")
 	        ->setAttrib("autocomplete","off");
          
          $zendForm->addElement($selectAgencias);

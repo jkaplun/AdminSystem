@@ -16,7 +16,8 @@ class Application_Model_DbTable_Agencia extends Zend_Db_Table_Abstract
 
 		$select = $this->_db->select()->
 				from ( $this->_name,'*')
-			->where($cond);;
+			->where($cond)
+			->order('nombre');
 
 		return $this->getAdapter ()->fetchAll ( $select );
 	}
@@ -25,7 +26,8 @@ class Application_Model_DbTable_Agencia extends Zend_Db_Table_Abstract
 	{
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
-		->where('nombre="'.$nombre.'"');
+		->where('nombre="'.$nombre.'"')
+			->order('nombre');
 
 		//echo $select;die;
 		return $this->getAdapter ()->fetchAll( $select );

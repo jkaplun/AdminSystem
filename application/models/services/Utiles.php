@@ -40,6 +40,17 @@ class Application_Model_Services_Utiles
 		return false;
 	}
 	
+	function validarEmail($email)
+	{
+		$regex = '/^(([a-z]+)@{3})$/';
+		$esRfcValido = preg_match($regex, $email);
+		if($esRfcValido == 1)
+		{
+			return true;
+		}
+		return false;
+	}
+	
 	
 	
 	
