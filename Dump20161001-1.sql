@@ -110,11 +110,11 @@ DROP TABLE IF EXISTS `poliza`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `poliza` (
+  `id_poliza` int(11) NOT NULL AUTO_INCREMENT,
   `id_agencia` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `horasopor_year` int(11) NOT NULL,
   `clave` char(15) NOT NULL,
-  `id_outsourcing` int(11) NOT NULL,
   `fecha_ini` date NOT NULL,
   `fecha_fin` date NOT NULL,
   `cantidad_fact` int(11) DEFAULT '0',
@@ -129,10 +129,7 @@ CREATE TABLE `poliza` (
   `sitio` char(2) DEFAULT 'N',
   `estatus` char(1) DEFAULT 'N',
   `pagxeven` char(2) DEFAULT 'N',
-  PRIMARY KEY (`id_agencia`,`id_producto`,`clave`),
-  KEY `fk_producto_idx` (`id_producto`),
-  CONSTRAINT `fk_agencia` FOREIGN KEY (`id_agencia`) REFERENCES `agencia` (`id_agencia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`id_poliza`,`id_agencia`,`id_producto`,`clave`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -142,7 +139,6 @@ CREATE TABLE `poliza` (
 
 LOCK TABLES `poliza` WRITE;
 /*!40000 ALTER TABLE `poliza` DISABLE KEYS */;
-INSERT INTO `poliza` VALUES (1,2,100,'ABCDE',1,'2016-01-01','2016-12-31',100,'N','N','N',NULL,'N','N','N','N','N','N','N');
 /*!40000 ALTER TABLE `poliza` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,4 +260,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-01 17:50:26
+-- Dump completed on 2016-10-01 18:13:01
