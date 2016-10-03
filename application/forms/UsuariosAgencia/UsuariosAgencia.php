@@ -14,9 +14,10 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Usuario"))
-        ->setAttrib("maxlength","45")
+        ->setAttrib("maxlength","15")
         //->setAttrib('disabled', 'disabled');
         ;
+        $this->addElement($clave);
         
         // Password
         $password = new Zend_Form_Element_Password('pwd');
@@ -27,8 +28,9 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->setAttrib("autocomplete","off")
         ->setAttrib("class","form-control")
         ->setAttrib("placeholder","Password")
-        ->setAttrib("maxlength","45")
+        ->setAttrib("maxlength","15")
         ;
+        $this->addElement($password);
         
         
         // Password
@@ -41,8 +43,9 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->setAttrib("autocomplete","off")
         ->setAttrib("class","form-control")
         ->setAttrib("placeholder","Confirmar password")
-        ->setAttrib("maxlength","45")
+        ->setAttrib("maxlength","15")
         ;
+        $this->addElement($password_conf);
         
         // Nombre
         $nombre = new Zend_Form_Element_Text('nombre');
@@ -53,32 +56,22 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Nombre"))
-        ->setAttrib("maxlength","75")
+        ->setAttrib("maxlength","50")
         ;
+        $this->addElement($nombre);
         
-        // Apellido paterno
-        $apellido_paterno = new Zend_Form_Element_Text('apellido_paterno');
-        $apellido_paterno->setRequired(true)
-        ->addErrorMessage("- Es necesario que introduzca el apellido paterno.")
+        // Apellidos
+        $apellidos = new Zend_Form_Element_Text('apellidos');
+        $apellidos->setRequired(true)
+        ->addErrorMessage("- Es necesario que introduzca los apellidos.")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Apellido paterno"))
-        ->setAttrib("maxlength","75")
+        ->setAttrib("placeholder",utf8_encode("Apellidos"))
+        ->setAttrib("maxlength","50")
         ;
-        
-        // Apellido materno
-        $apellido_materno = new Zend_Form_Element_Text('apellido_materno');
-        $apellido_materno->setRequired(true)
-        ->addErrorMessage("- Es necesario que introduzca el apellido materno.")
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Apellido materno"))
-        ->setAttrib("maxlength","75")
-        ;
+        $this->addElement($apellidos);
         
         // Puesto
         $puesto = new Zend_Form_Element_Text('puesto');
@@ -89,8 +82,22 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Puesto"))
-        ->setAttrib("maxlength","75")
+        ->setAttrib("maxlength","50")
         ;
+        $this->addElement($puesto);
+        
+        // Teléfono
+        $telefono = new Zend_Form_Element_Text('telefono');
+        $telefono->setRequired(true)
+        ->addErrorMessage("- Es necesario que introduzca el teléfono.")
+        ->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("Puesto"))
+        ->setAttrib("maxlength","50")
+        ;
+        $this->addElement($telefono);
         
         // Email
         $email = new Zend_Form_Element_Text('email');
@@ -101,8 +108,9 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Email"))
-        ->setAttrib("maxlength","100")
+        ->setAttrib("maxlength","50")
         ;
+        $this->addElement($email);
         
         // Activo
         $activo = new Zend_Form_Element_Select('activo');
@@ -161,9 +169,9 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ;
         $this->addElement($admin_fe);
         
-        // nuevo_user
-        $nuevo_user = new Zend_Form_Element_Select('nuevo_user');
-        $nuevo_user->setRequired(true)
+        // nuevo
+        $nuevo = new Zend_Form_Element_Select('nuevo');
+        $nuevo->setRequired(true)
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
@@ -173,7 +181,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ;
-        $this->addElement($nuevo_user);
+        $this->addElement($nuevo);
         
         // actualizar_pass
         $actualizar_pass = new Zend_Form_Element_Select('actualizar_pass');
@@ -217,41 +225,6 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ;
         $this->addElement($bajar_updates);
         
-        // Teléfono
-        $telefono = new Zend_Form_Element_Text('telefono');
-        $telefono->setRequired(true)
-        ->addErrorMessage("- Es necesario que introduzca el teléfono")
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Email"))
-        ->setAttrib("maxlength","50")
-        ;
-        $this->addElement($telefono);
-        
-        // Extensión
-        $extension = new Zend_Form_Element_Text('extension');
-        $extension ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("ext"))
-        ->setAttrib("maxlength","10")
-        ;
-        $this->addElement($extension);
-        
-        // Celular
-        $celular = new Zend_Form_Element_Text('celular');
-        $celular->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Celular"))
-        ->setAttrib("maxlength","20")
-        ;
-        $this->addElement($celular);
-        
         // Submit
         $submit = new Zend_Form_Element_Submit('submit');
         $submit ->setLabel("Iniciar")
@@ -260,7 +233,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->removeDecorator('Errors')
         ;
-        $id_usuario = new Zend_Form_Element_Hidden('id_usuario');
+        $id_agencia = new Zend_Form_Element_Hidden('id_agencia');
         
         $this
         ->setMethod('post');

@@ -15,17 +15,17 @@ class Application_Model_DbTable_UsuarioAgencia extends Zend_Db_Table_Abstract
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 
-	public function obtenerUsuarioDeAgenciaPorId ($id)
+	public function obtenerUsuarioDeAgenciaPorId ($id_agencia, $clave)
 	{
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
-		->where('id_usuario_agencia="'.$id.'"');
+		->where('id_agencia="'.$id_agencia.'" and clave="'.$clave.'"');
 
 		//echo $select;die;
 		return $this->getAdapter ()->fetchRow( $select );
 	}
   
-  	public function obtenerUsuariosAgenciaPorClave ($clave)
+  	public function obtenerUsuariosAgenciaPorClave($clave)
   	{
 	    $select = $this->_db->select()->
     	  from ( $this->_name, '*' )
@@ -33,16 +33,6 @@ class Application_Model_DbTable_UsuarioAgencia extends Zend_Db_Table_Abstract
 
     	return $this->getAdapter ()->fetchAll ( $select );
   	}
-  
-  	public function obtenerUsuarioAgenciaPorId ($id)
-  	{
-    	$select = $this->_db->select()->
-      	from ( $this->_name, '*' )
-      	->where('id_usuario_agencia="'.$id.'"');
-
-	      //echo $select;die;
-    	return $this->getAdapter ()->fetchRow( $select );
-  }
 
 }
 
