@@ -116,7 +116,7 @@ class AgenciasController extends Zend_Controller_Action
                         'agencias_consolidadas' => $params['agencias_consolidadas'],
                         'contabilidad_elect' => $params['contabilidad_elect'],
                         //'fecha_actualizacion_folios' => $params['fecha_actualizacion_folios'],
-                        'ine' => $params['ine'],
+                        'ine' => $params['ine']
                 );
               
         $form = new Application_Form_Agencias_Agencias();
