@@ -4,24 +4,20 @@ class UsuariosAgenciaController extends Zend_Controller_Action
 {
 
     private $usuario_agencia;
+
     public function init()
     {
-        $this->$usuario_agencia = new Application_Model_DbTable_UsuarioAgencia();
+        $this->usuario_agencia = new Application_Model_DbTable_UsuarioAgencia();
          
         /* Initialize action controller here */
     }
 
     public function indexAction()
     {
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/usuarios/index.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
          
          $usuarioAgencia = new Application_Model_DbTable_UsuarioAgencia();
          $params=$this->_request->getParams();
-         $this->view->form = new Application_Form_UsuariosAgencia_UsuariosAgencia();
+         //$this->view->form = new Application_Form_UsuariosAgencia_UsuariosAgencia();
          $registros = $usuarioAgencia->obtenerUsuariosDeAgenciaPorIdAgencia($params['id_agencia']);
          $this->view->registros = $registros;
 
@@ -45,8 +41,8 @@ class UsuariosAgenciaController extends Zend_Controller_Action
                                 'lider_proy' => $params['lider_proy'],
                                 'director' => $params['director'],
                                 'admin_fe' => $params['admin_fe'],
-                                'nuevo' => $params['nuevo'],
-                                'actualizar_pass' => $params['actualizar_pass'],
+                                //'nuevo' => $params['nuevo'],
+                                //'actualizar_pass' => $params['actualizar_pass'],
                                 'enviar_reporte_portal_mig' => $params['enviar_reporte_portal_mig'],
                                 'bajar_updates' => $params['bajar_updates']
                         );
@@ -68,11 +64,12 @@ class UsuariosAgenciaController extends Zend_Controller_Action
                     $esEmailCorrecto = $utiles->comprobar_email($params['email']);
                     if($esEmailCorrecto)
                     { // si el emal es correcto:
-                        unset($data['pwd']);
+                        
                         // se inserta en la base de datos al nuevo usuario
                         $nuevoUsuarioAgencia = $this->usuario_agencia->insert($data);
                         // se inyecta el ID, estado y descripción en la respuesta al cliente
-                        $data['clave']=$nuevoUsuarioAgencia['id_agencia'];
+                        //$data['clave']=$nuevoUsuarioAgencia['id_agencia'];
+                        unset($data['pwd']);
                         $data['estado']='ok';
                         //$data['descripcion']='El usuario ha sido guardado exitosamente';
                         // se responde al cliente
@@ -145,8 +142,8 @@ class UsuariosAgenciaController extends Zend_Controller_Action
                                 'lider_proy' => $params['lider_proy'],
                                 'director' => $params['director'],
                                 'admin_fe' => $params['admin_fe'],
-                                'nuevo' => $params['nuevo'],
-                                'actualizar_pass' => $params['actualizar_pass'],
+                                //'nuevo' => $params['nuevo'],
+                                //'actualizar_pass' => $params['actualizar_pass'],
                                 'enviar_reporte_portal_mig' => $params['enviar_reporte_portal_mig'],
                                 'bajar_updates' => $params['bajar_updates']
                         );
@@ -229,6 +226,18 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         $registros = $users->getAllUsers(array());
         
         //echo '<pre>'.print_r($registros,true).'</pre>';
+
+    }
+
+    public function consultarAction(){
+
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+        $params=$this->_request->getParams(); 
+        $usuariosAgencia = $this->usuario_agencia->obtenerUsuariosDeAgenciaPorIdAgencia($params['id_agencia']);
+       // $datosAgencia = $this->agencia->find($params['id_agencia'])->toArray();
+       
+        $this->_helper->json($usuariosAgencia);
 
     }
 
