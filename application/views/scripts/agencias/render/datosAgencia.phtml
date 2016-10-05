@@ -27,7 +27,7 @@
         <div class="panel-heading">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#tabInformacion" data-toggle="tab">Informaci&oacute;n General</a></li>
-                    <li><a href="#tabUsuarios" data-toggle="tab">Usuarios</a></li>
+                    <li><a  id="tabUsuariosAgencia" href="#tabUsuarios" data-toggle="tab">Usuarios</a></li>
                     <li><a href="#tabPolizas" data-toggle="tab">P&oacute;lizas</a></li>
                     <li><a href="#tabObservaciones" data-toggle="tab">Observaciones</a></li>
                 </ul>
@@ -165,7 +165,7 @@
 							<div class="col-md-10">
 							</div>
 							<div class="col-md-2" align="right">
-							    <button type="button" class="btn btn-primary btn-circle" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#nuevoUsuarioModal">
+							    <button type="button" class="btn btn-primary btn-circle" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#nuevoUsuarioModal" id="agregarUsuarioAgenciaBtn" >
 							    &nbsp;<i class="fa fa-plus"></i>&nbsp;<i class="fa fa-user"></i>&nbsp;
 							    </button>
 							</div>
@@ -174,7 +174,7 @@
 						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-usuarios-agencias">
 							<thead>
 								<tr>
-									<th>ID</th>
+									<th class="frontEndIdColumn" >Número</th>
 									<th>Nombre</th>
 									<th>Apellido</th>
 									<th>Email</th>
@@ -187,7 +187,7 @@
 							</thead>
 							<tbody align="center">
 								<tr>
-									<td>Leo</td>
+									<td class="frontEndIdColumn">1</td>
 									<td>Leonardo</td>
 									<td>Maza Martinez</td>
 									<td>leo2@viajes.com</td>
@@ -197,35 +197,6 @@
 									<td>Si</td>
 									<td>Info</td>
 								</tr>							
-<!-- 								<?php foreach ($this->registros as $registro) { ?>
-								<tr id='<?php echo $registro['id_usuario'] ?>'
-									<?php 
-										if ( $registro['activo'] == 0 ){
-											echo 'class="bg-warning"';
-										}
-									?>
-									>
-									<td><?php echo $registro['id_usuario'] ?></td>
-									<td><?php echo $registro['clave'] ?></td>
-									<td><?php echo $registro['nombre'] ?> <?php echo $registro['apellido_paterno'] ?> <?php echo $registro['apellido_materno'] ?></td>
-									<td>
-									<?php 
-										if ( $registro['activo'] == 'S' ){
-										echo 'Activo';
-										} else {
-										echo 'Inactivo';
-										}
-									?>
-									</td>
-									<td><?php echo $registro['email'] ?></td>
-									<td >
-										<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#myModal" value='<?= json_encode($registro) ?>'
-										onclick="datosform_edita_usuario(this.value)">
-										<i class="fa fa-info-circle"></i>
-										</button>
-									</td>
-								</tr>
-								<?php } ?> -->
 							</tbody>
 						</table>
 					</div>

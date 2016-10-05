@@ -94,7 +94,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Puesto"))
+        ->setAttrib("placeholder",utf8_encode("Telefono"))
         ->setAttrib("maxlength","50")
         ;
         $this->addElement($telefono);
@@ -133,8 +133,8 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
+                'S'=>'Si',
+                'N'=>'No'
         ))
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
@@ -147,8 +147,8 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
+                'S'=>'Si',
+                'N'=>'No'
         ))
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")

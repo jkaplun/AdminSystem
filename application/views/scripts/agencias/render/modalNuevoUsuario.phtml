@@ -12,7 +12,7 @@
 					</div> 			    		
 				</div>
 			</div>
-<!-- 		<form method="post" id="formedituser"> -->
+ 		<form method="post" id="formUsuarioAgencia"> 
 		  	<input type="hidden" name="edita_id_user" id="edita_id_user">
 		  	<input name="accion" value="editar" type="hidden">
 
@@ -25,23 +25,26 @@
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-user"></i>
 				                </span>
-				                <input type="text" class="form-control" placeholder="Nombre">
+				                  <?= $this->formUsuarioAgencia->nombre ?>
+				               <!--  <input type="text" class="form-control" placeholder="Nombre"> -->
 				            </div>
 			    		</div>	    			    		
 			    		<div class="col-md-4">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-user"></i>
 				                </span>
-				                <input type="text" class="form-control" placeholder="Apellido Paterno">
+
+										<?= $this->formUsuarioAgencia->apellidos ?>
+				           <!--     <input type="text" name="apellidos" id="apellidos" autocomplete="off" class="form-control" maxlength="225" placeholder="Apellidos"> -->
 				            </div>
 			    		</div>
-			    		<div class="col-md-4">
+<!-- 			    		<div class="col-md-4">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-user"></i>
 				                </span>
 				                <input type="text" class="form-control" placeholder="Apellido Materno">
 				            </div>	    		
-			    		</div>   			    		
+			    		</div>    -->			    		
 			    	</div>
 			    	<h4 class="h4Form">Contacto</h4>
 					<hr class="hrForm">
@@ -50,28 +53,32 @@
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-phone"></i>
 				                </span>
-				                <input type="text" class="form-control" placeholder="Telefono Contacto">
+				                <?= $this->formUsuarioAgencia->telefono ?>
+				             <!--    <input type="text" class="form-control" placeholder="Telefono Contacto"> -->
 				            </div>
 			    		</div>	    			    		
 			    		<div class="col-md-2">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-tags"></i>
 				                </span>
-				                <input type="text" class="form-control" placeholder="Ext.">
+				               <!-- No existe en la BD -->
+				                <input disabled type="text" class="form-control" placeholder="Ext.">
 				            </div>
 			    		</div>
 			    		<div class="col-md-3">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-mobile"></i>
 				                </span>
-				                <input type="text" class="form-control" placeholder="Celular">
+
+				                <input  disabled type="text" class="form-control" placeholder="Celular">
 				            </div>	    		
 			    		</div>  
 			    		<div class="col-md-4">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-envelope-o"></i>
 				                </span>
-				                <input type="text" class="form-control" placeholder="Correo">
+				                 <?= $this->formUsuarioAgencia->email ?>
+				              <!--   <input type="text" class="form-control" placeholder="Correo"> -->
 				            </div>	    		
 			    		</div>  			    		 			    		
 			    	</div>
@@ -81,25 +88,20 @@
 			    		<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Puesto</label>
-				                <input type="text" class="form-control" placeholder="Puesto">
+								   <?= $this->formUsuarioAgencia->puesto ?>
+				               <!--  <input type="text" class="form-control" placeholder="Puesto"> -->
 							</div>
 			    		</div>	    			    		
 			    		<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Director</label>
-				                <select class="form-control">
-				                    <option value="1">Si</option>
-				                    <option value="0">No</option>
-				                </select>
+								 <?= $this->formUsuarioAgencia->director ?>
 							</div>
 			    		</div>
 			    		<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Lider de Proyecto</label>
-				                <select class="form-control">
-				                    <option value="1">Si</option>
-				                    <option value="0">No</option>
-				                </select>
+								 <?= $this->formUsuarioAgencia->lider_proy ?>
 							</div>   		
 			    		</div>   			    		
 			    	</div>
@@ -110,21 +112,24 @@
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-user"></i>
 				                </span>
-				                <input type="text" class="form-control" placeholder="Clave">
+				                 <?= $this->formUsuarioAgencia->clave ?>
+				               <!--  <input type="text" class="form-control" placeholder="Clave"> -->
 				            </div>
 			    		</div>			    	
 			    		<div class="col-md-4">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-lock"></i>
 				                </span>
-				                <input type="text" class="form-control" placeholder="Contraseña">
+				                     <?= $this->formUsuarioAgencia->pwd ?>
+				               <!--  <input type="text" class="form-control" placeholder="Contraseña"> -->
 				            </div>
 			    		</div>
 			    		<div class="col-md-4">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-lock"></i>
 				                </span>
-				                <input type="text" class="form-control" placeholder="Confirmar Contraseña">
+				                         <?= $this->formUsuarioAgencia->pwd_conf?>
+				                <!-- <input type="text" class="form-control" placeholder="Confirmar Contraseña"> -->
 				            </div>	    		
 			    		</div>	    			    		
 			    	</div>
@@ -136,39 +141,38 @@
 			    		<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Admin Fe</label>
-				                <select class="form-control">
-				                    <option value="1">Si</option>
-				                    <option value="0">No</option>
-				                </select>
+	  									<?= $this->formUsuarioAgencia->admin_fe?>
 							</div>
 			    		</div>
 			    		<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Enviar Reporte MIG</label>
-				                <select class="form-control">
-				                    <option value="1">Si</option>
-				                    <option value="0">No</option>
-				                </select>
+									<?= $this->formUsuarioAgencia->enviar_reporte_portal_mig?>
 							</div>   		
 			    		</div>	    			    		
 			    		<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Bajar Actualizaciones</label>
-				                <select class="form-control">
-				                    <option value="1">Si</option>
-				                    <option value="0">No</option>
-				                </select>
+									<?= $this->formUsuarioAgencia->bajar_updates?>
 							</div> 
 			    		</div>    			    		
 			    	</div>
+			    	<div class="row">
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <span class="input-group-addon">Estatus</span>
+			                <?= $this->formUsuarioAgencia->activo ?>
+			            </div>	    		
+		    		</div>	    			    		
+		    	</div>
 		    	</fieldset>
 		    </div>
 		    <div class="modal-footer">     
 		       <button type="button" class="btn btn-primary btn-circle btn-lg" ><i class="fa fa-edit"></i></button>
-		       <span id="submitBtn" type="button" class="btn btn-success btn-circle btn-lg" onclick="submitForm()"><i class="fa fa-save"></i></span>
+		       <span id="submitNuevoUsuarioAgenciaBtn" type="button" class="btn btn-success btn-circle btn-lg" onclick="submitFormUsuarioAgencia()"><i class="fa fa-save"></i></span> 
 		       <button type="button" class="btn btn-danger btn-circle btn-lg" ><i class="fa fa-trash-o"></i></button>
 		    </div>
-<!-- 		 </form> -->
+ 		 </form> 
 		</div>
 	</div>
 </div>

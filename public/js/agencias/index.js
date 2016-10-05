@@ -1,4 +1,5 @@
 var path="public/agencias/";
+var idAgenciaActual;
 
 $(document).ready(function() {
     $('#dataTable-usuarios-agencias').DataTable({
@@ -33,7 +34,8 @@ $(document).ready(function() {
 
 	// cuando se eliga una agencia de la lista se llama a la función cunslutar agencia
 	$("#select_agencias").change(function(){
-		consultarAgencia($("#select_agencias").val());
+		idAgenciaActual =$("#select_agencias").val();
+		consultarAgencia(idAgenciaActual);
 	});
 
 	soloNumeros('cp');
