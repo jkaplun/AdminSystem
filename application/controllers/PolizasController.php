@@ -13,12 +13,7 @@ class PolizasController extends Zend_Controller_Action
 
     public function indexAction()
     {
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/data/validacion.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/agencias/index.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
+       
          $poliza = new Application_Model_DbTable_Poliza();
 
          
@@ -45,7 +40,7 @@ class PolizasController extends Zend_Controller_Action
          $this->view->$selectPolizas=$zendForm;
          
          $params=$this->_request->getParams();
-         $this->view->form = new Application_Form_Polizas_Polizas();
+         //$this->view->form = new Application_Form_Polizas_Polizas();
   
          $this->view->prueba = 'Llega al mensaje';
          //echo '<pre>'.print_r($agencias,true).'</pre>';die;
@@ -65,17 +60,17 @@ class PolizasController extends Zend_Controller_Action
                         'fecha_ini' => $params['fecha_ini'], 
                         'fecha_fin' => $params['fecha_fin'],
                         'cantidad_fact' => $params['cantidad_fact'],
-                        'tiempo_agotado' => 'tiempo_agotado',
-                        'garantia' => $params['garantia'],
-                        'tipo' => $params['tipo'],
-                        'desc_servicios' => $params['desc_servicios'],
-                        'actualizacion' => $params['actualizacion'],
-                        'telefonico' => $params['telefonico'],
-                        'remoto' => $params['remoto'],
-                        'admconvenios' => $params['admconvenios'],
-                        'sitio' => $params['sitio'],
-                        'estatus' => $params['estatus'],
-                        'pagxeven' => $params['pagxeven']
+                        //'tiempo_agotado' => $params['tiempo_agotado'],
+                       // 'garantia' => $params['garantia'],
+                        'tipo' => $params['tipo']
+                       // 'desc_servicios' => $params['desc_servicios'],
+                      //  'actualizacion' => $params['actualizacion'],
+                       // 'telefonico' => $params['telefonico'],
+                       // 'remoto' => $params['remoto'],
+                       // 'admconvenios' => $params['admconvenios'],
+                       // 'sitio' => $params['sitio'],
+                       // 'estatus' => $params['estatus'],
+                       // 'pagxeven' => $params['pagxeven']
                 );
               
         $form = new Application_Form_Polizas_Polizas();
@@ -88,10 +83,11 @@ class PolizasController extends Zend_Controller_Action
         	// se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
         	$data['id_poliza']=$idNuevaPoliza;
         	$data['estado']='ok';
-        	$data['descripcion']='La póliza ha sido guardada exitosamente';
+        	$data['descripcion']='La poliza ha sido guardada exitosamente';
         	// se responde al cliente
+            //$this->_helper->json("todo bien");
         	$this->_helper->json($data);
-        	$this->_redirect('agencias/');
+        	//$this->_redirect('agencias/');
         }
         else 
         { // else cuando existe un error encontrado en el form

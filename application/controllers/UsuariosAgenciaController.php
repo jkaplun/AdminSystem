@@ -133,7 +133,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
             	
         $data = array(
                                 'id_agencia' => $params['id_agencia'],
-                                'clave' => $params['clave'],
+                                'clave' => $params['claveUsuarioAgencia'],
                                 'pwd' => $params['pwd'],
                                 'nombre' => $params['nombreUsuarioAgencia'],
                                 'apellidos' => $params['apellidos'],
@@ -158,9 +158,9 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         	if ($cantidadDeErrores == 0)
         	{
         		$esContrasenaYConfValidos=false;
-        		//Revisando si el usuario modificó la contraseña
+        		//Revisando si el usuario modificï¿½ la contraseï¿½a
         		if($params['pwd'] != $usuarioActual['pwd'])
-        		{//Si el usuario la modificó
+        		{//Si el usuario la modificï¿½
         			if($params['pwd'] != $params['pwd_conf'])
         			{// else cuando las contraeÃ±as no coinciden
         				

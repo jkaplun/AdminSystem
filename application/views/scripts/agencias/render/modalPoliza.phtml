@@ -16,7 +16,7 @@
 
      </div>
 
-<!--      <form method="post" id="formedituser"> -->
+     <form method="post" id="formPoliza"> 
       	<input type="hidden" name="edita_id_user" id="edita_id_user">
       	<input name="accion" value="editar" type="hidden">
 
@@ -26,10 +26,7 @@
 		    		<div class="col-md-12">
 						<div class="form-group">
 							<label class="control-label">Producto</label>
-			                <select class="form-control">
-			                    <option value="1">Si</option>
-			                    <option value="0">No</option>
-			                </select>
+								<?= $this->formPolizas->producto ?>
 						</div>
 		    		</div>	    			    		
 		    	</div>
@@ -37,10 +34,7 @@
 		    		<div class="col-md-12">
 						<div class="form-group">
 							<label class="control-label">Tipo de P&oacute;liza</label>
-			                <select class="form-control">
-			                    <option value="1">Si</option>
-			                    <option value="0">No</option>
-			                </select>
+							<?= $this->formPolizas->tipo ?>
 						</div>
 		    		</div>	    			    		
 		    	</div>
@@ -49,14 +43,16 @@
 						<div class="form-group input-group">
 			                <span class="input-group-addon"><i class="fa fa-clock-o"></i>
 			                </span>
-			                <input type="text" class="form-control" placeholder="Horas Anuales">
+			                <?= $this->formPolizas->horasopor_year ?>
+			              <!--   <input type="text" class="form-control" placeholder="Horas Anuales"> -->
 			            </div>
 		    		</div> 			    		
 		    		<div class="col-md-6">
 						<div class="form-group input-group">
 			                <span class="input-group-addon"><i class="fa fa-list-alt"></i>
 			                </span>
-			                <input type="text" class="form-control" placeholder="Facturado Mensual ICAAV">
+			               <?= $this->formPolizas->cantidad_fact ?> 
+			               <!--  <input type="text" class="form-control" placeholder="Facturado Mensual ICAAV"> -->
 			            </div>
 		    		</div> 			    		
 		    	</div>
@@ -65,14 +61,16 @@
 						<div class="form-group input-group">
 			                <span class="input-group-addon"><i class="fa fa-play"></i>
 			                </span>
-			                <input type="text" class="form-control" placeholder="Fecha Inicial">
+			               <?= $this->formPolizas->fecha_ini ?>  
+			             <!--    <input type="text" class="form-control" placeholder="Fecha Inicial"> -->
 			            </div>
 		    		</div>
 		    		<div class="col-md-6">
 						<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-stop"></i>
 				                </span>
-				                <input type="text" class="form-control" placeholder="Fecha Final">
+				           <?= $this->formPolizas->fecha_fin ?>  
+				                <!-- <input type="text" class="form-control" placeholder="Fecha Final"> -->
 			            </div>	    		
 		    		</div>	    			    		
 		    	</div>
@@ -80,10 +78,10 @@
 	    </div>
 	    <div class="modal-footer">     
 	       <button type="button" class="btn btn-primary btn-circle btn-lg" ><i class="fa fa-edit"></i></button>
-	       <span id="submitBtn" type="button" class="btn btn-success btn-circle btn-lg" onclick="submitForm()"><i class="fa fa-save"></i></span>
+	       <span id="submitPolizaBtn" type="button" class="btn btn-success btn-circle btn-lg" onclick=""><i class="fa fa-save"></i></span>
 	       <button type="button" class="btn btn-danger btn-circle btn-lg" ><i class="fa fa-trash-o"></i></button>
 	    </div>
-<!--      </form> -->
+ 	 </form>
    </div>
  </div>
 </div>

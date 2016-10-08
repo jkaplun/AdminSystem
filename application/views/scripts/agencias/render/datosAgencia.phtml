@@ -207,7 +207,7 @@
 							<div class="col-md-10">
 							</div>
 							<div class="col-md-2" align="right">
-							    <button type="button" class="btn btn-primary btn-circle" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#modalNuevaPoliza">
+							    <button type="button" id="addNewPolizaBtn" class="btn btn-primary btn-circle" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#modalNuevaPoliza">
 							    &nbsp;<i class="fa fa-plus"></i>&nbsp;<i class="fa fa-user"></i>&nbsp;
 							    </button>
 							</div>
@@ -220,9 +220,10 @@
 			                            P&oacute;lizas renovadas anticipadamente
 			                        </div>
 			                        <div class="panel-body">
-										<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas">
+										<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-anticipadas">
 											<thead>
 												<tr>
+													<th class="idPoliza" >id</th>
 													<th>Clave</th>
 													<th>Producto</th>
 													<th>Horas</th>
@@ -230,13 +231,14 @@
 													<th>Facturacion</th>
 													<th>F. Inicial</th>
 													<th>F. Final</th>
-													<th>Agotado</th>
-													<th>Garantia</th>
+<!-- 													<th>Agotado</th>
+													<th>Garantia</th> -->
 													<th>Detalles</th>
 												</tr>
 											</thead>
 											<tbody align="center">
 												<tr>
+													<td class="idPoliza" >0</td>
 													<td>DASFAS</td>
 													<td>IRISWIN</td>
 													<td>123</td>
@@ -244,8 +246,8 @@
 													<td>55633</td>
 													<td>01/01/2016</td>
 													<td>01/01/2017</td>
-													<td>N</td>
-													<td>N</td>
+<!-- 													<td>N</td>
+													<td>N</td> -->
 													<td>Info</td>
 												</tr>							
 											</tbody>
@@ -334,9 +336,10 @@
 				                        	</div>				                        	                 		
 				                        </div> -->
 
-						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas">
+						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-vigentes">
 							<thead>
 								<tr>
+									<th class="idPoliza" >id</th>
 									<th>Clave</th>
 									<th>Producto</th>
 									<th>Horas</th>
@@ -344,14 +347,15 @@
 									<th>Facturacion</th>
 									<th>F. Inicial</th>
 									<th>F. Final</th>
-									<th>Agotado</th>
-									<th>Garantia</th>
+<!-- 									<th>Agotado</th>
+									<th>Garantia</th> -->
 									<th>Detalles</th>
-									<th>Bloquear</th>
+							<!-- 		<th>Bloquear</th> -->
 								</tr>
 							</thead>
 							<tbody align="center">
 								<tr>
+									<td class="idPoliza" >0</td>
 									<td>DASFAS</td>
 									<td>IRISWIN</td>
 									<td>123</td>
@@ -359,10 +363,10 @@
 									<td>55633</td>
 									<td>01/01/2016</td>
 									<td>01/01/2017</td>
-									<td>N</td>
-									<td>N</td>
+<!-- 									<td>N</td>
+									<td>N</td> -->
 									<td>Info</td>
-									<td>Bloqueo</td>
+								<!-- 	<td>Bloqueo</td> -->
 								</tr>							
 							</tbody>
 						</table>
@@ -381,9 +385,10 @@
 			                            P&oacute;lizas proximas a vencer
 			                        </div>
 			                        <div class="panel-body">
-										<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas">
+										<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-proximas-vencer">
 											<thead>
 												<tr>
+													<th class="idPoliza" >id</th>
 													<th>Clave</th>
 													<th>Producto</th>
 													<th>Horas</th>
@@ -391,13 +396,14 @@
 													<th>Facturacion</th>
 													<th>F. Inicial</th>
 													<th>F. Final</th>
-													<th>Agotado</th>
-													<th>Garantia</th>
+<!-- 													<th>Agotado</th>
+													<th>Garantia</th> -->
 													<th>Detalles</th>
 												</tr>
 											</thead>
 											<tbody align="center">
 												<tr>
+													<td class="idPoliza" >0</td>
 													<td>DASFAS</td>
 													<td>IRISWIN</td>
 													<td>123</td>
@@ -405,8 +411,8 @@
 													<td>55633</td>
 													<td>01/01/2016</td>
 													<td>01/01/2017</td>
-													<td>N</td>
-													<td>N</td>
+<!-- 													<td>N</td>
+													<td>N</td> -->
 													<td>Info</td>
 												</tr>							
 											</tbody>
@@ -426,9 +432,10 @@
 			                            P&oacute;lizas vencidas
 			                        </div>
 			                        <div class="panel-body">
-										<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas">
+										<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-vencidas">
 											<thead>
 												<tr>
+													<th class="idPoliza" >id</th>
 													<th>Clave</th>
 													<th>Producto</th>
 													<th>Horas</th>
@@ -436,13 +443,14 @@
 													<th>Facturacion</th>
 													<th>F. Inicial</th>
 													<th>F. Final</th>
-													<th>Agotado</th>
-													<th>Garantia</th>
+	<!-- 												<th>Agotado</th>
+													<th>Garantia</th> -->
 													<th>Detalles</th>
 												</tr>
 											</thead>
 											<tbody align="center">
 												<tr>
+													<td class="idPoliza" >0</td>
 													<td>DASFAS</td>
 													<td>IRISWIN</td>
 													<td>123</td>
@@ -450,8 +458,8 @@
 													<td>55633</td>
 													<td>01/01/2016</td>
 													<td>01/01/2017</td>
-													<td>N</td>
-													<td>N</td>
+	<!-- 												<td>N</td>
+													<td>N</td> -->
 													<td>Info</td>
 												</tr>							
 											</tbody>

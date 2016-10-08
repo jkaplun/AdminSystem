@@ -328,6 +328,8 @@ function populateUsuarioAgenciaForm(data) {
           $("#nombreUsuarioAgencia").val(value);
       } else if(key == "email"){
         $("#emailUsuarioAgencia").val(value);
+      }else if(key == "clave"){
+        $("#claveUsuarioAgencia").val(value);
       }else{
       //console.log("key: "+key + " value: " +value);
       $("#"+key).val(value);
