@@ -32,11 +32,11 @@ class UsuariosAgenciaController extends Zend_Controller_Action
                                 'id_agencia' => $params['id_agencia'],
                                 'clave' => $params['clave'],
                                 //'pwd' => $contraEncrip, se define más abajo
-                                'nombre' => $params['nombre'],
+                                'nombre' => $params['nombreUsuarioAgencia'],
                                 'apellidos' => $params['apellidos'],
                                 'puesto' => $params['puesto'],
                                 'telefono' => $params['telefono'],
-                                'email' => $params['email'],
+                                'email' => $params['emailUsuarioAgencia'],
                                 'activo' => $params['activo'],
                                 'lider_proy' => $params['lider_proy'],
                                 'director' => $params['director'],
@@ -61,7 +61,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
                 if (!$usuario)
                 { // ¿Qué se verifica aquí?
                     $utiles = new Application_Model_Services_Utiles();
-                    $esEmailCorrecto = $utiles->comprobar_email($params['email']);
+                    $esEmailCorrecto = $utiles->comprobar_email($params['emailUsuarioAgencia']);
                     if($esEmailCorrecto)
                     { // si el emal es correcto:
                         

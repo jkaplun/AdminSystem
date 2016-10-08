@@ -13,13 +13,14 @@ class AgenciasController extends Zend_Controller_Action
 
     public function indexAction()
     {
+
+         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
+         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
+         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/data/validacion.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/agencias/index.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/usuariosAgencias/index.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
          $agencia = new Application_Model_DbTable_Agencia();
 
          
