@@ -99,6 +99,28 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ;
         $this->addElement($telefono);
         
+        // Extensión
+        $ext = new Zend_Form_Element_Text('ext');
+        $ext->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("ext"))
+        ->setAttrib("maxlength","45")
+        ;
+        $this->addElement($ext);
+        
+        // Celular
+        $celular = new Zend_Form_Element_Text('celular');
+        $celular->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("ext"))
+        ->setAttrib("maxlength","50")
+        ;
+        $this->addElement($celular);
+        
         // Email
         $email = new Zend_Form_Element_Text('emailUsuarioAgencia');
         $email->setRequired(true)
