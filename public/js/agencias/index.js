@@ -1,5 +1,6 @@
 var path="public/agencias/";
 var idAgenciaActual;
+var actualizarVistas = {"vistaAgencia":false, "vistaUsuarioAgencia":false, "vistaPoliza":false};
 
 $(document).ready(function() {
     $('#dataTable-usuarios-agencias').DataTable({
@@ -34,8 +35,14 @@ $(document).ready(function() {
 
 	// cuando se eliga una agencia de la lista se llama a la función cunslutar agencia
 	$("#select_agencias").change(function(){
+
 		idAgenciaActual =$("#select_agencias").val();
 		consultarAgencia(idAgenciaActual);
+		actualizarVistas.vistaUsuarioAgencia=false;
+		var tableUsuariosAgencias = $('#dataTable-usuarios-agencias').DataTable();
+		tableUsuariosAgencias.clear().draw();
+	 	mostrarUsuariosAgencia();
+        actualizarVistas.vistaUsuarioAgencia =true;
 	});
 
 	soloNumeros('cp');

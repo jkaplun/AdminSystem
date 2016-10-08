@@ -48,7 +48,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         $this->addElement($password_conf);
         
         // Nombre
-        $nombre = new Zend_Form_Element_Text('nombre');
+        $nombre = new Zend_Form_Element_Text('nombreUsuarioAgencia');
         $nombre->setRequired(true)
         ->addErrorMessage("- Es necesario que introduzca el nombre.")
         ->removeDecorator('label')
@@ -100,7 +100,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         $this->addElement($telefono);
         
         // Email
-        $email = new Zend_Form_Element_Text('email');
+        $email = new Zend_Form_Element_Text('emailUsuarioAgencia');
         $email->setRequired(true)
         ->addErrorMessage("- Es necesario que introduzca el email")
         ->removeDecorator('label')

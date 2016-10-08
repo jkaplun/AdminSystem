@@ -70,12 +70,21 @@ $(document).ready(function() {
   }) 
  
   $(".frontEndIdColumn").hide()//.css("display", "none");
+
   $("#tabUsuariosAgencia").click(function(){
-        mostrarUsuariosAgencia();
+        if(actualizarVistas.vistaUsuarioAgencia == false){
+          console.log("actualizarVistas.vistaUsuarioAgencia: "+actualizarVistas.vistaUsuarioAgencia);
+          mostrarUsuariosAgencia();
+            actualizarVistas.vistaUsuarioAgencia =true;
+        }
       
   })
 
 
+$('#dataTable-usuarios-agencias').on( 'page.dt', function () {
+    console.log("cambiando de página");
+    $(".frontEndIdColumn").hide();
+} );
 
  
 
@@ -120,18 +129,18 @@ function submitFormUsuarioAgencia(){
  
  
  
-function editarUsuarioAgenciaForm(json_values){ 
-  $('#myModalLabel').html("Editar Datos de la Agencia"); 
-  var obj = jQuery.parseJSON( json_values ); 
-  populate(obj); 
-  $("#action-form-agencia").attr('onclick','submitFormUpdateAgencia()'); 
-} 
+// function editarUsuarioAgenciaForm(json_values){ 
+//   $('#myModalLabel').html("Editar Datos de la Agencia"); 
+//   var obj = jQuery.parseJSON( json_values ); 
+//   populate(obj); 
+//   $("#action-form-agencia").attr('onclick','submitFormUpdateAgencia()'); 
+// } 
  
-function populate(data) {    
-    $.each(data, function(key, value){   
-      $("#"+key).val(value); 
-    }); 
-} 
+// function populate(data) {    
+//     $.each(data, function(key, value){   
+//       $("#"+key).val(value); 
+//     }); 
+// } 
  
  
  
@@ -243,7 +252,7 @@ function actualizarUsuarioAgenciaAjaxDone(res){
    console.log("ajaxAction "+ajaxAction); 
     console.log(usuariosAgencias[frontEndId - 1]);
 
-    populate(usuariosAgencias[frontEndId - 1]);
+    populateUsuarioAgenciaForm(usuariosAgencias[frontEndId - 1]);
  
   
  
@@ -252,7 +261,8 @@ function actualizarUsuarioAgenciaAjaxDone(res){
  
  function abrirModalAgregarUsuario(){ 
   //$('#myModalLabel').html("Agregar Usuario"); 
-  //document.getElementById("formedituser").reset(); 
+  document.getElementById("formUsuarioAgencia").reset(); 
+
   ajaxAction="agregar"; 
  
   console.log("ajaxAction "+ajaxAction); 
@@ -311,9 +321,17 @@ function pruebaMostrarUsuarios(res, i){
 }
 
 
-function populate(data) {   
+function populateUsuarioAgenciaForm(data) {  
+    //console.log("populating form"); 
     $.each(data, function(key, value){  
+      if(key == "nombre"){
+          $("#nombreUsuarioAgencia").val(value);
+      } else if(key == "email"){
+        $("#emailUsuarioAgencia").val(value);
+      }else{
+      //console.log("key: "+key + " value: " +value);
       $("#"+key).val(value);
+      }
     });
 }
 
