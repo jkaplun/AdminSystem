@@ -30,7 +30,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         $params=$this->_request->getParams();
         $data = array(
                                 'id_agencia' => $params['id_agencia'],
-                                'clave' => $params['clave'],
+                                'clave' => $params['claveUsuarioAgencia'],
                                 //'pwd' => $contraEncrip, se define más abajo
                                 'nombre' => $params['nombreUsuarioAgencia'],
                                 'apellidos' => $params['apellidos'],
