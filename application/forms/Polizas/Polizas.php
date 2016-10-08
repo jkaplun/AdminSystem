@@ -7,8 +7,8 @@ class Application_Form_Polizas_Polizas extends Zend_Form
     {
     	
     	// id_poliza
-    	$id_poliza = new Zend_Form_Element_Hidden('id_poliza');
-    	$this->addElement(id_poliza);
+    	// $id_poliza = new Zend_Form_Element_Hidden('id_poliza');
+    	// $this->addElement(id_poliza);
     	
         // Horas soporte
         $horasopor_year = new Zend_Form_Element_Text('horasopor_year');
@@ -19,11 +19,29 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Horas soporte"))
+        ->setAttrib("placeholder",utf8_encode("Horas anuales"))
         ->setAttrib("maxlength","11")
         ;
         $this->addElement($horasopor_year);
-        
+
+        // Producto
+        $producto = new Zend_Form_Element_Select('producto');
+        $producto->setAttribs ( array (
+                'autocomplete'=>'off'))
+                ->addMultiOptions(array(
+                        '1'=>'producto 1',
+                        '2'=>'producto 2',
+                        '3'=>'producto 3',
+                        '4'=>'producto 4',
+                        '5'=>'producto 5'
+                ))
+                ->setAttrib("class","form-control")                
+                ->removeDecorator('label')
+                ->setValue('producto1')
+                ->removeDecorator('HtmlTag');
+        ;
+        $this->addElement($producto);
+                
         // Clave
         $clave = new Zend_Form_Element_Text('clave');
         $clave->setRequired(true)
@@ -44,7 +62,7 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->removeDecorator('Errors')
         ->setAttrib("autocomplete","off")
         ->setAttrib("class","form-control datepicker")
-        ->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
+        ->setAttrib("placeholder",utf8_encode("Fecha inicial yyyy-mm-dd"))
         ->setAttrib("maxlength","10");
         $this->addElement($fecha_ini);
         
@@ -55,7 +73,7 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->removeDecorator('Errors')
         ->setAttrib("autocomplete","off")
         ->setAttrib("class","form-control datepicker")
-        ->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
+        ->setAttrib("placeholder",utf8_encode("Fecha final año-mes-dia"))
         ->setAttrib("maxlength","10");
         $this->addElement($fecha_fin);
         
@@ -104,8 +122,12 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
+                'tipo1'=>'tipo 1',
+                'tipo2'=>'tipo 2',
+                'tipo3'=>'tipo 3',
+                'tipo4'=>'tipo 4',
+                'tipo5'=>'tipo 5'
+
         ))
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")

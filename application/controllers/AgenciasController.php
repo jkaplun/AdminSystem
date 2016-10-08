@@ -21,6 +21,7 @@ class AgenciasController extends Zend_Controller_Action
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/agencias/index.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/usuariosAgencias/index.js');
+         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/polizas/index.js');
          $agencia = new Application_Model_DbTable_Agencia();
 
          
@@ -50,6 +51,7 @@ class AgenciasController extends Zend_Controller_Action
          $params=$this->_request->getParams();
          $this->view->form = new Application_Form_Agencias_Agencias();
          $this->view->formUsuarioAgencia = new Application_Form_UsuariosAgencia_UsuariosAgencia();
+         $this->view->formPolizas = new Application_Form_Polizas_Polizas();
   
          $this->view->prueba = 'Llega al mensaje';
          //echo '<pre>'.print_r($agencias,true).'</pre>';die;
