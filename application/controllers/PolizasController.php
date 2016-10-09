@@ -62,14 +62,14 @@ class PolizasController extends Zend_Controller_Action
                         'cantidad_fact' => $params['cantidad_fact'],
                         //'tiempo_agotado' => $params['tiempo_agotado'],
                        // 'garantia' => $params['garantia'],
-                        'tipo' => $params['tipo']
+                        'tipo' => $params['tipo'],
                        // 'desc_servicios' => $params['desc_servicios'],
                       //  'actualizacion' => $params['actualizacion'],
                        // 'telefonico' => $params['telefonico'],
                        // 'remoto' => $params['remoto'],
                        // 'admconvenios' => $params['admconvenios'],
                        // 'sitio' => $params['sitio'],
-                       // 'estatus' => $params['estatus'],
+                        'estatus' => 'S'
                        // 'pagxeven' => $params['pagxeven']
                 );
               
@@ -79,15 +79,30 @@ class PolizasController extends Zend_Controller_Action
         $cantidadDeErrores = count($mensajesDeError);
         if ($cantidadDeErrores == 0)
         {
-        	$idNuevaPoliza = $this->poliza->insert($data);
-        	// se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
-        	$data['id_poliza']=$idNuevaPoliza;
-        	$data['estado']='ok';
-        	$data['descripcion']='La poliza ha sido guardada exitosamente';
-        	// se responde al cliente
-            //$this->_helper->json("todo bien");
-        	$this->_helper->json($data);
-        	//$this->_redirect('agencias/');
+        	$servicesPolizas = new Application_Model_Services_ServicesPolizas();
+        	$esFechaDePolizaValida = $servicesPolizas ->esPolizaValida($params['id_producto'], $params['id_agencia'], 
+        										$params['fecha_ini'], $params['fecha_fin']);
+        	
+        	if($esFechaDePolizaValida)
+        	{
+        		$idNuevaPoliza = $this->poliza->insert($data);
+        		// se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
+        		$data['id_poliza']=$idNuevaPoliza;
+        		$data['estado']='ok';
+        		$data['descripcion']='La póliza ha sido guardada exitosamente';
+        		// se responde al cliente
+        		//$this->_helper->json("todo bien");
+        		$this->_helper->json($data);
+        		//$this->_redirect('agencias/');
+        	}
+        	else 
+        	{//Si las fechas de la nueva póliza se traslapan con las de alguna vigente
+        		$data['estado']='error';
+        		$data['descripcion']='La fecha de la póliza que intenta crear se traslapa con otra.';
+        		// se responde al cliente
+        		$this->_helper->json($data);
+        		//$this->_redirect('agencias/');
+        	}
         }
         else 
         { // else cuando existe un error encontrado en el form

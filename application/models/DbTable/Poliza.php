@@ -33,14 +33,15 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 
-	public function obtenerPolizaPorId ($id)
+	public function obtenerPolizaPorIdProductoYIdAgencia ($idProducto, $idAgencia)
 	{
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
-		->where('id_poliza="'.$id.'"');
+		->where('id_producto="'.$idProducto.'" and id_agencia="'.$idAgencia.'" and current_timestamp() < fecha_fin')
+		->order('fecha_fin');
 
 		//echo $select;die;
-		return $this->getAdapter ()->fetchRow( $select );
+		return $this->getAdapter ()->fetchAll( $select );
 	}
 
 }
