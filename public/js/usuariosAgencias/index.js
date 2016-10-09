@@ -63,8 +63,11 @@ var datosPruebaActualizarUsuarioAgencia =     {
  
 $(document).ready(function() { 
  
-  $("#agregarUsuarioAgenciaBtn").click(function(){ 
+  $("#agregarUsuarioAgenciaBtn").click(function(){
+	  
     abrirModalAgregarUsuario(); 
+	 $( "#claveUsuarioAgencia" ).prop( "disabled", false );
+
      //mostrarUsuariosAgencia();
   
   }) 
@@ -247,15 +250,15 @@ function actualizarUsuarioAgenciaAjaxDone(res){
  
  
  function datosform_edita_usuario_agencia(frontEndId){ 
-   //alert("no es necesario llenar los campos, se simulan los datos desde un JSON en el public/js/usuariosagencia/index.js ") 
+   //alert("no es necesario llenar los campos, se simulan los datos desde un JSON en el public/js/usuariosagencia/index.js ")
+	 
+	 
+	 $( "#claveUsuarioAgencia" ).prop( "disabled", true );
    ajaxAction="actualizar"; 
    console.log("ajaxAction "+ajaxAction); 
     console.log(usuariosAgencias[frontEndId - 1]);
 
     populateUsuarioAgenciaForm(usuariosAgencias[frontEndId - 1]);
- 
-  
- 
       
  } 
  

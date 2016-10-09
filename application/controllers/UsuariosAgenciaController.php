@@ -31,7 +31,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         $data = array(
                                 'id_agencia' => $params['id_agencia'],
                                 'clave' => $params['claveUsuarioAgencia'],
-                                //'pwd' => $contraEncrip, se define más abajo
+                                //'pwd' => $contraEncrip, se define mÃ¡s abajo
                                 'nombre' => $params['nombreUsuarioAgencia'],
                                 'apellidos' => $params['apellidos'],
                                 'puesto' => $params['puesto'],
@@ -56,12 +56,12 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         if ($cantidadDeErrores == 0)
         {
             if ($params['pwd'] == $params['pwd_conf'])
-            { // ¿Qué se verifica aquí?
+            { // Â¿QuÃ© se verifica aquÃ­?
 				$contraEncrip = sha1($params['pwd']);
                 $usuario = $this->usuario_agencia->obtenerUsuariosAgenciaPorClave($params['claveUsuarioAgencia']);
                 $data['pwd']=$contraEncrip;
                 if (!$usuario)
-                { // ¿Qué se verifica aquí?
+                { // Â¿QuÃ© se verifica aquÃ­?
                     $utiles = new Application_Model_Services_Utiles();
                     $esEmailCorrecto = $utiles->comprobar_email($params['emailUsuarioAgencia']);
                     if($esEmailCorrecto)
@@ -78,7 +78,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
                     else 
                     { // else cuando el email es incorrecto
   
-                       // se inyecta el ID, estado y descripción en la respuesta al cliente
+                       // se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
                         $data['id_agencia']='0';
                         $data['clave']='';
                         $data['estado']='error';
@@ -91,7 +91,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
                 else 
                 { // else cuando ya existe una clave igual (??) 
 
-                       // se inyecta el ID, estado y descripción en la respuesta al cliente
+                       // se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
                         $data['id_agencia']='0';
                         $data['clave']='';
                         $data['estado']='error';
@@ -102,9 +102,9 @@ class UsuariosAgenciaController extends Zend_Controller_Action
                 }
             }
             else 
-            { // else cuando las contraeñas no coinciden
+            { // else cuando las contraeÃ±as no coinciden
 
-                     // se inyecta el ID, estado y descripción en la respuesta al cliente
+                     // se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
                         $data['id_agencia']='0';
                         $data['clave']='';
                         $data['estado']='error';
@@ -130,7 +130,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
             	
         $data = array(
                                 'id_agencia' => $params['id_agencia'],
-                                //'clave' => $params['claveUsuarioAgencia'], no se permite modificaci�n
+                                //'clave' => $params['claveUsuarioAgencia'], no se permite modificación
                                 'pwd' => $params['pwd'],
                                 'nombre' => $params['nombreUsuarioAgencia'],
                                 'apellidos' => $params['apellidos'],
@@ -155,13 +155,13 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         	if ($cantidadDeErrores == 0)
         	{
         		$esContrasenaYConfValidos=false;
-        		//Revisando si el usuario modific� la contrase�a
+        		//Revisando si el usuario modificï¿½ la contraseï¿½a
         		if($params['pwd'] != $usuarioActual['pwd'])
-        		{//Si el usuario la modific�
+        		{//Si el usuario la modificï¿½
         			if($params['pwd'] != $params['pwd_conf'])
-        			{// else cuando las contraeñas no coinciden
+        			{// else cuando las contraeÃ±as no coinciden
         				
-        				// se inyecta el ID, estado y descripción en la respuesta al cliente
+        				// se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
         				$data['estado']='error';
         				$data['descripcion']='Passwords diferentes'.$usuarioActual['pwd'];
         				// se responde al cliente
@@ -181,7 +181,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         			/*if ($usuarioActual['clave'] != $params['claveUsuarioAgencia'])
         			{
 	        				// Si se intenta modificar la clave
-        					// se inyecta el ID, estado y descripción en la respuesta al cliente
+        					// se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
         					$data['estado']='error';
         					$data['descripcion']='No se permite modificar la clave';
         					// se responde al cliente
@@ -193,7 +193,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         				// 	se actualiza en la base de datos al usuario
         				$where = "id_agencia = {$params['id_agencia']} and clave = '{$params['claveUsuarioAgencia']}'";
         				$this->usuario_agencia->update($data, $where);
-	        			// 	se inyecta el estado y descripción en la respuesta al cliente
+	        			// 	se inyecta el estado y descripciÃ³n en la respuesta al cliente
         				$data['id_agencia']=$params['id_agencia'];
         				$data['clave']=$params['claveUsuarioAgencia'];
     	    			$data['estado']='ok';
@@ -205,7 +205,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         		}
         		else
         		{ // else cuando el email es incorrecto
-        			// se inyecta el ID, estado y descripción en la respuesta al cliente
+        			// se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
         			//$data['id_usuario_agencia']='0';
         			$data['estado']='error';
         			$data['descripcion']='Email en formato incorrecto';

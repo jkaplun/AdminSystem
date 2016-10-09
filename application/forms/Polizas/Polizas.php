@@ -24,17 +24,19 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ;
         $this->addElement($horasopor_year);
 
+        
+        $producto = new Application_Model_DbTable_Producto();
+        $resultados = $producto->obtenerPolizasVigentes();
+        $lista = array();
+        foreach ( $resultados as $resultado){
+        	$lista[$resultado['id_producto']]=$resultado['nombre_prod'];
+        }
+        
         // Producto
         $producto = new Zend_Form_Element_Select('producto');
         $producto->setAttribs ( array (
                 'autocomplete'=>'off'))
-                ->addMultiOptions(array(
-                        '1'=>'producto 1',
-                        '2'=>'producto 2',
-                        '3'=>'producto 3',
-                        '4'=>'producto 4',
-                        '5'=>'producto 5'
-                ))
+                ->addMultiOptions($lista)
                 ->setAttrib("class","form-control")                
                 ->removeDecorator('label')
                 ->setValue('producto1')
@@ -55,6 +57,9 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ;
         $this->addElement($clave);
         
+        
+        //<input class='datepicker' data-provide="datepicker"  data-date-format="yyyy-mm-dd">
+        
         // Fecha inicial
         $fecha_ini = new Zend_Form_Element_Text('fecha_ini');
         $fecha_ini->removeDecorator('label')
@@ -63,7 +68,10 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->setAttrib("autocomplete","off")
         ->setAttrib("class","form-control datepicker")
         ->setAttrib("placeholder",utf8_encode("Fecha inicial yyyy-mm-dd"))
-        ->setAttrib("maxlength","10");
+        ->setAttrib("maxlength","10")
+        ->setAttrib("data-provide","datepicker")
+        ->setAttrib("readonly","readonly")
+        ->setAttrib("data-date-format","yyyy-mm-dd");
         $this->addElement($fecha_ini);
         
         // Fecha final
@@ -74,7 +82,10 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->setAttrib("autocomplete","off")
         ->setAttrib("class","form-control datepicker")
         ->setAttrib("placeholder",utf8_encode("Fecha final año-mes-dia"))
-        ->setAttrib("maxlength","10");
+        ->setAttrib("maxlength","10")
+        ->setAttrib("data-provide","datepicker")
+        ->setAttrib("readonly","readonly")
+        ->setAttrib("data-date-format","yyyy-mm-dd");
         $this->addElement($fecha_fin);
         
         // Cantidad facturar
@@ -115,20 +126,20 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->setAttrib("autocomplete","off")
         ;
         $this->addElement($garantia);
-         
+
+        $tipoPoliza = new Application_Model_DbTable_TipoPoliza();
+        $resultados = $tipoPoliza->obtenerTiposPoliza();
+        $lista = array();
+        foreach ( $resultados as $resultado){
+        	$lista[$resultado['tipo']]=$resultado['descripcion'];
+        }
+        
         //Tipo
         $tipo = new Zend_Form_Element_Select('tipo');
         $tipo
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'tipo1'=>'tipo 1',
-                'tipo2'=>'tipo 2',
-                'tipo3'=>'tipo 3',
-                'tipo4'=>'tipo 4',
-                'tipo5'=>'tipo 5'
-
-        ))
+        ->addMultiOptions($lista)
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ;
