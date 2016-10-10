@@ -89,7 +89,7 @@ class PolizasController extends Zend_Controller_Action
         		// se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
         		$data['id_poliza']=$idNuevaPoliza;
         		$data['estado']='ok';
-        		$data['descripcion']='La póliza ha sido guardada exitosamente';
+        		$data['descripcion']='La poliza ha sido guardada exitosamente';
         		// se responde al cliente
         		//$this->_helper->json("todo bien");
         		$this->_helper->json($data);
@@ -98,7 +98,7 @@ class PolizasController extends Zend_Controller_Action
         	else 
         	{//Si las fechas de la nueva póliza se traslapan con las de alguna vigente
         		$data['estado']='error';
-        		$data['descripcion']='La fecha de la póliza que intenta crear se traslapa con otra.';
+        		$data['descripcion']='La fecha de la poliza que intenta crear se traslapa con otra.';
         		// se responde al cliente
         		$this->_helper->json($data);
         		//$this->_redirect('agencias/');
@@ -148,7 +148,7 @@ class PolizasController extends Zend_Controller_Action
         		// 	se actualiza en la base de datos a la póliza
         		$this->poliza->update($data, $where);
         		$data['estado']='ok';
-        		$data['descripcion']='La póliza ha sido actualizada exitosamente';
+        		$data['descripcion']='La poliza ha sido actualizada exitosamente';
         		// se responde al cliente
         		$this->_helper->json($data);
         		$this->_redirect('agencias/');
@@ -165,9 +165,9 @@ class PolizasController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams(); 
-        $datosAgencia = $this->poliza->find($params['id_agencia'])->toArray();
+        $polizasAgencia = $this->poliza->find($params['id_agencia'])->toArray();
        
-        $this->_helper->json($datosAgencia[0]);
+        $this->_helper->json($polizasAgencia);
 
     }
 

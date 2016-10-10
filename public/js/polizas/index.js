@@ -80,9 +80,9 @@ $(document).ready(function() {
  
 function submitFormPoliza(){   
   addIdAgencia="&id_agencia="+idAgenciaActual;
-  console.log("ajaxActionPoliza" +ajaxActionPoliza);
+  //console.log("ajaxActionPoliza" +ajaxActionPoliza);
   var id_product="&id_producto="+ $("#producto").val();
-  console.log("id_producto: "+ id_product);
+  //console.log("id_producto: "+ id_product);
   var clave = "&clave=clave"+getRandomInt(0,1000);
   $.ajax({ 
       url: pathPolizaController + ajaxActionPoliza, 
@@ -91,10 +91,11 @@ function submitFormPoliza(){
       dataType: "json" 
     }).done(function(res) {  
       console.log("ajax submitFormPoliza done");
+
     if (ajaxActionPoliza == "agregar"){ 
        agregarPolizaAjaxDone(res); 
      }else{ 
-    //   actualizarUsuarioAgenciaAjaxDone(res); 
+       actualizarPolizaAjaxDone(res); 
      } 
  
  
@@ -155,15 +156,15 @@ function agregarPolizaEnTabla(res){
           ]).draw(); 
  
         var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#modalNuevaPoliza" value='+ res.id_poliza +   
-        ' onclick="" >' +  // 
+        ' onclick="datosFormPoliza()" >' +  // 
         '<i class="fa fa-info-circle"></i>'+  
         '</button>'   
     
        // borrar despues 
-        if(ajaxAction=="agregar" || ajaxAction=="consultar"){ 
+        if(ajaxActionPoliza=="agregar" || ajaxActionPoliza=="consultar"){ 
         userTable.page( 'last' ).draw( 'page' );  
  
-        $('#dataTable-polizas-vigentes tr:last-child td:first-child').attr('class', 'frontEndIdColumn'); 
+        //$('#dataTable-polizas-vigentes tr:last-child td:first-child').attr('class', 'frontEndIdColumn'); 
        // $('#dataTable-polizas-vigentes tr:last-child td:first-child').css('background-color', 'red'); 
         $('#dataTable-polizas-vigentes tr:last-child td:last-child').html(boton);  
         $('#dataTable-polizas-vigentes tr:last-child td:last-child').attr('id', "editarBtn"+res.id_poliza); 
@@ -173,15 +174,15 @@ function agregarPolizaEnTabla(res){
  
            userTable.page(info.page).draw( 'page' );  
  
-          $("#"+res.id_usuario_agencia).closest('tr').next('tr').attr('id', res.id_usuario_agencia);; 
+          $("#"+res.id_poliza).closest('tr').next('tr').attr('id', res.id_poliza);; 
           //$("#"+res.id_usuario) 
-          userTable.row('#'+res.id_usuario_agencia).remove().draw( false ); 
-          $("#"+res.id_usuario_agencia + " td:last-child").html(boton); 
+          userTable.row('#'+res.id_poliza).remove().draw( false ); 
+          $("#"+res.id_poliza + " td:last-child").html(boton); 
  
  
-          if (!$("#"+res.id_usuario_agencia).length){ // es el último elemento en la tabla 
+          if (!$("#"+res.id_poliza).length){ // es el último elemento en la tabla 
                console.log("ultimoElemento") 
-               $('#dataTable-usuarios-agencias tr:last-child td:last-child').html(boton);  
+               $('#dataTable-polizas-vigentes tr:last-child td:last-child').html(boton);  
           } 
            
  
@@ -217,7 +218,7 @@ function actualizarPolizaAjaxDone(res){
   //var userTable = $('#dataTable-usuarios').DataTable();   
  
   if(res.estado == "ok"){ 
-    agregarUsuarioAgenciaEnTabla(res); 
+    agregarPolizaEnTabla(res); 
     swal("el usuario de la agencia ha sido actualizado exitosamente", " ", "success"); 
  
   }else{ 
@@ -232,10 +233,10 @@ function actualizarPolizaAjaxDone(res){
  
  function datosFormPoliza(frontEndId){ 
    //alert("no es necesario llenar los campos, se simulan los datos desde un JSON en el public/js/usuariosagencia/index.js ") 
-   ajaxAction="actualizar"; 
-   console.log("ajaxAction "+ajaxAction); 
-    console.log(usuariosAgencias[frontEndId - 1]);
-    populateUsuarioAgenciaForm(usuariosAgencias[frontEndId - 1]);     
+   ajaxActionPoliza="actualizar"; 
+   //console.log("ajaxAction "+ajaxActionPoliza); 
+   // console.log(usuariosAgencias[frontEndId - 1]);
+   // populateUsuarioAgenciaForm(usuariosAgencias[frontEndId - 1]);     
  } 
  
  function abrirModalAgregarPoliza(){ 
@@ -252,10 +253,10 @@ function actualizarPolizaAjaxDone(res){
 
 function mostrarPolizas(){
 
-  ajaxAction="consultar"
+  ajaxActionPoliza="consultar"
   var addIdAgencia="id_agencia="+idAgenciaActual;
  $.ajax({ 
-      url: pathUsuarioAgenciaController+"consultar", 
+      url: pathPolizaController+"consultar", 
       method: "post", 
       data: addIdAgencia,
       dataType: "json" 
@@ -269,14 +270,14 @@ function mostrarPolizas(){
 
       for (i;i<res.length;i++){
 
-        usuariosAgencias[i+1]=res[i];
-        agregarUsuarioAgenciaEnTabla(res[i]);
+        polizas[i+1]=res[i];
+        //agregarUsuarioAgenciaEnTabla(res[i]);
 
       }
 
-   $(".frontEndIdColumn").hide();
- 
-  console.log(usuariosAgencias);
+   //$(".frontEndIdColumn").hide();
+  console.log("polizas");
+  console.log(polizas);
        
   })// end ajax done  
     .fail(function() { 

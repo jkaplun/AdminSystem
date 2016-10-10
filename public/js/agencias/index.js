@@ -59,6 +59,7 @@ $(document).ready(function() {
 		var tableUsuariosAgencias = $('#dataTable-usuarios-agencias').DataTable();
 		tableUsuariosAgencias.clear().draw();
 	 	mostrarUsuariosAgencia();
+	 	mostrarPolizas();
         actualizarVistas.vistaUsuarioAgencia =true;
 	});
 
