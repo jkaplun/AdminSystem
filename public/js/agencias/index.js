@@ -20,6 +20,7 @@ $(document).ready(function() {
 	    language: "es"
 	});
 	
+
     $('#dataTable-usuarios-agencias').DataTable({
         responsive: true,
         "language":{
@@ -46,9 +47,7 @@ $(document).ready(function() {
 			    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
 			}
 		}
-
     });
-
 
 	// cuando se eliga una agencia de la lista se llama a la función cunslutar agencia
 	$("#select_agencias").change(function(){
