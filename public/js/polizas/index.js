@@ -200,7 +200,7 @@ function agregarPolizaAjaxDone(res){
  
       agregarPolizaEnTabla(res); 
 
-      swal("el usuario de la agencia ha sido guardado exitosamente", " ", "success");  
+      swal("La póliza ha sido actualizado exitosamente", " ", "success");  
  
    } else{ 
      swal(res.descripcion, " ", "error");  
@@ -214,7 +214,7 @@ function actualizarPolizaAjaxDone(res){
  
   if(res.estado == "ok"){ 
     agregarPolizaEnTabla(res); 
-    swal("el usuario de la agencia ha sido actualizado exitosamente", " ", "success"); 
+    swal("La póliza ha sido actualizado exitosamente", " ", "success"); 
  
   }else{ 
     swal(res.descripcion, " ", "error"); 
