@@ -12,20 +12,32 @@ class Application_Model_Services_ServicesPolizas
 		{
 			foreach ($polizasVigentes as $poliza)
 			{
-				$dateFinalPoliza = new DateTime($poliza['fecha_fin']);
-				if($dateInicialNuevaPoliza > $dateFinalPoliza)
+				$dateFinalPolizaActual = new DateTime($poliza['fecha_fin']);
+				if($dateInicialNuevaPoliza > $dateFinalPolizaActual)
 				{
 					$esPolizaValida = true;
 				}
 				else
 				{
 					$dateInicialPolizaActual = new DateTime($poliza['fecha_ini']);
-					$indicePolizaAnterior = (key($polizasVigentes))-2;
-					$polizaAnterior = $polizasVigentes[$indicePolizaAnterior];
-					$dateFinalPolizaAnterior = new DateTime($polizaAnterior['fecha_fin']);
-					$difFechasDePolizasAnteriores = $dateFinalPolizaAnterior ->diff($dateInicialPolizaActual, false);
+					$difFechasDePolizasAnteriores = 0;
+					if(key($polizasVigentes) == 0)
+					{
+						$indicePolizaAnterior = 1;
+						$difFechasDePolizasAnteriores = 0;
+					}
+					else 
+					{
+						$indicePolizaAnterior = (key($polizasVigentes))-1;
+						$polizaAnterior = $polizasVigentes[$indicePolizaAnterior];
+						$dateFinalPolizaAnterior = new DateTime($polizaAnterior['fecha_fin']);
+						$difFechasDePolizasAnteriores = $dateFinalPolizaAnterior ->diff($dateInicialPolizaActual, false);
+						
+					}
 					$difFechasDePolizaNueva = $dateInicialNuevaPoliza -> diff($dateFinalNuevaPoliza, false);
-					if((array)$difFechasDePolizasAnteriores >= (array)$difFechasDePolizaNueva)
+					if((array)$difFechasDePolizasAnteriores >= (array)$difFechasDePolizaNueva 
+							&& $dateInicialNuevaPoliza != $dateInicialPolizaActual
+							&& $dateFinalNuevaPoliza != $dateFinalPolizaActual)
 					{
 						return true;
 					}

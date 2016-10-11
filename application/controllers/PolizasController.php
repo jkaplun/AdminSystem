@@ -60,17 +60,8 @@ class PolizasController extends Zend_Controller_Action
                         'fecha_ini' => $params['fecha_ini'], 
                         'fecha_fin' => $params['fecha_fin'],
                         'cantidad_fact' => $params['cantidad_fact'],
-                        //'tiempo_agotado' => $params['tiempo_agotado'],
-                       // 'garantia' => $params['garantia'],
                         'tipo' => $params['tipo'],
-                       // 'desc_servicios' => $params['desc_servicios'],
-                      //  'actualizacion' => $params['actualizacion'],
-                       // 'telefonico' => $params['telefonico'],
-                       // 'remoto' => $params['remoto'],
-                       // 'admconvenios' => $params['admconvenios'],
-                       // 'sitio' => $params['sitio'],
                         'estatus' => 'S'
-                       // 'pagxeven' => $params['pagxeven']
                 );
               
         $form = new Application_Form_Polizas_Polizas();
@@ -90,10 +81,7 @@ class PolizasController extends Zend_Controller_Action
         		$data['id_poliza']=$idNuevaPoliza;
         		$data['estado']='ok';
         		$data['descripcion']='La poliza ha sido guardada exitosamente';
-        		// se responde al cliente
-        		//$this->_helper->json("todo bien");
         		$this->_helper->json($data);
-        		//$this->_redirect('agencias/');
         	}
         	else 
         	{//Si las fechas de la nueva p�liza se traslapan con las de alguna vigente

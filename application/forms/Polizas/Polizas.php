@@ -81,7 +81,7 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->removeDecorator('Errors')
         ->setAttrib("autocomplete","off")
         ->setAttrib("class","form-control datepicker")
-        ->setAttrib("placeholder",utf8_encode("Fecha final año-mes-dia"))
+        ->setAttrib("placeholder",utf8_encode("Fecha final yyyy-mm-dd"))
         ->setAttrib("maxlength","10")
         ->setAttrib("data-provide","datepicker")
         ->setAttrib("readonly","readonly")
@@ -113,7 +113,7 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ;
         $this->addElement($tiempo_agotado);
          
-        //Garantía
+        //Garantï¿½a
         $garantia = new Zend_Form_Element_Select('garantia');
         $garantia
         ->removeDecorator('label')
@@ -145,35 +145,35 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ;
         $this->addElement($tipo);
         
-        //Descripción de  servicios
+        //Descripciï¿½n de  servicios
         $desc_servicios = new Zend_Form_Element_Text('desc_servicios');
         $desc_servicios->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Descripción de servicios"))
+        ->setAttrib("placeholder",utf8_encode("Descripciï¿½n de servicios"))
         ->setAttrib("maxlength","250")
         ;
         $this->addElement($desc_servicios);
         
-        // Actualización
+        // Actualizaciï¿½n
         $actualizacion = new Zend_Form_Element_Text('actualizacion');
         $actualizacion->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Actualización"))
+        ->setAttrib("placeholder",utf8_encode("Actualizaciï¿½n"))
         ->setAttrib("maxlength","2")
         ;
         $this->addElement($actualizacion);
         
-        // Telefónico
+        // Telefï¿½nico
         $telefonico = new Zend_Form_Element_Text('telefonico');
         $telefonico->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Telefónico"))
+        ->setAttrib("placeholder",utf8_encode("Telefï¿½nico"))
         ->setAttrib("maxlength","2")
         ;
         $this->addElement($telefonico);
