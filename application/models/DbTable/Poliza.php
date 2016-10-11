@@ -44,5 +44,15 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 
+	public function obtenerPolizaPorIdAgencia ($idAgencia)
+	{
+		$select = $this->_db->select()->
+		from ( $this->_name, '*' )
+		->where(' id_agencia="'.$idAgencia.'"');
+
+		//echo $select;die;
+		return $this->getAdapter ()->fetchAll( $select );
+	}
+
 }
 

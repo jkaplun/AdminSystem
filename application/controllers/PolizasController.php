@@ -96,7 +96,7 @@ class PolizasController extends Zend_Controller_Action
         		//$this->_redirect('agencias/');
         	}
         	else 
-        	{//Si las fechas de la nueva póliza se traslapan con las de alguna vigente
+        	{//Si las fechas de la nueva pï¿½liza se traslapan con las de alguna vigente
         		$data['estado']='error';
         		$data['descripcion']='La fecha de la poliza que intenta crear se traslapa con otra.';
         		// se responde al cliente
@@ -145,7 +145,7 @@ class PolizasController extends Zend_Controller_Action
     		if ($cantidadDeErrores == 0)
         	{
         		$where = "id_poliza= {$params['id_poliza']}";
-        		// 	se actualiza en la base de datos a la póliza
+        		// 	se actualiza en la base de datos a la pï¿½liza
         		$this->poliza->update($data, $where);
         		$data['estado']='ok';
         		$data['descripcion']='La poliza ha sido actualizada exitosamente';
@@ -165,7 +165,7 @@ class PolizasController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams(); 
-        $polizasAgencia = $this->poliza->find($params['id_agencia'])->toArray();
+        $polizasAgencia = $this->poliza->obtenerPolizaPorIdAgencia($params['id_agencia']);
        
         $this->_helper->json($polizasAgencia);
 
