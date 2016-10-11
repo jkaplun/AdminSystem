@@ -37,7 +37,7 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 	{
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
-		->where('id_producto="'.$idProducto.'" and id_agencia="'.$idAgencia.'" and current_timestamp() < fecha_fin')
+		->where('id_producto="'.$idProducto.'" and id_agencia="'.$idAgencia.'" and curdate() < fecha_fin')
 		->order('fecha_fin');
 
 		//echo $select;die;
