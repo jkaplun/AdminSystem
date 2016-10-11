@@ -20,7 +20,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         $this->addElement($clave);
         
         // Password
-        $password = new Zend_Form_Element_Password('pwd');
+        $password = new Zend_Form_Element_Text('pwd');
         $password->setRequired(true)
         ->addErrorMessage("- Es necesario que introduzca el password.")
         ->removeDecorator('label')
@@ -31,21 +31,6 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->setAttrib("maxlength","15")
         ;
         $this->addElement($password);
-        
-        
-        // Password
-        $password_conf = new Zend_Form_Element_Password('pwd_conf');
-        $password_conf
-        ->setRequired(true)
-        ->addErrorMessage("- Es necesario que introduzca el password.")
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("class","form-control")
-        ->setAttrib("placeholder","Confirmar password")
-        ->setAttrib("maxlength","15")
-        ;
-        $this->addElement($password_conf);
         
         // Nombre
         $nombre = new Zend_Form_Element_Text('nombreUsuarioAgencia');
@@ -86,10 +71,10 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ;
         $this->addElement($puesto);
         
-        // Teléfono
+        // Telï¿½fono
         $telefono = new Zend_Form_Element_Text('telefono');
         $telefono->setRequired(true)
-        ->addErrorMessage("- Es necesario que introduzca el teléfono.")
+        ->addErrorMessage("- Es necesario que introduzca el telï¿½fono.")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
@@ -99,7 +84,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ;
         $this->addElement($telefono);
         
-        // Extensión
+        // Extensiï¿½n
         $ext = new Zend_Form_Element_Text('ext');
         $ext->removeDecorator('label')
         ->removeDecorator('HtmlTag')
@@ -149,7 +134,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ;
         $this->addElement($activo);
         
-        // Líder de proyecto
+        // Lï¿½der de proyecto
         $lider_proy = new Zend_Form_Element_Select('lider_proy');
         $lider_proy->setRequired(true)
         ->removeDecorator('label')
