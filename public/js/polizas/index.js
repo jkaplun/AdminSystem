@@ -3,6 +3,7 @@
 //console.log("loading poliza index.js"); 
 var pathPolizaController="public/polizas/"; 
 var polizas={};
+var id_poliza="";
  
 
 // accion que se realiza en el ajax, esta se define en 
@@ -77,11 +78,11 @@ function submitFormPoliza(){
   //console.log("ajaxActionPoliza" +ajaxActionPoliza);
   var id_product="&id_producto="+ $("#producto").val();
   //console.log("id_producto: "+ id_product);
-  var clave = "&clave=clave"+getRandomInt(0,1000);
+  var clave = "&clave=claveX";
   $.ajax({ 
       url: pathPolizaController + ajaxActionPoliza, 
       method: "post", 
-      data: $("#formPoliza").serialize() + addIdAgencia + id_product + clave,
+      data: $("#formPoliza").serialize() + addIdAgencia + id_product + clave + id_poliza,
       dataType: "json" 
     }).done(function(res) {  
       console.log("ajax submitFormPoliza done");
@@ -150,31 +151,30 @@ function agregarPolizaEnTabla(res){
           ]).draw(); 
  
         var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#modalNuevaPoliza" value='+ res.id_poliza +   
-        ' onclick="datosFormPoliza()" >' +  // 
+        ' onclick="datosFormPoliza('+ res.id_poliza +  ')" >' +  // 
         '<i class="fa fa-info-circle"></i>'+  
         '</button>'   
     
        // borrar despues 
         if(ajaxActionPoliza=="agregar" || ajaxActionPoliza=="consultar"){ 
         userTable.page( 'last' ).draw( 'page' );  
+        var id_poliza_row = "idPolizaRow"+res.id_poliza;
  
         //$('#dataTable-polizas-vigentes tr:last-child td:first-child').attr('class', 'frontEndIdColumn'); 
        // $('#dataTable-polizas-vigentes tr:last-child td:first-child').css('background-color', 'red'); 
         $('#dataTable-polizas-vigentes tr:last-child td:last-child').html(boton);  
-        $('#dataTable-polizas-vigentes tr:last-child td:last-child').attr('id', "editarBtn"+res.id_poliza); 
-        $("#editarBtn"+res.id_usuario_agencia).closest('tr').attr('id', res.id_poliza); 
+        $('#dataTable-polizas-vigentes tr:last-child td:last-child').attr('id', "editarPolizaBtn"+res.id_poliza); 
+        $("#editarPolizaBtn"+res.id_poliza).closest('tr').attr('id', id_poliza_row); 
  
         }else{ 
  
            userTable.page(info.page).draw( 'page' );  
- 
-          $("#"+res.id_poliza).closest('tr').next('tr').attr('id', res.id_poliza);; 
+          var id_poliza_row = "idPolizaRow"+res.id_poliza;
+          $("#editarPolizaBtn"+res.id_poliza).closest('tr').next('tr').attr('id', id_poliza_row);; 
           //$("#"+res.id_usuario) 
-          userTable.row('#'+res.id_poliza).remove().draw( false ); 
-          $("#"+res.id_poliza + " td:last-child").html(boton); 
- 
- 
-          if (!$("#"+res.id_poliza).length){ // es el último elemento en la tabla 
+          userTable.row('#'+id_poliza_row).remove().draw( false ); 
+          $("#"+id_poliza_row + " td:last-child").html(boton);  
+          if (!$("#"+id_poliza_row).length){ // es el último elemento en la tabla 
                console.log("ultimoElemento") 
                $('#dataTable-polizas-vigentes tr:last-child td:last-child').html(boton);  
           } 
@@ -199,6 +199,7 @@ function agregarPolizaAjaxDone(res){
         console.log(res);  
  
       agregarPolizaEnTabla(res); 
+
       swal("el usuario de la agencia ha sido guardado exitosamente", " ", "success");  
  
    } else{ 
@@ -225,12 +226,16 @@ function actualizarPolizaAjaxDone(res){
 } 
  
  
- function datosFormPoliza(frontEndId){ 
+ function datosFormPoliza(frontEndIdPoliza){ 
    //alert("no es necesario llenar los campos, se simulan los datos desde un JSON en el public/js/usuariosagencia/index.js ") 
+   console.log("frontEndId "+frontEndIdPoliza);
+   id_poliza="&id_poliza=" +frontEndIdPoliza;
    ajaxActionPoliza="actualizar"; 
+
    //console.log("ajaxAction "+ajaxActionPoliza); 
    // console.log(usuariosAgencias[frontEndId - 1]);
-   // populateUsuarioAgenciaForm(usuariosAgencias[frontEndId - 1]);     
+    populatePolizaForm(polizas[frontEndIdPoliza - 1]);
+
  } 
  
  function abrirModalAgregarPoliza(){ 
@@ -265,7 +270,7 @@ function mostrarPolizas(){
       for (i;i<res.length;i++){
 
         polizas[i+1]=res[i];
-        //agregarUsuarioAgenciaEnTabla(res[i]);
+        agregarPolizaEnTabla(res[i]);
 
       }
 

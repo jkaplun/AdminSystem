@@ -56,7 +56,10 @@ $(document).ready(function() {
 		consultarAgencia(idAgenciaActual);
 		actualizarVistas.vistaUsuarioAgencia=false;
 		var tableUsuariosAgencias = $('#dataTable-usuarios-agencias').DataTable();
+		var tablePolizas = $('#dataTable-polizas-vigentes').DataTable();
+
 		tableUsuariosAgencias.clear().draw();
+		tablePolizas.clear().draw();
 	 	mostrarUsuariosAgencia();
 	 	mostrarPolizas();
         actualizarVistas.vistaUsuarioAgencia =true;
