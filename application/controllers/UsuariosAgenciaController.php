@@ -31,7 +31,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         $data = array(
                                 'id_agencia' => $params['id_agencia'],
                                 'clave' => $params['claveUsuarioAgencia'],
-                                //'pwd' => $contraEncrip, se define mÃ¡s abajo
+                                'pwd'=>$params['pwd'],
                                 'nombre' => $params['nombreUsuarioAgencia'],
                                 'apellidos' => $params['apellidos'],
                                 'puesto' => $params['puesto'],
@@ -55,11 +55,9 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         $cantidadDeErrores = count($mensajesDeError);
         if ($cantidadDeErrores == 0)
         {
-            if ($params['pwd'] == $params['pwd_conf'])
-            { // Â¿QuÃ© se verifica aquÃ­?
-				$contraEncrip = sha1($params['pwd']);
+				//$contraEncrip = sha1($params['pwd']);
                 $usuario = $this->usuario_agencia->obtenerUsuariosAgenciaPorClave($params['claveUsuarioAgencia']);
-                $data['pwd']=$contraEncrip;
+                
                 if (!$usuario)
                 { // Â¿QuÃ© se verifica aquÃ­?
                     $utiles = new Application_Model_Services_Utiles();
@@ -100,19 +98,6 @@ class UsuariosAgenciaController extends Zend_Controller_Action
                         $this->_helper->json($data);
                         $this->_redirect('agencias/');
                 }
-            }
-            else 
-            { // else cuando las contraeÃ±as no coinciden
-
-                     // se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
-                        $data['id_agencia']='0';
-                        $data['clave']='';
-                        $data['estado']='error';
-                        $data['descripcion']='Passwords diferentes';
-                        // se responde al cliente
-                        $this->_helper->json($data);
-                        $this->_redirect('agencias/');
-            }
         }
         else 
         { // else cuando existe un error encontrado en el form
@@ -126,7 +111,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
-       	 //echo $params['id_usuario_agencia'];
+       	 //echo $params['id_agencia'];
             	
         $data = array(
                                 'id_agencia' => $params['id_agencia'],
@@ -154,7 +139,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         	$cantidadDeErrores = count($mensajesDeError);
         	if ($cantidadDeErrores == 0)
         	{
-        		$esContrasenaYConfValidos=false;
+        		/*$esContrasenaYConfValidos=false;
         		//Revisando si el usuario modificï¿½ la contraseï¿½a
         		if($params['pwd'] != $usuarioActual['pwd'])
         		{//Si el usuario la modificï¿½
@@ -173,7 +158,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         				$contraEncrip = sha1($params['pwd']);
         				$data['pwd']=$contraEncrip;
         			}
-        		}
+        		}*/
         		$utiles = new Application_Model_Services_Utiles();
         		$esEmailCorrecto = $utiles->comprobar_email($params['emailUsuarioAgencia']);
         		if ($esEmailCorrecto)
