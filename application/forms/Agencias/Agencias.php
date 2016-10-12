@@ -740,6 +740,19 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ;
         $id_agencia = new Zend_Form_Element_Hidden('id_agencia');
         
+        // Observaciones
+        $observaciones_agencia = new Zend_Form_Element_TextArea('observaciones_agencia');
+        $observaciones_agencia
+        ->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("Observaciones de la póliza"))
+        ->setAttrib("maxlength","256")
+        ->setAttrib("rows","10")
+        ;
+        $this->addElement($observaciones_agencia);
+
 
         }
 }

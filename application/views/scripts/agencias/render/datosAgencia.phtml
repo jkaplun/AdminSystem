@@ -36,7 +36,7 @@
         	<div class="tab-content">
 		    	<div class="tab-pane fade in active" id="tabInformacion">
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="bs-callout bs-callout-primary col"
 								id="callout-glyphicons-dont-mix">
 								<h5>Direcci&oacute;n</h5>
@@ -52,29 +52,18 @@
 								<p>Clave ejecutivo Ayuda:  <span class="text-primary" id="cve_usopor_aux-info"> </p>
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="bs-callout bs-callout-primary col"
 								id="callout-glyphicons-dont-mix">
 								<h5 align="center">Configuraci&oacute;n</h5>
-								<p>Estatus</p>
-								<p>ICAAVWin: <span id="id_estatus_icaav-info" class="text-primary"></span>  </p>
-								<p>IRISWin: <span id="id_estatus_iris-info" class="text-primary"></span> </p>
 								<div class="form-group input-group">
 					                <span class="input-group-addon">P&oacute;lizas</span>
 					                <input type="text" class="form-control" value="OQAPDDW">
 					                <span class="input-group-addon"><i class="fa fa-plus"></i></span>
 					            </div>
-								<p>Personalizado: Encuesta</p>
-								<p>Formatos Pagados Sin documentos</p>
-								<p>Factura Elect&oacute;nica:  <span id="factura_electronica-info" class="text-primary"></span>  </p>
-								<p>Portal Proveedores:  </p>
-								<p>Agencia Consolidada: <span id="agencias_consolidadas-info" class="text-primary"></span> </p>
-								 <p> Markup: <span id="markup-info" class="text-primary"></span> </p>
-								<p>Contabilidad Elect&oacute;nica:  <span id="contabilidad_elect-info" class="text-primary"></span>  </p>
-								 <p>INE: <span id="ine-info" class="text-primary"></span>  </p>
 							</div>
 						</div>
-						<div class="col-md-4">
+<!-- 						<div class="col-md-4">
 							<div class="bs-callout bs-callout-primary col" id="callout-glyphicons-dont-mix">
 								<h5 align="center">Productos</h5>
 								<div class="row">
@@ -87,12 +76,6 @@
 												class="form-control" value="" id="edita_puesto-info" disabled>
 										</div>
 									</div>
-					<!-- 			<div class="col-lg-5">
-									<div class="form-group input-group">
-					                	<span class="input-group-addon">AnyWhere</span>
-					                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
-					            	</div>	
-								</div>		 -->
 								</div>
 								<div class="row">
 									<div class="col-lg-3">
@@ -104,12 +87,6 @@
 												class="form-control" value="" id="lic_iriswin-info" disabled>
 										</div>
 									</div>
-									<!-- 									<div class="col-lg-5">
-															<div class="form-group input-group">
-											                	<span class="input-group-addon">AnyWhere</span>
-											                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
-											            	</div>	
-														</div>	 -->
 								</div>
 								<div class="row">
 									<div class="col-lg-3">
@@ -121,12 +98,6 @@
 												class="form-control" value="" id="lic_centauro-info" disabled>
 										</div>
 									</div>
-									<!-- 									<div class="col-lg-5">
-															<div class="form-group input-group">
-											                	<span class="input-group-addon">AnyWhere</span>
-											                	<input type="text" class="form-control" value="2" id="edita_puesto-info" disabled>
-											            	</div>	
-														</div> -->
 								</div>
 								<div class="row">
 									<div class="col-lg-3">
@@ -150,7 +121,7 @@
 								<p>Facturaci&oacute; de Boletos: <span id="facturacion_boleto-info" class="text-primary"></span></p> </p>
 								Layout MIG y EDICOMO</p>
 							</div>
-						</div>
+						</div> -->
 					</div>
 		    	</div>
 		    	<div class="tab-pane fade" id="tabUsuarios">
@@ -165,7 +136,6 @@
 							</div>
 						</div>
 						<br/>
-<!-- 						<div class="table-responsive"> -->
 							<table width="100%" class="table table-striped table-bordered table-hover display" id="dataTable-usuarios-agencias">
 								<thead>
 									<tr>
@@ -174,16 +144,13 @@
 										<th>Apellido</th>
 										<th>Email</th>
 										<th>Tel&eacute;fono</th>
-									<!-- 	<th>Ext</th> -->
 										<th>Puesto</th>
-									<!-- 	<th>Admin Fe</th> -->
 										<th>Detalles</th>
 									</tr>
 								</thead>
 								<tbody align="center">						
 								</tbody>
 							</table>
-<!-- 						</div> -->
 					</div>
 		    	</div>
 		    	<div class="tab-pane fade" id="tabPolizas">
@@ -202,7 +169,7 @@
 							<div class="col-md-12">
 								<div class="panel panel-info">
 			                        <div class="panel-heading">
-			                            P&oacute;lizas renovadas anticipadamente
+			                            <b>P&oacute;lizas renovadas anticipadamente</b>
 			                        </div>
 			                        <div class="panel-body">
 										<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-anticipadas">
@@ -232,125 +199,10 @@
 							<div class="col-md-12">
 								<div class="panel panel-green">
 			                        <div class="panel-heading">
-			                            P&oacute;lizas vigentes
+			                            <b>P&oacute;lizas vigentes</b>
 			                        </div>
 			                        <div class="panel-body">
-<!-- 				                        <div class="row">
-				                        	<div class="col-md-1">
-											    <div class="form-group">
-									                <label class="control-label">Clave</label>
-									                <input class="form-control" placeholder="Clave">
-											    </div>					                        		
-				                        	</div>
-				                        	<div class="col-md-1">
-											    <div class="form-group">
-									                <label class="control-label">Producto</label>
-									                <input class="form-control" placeholder="IRISWIN">
-											    </div>					                        		
-				                        	</div>
-				                        	<div class="col-md-1">
-											    <div class="form-group">
-									                <label class="control-label">Horas</label>
-									                <input class="form-control" placeholder="IRISWIN">
-											    </div>					                        		
-				                        	</div>
-				                        	<div class="col-md-1">
-											    <div class="form-group">
-									                <label class="control-label">Horas Usadas</label>
-									                <input class="form-control" placeholder="IRISWIN">
-											    </div>					                        		
-				                        	</div>
-				                        	<div class="col-md-1">
-											    <div class="form-group">
-									                <label class="control-label">Facturación</label>
-									                <input class="form-control" placeholder="Clave">
-											    </div>					                        		
-				                        	</div>
-				                        	<div class="col-md-2">
-											    <div class="form-group">
-									                <label class="control-label">F. Inicial</label>
-									                <input class="form-control" placeholder="Clave">
-											    </div>					                        		
-				                        	</div>
-				                        	<div class="col-md-2">
-											    <div class="form-group">
-									                <label class="control-label">F. Final</label>
-									                <input class="form-control" placeholder="Clave">
-											    </div>					                        		
-				                        	</div>
-				                        	<div class="col-md-1">
-											    <div class="form-group">
-									                <label class="control-label">Agotado</label>
-									                <input class="form-control" placeholder="Clave">
-											    </div>					                        		
-				                        	</div>
-				                        	<div class="col-md-1">
-											    <div class="form-group">
-									                <label class="control-label">Garantia</label>
-									                <input class="form-control" placeholder="Clave">
-											    </div>					                        		
-				                        	</div>
-				                        	<div class="col-md-1">
-											    <div class="form-group">
-									                <label class="control-label">Detalles</label>
-									                <input class="form-control" placeholder="Clave">
-											    </div>					                        		
-				                        	</div>
-				                        	<div class="col-md-1">
-											    <div class="form-group">
-									                <label class="control-label">Bloquear</label>
-									                <input class="form-control" placeholder="Clave">
-											    </div>					                        		
-				                        	</div>				                        	                 		
-				                        </div> -->
-
-						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-vigentes">
-							<thead>
-								<tr>
-									<th class="idPoliza" >id</th>
-									<th>Clave</th>
-									<th>Producto</th>
-									<th>Horas</th>
-									<th>Horas Usadas</th>
-									<th>Facturacion</th>
-									<th>F. Inicial</th>
-									<th>F. Final</th>
-<!-- 									<th>Agotado</th>
-									<th>Garantia</th> -->
-									<th>Detalles</th>
-							<!-- 		<th>Bloquear</th> -->
-								</tr>
-							</thead>
-							<tbody align="center">
-								<tr>
-									<td class="idPoliza" >0</td>
-									<td>DASFAS</td>
-									<td>IRISWIN</td>
-									<td>123</td>
-									<td>32</td>
-									<td>55633</td>
-									<td>01/01/2016</td>
-									<td>01/01/2017</td>
-<!-- 									<td>N</td>
-									<td>N</td> -->
-									<td>Info</td>
-								<!-- 	<td>Bloqueo</td> -->
-								</tr>							
-							</tbody>
-						</table>
-
-			                        </div>
-			                    </div>							
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-yellow">
-			                        <div class="panel-heading">
-			                            P&oacute;lizas proximas a vencer
-			                        </div>
-			                        <div class="panel-body">
-										<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-proximas-vencer">
+										<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-vigentes">
 											<thead>
 												<tr>
 													<th class="idPoliza" >id</th>
@@ -361,34 +213,24 @@
 													<th>Facturacion</th>
 													<th>F. Inicial</th>
 													<th>F. Final</th>
+													<th>Estado</th>
 													<th>Detalles</th>
 												</tr>
 											</thead>
 											<tbody align="center">
-												<tr>
-													<td class="idPoliza" >0</td>
-													<td>DASFAS</td>
-													<td>IRISWIN</td>
-													<td>123</td>
-													<td>32</td>
-													<td>55633</td>
-													<td>01/01/2016</td>
-													<td>01/01/2017</td>
-<!-- 													<td>N</td>
-													<td>N</td> -->
-													<td>Info</td>
-												</tr>							
+
 											</tbody>
 										</table>
+
 			                        </div>
 			                    </div>							
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="panel panel-red">
+								<div class="panel panel-default">
 			                        <div class="panel-heading">
-			                            P&oacute;lizas vencidas
+			                            <b>Historico de P&oacute;lizas</b>
 			                        </div>
 			                        <div class="panel-body">
 										<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-vencidas">
@@ -406,19 +248,7 @@
 												</tr>
 											</thead>
 											<tbody align="center">
-												<tr>
-													<td class="idPoliza" >0</td>
-													<td>DASFAS</td>
-													<td>IRISWIN</td>
-													<td>123</td>
-													<td>32</td>
-													<td>55633</td>
-													<td>01/01/2016</td>
-													<td>01/01/2017</td>
-	<!-- 												<td>N</td>
-													<td>N</td> -->
-													<td>Info</td>
-												</tr>							
+
 											</tbody>
 										</table>
 			                        </div>
@@ -431,7 +261,7 @@
 					<div class="panel-body">
 						<div class="form-group">
                             <label>Observaciones</label>
-                            <textarea class="form-control" rows="4"></textarea>
+                            <?= $this->form->observaciones_agencia ?>  
                         </div>
                         <div class="row">
                         	<div class="col-md-10"></div>

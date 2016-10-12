@@ -26,25 +26,15 @@
 				                <span class="input-group-addon"><i class="fa fa-user"></i>
 				                </span>
 				                  <?= $this->formUsuarioAgencia->nombreUsuarioAgencia ?>
-				               <!--  <input type="text" class="form-control" placeholder="Nombre"> -->
 				            </div>
 			    		</div>	    			    		
 			    		<div class="col-md-4">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-user"></i>
 				                </span>
-
-										<?= $this->formUsuarioAgencia->apellidos ?>
-				           <!--     <input type="text" name="apellidos" id="apellidos" autocomplete="off" class="form-control" maxlength="225" placeholder="Apellidos"> -->
+								<?= $this->formUsuarioAgencia->apellidos ?>
 				            </div>
-			    		</div>
-<!-- 			    		<div class="col-md-4">
-							<div class="form-group input-group">
-				                <span class="input-group-addon"><i class="fa fa-user"></i>
-				                </span>
-				                <input type="text" class="form-control" placeholder="Apellido Materno">
-				            </div>	    		
-			    		</div>    -->			    		
+			    		</div>			    		
 			    	</div>
 			    	<h4 class="h4Form">Contacto</h4>
 					<hr class="hrForm">
@@ -54,7 +44,6 @@
 				                <span class="input-group-addon"><i class="fa fa-phone"></i>
 				                </span>
 				                <?= $this->formUsuarioAgencia->telefono ?>
-				             <!--    <input type="text" class="form-control" placeholder="Telefono Contacto"> -->
 				            </div>
 			    		</div>	    			    		
 			    		<div class="col-md-2">
@@ -71,7 +60,6 @@
 				                <span class="input-group-addon"><i class="fa fa-mobile"></i>
 				                </span>
        							<?= $this->formUsuarioAgencia->celular ?>
-				        <!--         <input  disabled type="text" class="form-control" placeholder="Celular"> -->
 				            </div>	    		
 			    		</div>  
 			    		<div class="col-md-4">
@@ -79,7 +67,6 @@
 				                <span class="input-group-addon"><i class="fa fa-envelope-o"></i>
 				                </span>
 				                 <?= $this->formUsuarioAgencia->emailUsuarioAgencia ?>
-				              <!--   <input type="text" class="form-control" placeholder="Correo"> -->
 				            </div>	    		
 			    		</div>  			    		 			    		
 			    	</div>
@@ -90,7 +77,6 @@
 							<div class="form-group">
 								<label class="control-label">Puesto</label>
 								   <?= $this->formUsuarioAgencia->puesto ?>
-				               <!--  <input type="text" class="form-control" placeholder="Puesto"> -->
 							</div>
 			    		</div>	    			    		
 			    		<div class="col-md-4">
@@ -109,20 +95,18 @@
 			    	<h4 class="h4Form">Credenciales de Acceso</h4>
 					<hr class="hrForm">
 			    	<div class="row">
-			    		<div class="col-md-4">
+			    		<div class="col-md-6">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-user"></i>
 				                </span>
 				                 <?= $this->formUsuarioAgencia->claveUsuarioAgencia ?>
-				               <!--  <input type="text" class="form-control" placeholder="Clave"> -->
 				            </div>
 			    		</div>			    	
-			    		<div class="col-md-4">
+			    		<div class="col-md-6">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-lock"></i>
 				                </span>
 				                     <?= $this->formUsuarioAgencia->pwd ?>
-				               <!--  <input type="text" class="form-control" placeholder="Contraseña"> -->
 				            </div>
 			    		</div>
     			    		
@@ -134,7 +118,7 @@
 			    	<div class="row">
 			    		<div class="col-md-4">
 							<div class="form-group">
-								<label class="control-label">Admin Fe</label>
+								<label class="control-label">Admin Factura Electr&oacute;nica</label>
 	  									<?= $this->formUsuarioAgencia->admin_fe?>
 							</div>
 			    		</div>
@@ -162,7 +146,6 @@
 		    	</fieldset>
 		    </div>
 		    <div class="modal-footer">     
-		       <button type="button" class="btn btn-primary btn-circle btn-lg" ><i class="fa fa-edit"></i></button>
 		       <span id="submitNuevoUsuarioAgenciaBtn" type="button" class="btn btn-success btn-circle btn-lg" onclick="submitFormUsuarioAgencia()"><i class="fa fa-save"></i></span> 
 		    </div>
  		 </form> 

@@ -52,7 +52,6 @@
 			                <span class="input-group-addon"><i class="fa fa-list-alt"></i>
 			                </span>
 			               <?= $this->formPolizas->cantidad_fact ?> 
-			               <!--  <input type="text" class="form-control" placeholder="Facturado Mensual ICAAV"> -->
 			            </div>
 		    		</div> 			    		
 		    	</div>
@@ -62,7 +61,6 @@
 			                <span class="input-group-addon"><i class="fa fa-play"></i>
 			                </span>
 			               <?= $this->formPolizas->fecha_ini ?>  
-			             <!--    <input type="text" class="form-control" placeholder="Fecha Inicial"> -->
 			            </div>
 		    		</div>
 		    		<div class="col-md-6">
@@ -70,16 +68,30 @@
 				                <span class="input-group-addon"><i class="fa fa-stop"></i>
 				                </span>
 				           <?= $this->formPolizas->fecha_fin ?>  
-				                <!-- <input type="text" class="form-control" placeholder="Fecha Final"> -->
 			            </div>	    		
 		    		</div>	    			    		
 		    	</div>
-		    	<!-- <input class='datepicker' data-provide="datepicker"  data-date-format="yyyy-mm-dd"> -->
-		    	  
+		    	<div class="row">
+		    		<div class="col-md-12">
+						<div class="form-group input-group">
+			                <span class="input-group-addon"><i class="fa fa-bookmark-o"></i>
+			                </span>
+			               	<?= $this->formPolizas->estatus_poliza ?> 
+			            </div>
+		    		</div>    			    		
+		    	</div>
+		    	<div class="row">
+		    		<div class="col-md-12">
+						<div class="form-group input-group">
+			                <span class="input-group-addon"><i class="fa fa-info-circle"> Observaciones</i>
+			                </span>
+			               	<?= $this->formPolizas->observaciones_poliza ?> 
+			            </div>
+		    		</div>  			    		
+		    	</div>		    			    	
 			</fieldset>
 	    </div>
 	    <div class="modal-footer">     
-	       <button type="button" class="btn btn-primary btn-circle btn-lg" ><i class="fa fa-edit"></i></button>
 	       <span id="submitPolizaBtn" type="button" class="btn btn-success btn-circle btn-lg" onclick=""><i class="fa fa-save"></i></span>
 	    </div>
  	 </form>

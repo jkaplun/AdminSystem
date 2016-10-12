@@ -32,6 +32,13 @@ body {
     margin-bottom: 10px;
 }
 
+.nav-second-level{
+  background-color: rgba(79, 162, 143, 0.61);
+}
+
+.nav-third-level{
+  background-color:rgba(57, 177, 136, 0.67);
+}
 
 .tablaMonitoreo{
   min-height: 150px;

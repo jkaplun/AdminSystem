@@ -19,6 +19,11 @@ $(document).ready(function() {
 	$('.datepicker').datepicker({
 	    language: "es"
 	});
+
+	$("#emailUsuarioAgencia").keyup(function () {
+        var value = $(this).val();
+        $("#claveUsuarioAgencia").val(value);
+    });
 	
 
     $('#dataTable-usuarios-agencias').DataTable({

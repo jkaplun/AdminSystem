@@ -14,15 +14,16 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Usuario"))
-        ->setAttrib("maxlength","15")
+        ->setAttrib("disabled","disabled")
+        // ->setAttrib("onkeyup","fAgrega();")
+        // ->setAttrib("maxlength","15")
         //->setAttrib('disabled', 'disabled');
         ;
         $this->addElement($clave);
         
         // Password
         $password = new Zend_Form_Element_Text('pwd');
-        $password->setRequired(true)
-        ->addErrorMessage("- Es necesario que introduzca el password.")
+        $password->addErrorMessage("- Es necesario que introduzca el password.")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("autocomplete","off")
@@ -136,8 +137,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         
         // L�der de proyecto
         $lider_proy = new Zend_Form_Element_Select('lider_proy');
-        $lider_proy->setRequired(true)
-        ->removeDecorator('label')
+        $lider_proy->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
                 'S'=>'Si',
@@ -150,8 +150,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         
         // Director
         $director = new Zend_Form_Element_Select('director');
-        $director->setRequired(true)
-        ->removeDecorator('label')
+        $director->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
                 'S'=>'Si',
@@ -164,8 +163,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         
         // admin_FE
         $admin_fe = new Zend_Form_Element_Select('admin_fe');
-        $admin_fe->setRequired(true)
-        ->removeDecorator('label')
+        $admin_fe->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
                 'S'=>'Activo',
@@ -178,8 +176,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         
         // nuevo
         $nuevo = new Zend_Form_Element_Select('nuevo');
-        $nuevo->setRequired(true)
-        ->removeDecorator('label')
+        $nuevo->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
                 'S'=>'Activo',
@@ -192,8 +189,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         
         // actualizar_pass
         $actualizar_pass = new Zend_Form_Element_Select('actualizar_pass');
-        $actualizar_pass->setRequired(true)
-        ->removeDecorator('label')
+        $actualizar_pass->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
                 'S'=>'Activo',
@@ -206,8 +202,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         
         // Enviar reporte portal MIG
         $enviar_reporte_portal_mig = new Zend_Form_Element_Select('enviar_reporte_portal_mig');
-        $enviar_reporte_portal_mig->setRequired(true)
-        ->removeDecorator('label')
+        $enviar_reporte_portal_mig->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
                 'S'=>'Activo',
@@ -220,8 +215,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         
         // Bajar updates
         $bajar_updates = new Zend_Form_Element_Select('bajar_updates');
-        $bajar_updates->setRequired(true)
-        ->removeDecorator('label')
+        $bajar_updates->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
                 'S'=>'Activo',

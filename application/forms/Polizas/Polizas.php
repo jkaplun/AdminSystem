@@ -245,7 +245,36 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->removeDecorator('Errors')
         ;
         $id_agencia = new Zend_Form_Element_Hidden('id_agencia');
-        
+
+
+        // Supervisor
+        $estatus_poliza = new Zend_Form_Element_Select('estatus_poliza');
+        $estatus_poliza->setRequired(true)
+        ->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->addMultiOptions(array(
+                'A'=>'Activo',
+                'D'=>'Adeudo',
+                'B'=>'Bloqueada',
+                'C'=>'Cancelada'
+        ))
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ;
+        $this->addElement($estatus_poliza);
+
+        // Observaciones
+        $observaciones_poliza = new Zend_Form_Element_TextArea('observaciones_poliza');
+        $observaciones_poliza
+        ->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("Observaciones de la póliza"))
+        ->setAttrib("maxlength","256")
+        ->setAttrib("rows","5")
+        ;
+        $this->addElement($observaciones_poliza);
 
         }
 }
