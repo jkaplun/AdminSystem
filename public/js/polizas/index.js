@@ -147,7 +147,7 @@ function agregarPolizaEnTabla(res){
         // se agrega la nueva columna a la tabla  
         //$(".frontEndIdColumn").show()
         userTable.row.add( [  
-          res.id_poliza, res.clave, res.id_producto, res.horasopor_year, '0', res.cantidad_fact, res.fecha_ini, res.fecha_fin, "x"  
+          res.id_poliza, res.clave, res.id_producto, res.horasopor_year, '0', res.cantidad_fact, res.fecha_ini, res.fecha_fin, "x" , "x"
           ]).draw(); 
  
         var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#modalNuevaPoliza" value='+ res.id_poliza +   

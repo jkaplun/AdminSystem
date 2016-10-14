@@ -2,93 +2,40 @@
 var pathUsuarioAgenciaController="public/usuariosAgencia/"; 
 var usuariosAgencias={};
 var seAgregoNuevoUsuario=false;
+var idUsuarioAgenciaToEdit;
 
 // accion que se realiza en el ajax, esta se define en 
 // datosform_edita_usuario_agencia() -> 'actualiza' 
 // datosform_edita_usuario_agencia() -> 'actualiza' 
-var ajaxAction; 
+var ajaxActionUsuarioAgencia; 
  
 //Variable donde se almacena el id que asigna la base de datos al usuario 
 var idDataBaseUser=""; 
 var claveUsuarioAgencia="";
  
  
-// borrar en master 
-var falseId=0; 
- 
-// datos de prueba de nuevo usuario agencia 
-var datosPruebaAgregarUsuarioAgencia =     { 
-            'clave':'evaldez', 
-            'pwd':'123456', 
-            'pwd_conf':'123456', 
-            'nombre':'eric', 
-            'apellido_paterno':'valdez', 
-            'apellido_materno':'valenzuela', 
-            'puesto':'CEO', 
-            'email':'ericvv@gmail.com', 
-            //'activo':'S', 
-            'lider_proy':'S', 
-            'director':'S', 
-            'admin_fe':'S', 
-            //'nuevo_user':'S', 
-            'enviar_reporte_mig':'S', 
-            'bajar_updates':'S', 
-            'telefono':'8121343', 
-            'extension':'1234', 
-            'celular':'5532019402' 
-            }           
- 
-// datos de prueba para actualizar usuario agencia 
-var datosPruebaActualizarUsuarioAgencia =     { 
-            //'clave':'evaldez', 
-            'id_usuario_agencia':idDataBaseUser, 
-            'pwd':'123456', 
-            'pwd_conf':'123456', 
-            'nombre':'ericEd', 
-            'apellido_paterno':'valdezEd', 
-            'apellido_materno':'valenzuelaEd', 
-            'puesto':'CEO', 
-            'email':'ericvv@gmail.com', 
-            //'activo':'S', 
-            'lider_proy':'S', 
-            'director':'S', 
-            'admin_fe':'S', 
-            //'nuevo_user':'S', 
-            'enviar_reporte_mig':'S', 
-            'bajar_updates':'S', 
-            'telefono':'8121343', 
-            'extension':'1234', 
-            'celular':'5532019402' 
-            }           
- 
- 
 $(document).ready(function() { 
  
   $("#agregarUsuarioAgenciaBtn").click(function(){
-	  
     abrirModalAgregarUsuario(); 
-	 //$( "#claveUsuarioAgencia" ).prop( "disabled", false );
-
-     //mostrarUsuariosAgencia();
-  
   }) 
  
   $(".frontEndIdColumn").hide()//.css("display", "none");
 
-  $("#tabUsuariosAgencia").click(function(){
-        if(actualizarVistas.vistaUsuarioAgencia == false){
-          console.log("actualizarVistas.vistaUsuarioAgencia: "+actualizarVistas.vistaUsuarioAgencia);
-          mostrarUsuariosAgencia();
-            actualizarVistas.vistaUsuarioAgencia =true;
-        }
+  // $("#tabUsuariosAgencia").click(function(){
+  //       if(actualizarVistas.vistaUsuarioAgencia == false){
+  //         console.log("actualizarVistas.vistaUsuarioAgencia: "+actualizarVistas.vistaUsuarioAgencia);
+  //         mostrarUsuariosAgencia();
+  //           actualizarVistas.vistaUsuarioAgencia =true;
+  //       }
       
-  })
+  // })
 
 
-$('#dataTable-usuarios-agencias').on( 'page.dt', function () {
-    console.log("cambiando de página");
-    $(".frontEndIdColumn").hide();
-} );
+// $('#dataTable-usuarios-agencias').on( 'page.dt', function () {
+//     console.log("cambiando de página");
+//     $(".frontEndIdColumn").hide();
+// } );
 
  
 
@@ -98,27 +45,20 @@ $('#dataTable-usuarios-agencias').on( 'page.dt', function () {
  
 function submitFormUsuarioAgencia(){ 
  
-  if (ajaxAction=="agregar"){ 
-    datosPrueba = datosPruebaAgregarUsuarioAgencia; 
-    claveUsuarioAgencia="";
-  } 
-  else{ 
-    datosPrueba = datosPruebaActualizarUsuarioAgencia; 
- 
-  } 
-  
     addIdAgencia="&id_agencia="+idAgenciaActual;
     console.log("mandando submitFormUsuarioAgencia, clave usuariosagencia: "+claveUsuarioAgencia);
+    claveUsuarioAgencia= "&claveUsuarioAgencia=" + $("#emailUsuarioAgencia").val();
+
  
   $.ajax({ 
-      url: pathUsuarioAgenciaController + ajaxAction, 
+      url: pathUsuarioAgenciaController + ajaxActionUsuarioAgencia, 
       method: "post", 
       data: $("#formUsuarioAgencia").serialize() + addIdAgencia +claveUsuarioAgencia,
       dataType: "json" 
     }) 
     .done(function(res) {  
  
-    if (ajaxAction == "agregar"){ 
+    if (ajaxActionUsuarioAgencia == "agregar"){ 
       agregarUsuarioAgenciaAjaxDone(res); 
     }else{ 
       actualizarUsuarioAgenciaAjaxDone(res); 
@@ -150,37 +90,26 @@ function submitFormUsuarioAgencia(){
  
  
 function agregarUsuarioAgenciaEnTabla(res, counter){ 
- 
-      // console.log("entrando a agregarUsuarioAgenciaEnTabla"); 
-      if(ajaxAction=="consultar"){
+
+      if(ajaxActionUsuarioAgencia=="consultar"){
         var frontEndId = counter;
-      }else{
+      }else if (ajaxActionUsuarioAgencia=="actualizar"){
+        var frontEndId = idUsuarioAgenciaToEdit;
+      }
+      else{
         var frontEndId = Object.keys(usuariosAgencias).length + 1; 
       }
-      // if(ajaxAction=="actualizar"|| !seAgregoNuevoUsuario){
-      //   frontEndId--;
-      // }
 
         var userTable = $('#dataTable-usuarios-agencias').DataTable();   
         var estatusUsuario; 
         var info = userTable.page.info(); 
- 
- 
-        // if(res.activo == "S"){ 
-        //   estatusUsuario="Activo"; 
-        // } else{ 
-        //   estatusUsuario="Inactivo"; 
-        // } 
- 
- 
- 
+
         //var apellido = res.apellido_paterno+ " " + res.apellido_materno;  
- 
- 
+
         //res.id_usuario_agencia=falseId; 
         res.descripcion=""; 
         // se agrega la nueva columna a la tabla  
-        $(".frontEndIdColumn").show()
+         $(".frontEndIdColumn").show()
         userTable.row.add( [  
           frontEndId, res.nombre, res.apellidos, res.email, res.telefono, res.puesto, "x"  
           ]).draw(); 
@@ -194,7 +123,7 @@ function agregarUsuarioAgenciaEnTabla(res, counter){
 
          //$('#dataTable-usuarios-agencias tr:last-child td:first-child').attr('class', 'frontEndIdColumn'); 
          //$('#dataTable-usuarios-agencias tr:last-child td:first-child').css('background-color', 'red'); 
-        if(ajaxAction=="agregar" || ajaxAction=="consultar"){ 
+        if(ajaxActionUsuarioAgencia=="agregar" || ajaxActionUsuarioAgencia=="consultar"){ 
         userTable.page( 'last' ).draw( 'page' );  
  
 
@@ -217,12 +146,14 @@ function agregarUsuarioAgenciaEnTabla(res, counter){
                $('#dataTable-usuarios-agencias tr:last-child td:last-child').html(boton);  
           } 
            
+           // Actualizar modelo
+           usuariosAgencias[idUsuarioAgenciaToEdit]=res;
  
         } 
 
-      
+        
 
-          if(ajaxAction=="agregar" || ajaxAction=="actualizar" ) {
+          if(ajaxActionUsuarioAgencia=="agregar" || ajaxActionUsuarioAgencia=="actualizar" ) {
              $('#nuevoUsuarioModal').modal('toggle');  
                $(".frontEndIdColumn").hide();
           }
@@ -271,9 +202,11 @@ function actualizarUsuarioAgenciaAjaxDone(res){
 	 
 	 
 	 //$( "#claveUsuarioAgencia" ).prop( "disabled", true );
-   ajaxAction="actualizar"; 
-   console.log("ajaxAction "+ajaxAction); 
-    console.log(usuariosAgencias[frontEndId]);
+   ajaxActionUsuarioAgencia="actualizar"; 
+   //console.log("ajaxActionUsuarioAgencia "+ajaxActionUsuarioAgencia); 
+
+   idUsuarioAgenciaToEdit=frontEndId;
+   console.log("usuariosAgencias[frontEndId]: "+usuariosAgencias[frontEndId]);
 
     populateUsuarioAgenciaForm(usuariosAgencias[frontEndId ]);
       
@@ -283,17 +216,17 @@ function actualizarUsuarioAgenciaAjaxDone(res){
   //$('#myModalLabel').html("Agregar Usuario"); 
   document.getElementById("formUsuarioAgencia").reset(); 
 
-  ajaxAction="agregar"; 
+  ajaxActionUsuarioAgencia="agregar"; 
  
-  console.log("ajaxAction "+ajaxAction); 
+  console.log("ajaxActionUsuarioAgencia "+ajaxActionUsuarioAgencia); 
    
 } 
 
 
 
 function mostrarUsuariosAgencia(){
-
-  ajaxAction="consultar"
+  usuariosAgencias={};
+  ajaxActionUsuarioAgencia="consultar"
   var addIdAgencia="id_agencia="+idAgenciaActual;
  $.ajax({ 
       url: pathUsuarioAgenciaController+"consultar", 
