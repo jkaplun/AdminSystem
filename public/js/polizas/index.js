@@ -50,7 +50,7 @@ $(document).ready(function() {
       submitFormPoliza();
   });
 
-//   $(".frontEndIdColumn").hide()//.css("display", "none");
+ $(".FrontEndIdPoliza").hide()//.css("display", "none");
 
 //   $("#tabUsuariosAgencia").click(function(){
 //         if(actualizarVistas.vistaUsuarioAgencia == false){
@@ -160,19 +160,24 @@ function agregarPolizaEnTabla(res){
         userTable.page( 'last' ).draw( 'page' );  
         var id_poliza_row = "idPolizaRow"+res.id_poliza;
  
-        //$('#dataTable-polizas-vigentes tr:last-child td:first-child').attr('class', 'frontEndIdColumn'); 
-       // $('#dataTable-polizas-vigentes tr:last-child td:first-child').css('background-color', 'red'); 
+        $('#dataTable-polizas-vigentes tr:last-child td:first-child').attr('class', 'frontEndIdPoliza'); 
+        $('#dataTable-polizas-vigentes tr:last-child td:first-child').css('background-color', 'red'); 
         $('#dataTable-polizas-vigentes tr:last-child td:last-child').html(boton);  
         $('#dataTable-polizas-vigentes tr:last-child td:last-child').attr('id', "editarPolizaBtn"+res.id_poliza); 
+        //$('#dataTable-polizas-vigentes tr:last-child td:last-child').attr('class', "frontEndIdPoliza"); 
         $("#editarPolizaBtn"+res.id_poliza).closest('tr').attr('id', id_poliza_row); 
  
         }else{ 
  
            userTable.page(info.page).draw( 'page' );  
           var id_poliza_row = "idPolizaRow"+res.id_poliza;
-          $("#editarPolizaBtn"+res.id_poliza).closest('tr').next('tr').attr('id', id_poliza_row);; 
+          $("#editarPolizaBtn"+res.id_poliza).closest('tr').next('tr').attr('id', id_poliza_row);
+
           //$("#"+res.id_usuario) 
           userTable.row('#'+id_poliza_row).remove().draw( false ); 
+          $('#'+id_poliza_row + " td:first-child").css('background-color', 'red'); 
+          $('#'+id_poliza_row + " td:first-child").attr('class', 'frontEndIdPoliza');
+
           $("#"+id_poliza_row + " td:last-child").html(boton);  
           if (!$("#"+id_poliza_row).length){ // es el último elemento en la tabla 
                console.log("ultimoElemento") 
@@ -189,7 +194,10 @@ function agregarPolizaEnTabla(res){
              //$('#').modal('modalNuevaPoliza');  
                //$(".frontEndIdColumn").hide();
           }
-             
+           
+          // ocultar front-end-id
+          $(".frontEndIdPoliza").hide();  
+
 } // end function agregarUsuarioAgenciaEnTabla(res){ 
  
  

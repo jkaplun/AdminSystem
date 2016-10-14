@@ -20,7 +20,7 @@ $(document).ready(function() {
     abrirModalAgregarUsuario(); 
   }) 
  
-  $(".frontEndIdColumn").hide()//.css("display", "none");
+ 
 
   // $("#tabUsuariosAgencia").click(function(){
   //       if(actualizarVistas.vistaUsuarioAgencia == false){
@@ -91,16 +91,21 @@ function submitFormUsuarioAgencia(){
  
 function agregarUsuarioAgenciaEnTabla(res, counter){ 
 
+     var userTable = $('#dataTable-usuarios-agencias').DataTable();   
+
       if(ajaxActionUsuarioAgencia=="consultar"){
         var frontEndId = counter;
       }else if (ajaxActionUsuarioAgencia=="actualizar"){
+        userTable.order([0, 'asc']).draw();
         var frontEndId = idUsuarioAgenciaToEdit;
       }
       else{
+        userTable.order([0, 'asc']).draw();
         var frontEndId = Object.keys(usuariosAgencias).length + 1; 
       }
 
-        var userTable = $('#dataTable-usuarios-agencias').DataTable();   
+       
+        
         var estatusUsuario; 
         var info = userTable.page.info(); 
 
