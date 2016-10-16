@@ -54,7 +54,7 @@ class AuthController extends Zend_Controller_Action
 						
 					if($_SESSION['Zend_Auth']['USER_VALUES']['activo']=='N'){
 						unset($_SESSION);
-						$this->view->error='El usuario est&acute; inactivo.';
+						$this->view->error='El usuario est&aacute; inactivo.';
 					} else {
 							$this->_redirect('/');
 						return;
@@ -64,7 +64,7 @@ class AuthController extends Zend_Controller_Action
 	
 					switch ($result->getCode()) {
 						case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
-							$this->view->error='El usuario no est&acute; registrado.';
+							$this->view->error='El usuario no est&aacute; registrado.';
 							break;
 						case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
 							$this->view->error='Password Incorrecto.';

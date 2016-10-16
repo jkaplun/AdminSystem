@@ -13,14 +13,16 @@ class AgenciasController extends Zend_Controller_Action
 
     public function busquedaAgenciaAction()
     {
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/data/validacion.js');
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/agencias/index.js');
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/usuariosAgencias/index.js');
+        //$this->view->headScript()->appendFile($this->view->baseUrl().'/css_complete/multi-select/css/multi-select.css');
+
+
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');    
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/multi-select/js/multi-select.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/agencias/busqueda-agencia.js');
 
+        $this->view->form = new Application_Form_Agencias_Busquedagencias();
     }
 
 

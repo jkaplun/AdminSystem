@@ -25,12 +25,16 @@
 	<link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/bootstrap-select/css/bootstrap-select.min.css">
 
 	<link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/datepicker/css/bootstrap-datepicker3.min.css">
-	<link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/font-awesome.min.css">
 
+    <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/multi-select/css/multi-select.css">
     <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/panel.css">
     <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/sweetalert.css">
-        <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/utiles.css">
+    <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/utiles.css">
     
+
+
+    <?php echo $this->headScript();  ?>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -111,6 +115,7 @@
             </ul>
             <!-- /.navbar-top-links -->
 
+            <b>
             <div class="navbar-default sidebar" role="navigation" style="margin-top: 60px;">
             <!--padding-bottom: 25%;-->
                 <div class="sidebar-nav navbar-collapse">
@@ -129,13 +134,13 @@
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> Administracion<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?= $this->baseUrl() ?>/agencias/">Agencias</a>
+                                    <a href="<?= $this->baseUrl() ?>/agencias/"> Agencias</a>
                                 </li>
                                 <li>
-                                    <a href="<?= $this->baseUrl() ?>/usuarios/">Usuarios</a>
+                                    <a href="<?= $this->baseUrl() ?>/usuarios/"> Usuarios</a>
                                 </li>
                                 <li>
-                                    <a href="<?= $this->baseUrl() ?>/productos/">Productos</a>
+                                    <a href="<?= $this->baseUrl() ?>/productos/"> Productos</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -144,17 +149,17 @@
                             <a href="#"><i class="fa fa-clipboard fa-fw"></i> Reportes<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?= $this->baseUrl() ?>/agencias/busqueda-agencia">Agencias</a>
+                                    <a href="<?= $this->baseUrl() ?>/agencias/busqueda-agencia"> Agencias</a>
 
                                 </li>
                                 <li>
                                     <a>Servicios<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Por Cliente</a>
+                                            <a href="#"> Por Cliente</a>
                                         </li>
                                         <li>
-                                            <a href="#">Por Ejecutivo</a>
+                                            <a href="#"> Por Ejecutivo</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
@@ -163,10 +168,10 @@
                                     <a>Horas <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Por Cliente</a>
+                                            <a href="#"> Por Cliente</a>
                                         </li>
                                         <li>
-                                            <a href="#">Por Ejecutivo</a>
+                                            <a href="#"> Por Ejecutivo</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
@@ -175,13 +180,13 @@
                                     <a><i class="fa fa-user"></i> Clientes <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Por Poliza</a>
+                                            <a href="#"> Por Poliza</a>
                                         </li>
                                         <li>
-                                            <a href="#">Por Polizas a Vencer</a>
+                                            <a href="#"> Por Polizas a Vencer</a>
                                         </li>
                                         <li>
-                                            <a href="#">Por Tiempo sin Utilizar</a>
+                                            <a href="#"> Por Tiempo sin Utilizar</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
@@ -193,13 +198,13 @@
                             <a href="<?= $this->baseUrl() ?>/ordenes/"><i class="fa fa-files-o fa-fw"></i> Ordenes de Servicio<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="public/ordenes/nueva-orden">Nueva Orden</a>
+                                    <a href="public/ordenes/nueva-orden"> Nueva Orden</a>
                                 </li>
                                 <li>
-                                    <a href="public/ordenes/atencion-orden">Atenci&oacute;n de Ordenes</a>
+                                    <a href="public/ordenes/atencion-orden"> Atenci&oacute;n de Ordenes</a>
                                 </li>
                                 <li>
-                                    <a target="_blank" href="public/ordenes/monitoreo-orden">Monitoreo de Ordenes</a>
+                                    <a target="_blank" href="public/ordenes/monitoreo-orden"> Monitoreo de Ordenes</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -209,6 +214,7 @@
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
+            </b>
             <!-- /.navbar-static-side -->
         </nav>
 
