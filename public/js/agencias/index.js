@@ -2,6 +2,10 @@ var path="public/agencias/";
 var idAgenciaActual;
 var actualizarVistas = {"vistaAgencia":false, "vistaUsuarioAgencia":false, "vistaPoliza":false};
 
+
+
+
+
 $(document).ready(function() {
 	
 
@@ -71,10 +75,10 @@ $(document).ready(function() {
 	});
 
 	soloNumeros('cp');
-	soloNumeros('lic_icaavwin');
-	soloNumeros('lic_iriswin');
-	soloNumeros('lic_gvc');
-	soloNumeros('lic_centauro');
+	// soloNumeros('lic_icaavwin');
+	// soloNumeros('lic_iriswin');
+	// soloNumeros('lic_gvc');
+	// soloNumeros('lic_centauro');
 
 	soloLetrasNumeros('nombre')
 	soloLetrasNumeros('direccion')
@@ -189,20 +193,20 @@ function mostarDatosAgencia(datosAgencia){
 	$("#cve_usopor_tit-info").html(datosAgencia.cve_usopor_tit);
 	$("#cve_usopor_aux-info").html(datosAgencia.cve_usopor_aux);
 	$("#rfc-info").html(datosAgencia.rfc);
-	$("#id_estatus_icaav-info").html(datosAgencia.id_estatus_icaav);
-	$("#id_estatus_iris-info").html(datosAgencia.id_estatus_iris);
-	$("#factura_electronica-info").html(datosAgencia.factura_electronica);
-	$("#agencias_consolidadas-info").html(datosAgencia.agencias_consolidadas);
-	$("#markup-info").html(datosAgencia.markup);
-	$("#contabilidad_elect-info").html(datosAgencia.contabilidad_elect);
-	$("#ine-info").html(datosAgencia.ine);
-	$("#lic_icaavwin-info").val(datosAgencia.lic_icaavwin);
-	$("#lic_iriswin-info").val(datosAgencia.lic_iriswin);
-	$("#lic_centauro-info").val(datosAgencia.lic_centauro);
-	$("#lic_gvc-info").val(datosAgencia.lic_gvc);
-	$("#cfdi-info").html(datosAgencia.cfdi);
+	// $("#id_estatus_icaav-info").html(datosAgencia.id_estatus_icaav);
+	// $("#id_estatus_iris-info").html(datosAgencia.id_estatus_iris);
+	// $("#factura_electronica-info").html(datosAgencia.factura_electronica);
+	// $("#agencias_consolidadas-info").html(datosAgencia.agencias_consolidadas);
+	// $("#markup-info").html(datosAgencia.markup);
+	// $("#contabilidad_elect-info").html(datosAgencia.contabilidad_elect);
+	// $("#ine-info").html(datosAgencia.ine);
+	// $("#lic_icaavwin-info").val(datosAgencia.lic_icaavwin);
+	// $("#lic_iriswin-info").val(datosAgencia.lic_iriswin);
+	// $("#lic_centauro-info").val(datosAgencia.lic_centauro);
+	// $("#lic_gvc-info").val(datosAgencia.lic_gvc);
+	// $("#cfdi-info").html(datosAgencia.cfdi);
 	$("#prov_timbrado-info").html(datosAgencia.prov_timbrado);
-	$("#bolet_e-info").html(datosAgencia.boleto_e);
+	// $("#bolet_e-info").html(datosAgencia.boleto_e);
 	$("#facturacion_boleto-info").html(datosAgencia.facturacion_boleto);
 	$("#boton-editar-agencia").val(datosAgencia);
 	$("#datos-agencia").show();

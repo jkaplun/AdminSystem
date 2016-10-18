@@ -23,6 +23,10 @@ body {
   }
 }
 
+.portfolio-item{
+    margin-bottom: 10px;
+}
+
 .h4Form{
     margin-bottom: 5px;
 }

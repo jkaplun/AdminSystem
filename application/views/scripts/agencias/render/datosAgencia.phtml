@@ -29,6 +29,7 @@
                     <li class="active"><a href="#tabInformacion" data-toggle="tab">Informaci&oacute;n General</a></li>
                     <li><a  id="tabUsuariosAgencia" href="#tabUsuarios" data-toggle="tab">Usuarios</a></li>
                     <li><a href="#tabPolizas" data-toggle="tab">P&oacute;lizas</a></li>
+                  	<li><a href="#tabLicencias" data-toggle="tab">Productos</a></li>
                     <li><a href="#tabObservaciones" data-toggle="tab">Observaciones</a></li>
                 </ul>
         </div>
@@ -124,6 +125,50 @@
 						</div> -->
 					</div>
 		    	</div>
+                <div class="tab-pane fade" id="tabLicencias">
+                <br/>
+			        <div class="row">
+			            <div class="col-md-4 portfolio-item">
+							<div class="panel panel-primary">
+		                        <div class="panel-heading">
+		                            Producto 1
+		                        </div>
+		                        <div class="panel-body">
+									<div id="label-switch" class="make-switch" data-on-label="Comprado" data-off-label="Comprar">
+									    <input type="checkbox" checked>
+									</div>
+								</div>
+		                    </div>
+			            </div>
+			            <div class="col-md-4 portfolio-item">
+							<div class="panel panel-primary">
+		                        <div class="panel-heading">
+		                            Producto 2
+		                        </div>
+		                        <div class="panel-body">
+								    <div class="control-group">
+								        <label class="control-label" for="notification1">Estatus</label>
+								        <div class="controls">
+								            <div class="make-switch" tabindex="0">
+								                <input id="notification1" type="checkbox" data-on-label="Comprado" data-off-label="Comprar">
+								            </div>
+								        </div>
+								    </div>		                        
+		                        </div>
+		                    </div>
+			            </div>
+			            <div class="col-md-4 portfolio-item">
+							<div class="panel panel-primary">
+		                        <div class="panel-heading">
+		                            Producto 3
+		                        </div>
+		                        <div class="panel-body">
+		                        </div>
+		                    </div>
+			            </div>
+					</div>
+			        <!-- /.row -->
+				</div>		    	
 		    	<div class="tab-pane fade" id="tabUsuarios">
 					<div class="panel-body">
 					   	<div class="row">
@@ -275,3 +320,11 @@
 		    </div>
 		</div>
 	</div>
+
+  <script type="text/javascript">
+  	$('#label-switch').bootstrapSwitch();
+
+  	$('#notification1').bootstrapSwitch();
+  	//$("#switch-handleWidth").bootstrapSwitch();
+  	
+  </script>

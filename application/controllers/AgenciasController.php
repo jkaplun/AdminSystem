@@ -21,14 +21,22 @@ class AgenciasController extends Zend_Controller_Action
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');    
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/multi-select/js/multi-select.js');
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/agencias/busqueda-agencia.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
 
         $this->view->form = new Application_Form_Agencias_Busquedagencias();
+    }
+
+    public function busquedaAction(){
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+        $params=$this->_request->getParams();
+        $this->view->prueba = 'Llega al mensaje';
     }
 
 
     public function indexAction()
     {
-
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/bootstrap-switch/js/bootstrap-switch.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
@@ -37,6 +45,11 @@ class AgenciasController extends Zend_Controller_Action
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/agencias/index.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/usuariosAgencias/index.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/polizas/index.js');
+
+
+
+
+
          $agencia = new Application_Model_DbTable_Agencia();
 
          
@@ -90,11 +103,11 @@ class AgenciasController extends Zend_Controller_Action
                         'rfc' => $params['rfc'],
                         'email' => $params['email'],
                         'http' => $params['http'],
-                        'lic_icaavwin' => $params['lic_icaavwin'],
-                        'lic_iriswin' => $params['lic_iriswin'],
-                        'lic_gvc' => $params['lic_gvc'],
-                        'lic_centauro' => $params['lic_centauro'],
-                        'version_icaav' => $params['version_icaav'],
+                        // 'lic_icaavwin' => $params['lic_icaavwin'],
+                        // 'lic_iriswin' => $params['lic_iriswin'],
+                        // 'lic_gvc' => $params['lic_gvc'],
+                        // 'lic_centauro' => $params['lic_centauro'],
+                        // 'version_icaav' => $params['version_icaav'],
                         //'seguridad' => $params['seguridad'],
                         'factura_electronica' => $params['factura_electronica'],
                         //'fe_activa' => $params['fe_activa'],
@@ -110,8 +123,8 @@ class AgenciasController extends Zend_Controller_Action
                         'diot' => $params['diot'],
                         'cve_usopor_tit' => $params['cve_usopor_tit'],
                         'cve_usopor_aux' => $params['cve_usopor_aux'],
-                        'id_estatus_icaav' => $params['id_estatus_icaav'],
-                        'id_estatus_iris' => $params['id_estatus_iris'],
+                        // 'id_estatus_icaav' => $params['id_estatus_icaav'],
+                        // 'id_estatus_iris' => $params['id_estatus_iris'],
                         //'fecha' => $params['fecha'],
                         //'observaciones' => $params['observaciones'],
                         'sucursales' => $params['sucursales'],
@@ -134,9 +147,9 @@ class AgenciasController extends Zend_Controller_Action
                         'markup' => $params['markup'],
                         'portal_proveedores' => $params['portal_proveedores'],
                         'agencias_consolidadas' => $params['agencias_consolidadas'],
-                        'contabilidad_elect' => $params['contabilidad_elect'],
-                        //'fecha_actualizacion_folios' => $params['fecha_actualizacion_folios'],
-                        'ine' => $params['ine']
+                        // 'contabilidad_elect' => $params['contabilidad_elect'],
+                        // 'fecha_actualizacion_folios' => $params['fecha_actualizacion_folios'],
+                        // 'ine' => $params['ine']
                 );
               
         $form = new Application_Form_Agencias_Agencias();
@@ -215,11 +228,11 @@ class AgenciasController extends Zend_Controller_Action
                         'rfc' => $params['rfc'],
                         'email' => $params['email'],
                         'http' => $params['http'],
-                        'lic_icaavwin' => $params['lic_icaavwin'],
-                        'lic_iriswin' => $params['lic_iriswin'],
-                        'lic_gvc' => $params['lic_gvc'],
-                        'lic_centauro' => $params['lic_centauro'],
-                        'version_icaav' => $params['version_icaav'],
+                        // 'lic_icaavwin' => $params['lic_icaavwin'],
+                        // 'lic_iriswin' => $params['lic_iriswin'],
+                        // 'lic_gvc' => $params['lic_gvc'],
+                        // 'lic_centauro' => $params['lic_centauro'],
+                        // 'version_icaav' => $params['version_icaav'],
                         //'seguridad' => $params['seguridad'],
                         'factura_electronica' => $params['factura_electronica'],
                         //'fe_activa' => $params['fe_activa'],
@@ -232,7 +245,7 @@ class AgenciasController extends Zend_Controller_Action
                         //'tamara' => $params['tamara'],
                         //'ibank' => $params['ibank'],
                         //'amex' => $params['amex'],
-                        'diot' => $params['diot'],
+                        // 'diot' => $params['diot'],
                         'cve_usopor_tit' => $params['cve_usopor_tit'],
                         'cve_usopor_aux' => $params['cve_usopor_aux'],
                         //'id_estatus_icaav' => $params['id_estatus_icaav'],
@@ -261,7 +274,7 @@ class AgenciasController extends Zend_Controller_Action
                         'agencias_consolidadas' => $params['agencias_consolidadas'],
                         //'contabilidad_elect' => $params['contabilidad_elect'],
                         //'fecha_actualizacion_folios' => $params['fecha_actualizacion_folios'],
-                        'ine' => $params['ine'],
+                        // 'ine' => $params['ine'],
                 );
         
         	$form = new Application_Form_Agencias_Agencias();
