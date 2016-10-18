@@ -1,310 +1,307 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<base href="<?= $this->baseUrl() ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="MIG AdminSystem">
-    <meta name="author" content="HopeWare">
+    <head>
+    	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    	<base href="<?= $this->baseUrl() ?>">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="MIG AdminSystem">
+        <meta name="author" content="HopeWare">
 
-	<!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/bootstrap/css/bootstrap.min.css">
-    <!-- MetisMenu CSS -->
-    <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/metisMenu/metisMenu.min.css" >
-    <!-- DataTables CSS -->
-    <link href="<?= $this->baseUrl() ?>/css_complete/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
-    <!-- DataTables Responsive CSS -->
-    <link href="<?= $this->baseUrl() ?>/css_complete/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
- 	<!-- Custom CSS -->
-    <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/dist/css/sb-admin-2.css">
-    <!-- Custom Fonts -->
-    <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/font-awesome/css/font-awesome.min.css" >
-
-
-	<link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/bootstrap-select/css/bootstrap-select.min.css">
-
-	<link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/datepicker/css/bootstrap-datepicker3.min.css">
-
-    <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/multi-select/css/multi-select.css">
-    <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/bootstrap-switch/css/bootstrap-switch.css">
-
-    <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/panel.css">
-    <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/sweetalert.css">
-    <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/utiles.css">
-    
+    	<!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/bootstrap/css/bootstrap.min.css">
+        <!-- MetisMenu CSS -->
+        <!-- <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/metisMenu/metisMenu.min.css" > -->
+        <!-- DataTables CSS -->
+        <link href="<?= $this->baseUrl() ?>/css_complete/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+        <!-- DataTables Responsive CSS -->
+        <link href="<?= $this->baseUrl() ?>/css_complete/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+     	<!-- Custom CSS -->
+        <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/dist/css/sb-admin-2.css">
+        <!-- Custom Fonts -->
+        <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/font-awesome/css/font-awesome.min.css" >
 
 
-    <?php echo $this->headScript();  ?>
+    	<link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/bootstrap-select/css/bootstrap-select.min.css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    	<link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/datepicker/css/bootstrap-datepicker3.min.css">
 
-	<script src="<?= $this->baseUrl() ?>/css_complete/jquery/jquery.min.js"></script>
-	<script src="<?= $this->baseUrl() ?>/css_complete/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<?= $this->baseUrl() ?>/css_complete/metisMenu/metisMenu.min.js"></script>
-    <script src="<?= $this->baseUrl() ?>/js/sb-admin-2.js"></script>
-    <script src="<?= $this->baseUrl() ?>/css_complete/bootstrap-select/js/bootstrap-select.min.js"></script>
-	<!-- <script src="<?= $this->baseUrl() ?>/js/carousel.js"></script> -->
-	<script src="<?= $this->baseUrl() ?>/css_complete/datepicker/js/datepicker.min.js"></script>    
-	<script src="<?= $this->baseUrl() ?>/css_complete/datepicker/js/bootstrap-datepicker.es.js"></script>   
+        <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/multi-select/css/multi-select.css">
+        <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/bootstrap-switch/css/bootstrap-switch.css">
 
-	
-	<?php echo $this->InlineScript();  ?>
- 	<?php echo $this->headLink(); ?>
-</head>
-<body>
+        <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/panel.css">
+        <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/utiles.css">
+        
 
 
-	<div id="wrapper">
-	    <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="padding-top: 15px;padding-bottom: 10px;margin-bottom: 0px;">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="#" class="navbar-left"><img  style="max-width:100px; margin-top: -7px; margin-left: 10px;" src="<?= $this->baseUrl() ?>/img/empresa_mig.png"></a>
-            </div>
-            <!-- /.navbar-header -->
+        <?php echo $this->headScript();  ?>
 
-            <ul class="nav navbar-top-links navbar-right">
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> Nuevo Servicio
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> Reportarse con ...
-                                    <span class="pull-right text-muted small">12 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-alerts -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <?php echo $_SESSION['Zend_Auth']['USER_VALUES']['nombre']; ?> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-						<li role="presentation"><a href="#" data-toggle="modal" data-target="#myModalUserEdit"><i class="fa fa-user fa-fw"></i> Perfil </a></li>
-                        <li class="divider"></li>
-                        <li role="presentation"><a href="<?php echo $this->url(array('controller'=>'auth','action'=>'logout'));?>"><i class="fa fa-sign-out fa-fw"></i> Salir&nbsp;&nbsp;&nbsp;</a></li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-            <b>
-            <div class="navbar-default sidebar" role="navigation" style="margin-top: 60px;">
-            <!--padding-bottom: 25%;-->
-                <div class="sidebar-nav navbar-collapse">
-                    <br/>
-                    <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="<?= $this->baseUrl() ?>/"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
-                        </li>
-                        <li>
-                            <a href="tables.html"><i class="fa fa-calendar fa-fw"></i> Agenda</a>
-                        </li>
-                        <li>
-                            <a href="forms.html"><i class="fa fa-spinner fa-fw"></i> Actualizaciones</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Administracion<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<?= $this->baseUrl() ?>/agencias/"> Agencias</a>
-                                </li>
-                                <li>
-                                    <a href="<?= $this->baseUrl() ?>/usuarios/"> Usuarios</a>
-                                </li>
-                                <li>
-                                    <a href="<?= $this->baseUrl() ?>/productos/"> Productos</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-clipboard fa-fw"></i> Reportes<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<?= $this->baseUrl() ?>/agencias/busqueda-agencia"> Agencias</a>
+    	<script src="<?= $this->baseUrl() ?>/css_complete/jquery/jquery.js"></script>
+    	<script src="<?= $this->baseUrl() ?>/css_complete/bootstrap/js/bootstrap.min.js"></script>
+        <script src="<?= $this->baseUrl() ?>/css_complete/metisMenu/metisMenu.min.js"></script>
+        <script src="<?= $this->baseUrl() ?>/js/sb-admin-2.js"></script>
+        <script src="<?= $this->baseUrl() ?>/css_complete/bootstrap-select/js/bootstrap-select.min.js"></script>
+        <script src="<?= $this->baseUrl() ?>//css_complete/bootstrap-switch/js/bootstrap-switch.js"></script>
+    	<script src="<?= $this->baseUrl() ?>/css_complete/datepicker/js/datepicker.min.js"></script>    
+    	<script src="<?= $this->baseUrl() ?>/css_complete/datepicker/js/bootstrap-datepicker.es.js"></script>   
 
-                                </li>
-                                <li>
-                                    <a>Servicios<span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#"> Por Cliente</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> Por Ejecutivo</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                                <li>
-                                    <a>Horas <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#"> Por Cliente</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> Por Ejecutivo</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                                <li>
-                                    <a><i class="fa fa-user"></i> Clientes <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#"> Por Poliza</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> Por Polizas a Vencer</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> Por Tiempo sin Utilizar</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="<?= $this->baseUrl() ?>/ordenes/"><i class="fa fa-files-o fa-fw"></i> Ordenes de Servicio<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="public/ordenes/nueva-orden"> Nueva Orden</a>
-                                </li>
-                                <li>
-                                    <a href="public/ordenes/atencion-orden"> Atenci&oacute;n de Ordenes</a>
-                                </li>
-                                <li>
-                                    <a target="_blank" href="public/ordenes/monitoreo-orden"> Monitoreo de Ordenes</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>                        
-                    </ul>
-                    <br/>
+    	
+    	<?php echo $this->InlineScript();  ?>
+     	<?php echo $this->headLink(); ?>
+    </head>
+    <body>
+        <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="padding-top: 15px;padding-bottom: 10px;margin-bottom: 0px;">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" class="navbar-left"><img  style="max-width:100px; margin-top: -7px; margin-left: 10px;" src="<?= $this->baseUrl() ?>/img/empresa_mig.png"></a>
                 </div>
-                <!-- /.sidebar-collapse -->
+                <!-- /.navbar-header -->
+
+                <ul class="nav navbar-top-links navbar-right">
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-comment fa-fw"></i> Nuevo Servicio
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-twitter fa-fw"></i> Reportarse con ...
+                                        <span class="pull-right text-muted small">12 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-alerts -->
+                    </li>
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> <?php echo $_SESSION['Zend_Auth']['USER_VALUES']['nombre']; ?> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+        					<li role="presentation"><a href="#" data-toggle="modal" data-target="#myModalUserEdit"><i class="fa fa-user fa-fw"></i> Perfil </a></li>
+                            <li class="divider"></li>
+                            <li role="presentation"><a href="<?php echo $this->url(array('controller'=>'auth','action'=>'logout'));?>"><i class="fa fa-sign-out fa-fw"></i> Salir&nbsp;&nbsp;&nbsp;</a></li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+                <!-- /.navbar-top-links -->
+
+                <b>
+                <div class="navbar-default sidebar" role="navigation" style="margin-top: 60px;">
+                <!--padding-bottom: 25%;-->
+                    <div class="sidebar-nav navbar-collapse">
+                        <br/>
+                        <ul class="nav" id="side-menu">
+                            <li>
+                                <a href="<?= $this->baseUrl() ?>/"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
+                            </li>
+                            <li>
+                                <a href="tables.html"><i class="fa fa-calendar fa-fw"></i> Agenda</a>
+                            </li>
+                            <li>
+                                <a href="forms.html"><i class="fa fa-spinner fa-fw"></i> Actualizaciones</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-wrench fa-fw"></i> Administracion<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<?= $this->baseUrl() ?>/agencias/"> Agencias</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= $this->baseUrl() ?>/usuarios/"> Usuarios</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= $this->baseUrl() ?>/productos/"> Productos</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-clipboard fa-fw"></i> Reportes<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<?= $this->baseUrl() ?>/agencias/busqueda-agencia"> Agencias</a>
+
+                                    </li>
+                                    <li>
+                                        <a>Servicios<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="#"> Por Cliente</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> Por Ejecutivo</a>
+                                            </li>
+                                        </ul>
+                                        <!-- /.nav-third-level -->
+                                    </li>
+                                    <li>
+                                        <a>Horas <span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="#"> Por Cliente</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> Por Ejecutivo</a>
+                                            </li>
+                                        </ul>
+                                        <!-- /.nav-third-level -->
+                                    </li>
+                                    <li>
+                                        <a><i class="fa fa-user"></i> Clientes <span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="#"> Por Poliza</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> Por Polizas a Vencer</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> Por Tiempo sin Utilizar</a>
+                                            </li>
+                                        </ul>
+                                        <!-- /.nav-third-level -->
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="<?= $this->baseUrl() ?>/ordenes/"><i class="fa fa-files-o fa-fw"></i> Ordenes de Servicio<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="public/ordenes/nueva-orden"> Nueva Orden</a>
+                                    </li>
+                                    <li>
+                                        <a href="public/ordenes/atencion-orden"> Atenci&oacute;n de Ordenes</a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="public/ordenes/monitoreo-orden"> Monitoreo de Ordenes</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>                        
+                        </ul>
+                        <br/>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                </b>
+                <!-- /.navbar-static-side -->
+            </nav>
+
+        </div>
+        <div id="page-wrapper" style="min-height: 184px;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                       <br>
+        	           <?php echo $this->layout()->content; ?>
+                    </div>
+                </div>
             </div>
-            </b>
-            <!-- /.navbar-static-side -->
-        </nav>
+        </div>
 
-	</div>
-    <div id="page-wrapper" style="min-height: 184px;">
-        <div class="container-fluid">
-        <div class="row">
-        <div class="col-lg-12">
-        <br>
-    	<?php echo $this->layout()->content; ?>
+    	<!-- Modal -->
+    	<div class="modal fade" id="myModalUserEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    	  <div class="modal-dialog" role="document">
+    	    <div class="modal-content">
+    	      <div class="modal-header">
+    	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    	        <h4 class="modal-title" id="myModalLabel">Cambiar datos de usuario</h4>
+    	      </div> 
+    	      <form method="post" id="formupdateuser">
+    	      	<input type="hidden" name="actualiza_id_user" id="actualiza_id_user" value="<?php echo $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario']?>">
+    	      	<input name="accion" value="editar" type="hidden">
+    		      <div class="modal-body">
+    		        
+    				  <div class="form-group">
+    				    <label for="exampleInputName2">Nombre del Usuario</label>
+    				    <input type="text" class="form-control" id="actualiza_nombre_real" name="actualiza_nombre_real" value="<?php echo $_SESSION['Zend_Auth']['USER_VALUES']['nombre']?>">
+    				  </div>
+    				  <div class="form-group">
+    				    <label for="password">Nueva Contrase&ntilde;a</label>
+    				    <input type="password" class="form-control" id="actualiza_password" name="actualiza_password" >
+    				  </div>
+    				  <div class="form-group">
+    				    <label for="passwordConfirm">Confirmar Nueva Contrase&ntilde;a</label>
+    				    <input type="password" class="form-control" id="actualiza_passwordConfirm" name="actualiza_passwordConfirm" >
+    				  </div>
+    		      </div>
+    		      <div class="modal-footer">
+    		        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+    		        <button type="button" class="btn btn-primary" onclick="submitFormEditUser()">Guardar</button>
+    		      </div>
+    	      </form>
+    	    </div>
+    	  </div>
+    	</div>
 
-</div>
-</div>
-</div>
-</div>
-
-		<!-- Modal -->
-		<div class="modal fade" id="myModalUserEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Cambiar datos de usuario</h4>
-		      </div> 
-		      <form method="post" id="formupdateuser">
-		      	<input type="hidden" name="actualiza_id_user" id="actualiza_id_user" value="<?php echo $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario']?>">
-		      	<input name="accion" value="editar" type="hidden">
-			      <div class="modal-body">
-			        
-					  <div class="form-group">
-					    <label for="exampleInputName2">Nombre del Usuario</label>
-					    <input type="text" class="form-control" id="actualiza_nombre_real" name="actualiza_nombre_real" value="<?php echo $_SESSION['Zend_Auth']['USER_VALUES']['nombre']?>">
-					  </div>
-					  <div class="form-group">
-					    <label for="password">Nueva Contrase&ntilde;a</label>
-					    <input type="password" class="form-control" id="actualiza_password" name="actualiza_password" >
-					  </div>
-					  <div class="form-group">
-					    <label for="passwordConfirm">Confirmar Nueva Contrase&ntilde;a</label>
-					    <input type="password" class="form-control" id="actualiza_passwordConfirm" name="actualiza_passwordConfirm" >
-					  </div>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-			        <button type="button" class="btn btn-primary" onclick="submitFormEditUser()">Guardar</button>
-			      </div>
-		      </form>
-		    </div>
-		  </div>
-		</div>
-
-		<script type="text/javascript">
-			function submitFormEditUser(){
-				
-				var newpass = $.trim($('#actualiza_password').val());
-				var confirmpass = $.trim($('#actualiza_passwordConfirm').val());
-				var realname = $.trim($('#actualiza_nombre_real').val());
-				var id_user = $.trim($('#actualiza_id_user').val());
-				
-				if (newpass != '' ){
-					if ( newpass.length >= 6 ){
-						if ( newpass == confirmpass){
-							$.ajax({
-								  url: "public/index/ajax",
-								  method: "post",
-								  data: { accion_ajax : 'update_user' , id_user:id_user, newpass:newpass, realname:realname},
-								  dataType: "json"
-								})  .done(function( item ) {
-									window.location = "public/auth/logout"
-								  });
-						} else {
-							alert('Los passwords no coinciden.');
-						}
-					} else {
-						alert ("El password debe de contener minimo 6 caracteres.");
-						}
-					
-				} else {
-					$.ajax({
-						  url: "public/index/ajax",
-						  method: "post",
-						  data: { accion_ajax : 'update_user' , id_user:id_user, newpass:newpass, realname:realname},
-						  dataType: "json"
-						})  .done(function( item ) {
-							window.location = "public/auth/logout"
-						  });
-				}
-			}
-		</script>
-</body>
+    	<script type="text/javascript">
+    		function submitFormEditUser(){
+    			
+    			var newpass = $.trim($('#actualiza_password').val());
+    			var confirmpass = $.trim($('#actualiza_passwordConfirm').val());
+    			var realname = $.trim($('#actualiza_nombre_real').val());
+    			var id_user = $.trim($('#actualiza_id_user').val());
+    			
+    			if (newpass != '' ){
+    				if ( newpass.length >= 6 ){
+    					if ( newpass == confirmpass){
+    						$.ajax({
+    							  url: "public/index/ajax",
+    							  method: "post",
+    							  data: { accion_ajax : 'update_user' , id_user:id_user, newpass:newpass, realname:realname},
+    							  dataType: "json"
+    							})  .done(function( item ) {
+    								window.location = "public/auth/logout"
+    							  });
+    					} else {
+    						alert('Los passwords no coinciden.');
+    					}
+    				} else {
+    					alert ("El password debe de contener minimo 6 caracteres.");
+    					}
+    				
+    			} else {
+    				$.ajax({
+    					  url: "public/index/ajax",
+    					  method: "post",
+    					  data: { accion_ajax : 'update_user' , id_user:id_user, newpass:newpass, realname:realname},
+    					  dataType: "json"
+    					})  .done(function( item ) {
+    						window.location = "public/auth/logout"
+    					  });
+    			}
+    		}
+    	</script>
+    </body>
 </html>

@@ -11,8 +11,8 @@ class Application_Form_Polizas_Polizas extends Zend_Form
     	// $this->addElement(id_poliza);
     	
         // Horas soporte
-        $horasopor_year = new Zend_Form_Element_Text('horasopor_year');
-        $horasopor_year
+        $horas_poliza = new Zend_Form_Element_Text('horas_poliza');
+        $horas_poliza
         ->setRequired(true)
         ->addErrorMessage("- Es necesario que introduzca las horas de soporte.")
         ->removeDecorator('label')
@@ -22,7 +22,7 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->setAttrib("placeholder",utf8_encode("Horas anuales"))
         ->setAttrib("maxlength","11")
         ;
-        $this->addElement($horasopor_year);
+        $this->addElement($horas_poliza);
 
         
         $producto = new Application_Model_DbTable_Producto();
@@ -89,15 +89,15 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         $this->addElement($fecha_fin);
         
         // Cantidad facturar
-        $cantidad_fact = new Zend_Form_Element_Text('cantidad_fact');
-        $cantidad_fact->removeDecorator('label')
+        $costo_poliza = new Zend_Form_Element_Text('costo_poliza');
+        $costo_poliza->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Cantidad"))
         ->setAttrib("maxlength","11")
         ;
-        $this->addElement($cantidad_fact);
+        $this->addElement($costo_poliza);
          
         // Tiempo agotado
         $tiempo_agotado = new Zend_Form_Element_Select('tiempo_agotado');
@@ -114,18 +114,18 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         $this->addElement($tiempo_agotado);
          
         //Garant�a
-        $garantia = new Zend_Form_Element_Select('garantia');
-        $garantia
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($garantia);
+        // $garantia = new Zend_Form_Element_Select('garantia');
+        // $garantia
+        // ->removeDecorator('label')
+        // ->removeDecorator('HtmlTag')
+        // ->addMultiOptions(array(
+        //         'S'=>'Activo',
+        //         'N'=>'Inactivo'
+        // ))
+        // ->setAttrib("class","form-control")
+        // ->setAttrib("autocomplete","off")
+        // ;
+        // $this->addElement($garantia);
 
         $tipoPoliza = new Application_Model_DbTable_TipoPoliza();
         $resultados = $tipoPoliza->obtenerTiposPoliza();
@@ -155,61 +155,6 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->setAttrib("maxlength","250")
         ;
         $this->addElement($desc_servicios);
-        
-        // Actualizaci�n
-        $actualizacion = new Zend_Form_Element_Text('actualizacion');
-        $actualizacion->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Actualizaci�n"))
-        ->setAttrib("maxlength","2")
-        ;
-        $this->addElement($actualizacion);
-        
-        // Telef�nico
-        $telefonico = new Zend_Form_Element_Text('telefonico');
-        $telefonico->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Telef�nico"))
-        ->setAttrib("maxlength","2")
-        ;
-        $this->addElement($telefonico);
-        
-        // Remoto
-        $remoto = new Zend_Form_Element_Text('remoto');
-        $remoto->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Remoto"))
-        ->setAttrib("maxlength","2")
-        ;
-        $this->addElement($remoto);
-        
-        // AdmConvenios
-        $admconvenios = new Zend_Form_Element_Text('admconvenios');
-        $admconvenios->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Convenios adm"))
-        ->setAttrib("maxlength","2")
-        ;
-        $this->addElement($admconvenios);
-        
-        // Sitio
-        $sitio = new Zend_Form_Element_Text('sitio');
-        $sitio->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Sitio"))
-        ->setAttrib("maxlength","2")
-        ;
-        $this->addElement($sitio);
         
         // Estatus
         $estatus = new Zend_Form_Element_Select('estatus');

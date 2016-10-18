@@ -55,11 +55,11 @@ class PolizasController extends Zend_Controller_Action
         $data = array(
         				'id_agencia' => $params['id_agencia'],
         				'id_producto' => $params['id_producto'],
-                        'horasopor_year' => $params['horasopor_year'], 
+                        'horas_poliza' => $params['horas_poliza'], 
                         'clave' => $params['clave'], 
                         'fecha_ini' => $params['fecha_ini'], 
                         'fecha_fin' => $params['fecha_fin'],
-                        'cantidad_fact' => $params['cantidad_fact'],
+                        'costo_poliza' => $params['costo_poliza'],
                         'tipo' => $params['tipo'],
                         'estatus' => 'S'
                 );
@@ -110,22 +110,14 @@ class PolizasController extends Zend_Controller_Action
         				'id_agencia' => $params['id_agencia'],
                         'id_poliza' => $params['id_poliza'], 
         				'id_producto' => $params['id_producto'],
-                        'horasopor_year' => $params['horasopor_year'], 
+                        'horas_poliza' => $params['horas_poliza'], 
                         'clave' => $params['clave'], 
                         'fecha_ini' => $params['fecha_ini'], 
                         'fecha_fin' => $params['fecha_fin'],
-                        'cantidad_fact' => $params['cantidad_fact'],
+                        'costo_poliza' => $params['costo_poliza'],
                         'tiempo_agotado' => 'tiempo_agotado',
-                        //'garantia' => $params['garantia'],
                         'tipo' => $params['tipo'],
-                        //'desc_servicios' => $params['desc_servicios'],
-                        //'actualizacion' => $params['actualizacion'],
-                        //'telefonico' => $params['telefonico'],
-                        //'remoto' => $params['remoto'],
-                        //'admconvenios' => $params['admconvenios'],
-                        //'sitio' => $params['sitio'],
                         'estatus' => 'S'
-                        //'pagxeven' => $params['pagxeven']
                 );
         
         	$form = new Application_Form_Polizas_Polizas();
