@@ -30,6 +30,18 @@
                     <li><a  id="tabUsuariosAgencia" href="#tabUsuarios" data-toggle="tab">Usuarios</a></li>
                     <li><a href="#tabPolizas" data-toggle="tab">P&oacute;lizas</a></li>
                   	<li><a href="#tabLicencias" data-toggle="tab">Productos</a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" >Facturaci&oacute;n Electr&oacute;nica
+						<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#tabFacturacion" data-toggle="tab">Informaci&oacute;n Gral</a></li>
+							<li><a href="#tabFoliosFE" data-toggle="tab">Folios FE</a></li>
+							<li><a href="#tabSeriesFE" data-toggle="tab">Series FE</a></li>
+						</ul>
+					</li>
+                  	<li><a href="#tabIatas" data-toggle="tab">IATAS</a></li>
+                  	<li><a href="#tabDbUsers" data-toggle="tab">DB Users</a></li>
                     <li><a href="#tabObservaciones" data-toggle="tab">Observaciones</a></li>
                 </ul>
         </div>
@@ -37,9 +49,8 @@
         	<div class="tab-content">
 		    	<div class="tab-pane fade in active" id="tabInformacion">
 					<div class="row">
-						<div class="col-md-6">
-							<div class="bs-callout bs-callout-primary col"
-								id="callout-glyphicons-dont-mix">
+						<div class="col-md-4">
+							<div class="bs-callout bs-callout-primary col" id="callout-glyphicons-dont-mix">
 								<h5>Direcci&oacute;n</h5>
 								<address class="text-primary" id="direccion-info"> </address>
 								<p>
@@ -51,6 +62,11 @@
 								<p>RFC: <span class="text-primary" id="rfc-info"></span> </p>
 								<p>Clave ejecutivo Asignado:  <span class="text-primary" id="cve_usopor_tit-info"></span>  </p>
 								<p>Clave ejecutivo Ayuda:  <span class="text-primary" id="cve_usopor_aux-info"> </p>
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="bs-callout bs-callout-primary col" id="mapa">
+								<iframe id="map" width="100%" height="450"></iframe>
 							</div>
 						</div>
 <!-- 						<div class="col-md-6">
@@ -397,7 +413,114 @@
                         </div>
                 		
 					</div>
-				</div>		    	
+				</div>
+				<div class="tab-pane fade" id="tabFoliosFE">
+				<br/><br/>
+					<div class="panel panel-success">
+	                    <div class="panel-heading">
+	                        <h4><b>Folios Factura Elect&oacute;nica</b></h4>
+	                    </div>
+	                    <div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+
+								</div>
+								<div class="col-md-8" align="right">
+									<button type="button" class="btn btn-primary btn-circle"
+										data-dismiss="modal" onclick="abrirModalAgregarFolios()"
+										data-toggle="modal" data-target="#AgregarFolios">
+										&nbsp;<i class="fa fa-plus"></i>&nbsp;<i class="fa  fa-plane"></i>&nbsp;
+									</button>
+								</div>
+							</div>	  
+							<br/>                  
+							<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-foliosFE">
+								<thead>
+									<tr>
+										<th>id</th>
+										<th>Fecha de Compra</th>
+										<th>Folios</th>
+										<th>Folios Utilizados</th>
+										<th>Observaciones</th>
+										<th>Estado</th>
+										<th>Detalles</th>
+									</tr>
+								</thead>
+								<tbody align="center">
+
+								</tbody>
+							</table>
+
+	                    </div>
+	                </div>					
+				</div>
+				<div class="tab-pane fade" id="tabFacturacion">
+					<br/><br/>
+					<div class="col-md-12">
+						<h4 class="h4Form">Facturas</h4>
+						<hr class="hrForm">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-4">
+									    <div class="form-group">
+							                <label class="control-label">Formatos Pagados</label>
+							                <input type="number" min="0" class="form-control" placeholder="Formatos Pagados">
+									    </div>											
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+							                <label class="control-label">Factura Electr&oacute;nica</label>
+							                <?= $this->form->factura_electronica ?>		
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+							                <label class="control-label">CFDI</label>
+							                <?= $this->form->cfdi ?>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<label class="control-label">Timbrado</label>
+							                <select class="form-control">
+							                    <option value="1">Si</option>
+							                    <option value="0">No</option>
+							                </select>
+										</div>
+									</div>													
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+					                		<label class="control-label">Facturación de Boletos</label>
+					                 		<?= $this->form->facturacion_boleto ?>		
+										</div>
+									</div>										
+								</div>
+							</div>								
+						</div>
+					<div class="form-group">
+					<div class="row">
+					    <div class="col-xs-12">
+					        <label class="control-label">Adeudo</label>
+					        <?= $this->form->adeudo ?>
+					    </div>
+					</div>
+					</div>        										
+					</div>						
+				</div> 				
+				<div class="tab-pane fade" id="tabIatas">
+					<br/><br/>   
+				</div>
+				<div class="tab-pane fade" id="tabDbUsers">
+					<br/><br/>   
+				</div>  	
+				<div class="tab-pane fade" id="tabSeriesFE">
+					<br/><br/>   
+				</div> 
 		    </div>
 		</div>
 	</div>
@@ -410,7 +533,6 @@
   	$("[name='producto5']").bootstrapSwitch({onColor: 'success'});
   	$("[name='producto6']").bootstrapSwitch({onColor: 'success'});
   	$("[name='producto7']").bootstrapSwitch({onColor: 'success'});
-  	$("[name='producto8']").bootstrapSwitch({onColor: 'success'});
+  	$("[name='producto8']").bootstrapSwitch({onColor: 'success'});  	
   	//$("#switch-handleWidth").bootstrapSwitch();
-  	
   </script>

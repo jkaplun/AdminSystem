@@ -404,7 +404,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Observaciones de la p�liza"))
+        ->setAttrib("placeholder","Observaciones de la agencia")
         ->setAttrib("maxlength","256")
         ->setAttrib("rows","10")
         ;

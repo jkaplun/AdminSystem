@@ -199,79 +199,7 @@
 									</div>
 								</div>
 		                        <div class="tab-pane fade" id="tabConfiguraciones">
-		                        	<h4 class="h4Form">Estatus</h4>
-		                        	<hr class="hrForm">
-		                        	<div class="row">
-										<div class="col-md-12">
-				                        	<div class="row">
-												<div class="col-md-6">
-												    <div class="form-group">
-										                <label class="control-label">ICAAVWin</label>
-										                <?= $this->form->id_estatus_icaav ?>
-												    </div>												
-												</div>
-												<div class="col-md-6">
-												    <div class="form-group">
-										                <label class="control-label">IRISWin</label>
-										                <?= $this->form->id_estatus_iris ?>
-												    </div>												
-												</div>
-											</div>				
-										</div>
-									</div>
-		                        	<div class="row">
-										<div class="col-md-12">
-													<div class="form-group">
-										                <label class="control-label">Versi&oacute;n ICAAV</label>
-										                <?= $this->form->version_icaav ?>
-													</div>
-										</div>
-									</div>
-									<h4 class="h4Form">Interface</h4>
-									<hr class="hrForm">
-		                        	<div class="row">
-										<div class="col-md-12">
-				                        	<div class="row">
-												<div class="col-md-3">
-													<div class="form-group">
-										                <label class="control-label">Amadeus</label>
-										                <select class="form-control">
-										                    <option value="1">Si</option>
-										                    <option value="0">No</option>
-										                </select>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group">
-										                <label class="control-label">Sabre</label>
-										                <select class="form-control">
-										                    <option value="1">Si</option>
-										                    <option value="0">No</option>
-										                </select>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group">
-										                <label class="control-label">Apollo</label>
-										                <select class="form-control">
-										                    <option value="1">Si</option>
-										                    <option value="0">No</option>
-										                </select>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group">
-										                <label class="control-label">Wordspan</label>
-										                <select class="form-control">
-										                    <option value="1">Si</option>
-										                    <option value="0">No</option>
-										                </select>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
+		                   
 									<h4 class="h4Form">Acceso</h4>
 									<hr class="hrForm">
 		                        	<div class="row">
@@ -301,130 +229,25 @@
 		                        			</div>
 										</div>
 									</div>
-
-		                        	<div class="row">
+									<h4 class="h4Form">Ejecutivos</h4>
+									<hr class="hrForm">
+									<div class="row">
 										<div class="col-md-12">
-				                        	<div class="row">
-												<div class="col-md-4">
-													<div class="form-group">
-										                <label class="control-label">DIOT</label>
-										                <?= $this->form->diot ?>
-													</div>
-												</div>
-												<div class="col-md-4">
-													<div class="form-group">
-										                <label class="control-label">IMPLANT AM</label>
-										                <?= $this->form->implant_am ?>
-													</div>
-												</div>
-												<div class="col-md-4">
-													<div class="form-group">
-										                <label class="control-label">Agencia Consolidada</label>
-										                <?= $this->form->agencias_consolidadas ?> 
-													</div>
-												</div>
-											</div>
+										<div class="form-group">
+										<div class="row">
+										    <div class="col-xs-6">
+										        <label class="control-label">Ejecutivo Titular</label>
+										        <?= $this->form->cve_usopor_tit ?>
+										    </div>
+
+										    <div class="col-xs-6">
+										        <label class="control-label">Ejecutivo Auxiliar</label>
+										         <?= $this->form->cve_usopor_aux ?>
+										    </div>
 										</div>
-									</div>	
-
-		                        	<div class="row">
-										<div class="col-md-12">
-				                        	<div class="row">
-												<div class="col-md-3">
-													<div class="form-group">
-										                <label class="control-label">Portal de Proveedores</label>
-										                <?= $this->form->portal_proveedores ?>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group">
-										                <label class="control-label">Contabilidad Electr&oacute;nica</label>
-										                <?= $this->form->contabilidad_elect ?>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group">
-										                <label class="control-label">INE</label>
-										                <?= $this->form->ine ?>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group">
-										                <label class="control-label">Markup</label>
-										                <?= $this->form->markup ?>
-													</div>
-												</div>
-											</div>
+										</div>												
 										</div>
-									</div>	
-										<div class="col-md-12">
-											<h4 class="h4Form">Facturas</h4>
-											<hr class="hrForm">
-											<div class="row">
-												<div class="col-md-12">
-													<div class="row">
-														<div class="col-md-4">
-														    <div class="form-group">
-												                <label class="control-label">Formatos Pagados</label>
-												                <input type="number" min="0" class="form-control" placeholder="Formatos Pagados">
-														    </div>											
-														</div>
-														<div class="col-md-4">
-															<div class="form-group">
-												                <label class="control-label">Factura Electr&oacute;nica</label>
-												                <?= $this->form->factura_electronica ?>		
-															</div>
-														</div>
-														<div class="col-md-2">
-															<div class="form-group">
-												                <label class="control-label">CFDI</label>
-												                <?= $this->form->cfdi ?>
-															</div>
-														</div>
-														<div class="col-md-2">
-															<div class="form-group">
-																<label class="control-label">Timbrado</label>
-												                <select class="form-control">
-												                    <option value="1">Si</option>
-												                    <option value="0">No</option>
-												                </select>
-															</div>
-														</div>													
-													</div>
-												</div>
-												<div class="col-md-12">
-													<div class="row">
-														<div class="col-md-4">
-															<div class="form-group">
-										                		<label class="control-label">Facturación de Boletos</label>
-										                 		<?= $this->form->facturacion_boleto ?>		
-															</div>
-														</div>										
-													</div>
-												</div>								
-											</div>
-								    <div class="form-group">
-								        <div class="row">
-								            <div class="col-xs-12">
-								                <label class="control-label">Adeudo</label>
-								                <?= $this->form->adeudo ?>
-								            </div>
-								        </div>
-								    </div>        
-								    <div class="form-group">
-								        <div class="row">
-								            <div class="col-xs-6">
-								                <label class="control-label">Ejecutivo Titular</label>
-								                <?= $this->form->cve_usopor_tit ?>
-								            </div>
-
-								            <div class="col-xs-6">
-								                <label class="control-label">Ejecutivo Auxiliar</label>
-								                 <?= $this->form->cve_usopor_aux ?>
-								            </div>
-								        </div>
-								    </div>											
-										</div>											                        	
+									</div>										                        	
 		                        </div>	                        
 		                    </div>
 		                </div>
