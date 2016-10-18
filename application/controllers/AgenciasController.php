@@ -85,250 +85,188 @@ class AgenciasController extends Zend_Controller_Action
          //echo '<pre>'.print_r($agencias,true).'</pre>';die;
     }
 
-    public function agregarAction(){
+public function agregarAction(){
 
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
-
         $data = array(
-                        'clave' => $params['clave'], 
-                        'nombre' => $params['nombre'], 
-                        'direccion' => $params['direccion'], 
-                        'colonia' => $params['colonia'],
-                        'cp' => $params['cp'],
-                        'clave_ciudad' => '51',
-                        'tel1' => $params['tel1'],
-                        'tel2' => $params['tel2'],
-                        'rfc' => $params['rfc'],
-                        'email' => $params['email'],
-                        'http' => $params['http'],
-                        // 'lic_icaavwin' => $params['lic_icaavwin'],
-                        // 'lic_iriswin' => $params['lic_iriswin'],
-                        // 'lic_gvc' => $params['lic_gvc'],
-                        // 'lic_centauro' => $params['lic_centauro'],
-                        // 'version_icaav' => $params['version_icaav'],
-                        //'seguridad' => $params['seguridad'],
-                        'factura_electronica' => $params['factura_electronica'],
-                        //'fe_activa' => $params['fe_activa'],
-                        'cfdi' => $params['cfdi'],
-                        //'ftp_login' => $params['ftp_login'],
-                        //'ftp_pwd' => $params['ftp_pwd'],
-                        //'dba_pwd' => $params['dba_pwd'],
-                        //'layout_login' => $params['layout_login'],
-                        //'layout_pwd' => $params['layout_pwd'],
-                        //'tamara' => $params['tamara'],
-                        //'ibank' => $params['ibank'],
-                        //'amex' => $params['amex'],
-                        'diot' => $params['diot'],
-                        'cve_usopor_tit' => $params['cve_usopor_tit'],
-                        'cve_usopor_aux' => $params['cve_usopor_aux'],
-                        // 'id_estatus_icaav' => $params['id_estatus_icaav'],
-                        // 'id_estatus_iris' => $params['id_estatus_iris'],
-                        //'fecha' => $params['fecha'],
-                        //'observaciones' => $params['observaciones'],
-                        'sucursales' => $params['sucursales'],
-                        'adeudo' => $params['adeudo'],
-                        'boleto_e' => $params['boleto_e'],
-                        'update_login' => $params['update_login'],
-                        'update_pwd' => $params['update_pwd'],
-                        //'activa_nuevos_sp' => $params['activa_nuevos_sp'],
-                        //'addenda' => $params['addenda'],
-                        //'fecha_caducidad' => $params['fecha_caducidad'],
-                        //'ftp_add_login' => $params['ftp_add_login'],
-                        //'ftp_add_pwd' => $params['ftp_add_pwd'],
-                        //'ip_portal_fe' => $params['ip_portal_fe'],
-                        //'prov_timbrado' => $params['prov_timbrado'],
-                        'facturacion_boleto' => $params['facturacion_boleto'],
-                        'implant_am' => $params['implant_am'],
-                        //'folios_utilizados' => $params['folios_utilizados'],
-                        //'folios_sync' => $params['folios_sync'],
-                        'nombre_comercial' => $params['nombre_comercial'],
-                        'markup' => $params['markup'],
-                        'portal_proveedores' => $params['portal_proveedores'],
-                        'agencias_consolidadas' => $params['agencias_consolidadas'],
-                        // 'contabilidad_elect' => $params['contabilidad_elect'],
-                        // 'fecha_actualizacion_folios' => $params['fecha_actualizacion_folios'],
-                        // 'ine' => $params['ine']
-                );
-              
-        $form = new Application_Form_Agencias_Agencias();
-        $utiles = new Application_Model_Services_Utiles();
+                                'id_agencia' => $params['id_agencia'],
+                                'clave' => $params['claveUsuarioAgencia'],
+                                'nombre' => $params['nombreUsuarioAgencia'],
+                                'apellidos' => $params['apellidos'],
+                                'puesto' => $params['puesto'],
+                                'telefono' => $params['telefono'],
+        						'ext' => $params['ext'],
+                                'celular' => $params['celular'],
+                                'email' => $params['emailUsuarioAgencia'],
+                                'activo' => $params['activo'],
+                                'lider_proy' => $params['lider_proy'],
+                                'director' => $params['director'],
+                                'admin_fe' => $params['admin_fe'],
+                                'enviar_reporte_portal_mig' => $params['enviar_reporte_portal_mig'],
+                                'bajar_updates' => $params['bajar_updates']
+                        );
+        
+        $form = new Application_Form_UsuariosAgencia_UsuariosAgencia();
         
         $mensajesDeError = $form->getMessages();
         $cantidadDeErrores = count($mensajesDeError);
         if ($cantidadDeErrores == 0)
         {
-            // LEER: coment� la siguiente linea por que siempre me manda que el RFC es invalido 
-            $rfcMinusculas = strtolower($params['rfc']);
-        	$esRfcValido = $utiles->validarRFC($rfcMinusculas);
-            //$esRfcValido=true;
-            if ($esRfcValido)
-            { // Si es RFC es v�lido
-            	$data['rfc'] = $rfcMinusculas;
-                $esEmailCorrecto = $utiles->comprobar_email($params['email']);
-                if($esEmailCorrecto)
-                { // si el emal es correcto:
-                      
-                   // se inserta en la base de datos a la nueva agencia
-                   $idNuevaAgencia = $this->agencia->insert($data);
-                   // se inyecta el ID, estado y descripción en la respuesta al cliente
-                   $data['id_agencia']=$idNuevaAgencia;
-                   $data['estado']='ok';
-                   $data['descripcion']='La agencia ha sido guardada exitosamente';
-                   // se responde al cliente
-                   $this->_helper->json($data);
-                   $this->_redirect('agencias/');
-                 }
-                 else 
-                 { // else cuando el email es incorrecto
-  
-                   // se inyecta el ID, estado y descripción en la respuesta al cliente
-                   //$data['id_agencia']='0';
-                   $data['estado']='error';
-                   $data['descripcion']='Email en formato incorrecto';
-                   // se responde al cliente
-                   $this->_helper->json($data);
-                   $this->_redirect('clientes/');
-                }
-            }
-            else 
-            { // else cuando el formato del RFC no es correcto
+				//$contraEncrip = sha1($params['pwd']);
+                $usuario = $this->usuario_agencia->obtenerUsuariosAgenciaPorClave($params['claveUsuarioAgencia']);
+                
+                if (!$usuario)
+                { // Â¿QuÃ© se verifica aquÃ­?
+                    $utiles = new Application_Model_Services_Utiles();
+                    $esEmailCorrecto = $utiles->comprobar_email($params['emailUsuarioAgencia']);
+                    if($esEmailCorrecto)
+                    { // si el emal es correcto:
 
-              // se inyecta el ID, estado y descripción en la respuesta al cliente
-             // $data['id_usuario']='0';
-              $data['estado']='error';
-              $data['descripcion']='RFC en formato incorrecto';
-              // se responde al cliente
-              $this->_helper->json($data);
-              $this->_redirect('clientes/');
-            }
+                    	$dba_pwdEncoded = base64_encode($params['pwd']);
+                    	$data['pwd']=$dba_pwdEncoded;
+                        // se inserta en la base de datos al nuevo usuario
+                        $nuevoUsuarioAgencia = $this->usuario_agencia->insert($data);
+                        unset($data['pwd']);
+                        $data['estado']='ok';
+                        // se responde al cliente
+                        $this->_helper->json($data);
+                        $this->_redirect('agencias/');
+                    }
+                    else 
+                    { // else cuando el email es incorrecto
+  
+                       // se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
+                        $data['id_agencia']='0';
+                        $data['clave']='';
+                        $data['estado']='error';
+                        $data['descripcion']='Email en formato incorrecto';
+                         // se responde al cliente
+                        $this->_helper->json($data);
+                        $this->_redirect('agencias/');
+                    }
+                }
+                else 
+                { // else cuando ya existe una clave igual (??) 
+
+                       // se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
+                        $data['id_agencia']='0';
+                        $data['clave']='';
+                        $data['estado']='error';
+                        $data['descripcion']='Ya existe una clave igual';
+                        // se responde al cliente
+                        $this->_helper->json($data);
+                        $this->_redirect('agencias/');
+                }
         }
         else 
         { // else cuando existe un error encontrado en el form
             $this->_helper->json($mensajesDeError);
-            $this->_redirect('usuarios/');
+            $this->_redirect('agencias/');
         }
     }
     
-    public function actualizarAction(){
+public function actualizarAction(){
 
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
+       	 //echo $params['id_agencia'];
+            	
         $data = array(
-                        'clave' => $params['clave'], 
-                        'nombre' => $params['nombre'], 
-                        'direccion' => $params['direccion'], 
-                        'colonia' => $params['colonia'],
-                        'cp' => $params['cp'],
-                        //'clave_ciudad' => $params['clave_ciudad'],
-                        'tel1' => $params['tel1'],
-                        'tel2' => $params['tel2'],
-                        'rfc' => $params['rfc'],
-                        'email' => $params['email'],
-                        'http' => $params['http'],
-                        // 'lic_icaavwin' => $params['lic_icaavwin'],
-                        // 'lic_iriswin' => $params['lic_iriswin'],
-                        // 'lic_gvc' => $params['lic_gvc'],
-                        // 'lic_centauro' => $params['lic_centauro'],
-                        // 'version_icaav' => $params['version_icaav'],
-                        //'seguridad' => $params['seguridad'],
-                        'factura_electronica' => $params['factura_electronica'],
-                        //'fe_activa' => $params['fe_activa'],
-                        'cfdi' => $params['cfdi'],
-                        //'ftp_login' => $params['ftp_login'],
-                        //'ftp_pwd' => $params['ftp_pwd'],
-                        //'dba_pwd' => $params['dba_pwd'],
-                        //'layout_login' => $params['layout_login'],
-                        //'layout_pwd' => $params['layout_pwd'],
-                        //'tamara' => $params['tamara'],
-                        //'ibank' => $params['ibank'],
-                        //'amex' => $params['amex'],
-                        // 'diot' => $params['diot'],
-                        'cve_usopor_tit' => $params['cve_usopor_tit'],
-                        'cve_usopor_aux' => $params['cve_usopor_aux'],
-                        //'id_estatus_icaav' => $params['id_estatus_icaav'],
-                        //'id_estatus_iris' => $params['id_estatus_iris'],
-                        //'fecha' => $params['fecha'],
-                        //'observaciones' => $params['observaciones'],
-                        'sucursales' => $params['sucursales'],
-                        //'adeudo' => $params['adeudo'],
-                        'boleto_e' => $params['boleto_e'],
-                        'update_login' => $params['update_login'],
-                        'update_pwd' => $params['update_pwd'],
-                        //'activa_nuevos_sp' => $params['activa_nuevos_sp'],
-                        //'addenda' => $params['addenda'],
-                        //'fecha_caducidad' => $params['fecha_caducidad'],
-                        //'ftp_add_login' => $params['ftp_add_login'],
-                        //'ftp_add_pwd' => $params['ftp_add_pwd'],
-                        //'ip_portal_fe' => $params['ip_portal_fe'],
-                        //'prov_timbrado' => $params['prov_timbrado'],
-                        'facturacion_boleto' => $params['facturacion_boleto'],
-                        'implant_am' => $params['implant_am'],
-                        //'folios_utilizados' => $params['folios_utilizados'],
-                        //'folios_sync' => $params['folios_sync'],
-                        'nombre_comercial' => $params['nombre_comercial'],
-                        'markup' => $params['markup'],
-                        'portal_proveedores' => $params['portal_proveedores'],
-                        'agencias_consolidadas' => $params['agencias_consolidadas'],
-                        //'contabilidad_elect' => $params['contabilidad_elect'],
-                        //'fecha_actualizacion_folios' => $params['fecha_actualizacion_folios'],
-                        // 'ine' => $params['ine'],
-                );
+                                'id_agencia' => $params['id_agencia'],
+                                //'clave' => $params['claveUsuarioAgencia'], no se permite modificación
+                                //'pwd' => $params['pwd'],
+                                'nombre' => $params['nombreUsuarioAgencia'],
+                                'apellidos' => $params['apellidos'],
+                                'puesto' => $params['puesto'],
+                                'telefono' => $params['telefono'],
+                                'ext' => $params['ext'],
+                                'celular' => $params['celular'],
+                                'email' => $params['emailUsuarioAgencia'],
+                                'activo' => $params['activo'],
+                                'lider_proy' => $params['lider_proy'],
+                                'director' => $params['director'],
+                                'admin_fe' => $params['admin_fe'],
+                                'enviar_reporte_portal_mig' => $params['enviar_reporte_portal_mig'],
+                                'bajar_updates' => $params['bajar_updates']
+                        );
         
-        	$form = new Application_Form_Agencias_Agencias();
-        	$utiles = new Application_Model_Services_Utiles();
+        	$form = new Application_Form_UsuariosAgencia_UsuariosAgencia();
+       		$usuarioActual = $this->usuario_agencia->obtenerUsuarioDeAgenciaPorId($params['id_agencia'],$params['claveUsuarioAgencia']);
         	
         	$mensajesDeError = $form->getMessages();
         	$cantidadDeErrores = count($mensajesDeError);
-    		if ($cantidadDeErrores == 0)
+        	if ($cantidadDeErrores == 0)
         	{
-        		//$esRfcValido = $utiles->validarRFC($params['rfc']);
-        		$esRfcValido = true;
-            	if ($esRfcValido)
-            	{ // Si es RFC es v�lido
-                	//$esEmailCorrecto = $utiles->comprobar_email($params['email']);
-            		$esEmailCorrecto = true;
-                	
-                	if($esEmailCorrecto)
-                	{ // si el emal es correcto:
-        				$where = "id_agencia = {$params['id_agencia']}";
-        				// 	se actualiza en la base de datos a la agencia
-        				$this->agencia->update($data, $where);
-                   		$data['estado']='ok';
-                   		$data['descripcion']='La agencia ha sido actualizada exitosamente';
-                   		// se responde al cliente
-                   		$this->_helper->json($data);
-                   		$this->_redirect('clientes/');
-                 	}
-                 	else 
-                 	{ // else cuando el email es incorrecto
-                 		// se inyecta el ID, estado y descripción en la respuesta al cliente
-                   		$data['id_agencia']='0';
-                   		$data['estado']='error';
-                  		$data['descripcion']='Email en formato incorrecto';
-                   		// se responde al cliente
-                   		$this->_helper->json($data);
-                   		$this->_redirect('clientes/');
-                	}
-            	}
-            	else 
-            	{ // else cuando el formato del RFC no es correcto
-            		// se inyecta el ID, estado y descripción en la respuesta al cliente
-              		$data['id_usuario']='0';
-              		$data['estado']='error';
-              		$data['descripcion']='RFC en formato incorrecto';
-              		// se responde al cliente
-              		$this->_helper->json($data);
-              		$this->_redirect('clientes/');
-            	}
-        	}
-        	else 
-        	{ // else cuando existe un error encontrado en el form
-            	$this->_helper->json($mensajesDeError);
-            	$this->_redirect('clientes/');
-        	}
+        		/*$esContrasenaYConfValidos=false;
+        		//Revisando si el usuario modificï¿½ la contraseï¿½a
+        		if($params['pwd'] != $usuarioActual['pwd'])
+        		{//Si el usuario la modificï¿½
+        			if($params['pwd'] != $params['pwd_conf'])
+        			{// else cuando las contraeÃ±as no coinciden
+        				
+        				// se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
+        				$data['estado']='error';
+        				$data['descripcion']='Passwords diferentes'.$usuarioActual['pwd'];
+        				// se responde al cliente
+        				$this->_helper->json($data);
+        				$this->_redirect('agencias/');
+        			}
+        			else 
+        			{
+        				$contraEncrip = sha1($params['pwd']);
+        				$data['pwd']=$contraEncrip;
+        			}
+        		}*/
+        		$utiles = new Application_Model_Services_Utiles();
+        		$esEmailCorrecto = $utiles->comprobar_email($params['emailUsuarioAgencia']);
+        		if ($esEmailCorrecto)
+        		{
+        			/*if ($usuarioActual['clave'] != $params['claveUsuarioAgencia'])
+        			{
+	        				// Si se intenta modificar la clave
+        					// se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
+        					$data['estado']='error';
+        					$data['descripcion']='No se permite modificar la clave';
+        					// se responde al cliente
+        					$this->_helper->json($data);
+        					$this->_redirect('agencias/');
+        			}
+        			else
+        			{ */
+        				// 	se actualiza en la base de datos al usuario
+                    	$dba_pwdEncoded = base64_encode($params['pwd']);
+                    	$data['pwd']=$dba_pwdEncoded;
+        				$where = "id_agencia = {$params['id_agencia']} and clave = '{$params['claveUsuarioAgencia']}'";
+        				$this->usuario_agencia->update($data, $where);
+	        			// 	se inyecta el estado y descripciÃ³n en la respuesta al cliente
+        				$data['id_agencia']=$params['id_agencia'];
+        				$data['clave']=$params['claveUsuarioAgencia'];
+    	    			$data['estado']='ok';
+        				$data['descripcion']='El usuario ha sido actualizado exitosamente';
+        				// se responde al cliente
+        				$this->_helper->json($data);
+        				$this->_redirect('agencias/');
+        			//}
+        		}
+        		else
+        		{ // else cuando el email es incorrecto
+        			// se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
+        			//$data['id_usuario_agencia']='0';
+        			$data['estado']='error';
+        			$data['descripcion']='Email en formato incorrecto';
+        			// se responde al cliente
+        			$this->_helper->json($data);
+        			$this->_redirect('agencias/');
+        		}
+    	}
+	    else
+    	{ // else cuando existe un error encontrado en el form
+       		$this->_helper->json($mensajesDeError);
+       		$this->_redirect('agencias/');
+    	}
     }
 
    public function consultarAction(){

@@ -5,25 +5,10 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
 {
     public function init()
     {
-        // Clave
-        $clave = new Zend_Form_Element_Text('claveUsuarioAgencia');
-        $clave->setRequired(true)
-        ->addErrorMessage("- Es necesario que introduzca el nombre de usuario.")
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Usuario"))
-        ->setAttrib("disabled","disabled")
-        // ->setAttrib("onkeyup","fAgrega();")
-        // ->setAttrib("maxlength","15")
-        //->setAttrib('disabled', 'disabled');
-        ;
-        $this->addElement($clave);
         
         // Password
         $password = new Zend_Form_Element_Text('pwd');
-        $password->addErrorMessage("- Es necesario que introduzca el password.")
+        $password
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("autocomplete","off")
@@ -173,32 +158,6 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->setAttrib("autocomplete","off")
         ;
         $this->addElement($admin_fe);
-        
-        // nuevo
-        $nuevo = new Zend_Form_Element_Select('nuevo');
-        $nuevo->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($nuevo);
-        
-        // actualizar_pass
-        $actualizar_pass = new Zend_Form_Element_Select('actualizar_pass');
-        $actualizar_pass->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($actualizar_pass);
         
         // Enviar reporte portal MIG
         $enviar_reporte_portal_mig = new Zend_Form_Element_Select('enviar_reporte_portal_mig');

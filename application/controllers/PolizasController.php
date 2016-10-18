@@ -55,13 +55,16 @@ class PolizasController extends Zend_Controller_Action
         $data = array(
         				'id_agencia' => $params['id_agencia'],
         				'id_producto' => $params['id_producto'],
-                        'horasopor_year' => $params['horasopor_year'], 
-                        'clave' => $params['clave'], 
+                        'horas_poliza' => '30', 
+                        'horas_consumidas' => $params['horas_consumidas'],
+                        //'clave' => $params['clave'], 
                         'fecha_ini' => $params['fecha_ini'], 
                         'fecha_fin' => $params['fecha_fin'],
-                        'cantidad_fact' => $params['cantidad_fact'],
+                        'costo_poliza' => $params['costo_poliza'],
+                        'tiempo_agotado' => $params['tiempo_agotado'],
                         'tipo' => $params['tipo'],
-                        'estatus' => 'S'
+                        'observaciones' => $params['observaciones'],
+                        'estatus' => 'ACT'
                 );
               
         $form = new Application_Form_Polizas_Polizas();
@@ -74,24 +77,32 @@ class PolizasController extends Zend_Controller_Action
         	$esFechaDePolizaValida = $servicesPolizas ->esPolizaValida($params['id_producto'], $params['id_agencia'], 
         										$params['fecha_ini'], $params['fecha_fin']);
         	
-        	// if($esFechaDePolizaValida)
-        	// {
+        	 if($esFechaDePolizaValida)
+        	 {
+        	 	$v1ClavePoliza = $servicesPolizas->obtenerV1DeClavePoliza($params['id_producto'], $params['id_agencia']);        	 	
+        	 	$data['clave'] = $v1ClavePoliza;
+        	 	//Se crea la póliza con una clave sin el id
         		$idNuevaPoliza = $this->poliza->insert($data);
+        		//Se concatena el id de la nueva póliza
+        		$data['clave'] = $v1ClavePoliza.'5';
+        		// 	se actualiza en la base de datos la clave de la p�liza
+        		$where = "id_poliza= {$idNuevaPoliza}";
+        		$this->poliza->update($data, $where);
         		// se inyecta el ID, estado y descripción en la respuesta al cliente
-        		$data['id_poliza']=$idNuevaPoliza;
+        		$data['id_poliza']=5;
         		$data['estado']='ok';
         		$data['descripcion']='La poliza ha sido guardada exitosamente';
         		$this->_helper->json($data);
         		//$this->_redirect('agencias/');
-        	// }
-        	// else 
-        	// {//Si las fechas de la nueva p�liza se traslapan con las de alguna vigente
-        	// 	$data['estado']='error';
-        	// 	$data['descripcion']='La fecha de la poliza que intenta crear se traslapa con otra.';
-        	// 	// se responde al cliente
-        	// 	$this->_helper->json($data);
-        	// 	//$this->_redirect('agencias/');
-        	// }
+        	 }
+        	 else 
+        	 {//Si las fechas de la nueva p�liza se traslapan con las de alguna vigente
+        	 	$data['estado']='error';
+        	 	$data['descripcion']='La fecha de la poliza que intenta crear se traslapa con otra.';
+        	 	// se responde al cliente
+        	 	$this->_helper->json($data);
+        	 	//$this->_redirect('agencias/');
+        	 }
         }
         else 
         { // else cuando existe un error encontrado en el form
@@ -107,25 +118,19 @@ class PolizasController extends Zend_Controller_Action
         $params=$this->_request->getParams();
 
         $data = array(
+        				'id_poliza' => $params['id_poliza'],
         				'id_agencia' => $params['id_agencia'],
-                        'id_poliza' => $params['id_poliza'], 
         				'id_producto' => $params['id_producto'],
-                        'horasopor_year' => $params['horasopor_year'], 
+                        'horas_poliza' => $params['horas_poliza'], 
+                        'horas_consumidas' => $params['horas_consumidas'],
                         'clave' => $params['clave'], 
                         'fecha_ini' => $params['fecha_ini'], 
                         'fecha_fin' => $params['fecha_fin'],
-                        'cantidad_fact' => $params['cantidad_fact'],
-                        'tiempo_agotado' => 'tiempo_agotado',
-                        //'garantia' => $params['garantia'],
+                        'costo_poliza' => $params['costo_poliza'],
+                        'tiempo_agotado' => $params['tiempo_agotado'],
                         'tipo' => $params['tipo'],
-                        //'desc_servicios' => $params['desc_servicios'],
-                        //'actualizacion' => $params['actualizacion'],
-                        //'telefonico' => $params['telefonico'],
-                        //'remoto' => $params['remoto'],
-                        //'admconvenios' => $params['admconvenios'],
-                        //'sitio' => $params['sitio'],
-                        'estatus' => 'S'
-                        //'pagxeven' => $params['pagxeven']
+                        'observaciones' => $params['observaciones'],
+                        'estatus' => $params['estatus']
                 );
         
         	$form = new Application_Form_Polizas_Polizas();
