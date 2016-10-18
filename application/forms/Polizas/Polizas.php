@@ -26,7 +26,7 @@ class Application_Form_Polizas_Polizas extends Zend_Form
 
         
         $producto = new Application_Model_DbTable_Producto();
-        $resultados = $producto->obtenerPolizasVigentes();
+        $resultados = $producto->obtenerProductos();
         $lista = array();
         foreach ( $resultados as $resultado){
         	$lista[$resultado['id_producto']]=$resultado['nombre_prod'];
@@ -56,9 +56,6 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->setAttrib("maxlength","15")
         ;
         $this->addElement($clave);
-        
-        
-        //<input class='datepicker' data-provide="datepicker"  data-date-format="yyyy-mm-dd">
         
         // Fecha inicial
         $fecha_ini = new Zend_Form_Element_Text('fecha_ini');
@@ -94,7 +91,7 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Cantidad"))
+        ->setAttrib("placeholder",utf8_encode("Cantidad anual de la póliza"))
         ->setAttrib("maxlength","11")
         ;
         $this->addElement($costo_poliza);
@@ -146,15 +143,14 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         $this->addElement($tipo);
         
         //Descripci�n de  servicios
-        $desc_servicios = new Zend_Form_Element_Text('desc_servicios');
-        $desc_servicios->removeDecorator('label')
+        $observaciones = new Zend_Form_Element_TextArea('observaciones');
+        $observaciones->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Descripci�n de servicios"))
-        ->setAttrib("maxlength","250")
+        ->setAttrib("placeholder",utf8_encode("Observaciones"))
         ;
-        $this->addElement($desc_servicios);
+        $this->addElement($observaciones);
         
         // Estatus
         $estatus = new Zend_Form_Element_Select('estatus');
@@ -162,24 +158,15 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
+                'ACT'=>'Activo',
+                'ADE'=>'Adeudo',
+        		'BLQ'=>'Bloqueado',
+        		'CAN'=>'Cancelado',
         ))
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ;
         $this->addElement($estatus);
-        
-        // Pagxeven
-        $pagxeven = new Zend_Form_Element_Text('pagxeven');
-        $pagxeven->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Pagxeven"))
-        ->setAttrib("maxlength","2")
-        ;
-        $this->addElement($pagxeven);
         
         // Submit
         $submit = new Zend_Form_Element_Submit('submit');

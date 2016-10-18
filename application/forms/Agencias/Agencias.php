@@ -12,7 +12,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
     	
         // Clave
         $clave = new Zend_Form_Element_Text('clave');
-        $clave
+        $clave->setRequired(true)
         ->addErrorMessage("- Es necesario que introduzca la clave de la agencia.")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
@@ -25,33 +25,34 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         
         // Nombre
         $nombre = new Zend_Form_Element_Text('nombre');
-        $nombre
+        $nombre->setRequired(true)
         ->addErrorMessage("- Es necesario que introduzca el nombre.")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Nombre"))
-        ->setAttrib("maxlength","225")
+        ->setAttrib("maxlength","255")
         ;
         $this->addElement($nombre);
         
-        // Dirección
+        // Direcciï¿½n
         $direccion = new Zend_Form_Element_Text('direccion');
-        $direccion
-        ->addErrorMessage("- Es necesario que introduzca la dirección.")
+        $direccion->setRequired(true)
+        ->addErrorMessage("- Es necesario que introduzca la direcciï¿½n.")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Dirección"))
+        ->setAttrib("placeholder",utf8_encode("Direcciï¿½n"))
         ->setAttrib("maxlength","120")
         ;
         $this->addElement($direccion);
         
         // Colonia
         $colonia = new Zend_Form_Element_Text('colonia');
-        $colonia->removeDecorator('label')
+        $colonia->setRequired(true)
+        ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
@@ -62,11 +63,12 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         
         // C.P.
         $cp = new Zend_Form_Element_Text('cp');
-        $cp->removeDecorator('label')
+        $cp->setRequired(true)
+        ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Código postal"))
+        ->setAttrib("placeholder",utf8_encode("Cï¿½digo postal"))
         ->setAttrib("maxlength","5")
         ->setAttrib("minlength","5")
         ;
@@ -85,27 +87,27 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ;
         $this->addElement($clave_ciudad);
         
-        // Teléfono 1
+        // Telï¿½fono 1
         $tel1 = new Zend_Form_Element_Text('tel1');
-        $tel1
-        ->addErrorMessage("- Es necesario que introduzca el teléfono 1")
+        $tel1->setRequired(true)
+        ->addErrorMessage("- Es necesario que introduzca el telï¿½fono 1")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Teléfono 1"))
+        ->setAttrib("placeholder",utf8_encode("Telï¿½fono 1"))
         ->setAttrib("maxlength","10")
         ->setAttrib("minlength","10")
         ;
         $this->addElement($tel1);
         
-        // Teléfono 2
+        // Telï¿½fono 2
         $tel2 = new Zend_Form_Element_Text('tel2');
         $tel2->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Teléfono 2"))
+        ->setAttrib("placeholder",utf8_encode("Telï¿½fono 2"))
         ->setAttrib("maxlength","10")
         ->setAttrib("minlength","10")
         ;
@@ -113,7 +115,8 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         
         // Rfc
         $rfc = new Zend_Form_Element_Text('rfc');
-        $rfc->removeDecorator('label')
+        $rfc->setRequired(true)
+        ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
@@ -125,7 +128,8 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         
         // Email
         $email = new Zend_Form_Element_Text('email');
-        $email->removeDecorator('label')
+        $email->setRequired(true)
+        ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
@@ -133,6 +137,18 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("maxlength","100")
         ;
         $this->addElement($email);
+        
+        // Email alternativo
+        $emailAlterno = new Zend_Form_Element_Text('email_alt');
+        $emailAlterno
+        ->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("Email"))
+        ->setAttrib("maxlength","100")
+        ;
+        $this->addElement($emailAlterno);
         
         // HTTP
         $http = new Zend_Form_Element_Text('http');
@@ -144,104 +160,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("maxlength","100")
         ;
         $this->addElement($http);
-        
-        // Licencia ICAAVWIN
-        $lic_icaavwin = new Zend_Form_Element_Text('lic_icaavwin');
-        $lic_icaavwin->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("ICAAVWIN"))
-        ->setAttrib("maxlength","11")
-        ;
-        $this->addElement($lic_icaavwin);
-        
-        // Licencia IRISWIN
-        $lic_iriswin = new Zend_Form_Element_Text('lic_iriswin');
-        $lic_iriswin->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("IRISWIN"))
-        ->setAttrib("maxlength","11")
-        ;
-        $this->addElement($lic_iriswin);
-        
-        // Licencia GVC
-        $lic_gvc = new Zend_Form_Element_Text('lic_gvc');
-        $lic_gvc->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("GVC"))
-        ->setAttrib("maxlength","11")
-        ;
-        $this->addElement($lic_gvc);
-        
-        // Licencia Centauro
-        $lic_centauro = new Zend_Form_Element_Text('lic_centauro');
-        $lic_centauro->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Centauro"))
-        ->setAttrib("maxlength","11")
-        ;
-        $this->addElement($lic_centauro);
-        
-        // Versión ICAAV
-        $version_icaav = new Zend_Form_Element_Text('version_icaav');
-        $version_icaav->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Versión ICAAV"))
-        ->setAttrib("maxlength","10")
-        ;
-        $this->addElement($version_icaav);
-        
-        // Seguridad
-        $seguridad = new Zend_Form_Element_Select('seguridad');
-        $seguridad
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($seguridad);
-        
-        // Factura electrónica
-        $factura_electronica = new Zend_Form_Element_Select('factura_electronica');
-        $factura_electronica
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($factura_electronica);
-        
-        // Fe activa
-        $fe_activa = new Zend_Form_Element_Select('fe_activa');
-        $fe_activa
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($fe_activa);
-        
+              
         // CFDI
         $cfdi = new Zend_Form_Element_Select('cfdi');
         $cfdi
@@ -255,29 +174,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("autocomplete","off")
         ;
         $this->addElement($cfdi);
-        
-        // FTP login
-        $ftp_login = new Zend_Form_Element_Text('ftp_login');
-        $ftp_login->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("FTP login"))
-        ->setAttrib("maxlength","15")
-        ;
-        $this->addElement($ftp_login);
-        
-        // FTP pwd
-        $ftp_pwd = new Zend_Form_Element_Text('ftp_pwd');
-        $ftp_pwd->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("FTP password"))
-        ->setAttrib("maxlength","15")
-        ;
-        $this->addElement($ftp_pwd);
-        
+               
         // DBA pwd
         $dba_pwd = new Zend_Form_Element_Text('dba_pwd');
         $dba_pwd->removeDecorator('label')
@@ -311,112 +208,6 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ;
         $this->addElement($layout_pwd);
         
-        // Tamara
-        $tamara = new Zend_Form_Element_Select('tamara');
-        $tamara
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($tamara);
-        
-        // IBANK
-        $ibank = new Zend_Form_Element_Select('ibank');
-        $ibank
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($ibank);
-        
-        // AMEX
-        $amex = new Zend_Form_Element_Select('amex');
-        $amex
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($amex);
-        
-        // DIOT
-        $diot = new Zend_Form_Element_Select('diot');
-        $diot
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($diot);
-
-        // cve_usopor_tit
-        $cve_usopor_tit = new Zend_Form_Element_Text('cve_usopor_tit');
-        $cve_usopor_tit->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Clave soporte titular"))
-        ->setAttrib("maxlength","15")
-        ;
-        $this->addElement($cve_usopor_tit);
-        
-        // cve_usopor_aux
-        $cve_usopor_aux = new Zend_Form_Element_Text('cve_usopor_aux');
-        $cve_usopor_aux->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Clave soporte auxiliar"))
-        ->setAttrib("maxlength","15")
-        ;
-        $this->addElement($cve_usopor_aux);
-        
-        // id_estatus_icaav
-        $id_estatus_icaav = new Zend_Form_Element_Select('id_estatus_icaav');
-        $id_estatus_icaav
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($id_estatus_icaav);
-        
-        // id_estatus_iris
-        $id_estatus_iris = new Zend_Form_Element_Select('id_estatus_iris');
-        $id_estatus_iris
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($id_estatus_iris);
-        
         // Fecha
         $fecha = new Zend_Form_Element_Text('fecha');
         $fecha->removeDecorator('label')
@@ -427,7 +218,6 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
         ->setAttrib("maxlength","10");
         $this->addElement($fecha);
-
         
         // Observaciones
         $observaciones = new Zend_Form_Element_Textarea('observaciones');
@@ -435,7 +225,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Obervaciones"))
+        ->setAttrib("placeholder",utf8_encode("Observaciones"))
         ;
         $this->addElement($observaciones);
         
@@ -449,34 +239,6 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("maxlength","11")
         ;
         $this->addElement($sucursales);
-        
-        // Adeudo
-        $adeudo = new Zend_Form_Element_Select('adeudo');
-        $adeudo
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Si',
-                'N'=>'No'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($adeudo);
-        
-        // Boleto e
-        $boleto_e = new Zend_Form_Element_Select('boleto_e');
-        $boleto_e
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($boleto_e);
         
         // Update login
         $update_login = new Zend_Form_Element_Text('update_login');
@@ -528,39 +290,27 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ;
         $this->addElement($addenda);
         
-        // Fecha de caducidad
-        $fecha_caducidad = new Zend_Form_Element_Text('fecha_caducidad');
-        $fecha_caducidad->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->removeDecorator('Errors')
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("class","form-control datepicker")
-        ->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
-        ->setAttrib("maxlength","10");
-        $this->addElement($fecha_caducidad);
-
-        
-        // ftp_add_login
+        // FTP login
         $ftp_add_login = new Zend_Form_Element_Text('ftp_add_login');
         $ftp_add_login->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("FTP add login"))
-        ->setAttrib("maxlength","255")
+        ->setAttrib("placeholder",utf8_encode("FTP login"))
+        ->setAttrib("maxlength","50")
         ;
         $this->addElement($ftp_add_login);
         
-        // ftp_add_pwd
+        // FTP password
         $ftp_add_pwd = new Zend_Form_Element_Text('ftp_add_pwd');
         $ftp_add_pwd->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("FTP add password"))
-        ->setAttrib("maxlength","255")
+        ->setAttrib("placeholder",utf8_encode("FTP password"))
+        ->setAttrib("maxlength","50")
         ;
-        $this->addElement($ftp_add_pwd);
+        $this->addElement($update_pwd);
         
         // ip_portal_fe
         $ip_portal_fe = new Zend_Form_Element_Text('ip_portal_fe');
@@ -593,49 +343,10 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Facturación boleto"))
+        ->setAttrib("placeholder",utf8_encode("Facturaciï¿½n boleto"))
         ->setAttrib("maxlength","11")
         ;
         $this->addElement($facturacion_boleto);
-        
-        // implant_am
-        $implant_am = new Zend_Form_Element_Select('implant_am');
-        $implant_am
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($implant_am);
-        
-        // folios_utilizados
-        $folios_utilizados = new Zend_Form_Element_Text('folios_utilizados');
-        $folios_utilizados->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Folios utilizados"))
-        ->setAttrib("maxlength","11")
-        ;
-        $this->addElement($folios_utilizados);
-        
-        // folios_sync
-        $folios_sync = new Zend_Form_Element_Select('folios_sync');
-        $folios_sync
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($folios_sync);
         
         // nombre_comercial
         $nombre_comercial = new Zend_Form_Element_Text('nombre_comercial');
@@ -662,20 +373,6 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ;
         $this->addElement($markup); 
         
-        // portal_proveedores
-        $portal_proveedores = new Zend_Form_Element_Select('portal_proveedores');
-        $portal_proveedores
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($portal_proveedores);  
-        
         // agencias_consolidadas
         $agencias_consolidadas = new Zend_Form_Element_Select('agencias_consolidadas');
         $agencias_consolidadas
@@ -689,47 +386,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("autocomplete","off")
         ;
         $this->addElement($agencias_consolidadas);  
-        
-        // contabilidad_elect
-        $contabilidad_elect = new Zend_Form_Element_Select('contabilidad_elect');
-        $contabilidad_elect
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($contabilidad_elect);    
-        
-        // fecha_actualizacion_folios
-        $fecha_actualizacion_folios = new Zend_Form_Element_Text('fecha_actualizacion_folios');
-        $fecha_actualizacion_folios->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->removeDecorator('Errors')
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("class","form-control datepicker")
-        ->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
-        ->setAttrib("maxlength","10");
-        $this->addElement($fecha_actualizacion_folios);    
 
-        
-        // ine
-        $ine = new Zend_Form_Element_Select('ine');
-        $ine
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($ine);       
-        
         // Submit
         $submit = new Zend_Form_Element_Submit('submit');
         $submit ->setLabel("Iniciar")
@@ -747,7 +404,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Observaciones de la póliza"))
+        ->setAttrib("placeholder",utf8_encode("Observaciones de la pï¿½liza"))
         ->setAttrib("maxlength","256")
         ->setAttrib("rows","10")
         ;

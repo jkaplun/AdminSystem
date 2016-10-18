@@ -15,8 +15,6 @@ class Application_Form_Productos_Productos extends Zend_Form
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Clave"))
         ->setAttrib("maxlength","10")
-        //->setAttrib("minlength","10")
-        //->setAttrib('disabled', 'disabled');
         ;
         
         // Nombre
@@ -47,8 +45,7 @@ class Application_Form_Productos_Productos extends Zend_Form
         $this
         ->setMethod('post')
         ->addElements(array(
-                $clave, $nombre_prod, $version_prod, $ruta_prod, $cargo_prod, 
-                $compila_prod, $vigente_prod
+                $clave, $version_prod, $vigente_prod
                 ));
     }
 
