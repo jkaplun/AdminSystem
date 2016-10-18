@@ -30,7 +30,7 @@ $(document).ready(function() {
     });
 	
 
-    $('#dataTable-usuarios-agencias').DataTable({
+    $('#dataTable-usuarios-agencias,#dataTable-foliosFE').DataTable({
         responsive: true,
         "language":{
 			"sProcessing":     "Procesando...",
@@ -210,7 +210,10 @@ function mostarDatosAgencia(datosAgencia){
 	$("#facturacion_boleto-info").html(datosAgencia.facturacion_boleto);
 	$("#boton-editar-agencia").val(datosAgencia);
 	$("#datos-agencia").show();
-
+ 	
+ 	var q=encodeURIComponent(datosAgencia.direccion);
+    $('#map').attr('src',
+            'https://www.google.com/maps/embed/v1/place?key=AIzaSyCkxg35_4QHr8ev1erQ9hU5uGnRGL-y49U&q='+q);
 	
 };
 

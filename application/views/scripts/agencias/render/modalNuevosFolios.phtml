@@ -1,0 +1,75 @@
+<!-- Modal -->
+<div class="modal fade" id="AgregarFolios" tabindex="-1" role="dialog" aria-labelledby="AgregarFoliosModal">
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="row">
+					<div class="col-md-10">
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div class="col-md-2" align="right">
+							<button type="button" class="btn btn-info btn-circle" data-dismiss="modal"><i class="fa fa-times"></i></button>
+					</div> 			    		
+				</div>
+			</div>
+ 		<form method="post" id="formUsuarioAgencia"> 
+		  	<input type="hidden" name="edita_id_user" id="edita_id_user">
+		  	<input name="accion" value="editar" type="hidden">
+
+		    <div class="modal-body">
+				<fieldset>
+					<h4 class="h4Form">Nuevos Folios</h4>
+					<hr class="hrForm">
+					<div class="row">
+						<div class="col-md-1"></div>
+			    		<div class="col-md-10">
+							<div class="form-group input-group">
+				                <span class="input-group-addon">No Folios</i>
+				                </span>
+				                  
+				            </div>
+			    		</div>	
+			    		<div class="col-md-1"></div>
+			    	</div>
+			    	<div class="row">
+			    		<div class="col-md-1"></div>
+			    		<div class="col-md-10">
+							<div class="form-group input-group">
+				                <span class="input-group-addon">Fecha de Compra</i>
+				                </span>
+				                  
+				            </div>
+			    		</div>
+			    		<div class="col-md-1"></div>
+			    	</div>   
+			    	<div class="row">
+			    		<div class="col-md-1"></div>
+			    		<div class="col-md-10">
+							<div class="form-group input-group">
+				                <span class="input-group-addon">Observaciones</i>
+				                </span>
+				                  
+				            </div>
+			    		</div>	
+			    		<div class="col-md-1"></div>
+			    	</div>   
+			    	<div class="row">
+			    		<div class="col-md-1"></div>
+			    		<div class="col-md-10">
+							<div class="form-group input-group">
+				                <span class="input-group-addon">Estado</i>
+				                </span>
+				                  
+				            </div>
+			    		</div>	
+			    		<div class="col-md-1"></div>
+			    	</div>       			    		
+			    </fieldset>
+		    </div>
+		    <div class="modal-footer">     
+		       <span id="submitNuevoUsuarioAgenciaBtn" type="button" class="btn btn-success btn-circle btn-lg" onclick="submitFormUsuarioAgencia()"><i class="fa fa-save"></i></span> 
+		    </div>
+ 		 </form> 
+		</div>
+	</div>
+</div>
