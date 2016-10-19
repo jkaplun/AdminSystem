@@ -92,6 +92,9 @@ function submitFormUsuarioAgencia(){
 function agregarUsuarioAgenciaEnTabla(res, counter){ 
 
      var userTable = $('#dataTable-usuarios-agencias').DataTable();   
+     var info = userTable.page.info(); 
+     console.log("-----------------> info page: "+info.page);
+
 
       if(ajaxActionUsuarioAgencia=="consultar"){
         var frontEndId = counter;
@@ -107,17 +110,15 @@ function agregarUsuarioAgenciaEnTabla(res, counter){
        
         
         var estatusUsuario; 
-        var info = userTable.page.info(); 
+
 
         //var apellido = res.apellido_paterno+ " " + res.apellido_materno;  
 
         //res.id_usuario_agencia=falseId; 
         res.descripcion=""; 
         // se agrega la nueva columna a la tabla  
-         $(".frontEndIdColumn").show()
-        userTable.row.add( [  
-          frontEndId, res.nombre, res.apellidos, res.email, res.telefono, res.puesto, "x"  
-          ]).draw(); 
+         //$(".frontEndIdColumn").show()
+
           // res.admin_fe,
         var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#nuevoUsuarioModal" value='+ frontEndId +   
         ' onclick="datosform_edita_usuario_agencia(this.value)" >' +  // 
@@ -129,6 +130,11 @@ function agregarUsuarioAgenciaEnTabla(res, counter){
          //$('#dataTable-usuarios-agencias tr:last-child td:first-child').attr('class', 'frontEndIdColumn'); 
          //$('#dataTable-usuarios-agencias tr:last-child td:first-child').css('background-color', 'red'); 
         if(ajaxActionUsuarioAgencia=="agregar" || ajaxActionUsuarioAgencia=="consultar"){ 
+
+          userTable.row.add( [  
+          frontEndId, res.nombre, res.apellidos, res.email, res.telefono, res.puesto, "x"  
+          ]).draw(); 
+
         userTable.page( 'last' ).draw( 'page' );  
  
 
@@ -137,19 +143,31 @@ function agregarUsuarioAgenciaEnTabla(res, counter){
         $("#editarBtn"+frontEndId).closest('tr').attr('id', id_usuario_agencia_row); 
  
         }else{ 
+
+           console.log('--------------> $("#"+id_usuario_agencia_row).length' )
+              console.log($("#"+id_usuario_agencia_row).length)
+                console.log("----------------> id_usuario_agencia_row");
+           console.log(id_usuario_agencia_row);
+            userTable.page(info.page).draw( 'page' );  
+            //var id_poliza_row = "idPolizaRow"+res.id_poliza;
+            var dataToUpdate=[ frontEndId, res.nombre, res.apellidos, res.email, res.telefono, res.puesto, "x" ]
+            console.log("--------------> dataToUpdate");
+            console.log(dataToUpdate);
+            userTable.row( $("#"+id_usuario_agencia_row) ).data([ frontEndId, res.nombre, res.apellidos, res.email, res.telefono, res.puesto, "x" ]).draw();
+            //console.log( polizaTable.row( this ).data("x","x","x","x","x","x","x","x","x") );
  
            userTable.page(info.page).draw( 'page' );  
  
-          $("#editarBtn"+frontEndId).closest('tr').next('tr').attr('id', id_usuario_agencia_row);; 
+          //$("#editarBtn"+frontEndId).closest('tr').next('tr').attr('id', id_usuario_agencia_row);; 
           //$("#"+res.id_usuario) 
-          userTable.row('#'+id_usuario_agencia_row).remove().draw( false ); 
+          //userTable.row('#'+id_usuario_agencia_row).remove().draw( false ); 
           $("#"+id_usuario_agencia_row + " td:last-child").html(boton); 
  
  
-          if (!$("#"+id_usuario_agencia_row).length){ // es el último elemento en la tabla 
-               console.log("ultimoElemento") 
-               $('#dataTable-usuarios-agencias tr:last-child td:last-child').html(boton);  
-          } 
+          // if (!$("#"+id_usuario_agencia_row).length){ // es el último elemento en la tabla 
+          //      console.log("ultimoElemento") 
+          //      $('#dataTable-usuarios-agencias tr:last-child td:last-child').html(boton);  
+          // } 
            
            // Actualizar modelo
            usuariosAgencias[idUsuarioAgenciaToEdit]=res;
@@ -172,6 +190,7 @@ function agregarUsuarioAgenciaAjaxDone(res){
         seAgregoNuevoUsuario=true;
  
       agregarUsuarioAgenciaEnTabla(res, 0); 
+       usuariosAgencias[Object.keys(usuariosAgencias).length + 1] = res;
       swal("el usuario de la agencia ha sido guardado exitosamente", " ", "success");  
  
    } else{ 
@@ -188,7 +207,7 @@ function actualizarUsuarioAgenciaAjaxDone(res){
   if(res.estado == "ok"){ 
 
     agregarUsuarioAgenciaEnTabla(res, 0); 
-    usuariosAgencias[Object.keys(usuariosAgencias).length + 1] = res;
+   
 
     swal("el usuario de la agencia ha sido actualizado exitosamente", " ", "success"); 
  

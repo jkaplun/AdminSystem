@@ -142,31 +142,31 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ;
         $this->addElement($tipo);
         
-        //Descripci�n de  servicios
-        $observaciones = new Zend_Form_Element_TextArea('observaciones');
-        $observaciones->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Observaciones"))
-        ;
-        $this->addElement($observaciones);
+        // //Descripci�n de  servicios
+        // $observaciones = new Zend_Form_Element_TextArea('observaciones');
+        // $observaciones->removeDecorator('label')
+        // ->removeDecorator('HtmlTag')
+        // ->setAttrib("class","form-control")
+        // ->setAttrib("autocomplete","off")
+        // ->setAttrib("placeholder",utf8_encode("Observaciones"))
+        // ;
+        // $this->addElement($observaciones);
         
-        // Estatus
-        $estatus = new Zend_Form_Element_Select('estatus');
-        $estatus
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'ACT'=>'Activo',
-                'ADE'=>'Adeudo',
-        		'BLQ'=>'Bloqueado',
-        		'CAN'=>'Cancelado',
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        $this->addElement($estatus);
+        // // Estatus
+        // $estatus = new Zend_Form_Element_Select('estatus');
+        // $estatus
+        // ->removeDecorator('label')
+        // ->removeDecorator('HtmlTag')
+        // ->addMultiOptions(array(
+        //         'ACT'=>'Activo',
+        //         'ADE'=>'Adeudo',
+        // 		'BLQ'=>'Bloqueado',
+        // 		'CAN'=>'Cancelado',
+        // ))
+        // ->setAttrib("class","form-control")
+        // ->setAttrib("autocomplete","off")
+        // ;
+        // $this->addElement($estatus);
         
         // Submit
         $submit = new Zend_Form_Element_Submit('submit');
@@ -179,16 +179,16 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         $id_agencia = new Zend_Form_Element_Hidden('id_agencia');
 
 
-        // Supervisor
+        // Estatus
         $estatus_poliza = new Zend_Form_Element_Select('estatus_poliza');
         $estatus_poliza->setRequired(true)
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
-                'A'=>'Activo',
-                'D'=>'Adeudo',
-                'B'=>'Bloqueada',
-                'C'=>'Cancelada'
+                'ACT'=>'Activo',
+                'ADE'=>'Adeudo',
+                'BLQ'=>'Bloqueado',
+                'CAN'=>'Cancelado',
         ))
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
