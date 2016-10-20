@@ -410,6 +410,65 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ;
         $this->addElement($observaciones_agencia);
 
+        
+        // iata1
+        $iata1 = new Zend_Form_Element_Text('iata1');
+        $iata1->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("IATA 1"))
+        ->setAttrib("maxlength","255")
+        ;
+        $this->addElement($iata1);
+
+
+        // iata1
+        $iata2 = new Zend_Form_Element_Text('iata2');
+        $iata2->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("IATA 2"))
+        ->setAttrib("maxlength","255")
+        ;
+        $this->addElement($iata2);
+
+
+        // iata1
+        $iata3 = new Zend_Form_Element_Text('iata3');
+        $iata3->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("IATA 3"))
+        ->setAttrib("maxlength","255")
+        ;
+        $this->addElement($iata3);
+
+
+        // iata4
+        $iata4 = new Zend_Form_Element_Text('iata4');
+        $iata4->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("IATA 4"))
+        ->setAttrib("maxlength","255")
+        ;
+        $this->addElement($iata4);
+
+
+        // iata5
+        $iata5 = new Zend_Form_Element_Text('iata5');
+        $iata5->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("IATA 5"))
+        ->setAttrib("maxlength","255")
+        ;
+        $this->addElement($iata5);
 
         }
 }

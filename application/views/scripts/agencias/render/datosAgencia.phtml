@@ -1,15 +1,8 @@
-
 <div class="row">
-	<div class="col-lg-11">
+	<div class="col-lg-12">
 		<center>
 			<h2> <span class="text-primary" id="nombre_agencia-info">Nombre de la Agencia</span></h2>
 		</center>
-	</div>
-	<div class="col-lg-1" align="right">
-		<button type="button" class="btn btn-primary btn-circle btn-lg"
-		 id='boton-editar-agencia' data-dismiss="modal" data-toggle="modal" data-target="#myModal">
-			<i class="fa fa-edit"></i>
-		</button>
 	</div>
 </div>
 
@@ -23,516 +16,352 @@
 	</div>
 </div>
 						 -->
-	<div class="panel with-nav-tabs panel-primary">
-        <div class="panel-heading">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tabInformacion" data-toggle="tab">Informaci&oacute;n General</a></li>
-                    <li><a  id="tabUsuariosAgencia" href="#tabUsuarios" data-toggle="tab">Usuarios</a></li>
-                    <li><a href="#tabPolizas" data-toggle="tab">P&oacute;lizas</a></li>
-                  	<li><a href="#tabLicencias" data-toggle="tab">Productos</a></li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" >Facturaci&oacute;n Electr&oacute;nica
-						<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="#tabFacturacion" data-toggle="tab">Informaci&oacute;n Gral</a></li>
-							<li><a href="#tabFoliosFE" data-toggle="tab">Folios FE</a></li>
-							<li><a href="#tabSeriesFE" data-toggle="tab">Series FE</a></li>
-						</ul>
-					</li>
-                  	<li><a href="#tabIatas" data-toggle="tab">IATAS</a></li>
-                  	<li><a href="#tabDbUsers" data-toggle="tab">DB Users</a></li>
-                    <li><a href="#tabObservaciones" data-toggle="tab">Observaciones</a></li>
-                </ul>
-        </div>
-        <div class="panel-body" style="padding-top: 0px;">
-        	<div class="tab-content">
-		    	<div class="tab-pane fade in active" id="tabInformacion">
-					<div class="row">
-						<div class="col-md-4">
-							<div class="bs-callout bs-callout-primary col" id="callout-glyphicons-dont-mix">
-								<h5>Direcci&oacute;n</h5>
-								<address class="text-primary" id="direccion-info"> </address>
-								<p>
-									<i class="fa fa-phone" ></i>  <span class="text-primary" id="telefono1-info"></span>
-								</p>
-								<p>
-									<i class="fa fa-phone"></i> <span class="text-primary" id="telefono2-info"></span>
-								</p>
-								<p>RFC: <span class="text-primary" id="rfc-info"></span> </p>
-								<p>Clave ejecutivo Asignado:  <span class="text-primary" id="cve_usopor_tit-info"></span>  </p>
-								<p>Clave ejecutivo Ayuda:  <span class="text-primary" id="cve_usopor_aux-info"> </p>
-							</div>
+<div class="panel with-nav-tabs panel-primary">
+    <div class="panel-heading">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tabInformacion" data-toggle="tab">Informaci&oacute;n General</a></li>
+                <li><a  id="tabUsuariosAgencia" href="#tabUsuarios" data-toggle="tab">Usuarios</a></li>
+                <li><a href="#tabPolizas" data-toggle="tab">P&oacute;lizas</a></li>
+              	<li><a href="#tabLicencias" data-toggle="tab">Productos</a></li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" >Facturaci&oacute;n Electr&oacute;nica
+					<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="#tabFacturacion" data-toggle="tab">Informaci&oacute;n Gral</a></li>
+						<li><a href="#tabFoliosFE" data-toggle="tab">Folios FE</a></li>
+						<li><a href="#tabSeriesFE" data-toggle="tab">Series FE</a></li>
+					</ul>
+				</li>
+              	<li><a href="#tabDbUsers" data-toggle="tab">DB Users</a></li>
+                <li><a href="#tabObservaciones" data-toggle="tab">Observaciones</a></li>
+            </ul>
+    </div>
+    <div class="panel-body" style="padding-top: 0px;">
+    	<div class="tab-content">
+	    	<div class="tab-pane fade in active" id="tabInformacion">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="bs-callout bs-callout-primary col" id="callout-glyphicons-dont-mix">
+							<h5>Direcci&oacute;n</h5>
+							<address class="text-primary" id="direccion-info"> </address>
+							<p>
+								<i class="fa fa-phone" ></i>  <span class="text-primary" id="telefono1-info"></span>
+							</p>
+							<p>
+								<i class="fa fa-phone"></i> <span class="text-primary" id="telefono2-info"></span>
+							</p>
+							<p>RFC: <span class="text-primary" id="rfc-info"></span> </p>
+							<p>Clave ejecutivo Asignado:  <span class="text-primary" id="cve_usopor_tit-info"></span>  </p>
+							<p>Clave ejecutivo Ayuda:  <span class="text-primary" id="cve_usopor_aux-info"> </p>
+					    	<div class="row">
+								<div class="col-md-9"></div>			    	
+								<div class="col-md-2">
+									<button type="button" class="btn btn-primary btn-circle btn-lg" id='boton-editar-agencia' data-dismiss="modal" data-toggle="modal" data-target="#myModal">
+										<i class="fa fa-edit"></i>
+									</button>										
+								</div>			    		
+					    	</div>	  
 						</div>
-						<div class="col-md-8">
-							<div class="bs-callout bs-callout-primary col" id="mapa">
-								<iframe id="map" width="100%" height="450"></iframe>
-							</div>
-						</div>
-<!-- 						<div class="col-md-6">
-							<div class="bs-callout bs-callout-primary col"
-								id="callout-glyphicons-dont-mix">
-								<h5 align="center">Configuraci&oacute;n</h5>
-								<div class="form-group input-group">
-					                <span class="input-group-addon">P&oacute;lizas</span>
-					                <input type="text" class="form-control" value="OQAPDDW">
-					                <span class="input-group-addon"><i class="fa fa-plus"></i></span>
-					            </div>
-							</div>
-						</div> -->
-<!-- 						<div class="col-md-4">
-							<div class="bs-callout bs-callout-primary col" id="callout-glyphicons-dont-mix">
-								<h5 align="center">Productos</h5>
-								<div class="row">
-									<div class="col-lg-3">
-										<p align="center">ICAAVWin</p>
-									</div>
-									<div class="col-lg-8">
-										<div class="form-group input-group">
-											<span class="input-group-addon">Lic</span> <input id="lic_icaavwin-info" type="text"
-												class="form-control" value="" id="edita_puesto-info" disabled>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-3">
-										<p align="center">IRISWin</p>
-									</div>
-									<div class="col-lg-8">
-										<div class="form-group input-group">
-											<span class="input-group-addon">Lic</span> <input type="text"
-												class="form-control" value="" id="lic_iriswin-info" disabled>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-3">
-										<p align="center">Centauro</p>
-									</div>
-									<div class="col-lg-8">
-										<div class="form-group input-group">
-											<span class="input-group-addon">Lic</span> <input type="text"
-												class="form-control" value="" id="lic_centauro-info" disabled>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-3">
-										<p align="center">GVC</p>
-									</div>
-									<div class="col-lg-8">
-										<div class="form-group input-group">
-											<span class="input-group-addon">Lic</span> <input type="text"
-												class="form-control" value="0" id="lic_gvc-info" disabled>
-										</div>
-									</div>
-								</div>
-								<p>Globalizador: SA, WS</p>
-								<p>Producto: icaavwin</p>
-								<p>Implant AM: N</p>
-								<p>Version PB: </p>
-
-								<p>CFDI:  <span id="cfdi-info" class="text-primary"></span>   </p>
-								<p>Timbrado:  <span id="prov_timbrado-info" class="text-primary"></span>   </p> 
-								<p>Boleto-E: <span id="boleto_e-info" class="text-primary"></span></p>
-								<p>Facturaci&oacute; de Boletos: <span id="facturacion_boleto-info" class="text-primary"></span></p> </p>
-								Layout MIG y EDICOMO</p>
-							</div>
-						</div> -->
 					</div>
-		    	</div>
-                <div class="tab-pane fade" id="tabLicencias">
-                <br/>
-			        <div class="row">
-			            <div class="col-md-3 portfolio-item">
-							<div class="panel panel-info">
-		                        <div class="panel-heading">
-		                            Producto 1
-		                        </div>
-		                        <div class="panel-body">
-		                        	<input name="producto1" type="checkbox" checked data-on-text="Comprado" data-off-text="Comprar" data-label-text="Prod 1">
-		                        	<br/><br/>
-									<div class="form-group input-group">
-						                <span class="input-group-addon"># Lic</span>
-						                <input type="text" class="form-control" value="12">
-						            </div>		                        	
-								</div>
-		                    </div>
-			            </div>
-			            <div class="col-md-3 portfolio-item">
-							<div class="panel panel-info">
-		                        <div class="panel-heading">
-		                            Producto 2
-		                        </div>
-		                        <div class="panel-body">
-		                        	<input name="producto2" type="checkbox" checked data-on-text="Comprado" data-off-text="Comprar">
-		                        	<br/><br/>
-									<div class="form-group input-group">
-						                <span class="input-group-addon"># Lic</span>
-						                <input type="text" class="form-control" value="12">
-						            </div>		                        	
-								</div>
-		                    </div>
-			            </div>			            <div class="col-md-3 portfolio-item">
-							<div class="panel panel-info">
-		                        <div class="panel-heading">
-		                            Producto 3
-		                        </div>
-		                        <div class="panel-body">
-		                        	<input name="producto3" type="checkbox" checked data-on-text="Comprado" data-off-text="Comprar">
-		                        	<br/><br/>
-									<div class="form-group input-group">
-						                <span class="input-group-addon"># Lic</span>
-						                <input type="text" class="form-control" value="12">
-						            </div>		                        	
-								</div>
-		                    </div>
-			            </div>			            <div class="col-md-3 portfolio-item">
-							<div class="panel panel-info">
-		                        <div class="panel-heading">
-		                            Producto 4
-		                        </div>
-		                        <div class="panel-body">
-		                        	<input name="producto4" type="checkbox" checked data-on-text="Comprado" data-off-text="Comprar">
-		                        	<br/><br/>
-									<div class="form-group input-group">
-						                <span class="input-group-addon"># Lic</span>
-						                <input type="text" class="form-control" value="12">
-						            </div>		                        	
-								</div>
-		                    </div>
-			            </div>
-					</div>
-			        <!-- /.row -->
-			        <div class="row">
-			            <div class="col-md-3 portfolio-item">
-							<div class="panel panel-info">
-		                        <div class="panel-heading">
-		                            Producto 5
-		                        </div>
-		                        <div class="panel-body">
-		                        	<input name="producto5" type="checkbox" checked data-on-text="Comprado" data-off-text="Comprar">
-		                        	<br/><br/>
-									<div class="form-group input-group">
-						                <span class="input-group-addon"># Lic</span>
-						                <input type="text" class="form-control" value="12">
-						            </div>		                        	
-								</div>
-		                    </div>
-			            </div>
-			            <div class="col-md-3 portfolio-item">
-							<div class="panel panel-info">
-		                        <div class="panel-heading">
-		                            Producto 6
-		                        </div>
-		                        <div class="panel-body">
-		                        	<input name="producto6" type="checkbox" checked data-on-text="Comprado" data-off-text="Comprar">
-		                        	<br/><br/>
-									<div class="form-group input-group">
-						                <span class="input-group-addon"># Lic</span>
-						                <input type="text" class="form-control" value="12">
-						            </div>		                        	
-								</div>
-		                    </div>
-			            </div>
-			            <div class="col-md-3 portfolio-item">
-							<div class="panel panel-info">
-		                        <div class="panel-heading">
-		                            Producto 7
-		                        </div>
-		                        <div class="panel-body">
-		                        	<input name="producto7" type="checkbox" checked data-on-text="Comprado" data-off-text="Comprar">
-		                        	<br/><br/>
-									<div class="form-group input-group">
-						                <span class="input-group-addon"># Lic</span>
-						                <input type="text" class="form-control" value="12">
-						            </div>		                        	
-								</div>
-		                    </div>
-			            </div>			            <div class="col-md-3 portfolio-item">
-							<div class="panel panel-info">
-		                        <div class="panel-heading">
-		                            Producto 8
-		                        </div>
-		                        <div class="panel-body">
-		                        	<input name="producto8" type="checkbox" checked data-on-text="Comprado" data-off-text="Comprar">
-		                        	<br/><br/>
-									<div class="form-group input-group">
-						                <span class="input-group-addon"># Lic</span>
-						                <input type="text" class="form-control" value="12">
-						            </div>		                        	
-								</div>
-		                    </div>
-			            </div>
-					</div>			        
-				</div>		    	
-		    	<div class="tab-pane fade" id="tabUsuarios">
-					<div class="panel-body">
-					   	<div class="row">
-							<div class="col-md-10">
-							</div>
-							<div class="col-md-2" align="right">
-							    <button type="button" class="btn btn-primary btn-circle" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#nuevoUsuarioModal" id="agregarUsuarioAgenciaBtn" >
-							    &nbsp;<i class="fa fa-plus"></i>&nbsp;<i class="fa fa-user"></i>&nbsp;
-							    </button>
-							</div>
+					<div class="col-md-8">
+						<div class="bs-callout bs-callout-primary col" id="mapa">
+							<iframe id="map" width="100%" height="450"></iframe>
 						</div>
-						<br/>
-							<table width="100%" class="table table-striped table-bordered table-hover display" id="dataTable-usuarios-agencias">
-								<thead>
-									<tr>
-										<th class="frontEndIdColumn*" >No.</th>
-										<th>Nombre</th>
-										<th>Apellido</th>
-										<th>Email</th>
-										<th>Tel&eacute;fono</th>
-										<th>Puesto</th>
-										<th>Detalles</th>
-									</tr>
-								</thead>
-								<tbody align="center">						
-								</tbody>
-							</table>
-					</div>
-		    	</div>
-		    	<div class="tab-pane fade" id="tabPolizas">
-					<div class="panel-body">
-					   	<div class="row">
-							<div class="col-md-10">
-							</div>
-							<div class="col-md-2" align="right">
-							    <button type="button" id="addNewPolizaBtn" class="btn btn-primary btn-circle" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#modalNuevaPoliza">
-							    &nbsp;<i class="fa fa-plus"></i>&nbsp;<i class="fa fa-user"></i>&nbsp;
-							    </button>
-							</div>
-						</div>
-						<br/>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-info">
-			                        <div class="panel-heading">
-			                            <b>P&oacute;lizas renovadas anticipadamente</b>
-			                        </div>
-			                        <div class="panel-body">
-										<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-anticipadas">
-											<thead>
-												<tr>
-													<th class="FrontEndIdPoliza" >id</th>
-													<th>Clave</th>
-													<th>Producto</th>
-													<th>Horas</th>
-													<th>Horas Usadas</th>
-													<th>Facturacion</th>
-													<th>F. Inicial</th>
-													<th>F. Final</th>
-													<th>Detalles</th>
-												</tr>
-											</thead>
-											<tbody align="center">
-						
-											</tbody>
-										</table>
-
-			                        </div>
-			                    </div>							
-							</div>
-						</div>						
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-green">
-			                        <div class="panel-heading">
-			                            <b>P&oacute;lizas vigentes</b>
-			                        </div>
-			                        <div class="panel-body">
-										<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-vigentes">
-											<thead>
-												<tr>
-													<th class="FrontEndIdPoliza" >id</th>
-													<th>Clave</th>
-													<th>Producto</th>
-													<th>Horas</th>
-													<th>Horas Usadas</th>
-													<th>Facturacion</th>
-													<th>F. Inicial</th>
-													<th>F. Final</th>
-													<th>Estado</th>
-													<th>Detalles</th>
-												</tr>
-											</thead>
-											<tbody align="center">
-
-											</tbody>
-										</table>
-
-			                        </div>
-			                    </div>							
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-default">
-			                        <div class="panel-heading">
-			                            <b>Historico de P&oacute;lizas</b>
-			                        </div>
-			                        <div class="panel-body">
-										<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-vencidas">
-											<thead>
-												<tr>
-													<th class="FrontEndIdPoliza" >id</th>
-													<th>Clave</th>
-													<th>Producto</th>
-													<th>Horas</th>
-													<th>Horas Usadas</th>
-													<th>Facturacion</th>
-													<th>F. Inicial</th>
-													<th>F. Final</th>
-													<th>Detalles</th>
-												</tr>
-											</thead>
-											<tbody align="center">
-
-											</tbody>
-										</table>
-			                        </div>
-			                    </div>							
-							</div>
-						</div>												
-					</div>
-		    	</div>
-		    	<div class="tab-pane fade" id="tabObservaciones">
-					<div class="panel-body">
-						<div class="form-group">
-                            <label>Observaciones</label>
-                            <?= $this->form->observaciones_agencia ?>  
-                        </div>
-                        <div class="row">
-                        	<div class="col-md-10"></div>
-                        	<div class="col-md-2">
-                        		<button type="button" class="btn btn-block btn-outline btn-success">Guardar</button>
-                        	</div>
-                        </div>
-                		
 					</div>
 				</div>
-				<div class="tab-pane fade" id="tabFoliosFE">
+	    	</div>
+            <div class="tab-pane fade" id="tabLicencias">
+                <br/>
+			   	<div class="row">
+					<div class="col-md-10">
+					</div>
+					<div class="col-md-2" align="right">
+					    <button type="button" id="addNewProductoBtn" class="btn btn-block btn-outline btn-primary" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#modalNuevoProducto">
+					    &nbsp;<i class="fa fa-plus"></i>&nbsp;Producto&nbsp;
+					    </button>
+					</div>
+				</div>    
+				<br/>            
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-info">
+	                        <div class="panel-heading">
+	                            <b>Productos Adquiridos</b>
+	                        </div>
+	                        <div class="panel-body">
+								<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-productos">
+									<thead>
+										<tr>
+											<th class="FrontEndIdPoliza" >id</th>
+											<th>Producto</th>
+											<th>Licencias</th>
+											<th>Estatus</th>
+											<th>Detalles</th>
+										</tr>
+									</thead>
+									<tbody align="center">
+				
+									</tbody>
+								</table>
+
+	                        </div>
+	                    </div>							
+					</div>
+				</div>			        
+			</div>		    	
+	    	<div class="tab-pane fade" id="tabUsuarios">
+				<div class="panel-body">
+				   	<div class="row">
+						<div class="col-md-10">
+						</div>
+						<div class="col-md-2" align="right">
+						    <button type="button" class="btn btn-block btn-outline btn-primary" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#nuevoUsuarioModal" id="agregarUsuarioAgenciaBtn" style="padding-left: 6px;">
+						    &nbsp;<i class="fa fa-plus"></i>&nbsp;Usuario Agencia&nbsp;&nbsp;&nbsp;
+						    </button>
+						</div>
+					</div>
+					<br/>
+						<table width="100%" class="table table-striped table-bordered table-hover display" id="dataTable-usuarios-agencias">
+							<thead>
+								<tr>
+									<th class="frontEndIdColumn*" >No.</th>
+									<th>Nombre</th>
+									<th>Apellido</th>
+									<th>Email</th>
+									<th>Tel&eacute;fono</th>
+									<th>Puesto</th>
+									<th>Detalles</th>
+								</tr>
+							</thead>
+							<tbody align="center">						
+							</tbody>
+						</table>
+				</div>
+	    	</div>
+	    	<div class="tab-pane fade" id="tabPolizas">
+				<div class="panel-body">
+				   	<div class="row">
+						<div class="col-md-10">
+						</div>
+						<div class="col-md-2" align="right">
+						    <button type="button" id="addNewPolizaBtn" class="btn btn-block btn-outline btn-primary" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#modalNuevaPoliza">
+						    &nbsp;<i class="fa fa-plus"></i>&nbsp;P&oacute;liza&nbsp;
+						    </button>
+						</div>
+					</div>
+					<br/>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-info">
+		                        <div class="panel-heading">
+		                            <b>P&oacute;lizas renovadas anticipadamente</b>
+		                        </div>
+		                        <div class="panel-body">
+									<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-anticipadas">
+										<thead>
+											<tr>
+												<th class="FrontEndIdPoliza" >id</th>
+												<th>Clave</th>
+												<th>Producto</th>
+												<th>Horas</th>
+												<th>Horas Usadas</th>
+												<th>Facturacion</th>
+												<th>F. Inicial</th>
+												<th>F. Final</th>
+												<th>Detalles</th>
+											</tr>
+										</thead>
+										<tbody align="center">
+					
+										</tbody>
+									</table>
+
+		                        </div>
+		                    </div>							
+						</div>
+					</div>						
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-green">
+		                        <div class="panel-heading">
+		                            <b>P&oacute;lizas vigentes</b>
+		                        </div>
+		                        <div class="panel-body">
+									<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-vigentes">
+										<thead>
+											<tr>
+												<th class="FrontEndIdPoliza" >id</th>
+												<th>Clave</th>
+												<th>Producto</th>
+												<th>Horas</th>
+												<th>Horas Usadas</th>
+												<th>Facturacion</th>
+												<th>F. Inicial</th>
+												<th>F. Final</th>
+												<th>Estado</th>
+												<th>Detalles</th>
+											</tr>
+										</thead>
+										<tbody align="center">
+
+										</tbody>
+									</table>
+
+		                        </div>
+		                    </div>							
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+		                        <div class="panel-heading">
+		                            <b>Historico de P&oacute;lizas</b>
+		                        </div>
+		                        <div class="panel-body">
+									<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-vencidas">
+										<thead>
+											<tr>
+												<th class="FrontEndIdPoliza" >id</th>
+												<th>Clave</th>
+												<th>Producto</th>
+												<th>Horas</th>
+												<th>Horas Usadas</th>
+												<th>Facturacion</th>
+												<th>F. Inicial</th>
+												<th>F. Final</th>
+												<th>Detalles</th>
+											</tr>
+										</thead>
+										<tbody align="center">
+
+										</tbody>
+									</table>
+		                        </div>
+		                    </div>							
+						</div>
+					</div>												
+				</div>
+	    	</div>
+	    	<div class="tab-pane fade" id="tabObservaciones">
+				<div class="panel-body">
+					<div class="form-group">
+                        <label>Observaciones</label>
+                        <?= $this->form->observaciones_agencia ?>  
+                    </div>
+                    <div class="row">
+                    	<div class="col-md-10"></div>
+                    	<div class="col-md-2">
+                    		<button type="button" class="btn btn-block btn-outline btn-success">Guardar</button>
+                    	</div>
+                    </div>
+            		
+				</div>
+			</div>
+			<div class="tab-pane fade" id="tabFoliosFE">
+			<br/><br/>
+				<div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h4><b>Folios Factura Elect&oacute;nica</b></h4>
+                    </div>
+                    <div class="panel-body">
+						<div class="row">
+							<div class="col-md-10">
+
+							</div>
+							<div class="col-md-2" align="right">
+								<button type="button" class="btn btn-block btn-outline btn-primary"
+									data-dismiss="modal" onclick="abrirModalAgregarFolios()"
+									data-toggle="modal" data-target="#AgregarFolios">
+									&nbsp;<i class="fa fa-plus"></i>&nbsp;Folios&nbsp;
+								</button>
+							</div>
+						</div>	  
+						<br/>                  
+						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-foliosFE">
+							<thead>
+								<tr>
+									<th>id</th>
+									<th>Fecha de Compra</th>
+									<th>Folios</th>
+									<th>Folios Utilizados</th>
+									<th>Observaciones</th>
+									<th>Estado</th>
+									<th>Detalles</th>
+								</tr>
+							</thead>
+							<tbody align="center">
+
+							</tbody>
+						</table>
+
+                    </div>
+                </div>					
+			</div>
+			<div class="tab-pane fade" id="tabFacturacion">
 				<br/><br/>
-					<div class="panel panel-success">
-	                    <div class="panel-heading">
-	                        <h4><b>Folios Factura Elect&oacute;nica</b></h4>
-	                    </div>
-	                    <div class="panel-body">
+				<div class="col-md-12">
+					<h4 class="h4Form">Facturas</h4>
+					<hr class="hrForm">
+					<div class="row">
+						<div class="col-md-12">
 							<div class="row">
 								<div class="col-md-4">
-
+								    <div class="form-group">
+						                <label class="control-label">Formatos Pagados</label>
+						                <input type="number" min="0" class="form-control" placeholder="Formatos Pagados">
+								    </div>											
 								</div>
-								<div class="col-md-8" align="right">
-									<button type="button" class="btn btn-primary btn-circle"
-										data-dismiss="modal" onclick="abrirModalAgregarFolios()"
-										data-toggle="modal" data-target="#AgregarFolios">
-										&nbsp;<i class="fa fa-plus"></i>&nbsp;<i class="fa  fa-plane"></i>&nbsp;
-									</button>
+								<div class="col-md-4">
+									<div class="form-group">
+						                <label class="control-label">Factura Electr&oacute;nica</label>
+						                <?= $this->form->factura_electronica ?>		
+									</div>
 								</div>
-							</div>	  
-							<br/>                  
-							<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-foliosFE">
-								<thead>
-									<tr>
-										<th>id</th>
-										<th>Fecha de Compra</th>
-										<th>Folios</th>
-										<th>Folios Utilizados</th>
-										<th>Observaciones</th>
-										<th>Estado</th>
-										<th>Detalles</th>
-									</tr>
-								</thead>
-								<tbody align="center">
-
-								</tbody>
-							</table>
-
-	                    </div>
-	                </div>					
-				</div>
-				<div class="tab-pane fade" id="tabFacturacion">
-					<br/><br/>
-					<div class="col-md-12">
-						<h4 class="h4Form">Facturas</h4>
-						<hr class="hrForm">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="row">
-									<div class="col-md-4">
-									    <div class="form-group">
-							                <label class="control-label">Formatos Pagados</label>
-							                <input type="number" min="0" class="form-control" placeholder="Formatos Pagados">
-									    </div>											
+								<div class="col-md-2">
+									<div class="form-group">
+						                <label class="control-label">CFDI</label>
+						                <?= $this->form->cfdi ?>
 									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-							                <label class="control-label">Factura Electr&oacute;nica</label>
-							                <?= $this->form->factura_electronica ?>		
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div class="form-group">
-							                <label class="control-label">CFDI</label>
-							                <?= $this->form->cfdi ?>
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div class="form-group">
-											<label class="control-label">Timbrado</label>
-							                <select class="form-control">
-							                    <option value="1">Si</option>
-							                    <option value="0">No</option>
-							                </select>
-										</div>
-									</div>													
 								</div>
+								<div class="col-md-2">
+									<div class="form-group">
+										<label class="control-label">Timbrado</label>
+						                <select class="form-control">
+						                    <option value="1">Si</option>
+						                    <option value="0">No</option>
+						                </select>
+									</div>
+								</div>													
 							</div>
-							<div class="col-md-12">
-								<div class="row">
-									<div class="col-md-4">
-										<div class="form-group">
-					                		<label class="control-label">Facturación de Boletos</label>
-					                 		<?= $this->form->facturacion_boleto ?>		
-										</div>
-									</div>										
-								</div>
-							</div>								
 						</div>
-					<div class="form-group">
-					<div class="row">
-					    <div class="col-xs-12">
-					        <label class="control-label">Adeudo</label>
-					        <?= $this->form->adeudo ?>
-					    </div>
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+				                		<label class="control-label">Facturación de Boletos</label>
+				                 		<?= $this->form->facturacion_boleto ?>		
+									</div>
+								</div>										
+							</div>
+						</div>								
 					</div>
+					<div class="form-group">
+						<div class="row">
+						    <div class="col-xs-12">
+						        <label class="control-label">Adeudo</label>
+						        <?= $this->form->adeudo ?>
+						    </div>
+						</div>
 					</div>        										
-					</div>						
-				</div> 				
-				<div class="tab-pane fade" id="tabIatas">
-					<br/><br/>   
-				</div>
-				<div class="tab-pane fade" id="tabDbUsers">
-					<br/><br/>   
-				</div>  	
-				<div class="tab-pane fade" id="tabSeriesFE">
-					<br/><br/>   
-				</div> 
-		    </div>
-		</div>
+				</div>						
+			</div> 				
+			<div class="tab-pane fade" id="tabDbUsers">
+				<br/><br/>   
+			</div>  	
+			<div class="tab-pane fade" id="tabSeriesFE">
+				<br/><br/>   
+			</div> 
+	    </div>
 	</div>
-
-  <script type="text/javascript">
-  	$("[name='producto1']").bootstrapSwitch({onColor: 'success'});
-  	$("[name='producto2']").bootstrapSwitch({onColor: 'success'});
-  	$("[name='producto3']").bootstrapSwitch({onColor: 'success'});
-  	$("[name='producto4']").bootstrapSwitch({onColor: 'success'});
-  	$("[name='producto5']").bootstrapSwitch({onColor: 'success'});
-  	$("[name='producto6']").bootstrapSwitch({onColor: 'success'});
-  	$("[name='producto7']").bootstrapSwitch({onColor: 'success'});
-  	$("[name='producto8']").bootstrapSwitch({onColor: 'success'});  	
-  	//$("#switch-handleWidth").bootstrapSwitch();
-  </script>
+</div>

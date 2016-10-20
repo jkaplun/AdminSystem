@@ -1,0 +1,66 @@
+<!-- Modal -->
+<div class="modal fade" id="modalNuevoProducto" tabindex="-1" role="dialog" aria-labelledby="modalNuevoProducto">
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="row">
+					<div class="col-md-10">
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div class="col-md-2" align="right">
+							<button type="button" class="btn btn-info btn-circle" data-dismiss="modal"><i class="fa fa-times"></i></button>
+					</div> 			    		
+				</div>
+			</div>
+	 		<form method="post" id="formNuevoProducto"> 
+			    <div class="modal-body">
+					<fieldset>
+						<h4 class="h4Form">Nuevo Producto</h4>
+						<hr class="hrForm">
+						<div class="row">
+							<div class="col-md-1"></div>
+				    		<div class="col-md-10">
+								<div class="form-group input-group">
+					                <span class="input-group-addon">Producto
+					                </span> 
+					            </div>
+				    		</div>	
+				    		<div class="col-md-1"></div>
+				    	</div>
+				    	<div class="row">
+				    		<div class="col-md-1"></div>
+				    		<div class="col-md-10">
+								<div class="form-group input-group">
+					                <span class="input-group-addon">Licencias
+					                </span>
+					                  
+					            </div>
+				    		</div>
+				    		<div class="col-md-1"></div>
+				    	</div>   
+				    	<div class="row">
+				    		<div class="col-md-1"></div>
+				    		<div class="col-md-10">
+								<div class="form-group input-group">
+					                <span class="input-group-addon">Estado
+					                </span>
+					            </div>
+				    		</div>	
+				    		<div class="col-md-1"></div>
+				    	</div>      			    		
+				    </fieldset>
+			    </div>
+			    <div class="modal-footer"> 
+			    	<div class="row">
+						<div class="col-md-3"></div>			    	
+			    		<div class="col-md-6">
+			       			<span id="submitNuevoUsuarioAgenciaBtn" type="button" class="btn btn-block btn-outline btn-success" onclick="submitFormUsuarioAgencia()">Guardar</span>			
+			    		</div>
+						<div class="col-md-3"></div>			    		
+			    	</div>	  		        
+
+			    </div>
+	 		</form> 
+		</div>
+	</div>
+</div>

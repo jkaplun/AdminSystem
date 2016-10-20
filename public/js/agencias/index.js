@@ -30,7 +30,7 @@ $(document).ready(function() {
     });
 	
 
-    $('#dataTable-usuarios-agencias,#dataTable-foliosFE').DataTable({
+    $('#dataTable-usuarios-agencias,#dataTable-foliosFE,#dataTable-productos').DataTable({
         responsive: true,
         "language":{
 			"sProcessing":     "Procesando...",

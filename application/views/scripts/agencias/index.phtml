@@ -4,17 +4,18 @@
 	</div>
 	<div class="panel-body">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<div class="input-group">
 					<label>Buscar Agencia:</label>
 				<?= $this->selectAgencias->select_agencias?>
 				</div>
 			</div>
-			<div class="col-md-8" align="right">
-				<button type="button" class="btn btn-primary btn-circle"
+			<div class="col-md-5"></div>
+			<div class="col-md-2" align="right">
+				<button type="button" class="btn btn-block btn-outline btn-success"
 					data-dismiss="modal" onclick="abrirModalAgregarAgencia()"
 					data-toggle="modal" data-target="#myModal">
-					&nbsp;<i class="fa fa-plus"></i>&nbsp;<i class="fa  fa-plane"></i>&nbsp;
+					&nbsp;<i class="fa fa-plus"></i>&nbsp;Agencia&nbsp;
 				</button>
 			</div>
 		</div>
@@ -39,6 +40,7 @@
 <?= $this->render('agencias/render/modalNuevoUsuario.phtml') ?>
 <?= $this->render('agencias/render/modalPoliza.phtml') ?>
 <?= $this->render('agencias/render/modalNuevosFolios.phtml') ?>
+<?= $this->render('agencias/render/modalNuevoProducto.phtml') ?>
 <script type="text/javascript">
 	function buscar(){
 		document.getElementById('datosAgencia').style.display = 'block';
