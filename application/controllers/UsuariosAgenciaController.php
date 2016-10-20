@@ -30,7 +30,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         $params=$this->_request->getParams();
         $data = array(
                                 'id_agencia' => $params['id_agencia'],
-                                'clave' => $params['claveUsuarioAgencia'],
+                                //'clave' => $params['claveUsuarioAgencia'],
                                 //'pwd'=>$params['pwd'],
                                 'nombre' => $params['nombreUsuarioAgencia'],
                                 'apellidos' => $params['apellidos'],
@@ -43,8 +43,6 @@ class UsuariosAgenciaController extends Zend_Controller_Action
                                 'lider_proy' => $params['lider_proy'],
                                 'director' => $params['director'],
                                 'admin_fe' => $params['admin_fe'],
-                                //'nuevo' => $params['nuevo'],
-                                //'actualizar_pass' => $params['actualizar_pass'],
                                 'enviar_reporte_portal_mig' => $params['enviar_reporte_portal_mig'],
                                 'bajar_updates' => $params['bajar_updates']
                         );
@@ -55,8 +53,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         $cantidadDeErrores = count($mensajesDeError);
         if ($cantidadDeErrores == 0)
         {
-				//$contraEncrip = sha1($params['pwd']);
-                $usuario = $this->usuario_agencia->obtenerUsuariosAgenciaPorClave($params['claveUsuarioAgencia']);
+                $usuario = $this->usuario_agencia->obtenerUsuariosAgenciaPorEmail($params['emailUsuarioAgencia']);
                 
                 if (!$usuario)
                 { // Â¿QuÃ© se verifica aquÃ­?
@@ -135,54 +132,22 @@ class UsuariosAgenciaController extends Zend_Controller_Action
                         );
         
         	$form = new Application_Form_UsuariosAgencia_UsuariosAgencia();
-       		$usuarioActual = $this->usuario_agencia->obtenerUsuarioDeAgenciaPorId($params['id_agencia'],$params['claveUsuarioAgencia']);
+       		$usuarioActual = $this->usuario_agencia->obtenerUsuarioDeAgenciaPorId($params['id_usuario_agencia']);
         	
         	$mensajesDeError = $form->getMessages();
         	$cantidadDeErrores = count($mensajesDeError);
         	if ($cantidadDeErrores == 0)
         	{
-        		/*$esContrasenaYConfValidos=false;
-        		//Revisando si el usuario modificï¿½ la contraseï¿½a
-        		if($params['pwd'] != $usuarioActual['pwd'])
-        		{//Si el usuario la modificï¿½
-        			if($params['pwd'] != $params['pwd_conf'])
-        			{// else cuando las contraeÃ±as no coinciden
-        				
-        				// se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
-        				$data['estado']='error';
-        				$data['descripcion']='Passwords diferentes'.$usuarioActual['pwd'];
-        				// se responde al cliente
-        				$this->_helper->json($data);
-        				$this->_redirect('agencias/');
-        			}
-        			else 
-        			{
-        				$contraEncrip = sha1($params['pwd']);
-        				$data['pwd']=$contraEncrip;
-        			}
-        		}*/
         		$utiles = new Application_Model_Services_Utiles();
         		$esEmailCorrecto = $utiles->comprobar_email($params['emailUsuarioAgencia']);
         		if ($esEmailCorrecto)
         		{
-        			/*if ($usuarioActual['clave'] != $params['claveUsuarioAgencia'])
-        			{
-	        				// Si se intenta modificar la clave
-        					// se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
-        					$data['estado']='error';
-        					$data['descripcion']='No se permite modificar la clave';
-        					// se responde al cliente
-        					$this->_helper->json($data);
-        					$this->_redirect('agencias/');
-        			}
-        			else
-        			{ */
-        				// 	se actualiza en la base de datos al usuario
                     	$dba_pwdEncoded = base64_encode($params['pwd']);
                     	$data['pwd']=$dba_pwdEncoded;
-        				$where = "id_agencia = {$params['id_agencia']} and clave = '{$params['claveUsuarioAgencia']}'";
+        				$where = "id_usuario_agencia = '{$params['id_usuario_agencia']}'";
         				$this->usuario_agencia->update($data, $where);
 	        			// 	se inyecta el estado y descripciÃ³n en la respuesta al cliente
+        				$data['id_usuario_agencia']=$params['id_usuario_agencia'];
         				$data['id_agencia']=$params['id_agencia'];
         				$data['clave']=$params['claveUsuarioAgencia'];
     	    			$data['estado']='ok';
@@ -194,8 +159,6 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         		}
         		else
         		{ // else cuando el email es incorrecto
-        			// se inyecta el ID, estado y descripciÃ³n en la respuesta al cliente
-        			//$data['id_usuario_agencia']='0';
         			$data['estado']='error';
         			$data['descripcion']='Email en formato incorrecto';
         			// se responde al cliente

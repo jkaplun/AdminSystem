@@ -45,7 +45,7 @@ class Application_Form_Productos_Productos extends Zend_Form
         $this
         ->setMethod('post')
         ->addElements(array(
-                $clave, $version_prod, $vigente_prod
+                $clave, $nombre_prod, $vigente_prod
                 ));
     }
 

@@ -124,7 +124,6 @@ class PolizasController extends Zend_Controller_Action
                         'fecha_ini' => $params['fecha_ini'], 
                         'fecha_fin' => $params['fecha_fin'],
                         'costo_poliza' => $params['costo_poliza'],
-                        'tiempo_agotado' => 'tiempo_agotado',
                         'observaciones' => $params['observaciones_poliza'],
                         'tipo' => $params['tipo'],
                         'estatus' => $params['estatus_poliza'],
@@ -158,7 +157,6 @@ class PolizasController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams(); 
         $polizasAgencia = $this->poliza->obtenerPolizaPorIdAgencia($params['id_agencia']);
-       
         $this->_helper->json($polizasAgencia);
 
     }
