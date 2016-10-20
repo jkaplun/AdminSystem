@@ -18,9 +18,6 @@ var path="public/usuarios/";
 //var urlAgregr= "public/usuarios/agregar";
 //var urlEditar= "public/usuarios/actualizar";
 
-
-
-
 function datosform_edita_usuario(json_values){
 	ajaxAction="actualizar";
 	var obj = jQuery.parseJSON( json_values );
@@ -29,8 +26,6 @@ function datosform_edita_usuario(json_values){
 	$('#myModalLabel').html(obj.nombre+' '+obj.apellido_paterno +' - '+ obj.clave);
 	 
 	populate(obj);
-
-	
 }
 
 function populate(data) {   
@@ -177,16 +172,8 @@ function agregarUsuarioEnTabla(res){
 	  	  	   	//alert("ultimoElemento")
 	  	  	   	$('#dataTable-usuarios tr:last-child td:last-child').html(boton); 
 	  	  	}
-	  	  	
-
-	  	  }
-
-	  		
-
-
-	       
+	  	  }	       
 	       $('#myModal').modal('toggle'); 
-
 }
 
 

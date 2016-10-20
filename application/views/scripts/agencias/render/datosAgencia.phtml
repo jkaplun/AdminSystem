@@ -244,19 +244,20 @@
 				</div>
 	    	</div>
 	    	<div class="tab-pane fade" id="tabObservaciones">
-				<div class="panel-body">
-					<div class="form-group">
-                        <label>Observaciones</label>
-                        <?= $this->form->observaciones_agencia ?>  
-                    </div>
-                    <div class="row">
-                    	<div class="col-md-10"></div>
-                    	<div class="col-md-2">
-                    		<button type="button" class="btn btn-block btn-outline btn-success">Guardar</button>
-                    	</div>
-                    </div>
-            		
-				</div>
+	    		<form method="post" id="formObservaciones"> 
+					<div class="panel-body">
+						<div class="form-group">
+	                        <label>Observaciones</label>
+	                        <?= $this->form->observaciones_agencia ?>  
+	                    </div>
+	                    <div class="row">
+	                    	<div class="col-md-10"></div>
+	                    	<div class="col-md-2">
+	                    		<button onclick="submitFormUpdateObservaciones()" type="button" class="btn btn-block btn-outline btn-success">Guardar</button>
+	                    	</div>
+	                    </div>
+					</div>
+				</form>
 			</div>
 			<div class="tab-pane fade" id="tabFoliosFE">
 			<br/><br/>
