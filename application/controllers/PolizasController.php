@@ -56,13 +56,13 @@ class PolizasController extends Zend_Controller_Action
         				'id_agencia' => $params['id_agencia'],
         				'id_producto' => $params['id_producto'],
                         'horas_poliza' => $params['horas_poliza'], 
-                        'clave' => $params['clave'], 
+                        //'clave' => $params['clave'], 
                         'fecha_ini' => $params['fecha_ini'], 
                         'fecha_fin' => $params['fecha_fin'],
                         'costo_poliza' => $params['costo_poliza'],
                         'tipo' => $params['tipo'],
-                        'observaciones' => $params['observaciones'],
-                        'estatus' => 'ACT'
+                        'observaciones' => $params['observaciones_poliza'],
+                        'estatus' => $params['estatus_poliza'],
                 );
               
         $form = new Application_Form_Polizas_Polizas();
@@ -82,12 +82,12 @@ class PolizasController extends Zend_Controller_Action
         	 	//Se crea la póliza con una clave sin el id
         		$idNuevaPoliza = $this->poliza->insert($data);
         		//Se concatena el id de la nueva póliza
-        		$data['clave'] = $v1ClavePoliza.'5';
+        		$data['clave'] = $v1ClavePoliza.$idNuevaPoliza;
         		// 	se actualiza en la base de datos la clave de la p�liza
         		$where = "id_poliza= {$idNuevaPoliza}";
         		$this->poliza->update($data, $where);
         		// se inyecta el ID, estado y descripción en la respuesta al cliente
-        		$data['id_poliza']=5;
+        		$data['id_poliza']=$idNuevaPoliza;
         		$data['estado']='ok';
         		$data['descripcion']='La poliza ha sido guardada exitosamente';
         		$this->_helper->json($data);
@@ -125,8 +125,9 @@ class PolizasController extends Zend_Controller_Action
                         'fecha_fin' => $params['fecha_fin'],
                         'costo_poliza' => $params['costo_poliza'],
                         'tiempo_agotado' => 'tiempo_agotado',
+                        'observaciones' => $params['observaciones_poliza'],
                         'tipo' => $params['tipo'],
-                        'estatus' => 'S'
+                        'estatus' => $params['estatus_poliza'],
                 );
         
         	$form = new Application_Form_Polizas_Polizas();
