@@ -63,6 +63,7 @@ $(document).ready(function() {
 
 		idAgenciaActual =$("#select_agencias").val();
 		consultarAgencia(idAgenciaActual);
+
 		actualizarVistas.vistaUsuarioAgencia=false;
 		var tableUsuariosAgencias = $('#dataTable-usuarios-agencias').DataTable();
 		var tablePolizas = $('#dataTable-polizas-vigentes').DataTable();
@@ -71,6 +72,7 @@ $(document).ready(function() {
 		tablePolizas.clear().draw();
 	 	mostrarUsuariosAgencia();
 	 	mostrarPolizas();
+	 	mostrarProductosEnSelect()
         actualizarVistas.vistaUsuarioAgencia =true;
 	});
 

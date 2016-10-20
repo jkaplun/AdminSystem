@@ -3,17 +3,17 @@
 class ProductosController extends Zend_Controller_Action
 {
 
+    private $agencia_producto;
     public function init()
     {
     	$this->view->activemenu=4;
+        $this->agencia_producto = new Application_Model_DbTable_AgenciaProducto();
         /* Initialize action controller here */
     }
 
     public function indexAction()
     {
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
+     
     	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/productos/index.js');
 
         $producto = new Application_Model_DbTable_Producto();
@@ -23,6 +23,7 @@ class ProductosController extends Zend_Controller_Action
         $this->view->registros = $registros;
 
     }
+
     
     public function productosDisponiblesAdquiridosPorIdAgenciaAction()
     {
@@ -35,7 +36,7 @@ class ProductosController extends Zend_Controller_Action
     	$this->_helper->json($productos);
     }
     
-	public function agregarProductoAAgenciaAction(){
+	public function agregarAction(){
 
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
@@ -44,17 +45,17 @@ class ProductosController extends Zend_Controller_Action
                        	'id_agencia' => $params['id_agencia'],
                        	'id_producto' => $params['id_producto'],
                        	'numero_licencias' => $params['numero_licencias'],
-                       	'estatus' => 'S'
+                       	'estatus' => $params['estatus_producto']
                       );
 
         $agencia_producto = new Application_Model_DbTable_AgenciaProducto();
-        $nuevoAgenciaProducto = $this->$agencia_producto->insert($data);
+        $nuevoAgenciaProducto = $this->agencia_producto->insert($data);
         $data['estado']='ok';
         $this->_helper->json($data); 
         $this->_redirect('agencias/');       
     }
     
-    public function actualizarRelacionAgenciaProductoAction()
+    public function actualizarAction()
     {
     	$this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
@@ -62,14 +63,16 @@ class ProductosController extends Zend_Controller_Action
         $data = array(
                        	'id_agencia' => $params['id_agencia'],
                        	'id_producto' => $params['id_producto'],
-                       	'numero_licencias' => $params['numero_licencias']
+                       	'numero_licencias' => $params['numero_licencias'],
+                        'estatus' => $params['estatus_producto']
                       );
 
         $agencia_producto = new Application_Model_DbTable_AgenciaProducto();
 
         $where = "id_agencia = '{$params['id_agencia']}' and id_producto = '{$params['id_producto']}'";
-        if($params['estatus'] == 'N')
+        if($params['estatus_producto'] == 'N')
         {
+            //// Hay que cambiar el estatus en lugar de eliminar;
         	$agencia_producto->delete($where);
         	$data['descripcion']='El producto ha sido eliminado exitosamente';
         }
@@ -78,14 +81,14 @@ class ProductosController extends Zend_Controller_Action
         	$agencia_producto->update($data, $where);
         	$data['descripcion']='El producto ha sido actualizado exitosamente';
         }
-        $data['id_agencia']=$params['id_agencia'];
-        $data['id_producto']=$params['id_producto'];
+        //$data['id_agencia']=$params['id_agencia'];
+        //$data['id_producto']=$params['id_producto'];
         $data['estado']='ok';
         $this->_helper->json($data);
         $this->_redirect('agencias/');
     }
 
-    public function consultarProductosAction(){
+    public function consultarproductosAction(){
 
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();

@@ -12,49 +12,50 @@
 					</div> 			    		
 				</div>
 			</div>
-	 		<form method="post" id="formNuevoProducto"> 
+	 		<form method="post" id="formProducto"> 
 			    <div class="modal-body">
 					<fieldset>
 						<h4 class="h4Form">Nuevo Producto</h4>
 						<hr class="hrForm">
+
 						<div class="row">
-							<div class="col-md-1"></div>
-				    		<div class="col-md-10">
-								<div class="form-group input-group">
-					                <span class="input-group-addon">Producto
-					                </span> 
-					            </div>
-				    		</div>	
-				    		<div class="col-md-1"></div>
+				    		<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label">Producto</label>
+									<?= $this->formProductos->nombre_prod ?>
+								</div>
+				    		</div>	    			    		
 				    	</div>
+
 				    	<div class="row">
-				    		<div class="col-md-1"></div>
-				    		<div class="col-md-10">
-								<div class="form-group input-group">
-					                <span class="input-group-addon">Licencias
-					                </span>
+				    		
+				    		<div class="col-md-12">
+								<div class="form-group">
+					                <label class="control-label"> Número de licencias </label>
+					                <?= $this->formProductos->numero_licencias ?>
 					                  
 					            </div>
 				    		</div>
-				    		<div class="col-md-1"></div>
+				    		
 				    	</div>   
-				    	<div class="row">
-				    		<div class="col-md-1"></div>
-				    		<div class="col-md-10">
-								<div class="form-group input-group">
-					                <span class="input-group-addon">Estado
-					                </span>
-					            </div>
-				    		</div>	
-				    		<div class="col-md-1"></div>
-				    	</div>      			    		
+
+
+						<div class="row">
+				    		<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label">estado</label>
+									   <?= $this->formProductos->estatus_producto ?>
+								</div>
+				    		</div>	    			    		
+				    	</div>
+     			    		
 				    </fieldset>
 			    </div>
 			    <div class="modal-footer"> 
 			    	<div class="row">
 						<div class="col-md-3"></div>			    	
 			    		<div class="col-md-6">
-			       			<span id="submitNuevoUsuarioAgenciaBtn" type="button" class="btn btn-block btn-outline btn-success" onclick="submitFormUsuarioAgencia()">Guardar</span>			
+			       			<span id="submitFormProductoBtn" type="button" class="btn btn-block btn-outline btn-success" onclick="submitFormProducto()">Guardar</span>			
 			    		</div>
 						<div class="col-md-3"></div>			    		
 			    	</div>	  		        
