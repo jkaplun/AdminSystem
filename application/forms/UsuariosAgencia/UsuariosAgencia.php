@@ -16,9 +16,6 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Usuario"))
         ->setAttrib("disabled","disabled")
-        // ->setAttrib("onkeyup","fAgrega();")
-        // ->setAttrib("maxlength","15")
-        //->setAttrib('disabled', 'disabled');
         ;
         $this->addElement($clave);
  

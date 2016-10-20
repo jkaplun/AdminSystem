@@ -202,7 +202,7 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder","Observaciones de la poliza")
+        ->setAttrib("placeholder","Observaciones de la póliza")
         ->setAttrib("maxlength","256")
         ->setAttrib("rows","5")
         ;
