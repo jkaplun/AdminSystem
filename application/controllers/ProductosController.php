@@ -25,7 +25,7 @@ class ProductosController extends Zend_Controller_Action
     }
 
     
-    public function productosDisponiblesAdquiridosPorIdAgenciaAction()
+    public function productosdisponiblesadquiridosporidagenciaAction()
     {
     	$producto = new Application_Model_DbTable_Producto();
     	$this->_helper->layout()->disableLayout();
@@ -95,7 +95,7 @@ class ProductosController extends Zend_Controller_Action
         $params=$this->_request->getParams(); 
     	$producto = new Application_Model_DbTable_Producto();
         $productos = $producto->obtenerProductos();
-       
+        
         $this->_helper->json($productos);
 
     }
