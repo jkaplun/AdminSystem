@@ -83,6 +83,31 @@ $(document).ready(function() {
  
  
  
+ function probarAgenciaProducto(){
+  //var id_agencia_prueba="id_agencia=156"
+    var id_agencia_prueba="id_agencia=" + $("#probarAgenciaProducto").val();
+
+  $.ajax({ 
+      url: pathProductoController + "productosdisponiblesadquiridosporidagencia", 
+      method: "post", 
+      data: id_agencia_prueba,
+      dataType: "json" 
+    }).done(function(res) {  
+
+      console.log("---------------> respuesta del método: productosdisponiblesadquiridosporidagencia");
+      console.log(id_agencia_prueba);
+      console.log("objetos en arreglo: "+ res.length);
+      console.log(res);
+ 
+ 
+       
+  })// end ajax done  
+    .fail(function() { 
+      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+  });
+
+}
+
 function submitFormProducto(){   
   //console.log("----------> ajaxActionProducto: "+ajaxActionProducto);
   addIdAgencia="&id_agencia="+idAgenciaActual;

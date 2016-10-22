@@ -10,8 +10,13 @@
 				<?= $this->selectAgencias->select_agencias?>
 				</div>
 			</div>
-			<div class="col-md-5"></div>
+			<div class="col-md-5">
+			 id_agencia: <input type="text" id="probarAgenciaProducto" ><br>
+			 <button type="button" onclick="probarAgenciaProducto()">Buscar Productos de agencia<br> (ver consola)</button>
+			
+			</div>
 			<div class="col-md-2" align="right">
+
 				<button type="button" class="btn btn-block btn-outline btn-success"
 					data-dismiss="modal" onclick="abrirModalAgregarAgencia()"
 					data-toggle="modal" data-target="#myModal">
