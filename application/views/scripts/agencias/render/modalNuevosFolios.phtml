@@ -5,28 +5,25 @@
 			<div class="modal-header">
 				<div class="row">
 					<div class="col-md-10">
-						<h4 class="modal-title" id="myModalLabel"></h4>
+						<h4 class="modal-title" id="myModalLabel">Nuevos Folios</h4>
 					</div>
 					<div class="col-md-2" align="right">
 							<button type="button" class="btn btn-info btn-circle" data-dismiss="modal"><i class="fa fa-times"></i></button>
 					</div> 			    		
 				</div>
 			</div>
- 		<form method="post" id="formUsuarioAgencia"> 
+ 		<form method="post" id="form-agregar-folios-agencia"> 
 		  	<input type="hidden" name="edita_id_user" id="edita_id_user">
 		  	<input name="accion" value="editar" type="hidden">
-
+			<?= $this->formFoliosAgencia->id_agencia_folios ?>
 		    <div class="modal-body">
 				<fieldset>
-					<h4 class="h4Form">Nuevos Folios</h4>
-					<hr class="hrForm">
 					<div class="row">
 						<div class="col-md-1"></div>
 			    		<div class="col-md-10">
 							<div class="form-group input-group">
-				                <span class="input-group-addon">No Folios</i>
-				                </span>
-				                  
+							 	<label>Folios Comprados:</label>
+				                <?= $this->formFoliosAgencia->folios_comprados ?>
 				            </div>
 			    		</div>	
 			    		<div class="col-md-1"></div>
@@ -35,8 +32,8 @@
 			    		<div class="col-md-1"></div>
 			    		<div class="col-md-10">
 							<div class="form-group input-group">
-				                <span class="input-group-addon">Fecha de Compra</i>
-				                </span>
+				               <label>Fecha de Compra:</label>
+				                <?= $this->formFoliosAgencia->fecha_compra_folios ?>
 				                  
 				            </div>
 			    		</div>
@@ -46,7 +43,8 @@
 			    		<div class="col-md-1"></div>
 			    		<div class="col-md-10">
 							<div class="form-group input-group">
-				                <span class="input-group-addon">Observaciones</i></span>
+				                <label>Folios Comprados:</label>
+				                <?= $this->formFoliosAgencia->observaciones_folios ?>
 				            </div>
 			    		</div>	
 			    		<div class="col-md-1"></div>
@@ -55,8 +53,8 @@
 			    		<div class="col-md-1"></div>
 			    		<div class="col-md-10">
 							<div class="form-group input-group">
-				                <span class="input-group-addon">Estado</i>
-				                </span>
+				              <label>Estatus:</label>
+				                <?= $this->formFoliosAgencia->estatus_folios ?>
 				                  
 				            </div>
 			    		</div>	
@@ -68,7 +66,7 @@
 		    	<div class="row">
 					<div class="col-md-3"></div>			    	
 		    		<div class="col-md-6">
-		       			<span id="submitNuevoUsuarioAgenciaBtn" type="button" class="btn btn-block btn-outline btn-success" onclick="submitFormUsuarioAgencia()">Guardar</span>		
+		       			<span id="submitAgregarFolios" type="button" class="btn btn-block btn-outline btn-success" onclick="submitAgregarFolios()">Guardar</span>		
 		    		</div>
 					<div class="col-md-3"></div>			    		
 		    	</div>	  		        

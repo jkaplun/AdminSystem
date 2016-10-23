@@ -77,6 +77,9 @@ class AgenciasController extends Zend_Controller_Action
 
          $this->view->prueba = 'Llega al mensaje';
          //echo '<pre>'.print_r($agencias,true).'</pre>';die;
+         
+         $this->view->formFoliosAgencia = new Application_Form_Agencias_FoliosAgencia();
+         
     }
 
     public function agregarAction()
@@ -317,4 +320,52 @@ class AgenciasController extends Zend_Controller_Action
 
     }
 
+    public function agregarfoliosAction(){
+    
+    	$this->_helper->layout()->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	$params=$this->_request->getParams();
+    	
+    	$formFoliosAgencia = new Application_Form_Agencias_FoliosAgencia();
+    	
+
+    	
+    	if (!$formFoliosAgencia->isValid($params)) {
+    		$params = $formFoliosAgencia->getErrors();
+    		$this->_helper->json($params);
+
+    	}
+    	
+    	$foliosAgencia = new Application_Model_DbTable_FoliosAgencia();
+    	
+    	$data = array(
+    			'id_agencia' => $params['id_agencia_folios'],
+    			'fecha_compra' => $params['fecha_compra_folios'],
+    			'folios_comprados' => $params['folios_comprados'],
+    			'estatus' => $params['estatus_folios'],
+    			'observaciones' => $params['observaciones_folios']
+    	);
+    	try {
+    		$foliosAgencia->insert($data);
+    	} catch (Exception $e){
+    		$params['error']=$e->getMessage();
+    	}
+    	
+    	$this->_helper->json($params);
+    
+    }
+    
+    
+    public function obtienefoliosagenciaAction(){
+    
+    	$this->_helper->layout()->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	$params=$this->_request->getParams();
+    	
+    	$foliosAgencia = new Application_Model_DbTable_FoliosAgencia();
+    	
+    	$result = $foliosAgencia->obtenerFoliosPorId($params['id_agencia']);
+    	$this->_helper->json($result);
+    
+    }
 }

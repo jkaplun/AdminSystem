@@ -67,6 +67,7 @@ $(document).ready(function() {
 	 	mostrarUsuariosAgencia();
 	 	mostrarPolizas();
 	 	mostrarProductosEnSelect()
+	 	mostrarFolios();
         actualizarVistas.vistaUsuarioAgencia =true;
 	});
 
@@ -230,3 +231,66 @@ function populate(data) {
     	$("#"+key).val(value);
     });
 }
+
+
+function abrirModalAgregarFolios(){
+	console.log('Agregar Folio');
+	$("#id_agencia_folios").val($("#id_agencia").val()); 
+
+}
+
+function submitAgregarFolios(){
+	console.log('agregar Folio'+ $("#id_agencia").val());
+	
+	var valoresForm =  $("#form-agregar-folios-agencia").serialize();
+	console.log(valoresForm);
+	$.ajax({
+		  url: path + "agregarfolios",
+		  method: "post",
+		  data: valoresForm,
+		  dataType: "html"
+		})
+		.done(function(res) { 
+			console.log(res);	
+			mostarDatosAgencia(res);
+			editarAgenciaForm(res)
+})// end ajax done 
+		.fail(function() {
+  	swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );
+});
+}
+
+
+
+function mostrarFolios(){
+
+	 var addIdAgencia="id_agencia="+idAgenciaActual;
+	 $.ajax({ 
+	      url: path+"obtienefoliosagencia", 
+	      method: "post", 
+	      data: addIdAgencia,
+	      dataType: "json" 
+	    }) 
+	    .done(function(res) {  
+	    	$( "#body-tabla-folios" ).html("");
+	    	$.each( res, function( key, value ) {
+	    		  console.log( "Folios ! - " + value.folios_comprados );
+	    		  
+	    		  $( "#body-tabla-folios" ).append( "<tr>" +
+	    		  		
+	    		  		"<td>"+ value.id_folios_agencia +"</td>" +
+	    		  		"<td>"+ value.fecha_compra +"</td>" +
+	    		  		"<td>"+ value.folios_comprados +"</td>" +
+	    		  		"<td>"+ (parseInt(value.folios_comprados) - parseInt(value.folios_comprados)) +"</td>" +
+	    		  		"<td>"+ value.observaciones +"</td>" +
+	    		  		"<td>"+ value.estatus +"</td>" +
+	    		  		"<td></td>" +
+	    		  		"</tr>" +
+	    		  		"" );
+	    		});
+	       
+	  })// end ajax done  
+	    .fail(function() { 
+	      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+	  }); 
+	}
