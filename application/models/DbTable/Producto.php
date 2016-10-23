@@ -42,5 +42,24 @@ class Application_Model_DbTable_Producto extends Zend_Db_Table_Abstract
 						(a_p.id_agencia ="'.$id_agencia.'" or a_p.id_agencia is null)'); // empty list of columns
 		return $this->getAdapter ()->fetchAll( $select );
 	}
+	
+	public function obtenerProductosDisponiblesPorIdAgencia($id_agencia)
+	{
+		
+		/*SELECT producto.id_producto, nombre_prod, tiene_licencia, numero_licencias,
+		ifnull(id_agencia,0) as id_agencia, agencia_producto.estatus FROM producto
+		left JOIN agencia_producto on producto.id_producto = agencia_producto.id_producto
+		where vigente_prod = 'S' and (id_agencia =  or id_agencia is null) order by id_agencia desc;*/
+		
+		$select = $this->_db->select()
+		->from(array('p' => 'producto'),
+				array('id_producto', 'nombre_prod', 'tiene_licencia'))
+				->joinleft(array('a_p' => 'agencia_producto'),
+						'p.id_producto = a_p.id_producto',
+						array('ifnull(id_agencia,0) as id_agencia', 'ifnull(estatus,"N") as estatus'))
+				->where('p.vigente_prod="S" and 
+						a_p.id_agencia is null'); // empty list of columns
+		return $this->getAdapter ()->fetchAll( $select );
+	}
 }
 
