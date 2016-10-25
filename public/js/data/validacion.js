@@ -19,14 +19,15 @@
         var textbox = document.getElementById(inputElementId);
 
         textbox.addEventListener("keydown", function _OnNumericInputKeyDown(e) {
-		    var regex = new RegExp("^[0-9\t]+$");
-		    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-		    if (regex.test(str)) {
-		        return true;
-		    }
-
-		    e.preventDefault();
-    		return false;
+		    if(!(e.keyCode == 8 || e.keyCode == 37 || e.keyCode == 39)) {
+			    var regex = new RegExp("^[0-9\t]+$");
+			    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+			    if (regex.test(str)) {
+			        return true;
+			    }
+			    e.preventDefault();
+	    		return false;
+    		}
         });
 	
 	}
@@ -35,14 +36,16 @@
         var textbox = document.getElementById(inputElementId);
 
         textbox.addEventListener("keydown", function _OnNumericInputKeyDown(e) {
-		    var regex = new RegExp("^[a-zA-Z \t]+$");
-		    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-		    if (regex.test(str)) {
-		        return true;
-		    }
+        	if(!(e.keyCode == 8 || e.keyCode == 37 || e.keyCode == 39)) {
+			    var regex = new RegExp("^[a-zA-Z \t]+$");
+			    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+			    if (regex.test(str)) {
+			        return true;
+			    }
 
-		    e.preventDefault();
-    		return false;
+			    e.preventDefault();
+	    		return false;
+    		}
         });
 	}
 
@@ -50,14 +53,16 @@
         var textbox = document.getElementById(inputElementId);
 
         textbox.addEventListener("keypress", function _soloLetrasDot(e) {
-		    var regex = new RegExp("^[a-zA-Z. \t]+$");
-		    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-		    if (regex.test(str)) {
-		        return true;
-		    }
+        	if(!(e.keyCode == 8 || e.keyCode == 37 || e.keyCode == 39)) {
+			    var regex = new RegExp("^[a-zA-Z. \t]+$");
+			    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+			    if (regex.test(str)) {
+			        return true;
+			    }
 
-		    e.preventDefault();
-    		return false;
+			    e.preventDefault();
+	    		return false;
+    		}
         });
 	}
 
@@ -65,14 +70,16 @@
         var textbox = document.getElementById(inputElementId);
 
         textbox.addEventListener("keypress", function _soloLetrasNumeros(e) {
-		    var regex = new RegExp("^[a-zA-Z0-9 .\t]+$");
-		    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-		    if (regex.test(str)) {
-		        return true;
-		    }
+        	if(!(e.keyCode == 8 || e.keyCode == 37 || e.keyCode == 39)) {
+			    var regex = new RegExp("^[a-zA-Z0-9 .\t]+$");
+			    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+			    if (regex.test(str)) {
+			        return true;
+			    }
 
-		    e.preventDefault();
-    		return false;
+			    e.preventDefault();
+	    		return false;
+    		}
         });
 	}
 

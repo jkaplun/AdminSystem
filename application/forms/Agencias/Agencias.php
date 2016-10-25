@@ -68,7 +68,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("C�digo postal"))
+        ->setAttrib("placeholder",utf8_encode("Codigo postal"))
         ->setAttrib("maxlength","5")
         ->setAttrib("minlength","5")
         ;
@@ -90,7 +90,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         // Tel�fono 1
         $tel1 = new Zend_Form_Element_Text('tel1');
         $tel1->setRequired(true)
-        ->addErrorMessage("- Es necesario que introduzca el tel�fono 1")
+        ->addErrorMessage("- Es necesario que introduzca el telefono 1")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
@@ -107,7 +107,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Tel�fono 2"))
+        ->setAttrib("placeholder",utf8_encode("Telefono 2"))
         ->setAttrib("maxlength","10")
         ->setAttrib("minlength","10")
         ;
@@ -139,8 +139,8 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $this->addElement($email);
         
         // Email alternativo
-        $emailAlterno = new Zend_Form_Element_Text('email_alt');
-        $emailAlterno
+        $email_alt = new Zend_Form_Element_Text('email_alt');
+        $email_alt
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
@@ -148,7 +148,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("placeholder",utf8_encode("Email"))
         ->setAttrib("maxlength","100")
         ;
-        $this->addElement($emailAlterno);
+        $this->addElement($email_alt);
         
         // HTTP
         $http = new Zend_Form_Element_Text('http');
@@ -442,63 +442,63 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $this->addElement($id_usuario_soporte_auxiliar);
         
         // iata1
-        $iata1 = new Zend_Form_Element_Text('iata1');
-        $iata1->removeDecorator('label')
+        $iatas1 = new Zend_Form_Element_Text('iatas1');
+        $iatas1->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("IATA 1"))
         ->setAttrib("maxlength","255")
         ;
-        $this->addElement($iata1);
+        $this->addElement($iatas1);
 
 
         // iata1
-        $iata2 = new Zend_Form_Element_Text('iata2');
-        $iata2->removeDecorator('label')
+        $iatas2 = new Zend_Form_Element_Text('iatas2');
+        $iatas2->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("IATA 2"))
         ->setAttrib("maxlength","255")
         ;
-        $this->addElement($iata2);
+        $this->addElement($iatas2);
 
 
         // iata1
-        $iata3 = new Zend_Form_Element_Text('iata3');
-        $iata3->removeDecorator('label')
+        $iatas3 = new Zend_Form_Element_Text('iatas3');
+        $iatas3->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("IATA 3"))
         ->setAttrib("maxlength","255")
         ;
-        $this->addElement($iata3);
+        $this->addElement($iatas3);
 
 
         // iata4
-        $iata4 = new Zend_Form_Element_Text('iata4');
-        $iata4->removeDecorator('label')
+        $iatas4 = new Zend_Form_Element_Text('iatas4');
+        $iatas4->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("IATA 4"))
         ->setAttrib("maxlength","255")
         ;
-        $this->addElement($iata4);
+        $this->addElement($iatas4);
 
 
         // iata5
-        $iata5 = new Zend_Form_Element_Text('iata5');
-        $iata5->removeDecorator('label')
+        $iatas5 = new Zend_Form_Element_Text('iatas5');
+        $iatas5->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("IATA 5"))
         ->setAttrib("maxlength","255")
         ;
-        $this->addElement($iata5);
+        $this->addElement($iatas5);
 
         }
 }

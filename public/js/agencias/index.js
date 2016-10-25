@@ -218,6 +218,76 @@ function mostarDatosAgencia(datosAgencia){
 	$("#boton-editar-agencia").val(datosAgencia);
 	$("#datos-agencia").show();
  	$("#observaciones_agencia").html(datosAgencia.observaciones);
+ 	
+
+ 	if(datosAgencia.tel1 != null && datosAgencia.tel1.length != 0){
+ 		$("#telefono1-info").html(datosAgencia.tel1);
+ 		$('#te1').show();
+ 	}else{
+ 		$('#te1').hide();
+ 	}
+ 	if(datosAgencia.tel2 != null && datosAgencia.tel2.length != 0){
+ 		$("#telefono2-info").html(datosAgencia.tel2);
+ 		$('#te2').show();
+ 	}else{
+ 		$('#te2').hide();
+ 	}
+ 	
+ 	if(datosAgencia.email != null && datosAgencia.email.length != 0){
+ 		$("#correo1-info").html(datosAgencia.email);
+ 		$('#co1').show();
+ 	}else{
+ 		$('#co1').hide();
+ 	}
+ 	if(datosAgencia.email_alt != null && datosAgencia.email_alt.length != 0){
+ 		$("#correo2-info").html(datosAgencia.email_alt);
+ 		$('#co2').show();
+ 	}else{
+ 		$('#co2').hide();
+ 	}
+
+
+	var val_iata = false;
+ 	if(datosAgencia.iatas1.length != 0){
+ 		$("#iata1-info").html(datosAgencia.iatas1);
+ 		$('#ia1').show();
+ 		val_iata=true;
+ 	}else{
+ 		$('#ia1').hide();
+ 	}
+ 	if(datosAgencia.iatas2.length != 0){
+ 		$("#iata2-info").html(datosAgencia.iatas2);
+ 		$('#ia2').show();
+ 	}else{
+ 		$('#ia2').hide();
+ 	}
+ 	if(datosAgencia.iatas3.length != 0){
+ 		$("#iata3-info").html(datosAgencia.iatas3);
+ 		$('#ia3').show();
+ 	}else{
+ 		$('#ia3').hide();
+ 	}
+ 	if(datosAgencia.iatas4.length != 0){
+ 		$("#iata4-info").html(datosAgencia.iatas4);
+ 		$('#ia4').show();
+ 	}else{
+ 		$('#ia4').hide();
+ 	}
+ 	if(datosAgencia.iatas5.length != 0){
+ 		$("#iata5-info").html(datosAgencia.iatas5);
+ 		$('#ia5').show();
+ 	}else{
+ 		$('#ia5').hide();
+ 	}
+
+ 	 if(val_iata){
+ 		$('#iaT').show();
+ 		$('#iaThr').show();
+ 	}else{
+ 		$('#iaT').hide();
+ 		$('#iaThr').hide();
+ 	}
+ 	
 
  	var q=encodeURIComponent(datosAgencia.direccion);
     $('#map').attr('src',
