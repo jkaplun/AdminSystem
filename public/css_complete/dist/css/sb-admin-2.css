@@ -528,3 +528,22 @@ table.dataTable thead .sorting:after {
 .bs-callout-info h4 {
     color: #5bc0de;
 }
+
+.table>tbody>tr.rojo>td, .table>tbody>tr.rojo>th, .table>tbody>tr>td.rojo, .table>tbody>tr>th.rojo, .table>tfoot>tr.rojo>td, .table>tfoot>tr.rojo>th, .table>tfoot>tr>td.rojo, .table>tfoot>tr>th.rojo, .table>thead>tr.rojo>td, .table>thead>tr.rojo>th, .table>thead>tr>td.rojo, .table>thead>tr>th.rojo {
+    background-color: rgba(239, 8, 8, 0.38);
+}
+
+.table>tbody>tr.amarillo>td, .table>tbody>tr.amarillo>th, .table>tbody>tr>td.amarillo, .table>tbody>tr>th.amarillo, .table>tfoot>tr.amarillo>td, .table>tfoot>tr.amarillo>th, .table>tfoot>tr>td.amarillo, .table>tfoot>tr>th.amarillo, .table>thead>tr.amarillo>td, .table>thead>tr.amarillo>th, .table>thead>tr>td.amarillo, .table>thead>tr>th.amarillo {
+    background-color: rgba(240, 235, 78, 0.48);
+}
+
+.table>tbody>tr.naranja>td, .table>tbody>tr.naranja>th, .table>tbody>tr>td.naranja, .table>tbody>tr>th.naranja, .table>tfoot>tr.naranja>td, .table>tfoot>tr.naranja>th, .table>tfoot>tr>td.naranja, .table>tfoot>tr>th.naranja, .table>thead>tr.naranja>td, .table>thead>tr.naranja>th, .table>thead>tr>td.naranja, .table>thead>tr>th.naranja {
+    background-color: rgba(240, 173, 78, 0.54);
+}
+
+.table>tbody>tr.morado>td, .table>tbody>tr.morado>th, .table>tbody>tr>td.morado, .table>tbody>tr>th.morado, .table>tfoot>tr.morado>td, .table>tfoot>tr.morado>th, .table>tfoot>tr>td.morado, .table>tfoot>tr>th.morado, .table>thead>tr.morado>td, .table>thead>tr.morado>th, .table>thead>tr>td.morado, .table>thead>tr>th.morado {
+    background-color: rgba(78, 98, 240, 0.48);
+}
+
+
+
