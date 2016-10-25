@@ -76,6 +76,7 @@ $(document).ready(function() {
 // } );
 
 
+    mostrarProductosEnSelect();
 
  
 
@@ -206,7 +207,7 @@ function agregarProductoEnTabla(res){
 
         var id_producto_row = "idProductoRow"+res.id_producto;
        // borrar despues 
-        if(ajaxActionProducto=="agregar" || ajaxActionProducto=="consultar"){ 
+        if(ajaxActionProducto=="agregar" || ajaxActionProducto=="productosdisponiblesadquiridosporidagencia"){ 
 			var data = [
  
  		       res.id_producto,
@@ -239,7 +240,9 @@ function agregarProductoEnTabla(res){
         $('#'+id_producto_row+' td:last-child').attr('id', "editarProductoBtn"+res.id_producto); 
         //$('#dataTable-productos-adquiridos tr:last-child td:last-child').attr('class', "frontEndIdProducto"); 
         //$("#editarProductoBtn"+res.id_producto).closest('tr').attr('id', id_producto_row); 
- 
+
+        $("#id_producto_"+res.id_producto).hide();
+
         }else{  //  ajaxActionProducto=="editar"
  
           
@@ -366,7 +369,11 @@ function mostrarProductosEnSelect(){
 
         productos_todos[res[i].id_producto]=res[i];
         //agregarProductoEnTabla(res[i]);
-        $('#nombre_prod').append($('<option>').text(res[i].nombre_prod).attr('value', res[i].id_producto));
+        $('#nombre_prod').append($('<option>').text(res[i].nombre_prod)
+          .attr('value', res[i].id_producto)
+          .attr('id', "id_producto_"+res[i].id_producto)
+          .attr('class',"productSelect")
+          );
 
       }
 
@@ -395,6 +402,45 @@ function populateProductoForm(data) {
     });
 }
 
+function mostrarProductosEnTabla(){
+
+  $(".productSelect").show();
+  productos_agencia={};
+  ajaxActionProducto="productosdisponiblesadquiridosporidagencia"
+  var addIdAgencia="id_agencia="+idAgenciaActual;
+ $.ajax({ 
+      url: pathProductoController+ajaxActionProducto, 
+      method: "post", 
+      data: addIdAgencia,
+      dataType: "json" 
+    }) 
+    .done(function(res) {  
+      var i=0;
+
+      
+      //pruebaMostrarUsuarios(res, i);
+       
+
+      for (i;i<res.length;i++){
+        if(res[i].id_agencia!=0){
+            productos_agencia[res[i].id_producto]=res[i];
+            $("#id_producto_"+res[i].id_producto).hide();
+            agregarProductoEnTabla(res[i]);
+        }
+      
+       
+
+      }
+
+   //$(".frontEndIdColumn").hide();
+  console.log("productos_agencia despues de consulta");
+  console.log(productos_agencia);
+       
+  })// end ajax done  
+    .fail(function() { 
+      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+  }); 
+}
 
 
 
