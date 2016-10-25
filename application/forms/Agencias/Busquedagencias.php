@@ -128,21 +128,20 @@ class Application_Form_Agencias_Busquedagencias extends Zend_Form
         ;
         $this->addElement($ejecutivo);
 
-
         // Licencias
         $licencias = new Zend_Form_Element_Select('licencias');
-        $licencias
-        ->removeDecorator('name')
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ->setAttrib("name","licencias[]")
-        ->setAttrib("multiple","multiple")
+        $licencias->setAttribs ( array (
+                'autocomplete'=>'off'))
+                ->addMultiOptions(array())
+                ->removeDecorator('name')              
+                ->removeDecorator('label')
+                ->removeDecorator('HtmlTag')
+                ->setValue('producto1')
+                ->setAttrib("class","form-control")
+                ->setAttrib("autocomplete","off")
+                ->setAttrib("name","licencias[]")
+                ->setAttrib("multiple","multiple")
+                ;
         ;
         $this->addElement($licencias);
 
@@ -154,7 +153,5 @@ class Application_Form_Agencias_Busquedagencias extends Zend_Form
         ->removeDecorator('Errors')
         ;
         $this->addElement($submit);
-
-
-        }
+    }
 }
