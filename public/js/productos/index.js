@@ -367,6 +367,7 @@ function mostrarProductosEnSelect(){
 
       for (i;i<res.length;i++){
 
+        if(res[i].vigente_prod=="S"){
         productos_todos[res[i].id_producto]=res[i];
         //agregarProductoEnTabla(res[i]);
         $('#nombre_prod').append($('<option>').text(res[i].nombre_prod)
@@ -374,7 +375,7 @@ function mostrarProductosEnSelect(){
           .attr('id', "id_producto_"+res[i].id_producto)
           .attr('class',"productSelect")
           );
-
+        }
       }
 
    //$(".frontEndIdColumn").hide();
