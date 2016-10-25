@@ -18,7 +18,7 @@ class Application_Form_Agencias_FoliosAgencia extends Zend_Form
         // Folios
         $folios_comprados = new Zend_Form_Element_Text('folios_comprados');
         $folios_comprados->setRequired(true)
-        ->addErrorMessage("Verifica los Valores Capturados")
+        ->addErrorMessage("Verifique los valores capturados.")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
@@ -32,28 +32,28 @@ class Application_Form_Agencias_FoliosAgencia extends Zend_Form
         // Fecha de Compra
         $fecha_compra = new Zend_Form_Element_Text('fecha_compra_folios');
         $fecha_compra->setRequired(true)
-        ->addErrorMessage("- Es necesario que introduzca los folios de la agencia.")
+        ->addErrorMessage("Es necesario que introduzca la fecha de compra.")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control datepicker")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Folios Comprados"))
+        ->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
         ->setAttrib("maxlength","10")
         ->setAttrib("data-date-format","yyyy-mm-dd")
+        ->setAttrib("readonly",true)
         ->setRequired(true);
         $this->addElement($fecha_compra);
         
         // Observaciones
         $observaciones = new Zend_Form_Element_Textarea('observaciones_folios');
-        $observaciones->setRequired(true)
-        ->addErrorMessage("- Es necesario que introduzca los folios de la agencia.")
+        $observaciones
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("rows","12")
         ->setAttrib("class","form-control")
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Folios Comprados"));
+        ->setAttrib("placeholder",utf8_encode("Observaciones"));
         $this->addElement($observaciones);
 
         // Estatus

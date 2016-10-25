@@ -121,8 +121,8 @@ class AgenciasController extends Zend_Controller_Action
         				//'agencias_consolidadas' => $params['agencias_consolidadas'],
         				//'id_usuario_soporte_titular' => 1,
         				//'id_usuario_soporte_auxiliar' => 1,
-                        /*'id_usuario_soporte_titular' => $params['id_usuario_soporte_titular'],
-        				'id_usuario_soporte_auxiliar' => $params['id_usuario_soporte_auxiliar']*/
+                        'id_usuario_soporte_titular' => $params['id_usuario_soporte_titular'],
+        				'id_usuario_soporte_auxiliar' => $params['id_usuario_soporte_auxiliar']
         );
        // echo '<pre>'.print_r($params['email'],true).'</pre>';die();
         $form = new Application_Form_Agencias_Agencias();
@@ -242,10 +242,10 @@ class AgenciasController extends Zend_Controller_Action
         				//'agencias_consolidadas' => $params['agencias_consolidadas'],
         				//'id_usuario_soporte_titular' => 1,
         				//'id_usuario_soporte_auxiliar' => 1,
-                        /*'id_usuario_soporte_titular' => $params['id_usuario_soporte_titular'],
-        				'id_usuario_soporte_auxiliar' => $params['id_usuario_soporte_auxiliar']*/
+                        'id_usuario_soporte_titular' => $params['id_usuario_soporte_titular'],
+        				'id_usuario_soporte_auxiliar' => $params['id_usuario_soporte_auxiliar']
         );
-            
+
     	$form = new Application_Form_Agencias_Agencias();
         $utiles = new Application_Model_Services_Utiles();
     	
@@ -325,15 +325,13 @@ class AgenciasController extends Zend_Controller_Action
     	$this->_helper->layout()->disableLayout();
     	$this->_helper->viewRenderer->setNoRender();
     	$params=$this->_request->getParams();
-    	
+    	$params['error']='0';
     	$formFoliosAgencia = new Application_Form_Agencias_FoliosAgencia();
-    	
 
-    	
     	if (!$formFoliosAgencia->isValid($params)) {
     		$params = $formFoliosAgencia->getErrors();
+    		$params['error']='1';
     		$this->_helper->json($params);
-
     	}
     	
     	$foliosAgencia = new Application_Model_DbTable_FoliosAgencia();
@@ -348,7 +346,7 @@ class AgenciasController extends Zend_Controller_Action
     	try {
     		$foliosAgencia->insert($data);
     	} catch (Exception $e){
-    		$params['error']=$e->getMessage();
+    		$params['error']='0';
     	}
     	
     	$this->_helper->json($params);

@@ -411,6 +411,36 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $this->addElement($observaciones_agencia);
 
         
+        $usuarioAdmin = new Application_Model_DbTable_UsuarioAdmin();
+        $usuarios = $usuarioAdmin->obtenerUsuarios();
+        
+        $arregloUsuariosSelect = array();
+        foreach ($usuarios as $key => $value){
+        	$arregloUsuariosSelect[$value['id_usuario']] = $value['clave'] . ' - '.$value['nombre'] . ' '.$value['apellido_paterno'] . ' '.$value['apellido_materno'];
+        }
+        
+        // Ejecutivo Titular
+        $id_usuario_soporte_titular = new Zend_Form_Element_Select('id_usuario_soporte_titular');
+        $id_usuario_soporte_titular
+        ->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->addMultiOptions($arregloUsuariosSelect)
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ;
+        $this->addElement($id_usuario_soporte_titular);
+        
+        // Ejecutivo Auxiliar
+        $id_usuario_soporte_auxiliar = new Zend_Form_Element_Select('id_usuario_soporte_auxiliar');
+        $id_usuario_soporte_auxiliar
+        ->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->addMultiOptions($arregloUsuariosSelect)
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ;
+        $this->addElement($id_usuario_soporte_auxiliar);
+        
         // iata1
         $iata1 = new Zend_Form_Element_Text('iata1');
         $iata1->removeDecorator('label')

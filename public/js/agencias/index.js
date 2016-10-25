@@ -25,7 +25,7 @@ $(document).ready(function() {
     });
 	
 
-    $('#dataTable-usuarios-agencias,#dataTable-foliosFE,#dataTable-productos').DataTable({
+    $('#dataTable-usuarios-agencias,#dataTable-productos').DataTable({
         responsive: true,
         "language":{
 			"sProcessing":     "Procesando...",
@@ -234,26 +234,47 @@ function populate(data) {
 
 
 function abrirModalAgregarFolios(){
-	console.log('Agregar Folio');
+	//console.log('Agregar Folio');
 	$("#id_agencia_folios").val($("#id_agencia").val()); 
+	$("#folios_comprados").val(""); 
+	$("#fecha_compra_folios").val("");
+	$("#observaciones_folios").val("");
+	$("#estatus_folios").val("S");	
 
 }
 
+function abrirModalEditarFolios(){
+	//console.log('Agregar Folio');
+	$("#id_agencia_folios").val($("#id_agencia").val()); 
+	$("#folios_comprados").val(""); 
+	$("#fecha_compra_folios").val("");
+	$("#observaciones_folios").val("");
+	$("#estatus_folios").val("S");	
+}
+
+
+
 function submitAgregarFolios(){
-	console.log('agregar Folio'+ $("#id_agencia").val());
-	
+
 	var valoresForm =  $("#form-agregar-folios-agencia").serialize();
-	console.log(valoresForm);
 	$.ajax({
 		  url: path + "agregarfolios",
 		  method: "post",
 		  data: valoresForm,
-		  dataType: "html"
+		  dataType: "json"
 		})
 		.done(function(res) { 
-			console.log(res);	
-			mostarDatosAgencia(res);
-			editarAgenciaForm(res)
+			if (res.error=='1'){
+				var msg = res.folios_comprados + ' ' + res.fecha_compra_folios;
+				
+				swal("Error :(", msg , "error" );
+				
+			} else {
+				
+				$('#AgregarFolios').modal('hide');
+			    swal("Los folios se agregaron exitosamente", " ", "success");  
+			    mostrarFolios();
+			}
 })// end ajax done 
 		.fail(function() {
   	swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );
@@ -274,9 +295,8 @@ function mostrarFolios(){
 	    .done(function(res) {  
 	    	$( "#body-tabla-folios" ).html("");
 	    	$.each( res, function( key, value ) {
-	    		  console.log( "Folios ! - " + value.folios_comprados );
 	    		  
-	    		  $( "#body-tabla-folios" ).append( "<tr>" +
+	    		  $( "#body-tabla-folios" ).append( '<tr id="idUsuarioAgenciaRow1" class="odd" role="row">' +
 	    		  		
 	    		  		"<td>"+ value.id_folios_agencia +"</td>" +
 	    		  		"<td>"+ value.fecha_compra +"</td>" +
@@ -288,7 +308,7 @@ function mostrarFolios(){
 	    		  		"</tr>" +
 	    		  		"" );
 	    		});
-	       
+
 	  })// end ajax done  
 	    .fail(function() { 
 	      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 

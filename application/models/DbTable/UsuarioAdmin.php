@@ -69,5 +69,12 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
     return $this->getAdapter ()->fetchAll ( $select );
   }
   
+  public function obtenerUsuarios(){
+  	$select = $this->_db->select()->
+  	from ( $this->_name,'*')
+  	->order('clave');
+  
+  	return $this->getAdapter ()->fetchAll ( $select );
+  }
 }
 
