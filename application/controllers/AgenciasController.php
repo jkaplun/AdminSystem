@@ -113,7 +113,7 @@ class AgenciasController extends Zend_Controller_Action
                         'iatas2' => $params['iatas2'],
                         'iatas3' => $params['iatas3'],
                         'iatas4' => $params['iatas4'],
-                        'iatas5' => $params['iatas5']                        
+                        'iatas5' => $params['iatas5'],                    
         				//'activa_nuevos_sp' => $params['activa_nuevos_sp'],
         				//'addenda' => $params['addenda'],
         				//'ftp_add_login' => $params['ftp_add_login'],
@@ -238,7 +238,7 @@ class AgenciasController extends Zend_Controller_Action
                         'iatas2' => $params['iatas2'],
                         'iatas3' => $params['iatas3'],
                         'iatas4' => $params['iatas4'],
-                        'iatas5' => $params['iatas5']
+                        'iatas5' => $params['iatas5'],
         				//'activa_nuevos_sp' => $params['activa_nuevos_sp'],
         				//'addenda' => $params['addenda'],
         				//'ftp_add_login' => $params['ftp_add_login'],
