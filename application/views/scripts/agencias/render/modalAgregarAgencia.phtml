@@ -200,7 +200,7 @@
 								</div>
 		                        <div class="tab-pane fade" id="tabConfiguraciones">
 		                   
-									<h4 class="h4Form">Acceso</h4>
+									<h4 class="h4Form">Credenciales Update</h4>
 									<hr class="hrForm">
 		                        	<div class="row">
 										<div class="col-md-12">
@@ -222,13 +222,42 @@
 										                <label class="control-label">Modificar</label>
 										                <select class="form-control">
 										                    <option value="1">Si</option>
-										                    <option value="0">No</option>
+										                    <option value="0" selected="selected">No</option>
 										                </select>
 													</div>		                        				
 		                        				</div>		                        				
 		                        			</div>
 										</div>
 									</div>
+									<h4 class="h4Form">Credenciales BD</h4>
+									<hr class="hrForm">
+		                        	<div class="row">
+										<div class="col-md-12">
+		                        			<div class="row">
+		                        				<div class="col-lg-5">
+													<div class="form-group">
+														<label class="control-label">Login BD</label>
+														<?= $this->form->update_login_bd ?>
+													</div>
+		                        				</div>
+		                        				<div class="col-lg-5">
+													<div class="form-group">
+										                <label class="control-label">Password BD</label>
+														<?= $this->form->update_pwd_bd ?> 
+													</div>
+		                        				</div>
+		                        				<div class="col-lg-2">
+													<div class="form-group">
+										                <label class="control-label">Modificar</label>
+										                <select class="form-control">
+										                    <option value="1">Si</option>
+										                    <option value="0" selected="selected">No</option>
+										                </select>
+													</div>		                        				
+		                        				</div>		                        				
+		                        			</div>
+										</div>
+									</div>									
 									<h4 class="h4Form">Ejecutivos</h4>
 									<hr class="hrForm">
 									<div class="row">

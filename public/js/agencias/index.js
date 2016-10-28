@@ -246,49 +246,6 @@ function mostarDatosAgencia(datosAgencia){
  		$('#co2').hide();
  	}
 
-
-	var val_iata = false;
- 	if(datosAgencia.iatas1.length != 0){
- 		$("#iata1-info").html(datosAgencia.iatas1);
- 		$('#ia1').show();
- 		val_iata=true;
- 	}else{
- 		$('#ia1').hide();
- 	}
- 	if(datosAgencia.iatas2.length != 0){
- 		$("#iata2-info").html(datosAgencia.iatas2);
- 		$('#ia2').show();
- 	}else{
- 		$('#ia2').hide();
- 	}
- 	if(datosAgencia.iatas3.length != 0){
- 		$("#iata3-info").html(datosAgencia.iatas3);
- 		$('#ia3').show();
- 	}else{
- 		$('#ia3').hide();
- 	}
- 	if(datosAgencia.iatas4.length != 0){
- 		$("#iata4-info").html(datosAgencia.iatas4);
- 		$('#ia4').show();
- 	}else{
- 		$('#ia4').hide();
- 	}
- 	if(datosAgencia.iatas5.length != 0){
- 		$("#iata5-info").html(datosAgencia.iatas5);
- 		$('#ia5').show();
- 	}else{
- 		$('#ia5').hide();
- 	}
-
- 	 if(val_iata){
- 		$('#iaT').show();
- 		$('#iaThr').show();
- 	}else{
- 		$('#iaT').hide();
- 		$('#iaThr').hide();
- 	}
- 	
-
  	var q=encodeURIComponent(datosAgencia.direccion);
     $('#map').attr('src',
             'https://www.google.com/maps/embed/v1/place?key=AIzaSyCkxg35_4QHr8ev1erQ9hU5uGnRGL-y49U&q='+q);

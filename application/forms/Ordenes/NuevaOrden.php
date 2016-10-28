@@ -5,6 +5,10 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 {
 	public function init()
 	{
+
+    	$id_agencia = new Zend_Form_Element_Hidden('id_agencia');
+    	$this->addElement($id_agencia);
+		
 		// RFC
 		$rfc = new Zend_Form_Element_Text('empresa');
 		$rfc->setRequired(true)

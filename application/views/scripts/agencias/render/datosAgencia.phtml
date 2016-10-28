@@ -24,16 +24,9 @@
                 <li><a href="#tabPolizas" data-toggle="tab">P&oacute;lizas</a></li>
               	<li><a href="#tabLicencias" data-toggle="tab">Productos</a></li>
 				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" >Facturaci&oacute;n Electr&oacute;nica
-					<span class="caret"></span>
+					<a href="#tabFoliosFE" data-toggle="tab" >Facturaci&oacute;n Electr&oacute;nica
 					</a>
-					<ul class="dropdown-menu">
-						<li><a href="#tabFacturacion" data-toggle="tab">Informaci&oacute;n Gral</a></li>
-						<li><a href="#tabFoliosFE" data-toggle="tab">Folios FE</a></li>
-						<li><a href="#tabSeriesFE" data-toggle="tab">Series FE</a></li>
-					</ul>
 				</li>
-              	<li><a href="#tabDbUsers" data-toggle="tab">DB Users</a></li>
                 <li><a href="#tabObservaciones" data-toggle="tab">Observaciones</a></li>
             </ul>
     </div>
@@ -61,19 +54,11 @@
 							<p id="co2">
 								<i class="fa fa-envelope-o"></i> 2: <span class="text-primary" id="correo2-info"></span>
 							</p>		
-
 							<h5>Ejecutivos Asignados</h5>
 							<hr class="hrForm">										
 							<p>Titular:  <span class="text-primary" id="cve_usopor_tit-info"></span>  </p>
 							<p>Auxiliar:  <span class="text-primary" id="cve_usopor_aux-info"> </p>
 					    	
-							<h5 id="iaT">IATAS</h5>
-							<hr id="iaThr" class="hrForm">
-							<p id="ia1">1: <span class="text-primary" id="iata1-info"></span> </p>
-							<p id="ia2">2: <span class="text-primary" id="iata2-info"></span> </p>
-							<p id="ia3">3: <span class="text-primary" id="iata3-info"></span> </p>
-							<p id="ia4">4: <span class="text-primary" id="iata4-info"></span> </p>
-							<p id="ia5">5: <span class="text-primary" id="iata5-info"></span> </p>
 					    	<div class="row">
 								<div class="col-md-9"></div>			    	
 								<div class="col-md-2">
@@ -286,6 +271,32 @@
                         <h4><b>Folios Factura Electr&oacute;nica</b></h4>
                     </div>
                     <div class="panel-body">
+                    	<div class="row bs-callout bs-callout-success col">
+							<div class="col-md-2">
+								<p><b>Configuraci&oacute;n General:</b></p>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group">
+					                <label class="control-label">CFDI</label>
+					                <?= $this->form->cfdi ?>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="control-label">Timbrado</label>
+					                <select class="form-control">
+					                    <option value="1">Si</option>
+					                    <option value="0">No</option>
+					                </select>
+								</div>
+							</div>	
+							<div class="col-md-4"></div>
+							<div class="col-md-2">    
+								<br/>
+	                    		<button onclick="hola()" type="button" class="btn btn-block btn-outline btn-success">Actualizar</button>
+							</div>          		
+                    	</div>
+                    	<br/>
 						<div class="row">
 							<div class="col-md-10">
 
@@ -315,74 +326,9 @@
 
 							</tbody>
 						</table>
-
                     </div>
                 </div>					
 			</div>
-			<div class="tab-pane fade" id="tabFacturacion">
-				<br/><br/>
-				<div class="col-md-12">
-					<h4 class="h4Form">Facturas</h4>
-					<hr class="hrForm">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="row">
-								<div class="col-md-4">
-								    <div class="form-group">
-						                <label class="control-label">Formatos Pagados</label>
-						                <input type="number" min="0" class="form-control" placeholder="Formatos Pagados">
-								    </div>											
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-						                <label class="control-label">Factura Electr&oacute;nica</label>
-						                <?= $this->form->factura_electronica ?>		
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="form-group">
-						                <label class="control-label">CFDI</label>
-						                <?= $this->form->cfdi ?>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="form-group">
-										<label class="control-label">Timbrado</label>
-						                <select class="form-control">
-						                    <option value="1">Si</option>
-						                    <option value="0">No</option>
-						                </select>
-									</div>
-								</div>													
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="row">
-								<div class="col-md-4">
-									<div class="form-group">
-				                		<label class="control-label">Facturación de Boletos</label>
-				                 		<?= $this->form->facturacion_boleto ?>		
-									</div>
-								</div>										
-							</div>
-						</div>								
-					</div>
-					<div class="form-group">
-						<div class="row">
-						    <div class="col-xs-12">
-						        <label class="control-label">Adeudo</label>
-						        <?= $this->form->adeudo ?>
-						    </div>
-						</div>
-					</div>        										
-				</div>						
-			</div> 				
-			<div class="tab-pane fade" id="tabDbUsers">
-				<br/><br/>   
-			</div>  	
-			<div class="tab-pane fade" id="tabSeriesFE">
-				<br/><br/>   
-			</div> 
 	    </div>
 	</div>
 </div>

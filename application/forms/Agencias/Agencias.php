@@ -261,6 +261,29 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("maxlength","50")
         ;
         $this->addElement($update_pwd);
+        // Update login
+        $update_login_bd = new Zend_Form_Element_Text('update_login_bd');
+        $update_login_bd->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("Update login bd"))
+        ->setAttrib("maxlength","50")
+        ;
+        $this->addElement($update_login_bd);
+        
+        // Update password
+        $update_pwd_bd = new Zend_Form_Element_Text('update_pwd_bd');
+        $update_pwd_bd ->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("Update password bd"))
+        ->setAttrib("maxlength","50")
+        ;
+        $this->addElement($update_pwd_bd);
+
+
         
         // Activa nuevos sp
         $activa_nuevos_sp = new Zend_Form_Element_Select('activa_nuevos_sp');
