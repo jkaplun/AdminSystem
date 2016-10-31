@@ -23,3 +23,12 @@ $(document).ready(function() {
         }
     });
 }); // end  $(document).ready(function() { 
+
+$(document).ready(function(){
+	$("#pagination a").click(function(){
+		var page = $(this).attr('data-page');
+		//alert('pushado'+page+'-'+n_rows);
+		$("#filtroform").append('<input type="hidden" name="page" value="'+page+'" id="page">').trigger("submit");
+	});
+
+});

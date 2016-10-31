@@ -1,55 +1,21 @@
 <?php
 
-class Application_Model_DbTable_Ordenes extends Zend_Db_Table_Abstract
+class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 {
 
-	protected $_name = 'ordenes';
+	protected $_name = 'orden_servicio';
 
 	
-	public function getClientes(){
+	public function obtenerOrdenes($valores){
+		
 		$select = $this->_db->select()->
-		from ( $this->_name, '*' );
+		from ( "view_orde_servicio", '*' );
+		
 		//echo $select;
 		//die;
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	
-	
-	public function getUserValues ($values)
-	{
-	$select = $this->_db->select()->
-		from ( $this->_name, '*' )
-		->where('username="'.$values['usuario'].'" and password=sha("'.$values['password'].'")');
-		
-		//echo $select;die;
-		//$result = $this->getAdapter ()->fetchRow ( $select );
 
-		return $this->getAdapter ()->fetchRow ( $select );
-	}
-	
-	public function getAllUsers ($values)
-	{
-		
-		$cond = 'username is not null ';
-		
-		if( trim(@$values['usuario']) !=''){
-			$cond .= ' and username like "%'.$values['usuario'].'%"';
-		}
-		
-		$select = $this->_db->select()->
-		from ( $this->_name, 
-				array(
-						'id_user',
-						'username',
-						'realname',
-						'activo',
-						'id_rol'))
-				->where($cond);;
-	
-		//echo $select;die;
-		//$result = $this->getAdapter ()->fetchRow ( $select );
-	
-		return $this->getAdapter ()->fetchAll ( $select );
-	}
 }
 
