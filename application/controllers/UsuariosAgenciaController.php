@@ -67,6 +67,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
                         // se inserta en la base de datos al nuevo usuario
                         $nuevoUsuarioAgencia = $this->usuario_agencia->insert($data);
                         unset($data['pwd']);
+                        $data['id_usuario_agencia'] = $nuevoUsuarioAgencia;
                         $data['estado']='ok';
                         // se responde al cliente
                         $this->_helper->json($data);

@@ -10,7 +10,7 @@ var idUsuarioAgenciaToEdit;
 var ajaxActionUsuarioAgencia; 
  
 //Variable donde se almacena el id que asigna la base de datos al usuario 
-var idDataBaseUser=""; 
+var id_usuario_agencia=""; 
 var claveUsuarioAgencia="";
  
  
@@ -20,26 +20,7 @@ $(document).ready(function() {
     abrirModalAgregarUsuario(); 
   }) 
  
- 
-
-  // $("#tabUsuariosAgencia").click(function(){
-  //       if(actualizarVistas.vistaUsuarioAgencia == false){
-  //         console.log("actualizarVistas.vistaUsuarioAgencia: "+actualizarVistas.vistaUsuarioAgencia);
-  //         mostrarUsuariosAgencia();
-  //           actualizarVistas.vistaUsuarioAgencia =true;
-  //       }
-      
-  // })
-
-
-// $('#dataTable-usuarios-agencias').on( 'page.dt', function () {
-//     console.log("cambiando de página");
-//     $(".frontEndIdColumn").hide();
-// } );
-
- 
-
-}); // end  $(document).ready(function() { 
+ }); // end  $(document).ready(function() { 
  
  
  
@@ -48,12 +29,15 @@ function submitFormUsuarioAgencia(){
     addIdAgencia="&id_agencia="+idAgenciaActual;
     console.log("mandando submitFormUsuarioAgencia, clave usuariosagencia: "+claveUsuarioAgencia);
     claveUsuarioAgencia= "&claveUsuarioAgencia=" + $("#emailUsuarioAgencia").val();
-
+    if(ajaxActionUsuarioAgencia == "actualizar")
+      id_usuario_agencia_to_send="&id_usuario_agencia="+id_usuario_agencia;
+    else
+      id_usuario_agencia_to_send="";
  
   $.ajax({ 
       url: pathUsuarioAgenciaController + ajaxActionUsuarioAgencia, 
       method: "post", 
-      data: $("#formUsuarioAgencia").serialize() + addIdAgencia +claveUsuarioAgencia,
+      data: $("#formUsuarioAgencia").serialize() + addIdAgencia +claveUsuarioAgencia + id_usuario_agencia_to_send,
       dataType: "json" 
     }) 
     .done(function(res) {  
@@ -71,23 +55,7 @@ function submitFormUsuarioAgencia(){
       swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" ); 
   }); 
 } // submitForm(){ 
- 
- 
- 
-// function editarUsuarioAgenciaForm(json_values){ 
-//   $('#myModalLabel').html("Editar Datos de la Agencia"); 
-//   var obj = jQuery.parseJSON( json_values ); 
-//   populate(obj); 
-//   $("#action-form-agencia").attr('onclick','submitFormUpdateAgencia()'); 
-// } 
- 
-// function populate(data) {    
-//     $.each(data, function(key, value){   
-//       $("#"+key).val(value); 
-//     }); 
-// } 
- 
- 
+  
  
 function agregarUsuarioAgenciaEnTabla(res, counter){ 
 
@@ -111,15 +79,8 @@ function agregarUsuarioAgenciaEnTabla(res, counter){
         
         var estatusUsuario; 
 
-
-        //var apellido = res.apellido_paterno+ " " + res.apellido_materno;  
-
-        //res.id_usuario_agencia=falseId; 
         res.descripcion=""; 
-        // se agrega la nueva columna a la tabla  
-         //$(".frontEndIdColumn").show()
 
-          // res.admin_fe,
         var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#nuevoUsuarioModal" value='+ frontEndId +   
         ' onclick="datosform_edita_usuario_agencia(this.value)" >' +  // 
         '<i class="fa fa-info-circle"></i>'+  
@@ -231,6 +192,8 @@ function actualizarUsuarioAgenciaAjaxDone(res){
 
    idUsuarioAgenciaToEdit=frontEndId;
    console.log("usuariosAgencias[frontEndId]: "+usuariosAgencias[frontEndId]);
+   id_usuario_agencia = usuariosAgencias[frontEndId].id_usuario_agencia;
+
 
     populateUsuarioAgenciaForm(usuariosAgencias[frontEndId ]);
       
