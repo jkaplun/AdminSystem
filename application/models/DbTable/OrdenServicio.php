@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * 
+ * @author Juan Garfias
+ *
+ */
 class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 {
 
