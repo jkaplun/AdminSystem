@@ -6,6 +6,7 @@ var productos_todos={};
 var productos_agencia={};
 var id_Producto="";
 var clave_Producto="";
+var id_producto_seleccionado="";
  
 
 // accion que se realiza en el ajax, esta se define en 
@@ -54,28 +55,6 @@ $(document).ready(function() {
      abrirModalAgregarProducto();
   }) 
  
-  // $("#submitProductoBtn").click(function(){
-  //     submitFormProducto();
-  // });
-
- //$(".FrontEndIdProducto").hide()//.css("display", "none");
-
-//   $("#tabUsuariosAgencia").click(function(){
-//         if(actualizarVistas.vistaUsuarioAgencia == false){
-//           console.log("actualizarVistas.vistaUsuarioAgencia: "+actualizarVistas.vistaUsuarioAgencia);
-//           mostrarUsuariosAgencia();
-//             actualizarVistas.vistaUsuarioAgencia =true;
-//         }
-      
-//   })
-
-
-// $('#dataTable-usuarios-agencias').on( 'page.dt', function () {
-//     console.log("cambiando de página");
-//     $(".frontEndIdColumn").hide();
-// } );
-
-
     mostrarProductosEnSelect();
 
  
@@ -113,7 +92,7 @@ function submitFormProducto(){
   //console.log("----------> ajaxActionProducto: "+ajaxActionProducto);
   addIdAgencia="&id_agencia="+idAgenciaActual;
   //console.log("ajaxActionProducto" +ajaxActionProducto);
-  var id_producto="&id_producto="+ $("#nombre_prod").val();
+  var id_producto="&id_producto="+id_producto_seleccionado;
   //console.log("id_producto: "+ id_product);
 
   // if(ajaxActionProducto=="actualizar"){
@@ -149,22 +128,7 @@ function submitFormProducto(){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
  
- 
-// function editarUsuarioAgenciaForm(json_values){ 
-//   $('#myModalLabel').html("Editar Datos de la Agencia"); 
-//   var obj = jQuery.parseJSON( json_values ); 
-//   populate(obj); 
-//   $("#action-form-agencia").attr('onclick','submitFormUpdateAgencia()'); 
-// } 
- 
-// function populate(data) {    
-//     $.each(data, function(key, value){   
-//       $("#"+key).val(value); 
-//     }); 
-// } 
- 
- 
- 
+
 function agregarProductoEnTabla(res){ 
       // console.log("entrando a agregarUsuarioAgenciaEnTabla"); 
       // var frontEndId = Object.keys(Productos).length + 1; 
@@ -246,8 +210,8 @@ function agregarProductoEnTabla(res){
         }else{  //  ajaxActionProducto=="editar"
  
           
-
-
+          console.log("res after updating");
+          console.log(res);
             //var id_Producto_row = "idProductoRow"+res.id_Producto;
             productoTable.row( $("#"+id_producto_row) ).data([
             	 res.id_producto, productos_todos[res.id_producto].nombre_prod, res.numero_licencias, res.estatus, "x"
@@ -328,6 +292,7 @@ function actualizarProductoAjaxDone(res){
    //alert("no es necesario llenar los campos, se simulan los datos desde un JSON en el public/js/usuariosagencia/index.js ") 
    console.log("frontEndId "+frontEndIdProducto);
    //id_producto="&id_producto=" +frontEndIdProducto;
+   id_producto_seleccionado=frontEndIdProducto;
    ajaxActionProducto="actualizar"; 
 
    //console.log("ajaxAction "+ajaxActionProducto); 
@@ -341,7 +306,7 @@ function actualizarProductoAjaxDone(res){
  function abrirModalAgregarProducto(){ 
   //$('#myModalLabel').html("Agregar Usuario"); 
   document.getElementById("formProducto").reset(); 
-
+  $("#titulo_form_producto").html("Nuevo producto");
   ajaxActionProducto="agregar"; 
  
   //console.log("ajaxActionProducto "+ajaxActionProducto); 
@@ -395,7 +360,10 @@ function populateProductoForm(data) {
     console.log(data);
     $.each(data, function(key, value){  
      if(key == "id_producto"){
-     	$("#nombre_prod").val(value);
+      //$("#id_producto_"+value).show();
+
+      console.log("productos_todos[value].nombre_prod: "+productos_todos[value].nombre_prod);
+     	$("#titulo_form_producto").html(productos_todos[value].nombre_prod);
      } else{
       //console.log("key: "+key + " value: " +value);
       $("#"+key).val(value);
