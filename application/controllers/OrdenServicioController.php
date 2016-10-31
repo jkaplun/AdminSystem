@@ -10,11 +10,17 @@ class OrdenServicioController extends Zend_Controller_Action
 
     public function nuevaOrdenAction()
     {    
-        $agencia = new Application_Model_DbTable_Agencia();
-         
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/nueva-orden.js');
+        
+        
+        $agencia = new Application_Model_DbTable_Agencia(); 
         $selectAgencias = new Zend_Form_Element_Select('select_agencias');
         $this->view->agencias = $agencia->obtenerTodasLasAgencias();
-         
+
         $listaAgencias = array();
          foreach ( $this->view->agencias as $agencias){
             $listaAgencias[$agencias['id_agencia']]=$agencias['nombre'];
@@ -48,7 +54,7 @@ class OrdenServicioController extends Zend_Controller_Action
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js'); 
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes.js');  
 
         $orden = new Application_Model_DbTable_OrdenServicio();
         

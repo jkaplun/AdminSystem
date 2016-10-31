@@ -192,7 +192,7 @@ function consultarAgencia(id_agencia){
 		.done(function(res) { 
 			console.log(res);	
 			mostarDatosAgencia(res);
-			editarAgenciaForm(res)
+			editarAgenciaForm(res);
   })// end ajax done 
 		.fail(function() {
     	swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );
