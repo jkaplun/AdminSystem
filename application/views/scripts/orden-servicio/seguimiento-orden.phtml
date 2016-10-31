@@ -1,0 +1,74 @@
+<h1 class="page-header">Seguimiento Ordenes de Servicio</h1>
+
+
+<div class="row">
+	<div class="col-md-10"></div>
+	<div class="col-md-2 table-responsive">
+		<table width="100%" class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th class="amarillo">&nbsp;&nbsp;&nbsp;&nbsp;</th>
+					<th>Lamadas sin Contestar</th>
+				</tr>
+			</thead>
+			<tbody align="center" id="body-ts">
+				<tr>
+					<th class="naranja"></th>
+					<th>Reportarse</th>
+				</tr>
+				<tr>
+					<th class="rojo"></th>
+					<th>Reportarse Urgente</th>
+				</tr>
+				<tr>
+					<th class=""></th>
+					<th>Otros Servicios</th>
+				</tr>
+				<tr>
+					<th class="morado"></th>
+					<th>Externos</th>
+				</tr>				
+			</tbody>		
+		</table>
+	</div>
+</div>
+
+
+	<form class="form-inline" method="get" name="filtroform" id="filtroform">
+	</form>
+
+
+<div class="row">
+	<div class="col-md-12">
+<pre>Se muestran <?php echo $this->countArray ?> resultados</pre>
+
+<div class="row" align="right">
+	<?=$this->paginationControl ($this->paginator, 'Sliding');?>
+</div>
+  	<?php foreach ($this->paginator as $registro) { ?>
+		<div class="panel panel-default">
+		  <div class="panel-body">
+		    Id Orden Servicio: <?= $registro["id_orden_servicio"] ?><hr>
+		    Fecha Alta: <?= $registro["fecha_alta"] ?><hr>
+		    Fecha Cierre :<?= $registro["fecha_cierre"] ?><hr>
+		    Duraci&oacute;n del Servicio:<?= $registro["duracion_servicio"] ?><hr>
+		    Comentarios Recepci&oacute;n:<?= $registro["comentarios_recepcion"] ?><hr>
+		    Motivo:<?= $registro["motivo"] ?><hr>
+		    Solución:<?= $registro["solucion"] ?><hr>
+		    Concluido:<?= $registro["concluido"] ?><hr>
+		    Control Cron: <?= $registro["control_cron_estatus"] ?><hr>
+		    Agencia: <?= $registro["agencia_nombre"] ?><hr>
+		    Clave Usuario: <?= $registro["clave"] ?><hr>
+		    Nombre Usuario Agencia:<?= $registro["usuario_agencia_nombre"] ?><hr>
+		    Apellido Usuario Agencia: <?= $registro["usuario_agencia_apellidos"] ?><hr>
+		    Descripci&oacute;n<?= $registro["descripcion"] ?><hr>
+		    Estatus<?= $registro["id_orden_servicio_estatus"] ?>
+		  </div>
+		</div>
+	
+	<?php } ?>
+	
+	</div>
+</div>
+
+
