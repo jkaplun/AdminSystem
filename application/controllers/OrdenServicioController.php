@@ -1,6 +1,6 @@
 <?php
 
-class OrdenesController extends Zend_Controller_Action
+class OrdenServicioController extends Zend_Controller_Action
 {
 
     public function indexAction(){
@@ -49,6 +49,12 @@ class OrdenesController extends Zend_Controller_Action
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js'); 
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/ordenes/seguimiento-ordenes.js');
+        
+        
+        
+        
+        
+        
 
     }
 
