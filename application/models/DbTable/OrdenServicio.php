@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * 
+ * @author Juan Garfias
+ * Clase de Orden de Servicio.
+ *
+ */
 class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 {
 
