@@ -82,7 +82,7 @@ class PolizasController extends Zend_Controller_Action
         		//Se concatena el id de la nueva póliza
         		$data['clave'] = $v1ClavePoliza.$idNuevaPoliza;
         		// 	se actualiza en la base de datos la clave de la p�liza
-        		$where = "id_poliza= {$idNuevaPoliza}";
+        		$where = "id_poliza= ".$idNuevaPoliza;
         		$this->poliza->update($data, $where);
         		// se inyecta el ID, estado y descripción en la respuesta al cliente
         		$data['id_poliza']=$idNuevaPoliza;

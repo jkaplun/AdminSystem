@@ -6,28 +6,54 @@ class Application_Model_Services_ServicesPolizas
 		$polizaValida = false;
 		$polizaDbTable = new Application_Model_DbTable_Poliza();
 		$polizas = $polizaDbTable->obtenerPolizasPorIdProductoYIdAgencia($idProducto, $idAgencia);
-		$polizasViejasConFechaMayorAPolizaNueva = $polizaDbTable->obtenerPolizasConFechaFinalMayorAInicialNueva($id_agencia, $id_producto, $fechaInicialNuevaPoliza);
+		$polizasViejasConFechaMayorAPolizaNueva = $polizaDbTable->obtenerPolizasConFechaFinalMayorAInicialNueva($idAgencia, $idProducto, $fechaInicialNuevaPoliza);
 		if(count($polizasViejasConFechaMayorAPolizaNueva) == 0)
 		{
 			$polizaValida = true;
 		}
 		else
 		{
-			$fecha_fin = new DateTime($polizas['fecha_fin']);
-			unset($polizas[0]);
 			$dateTimeInicialNueva = new DateTime($fechaInicialNuevaPoliza);
 			$dateTimeFinalNueva = new DateTime($fechaFinalNuevaPoliza);
-			$diferenciaPolizaNueva = $dateTimeInicialNueva->diff($dateTimeFinalNueva);
-			foreach ($polizas as $poliza)
+			$primerPoliza = $polizas[0];
+			$fecha_fin = new DateTime($primerPoliza['fecha_fin']);
+			if(count($polizas) == 1)
 			{
-				$fecha_inicio = new DateTime($polizas['fecha_ini']);
-				$diferenciaPolizasViejas = $fecha_fin->diff($fecha_inicio);
-				$fecha_fin = new DateTime($polizas['fecha_fin']);
-				if($diferenciaPolizasViejas > $diferenciaPolizaNueva &&
-					$fechaInicialNuevaPoliza > $fecha_fin && 
-					$fechaFinalNuevaPoliza < $fecha_inicio)
+				if($dateTimeInicialNueva > $fecha_fin)
 				{
 					$polizaValida = true;
+				}
+				else
+				{
+					$polizaValida = false;
+				}
+			}
+			else 
+			{
+				unset($polizas[0]);
+				$diferenciaPolizaNueva = $dateTimeInicialNueva->diff($dateTimeFinalNueva);
+				$diferenciaPolizaNuevaFormat = $diferenciaPolizaNueva->format('%R%a');
+				$ultimaPoliza = end($polizas);
+				$dateTimeInicialUltima = new DateTime($ultimaPoliza['fecha_ini']);
+				$dateTimeFinalUltima = new DateTime($ultimaPoliza['fecha_fin']);
+				reset($polizas);
+				foreach ($polizas as $poliza)
+				{
+					$fecha_inicio = new DateTime($poliza['fecha_ini']);
+					$diferenciaPolizasViejas = $fecha_fin->diff($fecha_inicio);
+					$diferenciaPolizasViejasFormat = $diferenciaPolizasViejas->format('%R%a');
+					if($diferenciaPolizasViejas > $diferenciaPolizaNuevaFormat &&
+							$dateTimeInicialNueva > $fecha_fin &&
+							$dateTimeFinalNueva < $fecha_inicio)
+					{
+						$polizaValida = true;
+					}
+					$fecha_fin = new DateTime($poliza['fecha_fin']);
+					if($polizaValida == false && $poliza['id_poliza'] == $ultimaPoliza['id_poliza']
+						&& $fecha_fin < $dateTimeInicialNueva)
+					{
+						$polizaValida = true;
+					}
 				}
 			}
 		}
