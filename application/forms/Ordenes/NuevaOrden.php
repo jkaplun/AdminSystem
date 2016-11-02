@@ -9,9 +9,9 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
     	$id_agencia = new Zend_Form_Element_Hidden('id_agencia');
     	$this->addElement($id_agencia);
 		
-		// RFC
-		$rfc = new Zend_Form_Element_Text('empresa');
-		$rfc->setRequired(true)
+		// empresa
+		$empresa = new Zend_Form_Element_Text('empresa');
+		$empresa->setRequired(true)
 		->addErrorMessage("- Es necesario que introduzca una empresa.")
 		->removeDecorator('label')
 		->removeDecorator('HtmlTag')
@@ -23,9 +23,9 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		;
 		
 		
-		// RFC
-		$nombre = new Zend_Form_Element_Text('producto');
-		$nombre->setRequired(true)
+		// producto
+		$producto = new Zend_Form_Element_Text('producto');
+		$producto->setRequired(true)
 		->addErrorMessage("- Es necesario que introduzca el producto.")
 		->removeDecorator('label')
 		->removeDecorator('HtmlTag')
@@ -36,23 +36,23 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		->setAttrib("maxlength","45")
 		;
 
-		// RFC
-		$nombre = new Zend_Form_Element_Text('solicito');
-		$nombre->setRequired(true)
-		->addErrorMessage("- Es necesario que quien solicito el servicio.")
+		// solicito
+		$solicito = new Zend_Form_Element_Text('solicito');
+		$solicito->setRequired(true)
+		->addErrorMessage("- Es necesario indicar quién solicitó el servicio.")
 		->removeDecorator('label')
 		->removeDecorator('HtmlTag')
 		//->removeDecorator('Errors')
 		->setAttrib("class","form-control")
 		->setAttrib("autocomplete","off")
-		->setAttrib("placeholder",utf8_encode("Solicito"))
+		->setAttrib("placeholder",utf8_encode("Solicitó"))
 		->setAttrib("maxlength","45")
 		;
 
-		// RFC
-		$nombre = new Zend_Form_Element_Text('ejecutivo');
-		$nombre->setRequired(true)
-		->addErrorMessage("- Es necesario que introduzca el ejecutivo que atendera el soporte.")
+		// ejecutivo
+		$ejecutivo = new Zend_Form_Element_Text('ejecutivo');
+		$ejecutivo->setRequired(true)
+		->addErrorMessage("- Es necesario que introduzca el ejecutivo que atenderá el servicio.")
 		->removeDecorator('label')
 		->removeDecorator('HtmlTag')
 		//->removeDecorator('Errors')
@@ -62,10 +62,10 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		->setAttrib("maxlength","45")
 		;
 
-		// RFC
-		$nombre = new Zend_Form_Element_Text('motivo');
-		$nombre->setRequired(true)
-		->addErrorMessage("- Es necesario que introduzca el motivo del soporte.")
+		// motivo
+		$motivo = new Zend_Form_Element_Text('motivo');
+		$motivo->setRequired(true)
+		->addErrorMessage("- Es necesario que introduzca el motivo del servicio.")
 		->removeDecorator('label')
 		->removeDecorator('HtmlTag')
 		//->removeDecorator('Errors')
@@ -75,10 +75,10 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		->setAttrib("maxlength","45")
 		;
 
-		// RFC
-		$nombre = new Zend_Form_Element_Text('descripcion');
-		$nombre->setRequired(true)
-		->addErrorMessage("- Es necesario que introduzca la descripcion de la ayuda.")
+		// descripcion
+		$descripcion = new Zend_Form_Element_Text('descripcion');
+		$descripcion->setRequired(true)
+		->addErrorMessage("- Es necesario que introduzca la descripción de la ayuda.")
 		->removeDecorator('label')
 		->removeDecorator('HtmlTag')
 		//->removeDecorator('Errors')
@@ -105,6 +105,6 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		$this
 		->setMethod('post')
 		->setAction('public/ordenes/nueva-orden')
-		->addElements(array($rfc, $nombre, $submit,$idcliente));
+		->addElements(array($empresa, $producto, $solicito, $ejecutivo, $motivo, $descripcion, $submit, $idcliente));
 		}
 }
