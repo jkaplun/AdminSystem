@@ -1,28 +1,28 @@
 <?php
 
-class OrdenSeguimientoController extends Zend_Controller_Action
+class OrdenMonitoreoController extends Zend_Controller_Action
 {
 
     public function indexAction(){
-
-
-    }
-
-    public function monitoreoordenAction()
-    {    
-    	$this->_helper->layout()->disableLayout();
-    	$this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout->setLayout('layout_monitoreo');  
+    	
+        // $this->_helper->layout()->disableLayout();
+    	// $this->_helper->viewRenderer->setNoRender();
     	$params=$this->_request->getParams();
     	
     	$ordenServicioDbTable = new Application_Model_DbTable_OrdenServicio();
-		$ordenesBd = $ordenServicioDbTable->obtenerOrdenesMonitoreo($idProducto, $idAgencia);
+		$ordenesBd = $ordenServicioDbTable->obtenerOrdenesMonitoreo();
 		$ordenes = array();
 		foreach ($ordenesBd as $orden)
 		{
-			$ordenes[$orden['id_usuario_admin_atiende']] = $orden;
+
+			$ordenes[$orden['id_usuario_admin_atiende']][$orden['id_orden_servicio']] = $orden;
 		}
-		$this->_helper->json($ordenes);
-        $this->_helper->layout->setLayout('layout_monitoreo');  
+        // echo'<pre>';
+        // print_r($ordenes);
+        // echo'</pre>';
+        // die;
+        $this->view->ordenes = $ordenes;
     }
 }
 

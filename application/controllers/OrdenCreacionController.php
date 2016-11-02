@@ -1,15 +1,10 @@
 <?php
 
-class OrdenServicioController extends Zend_Controller_Action
+class ordenCreacionController extends Zend_Controller_Action
 {
 
     public function indexAction(){
-
-
-    }
-
-    public function nuevaOrdenAction()
-    {    
+        
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');

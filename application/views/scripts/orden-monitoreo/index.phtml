@@ -1,0 +1,67 @@
+<style>
+	th, td {
+    	padding-top: 5px !important;
+    	padding-bottom: 5px !important;
+	}
+	.panel-heading {
+    	padding-top: 7px !important;
+    	padding-bottom: 7px !important;
+	}
+</style>
+
+
+<br/>
+<?php $titulo=1;?>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <center>Monitoreo de Llamadas</center>
+    </div>
+    <div class="panel-body">
+
+<?php foreach ($this->ordenes as $ordenes) { ?>
+	<?php if($titulo==1){?>
+		<div class="row">
+	<?php }?>
+	<div class="col-md-4 tablaMonitoreo2">
+		<div class="panel panel-info">
+		    <div class="panel-heading">
+		    	<?php $num=1; foreach ($ordenes as $solicitud) { ?>
+		        	<center><?php echo $solicitud['id_usuario_admin_atiende'] ?></center>
+		        	<?php break; ?>
+		        <?php } ?>
+		    </div>
+		    <div class="panel-body tablaMonitoreo">
+				<div class="table-responsive">
+					<table width="100%" class="table table-striped table-bordered table-hover fz2">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Fecha</th>			
+								<th>Agencia</th>
+								<th>Solicito</th>
+								<th>Reporte</th>
+							</tr>
+						</thead>
+						<tbody align="center">
+							<?php foreach ($ordenes as $solicitud) { ?>
+							<tr id='<?php echo $solicitud['id_orden_servicio'] ?>'>
+								<td><?php echo $num; $num++; ?></td>
+								<td><?php echo $solicitud['fecha_alta'] ?></td>
+								<td><?php echo $solicitud['id_agencia'] ?></td>
+								<td><?php echo $solicitud['id_usuario_agencia_solicito'] ?></td>
+								<td><?php echo $solicitud['id_orden_servicio'] ?></td>
+							</tr>
+							<?php } ?>
+						</tbody>
+					</table>
+				</div>
+		    </div>
+		</div>
+	</div>
+	<?php if($titulo==3){?>
+		</div>
+	<?php $titulo=1;}else{$titulo++;} ?>	
+<?php } ?>	
+	</div>
+</div>
+<br/>

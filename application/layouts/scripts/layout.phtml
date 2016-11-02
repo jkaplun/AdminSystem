@@ -122,10 +122,10 @@
                                 <a href="<?= $this->baseUrl() ?>/"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
                             </li>
                             <li>
-                                <a href="tables.html"><i class="fa fa-calendar fa-fw"></i> Agenda</a>
+                                <a href="#"><i class="fa fa-calendar fa-fw"></i> Agenda</a>
                             </li>
                             <li>
-                                <a href="forms.html"><i class="fa fa-spinner fa-fw"></i> Actualizaciones</a>
+                                <a href="#"><i class="fa fa-spinner fa-fw"></i> Actualizaciones</a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-wrench fa-fw"></i> Administracion<span class="fa arrow"></span></a>
@@ -195,16 +195,16 @@
                                 <a href="<?= $this->baseUrl() ?>/ordenes/"><i class="fa fa-files-o fa-fw"></i> Ordenes de Servicio<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="public/orden-servicio/nueva-orden"> Nueva Orden</a>
+                                        <a href="<?= $this->baseUrl() ?>/orden-creacion/"> Nueva Orden</a>
                                     </li>
-                                    <li>
+<!--                                     <li>
                                         <a href="public/orden-servicio/atencion-orden"> Atenci&oacute;n de Ordenes</a>
-                                    </li>
+                                    </li> -->
                                     <li>
-                                        <a href="public/orden-servicio/seguimiento-orden"> Seguimiento de Ordenes</a>
+                                        <a href="<?= $this->baseUrl() ?>/orden-seguimiento/"> Seguimiento de Ordenes</a>
                                     </li>                                    
                                     <li>
-                                        <a target="_blank" href="public/orden-servicio/monitoreo-orden"> Monitoreo de Ordenes</a>
+                                        <a target="_blank" href="<?= $this->baseUrl() ?>/orden-monitoreo/"> Monitoreo de Ordenes</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->

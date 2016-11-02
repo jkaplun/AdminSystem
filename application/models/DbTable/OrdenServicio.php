@@ -24,10 +24,17 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 	public function obtenerOrdenesMonitoreo()
 	{
 		$select = $this->_db->select()->
-		from ( $this->_name, 'id_orden_servicio, id_agencia, 
-				id_usuario_admin_atiende, id_usuario_agencia_solicito, 
-				fecha_alta, id_orden_servicio_estatus' )
-		->where('concluido = "N"');
+		from ( $this->_name,
+				array(
+					'id_orden_servicio',
+					'id_agencia',
+					'id_usuario_admin_atiende',
+					'id_usuario_agencia_solicito',
+					'fecha_alta',
+					'id_orden_servicio_estatus'
+					)
+		)
+		->where("concluido = 'N'");
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 
