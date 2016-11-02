@@ -45,23 +45,33 @@
 <div class="row" align="right">
 	<?=$this->paginationControl ($this->paginator, 'Sliding');?>
 </div>
-  	<?php foreach ($this->paginator as $registro) { ?>
-  		<?if($registro["motivo"]=="Llamada sin contestar"){?>
-		<div class="panel panel-default bs-callout2 bs-callout-amarillo">
-		<?}elseif($registro["motivo"]=="Reportarse"){?>
-		<div class="panel panel-default bs-callout2 bs-callout-naranja">
-		<?}elseif($registro["motivo"]=="Reportarse Urgente"){?>
-		<div class="panel panel-default bs-callout2 bs-callout-rojo">
-		<?}elseif($registro["motivo"]=="Otro Servicio"){?>
-		<div class="panel panel-default bs-callout2 bs-callout-gris">
-		<?}elseif($registro["motivo"]=="Externo"){?>
-		<div class="panel panel-default bs-callout2 bs-callout-morado">
-		<? } ?>
-		  	<div class="panel-body">
+  	<?php foreach ($this->paginator as $registro) { 
+  		$color='';
+  		switch ($registro["id_orden_servicio_estatus"]){
+  			case '1':
+  				$color='bs-callout-amarillo';
+  			break;
+  			case '2':
+  				$color='bs-callout-naranja';
+  			break;
+  			case '3':
+  				$color='bs-callout-rojo';
+  			break;
+  			case '4':
+  				$color='bs-callout-gris';
+  			break;
+  			case '5':
+  				$color='bs-callout-morado';
+  			break;
+  		}
+  		?>
+		
+		<div class="panel panel-default bs-callout2 <?= $color ?>">
+		 	<div class="panel-body">
 				<div class="row">
 					<div class="col-md-3">
 				  		Id Orden Servicio:
-				  		<p><?= $registro["id_orden_servicio"] ?></p>
+				  		<p><?= $registro["id_orden_servicio"].'-'.$registro["id_orden_servicio_estatus"].'-'.$color ?></p>
 				  	</div>
 				  	<div class="col-md-3">
 				  		Fecha Alta:
