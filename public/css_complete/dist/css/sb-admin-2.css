@@ -479,6 +479,15 @@ table.dataTable thead .sorting:after {
     border-left-width: 5px;
     border-radius: 3px;
 }
+
+.bs-callout2 {
+    padding: 2px;
+    margin: 10px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+
 .bs-callout h4 {
     margin-top: 0;
     margin-bottom: 5px;
@@ -501,6 +510,29 @@ table.dataTable thead .sorting:after {
 .bs-callout-primary {
     border-left-color: #428bca;
 }
+
+.bs-callout-amarillo {
+    border-left-color: #f8f5aa;
+    background-color: rgb(254, 254, 242);
+}
+.bs-callout-naranja {
+  border-left-color: #f0ad4e;
+  background-color: rgba(240, 173, 78, 0.21);
+}
+.bs-callout-rojo {
+  border-left-color: #d9534f;
+  background-color: rgba(217, 83, 79, 0.15);
+}
+.bs-callout-gris {
+  border-left-color: #777;
+  background-color: rgba(119, 119, 119, 0.12);
+}
+.bs-callout-morado {
+  border-left-color: rgb(170, 180, 248);
+  background-color: rgba(170, 180, 248, 0.13);
+}
+
+
 .bs-callout-primary h4 {
     color: #428bca;
 }

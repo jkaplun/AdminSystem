@@ -3,57 +3,62 @@ class Application_Model_Services_ServicesPolizas
 {
 	function esPolizaValida($idProducto, $idAgencia, $fechaInicialNuevaPoliza, $fechaFinalNuevaPoliza)
 	{
-		$poliza = new Application_Model_DbTable_Poliza();
-		$polizasVigentes = $poliza->obtenerPolizaPorIdProductoYIdAgencia($idProducto, $idAgencia);
-		$dateInicialNuevaPoliza = new DateTime($fechaInicialNuevaPoliza);
-		$dateFinalNuevaPoliza = new DateTime($fechaFinalNuevaPoliza);
-		$esPolizaValida = false;
-		//var_dump(count($polizasVigentes));
-		if(count($polizasVigentes) > 0)
+		$polizaValida = false;
+		$polizaDbTable = new Application_Model_DbTable_Poliza();
+		$polizas = $polizaDbTable->obtenerPolizasPorIdProductoYIdAgencia($idProducto, $idAgencia);
+		$polizasViejasConFechaMayorAPolizaNueva = $polizaDbTable->obtenerPolizasConFechaFinalMayorAInicialNueva($idAgencia, $idProducto, $fechaInicialNuevaPoliza);
+		if(count($polizasViejasConFechaMayorAPolizaNueva) == 0)
 		{
-			foreach ($polizasVigentes as $poliza)
+			$polizaValida = true;
+		}
+		else
+		{
+			$dateTimeInicialNueva = new DateTime($fechaInicialNuevaPoliza);
+			$dateTimeFinalNueva = new DateTime($fechaFinalNuevaPoliza);
+			$primerPoliza = $polizas[0];
+			$fecha_fin = new DateTime($primerPoliza['fecha_fin']);
+			if(count($polizas) == 1)
 			{
-				$dateFinalPolizaActual = new DateTime($poliza['fecha_fin']);
-				if($dateInicialNuevaPoliza > $dateFinalPolizaActual)
+				if($dateTimeInicialNueva > $fecha_fin)
 				{
-					$esPolizaValida = true;
+					$polizaValida = true;
 				}
 				else
 				{
-					$dateInicialPolizaActual = new DateTime($poliza['fecha_ini']);
-					$difFechasDePolizasAnteriores = 0;
-					if(key($polizasVigentes) == 0)
+					$polizaValida = false;
+				}
+			}
+			else 
+			{
+				unset($polizas[0]);
+				$diferenciaPolizaNueva = $dateTimeInicialNueva->diff($dateTimeFinalNueva);
+				$diferenciaPolizaNuevaFormat = $diferenciaPolizaNueva->format('%R%a');
+				$ultimaPoliza = end($polizas);
+				$dateTimeInicialUltima = new DateTime($ultimaPoliza['fecha_ini']);
+				$dateTimeFinalUltima = new DateTime($ultimaPoliza['fecha_fin']);
+				reset($polizas);
+				foreach ($polizas as $poliza)
+				{
+					$fecha_inicio = new DateTime($poliza['fecha_ini']);
+					$diferenciaPolizasViejas = $fecha_fin->diff($fecha_inicio);
+					$diferenciaPolizasViejasFormat = $diferenciaPolizasViejas->format('%R%a');
+					if($diferenciaPolizasViejas > $diferenciaPolizaNuevaFormat &&
+							$dateTimeInicialNueva > $fecha_fin &&
+							$dateTimeFinalNueva < $fecha_inicio)
 					{
-						$indicePolizaAnterior = 1;
-						$difFechasDePolizasAnteriores = 0;
+						$polizaValida = true;
 					}
-					else 
+					$fecha_fin = new DateTime($poliza['fecha_fin']);
+					if($polizaValida == false && $poliza['id_poliza'] == $ultimaPoliza['id_poliza']
+						&& $fecha_fin < $dateTimeInicialNueva)
 					{
-						$indicePolizaAnterior = (key($polizasVigentes))-1;
-						$polizaAnterior = $polizasVigentes[$indicePolizaAnterior];
-						$dateFinalPolizaAnterior = new DateTime($polizaAnterior['fecha_fin']);
-						$difFechasDePolizasAnteriores = $dateFinalPolizaAnterior ->diff($dateInicialPolizaActual, false);
-						
-					}
-					$difFechasDePolizaNueva = $dateInicialNuevaPoliza -> diff($dateFinalNuevaPoliza, false);
-					if((array)$difFechasDePolizasAnteriores >= (array)$difFechasDePolizaNueva 
-							&& $dateInicialNuevaPoliza != $dateInicialPolizaActual
-							&& $dateFinalNuevaPoliza != $dateFinalPolizaActual)
-					{
-						return true;
-					}
-					else
-					{
-						return false;
+						$polizaValida = true;
 					}
 				}
 			}
 		}
-		else
-		{
-			$esPolizaValida = true;
-		}
-		return $esPolizaValida;
+		
+		return $polizaValida;
 	}
 	
 	function obtenerV1DeClavePoliza($idProducto, $id_agencia)
@@ -72,7 +77,22 @@ class Application_Model_Services_ServicesPolizas
 		//las cuatro primeras letras del rfc de la agencia
 		$v1ClavePoliza = $nombreProducto.$rfcAgencia;
 		return $v1ClavePoliza;
-		
+	}
+	
+	function restarMinutosAPoliza($idPoliza, $minutos)
+	{
+		$polizaDbTable = new Application_Model_DbTable_Poliza();
+		$poliza = $polizaDbTable->obtenerPolizaPorId($id_poliza);
+		if($poliza != null)
+		{
+			$poliza['horas_consumidas'] += $minutos;
+			$diferenciaHoras = $poliza['horas_poliza'] - $minutos;
+			if($diferenciaHoras < 0)
+			{
+				$poliza['tiempo_agotado'] = 'S';
+			}
+			$polizaDbTable->update($poliza);
+		}
 	}
 	
 	

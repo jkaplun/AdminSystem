@@ -7,8 +7,6 @@ class PolizasController extends Zend_Controller_Action
     public function init()
     {
         $this->poliza = new Application_Model_DbTable_Poliza();
-        //$this->view->activemenu=4;
-        /* Initialize action controller here */
     }
 
     public function indexAction()
@@ -84,7 +82,7 @@ class PolizasController extends Zend_Controller_Action
         		//Se concatena el id de la nueva póliza
         		$data['clave'] = $v1ClavePoliza.$idNuevaPoliza;
         		// 	se actualiza en la base de datos la clave de la p�liza
-        		$where = "id_poliza= {$idNuevaPoliza}";
+        		$where = "id_poliza= ".$idNuevaPoliza;
         		$this->poliza->update($data, $where);
         		// se inyecta el ID, estado y descripción en la respuesta al cliente
         		$data['id_poliza']=$idNuevaPoliza;
@@ -96,7 +94,7 @@ class PolizasController extends Zend_Controller_Action
         	 else 
         	 {//Si las fechas de la nueva p�liza se traslapan con las de alguna vigente
         	 	$data['estado']='error';
-        	 	$data['descripcion']='La fecha de la poliza que intenta crear se traslapa con otra.';
+        	 	$data['descripcion']='La fecha de la póliza que intenta crear se traslapa con otra.';
         	 	// se responde al cliente
         	 	$this->_helper->json($data);
         	 	//$this->_redirect('agencias/');
