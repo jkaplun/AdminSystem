@@ -46,7 +46,7 @@ class ordenCreacionController extends Zend_Controller_Action
     	
     	$data = array(
     			'id_agencia' => $params['id_agencia'],
-    			'id_usuario_admin_alta' => $params['id_usuario_admin_alta'],
+    			'id_usuario_admin_alta' => 1, //$params['id_usuario_admin_alta'],
     			'id_usuario_admin_atiende' => $params['ejecutivo'],
     			'id_producto' => $params['producto'],
     			//'id_poliza' => $params['id_poliza'],
