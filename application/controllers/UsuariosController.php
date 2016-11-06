@@ -239,4 +239,18 @@ class UsuariosController extends Zend_Controller_Action
 
     }
 
+    public function consultarejecutivosporidAction(){
+
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+        $params=$this->_request->getParams(); 
+        $ejecutivoPrincipal = $this->usuario_admin->find($params['id_usuario_soporte_titular'])->toArray();
+        $ejecutivoAuxiliar = $this->usuario_admin->find($params['id_usuario_soporte_auxiliar'])->toArray();
+        $result = array_merge($ejecutivoPrincipal, $ejecutivoAuxiliar);
+
+        $this->_helper->json($result);
+
+    }
+
+
 }

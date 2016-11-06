@@ -13,7 +13,12 @@ class OrdenSeguimientoController extends Zend_Controller_Action
         $orden = new Application_Model_DbTable_OrdenServicio();
         
         $valores = array();
+        
         $resultado = $orden->obtenerOrdenes($valores);
+        /*echo('<pre>');
+        var_dump($_SESSION);
+        echo('</pre>');*/
+        
         
         $this->view->countArray= count($resultado);
 

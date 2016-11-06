@@ -1,11 +1,16 @@
 var pathAgencias="public/agencias/";
 var pathPolizaController="public/polizas/"; 
 var pathProductoController="public/productos/"; 
+var pathUsuarioAgenciaController="public/usuariosAgencia/"; 
+var pathOrdenServicioController="public/ordenCreacion/"
 var idAgenciaActual;
 var productos_todos={};
+
+//$('input[name=name_of_your_radiobutton]:checked').val();
+
+//console.log("loading nueva orden")
+//var datosAgenciaSeleccionada={};
 var actualizarVistas = {"vistaDatos":false, "vistaServicio":false};
-
-
 
 $(document).ready(function() { 
 
@@ -42,6 +47,7 @@ $(document).ready(function() {
 	$("#select_agencias").change(function(){
 		idAgenciaActual =$("#select_agencias").val();
 		consultarAgencia(idAgenciaActual);
+		//console.log("idAgenciaActual: "+idAgenciaActual);
 
 		actualizarVistas.vistaUsuarioAgencia=false;
 		var tablePolizas = $('#dataTable-polizas-vigentes').DataTable();
@@ -50,11 +56,23 @@ $(document).ready(function() {
 		mostrarPolizas();
 	 	//mostrarProductosEnTabla();
         actualizarVistas.vistaUsuarioAgencia =true;
+        mostrarProductosEnSelect(idAgenciaActual);
+        mostrarUsuariosAgenciaEnSelect(idAgenciaActual);
+
 	});
+
+
+	$("#submitNuevaOrdenBtn").click(function(){
+		submitNuevaOrden();
+	})
+
+
+	//mostrarProductosEnSelect();
 
 }); // end  $(document).ready(function() { 
 
 function consultarAgencia(id_agencia){
+	var datosAgenciaSeleccionada={};
 	$.ajax({
 		url: pathAgencias + "consultar",
 		method: "post",
@@ -63,7 +81,10 @@ function consultarAgencia(id_agencia){
 	})
 	.done(function(res) { 
 		console.log(res);	
+		datosAgenciaSeleccionada=$.parseJSON(res);;
 		mostarDatosAgencia(res);
+		//console.log("res.id_usuario_soporte_titular: " +datosAgenciaSeleccionada.id_usuario_soporte_titular);
+		mostrarEjecutivosEnSelect(datosAgenciaSeleccionada.id_usuario_soporte_titular, datosAgenciaSeleccionada.id_usuario_soporte_auxiliar);
   	})// end ajax done 
 		.fail(function() {
     	swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );
@@ -194,24 +215,195 @@ function agregarPolizaEnTabla(res){
 
 	var id_poliza_row = "idPolizaRow"+res.id_poliza;
 	// borrar despues 
-
+	console.log("datos poliza: ");
+	console.log(res);
 	//console.log("productos_todos[res.id_producto].nombre_prod: "+productos_todos[res.id_producto].nombre_prod);
-	polizaTable.row.add( [  
-		res.id_poliza, res.clave, nombre_producto_poliza, res.horas_poliza, '0', res.costo_poliza, res.fecha_ini, res.fecha_fin, estadoPoliza
+	polizaTable.row.add( [ 
+	//"X", res.clave, "x", "x", '0',  "X" 
+		"X", res.clave, nombre_producto_poliza, res.horas_poliza, '0', estadoPoliza 
 	]).draw(); 
 
 	polizaTable.page( 'last' ).draw( 'page' );  
 
 
-	$('#dataTable-polizas-vigentes tr:last-child td:first-child').attr('class', 'frontEndIdPoliza'); 
-	$('#dataTable-polizas-vigentes tr:last-child td:first-child').css('background-color', 'red');  
-	$('#dataTable-polizas-vigentes tr:last-child td:last-child').attr('id', "editarPolizaBtn"+res.id_poliza); 
+	$('#dataTable-polizas-vigentes tr:last-child td:first-child').html(' <input type="radio" name="id_poliza" value="'+res.id_poliza+'">'); 
+	//$('#dataTable-polizas-vigentes tr:last-child td:first-child').css('background-color', 'red');  
+	//$('#dataTable-polizas-vigentes tr:last-child td:first-child').attr('id', "editarPolizaBtn"+res.id_poliza); 
 	//$('#dataTable-polizas-vigentes tr:last-child td:last-child').attr('class', "frontEndIdPoliza"); 
-	$("#editarPolizaBtn"+res.id_poliza).closest('tr').attr('id', id_poliza_row); 
+	//$("#editarPolizaBtn"+res.id_poliza).closest('tr').attr('id', id_poliza_row); 
 
 	
 
 	// ocultar front-end-id
-	$(".frontEndIdPoliza").hide();  
+	//$(".frontEndIdPoliza").hide();  
 
 } // end function agregarUsuarioAgenciaEnTabla(res){ 
+
+
+
+function mostrarProductosEnSelect(idAgenciaActual){
+$('#nombre_prod').html('').selectpicker('refresh');
+ // productos_todos={};
+  ajaxActionProducto="productosdisponiblesadquiridosporidagencia"
+  var id_agencia_seleccionada="id_agencia="+idAgenciaActual;
+  //var addIdAgencia="id_agencia="+idAgenciaActual;
+ $.ajax({ 
+      url: pathProductoController+ajaxActionProducto, 
+      method: "post", 
+      data: id_agencia_seleccionada,
+      dataType: "json" 
+    }) 
+    .done(function(res) {  
+    	console.log("productos de la agencia");
+    	console.log(res);
+        var i=0;
+
+
+      for (i;i<res.length;i++){
+
+        if(res[i].id_agencia!=0){
+        //productos_todos[res[i].id_producto]=res[i];
+        //agregarProductoEnTabla(res[i]);
+        console.log("producto agencia: "+res[i].nombre_prod)
+        $('#nombre_prod').append($('<option>').text(res[i].nombre_prod)
+          .attr('value', res[i].id_producto)
+          .attr('id', "id_producto_"+res[i].id_producto)
+          .attr('class',"productSelect")
+          ).selectpicker('refresh');
+        }
+      }
+
+ 
+  })// end ajax done  
+    .fail(function() { 
+      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+  }); 
+}
+
+function mostrarUsuariosAgenciaEnSelect(idAgenciaActual){
+$('#solicito').html('').selectpicker('refresh');
+ // productos_todos={};
+  //ajaxActionUsuarioAgencia="consultar"
+  var id_agencia_seleccionada="id_agencia="+idAgenciaActual;
+  //var addIdAgencia="id_agencia="+idAgenciaActual;
+ $.ajax({ 
+      url: pathUsuarioAgenciaController+"consultar", 
+      method: "post", 
+      data: id_agencia_seleccionada,
+      dataType: "json" 
+    }) 
+    .done(function(res) {  
+    	console.log("usuarios de la agencia");
+    	console.log(res);
+        var i=0;
+
+
+      for (i;i<res.length;i++){
+
+        //if(res[i].id_agencia!=0){
+        //productos_todos[res[i].id_producto]=res[i];
+        //agregarProductoEnTabla(res[i]);
+       // console.log("producto agencia: "+res[i].nombre_prod)
+        $('#solicito').append($('<option>').text(res[i].nombre + " " + res[i].apellidos)
+          .attr('value', res[i].id_usuario_agencia)
+          .attr('id', "id_usuario_agencia"+res[i].id_usuario_agencia)
+          .attr('class',"productSelect")
+          ).selectpicker('refresh');
+        }
+     // }
+
+
+  })// end ajax done  
+    .fail(function() { 
+      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+  }); 
+}
+
+//consultarejecutivosporid
+
+function mostrarEjecutivosEnSelect(id_ejecutivo_principal, id_ejecutivo_aux){
+	console.log("id_ejecutivo_principal"+id_ejecutivo_principal);
+
+$('#ejecutivo').html('').selectpicker('refresh');
+ // productos_todos={};
+  //ajaxActionUsuarioAgencia="consultar"
+  var id_agencia_seleccionada="id_agencia="+idAgenciaActual;
+  // var id_ejecutivos ={
+  // 	 "id_usuario_soporte_titular":datosAgenciaSeleccionada.id_usuario_soporte_titular,
+  // 	 "id_usuario_soporte_auxiliar":datosAgenciaSeleccionada.id_usuario_soporte_auxiliar
+  // }  
+  //var addIdAgencia="id_agencia="+idAgenciaActual;
+  // console.log("atosAgenciaSeleccionada.id_usuario_soporte_titular"+datosAgenciaSeleccionada.id_usuario_soporte_titular);
+ $.ajax({ 
+      url: "public/usuarios/consultarejecutivosporid", 
+      method: "post", 
+      data: "id_usuario_soporte_titular="+id_ejecutivo_principal+"&id_usuario_soporte_auxiliar="+id_ejecutivo_aux,
+      dataType: "json" 
+    }) 
+    .done(function(res) {  
+    	console.log("ejecutivos: ");
+    	console.log(res);
+        var i=0;
+
+
+      for (i;i<res.length;i++){
+
+        //if(res[i].id_agencia!=0){
+        //productos_todos[res[i].id_producto]=res[i];
+        //agregarProductoEnTabla(res[i]);
+       console.log("ejecutivo: "+res[i]);
+        $('#ejecutivo').append($('<option>').text(res[i].nombre + " " + res[i].apellido_paterno)
+          .attr('value', res[i].id_usuario)
+          .attr('id', "ejecutivo"+res[i].id_usuario)
+          .attr('class',"productSelect")
+          ).selectpicker('refresh');
+        }
+     // }
+
+
+  })// end ajax done  
+    .fail(function() { 
+      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+  }); 
+}
+
+
+function submitNuevaOrden(){
+	console.log('$("#datosFormServicio").serialize(): '+ $("#datosFormServicio").serialize());
+	var id_agencia_seleccionada="id_agencia="+idAgenciaActual;
+	var tipo_soporte="&tipo_soporte=" + $("#tipo_soporte").val();
+	var id_poliza_seleccionada="&id_poliza="+$('input[name=id_poliza]:checked').val();
+	var id_producto_seleccionado="&producto="+$("#nombre_prod").val();
+	var solicito ="&solicito="+$("#solicito").val();
+	var ejecutivo ="&ejecutivo=" +$("#ejecutivo").val();
+	var motivo="&motivo=" +$("#motivo").val();
+	var descripcion="&descripcion=" + $("#descripcion").val();
+
+
+$.ajax({ 
+      url: pathOrdenServicioController + "agregar", 
+      method: "post", 
+      data: id_agencia_seleccionada +tipo_soporte+ id_poliza_seleccionada+id_producto_seleccionado+solicito+ejecutivo+motivo+descripcion,
+      dataType: "json" 
+    }).done(function(res) {  
+      console.log("ajax submitFormNueva orden done");
+      if(res.estado=="ok"){
+      		swal("La orden de servicio ha sido registrada exitosamente", " ", "success"); 
+      }else{
+      		swal(res.descripcion, " ", "error"); 
+      }
+       
+
+
+ 
+       
+  })// end ajax done  
+    .fail(function() { 
+      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+  });
+
+
+}
+
+
+///////

@@ -1,6 +1,7 @@
 //index.js Productos
 //ruta para el controlador de Productos
-console.log("loading producto index.js"); 
+//console.log("loading producto index.js 4nov16"); 
+
 var pathProductoController="public/productos/"; 
 var productos_todos={};
 var productos_agencia={};
@@ -92,7 +93,7 @@ function submitFormProducto(){
   //console.log("----------> ajaxActionProducto: "+ajaxActionProducto);
   addIdAgencia="&id_agencia="+idAgenciaActual;
   //console.log("ajaxActionProducto" +ajaxActionProducto);
-  var id_producto="&id_producto="+id_producto_seleccionado;
+  var id_producto="&id_producto="+$("#nombre_prod").val();
   //console.log("id_producto: "+ id_product);
 
   // if(ajaxActionProducto=="actualizar"){
@@ -135,34 +136,7 @@ function agregarProductoEnTabla(res){
         var productoTable = $('#dataTable-productos-adquiridos').DataTable();   
         var info = productoTable.page.info(); 
  
-         // if(res.estatus == "ACT"){ 
-         //   estadoProducto="Activa"; 
-         // } else if (res.estatus == "ADE"){ 
-         //   estadoProducto="Adeudo"; 
-         // } else if (res.estatus == "BLQ"){ 
-         //   estadoProducto="Bloqueado"; 
-         // } else{
-         //   estadoProducto="Cancelado";
-         // }
- 
-          //  ACT - Activo
-          // ADE - Adeudo
-          // BLQ - Bloqueado
-          // CAN - Cancelado
-           
- 
-        //var apellido = res.apellido_paterno+ " " + res.apellido_materno;  
- 
- 
-        // //res.id_usuario_agencia=falseId; 
-        // res.descripcion=""; 
 
-        // se agrega la nueva columna a la tabla  
-        //$(".frontEndIdColumn").show()
-        // ProductoTable.row.add( [  
-        //   res.id_Producto, res.clave, res.id_producto, res.horas_Producto, '0', res.costo_Producto, res.fecha_ini, res.fecha_fin, estadoProducto , "x"
-        //   ]).draw(); 
- 
         var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#modalNuevoProducto" value='+ res.id_producto +   
         ' onclick="datosFormProducto('+ res.id_producto +  ')" >' +  // 
         '<i class="fa fa-info-circle"></i>'+  
@@ -181,10 +155,6 @@ function agregarProductoEnTabla(res){
  		       "x"
         			];
 
-			// var rowIndex = productoTable.fnAddData(data);
-			// var row = productoTable.fnGetNodes(rowIndex);
-			// $(row).attr( 'id', id_producto_row );
-        //productoTable.row.add( ).draw(); 
         var rowNode = productoTable
 			    .row.add( data )
 			    .draw()
@@ -192,18 +162,9 @@ function agregarProductoEnTabla(res){
 			 
 			$( rowNode ).attr('id', id_producto_row); ;
 
-        //productoTable.page( 'last' ).draw( 'page' );  
-        
- 
-        //$('#dataTable-productos-adquiridos tr:last-child td:first-child').attr('class', 'frontEndIdProducto'); 
-        //$('#dataTable-productos-adquiridos tr:last-child td:first-child').css('background-color', 'red'); 
-        
-        //$('#dataTable-productos-adquiridos tr:last-child td:last-child').html(boton);  
-        //$('#dataTable-productos-adquiridos tr:last-child td:last-child').attr('id', "editarProductoBtn"+res.id_producto); 
         $('#'+id_producto_row+' td:last-child').html(boton);  
         $('#'+id_producto_row+' td:last-child').attr('id', "editarProductoBtn"+res.id_producto); 
-        //$('#dataTable-productos-adquiridos tr:last-child td:last-child').attr('class', "frontEndIdProducto"); 
-        //$("#editarProductoBtn"+res.id_producto).closest('tr').attr('id', id_producto_row); 
+
 
         $("#id_producto_"+res.id_producto).hide();
 
@@ -220,19 +181,8 @@ function agregarProductoEnTabla(res){
             productoTable.page(info.page).draw( 'page' );  
     
 
-          // $("#editarProductoBtn"+res.id_Producto).closest('tr').next('tr').attr('id', id_Producto_row);
-
-          //$("#"+res.id_usuario) 
-          // ProductoTable.row('#'+id_Producto_row).remove().draw( false ); 
-          //$('#'+id_Producto_row + " td:first-child").css('background-color', 'red'); 
-          //$('#'+id_Producto_row + " td:first-child").attr('class', 'frontEndIdProducto');
-
           $("#"+id_producto_row + " td:last-child").html(boton);  
-          // if (!$("#"+id_Producto_row).length){ // es el último elemento en la tabla 
-          //      console.log("ultimoElemento") 
-          //      $('#dataTable-productos-adquiridos tr:last-child td:last-child').html(boton);  
-          // } 
-           
+
 
 
         } 

@@ -1,4 +1,6 @@
 <div class="panel panel-primary">
+
+  <form id="datosFormServicio">
 	<div class="panel-heading">
 	<b>Servicio</b>
 	</div>
@@ -6,46 +8,44 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="bs-docs-example no-code">
-				  Producto: <select class="selectpicker" data-live-search="true" data-width="auto">
-						<option>Curso</option>
+				  Producto: <select id="nombre_prod" class="selectpicker" data-live-search="true" data-width="auto">
+<!-- 						<option>Curso1</option>
 						<option>Demostracion</option>
-						<option>Desarrollo</option>
+						<option>Desarrollo</option> -->
 				  </select>
 				</div><br/>
 				<div class="bs-docs-example no-code">
-				  Solicit&oacute;: <select class="selectpicker" data-live-search="true" data-width="auto">
-						<option>Curso</option>
+				  Solicit&oacute;:  <select id="solicito" class="selectpicker" data-live-search="true" data-width="auto">
+<!-- 						<option>Curso</option>
 						<option>Demostracion</option>
-						<option>Desarrollo</option>
+						<option>Desarrollo</option> -->
 				  </select>
 				</div><br/>					        
 			</div>
 			<div class="col-md-4">
 				<div class="bs-docs-example no-code">
-				  Ejecutivo: <select class="selectpicker" data-live-search="true" data-width="auto">
-						<option>Curso</option>
-						<option>Demostracion</option>
-						<option>Desarrollo</option>
+				  Ejecutivo: <select id="ejecutivo" class="selectpicker" data-live-search="true" data-width="auto">
 				  </select>
 				</div><br/>			
 				<div class="bs-docs-example no-code">
-				  Motivo: <select class="selectpicker" data-live-search="true" data-width="auto">
-						<option>Curso</option>
-						<option>Demostracion</option>
-						<option>Desarrollo</option>
+				  Motivo: <select id="motivo" class="selectpicker" data-live-search="true" data-width="auto">
+						<option value="motivo1">motivo1</option>
+						<option value="motivo2">motivo2</option>
+						<option value="motivo3">motivo3</option>
 				  </select>
 				</div>			        
 			</div>			
 			<div class="col-md-4">
-				Descripci&oacute;n: <textarea class="form-control" rows="3"></textarea>			        
+				Descripci&oacute;n: <textarea id="descripcion" class="form-control" rows="3"></textarea>			        
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-4"></div>
 			<div class="col-md-4">
-				<button type="button" class="btn btn-outline btn-success btn-lg btn-block" onclick="">Guardar</button>
+				<button type="button" class="btn btn-outline btn-success btn-lg btn-block" id="submitNuevaOrdenBtn">Guardar</button>
 			</div>
 			<div class="col-md-4"></div>
 		</div>		
     </div>
+    </form>
 </div>
