@@ -10,9 +10,13 @@ class Application_Form_Agencias_FoliosAgencia extends Zend_Form
 {
     public function init()
     {
-    	// id_agencia
+    	// id_agencia  Para agregar folios
     	$id_agencia = new Zend_Form_Element_Hidden('id_agencia_folios');
     	$this->addElement($id_agencia);
+    	
+    	// id_folios_agencia_form Para editar Folios
+    	$id_folios_agencia_form = new Zend_Form_Element_Hidden('id_folios_agencia_form');
+    	$this->addElement($id_folios_agencia_form);
     	
     	$validator = new Zend_Validate_Alnum();
         // Folios
@@ -25,8 +29,7 @@ class Application_Form_Agencias_FoliosAgencia extends Zend_Form
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Folios Comprados"))
         ->setAttrib("maxlength","10")
-        ->addValidator('alNum')
-        ->setRequired(true);
+        ->addValidator('alnum');
         $this->addElement($folios_comprados);
         
         // Fecha de Compra
@@ -40,8 +43,7 @@ class Application_Form_Agencias_FoliosAgencia extends Zend_Form
         ->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
         ->setAttrib("maxlength","10")
         ->setAttrib("data-date-format","yyyy-mm-dd")
-        ->setAttrib("readonly",true)
-        ->setRequired(true);
+        ->setAttrib("readonly",true);
         $this->addElement($fecha_compra);
         
         // Observaciones
@@ -53,24 +55,9 @@ class Application_Form_Agencias_FoliosAgencia extends Zend_Form
         ->setAttrib("class","form-control")
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
+        ->addFilter('StringTrim')
         ->setAttrib("placeholder",utf8_encode("Observaciones"));
         $this->addElement($observaciones);
-
-        // Estatus
-        $estatus = new Zend_Form_Element_Select('estatus_folios');
-        $estatus->setAttribs ( array (
-                'autocomplete'=>'off'))
-                ->addMultiOptions(array(
-                        'S'=>'Activo',
-                        'N'=>'Inactivo'
-                ))
-                ->setAttrib("class","form-control")                
-                ->removeDecorator('label')
-                ->setValue('S')
-                ->removeDecorator('HtmlTag');
-        ;
-        $this->addElement($estatus);
-        
         
         }
 }

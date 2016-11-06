@@ -272,17 +272,21 @@ function abrirModalAgregarFolios(){
 	$("#folios_comprados").val(""); 
 	$("#fecha_compra_folios").val("");
 	$("#observaciones_folios").val("");
-	$("#estatus_folios").val("S");	
+	$("#modalLabelFolios").html("Agregar Folios");
+	$("#submitAgregarFolios").show();
+	$("#submitEditarFolios").hide();
 
 }
 
-function abrirModalEditarFolios(){
+function abrirModalEditarFolios(id_folios_agencia,fecha_compra,folios_comprados,observaciones){
 	//console.log('Agregar Folio');
-	$("#id_agencia_folios").val($("#id_agencia").val()); 
-	$("#folios_comprados").val(""); 
-	$("#fecha_compra_folios").val("");
-	$("#observaciones_folios").val("");
-	$("#estatus_folios").val("S");	
+	$("#id_folios_agencia_form").val(id_folios_agencia); 
+	$("#folios_comprados").val(folios_comprados);
+	$("#fecha_compra_folios").datepicker("update", fecha_compra);
+	$("#observaciones_folios").val(observaciones);
+	$("#modalLabelFolios").html("Editar Folios");
+	$("#submitEditarFolios").show();
+	$("#submitAgregarFolios").hide();
 }
 
 
@@ -328,7 +332,7 @@ function mostrarFolios(){
 	    .done(function(res) {  
 	    	$( "#body-tabla-folios" ).html("");
 	    	$.each( res, function( key, value ) {
-	    		  
+	    		  var obs = value.observaciones;
 	    		  $( "#body-tabla-folios" ).append( '<tr id="idUsuarioAgenciaRow1" class="odd" role="row">' +
 	    		  		
 	    		  		"<td>"+ value.id_folios_agencia +"</td>" +
@@ -336,10 +340,9 @@ function mostrarFolios(){
 	    		  		"<td>"+ value.folios_comprados +"</td>" +
 	    		  		"<td>"+ (parseInt(value.folios_comprados) - parseInt(value.folios_comprados)) +"</td>" +
 	    		  		"<td>"+ value.observaciones +"</td>" +
-	    		  		"<td>"+ value.estatus +"</td>" +
-	    		  		"<td></td>" +
-	    		  		"</tr>" +
-	    		  		"" );
+	    		  		"<td><button class='btn btn-primary btn-sm btn-circle' type='button' data-toggle='modal' data-target='#AgregarFolios' value='1' " +
+	    		  		'onclick=\'abrirModalEditarFolios("'+value.id_folios_agencia+'","'+ value.fecha_compra +'","'+ value.folios_comprados +'","'+ obs +'")\'' +
+	    		  				"><i class='fa fa-info-circle'></i></button></td></tr>");
 	    		});
 
 	  })// end ajax done  
@@ -347,3 +350,32 @@ function mostrarFolios(){
 	      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
 	  }); 
 	}
+
+
+function submitEditarFolios(){
+
+	var valoresForm =  $("#form-agregar-folios-agencia").serialize();
+	console.log(valoresForm);
+	$.ajax({
+		  url: path + "editarfolios",
+		  method: "post",
+		  data: valoresForm,
+		  dataType: "json"
+		})
+		.done(function(res) { 
+			if (res.error=='1'){
+				var msg = res.folios_comprados + ' ' + res.fecha_compra_folios;
+				
+				swal("Error :(", msg , "error" );
+				
+			} else {
+				
+				$('#AgregarFolios').modal('hide');
+			    swal("Los folios se editaron exitosamente", " ", "success");  
+			    mostrarFolios();
+			}
+	})// end ajax done 
+			.fail(function() {
+	  	swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );
+	});
+}

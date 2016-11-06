@@ -5,7 +5,7 @@
 			<div class="modal-header">
 				<div class="row">
 					<div class="col-md-10">
-						<h4 class="modal-title" id="myModalLabel">Nuevos Folios</h4>
+						<h4 class="modal-title" id="modalLabelFolios">Nuevos Folios</h4>
 					</div>
 					<div class="col-md-2" align="right">
 							<button type="button" class="btn btn-info btn-circle" data-dismiss="modal"><i class="fa fa-times"></i></button>
@@ -13,9 +13,8 @@
 				</div>
 			</div>
  		<form method="post" id="form-agregar-folios-agencia"> 
-		  	<input type="hidden" name="edita_id_user" id="edita_id_user">
-		  	<input name="accion" value="editar" type="hidden">
 			<?= $this->formFoliosAgencia->id_agencia_folios ?>
+			<?= $this->formFoliosAgencia->id_folios_agencia_form ?>
 		    <div class="modal-body">
 				<fieldset>
 					<div class="row">
@@ -48,25 +47,15 @@
 				            </div>
 			    		</div>	
 			    		<div class="col-md-1"></div>
-			    	</div>   
-			    	<div class="row">
-			    		<div class="col-md-1"></div>
-			    		<div class="col-md-10">
-							<div class="form-group input-group">
-				              <label>Estatus:</label>
-				                <?= $this->formFoliosAgencia->estatus_folios ?>
-				                  
-				            </div>
-			    		</div>	
-			    		<div class="col-md-1"></div>
-			    	</div>       			    		
+			    	</div>     			    		
 			    </fieldset>
 		    </div>
 		    <div class="modal-footer">
 		    	<div class="row">
 					<div class="col-md-3"></div>			    	
 		    		<div class="col-md-6">
-		       			<span id="submitAgregarFolios" type="button" class="btn btn-block btn-outline btn-success" onclick="submitAgregarFolios()">Guardar</span>		
+		       			<span id="submitAgregarFolios" type="button" class="btn btn-block btn-outline btn-success" onclick="submitAgregarFolios()">Guardar</span>	
+		       			<span id="submitEditarFolios" type="button" class="btn btn-block btn-outline btn-success" onclick="submitEditarFolios()">Guardar</span>		
 		    		</div>
 					<div class="col-md-3"></div>			    		
 		    	</div>	  		        

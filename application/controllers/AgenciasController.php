@@ -430,6 +430,7 @@ class AgenciasController extends Zend_Controller_Action
     	$this->_helper->layout()->disableLayout();
     	$this->_helper->viewRenderer->setNoRender();
     	$params=$this->_request->getParams();
+
     	$params['error']='0';
     	$formFoliosAgencia = new Application_Form_Agencias_FoliosAgencia();
 
@@ -438,20 +439,18 @@ class AgenciasController extends Zend_Controller_Action
     		$params['error']='1';
     		$this->_helper->json($params);
     	}
-    	
     	$foliosAgencia = new Application_Model_DbTable_FoliosAgencia();
     	
     	$data = array(
     			'id_agencia' => $params['id_agencia_folios'],
     			'fecha_compra' => $params['fecha_compra_folios'],
     			'folios_comprados' => $params['folios_comprados'],
-    			'estatus' => $params['estatus_folios'],
     			'observaciones' => $params['observaciones_folios']
     	);
     	try {
     		$foliosAgencia->insert($data);
     	} catch (Exception $e){
-    		$params['error']='0';
+    		$params['error']=$e;
     	}
     	
     	$this->_helper->json($params);
@@ -469,6 +468,40 @@ class AgenciasController extends Zend_Controller_Action
     	
     	$result = $foliosAgencia->obtenerFoliosPorId($params['id_agencia']);
     	$this->_helper->json($result);
+    
+    }
+    
+    
+    
+    public function editarfoliosAction(){
+    
+    	$this->_helper->layout()->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	$params=$this->_request->getParams();
+    
+    	$params['error']='0';
+    	$formFoliosAgencia = new Application_Form_Agencias_FoliosAgencia();
+    
+    	if (!$formFoliosAgencia->isValid($params)) {
+    		$params = $formFoliosAgencia->getErrors();
+    		$params['error']='1';
+    		$this->_helper->json($params);
+    	}
+    	$foliosAgencia = new Application_Model_DbTable_FoliosAgencia();
+    	
+    	$data = array(
+    			'fecha_compra' => $params['fecha_compra_folios'],
+    			'folios_comprados' => $params['folios_comprados'],
+    			'observaciones' => $params['observaciones_folios']
+    	);
+    	try {
+    		$where ='id_folios_agencia='.$params['id_folios_agencia_form'];
+    		$foliosAgencia->update($data,$where);
+    	} catch (Exception $e){
+    		$params['error']=$e;
+    	}
+    	 
+    	$this->_helper->json($params);
     
     }
 }
