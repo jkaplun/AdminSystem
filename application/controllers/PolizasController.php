@@ -54,6 +54,7 @@ class PolizasController extends Zend_Controller_Action
     		'id_agencia' => $params['id_agencia'],
     		'id_producto' => $params['id_producto'],
             'horas_poliza' => $params['horas_poliza'], 
+            'horas_poliza' => 0.00, 
             //'clave' => $params['clave'], 
             'fecha_ini' => $params['fecha_ini'], 
             'fecha_fin' => $params['fecha_fin'],
@@ -154,7 +155,7 @@ class PolizasController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams(); 
-        $polizasAgencia = $this->poliza->obtenerPolizasPorIdAgencia($params['id_agencia']);
+        $polizasAgencia = $this->poliza->obtenerPolizasVigentesPorIdAgencia($params['id_agencia']);
         $this->_helper->json($polizasAgencia);
 
     }

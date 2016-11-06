@@ -59,7 +59,8 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
 		->where(' id_agencia="'.$idAgencia.'" and now() between fecha_ini and fecha_fin 
-				and tiempo_agotado = "N" and estatus = "ACT" and horas_poliza > 0')
+				and tiempo_agotado = "N" and estatus = "ACT" 
+				and (horas_poliza-horas_consumidas) > 0')
 		->order('fecha_ini');
 
 		//echo $select;die;
