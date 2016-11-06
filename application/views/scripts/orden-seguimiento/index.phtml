@@ -15,14 +15,7 @@
 					
 				</tr>
 			</thead>
-			<tbody align="center" id="body-ts">
-<!-- 				<tr>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
-				</tr> -->				
+			<tbody align="center" id="body-ts">		
 			</tbody>		
 		</table>
 	</div>
@@ -67,67 +60,117 @@
   		?>
 		
 		<div class="panel panel-default bs-callout2 <?= $color ?>">
+		 	<div class="panel-heading <?= $color ?>2">
+            	<b>
+            	<div class="row">
+            		<div class="col-md-9">
+            			<center><?= $registro["agencia_nombre"] ?></center>
+            		</div>
+            		<div class="col-md-3" align="right">
+            			ID Orden Servicio: <?= $registro["id_orden_servicio"].'-'.$registro["id_orden_servicio_estatus"]?>
+            		</div>
+            	</div>
+            	</b>
+            </div>
 		 	<div class="panel-body">
-				<div class="row">
-					<div class="col-md-3">
-				  		Id Orden Servicio:
-				  		<p><?= $registro["id_orden_servicio"].'-'.$registro["id_orden_servicio_estatus"].'-'.$color ?></p>
-				  	</div>
-				  	<div class="col-md-3">
-				  		Fecha Alta:
-				  		<p><?= $registro["fecha_alta"] ?></p>
-				  	</div>
-				  	<div class="col-md-3">
-				  		Fecha Cierre :
-				  		<p><?= $registro["fecha_cierre"] ?></p>
-				  	</div>	
-				  	<div class="col-md-3">
-				  		Duraci&oacute;n del Servicio:
-				  		<p><?= $registro["duracion_servicio"] ?></p>
-				  	</div>					  	
+			 	<div class="row">
+					<div class="col-lg-3 col-md-6">
+						<div class="form-group">
+                            <label>Fecha Solicitud:</label>
+							<p><?= $registro["fecha_alta"] ?></p>
+                        </div>
+ 						<div class="form-group">
+                            <label>Fecha Respuesta:</label>
+							<p><?= $registro["fecha_cierre"] ?></p>
+                        </div>  
+ 						<div class="form-group">
+                            <label>Producto:</label>
+							<p></p>
+                        </div>                                              
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="form-group">
+                            <label>Usuario Solicitante:</label>
+							<p><?= $registro["usuario_agencia_nombre"] ?> <?= $registro["usuario_agencia_apellidos"] ?></p>
+                        </div>
+                        <br/>
+ 						<div class="form-group">
+                            <label>Usuario Atenci&oacute;n:</label>
+							<p><?= $registro["clave"] ?></p>
+                        </div>    
+					</div>
+					<div class="col-lg-3 col-md-6">
+ 						<div class="form-group">
+                            <label>Comentarios Recepci&oacute;n:</label>
+							<p><?= $registro["comentarios_recepcion"] ?></p>
+                        </div>   
+                        <div class="form-group">
+                            <label>Descripci&oacute;n / Soporte:</label>
+				  			<p><?= $registro["descripcion"] ?></p>
+                        </div>   
+					</div>
+					<div class="col-lg-3 col-md-6">
+	                    <div class="panel panel-green">
+	                        <div class="panel-heading">
+	                            <div class="row">
+	                                <div class="col-xs-3">
+	                                    <i class="fa  fa-play-circle fa-5x"></i>
+	                                </div>
+	                                <div class="col-xs-9 text-right">
+	                                    <div class="huge">12</div>
+	                                    <div>Empezar</div>
+	                                </div>
+	                            </div>
+	                        </div>
+                            <div class="panel-footer">
+                                <span class="pull-left">Duraci&oacute;n del Servicio:  </span>
+                                <span class="pull-left"><?= $registro["duracion_servicio"] ?></span>
+                                <span class="pull-right"><i class="fa fa-times-circle-o"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+	                    </div>
+	                </div>
 				</div>
-				<hr style=" margin-top: 5px; margin-bottom: 10px;">
-				<div class="row">
-					<div class="col-md-6">
-						Agencia:
-						<p><?= $registro["agencia_nombre"] ?></p>
-					</div>
-					<div class="col-md-2">
-						Usuario Solicitante:
-						<p><?= $registro["usuario_agencia_nombre"] ?> <?= $registro["usuario_agencia_apellidos"] ?></p>
-					</div>
-					<div class="col-md-2">
-						Usuario Atencion:
-						<p><?= $registro["clave"] ?></p>
-					</div>					
-					<div class="col-md-2">
-						Estatus:
-						<p><?= $registro["id_orden_servicio_estatus"] ?></p>
-					</div>	
-				</div>		
-				<hr style=" margin-top: 5px; margin-bottom: 10px;">		
-			  	<div class="row">
-				  	<div class="col-md-6">
-				  		Comentarios Recepci&oacute;n:
-				  		<p><?= $registro["comentarios_recepcion"] ?></p>
-				  	</div>
-				  	<div class="col-md-6">
-				  		Descripci&oacute;n:
-				  		<p><?= $registro["descripcion"] ?></p>
-				  	</div>
-			  	</div>			
+	
 			  	<hr style=" margin-top: 5px; margin-bottom: 10px;">	  		    
 			  	<div class="row">
 				  	<div class="col-md-6">
-				  		Motivo:
-				  		<p><?= $registro["motivo"] ?></p>
+				  		<label>Motivo:</label>
+				  		<textarea class="form-control" rows="3" value="<?= $registro["motivo"] ?>"></textarea>
 				  	</div>
 				  	<div class="col-md-6">
-				  		Solución:
-				  		<p><?= $registro["solucion"] ?></p>
+				  		<label>Solución:</label>
+				  		<textarea class="form-control" rows="3" value="<?= $registro["solucion"] ?>"></textarea>
 				  	</div>				  	
-			  	</div>			    
-		    	<hr style=" margin-top: 5px; margin-bottom: 10px;">
+			  	</div>
+			  	<br/>
+			  	<hr style=" margin-top: 5px; margin-bottom: 10px;">	  		    
+			  	<div class="row">
+				  	<div class="col-md-4">
+				  		<label>Conformidad:</label>
+				  		<input class="form-control">
+				  	</div>
+				  	<div class="col-md-6">
+				  		<center><label>Enviar Mail Al Cliente:</label></center>
+				  		<div class="row">
+				  			<div class="col-md-1"></div>
+				  			<div class="col-md-4">
+				  				<button type="button" class="btn btn-primary">Servicio en Proceso</button>
+				  			</div>
+				  			<div class="col-md-2"></div>
+				  			<div class="col-md-4">
+				  				<button type="button" class="btn btn-primary">Servicio Concluido</button>
+				  			</div>
+				  			<div class="col-md-1"></div>
+				  		</div>
+				  	</div>
+				  	<div class="col-md-1"></div>	
+				  	<div class="col-md-1">
+						<button type="button" class="btn btn-primary btn-circle btn-lg"><i class="fa fa-floppy-o  "></i>
+                            </button>
+				  	</div>				  				  	
+			  	</div>			  				    
+<!-- 		    	<hr style=" margin-top: 5px; margin-bottom: 10px;">
 			  	<div class="row">
 				  	<div class="col-md-10">
 				  		Control Cron:
@@ -138,7 +181,7 @@
 				  		<p><?= $registro["concluido"] ?></p>
 				  	</div>				  	
 			  	</div>		
-		    	<hr style=" margin-top: 5px; margin-bottom: 10px;">
+		    	<hr style=" margin-top: 5px; margin-bottom: 10px;"> -->
 		  </div>
 		</div>
 	
