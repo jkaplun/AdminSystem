@@ -46,10 +46,10 @@ class ordenCreacionController extends Zend_Controller_Action
     	
     	$data = array(
     			'id_agencia' => $params['id_agencia'],
-    			'id_usuario_admin_alta' => 1, //$params['id_usuario_admin_alta'],
+    			'id_usuario_admin_alta' => $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'],
     			'id_usuario_admin_atiende' => $params['ejecutivo'],
     			'id_producto' => $params['producto'],
-    			//'id_poliza' => $params['id_poliza'],
+    			'id_poliza' => $params['id_poliza'],
     			'id_orden_servicio_estatus' => 2,
     			'id_usuario_agencia_solicito' => $params['solicito'],
     			//Se crea con el estado 0 que indica que es nueva
@@ -63,14 +63,17 @@ class ordenCreacionController extends Zend_Controller_Action
     	
     	$mensajesDeError = $form->getMessages();
     	$cantidadDeErrores = count($mensajesDeError);
+        $ordenServicioDbTable = new Application_Model_DbTable_OrdenServicio();
     	if ($cantidadDeErrores == 0)
     	{
         	$polizaDbTable = new Application_Model_DbTable_Poliza();
-        	$polizaVigente = $polizaDbTable->obtenerPolizaVigenteProductoAgencia($params['id_agencia'], $params['producto']);
+        	$polizaVigente = $polizaDbTable->obtenerPolizaVigentePorId($params['id_poliza']);
         	if($polizaVigente != null)
         	{
-    			//Se crea la orden de servicio con una clave sin el id
-    			$idNuevaOrden = $this->poliza->insert($data);
+    			//Obteniendo el id del producto
+    			$data['id_producto'] = $polizaVigente['id_producto'];
+    			//Se crea la orden de servicio
+    			$idNuevaOrden = $ordenServicioDbTable->insert($data);
 	    		// se inyecta el ID, estado y descripción en la respuesta al cliente
     			$data['id_orden_servicio']=$idNuevaOrden;
     			$data['estado']='ok';
@@ -81,7 +84,7 @@ class ordenCreacionController extends Zend_Controller_Action
         	{
 				//else cuando no hay pólizas vigentes
     			$data['estado']='error';
-        	 	$data['descripcion']='El cliente no tiene pólizas vigentes';
+        	 	$data['descripcion']='Esa póliza no está vigente';
         	 	// se responde al cliente
         	 	$this->_helper->json($data);
         	}

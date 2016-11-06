@@ -154,7 +154,17 @@ class PolizasController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams(); 
-        $polizasAgencia = $this->poliza->obtenerPolizaPorIdAgencia($params['id_agencia']);
+        $polizasAgencia = $this->poliza->obtenerPolizasPorIdAgencia($params['id_agencia']);
+        $this->_helper->json($polizasAgencia);
+
+    }
+
+   public function consultar_polizas_vigentesAction(){
+
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+        $params=$this->_request->getParams(); 
+        $polizasAgencia = $this->poliza->obtenerPolizasVigentesPorIdAgencia($params['id_agencia']);
         $this->_helper->json($polizasAgencia);
 
     }

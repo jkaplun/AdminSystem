@@ -15,12 +15,11 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 		
 		$select = $this->_db->select()->
 		from ( "view_orden_servicio", '*' )
-		->where('id_usuario_admin_atiende="'.$_SESSION['Zend_Auth']['USER_VALUES']['id_usuario']
-				.'"');
-		
-		//echo $select;
-		//die;
+		->where('id_usuario_admin_atiende="'.$_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'].'"');
 		return $this->getAdapter ()->fetchAll( $select );
+		
+		/*echo $select;
+		die;*/
 	}
 	
 	public function obtenerOrdenesMonitoreo()

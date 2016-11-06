@@ -22,6 +22,19 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		->setAttrib("maxlength","15")
 		;
 		
+		// póliza
+		$id_poliza = new Zend_Form_Element_Text('poliza');
+		$id_poliza->setRequired(true)
+		->addErrorMessage("- Es necesario que elija una póliza.")
+		->removeDecorator('label')
+		->removeDecorator('HtmlTag')
+		//->removeDecorator('Errors')
+		->setAttrib("class","form-control")
+		->setAttrib("autocomplete","off")
+		->setAttrib("placeholder",utf8_encode("Empresa"))
+		->setAttrib("maxlength","15")
+		;
+		
 		
 		// producto
 		$producto = new Zend_Form_Element_Text('producto');
@@ -105,6 +118,6 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		$this
 		->setMethod('post')
 		->setAction('public/ordenes/nueva-orden')
-		->addElements(array($empresa, $producto, $solicito, $ejecutivo, $motivo, $descripcion, $submit, $idcliente));
+		->addElements(array($empresa, $id_poliza, $producto, $solicito, $ejecutivo, $motivo, $descripcion, $submit, $idcliente));
 		}
 }
