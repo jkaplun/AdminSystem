@@ -159,7 +159,7 @@ class PolizasController extends Zend_Controller_Action
 
     }
 
-   public function consultar_polizas_vigentesAction(){
+   public function consultarpolizasvigentesAction(){
 
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
