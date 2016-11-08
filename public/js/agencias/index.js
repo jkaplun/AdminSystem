@@ -217,7 +217,7 @@ function mostarDatosAgencia(datosAgencia){
 	$("#facturacion_boleto-info").html(datosAgencia.facturacion_boleto);
 	$("#boton-editar-agencia").val(datosAgencia);
 	$("#datos-agencia").show();
- 	$("#observaciones_agencia").html(datosAgencia.observaciones);
+ 	$("#observaciones_agencia").val(datosAgencia.observaciones);
  	
 
  	if(datosAgencia.tel1 != null && datosAgencia.tel1.length != 0){
