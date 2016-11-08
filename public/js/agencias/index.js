@@ -69,11 +69,9 @@ $(document).ready(function() {
 
 	 	mostrarUsuariosAgencia();
 	 	mostrarPolizas();
-
 	 	mostrarProductosEnTabla();
-
-
 	 	mostrarFolios();
+	 	
         actualizarVistas.vistaUsuarioAgencia =true;
 	});
 
