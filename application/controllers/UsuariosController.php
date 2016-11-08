@@ -65,7 +65,6 @@ class UsuariosController extends Zend_Controller_Action
                     $esEmailCorrecto = $utiles->comprobar_email($params['email']);
                     if($esEmailCorrecto)
                     { // si el emal es correcto:
-                        unset($data['pwd']);
                         // se inserta en la base de datos al nuevo usuario
                         $idNuevoUsuario = $this->usuario_admin->insert($data);
                         // se inyecta el ID, estado y descripción en la respuesta al cliente
@@ -124,7 +123,6 @@ class UsuariosController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
-       	 //echo $params['id_usuario'];
     
         	$data = array(
                 'id_usuario' => $params['id_usuario'],

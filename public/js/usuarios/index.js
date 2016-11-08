@@ -40,7 +40,8 @@ function submitForm(){
 
 	if(ajaxAction=="actualizar"){
 		addIdDataBaseParameter="&id_usuario="+idDataBaseUser;
-
+	}else{
+		ajaxAction= 'agregar';
 	}
 	console.log("parametros a mandar: ");
 	console.log($("#formedituser").serialize() + addIdDataBaseParameter );
