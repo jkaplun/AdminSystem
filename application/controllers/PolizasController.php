@@ -169,5 +169,5 @@ class PolizasController extends Zend_Controller_Action
         $this->_helper->json($polizasAgencia);
 
     }
-
+    
 }

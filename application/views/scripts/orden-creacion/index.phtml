@@ -1,9 +1,7 @@
 <h1 class="page-header">Nueva Orden de Servicio</h1>
 
 <div class="row">
-	<div class="col-md-1">
-		
-	</div>
+	<div class="col-md-1"></div>
 	<div class="col-md-4">
 		<div class="input-group">
 		  	<label>Buscar Agencia:</label> <?= $this->selectAgencias->select_agencias?>
@@ -32,18 +30,6 @@
 	</div>	
 	<div class="col-md-1"></div>
 </div>
-<br />
-<div class="alert alert-danger alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    Tiene adeudo en ICAVVwin
-</div>
-<div class="alert alert-success alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    Tiene 1 pago por evento
-</div>
-<div class="salto"></div>
-<div class="panel panel-default">
-	<div class="panel-body" id="datos-agencia">
 		<?= $this->render('/orden-creacion/render/datosAgencia.phtml') ?>
 		<?= $this->render('/orden-creacion/render/servicio.phtml') ?>
 	</div>

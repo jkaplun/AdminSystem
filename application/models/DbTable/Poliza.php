@@ -11,14 +11,13 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		$cond = 'clave is not null ';
 
 		if( $values != null){
-			$cond .= ' and clave like "%'.$values['poliza'].'%" and estatus = "S"';
+			$cond .= ' and clave like "%'.$values['poliza'].'%" and estatus = "ACT"';
 		}
 
 		$select = $this->_db->select()->
 				from ( $this->_name,'*')
 			->where($cond)
 			->order('fecha_ini');
-
 		return $this->getAdapter ()->fetchAll ( $select );
 	}
 

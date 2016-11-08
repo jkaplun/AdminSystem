@@ -1,0 +1,32 @@
+<h1 class="page-header">Reporte Servicios Historico</h1>
+
+<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-servicios-clientes">
+	<thead>
+		<tr>
+			<th>ID Orden</th>
+			<th>Producto</th>
+			<th>Fecha Solicitud</th>
+			<th>Fecha Respuesta</th>
+			<th>Duraci&oacute;n</th>
+			<th>Solicit&oacute;</th>
+			<th>Atendio</th>
+			<th>Agencia</th>
+			<th>Conformidad</th>
+		</tr>
+	</thead>
+	<tbody align="center">
+		<?php foreach ($this->registros as $registro) { ?>
+		<tr id='<?php echo $registro['id_orden_servicio'] ?>'>
+			<td><?php echo $registro['id_orden_servicio'] ?></td>
+			<td><?php echo $registro['producto'] ?></td>
+			<td><?php echo $registro['fecha_alta'] ?></td>
+			<td><?php echo $registro['fecha_cierre'] ?></td>
+			<td><?php echo $registro['duracion_servicio'] ?></td>
+			<td><?php echo $registro['nombre_usuario'].' '.$registro['apellidos_usuario'] ?></td>
+			<td><?php echo $registro['nombre_atiende'].' '.$registro['apellido_paterno'] ?></td>
+			<td><?php echo $registro['nombre_agencia'] ?></td>
+			<td><?php echo 'Pots' ?></td>
+		</tr>
+		<?php } ?>
+	</tbody>
+</table>
