@@ -42,11 +42,11 @@ class PruebasController extends Zend_Controller_Action
 	
 	public function stopAction()
 	{
-		$_SESSION['counterdownBanamexHotel'] = new Zend_Date();
+		//$_SESSION['counterdownBanamexHotel'] = new Zend_Date();
 	}
 	
 	public function pauseAction()
 	{
-		$_SESSION['counterdownBanamexHotel'] = new Zend_Date();
+		//$_SESSION['counterdownBanamexHotel'] = new Zend_Date();
 	}
 }
