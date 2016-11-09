@@ -65,7 +65,7 @@ class Application_Form_Productos_Productos extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("numero de licencias"))
+        ->setAttrib("placeholder","Número de licencias")
         ->setAttrib("maxlength","11")
         ;
         $this->addElement($numero_licencias);
@@ -85,10 +85,7 @@ class Application_Form_Productos_Productos extends Zend_Form
                 ->removeDecorator('HtmlTag');
         ;
         $this->addElement($estatus_producto);
-
-
-
-                $this
+        $this
         ->setMethod('post')
         ->addElements(array(
                 $clave, $nombre_prod, $vigente_prod

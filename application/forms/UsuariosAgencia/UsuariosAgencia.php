@@ -90,7 +90,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("ext"))
+        ->setAttrib("placeholder",utf8_encode("Ext"))
         ->setAttrib("maxlength","45")
         ;
         $this->addElement($ext);
@@ -101,7 +101,7 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("celular"))
+        ->setAttrib("placeholder",utf8_encode("Celular"))
         ->setAttrib("maxlength","50")
         ;
         $this->addElement($celular);
