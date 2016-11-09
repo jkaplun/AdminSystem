@@ -11,7 +11,7 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		$cond = 'clave is not null ';
 
 		if( $values != null){
-			$cond .= ' and clave like "%'.$values['poliza'].'%" and estatus = "ACT"';
+			$cond .= ' and clave like "%'.$values['poliza'].'%" and id_poliza_estatus = 1';
 		}
 
 		$select = $this->_db->select()->
@@ -58,7 +58,7 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
 		->where(' id_agencia="'.$idAgencia.'" and now() between fecha_ini and fecha_fin 
-				and tiempo_agotado = "N" and estatus = "ACT" 
+				and tiempo_agotado = "N" and id_poliza_estatus = 1 
 				and (horas_poliza-horas_consumidas) > 0')
 		->order('fecha_ini');
 
@@ -102,7 +102,7 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		from ( $this->_name, '*' )
 		->where(' id_agencia="'.$id_agencia.'" and id_producto="'.$id_producto.'"
 				and now() between fecha_ini and fecha_fin and tiempo_agotado = "N"
-				and estatus = "ACT" and horas_poliza > 0');
+				and id_poliza_estatus = 1 and horas_poliza > 0');
 		
 		return $this->getAdapter ()->fetchRow( $select );
 	}
@@ -121,7 +121,7 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
 		->where(' id_poliza="'.$id_poliza.'"  and now() between fecha_ini and fecha_fin 
-				 and tiempo_agotado = "N" and estatus = "ACT" and horas_poliza > 0')
+				 and tiempo_agotado = "N" and id_poliza_estatus = 1 and horas_poliza > 0')
 		->order('fecha_ini');
 		
 		return $this->getAdapter ()->fetchRow( $select );
