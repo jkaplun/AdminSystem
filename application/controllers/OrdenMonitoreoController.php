@@ -16,12 +16,12 @@ class OrdenMonitoreoController extends Zend_Controller_Action
 		foreach ($ordenesBd as $orden)
 		{
 
-			$ordenes[$orden['id_usuario_admin_atiende']][$orden['id_orden_servicio']] = $orden;
+			$ordenes[$orden['id_usuario']][$orden['id_orden_servicio']] = $orden;
 		}
-        // echo'<pre>';
-        // print_r($ordenes);
-        // echo'</pre>';
-        // die;
+        /*echo'<pre>';
+        print_r($ordenesBd);
+        echo'</pre>';
+        die;*/
         $this->view->ordenes = $ordenes;
     }
 }

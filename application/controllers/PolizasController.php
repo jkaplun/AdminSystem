@@ -61,7 +61,7 @@ class PolizasController extends Zend_Controller_Action
             'costo_poliza' => $params['costo_poliza'],
             'tipo' => $params['tipo'],
             'observaciones' => $params['observaciones_poliza'],
-            'estatus' => $params['estatus_poliza'],
+            'estatus' => 1,
         );
               
         $form = new Application_Form_Polizas_Polizas();

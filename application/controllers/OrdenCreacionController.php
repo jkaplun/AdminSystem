@@ -51,6 +51,7 @@ class ordenCreacionController extends Zend_Controller_Action
     			'id_producto' => $params['producto'],
     			'id_poliza' => $params['id_poliza'],
     			'id_orden_servicio_estatus' => 2,
+    			'duracion_servicio' => 0,
     			'id_usuario_agencia_solicito' => $params['solicito'],
     			//Se crea con el estado 0 que indica que es nueva
     			'control_cron_estatus' => 0,
