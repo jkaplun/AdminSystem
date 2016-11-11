@@ -54,14 +54,14 @@ class PolizasController extends Zend_Controller_Action
     		'id_agencia' => $params['id_agencia'],
     		'id_producto' => $params['id_producto'],
             'horas_poliza' => $params['horas_poliza'], 
-            'horas_poliza' => 0.00, 
+            'horas_consumidas' => 0.00, 
             //'clave' => $params['clave'], 
             'fecha_ini' => $params['fecha_ini'], 
             'fecha_fin' => $params['fecha_fin'],
             'costo_poliza' => $params['costo_poliza'],
             'tipo' => $params['tipo'],
             'observaciones' => $params['observaciones_poliza'],
-            'estatus' => 1,
+            'id_poliza_estatus' => 1,
         );
               
         $form = new Application_Form_Polizas_Polizas();
