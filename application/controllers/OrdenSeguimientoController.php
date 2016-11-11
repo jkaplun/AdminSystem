@@ -7,8 +7,12 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js'); 
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/flipclock.min.js');  
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/easytimer.js'); 
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js'); 
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes.js');  
+
 
         $orden = new Application_Model_DbTable_OrdenServicio();
         
@@ -36,6 +40,80 @@ class OrdenSeguimientoController extends Zend_Controller_Action
         Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination_sm.phtml');
         $this->view->paginator=$paginator;
     }
+    
+    public function playAction()
+    {
+    	$this->_helper->layout()->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	$params=$this->_request->getParams();
+    	
+    	$data = array(
+    			'control_cron_estatus' => 1
+    			);
+    	
+    	$ordenServicioDbTable = new Application_Model_DbTable_OrdenServicio();
+    	$orden = $ordenServicioDbTable->obtenerOrdenPorId($params['id_orden_servicio']);
+    	if($orden != null)
+    	{
+    		if($orden['fecha_inicia_atencion'] == null)
+    		{
+    			$data['fecha_inicia_atencion'] = Zend_Date::now();
+    			$data['control_cron_inicial'] = Zend_Date::now();
+    		}
+    		else
+    		{
+    			$data['control_cron_inicial'] = Zend_Date::now();
+    		}
+    		$where = "id_orden_servicio = {$params['id_orden_servicio']}";
+    		// 	se actualiza en la base de datos a la orden de servicio
+    		$ordenServicioDbTable->update($data, $where);
+            $this->_helper->json("ok");
+    	}
+    	else 
+    	{
+    		//else cuando no se encuentra la orden
+    		$data['estado']='error';
+    		$data['descripcion']='No se encuentra la orden de servicio';
+    		// se responde al cliente
+    		$this->_helper->json($data);
+    	}
+    }
+    
+    public function pauseAction()
+    {
+    	$this->_helper->layout()->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	$params=$this->_request->getParams();
+    	
+    	$data = array(
+    			'control_cron_estatus' => 2
+    			);
+    	
+    	$ordenServicioDbTable = new Application_Model_DbTable_OrdenServicio();
+    	$orden = $ordenServicioDbTable->obtenerOrdenPorId($params['id_orden_servicio']);
+    	if($orden != null)
+    	{
+    		$data['control_cron_final'] = Zend_Date::now();
+    		$duracionServicio = $orden['duracion_servicio'];
+    		$diferenciaFechas = $ordenServicioDbTable->
+    							obtenerDiferenciaDeFechas(
+    									$data['control_cron_final'], $data['control_cron_inicial']);
+    		$minutosConvertidos = $diferenciaFechas['hora']*60;
+    		$duracionServicio = $duracionServicio + $minutosConvertidos + $diferenciaFechas['minuto'];
+    		$data['duracion_servicio'] = $duracionServicio;
+    		$where = "id_orden_servicio = {$params['id_orden_servicio']}";
+    		// 	se actualiza en la base de datos a la orden de servicio
+    		$ordenServicioDbTable->update($data, $where);
+    	}
+    	else 
+    	{
+    		//else cuando no se encuentra la orden
+    		$data['estado']='error';
+    		$data['descripcion']='No se encuentra la orden de servicio';
+    		// se responde al cliente
+    		$this->_helper->json($data);
+    	}
+    }
      
     public function actualizarAction(){
     
@@ -47,11 +125,13 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     			'id_usuario_admin_atiende' => $params['ejecutivo'],
     			'id_usuario_agencia_solicito' => $params['solicito'],
     			'solucion' => $params['solucion'],
-    			//'control_cron_inicial' => se define más adelante,
-    			'control_cron_estatus' => $params['control_cron_estatus'],
-    			'control_cron_final' => $params['control_cron_final'],
-    			'duracion_servicio' => $params['duracion_servicio'],
+    			'concluido' => $params['concluido '],
     			'motivo' => $params['motivo']
+    			//'control_cron_estatus' => se define más adelante,
+    			//'fecha_cierre' => se define más adelante,
+    			//'control_cron_inicial' => se define más adelante,
+    			//'control_cron_final' => $params['control_cron_final'],
+    			//'duracion_servicio' => se define más adelante,
     	);
     
     	$form = new Application_Form_Ordenes_NuevaOrden();
@@ -64,20 +144,48 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     		$orden = $ordenServicioDbTable->obtenerOrdenPorId($params['id_orden_servicio']);
     		if($orden['concluido'] != "S")
     		{
-    			if($params['control_cron_estatus'] == 1 && $orden['control_cron_inicial'] == null)
+    			if($params['concluido'] == "N")
     			{
-    				$data['control_cron_inicial'] = Zend_Date::now();
+    				if($params['control_cron_estatus'] == 1)
+    				{
+    					if($orden['control_cron_inicial'] == null)
+    					{
+    						$data['fecha_inicia_atencion'] = Zend_Date::now();
+    						$data['control_cron_inicial'] = Zend_Date::now();
+    					}
+    					else
+    					{
+    						$data['control_cron_inicial'] = Zend_Date::now();
+    					}
+    					$data['control_cron_estatus'] = 2;
+    				}
+    				else if($params['control_cron_estatus'] == 2)
+    				{
+    					$duracionServicio = $orden['duracion_servicio'];
+    					$diferenciaFechas = $ordenServicioDbTable->
+    					obtenerDiferenciaDeFechas(
+    							Zend_Date::now(), $data['control_cron_inicial']);
+    					$minutosConvertidos = $diferenciaFechas['hora']*60;
+    					$duracionServicio = $duracionServicio + $minutosConvertidos + $diferenciaFechas['minuto'];
+    					$data['duracion_servicio'] = $duracionServicio;
+    					$data['control_cron_final'] = Zend_Date::now();
+    				}
     			}
-    			else if($params['control_cron_estatus'] == 3)
+    			else 
     			{
     				$data['fecha_cierre'] = Zend_Date::now();
-    				$diferenciaHoras = $ordenServicioDbTable->obtenerDiferenciaDeHoras
-    				($params['id_orden_servicio'], Zend_Date::now(), $params['control_cron_inicial']);
-    				$diferenciaMinutos = $diferenciaHoras*60;
-    				$data['duracion_servicio'] = $diferenciaMinutos;
+    				$diferenciaFechas = $ordenServicioDbTable->
+    					obtenerDiferenciaDeFechas(
+    							Zend_Date::now(), $data['control_cron_inicial']);
+    					$minutosConvertidos = $diferenciaFechas['hora']*60;
+    				$duracionServicio = $duracionServicio + $minutosConvertidos + $diferenciaFechas['minuto'];
+    				$data['duracion_servicio'] = $duracionServicio;
+    				$data['control_cron_final'] = Zend_Date::now();
+    				$data['control_cron_estatus'] = 3;
 					//Restando minutos a la póliza
     				$servicesPolizas = new Application_Model_Services_ServicesPolizas();
-    				$servicesPolizas->restarMinutosAPoliza($params['id_poliza'], $diferenciaMinutos);
+    				$servicesPolizas->restarMinutosAPoliza($params['id_poliza'], $duracionServicio);
+    				
     			}
     			$where = "id_orden_servicio = {$params['id_orden_servicio']}";
     			// 	se actualiza en la base de datos a la p�liza
@@ -105,45 +213,30 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	}
     }
 
-    public function obtener_ordenes_por_ejecutivoAction()
+   public function obtenerordenesporejecutivoAction()
     {
     	$this->_helper->layout()->disableLayout();
     	$this->_helper->viewRenderer->setNoRender();
     	$params=$this->_request->getParams();
     	 
     	$ordenServicioDbTable = new Application_Model_DbTable_OrdenServicio();
-    	$ordenes = $ordenServicioDbTable->obtenerOrdenesPorIdEjecutivo($params['ejecutivo']);
-    	
-    	$this->_helper->json($ordenes);
-    }
-
-    public function obtener_ordenes_por_idAction()
-    {
-    	$this->_helper->layout()->disableLayout();
-    	$this->_helper->viewRenderer->setNoRender();
-    	$params=$this->_request->getParams();
-    	 
-    	$ordenServicioDbTable = new Application_Model_DbTable_OrdenServicio();
-    	$orden = $ordenServicioDbTable->obtenerOrdenPorId($params['id_orden_servicio']);
-    	if($orden != null)
+    	$ordenes = $ordenServicioDbTable->obtenerOrdenesPorIdEjecutivo($_SESSION['Zend_Auth']['USER_VALUES']['id_usuario']);
+    	foreach ($ordenes as $orden)
     	{
     		//Si la orden está en play
     		$diferenciaDeMinutos;
     		if($orden['control_cron_estatus'] = 1)
     		{
-    			$diferenciaDeHoras = $ordenServicioDbTable->obtenerDiferenciaDeHoras
-    			($params['id_orden_servicio'], Zend_Date::now(), $params['control_cron_inicial']);
-    			$diferenciaDeMinutos = $diferenciaDeHoras['diferencia']*60;
+    			$duracionServicio = $orden['duracion_servicio'];
+    			$diferenciaFechas = $ordenServicioDbTable->
+    			obtenerDiferenciaDeFechas(
+    					Zend_Date::now(), $data['control_cron_inicial']);
+    			$horasConvertidos = $diferenciaFechas['hora']*60;
+    			$duracionServicio = $duracionServicio + $horasConvertidos + $diferenciaFechas['minuto'];
+    			$orden['duracion_servicio'] = $duracionServicio;
     		}
-    		//Si la orden está en pause
-    		else if($orden['control_cron_estatus'] = 2)
-    		{
-    			$diferenciaDeHoras = $ordenServicioDbTable->obtenerDiferenciaDeHoras
-    			($params['id_orden_servicio'], $params['control_cron_final'], $params['control_cron_inicial']);
-    			$diferenciaDeMinutos = $diferenciaDeHoras['diferencia']*60;
-    		}
+    		//Si la orden está en pause se envía el tiempo acumulado en duracion_servicio
     	}
-    	$orden['tiempo_cronometro'] = $diferenciaDeMinutos;
     	$this->_helper->json($orden);
     }
 

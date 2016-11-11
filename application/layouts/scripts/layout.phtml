@@ -100,6 +100,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-user fa-fw"></i> <?php echo $_SESSION['Zend_Auth']['USER_VALUES']['nombre']; ?> <i class="fa fa-caret-down"></i>
+                            <p id="user_id_info"  hidden="true"><?php echo $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario']; ?> </p>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
         					<li role="presentation"><a href="#" data-toggle="modal" data-target="#myModalUserEdit"><i class="fa fa-user fa-fw"></i> Perfil </a></li>
