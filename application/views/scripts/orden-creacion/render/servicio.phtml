@@ -1,51 +1,45 @@
-<div class="panel panel-primary">
-
-  <form id="datosFormServicio">
-	<div class="panel-heading">
-	<b>Servicio</b>
-	</div>
-	<div class="panel-body">
-		<div class="row">
-			<div class="col-md-4">
-				<div class="bs-docs-example no-code">
-<!-- 				  Producto: <select id="nombre_prod" class="selectpicker" data-live-search="true" data-width="auto">
-						<option>Curso1</option>
-						<option>Demostracion</option>
-						<option>Desarrollo</option>
-				  </select> -->
-				</div><br/>
-				<div class="bs-docs-example no-code">
-				  Solicit&oacute;:  <select id="solicito" class="selectpicker" data-live-search="true" data-width="auto">
-<!-- 						<option>Curso</option>
-						<option>Demostracion</option>
-						<option>Desarrollo</option> -->
-				  </select>
-				</div><br/>					        
-			</div>
-			<div class="col-md-4">
-				<div class="bs-docs-example no-code">
-				  Ejecutivo: <select id="ejecutivo" class="selectpicker" data-live-search="true" data-width="auto">
-				  </select>
-				</div><br/>			
-				<div class="bs-docs-example no-code">
-				  Motivo: <select id="motivo" class="selectpicker" data-live-search="true" data-width="auto">
-						<option value="motivo1">motivo1</option>
-						<option value="motivo2">motivo2</option>
-						<option value="motivo3">motivo3</option>
-				  </select>
-				</div>			        
-			</div>			
-			<div class="col-md-4">
-				Descripci&oacute;n: <textarea id="descripcion" class="form-control" rows="3"></textarea>			        
-			</div>
+<form id="datosFormServicio">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<b>Servicio</b>
 		</div>
-		<div class="row">
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
-				<button type="button" class="btn btn-outline btn-success btn-lg btn-block" id="submitNuevaOrdenBtn">Guardar</button>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="control-label">&nbsp;&nbsp;&nbsp;Solicit&oacute;:</label>
+						<select id="solicito" class="selectpicker" data-live-search="true" data-width="auto"></select>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Ejecutivo:</label>
+						<select id="ejecutivo" class="selectpicker" data-live-search="true" data-width="auto"></select>
+					</div>					
+					<br/>					        
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="control-label">Motivo:</label>
+						<select id="motivo" class="selectpicker" data-live-search="true" data-width="auto">
+							<option value="motivo1">motivo1</option>
+							<option value="motivo2">motivo2</option>
+							<option value="motivo3">motivo3</option>
+					  	</select>
+					</div>											        
+				</div>			
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="control-label">Descripci&oacute;n:</label>
+						<textarea id="descripcion" class="form-control" rows="3"></textarea>
+					</div>					        
+				</div>
 			</div>
-			<div class="col-md-4"></div>
-		</div>		
-    </div>
-    </form>
-</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<button type="button" class="btn btn-outline btn-success btn-lg btn-block" id="submitNuevaOrdenBtn">Guardar</button>
+				</div>
+				<div class="col-md-4"></div>
+			</div>		
+	    </div>
+	</div>
+</form>

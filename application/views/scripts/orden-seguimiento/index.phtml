@@ -149,59 +149,54 @@
                                 <div class="clearfix"></div>
                             </div> -->
 	                    </div>
+	                    <div align="right">
+	                    <a class="btn btn-info" href="#orden_<?= $registro["id_orden_servicio"]?>" data-toggle="collapse">v</a></div>
 	                </div>
 				</div>
-	
-			  	<hr style=" margin-top: 5px; margin-bottom: 10px;">	  		    
-			  	<div class="row">
-				  	<div class="col-md-6">
-				  		<label>Motivo:</label>
-				  		<textarea class="form-control" rows="3" value="<?= $registro["motivo"] ?>"></textarea>
+			  	  
+				<div class="row">
+				  	<div class="col-md-11">
 				  	</div>
-				  	<div class="col-md-6">
-				  		<label>Solución:</label>
-				  		<textarea class="form-control" rows="3" value="<?= $registro["solucion"] ?>"></textarea>
-				  	</div>				  	
-			  	</div>
-			  	<br/>
-			  	<hr style=" margin-top: 5px; margin-bottom: 10px;">	  		    
-			  	<div class="row">
-				  	<div class="col-md-4">
-				  		<label>Conformidad:</label>
-				  		<input class="form-control">
-				  	</div>
-				  	<div class="col-md-6">
-				  		<center><label>Enviar Mail Al Cliente:</label></center>
-				  		<div class="row">
-				  			<div class="col-md-1"></div>
-				  			<div class="col-md-4">
-				  				<button type="button" class="btn btn-primary">Servicio en Proceso</button>
-				  			</div>
-				  			<div class="col-md-2"></div>
-				  			<div class="col-md-4">
-				  				<button type="button" class="btn btn-primary">Servicio Concluido</button>
-				  			</div>
-				  			<div class="col-md-1"></div>
-				  		</div>
-				  	</div>
-				  	<div class="col-md-1"></div>	
 				  	<div class="col-md-1">
-						<button type="button" class="btn btn-primary btn-circle btn-lg"><i class="fa fa-floppy-o  "></i>
-                            </button>
-				  	</div>				  				  	
-			  	</div>			  				    
-<!-- 		    	<hr style=" margin-top: 5px; margin-bottom: 10px;">
-			  	<div class="row">
-				  	<div class="col-md-10">
-				  		Control Cron:
-				  		<p><?= $registro["control_cron_estatus"] ?></p>
-				  	</div>
-				  	<div class="col-md-2">
-				  		Concluido:
-				  		<p><?= $registro["concluido"] ?></p>
+				  		
 				  	</div>				  	
-			  	</div>		
-		    	<hr style=" margin-top: 5px; margin-bottom: 10px;"> -->
+				</div>
+				<hr style=" margin-top: 5px; margin-bottom: 10px;">	
+				<div id="orden_<?= $registro["id_orden_servicio"]?>" class="collapse">
+				  	<div class="row">
+					  	<div class="col-md-6">
+					  		<label>Motivo:</label>
+					  		<textarea class="form-control" rows="3" value="<?= $registro["motivo"] ?>"></textarea>
+					  	</div>
+					  	<div class="col-md-6">
+					  		<label>Solución:</label>
+					  		<textarea class="form-control" rows="3" value="<?= $registro["solucion"] ?>"></textarea>
+					  	</div>				  	
+				  	</div>
+				  	<br/>
+				  	<hr style=" margin-top: 5px; margin-bottom: 10px;">	  		    
+				  	<div class="row">
+					  	<div class="col-md-4">
+					  		<label>Conformidad:</label>
+					  		<input class="form-control">
+					  	</div>
+					  	<div class="col-md-6">
+					  		<center><label></label></center>
+					  		<div class="row">
+					  			<div class="col-md-1"></div>
+					  			<div class="col-md-4">
+					  				<!-- <button type="button" class="btn btn-primary">Servicio en Proceso</button> -->
+					  			</div>
+					  			<div class="col-md-2"></div>
+					  			<div class="col-md-4">
+					  				<button type="button" class="btn btn-primary">Servicio Concluido</button>
+					  			</div>
+					  			<div class="col-md-1"></div>
+					  		</div>
+					  	</div>
+					  	<div class="col-md-2"></div>			  				  	
+				  	</div>	
+				</div>
 		  </div>
 		</div>
 
