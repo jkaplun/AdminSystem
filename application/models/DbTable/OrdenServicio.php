@@ -171,7 +171,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 
 	public function obtenerDiferenciaDeFechas ($fechaMayor, $fechaMenor)
 	{
-		$select = 'extract(hour	from TIMEDIFF("'.$fechaMayor.'", "'.$fechaMenor.'")) as hora,
+		$select = 'select extract(hour	from TIMEDIFF("'.$fechaMayor.'", "'.$fechaMenor.'")) as hora,
 					extract(minute from TIMEDIFF("'.$fechaMayor.'", "'.$fechaMenor.'")) as minuto';
 		
 		return $this->getAdapter ()->fetchRow( $select );

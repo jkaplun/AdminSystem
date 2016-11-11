@@ -85,7 +85,7 @@ class ordenCreacionController extends Zend_Controller_Action
         	{
 				//else cuando no hay pólizas vigentes
     			$data['estado']='error';
-        	 	$data['descripcion']='Esa póliza no está vigente';
+        	 	$data['descripcion']='Elija una póliza vigente';
         	 	// se responde al cliente
         	 	$this->_helper->json($data);
         	}
