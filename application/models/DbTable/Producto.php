@@ -6,13 +6,11 @@ class Application_Model_DbTable_Producto extends Zend_Db_Table_Abstract
 	protected $_name = 'producto';
 	protected $_relacionAgenciaProducto = 'agencia_producto';
 
-		public function obtenerProductos(){
-	
+	public function obtenerProductos(){
 		$select = $this->_db->select()->
 		from ( $this->_name,'*')
 		->order('id_producto')
 		->order('vigente_prod');
-	
 		return $this->getAdapter ()->fetchAll ( $select );
 	}
 

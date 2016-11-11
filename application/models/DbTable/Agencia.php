@@ -60,5 +60,33 @@ class Application_Model_DbTable_Agencia extends Zend_Db_Table_Abstract
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 
+	public function obtenerAgenciaPorProducto($id)
+	{
+		$select = $this->_db->select()
+		->from(array('ag' => 'agencia'),
+				array('*'))
+				->joinleft(array('ap' => 'agencia_producto'),
+						'ag.id_agencia = ap.id_agencia',
+						array('numero_licencias'))
+				->where('ap.estatus="s" and ap.id_producto="'.$id.'"');
+		//echo $select;die;
+		return $this->getAdapter ()->fetchAll( $select );
+	}
+
+	public function obtenerAgenciaPorPoliza($id)
+	{
+		$select = $this->_db->select()
+		->from(array('ag' => 'agencia'),
+				array('*'))
+				->joinleft(array('p' => 'poliza'),
+						'ag.id_agencia = p.id_agencia',
+						array('horas_poliza','horas_consumidas'))
+				->where('p.estatus="ACT" and p.tipo="'.$id.'"');
+		//echo $select;die;
+		return $this->getAdapter ()->fetchAll( $select );
+	}
+
+
+
 }
 
