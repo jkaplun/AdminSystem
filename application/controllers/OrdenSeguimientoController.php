@@ -7,8 +7,12 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js'); 
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/flipclock.min.js');  
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/easytimer.js'); 
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js'); 
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes.js');  
+
 
         $orden = new Application_Model_DbTable_OrdenServicio();
         
@@ -63,6 +67,7 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     		$where = "id_orden_servicio = {$params['id_orden_servicio']}";
     		// 	se actualiza en la base de datos a la orden de servicio
     		$ordenServicioDbTable->update($data, $where);
+            $this->_helper->json("ok");
     	}
     	else 
     	{

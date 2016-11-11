@@ -62,7 +62,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 	{
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
-		->where('id_orden="'.$idOrden.'"');
+		->where('id_orden_servicio="'.$idOrden.'"');
 		
 		return $this->getAdapter ()->fetchRow( $select );
 	}

@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="public/css/flipclock.css">
+
 <h1 class="page-header">Seguimiento Ordenes de Servicio</h1>
 
 
@@ -38,6 +40,14 @@
 <div class="row" align="right">
 	<?=$this->paginationControl ($this->paginator, 'Sliding');?>
 </div>
+	<?php $id_orden_servicio_todos=","?>
+	<?php $duracion_servicio_todos=","?>
+	<?php $control_cron_estatus_todos=","?>
+
+	
+
+
+
   	<?php foreach ($this->paginator as $registro) { 
   		$color='';
   		switch ($registro["id_orden_servicio_estatus"]){
@@ -113,38 +123,22 @@
 	                    <!-- AQUI ES EL CRONOMETRO -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	                    <div class="panel panel-green" id="cron_<?= $registro["id_orden_servicio"]?>">
+	                    <div class="panel panel-green" >
 	                        <div class="panel-heading">
 	                            <div class="row">
-	                                <div class="col-xs-3">
-	                                    <i class="fa  fa-play-circle fa-5x"></i>
+	                                <div value="pause" id="mainBtn_<?= $registro["id_orden_servicio"]?>" onclick="clickPausePlayBtn(this.id)" class="col-xs-3">
+	                                    <i id="playPauseBtn_<?= $registro["id_orden_servicio"]?>" class="fa  fa-play-circle fa-5x"></i>
+	                                   <!--  <div>Comenzar</div> -->
+
 	                                </div>
 	                                <div class="col-xs-9 text-right">
-	                                    <div class="huge">12</div>
-	                                    <div>Empezar</div>
+
+	                                <div style="font-size:25px;"id="cron_<?= $registro["id_orden_servicio"]?>"></div>
+	                                  	<svg class="recSVG" id="recSVG_<?= $registro["id_orden_servicio"]?>" width="20" height="20">
+										   <circle cx="10" cy="10" r="8"  stroke-width="1" fill="red" />
+										</svg>
+	                                    
+	                                    
 	                                </div>
 	                            </div>
 	                        </div>
@@ -210,9 +204,15 @@
 		    	<hr style=" margin-top: 5px; margin-bottom: 10px;"> -->
 		  </div>
 		</div>
+
+		<?php $id_orden_servicio_todos = $id_orden_servicio_todos . $registro["id_orden_servicio"] . ","  ?>
+		<?php $duracion_servicio_todos = $duracion_servicio_todos . $registro["duracion_servicio"] . ","  ?>
+		<?php $control_cron_estatus_todos = $control_cron_estatus_todos . $registro["control_cron_estatus"] . ","  ?>
 	
 	<?php } ?>
-	
+	<p id="info_id_ordenes" hidden="true"> <?= $id_orden_servicio_todos ?> </p>
+	<p id="info_duracion_servicio_todos" hidden="true"> <?= $duracion_servicio_todos ?> </p>
+	<p id="info_control_cron_estatus_todos" hidden="true"> <?= $control_cron_estatus_todos ?> </p>
 	</div>
 </div>
 
