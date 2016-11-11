@@ -170,18 +170,20 @@ function mostrar_duracion_servicio_status_crono(duracion_servicio, cron_estatus,
   for(i;i<duracion_servicio.length;i++){
     current_orden_id=ordenes_id;
     ii=i;
-    console.log("cron_estatus[i]: "+cron_estatus[i]);
+    //console.log("cron_estatus[i]: "+cron_estatus[i]);
     if(cron_estatus[i]=="0") {
-      console.log("cron_estatus[i]=='0'")
+      //console.log("cron_estatus[i]=='0'")
          $('#cron_'+ordenes_id[i]).html('00:00:00');
     }else if(cron_estatus[i]=="1"){
-      console.log("cron_estatus[i]=='1'")
+      //console.log("cron_estatus[i]=='1'")
 
         cron_estatus_caso_1(ordenes_id[i], duracion_servicio[i]);
 
     }else{
-      console.log("cron_estatus[i]=='2'")
-        JSON_timers_global[ordenes_id[i]].start({precision: 'seconds', startValues: {minutes: duracion_servicio[i]}});
+      //console.log("cron_estatus[i]=='2'")
+        console.log("duracion_servicio[i]: "+duracion_servicio[i]);
+         console.log("ordenes_id[i]: "+ordenes_id[i]);
+        JSON_timers_global[ordenes_id[i]].start({precision: 'seconds', startValues: {minutes: parseInt(duracion_servicio[i])}});
         $('#cron_'+ordenes_id[i]).html( JSON_timers_global[ordenes_id[i]].getTimeValues().toString());
         JSON_timers_global[ordenes_id[i]].pause(); 
     }
@@ -202,7 +204,7 @@ function playBtnFunction(id_orden){
 
 
 function cron_estatus_caso_1(ordenes_id,duracion_servicio){
-          JSON_timers_global[ordenes_id].start({precision: 'seconds', startValues: {minutes: duracion_servicio}});
+          JSON_timers_global[ordenes_id].start({precision: 'seconds', startValues: {minutes: parseInt(duracion_servicio)}});
         $("#playPauseBtn_"+ordenes_id).removeClass("fa-play-circle");
         $("#playPauseBtn_"+ordenes_id).addClass("fa-pause-circle");
         $("#recSVG_"+ordenes_id).show();
@@ -214,4 +216,49 @@ function cron_estatus_caso_1(ordenes_id,duracion_servicio){
         $("#mainBtn_"+ordenes_id).attr('value','play');
 }
 
+function concluirSercicioAjax(button_id){
+
+    swal({
+    title: "¿Desea concluir la orden de servicio?",
+    text: "",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Concluir orden",
+    closeOnConfirm: true
+  },
+  function(){
+    concluirOrden(button_id);
+  });
+}
+
+function concluirOrden(button_id){
+    var id_orden= button_id.replace("concluirServicio_", "");
+  var id_orden_to_send="id_orden_servicio="+id_orden;
+  var conformidad= "&conformidad="+$("#conformidad_"+id_orden).val();
+  var motivo= "&motivo="+$("#motivo_"+id_orden).val();
+  var solucion= "&solucion="+$("#solucion_"+id_orden).val();
+
+      $.ajax({ 
+        url: pathOrdenServicioController + "actualizar", 
+        method: "post", 
+        data: id_orden_to_send+conformidad+motivo+solucion+"&concluido=S",
+        dataType: "json" 
+      }).done(function(res) { 
+
+  if(res.estado == "ok"){ // si la respuesta es correcta: 
+      console.log(res);  
+      swal("La orden ha sido concluida exitosamente", " ", "success"); 
+      $("#orden_servicio_"+id_orden).hide();
+   } else{ 
+    //$("#orden_servicio_"+id_orden).hide();
+     swal(res.descripcion, " ", "error");  
+     } 
+   
+         
+    })// end ajax done  
+      .fail(function() { 
+        swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+    });
+}
 

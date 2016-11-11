@@ -128,11 +128,12 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	$params=$this->_request->getParams();
     
     	$data = array(
-    			'id_usuario_admin_atiende' => $params['ejecutivo'],
-    			'id_usuario_agencia_solicito' => $params['solicito'],
+    			//'id_usuario_admin_atiende' => $params['ejecutivo'],
+    			//'id_usuario_agencia_solicito' => $params['solicito'],
     			'solucion' => $params['solucion'],
-    			'concluido' => $params['concluido '],
-    			'motivo' => $params['motivo']
+    			'concluido' => $params['concluido'],
+    			'motivo' => $params['motivo'],
+                'conformidad' => $params['conformidad']
     			//'control_cron_estatus' => se define más adelante,
     			//'fecha_cierre' => se define más adelante,
     			//'control_cron_inicial' => se define más adelante,
@@ -199,7 +200,7 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     			// 	se actualiza en la base de datos a la p�liza
     			$ordenServicioDbTable->update($data, $where);
     			$data['estado']='ok';
-    			$data['descripcion']='La orden ha sido actualizada exitosamente';
+    			$data['descripcion']='La orden ha sido concluida exitosamente';
     			// se responde al cliente
     			$this->_helper->json($data);
     			$this->_redirect('orden-servicio/atencion-orden');

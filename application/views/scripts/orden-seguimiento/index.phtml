@@ -67,9 +67,10 @@
   				$color='bs-callout-morado';
   			break;
   		}
+  		if($registro["control_cron_estatus"]!=3){
   		?>
-		
-		<div class="panel panel-default bs-callout2 <?= $color ?>">
+	
+		<div id="orden_servicio_<?= $registro["id_orden_servicio"]?>" class="panel panel-default bs-callout2 <?= $color ?>">
 		 	<div class="panel-heading <?= $color ?>2">
             	<b>
             	<div class="row">
@@ -166,11 +167,11 @@
 				  	<div class="row">
 					  	<div class="col-md-6">
 					  		<label>Motivo:</label>
-					  		<textarea class="form-control" rows="3" value="<?= $registro["motivo"] ?>"></textarea>
+					  		<textarea id="motivo_<?= $registro["id_orden_servicio"]?>" class="form-control" rows="3" value="<?= $registro["motivo"] ?>"></textarea>
 					  	</div>
 					  	<div class="col-md-6">
 					  		<label>Solución:</label>
-					  		<textarea class="form-control" rows="3" value="<?= $registro["solucion"] ?>"></textarea>
+					  		<textarea id="solucion_<?= $registro["id_orden_servicio"]?>" class="form-control" rows="3" value="<?= $registro["solucion"] ?>"></textarea>
 					  	</div>				  	
 				  	</div>
 				  	<br/>
@@ -178,7 +179,7 @@
 				  	<div class="row">
 					  	<div class="col-md-4">
 					  		<label>Conformidad:</label>
-					  		<input class="form-control">
+					  		<input id="conformidad_<?= $registro["id_orden_servicio"]?>" class="form-control">
 					  	</div>
 					  	<div class="col-md-6">
 					  		<center><label></label></center>
@@ -189,7 +190,7 @@
 					  			</div>
 					  			<div class="col-md-2"></div>
 					  			<div class="col-md-4">
-					  				<button type="button" class="btn btn-primary">Servicio Concluido</button>
+					  				<button id="concluirServicio_<?= $registro["id_orden_servicio"] ?>" onclick="concluirSercicioAjax(this.id)" type="button" class="btn btn-primary">Servicio Concluido</button>
 					  			</div>
 					  			<div class="col-md-1"></div>
 					  		</div>
@@ -204,7 +205,9 @@
 		<?php $duracion_servicio_todos = $duracion_servicio_todos . $registro["duracion_servicio"] . ","  ?>
 		<?php $control_cron_estatus_todos = $control_cron_estatus_todos . $registro["control_cron_estatus"] . ","  ?>
 	
-	<?php } ?>
+	<?php 
+		}
+	} ?>
 	<p id="info_id_ordenes" hidden="true"> <?= $id_orden_servicio_todos ?> </p>
 	<p id="info_duracion_servicio_todos" hidden="true"> <?= $duracion_servicio_todos ?> </p>
 	<p id="info_control_cron_estatus_todos" hidden="true"> <?= $control_cron_estatus_todos ?> </p>
