@@ -34,8 +34,36 @@ class ordenCreacionController extends Zend_Controller_Action
             ->setAttrib("autocomplete","off");
          
         $zendForm->addElement($selectAgencias);
-        $this->view->selectAgencias=$zendForm;
+        
+        $tipoSoporte = new Zend_Form_Element_Select('tipo_soporte');
 
+        $tipoSoporteArreglo = array(
+        		'1' => 'Curso',
+        		'2' => 'Demostración',
+        		'3' => 'Desarrollo',
+        		'4' => 'Implementación',
+        		'5' => 'Páginas Web',
+        		'6' => 'Reportarse',
+        		'7' => 'Reportarse Urgente',
+        		'8' => 'Revisión MIG',
+        		'9' => 'Soporte en Sitio',
+        		'10' => 'Soporte Interno',
+        		'10' => 'Soporte Remoto',
+        		'10' => 'Soporte Telefónico',
+        		'10' => 'Ventas',
+        );
+        $tipoSoporte
+        ->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->addMultiOptions($tipoSoporteArreglo)
+        ->setAttrib("class","form-control tipo-soporte-select")
+        ->setAttrib("data-max-options",10)
+        ->setAttrib("data-live-search","true")
+        ->setAttrib("title","Ingresa el tipo de soporte")
+        ->setAttrib("autocomplete","off");
+         
+        $zendForm->addElement($tipoSoporte);
+ 		$this->view->selectAgencias=$zendForm;
     }
 
     public function agregarAction()
