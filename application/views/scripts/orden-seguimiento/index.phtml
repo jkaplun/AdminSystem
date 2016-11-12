@@ -4,34 +4,23 @@
 
 
 <div class="row">
-	<div class="col-md-4"></div>
-	<div class="col-md-8 table-responsive">
-		<table width="100%" class="table table-striped table-bordered table-hover">
-			<thead>
-				<tr>
-					<th class="amarillo">Lamada sin Contestar</th>
-					<th class="naranja">Reportarse</th>
-					<th class="rojo">Reportarse Urgente</th>
-					<th class="">Otros Servicios</th>
-					<th class="morado">Externos</th>
-					
-				</tr>
-			</thead>
-			<tbody align="center" id="body-ts">		
-			</tbody>		
-		</table>
-	</div>
+	<table width="100%" class="table">
+		<thead>
+			<tr>
+				<th class="amarillo">Lamada sin Contestar</th>
+				<th class="naranja">Reportarse</th>
+				<th class="rojo">Reportarse Urgente</th>
+				<th class="">Otros Servicios</th>
+				<th class="morado">Externos</th>		
+			</tr>
+		</thead>	
+	</table>
 </div>
+<form class="form-inline" method="get" name="filtroform" id="filtroform">
+<form>
 
 
-	<form class="form-inline" method="get" name="filtroform" id="filtroform">
-	</form>
-
-
-<div class="alert alert-default alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    Se muestran <?php echo $this->countArray ?> resultados
-</div>
+<h2>Se muestra(n) <b><?php echo $this->countArray ?></b> resultado(s):</h2>
 
 <div class="row">
 	<div class="col-md-12">
@@ -212,6 +201,10 @@
 	<p id="info_duracion_servicio_todos" hidden="true"> <?= $duracion_servicio_todos ?> </p>
 	<p id="info_control_cron_estatus_todos" hidden="true"> <?= $control_cron_estatus_todos ?> </p>
 	</div>
+	
+	<div class="row" align="right">
+	<?=$this->paginationControl ($this->paginator, 'Sliding');?>
+</div>
 </div>
 
 
