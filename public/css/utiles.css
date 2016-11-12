@@ -7,3 +7,7 @@
 #datos-agencia{
 	display: none
 }
+
+.tipo-soporte-select{
+	z-index:0 !important
+}
