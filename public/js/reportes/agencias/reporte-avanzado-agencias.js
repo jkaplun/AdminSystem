@@ -1,4 +1,4 @@
-var path="public/agencias/";
+var pathReportesController="public/reporteAgencias/"; 
 
 $(document).ready(function() {
     mostrarProductosEnSelect();
@@ -11,16 +11,30 @@ function submitFormBusquedaAgencia(){
 	//console.log($("#form_agregar_agencia").serialize());
 	//alert($("#licencias option:selected").text());
 	//alert($("#licencias").val());
+	var lic= new Array($("#licencias").val());
+	//alert(lic);
 	//alert($("#form-busqueda-agencia").serialize());
 
 	$.ajax({
-		  url: path + "busqueda",
+		  url: pathReportesController + "consulta-avanzada",
 		  method: "post",
-		  data: $("#form-busqueda-agencia").serialize() ,
+		  data: $("#form-busqueda-agencia").serialize()+"&lice="+lic,
 		  dataType: "json"
 		})
 		.done(function(res) {
-			alert("Hola");
+			if(res=="No"){
+				swal({
+				  title: "Agencia no Encontrada",
+				  text: "No se encontró ninguna agencia con esos parámetros.",
+				  // timer: 5000,
+				  // showConfirmButton: false,
+				  type: "warning"
+				});
+			}else{
+				console.log(res);
+
+			}
+			//swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );
   		})
 		.fail(function() {
     	swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );

@@ -76,7 +76,7 @@
 			 	<div class="row">
 					<div class="col-lg-3 col-md-6">
 						<div class="form-group">
-                            <label>Fecha Solicitud:</label>
+                            <label >Fecha Solicitud:</label>
 							<p><?= $registro["fecha_alta"] ?></p>
                         </div>
  						<div class="form-group">
@@ -145,8 +145,13 @@
 				</div>
 			  	  
 				<div class="row">
-				  	<div class="col-md-11">
-				  	</div>
+		    			<div class="form-group col-md-4">
+		      				<label class="control-label">Solicit&oacute;:</label>
+							<input id="solicito" class="form-control">
+							<br/><br/>
+		 					<label class="control-label">Ejecutivo:</label>
+		      				<input id="ejecutivo" class="form-control"> 
+		    			</div>  
 				  	<div class="col-md-1">
 				  		
 				  	</div>				  	
@@ -154,11 +159,11 @@
 				<hr style=" margin-top: 5px; margin-bottom: 10px;">	
 				<div id="orden_<?= $registro["id_orden_servicio"]?>" class="collapse">
 				  	<div class="row">
-					  	<div class="col-md-6">
+					  	<div class="col-md-6 form-group">
 					  		<label>Motivo:</label>
 					  		<textarea id="motivo_<?= $registro["id_orden_servicio"]?>" class="form-control" rows="3" value="<?= $registro["motivo"] ?>"></textarea>
 					  	</div>
-					  	<div class="col-md-6">
+					  	<div class="col-md-6 form-group">
 					  		<label>Solución:</label>
 					  		<textarea id="solucion_<?= $registro["id_orden_servicio"]?>" class="form-control" rows="3" value="<?= $registro["solucion"] ?>"></textarea>
 					  	</div>				  	
@@ -166,22 +171,22 @@
 				  	<br/>
 				  	<hr style=" margin-top: 5px; margin-bottom: 10px;">	  		    
 				  	<div class="row">
-					  	<div class="col-md-4">
+					  	<div class="col-md-4 form-group">
 					  		<label>Conformidad:</label>
 					  		<input id="conformidad_<?= $registro["id_orden_servicio"]?>" class="form-control">
 					  	</div>
 					  	<div class="col-md-6">
-					  		<center><label></label></center>
 					  		<div class="row">
-					  			<div class="col-md-1"></div>
-					  			<div class="col-md-4">
-					  				<!-- <button type="button" class="btn btn-primary">Servicio en Proceso</button> -->
+					  			<div class="col-md-3">
 					  			</div>
-					  			<div class="col-md-2"></div>
-					  			<div class="col-md-4">
+					  			<div class="col-md-2">
 					  				<button id="concluirServicio_<?= $registro["id_orden_servicio"] ?>" onclick="concluirSercicioAjax(this.id)" type="button" class="btn btn-primary">Servicio Concluido</button>
 					  			</div>
-					  			<div class="col-md-1"></div>
+								<div class="col-md-2"></div>
+					  			<div class="col-md-2">
+					  				<button id="guardarServicio_<?= $registro["id_orden_servicio"] ?>" onclick="concluirSercicioAjax(this.id)" type="button" class="btn btn-primary">Guardar Servicio</button>
+					  			</div>					  			
+					  			<div class="col-md-3"></div>
 					  		</div>
 					  	</div>
 					  	<div class="col-md-2"></div>			  				  	

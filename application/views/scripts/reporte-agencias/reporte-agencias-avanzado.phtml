@@ -1,0 +1,117 @@
+<h1 class="page-header">Reporte Avanzado de Agencias</h1>
+
+<form id="form-busqueda-agencia"  class="form-busqueda-agencia" method="<?php echo $this->form->getMethod() ?>" action="<?php echo $this->form->getAction()?>">
+	<div class="row">
+	<div class="col-md-4">
+		<div class="form-group input-group">
+            <span class="input-group-addon"><i class="fa fa-info-circle"> Nombre Agencia</i>
+            </span>
+           	<?= $this->form->nombre ?>
+    	</div>
+		
+	</div>
+	<div class="col-md-4">
+		<div class="form-group input-group">
+            <span class="input-group-addon"><i class="fa fa-info-circle"> Nombre Comercial</i>
+            </span>
+           	<?= $this->form->nombre_comercial ?>
+    	</div>
+	</div>
+	<div class="col-md-2">
+		<div class="form-group input-group">
+            <span class="input-group-addon"><i class="fa fa-info-circle"> RFC</i>
+            </span>
+           	<?= $this->form->rfc ?>
+    	</div>
+	</div>
+	<div class="col-md-2">
+		<div class="form-group input-group">
+            <span class="input-group-addon"><i class="fa fa-info-circle"> Estatus</i>
+            </span>
+           	<?= $this->form->estatus ?>
+    	</div>
+	</div>
+</div>
+	<div class="row">
+	<div class="col-md-4">
+		<div class="form-group input-group">
+            <span class="input-group-addon"><i class="fa fa-info-circle"> Ciudad</i>
+            </span>
+           	<?= $this->form->ciudad ?>
+    	</div>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group input-group">
+            <span class="input-group-addon"><i class="fa fa-info-circle"> Estado</i>
+            </span>
+           	<?= $this->form->estado ?>
+    	</div>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group input-group">
+            <span class="input-group-addon"><i class="fa fa-info-circle"> C&oacute;digo Postal</i>
+            </span>
+           	<?= $this->form->cp ?>
+    	</div>							
+	</div>
+</div>					
+	<div class="row">
+	<div class="col-md-4">
+		<div class="form-group input-group">
+            <span class="input-group-addon"><i class="fa fa-info-circle"> Contacto</i>
+            </span>
+           	<?= $this->form->contacto ?>
+    	</div>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group input-group">
+            <span class="input-group-addon"><i class="fa fa-info-circle"> Email</i>
+            </span>
+           	<?= $this->form->email ?>
+    	</div>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group input-group">
+            <span class="input-group-addon"><i class="fa fa-info-circle"> Ejecutivo</i>
+            </span>
+           	<?= $this->form->ejecutivo ?>
+    	</div>
+	</div>
+</div>	
+<div class="row">
+	<div class="col-md-3">
+		
+	</div>			    	
+	<div class="col-md-6">
+		<?= $this->form->licencias ?>
+	</div>
+	<div class="col-md-3">
+		
+	</div>			    		
+</div>
+<br/>
+<div class="row">
+	<div class="col-md-9"></div>			    	
+	<div class="col-md-3">
+		<button type="button" class="btn btn-block btn-outline btn-success" id="action-form-agencia" onclick="submitFormBusquedaAgencia()">Buscar</button>		
+	</div>		    		
+</div>
+</form>		
+
+<br/>
+<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-agencias">
+	<thead>
+		<tr>
+			<th>ID Agencia</th>
+			<th>Clave</th>
+			<th>Nombre</th>
+			<th>Direcci&oacute;n</th>
+			<th>CP</th>
+			<th>Ciudad</th>
+			<th>Tel&oacute;fono</th>
+			<th>Email</th>
+		</tr>
+	</thead>
+	<tbody align="center">
+	</tbody>
+</table>

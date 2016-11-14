@@ -1,14 +1,12 @@
 <h1 class="page-header">Nueva Orden de Servicio</h1>
-<div class="input-group">
-
-<div class="row">
-	<div class="col-md-10">
-		<div class="input-group">
-		  	<label>Buscar Agencia:</label> <?= $this->selectAgencias->select_agencias?>
+<div>
+	<div class="row">
+		<div class="col-md-10">
+			<div class="input-group">
+			  	<label>Buscar Agencia:</label> <?= $this->selectAgencias->select_agencias?>
+			</div>
 		</div>
+		<div class="col-md-2"></div>
 	</div>
-	<div class="col-md-2"></div>
+	<?= $this->render('/orden-creacion/render/servicio.phtml') ?>
 </div>
-		<?= $this->render('/orden-creacion/render/datosAgencia.phtml') ?>
-		<?= $this->render('/orden-creacion/render/servicio.phtml') ?>
-

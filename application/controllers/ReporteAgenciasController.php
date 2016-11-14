@@ -40,6 +40,23 @@ class ReporteAgenciasController extends Zend_Controller_Action
         $this->view->selectAgencias=$zendForm;
     }
 
+    public function reporteAgenciasAvanzadoAction()
+    {
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');    
+        
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/multi-select/js/multi-select.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/reportes/agencias/reporte-avanzado-agencias.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
+
+
+
+        $this->view->form = new Application_Form_Agencias_Busquedagencias();
+
+    }
+
     public function reporteAgenciasProductosAction()
     {
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
@@ -91,6 +108,119 @@ class ReporteAgenciasController extends Zend_Controller_Action
         $serviciosAgencia = $this->orden->obtenerAgenciaPorPoliza($params['id_poliza']);
         $this->_helper->json($serviciosAgencia);
 
+    }
+
+    public function consultaAvanzadaAction(){
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+        $params=$this->_request->getParams();
+    
+        $agenciaDbTable = new Application_Model_DbTable_Agencia();
+        $where = array();
+        foreach ($params as $clave => $param)
+        {
+            if($clave == "nombre")
+            {
+                if(!empty($param))
+                {
+                    array_push($where, "ag.nombre like '%".$param."%'");
+                }
+            }
+            if($clave == "nombre_comercial")
+            {
+                if(!empty($param))
+                {
+                    array_push($where, "ag.nombre_comercial like '%".$param."%'");
+                }
+            }
+            if($clave == "rfc")
+            {
+                if(!empty($param))
+                {
+                    array_push($where, "ag.rfc like '%".$param."%'");
+                }
+            }
+            /*if($clave == "estatus")
+            {
+                if(!empty($param))
+                {
+                    array_push($where, "ag.estatus like '%".$param."%'");
+                }
+            }*/
+            if($clave == "ciudad")
+            {
+                if(!empty($param))
+                {
+                    array_push($where, "ag.clave_ciudad like '%".$param."%'");
+                }
+            }
+            /*if($clave == "estado")
+            {
+                if(!empty($param))
+                {
+                    array_push($where, "ag.estado like '%".$param."%'");
+                }
+            }*/
+            if($clave == "cp")
+            {
+                if(!empty($param))
+                {
+                    array_push($where, "ag.cp like '%".$param."%'");
+                }
+            }
+            if($clave == "contacto")
+            {
+                if(!empty($param))
+                {
+                    array_push($where, "u_ag.nombre like '%".$param."%'");
+                }
+            }
+            if($clave == "email")
+            {
+                if(!empty($param))
+                {
+                    array_push($where, "ag.email like '%".$param."%'");
+                }
+            }
+            if($clave == "ejecutivo")
+            {
+                if(!empty($param))
+                {
+                    array_push($where, "u_ad.nombre like '%".$param."%'");
+                }
+            }
+            if($clave=="lice"){
+                if(!empty($param))
+                {
+                    //HOLA
+
+                }                
+            }
+        }
+        $numero_filas = count($where);
+        if($numero_filas>0){
+            //Cuento el número de filas de la query
+            $indice = 0;
+            //var_dump($numero_filas);
+            $clausulaWhere = "";
+            foreach ($where as $clausula)
+            {
+                $indice +=1;
+                if($indice != $numero_filas)
+                {
+                    $clausulaWhere .= $clausula." and ";
+                }
+                else 
+                {
+                    $clausulaWhere .= $clausula;    
+                }
+            }
+            $productos = $agenciaDbTable->obtenerAgenciaPorAvanzado($clausulaWhere);
+            $this->_helper->json($productos);
+            //$this->view->prueba = 'Llega al mensaje';
+        }else{
+            $this->_helper->json("No");
+        }
     }
 
 }
