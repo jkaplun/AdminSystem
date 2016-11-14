@@ -82,7 +82,7 @@ class Application_Model_Services_ServicesPolizas
 	function restarMinutosAPoliza($idPoliza, $minutos)
 	{
 		$polizaDbTable = new Application_Model_DbTable_Poliza();
-		$poliza = $polizaDbTable->obtenerPolizaPorId($id_poliza);
+		$poliza = $polizaDbTable->obtenerPolizaPorId($idPoliza);
 		if($poliza != null)
 		{
 			$poliza['horas_consumidas'] += $minutos;
@@ -91,7 +91,8 @@ class Application_Model_Services_ServicesPolizas
 			{
 				$poliza['tiempo_agotado'] = 'S';
 			}
-			$polizaDbTable->update($poliza);
+    		$where = "id_poliza = ".$idPoliza;
+			$polizaDbTable->update($poliza, $where);
 		}
 	}
 	
