@@ -184,9 +184,15 @@ function agregarPolizaEnTabla(res){
         var id_poliza_row = "idPolizaRow"+res.id_poliza;
        // borrar despues 
         if(ajaxActionPoliza=="agregar" || ajaxActionPoliza=="consultar"){ 
+        var horas_us;
+        if(res.horas_consumidas!=null){
+          horas_us= res.horas_poliza-res.horas_consumidas;
+        }else{
+          horas_us=res.horas_poliza;
+        }
         //console.log("productos_todos[res.id_producto].nombre_prod: "+productos_todos[res.id_producto].nombre_prod);
         polizaTable.row.add( [  
-        res.id_poliza, res.clave, nombre_producto_poliza, res.horas_poliza, '0', res.costo_poliza, res.fecha_ini, res.fecha_fin, estadoPoliza , "x"
+        res.id_poliza, res.clave, nombre_producto_poliza, res.horas_poliza,horas_us, res.costo_poliza, res.fecha_ini, res.fecha_fin, estadoPoliza , "x"
         ]).draw(); 
 
         polizaTable.page( 'last' ).draw( 'page' );  

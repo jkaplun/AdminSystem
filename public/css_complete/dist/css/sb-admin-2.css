@@ -593,6 +593,10 @@ table.dataTable thead .sorting:after {
     background-color: rgba(78, 98, 240, 0.48);
 }
 
+.centrado{
+  vertical-align: middle !important;
+  text-align: center;
+}
 
 
 

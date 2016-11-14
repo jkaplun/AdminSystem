@@ -68,32 +68,53 @@ class Application_Form_Agencias_Busquedagencias extends Zend_Form
         $this->addElement($cp);
         
         // Ciudad
-        $ciudad = new Zend_Form_Element_Select('ciudad');
-        $ciudad
-        ->removeDecorator('label')
+        // $ciudad = new Zend_Form_Element_Select('ciudad');
+        // $ciudad
+        // ->removeDecorator('label')
+        // ->removeDecorator('HtmlTag')
+        // ->addMultiOptions(array(
+        //         'S'=>'Activo',
+        //         'N'=>'Inactivo'
+        // ))
+        // ->setAttrib("class","form-control")
+        // ->setAttrib("autocomplete","off")
+        // ;
+        // $this->addElement($ciudad);
+
+        $ciudad = new Zend_Form_Element_Text('ciudad');
+        $ciudad->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("Ciudad"))
+        ->setAttrib("maxlength","100")
         ;
         $this->addElement($ciudad);
 
-        // Estado
-        $estado = new Zend_Form_Element_Select('estado');
-        $estado
-        ->removeDecorator('label')
+        // // Estado
+        // $estado = new Zend_Form_Element_Select('estado');
+        // $estado
+        // ->removeDecorator('label')
+        // ->removeDecorator('HtmlTag')
+        // ->addMultiOptions(array(
+        //         'S'=>'Activo',
+        //         'N'=>'Inactivo'
+        // ))
+        // ->setAttrib("class","form-control")
+        // ->setAttrib("autocomplete","off")
+        // ;
+        // $this->addElement($estado);
+        // Email
+        $estado = new Zend_Form_Element_Text('estado');
+        $estado->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("Estado"))
+        ->setAttrib("maxlength","100")
         ;
         $this->addElement($estado);
+
         
         // Email
         $email = new Zend_Form_Element_Text('email');
