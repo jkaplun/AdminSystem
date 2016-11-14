@@ -4,6 +4,7 @@ var pathProductoController="public/productos/";
 var pathUsuarioAgenciaController="public/usuariosAgencia/"; 
 var pathOrdenServicioController="public/ordenCreacion/"
 var idAgenciaActual;
+var idMotivo;
 var productos_todos={};
 
 //$('input[name=name_of_your_radiobutton]:checked').val();
@@ -58,8 +59,31 @@ $(document).ready(function() {
         actualizarVistas.vistaUsuarioAgencia =true;
         mostrarProductosEnSelect(idAgenciaActual);
         mostrarUsuariosAgenciaEnSelect(idAgenciaActual);
-
 	});
+
+  $("#motivo").change(function(){
+    idMotivo =$("#motivo").val();
+    var des="";
+    switch(idMotivo){
+      case 'motivo1':   des="Actualización";break;
+      case 'motivo2':   des="Configuración";break;
+      case 'motivo3':   des="Error del Sistema";break;
+      case 'motivo4':   des="Factura Electrónica";break;
+      case 'motivo5':   des="Formatos e Impresoras";break;
+      case 'motivo6':   des="Implementación";break;
+      case 'motivo7':   des="Información";break;
+      case 'motivo8':   des="Instalación";break;
+      case 'motivo9':   des="Interfases";break;
+      case 'motivo10':   des="Operación";break;
+      case 'motivo11':   des="Reportarse";break;
+      case 'motivo12':   des="Reportarse Urgentemente";break;
+      case 'motivo13':   des="Reportes";break;
+      case 'motivo14':   des="Seguimiento";break;
+    }
+    //$("#descripcion").val(des+$("#descripcion").val());
+    $("#descripcion").val(des);
+  });
+
 
 
 	$("#submitNuevaOrdenBtn").click(function(){

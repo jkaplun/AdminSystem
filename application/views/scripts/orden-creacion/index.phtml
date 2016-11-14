@@ -1,34 +1,12 @@
 <h1 class="page-header">Nueva Orden de Servicio</h1>
 
 <div class="row">
-	<div class="col-md-1"></div>
-	<div class="col-md-4">
+	<div class="col-md-10">
 		<div class="input-group">
 		  	<label>Buscar Agencia:</label> <?= $this->selectAgencias->select_agencias?>
 		</div>
 	</div>
 	<div class="col-md-2"></div>
-	<div class="col-md-4">
-		<div class="input-group">
-		  	<label>Tipo de Soporte:</label>
-		  	<select id="tipo_soporte" class="selectpicker" data-live-search="true" data-width="auto">
-				<option>Curso</option>
-				<option>Demostracion</option>
-				<option>Desarrollo</option>
-				<option>Implementacion</option>
-				<option>Paginas Web</option>
-				<option>Reportarse</option>
-				<option>Reportarse Urgente</option>
-				<option>Revision MIG</option>
-				<option>Soporte en Sitio</option>
-				<option>Soporte Interno</option>
-				<option>Soporte Remoto</option>
-				<option>Soporte Telefonico</option>
-				<option>Ventas</option>
-		  </select>			
-		</div>
-	</div>	
-	<div class="col-md-1"></div>
 </div>
 		<?= $this->render('/orden-creacion/render/datosAgencia.phtml') ?>
 		<?= $this->render('/orden-creacion/render/servicio.phtml') ?>
