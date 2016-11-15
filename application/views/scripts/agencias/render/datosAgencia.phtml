@@ -20,12 +20,12 @@
                 <li><a href="#tabObservaciones" data-toggle="tab">Observaciones</a></li>
             </ul>
     </div>
-    <div class="panel-body" style="padding-top: 0px;">
+    <div class="panel-body">
     	<div class="tab-content">
 	    	<div class="tab-pane fade in active" id="tabInformacion">
 				<div class="row">
 					<div class="col-md-4">
-						<div class="bs-callout bs-callout-primary col" id="callout-glyphicons-dont-mix">
+						<div class="col" id="callout-glyphicons-dont-mix">
 							<b><p>RFC: <span class="text-primary" id="rfc-info"></span> </p></b>
 							<h5>Direcci&oacute;n</h5>
 							<hr class="hrForm">
@@ -52,7 +52,7 @@
 					    	<div class="row">
 								<div class="col-md-9"></div>			    	
 								<div class="col-md-2">
-									<button type="button" class="btn btn-primary" id='boton-editar-agencia' data-dismiss="modal" data-toggle="modal" data-target="#myModal">
+									<button type="button" class="btn btn-primary" id='boton-editar-agencia' data-dismiss="modal" data-toggle="modal" data-target="#myModal" onclick="abrirModalEditarAgencia()">
 										<span class="fa fa-edit"></span>Editar
 									</button>										
 								</div>			    		
@@ -60,7 +60,7 @@
 						</div>
 					</div>
 					<div class="col-md-8">
-						<div class="bs-callout bs-callout-primary col" id="mapa">
+						<div id="mapa">
 							<iframe id="map" width="100%" height="450"></iframe>
 						</div>
 					</div>

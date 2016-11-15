@@ -192,6 +192,9 @@ class AgenciasController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
+        //echo '<pre>'.print_r($params,true).'</pre>';die;
+        
+        
         $data = array(
         				'clave' => $params['clave'], 
                         'nombre' => $params['nombre'], 
@@ -206,7 +209,7 @@ class AgenciasController extends Zend_Controller_Action
         				'email_alt' => $params['email_alt'],
                         //'http' => $params['http'],
                         //'cfdi' => $params['cfdi'],
-                        //'dba_pwd' => $params['dba_pwd'],
+                        'dba_pwd' => $params['update_pwd_bd'],
                         //'layout_login' => $params['layout_login'],
                         //'layout_pwd' => $params['layout_pwd'],
         				//'fecha' => $params['fecha'],
@@ -303,7 +306,8 @@ class AgenciasController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams(); 
         $datosAgencia = $this->agencia->find($params['id_agencia'])->toArray();
-       
+        $datosAgencia[0]['update_pwd_bd'] = $datosAgencia[0]['dba_pwd'];
+        
         $this->_helper->json($datosAgencia[0]);
 
     }
