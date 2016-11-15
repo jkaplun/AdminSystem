@@ -1,5 +1,6 @@
 var JSON_timers_global={};
 var pathOrdenServicioController="public/orden-seguimiento/"
+var current_total_ordenes_global=0;
 
 $(document).ready(function() { 
   $('#dataTable-seguimientoOrdenes').DataTable({
@@ -61,10 +62,16 @@ $(".recSVG").hide();
   array_duracion_servicio.pop();
   //console.log(array_duracion_servicio);
 
+  // // arreglo con tiempo duracion servicio
+  // var array_motivo=$("#info_motivo_todos").html().split(',');
+  // array_motivo.shift();
+  // array_motivo.pop();
+
   //mostrar duración servicio y status crono
   mostrar_duracion_servicio_status_crono(array_duracion_servicio,array_cron_estatus,array_ordenes_id);
-
-
+  current_total_ordenes_global=array_cron_estatus.length;
+  
+  $("#total_ordenes").html(current_total_ordenes_global);
 
 }); // end  $(document).ready(function() { 
 
@@ -135,7 +142,7 @@ function botonPauseAjax(id_orden){
     }).done(function(res) { 
     console.log("resupuesta del ajax") ;
       console.log(res);
- 
+    
        
   })// end ajax done  
     .fail(function() { 
@@ -249,7 +256,10 @@ function concluirOrden(button_id){
   if(res.estado == "ok"){ // si la respuesta es correcta: 
       console.log(res);  
       swal("La orden ha sido concluida exitosamente", " ", "success"); 
+
       $("#orden_servicio_"+id_orden).hide();
+      current_total_ordenes_global=current_total_ordenes_global-1;
+      $("#total_ordenes").html(current_total_ordenes_global);
    } else{ 
     //$("#orden_servicio_"+id_orden).hide();
      swal(res.descripcion, " ", "error");  
@@ -261,4 +271,41 @@ function concluirOrden(button_id){
         swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
     });
 }
+
+
+function guardarSercicioAjax(button_id){
+   var id_orden= button_id.replace("guardarServicio_", "");
+  var id_orden_to_send="id_orden_servicio="+id_orden;
+  var conformidad= "&conformidad="+$("#conformidad_"+id_orden).val();
+  var motivo= "&motivo="+$("#motivo_"+id_orden).val();
+  var solucion= "&solucion="+$("#solucion_"+id_orden).val();
+
+      $.ajax({ 
+        url: pathOrdenServicioController + "actualizar", 
+        method: "post", 
+        data: id_orden_to_send+conformidad+motivo+solucion+"&concluido=N",
+        dataType: "json" 
+      }).done(function(res) { 
+
+  if(res.estado == "ok"){ // si la respuesta es correcta: 
+      console.log(res);  
+      swal("La orden ha sido guardada exitosamente", " ", "success"); 
+
+      //$("#orden_servicio_"+id_orden).hide();
+      //current_total_ordenes_global=current_total_ordenes_global-1;
+      //$("#total_ordenes").html(current_total_ordenes_global);
+   } else{ 
+    //$("#orden_servicio_"+id_orden).hide();
+     swal(res.descripcion, " ", "error");  
+     } 
+   
+         
+    })// end ajax done  
+      .fail(function() { 
+        swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+    });
+
+}
+
+
 

@@ -53,11 +53,12 @@ $(document).ready(function() {
 		actualizarVistas.vistaUsuarioAgencia=false;
 		var tablePolizas = $('#dataTable-polizas-vigentes').DataTable();
 		tablePolizas.clear().draw();
-		mostrarProductos();
+		//mostrarProductos();
+         mostrarProductosEnSelect(idAgenciaActual);
 		mostrarPolizas();
 	 	//mostrarProductosEnTabla();
         actualizarVistas.vistaUsuarioAgencia =true;
-        mostrarProductosEnSelect(idAgenciaActual);
+   
         mostrarUsuariosAgenciaEnSelect(idAgenciaActual);
 	});
 
@@ -213,14 +214,19 @@ function agregarPolizaEnTabla(res){
 	var estatusUsuario; 
 	var info = polizaTable.page.info(); 
 
-	if(res.estatus == "ACT"){ 
+	if(res.id_poliza_estatus == "1"){ 
 		estadoPoliza="Activa"; 
-	} else if (res.estatus == "ADE"){ 
+	} else if (res.id_poliza_estatus == "2"){ 
 		estadoPoliza="Adeudo"; 
-	} else if (res.estatus == "BLQ"){ 
+	} else if (res.id_poliza_estatus == "3"){ 
 		estadoPoliza="Bloqueado"; 
-	} else{
-		estadoPoliza="Cancelado";
+	} else if (res.id_poliza_estatus == "4"){ 
+    estadoPoliza="Cancelado"; 
+  } else if (res.id_poliza_estatus == "5"){ 
+    estadoPoliza="Caducada"; 
+  }
+  else{
+		estadoPoliza="Agotada";
 	}
 	//  ACT - Activo
 	// ADE - Adeudo
@@ -231,11 +237,16 @@ function agregarPolizaEnTabla(res){
 
 	var nombre_producto_poliza="";
 	var clave_producto_poliza="";
-	if ($(productos_todos[res.id_producto]).length){
-		nombre_producto_poliza=productos_todos[res.id_producto].nombre_prod
-	}else{
-		nombre_producto_poliza="no vigente"
-	}
+    console.log("-----------------------------> ");
+  console.log(productos_todos);
+  //console.log("$(productos_todos[res.id_producto]).length: "+$(productos_todos[res.id_producto]).length);
+  //console.log("---------------------> id_producto: "+res.id_producto);
+	//if ($(productos_todos[res.id_producto]).length){
+   // console.log("productos_todos[res.id_producto].nombre_prod: "+productos_todos[res.id_producto].nombre_prod);
+	nombre_producto_poliza=productos_todos[res.id_producto].nombre_prod
+	//}else{
+//		nombre_producto_poliza="no vigente"
+//	}
 
 	var id_poliza_row = "idPolizaRow"+res.id_poliza;
 	// borrar despues 
@@ -244,14 +255,24 @@ function agregarPolizaEnTabla(res){
 	//console.log("productos_todos[res.id_producto].nombre_prod: "+productos_todos[res.id_producto].nombre_prod);
 	polizaTable.row.add( [ 
 	//"X", res.clave, "x", "x", '0',  "X" 
-		"X", res.clave, nombre_producto_poliza, res.horas_poliza, '0', estadoPoliza 
+		"", res.clave, nombre_producto_poliza, res.horas_poliza, '0', estadoPoliza 
 	]).draw(); 
 
 	polizaTable.page( 'last' ).draw( 'page' );  
 
 
-	$('#dataTable-polizas-vigentes tr:last-child td:first-child').html(' <input type="radio" name="id_poliza" value="'+res.id_poliza+'">'); 
-	//$('#dataTable-polizas-vigentes tr:last-child td:first-child').css('background-color', 'red');  
+	
+	
+  if(res.id_poliza_estatus == "1"){ 
+    $('#dataTable-polizas-vigentes tr:last-child td:first-child').html(' <input type="radio" name="id_poliza" value="'+res.id_poliza+'">'); 
+        
+    }else if(res.id_poliza_estatus="null"){
+      $('#dataTable-polizas-vigentes tr:last-child td:last-child').css('background-color', '#ffd6d6');  
+
+    }
+
+  
+  //$('#dataTable-polizas-vigentes tr:last-child td:first-child').css('background-color', 'red');  
 	//$('#dataTable-polizas-vigentes tr:last-child td:first-child').attr('id', "editarPolizaBtn"+res.id_poliza); 
 	//$('#dataTable-polizas-vigentes tr:last-child td:last-child').attr('class', "frontEndIdPoliza"); 
 	//$("#editarPolizaBtn"+res.id_poliza).closest('tr').attr('id', id_poliza_row); 
@@ -266,7 +287,7 @@ function agregarPolizaEnTabla(res){
 
 
 function mostrarProductosEnSelect(idAgenciaActual){
-$('#nombre_prod').html('').selectpicker('refresh');
+//$('#nombre_prod').html('').selectpicker('refresh');
  // productos_todos={};
   ajaxActionProducto="productosdisponiblesadquiridosporidagencia"
   var id_agencia_seleccionada="id_agencia="+idAgenciaActual;
@@ -284,19 +305,16 @@ $('#nombre_prod').html('').selectpicker('refresh');
 
 
       for (i;i<res.length;i++){
-
-        if(res[i].id_agencia!=0){
-        //productos_todos[res[i].id_producto]=res[i];
+        console.log("id_agencia: "+res[i].id_agencia);
+       // if(res[i].id_agencia!="0"){
+        productos_todos[res[i].id_producto]=res[i];
         //agregarProductoEnTabla(res[i]);
         console.log("producto agencia: "+res[i].nombre_prod)
-        $('#nombre_prod').append($('<option>').text(res[i].nombre_prod)
-          .attr('value', res[i].id_producto)
-          .attr('id', "id_producto_"+res[i].id_producto)
-          .attr('class',"productSelect")
-          ).selectpicker('refresh');
-        }
-      }
 
+       // }
+      }
+    console.log("---------------------->productos_todos: ");
+    console.log(productos_todos);
  
   })// end ajax done  
     .fail(function() { 
@@ -412,7 +430,16 @@ $.ajax({
     }).done(function(res) {  
       console.log("ajax submitFormNueva orden done");
       if(res.estado=="ok"){
-      		swal("La orden de servicio ha sido registrada exitosamente", " ", "success"); 
+      		//swal("La orden de servicio ha sido registrada exitosamente", " ", "success");
+          swal({title: "La orden de servicio ha sido registrada exitosamente",   
+           text: "Redireccionando . .", 
+           type: "success",   
+           timer: 2800,   
+           showConfirmButton: false
+          });
+
+        setTimeout(function(){location.reload();}, 2600);
+        
       }else{
       		swal(res.descripcion, " ", "error"); 
       }

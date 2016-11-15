@@ -140,16 +140,22 @@ function agregarPolizaEnTabla(res){
         var polizaTable = $('#dataTable-polizas-vigentes').DataTable();   
         var estatusUsuario; 
         var info = polizaTable.page.info(); 
- 
-         if(res.estatus == "ACT"){ 
-           estadoPoliza="Activa"; 
-         } else if (res.estatus == "ADE"){ 
-           estadoPoliza="Adeudo"; 
-         } else if (res.estatus == "BLQ"){ 
-           estadoPoliza="Bloqueado"; 
-         } else{
-           estadoPoliza="Cancelado";
-         }
+       console.log("res.id_poliza_estatus: "+res.id_poliza_estatus);
+        if(res.id_poliza_estatus == "1"){ 
+          estadoPoliza="Activa"; 
+        } else if (res.id_poliza_estatus == "2"){ 
+          estadoPoliza="Adeudo"; 
+        } else if (res.id_poliza_estatus == "3"){ 
+          estadoPoliza="Bloqueado"; 
+        } else if (res.id_poliza_estatus == "4"){ 
+          estadoPoliza="Cancelado"; 
+        } else if (res.id_poliza_estatus == "5"){ 
+          estadoPoliza="Caducada"; 
+        }else if (res.id_poliza_estatus == "6"){ 
+          estadoPoliza="Agotada"; 
+        }else{
+          estadoPoliza="Sin estado";
+        }
  
           //  ACT - Activo
           // ADE - Adeudo

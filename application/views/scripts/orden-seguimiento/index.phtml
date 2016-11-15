@@ -20,7 +20,7 @@
 <form>
 
 
-<h2>Se muestra(n) <b><?php echo $this->countArray ?></b> resultado(s):</h2>
+<h2>Se muestra(n) <b id="total_ordenes"></b> resultado(s):</h2>
 
 <div class="row">
 	<div class="col-md-12">
@@ -32,6 +32,7 @@
 	<?php $id_orden_servicio_todos=","?>
 	<?php $duracion_servicio_todos=","?>
 	<?php $control_cron_estatus_todos=","?>
+	<?php $motivo_todos=","?>
 
 	
 
@@ -150,11 +151,11 @@
 				  	<div class="row">
 					  	<div class="col-md-6 form-group">
 					  		<label>Motivo:</label>
-					  		<textarea id="motivo_<?= $registro["id_orden_servicio"]?>" class="form-control" rows="3" value="<?= $registro["motivo"] ?>"></textarea>
+					  		<textarea id="motivo_<?= $registro["id_orden_servicio"]?>" class="form-control" rows="3" value="<?= $registro["motivo"] ?>"><?= $registro["motivo"] ?></textarea>
 					  	</div>
 					  	<div class="col-md-6 form-group">
 					  		<label>Solución:</label>
-					  		<textarea id="solucion_<?= $registro["id_orden_servicio"]?>" class="form-control" rows="3" value="<?= $registro["solucion"] ?>"></textarea>
+					  		<textarea id="solucion_<?= $registro["id_orden_servicio"]?>" class="form-control" rows="3" value="<?= $registro["solucion"] ?>"><?= $registro["solucion"] ?></textarea>
 					  	</div>				  	
 				  	</div>
 				  	<br/>
@@ -173,7 +174,7 @@
 					  			</div>
 								<div class="col-md-2"></div>
 					  			<div class="col-md-2">
-					  				<button id="guardarServicio_<?= $registro["id_orden_servicio"] ?>" onclick="concluirSercicioAjax(this.id)" type="button" class="btn btn-primary">Guardar Servicio</button>
+					  				<button id="guardarServicio_<?= $registro["id_orden_servicio"] ?>" onclick="guardarSercicioAjax(this.id)" type="button" class="btn btn-primary">Guardar Servicio</button>
 					  			</div>					  			
 					  			<div class="col-md-3"></div>
 					  		</div>
@@ -187,6 +188,7 @@
 		<?php $id_orden_servicio_todos = $id_orden_servicio_todos . $registro["id_orden_servicio"] . ","  ?>
 		<?php $duracion_servicio_todos = $duracion_servicio_todos . $registro["duracion_servicio"] . ","  ?>
 		<?php $control_cron_estatus_todos = $control_cron_estatus_todos . $registro["control_cron_estatus"] . ","  ?>
+		<?php $motivo_todos = $motivo_todos . $registro["motivo"] . ","  ?>
 	
 	<?php 
 		}
@@ -194,6 +196,7 @@
 	<p id="info_id_ordenes" hidden="true"> <?= $id_orden_servicio_todos ?> </p>
 	<p id="info_duracion_servicio_todos" hidden="true"> <?= $duracion_servicio_todos ?> </p>
 	<p id="info_control_cron_estatus_todos" hidden="true"> <?= $control_cron_estatus_todos ?> </p>
+	<p id="info_motivo_todos" hidden="true"> <?= $motivo_todos ?> </p>
 	</div>
 	
 	<div class="row" align="right">

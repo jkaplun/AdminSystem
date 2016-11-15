@@ -39,7 +39,7 @@ class Application_Form_Polizas_Polizas extends Zend_Form
                 ->addMultiOptions($lista)
                 ->setAttrib("class","form-control")                
                 ->removeDecorator('label')
-                ->setValue('producto1')
+                //->setValue('producto1')
                 ->removeDecorator('HtmlTag');
         ;
         $this->addElement($producto);
@@ -185,10 +185,12 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
-                'ACT'=>'Activo',
-                'ADE'=>'Adeudo',
-                'BLQ'=>'Bloqueado',
-                'CAN'=>'Cancelado',
+                '1'=>'Activo',
+                '2'=>'Adeudo',
+                '3'=>'Bloqueado',
+                '4'=>'Cancelado',
+                '5'=>'Caducada',
+                '6'=>'Agotada',
         ))
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
