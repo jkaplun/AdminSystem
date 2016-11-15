@@ -243,7 +243,8 @@ function agregarPolizaEnTabla(res){
   //console.log("---------------------> id_producto: "+res.id_producto);
 	//if ($(productos_todos[res.id_producto]).length){
    // console.log("productos_todos[res.id_producto].nombre_prod: "+productos_todos[res.id_producto].nombre_prod);
-	nombre_producto_poliza=productos_todos[res.id_producto].nombre_prod
+	//nombre_producto_poliza=productos_todos[res.id_producto].nombre_prod;
+    nombre_producto_poliza="Producto";
 	//}else{
 //		nombre_producto_poliza="no vigente"
 //	}
