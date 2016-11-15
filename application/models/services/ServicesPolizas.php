@@ -85,8 +85,9 @@ class Application_Model_Services_ServicesPolizas
 		$poliza = $polizaDbTable->obtenerPolizaPorId($idPoliza);
 		if($poliza != null)
 		{
-			$poliza['horas_consumidas'] += $minutos;
-			$diferenciaHoras = $poliza['horas_poliza'] - $minutos;
+			$minutosConvertidos = $minutos/60;
+			$poliza['horas_consumidas'] += $minutosConvertidos;
+			$diferenciaHoras = $poliza['horas_poliza'] - $minutosConvertidos;
 			if($diferenciaHoras < 0)
 			{
 				$poliza['tiempo_agotado'] = 'S';

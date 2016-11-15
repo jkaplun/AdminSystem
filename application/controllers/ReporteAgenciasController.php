@@ -154,13 +154,13 @@ class ReporteAgenciasController extends Zend_Controller_Action
                     array_push($where, "ag.clave_ciudad like '%".$param."%'");
                 }
             }
-            /*if($clave == "estado")
+            if($clave == "estado")
             {
                 if(!empty($param))
                 {
                     array_push($where, "ag.estado like '%".$param."%'");
                 }
-            }*/
+            }
             if($clave == "cp")
             {
                 if(!empty($param))
@@ -192,7 +192,7 @@ class ReporteAgenciasController extends Zend_Controller_Action
             if($clave=="lice"){
                 if(!empty($param))
                 {
-                    //HOLA
+                    array_push($where, "ag_p.id_producto in ('".$param."')");
 
                 }                
             }
@@ -216,11 +216,13 @@ class ReporteAgenciasController extends Zend_Controller_Action
                 }
             }
             $productos = $agenciaDbTable->obtenerAgenciaPorAvanzado($clausulaWhere);
-            $this->_helper->json($productos);
             //$this->view->prueba = 'Llega al mensaje';
-        }else{
+        }
+        else
+        {
             $this->_helper->json("No");
         }
+            $this->_helper->json($productos);
     }
 
 }

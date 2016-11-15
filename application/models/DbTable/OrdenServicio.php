@@ -32,7 +32,8 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 					'id_usuario_admin_atiende',
 					'id_usuario_agencia_solicito',
 					'fecha_alta',
-					'id_orden_servicio_estatus'
+					'id_orden_servicio_estatus',
+					'concluido'
 					)
 		)
 		->joinleft(array('u_a' => 'usuario_agencia'),
@@ -43,8 +44,9 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 						array('id_usuario','nombre as nombre_atiende', 'apellido_paterno'))
 		->joinleft(array('a' => 'agencia'),
 						'p.id_agencia = a.id_agencia',
-						array('nombre as nombre_agencia'));		
-		//->where("concluido = 'N' and u_ad = null");
+						array('nombre as nombre_agencia'))
+		->where("u_ad.ejecutivo = 'S'");
+		//->where("(concluido = 'N' or concluido is null) and u_ad.ejecutivo = 'S'");
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 
@@ -172,7 +174,8 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 	public function obtenerDiferenciaDeFechas ($fechaMayor, $fechaMenor)
 	{
 		$select = 'select extract(hour	from TIMEDIFF("'.$fechaMayor.'", "'.$fechaMenor.'")) as hora,
-					extract(minute from TIMEDIFF("'.$fechaMayor.'", "'.$fechaMenor.'")) as minuto';
+					extract(minute from TIMEDIFF("'.$fechaMayor.'", "'.$fechaMenor.'")) as minuto,
+					extract(second from TIMEDIFF("'.$fechaMayor.'", "'.$fechaMenor.'")) as segundo';
 		
 		return $this->getAdapter ()->fetchRow( $select );
 	}

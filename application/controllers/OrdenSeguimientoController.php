@@ -103,9 +103,13 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     		$diferenciaFechas = $ordenServicioDbTable->
     							obtenerDiferenciaDeFechas(
     									$fecha, $orden['control_cron_inicial']);
-    		$minutosConvertidos = $diferenciaFechas['hora']*60;
-    		$duracionServicio = $duracionServicio + $minutosConvertidos + $diferenciaFechas['minuto'];
-    		$data['duracion_servicio'] = $duracionServicio;
+    		$horasConvertidas = $diferenciaFechas['hora']*60;
+    		$segundosConvertidos = $diferenciaFechas['segundo']/60;
+    		$duracionServicio = $duracionServicio + 
+    								$horasConvertidas + 
+    								$diferenciaFechas['minuto'] + 
+    								$segundosConvertidos;
+    		$data['duracion_servicio'] = round($duracionServicio);
     		$where = "id_orden_servicio = {$params['id_orden_servicio']}";
     		// 	se actualiza en la base de datos a la orden de servicio
     		$ordenServicioDbTable->update($data, $where);
@@ -160,13 +164,18 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     				{
     					$data['control_cron_inicial'] = $fecha;
     				}
-    					$diferenciaFechas = $ordenServicioDbTable->
-    					obtenerDiferenciaDeFechas(
-    							$fecha, $orden['control_cron_inicial']);
-    					$minutosConvertidos = $diferenciaFechas['hora']*60;
-    					$duracionServicio = $duracionServicio + $minutosConvertidos + $diferenciaFechas['minuto'];
-    					$data['duracion_servicio'] = $duracionServicio;
-    					$data['control_cron_final'] = $fecha;
+    				$diferenciaFechas = $ordenServicioDbTable->
+    				obtenerDiferenciaDeFechas(
+    						$fecha, $orden['control_cron_inicial']);
+    				$horasConvertidas = $diferenciaFechas['hora']*60;
+    				$segundosConvertidos = $diferenciaFechas['segundo']/60;
+    				$duracionServicio = $duracionServicio + 
+    									$horasConvertidas + 
+    									$diferenciaFechas['minuto'] + 
+    									$segundosConvertidos;
+    				$data['duracion_servicio'] = round($duracionServicio);
+    				$data['control_cron_final'] = $fecha;
+    				$data['control_cron_estatus'] = 2;
     			}
     			else 
     			{
@@ -174,11 +183,15 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     				$diferenciaFechas = $ordenServicioDbTable->
     					obtenerDiferenciaDeFechas(
     							$fecha, $orden['control_cron_inicial']);
-    					$minutosConvertidos = $diferenciaFechas['hora']*60;
-    				$duracionServicio = $duracionServicio + $minutosConvertidos + $diferenciaFechas['minuto'];
-    				$data['duracion_servicio'] = $duracionServicio;
+    				$horasConvertidas = $diferenciaFechas['hora']*60;
+    				$segundosConvertidos = $diferenciaFechas['segundo']/60;
+    				$duracionServicio = $duracionServicio + 
+    										$horasConvertidas + 
+    										$diferenciaFechas['minuto'] + 
+    										$segundosConvertidos;
+    				$data['duracion_servicio'] = round($duracionServicio);
     				$data['control_cron_final'] = $fecha;
-    				$data['control_cron_estatus'] = 2;
+    				$data['control_cron_estatus'] = 3;
 					//Restando minutos a la póliza
     				$servicesPolizas = new Application_Model_Services_ServicesPolizas();
     				$servicesPolizas->restarMinutosAPoliza($orden['id_poliza'], $duracionServicio);

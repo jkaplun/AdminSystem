@@ -54,6 +54,9 @@ class Application_Model_DbTable_Agencia extends Zend_Db_Table_Abstract
 				->joinleft(array('u_ad' => 'usuario_admin'),
 							'ag.id_usuario_soporte_titular = u_ad.id_usuario',
 							array('nombre as ejecutivo'))
+				->joinleft(array('ag_p' => 'agencia_producto'),
+							'ag.id_agencia = ag_p.id_agencia',
+							array('id_producto as producto'))
 				->where($where);
 	
 		//echo $select;die;
@@ -81,7 +84,7 @@ class Application_Model_DbTable_Agencia extends Zend_Db_Table_Abstract
 				->joinleft(array('p' => 'poliza'),
 						'ag.id_agencia = p.id_agencia',
 						array('horas_poliza','horas_consumidas'))
-				->where('p.estatus="ACT" and p.tipo="'.$id.'"');
+				->where('p.id_poliza_estatus="1" and p.tipo="'.$id.'"');
 		//echo $select;die;
 		return $this->getAdapter ()->fetchAll( $select );
 	}

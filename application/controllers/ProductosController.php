@@ -100,6 +100,17 @@ class ProductosController extends Zend_Controller_Action
 
     }
 
+    public function consultarAction(){
+    
+    	$this->_helper->layout()->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	$params=$this->_request->getParams();
+    	$datosAgencia = $this->agencia->find($params['id_agencia'])->toArray();
+    	 
+    	$this->_helper->json($datosAgencia[0]);
+    
+    }
+
     public function consultarproductosdisponiblesporagenciaAction(){
 
         $this->_helper->layout()->disableLayout();
