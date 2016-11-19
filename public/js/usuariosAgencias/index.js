@@ -27,7 +27,7 @@ $(document).ready(function() {
 function submitFormUsuarioAgencia(){ 
  
     addIdAgencia="&id_agencia="+idAgenciaActual;
-    console.log("mandando submitFormUsuarioAgencia, clave usuariosagencia: "+claveUsuarioAgencia);
+    //console.log("mandando submitFormUsuarioAgencia, clave usuariosagencia: "+claveUsuarioAgencia);
     claveUsuarioAgencia= "&claveUsuarioAgencia=" + $("#emailUsuarioAgencia").val();
     if(ajaxActionUsuarioAgencia == "actualizar")
       id_usuario_agencia_to_send="&id_usuario_agencia="+id_usuario_agencia;
@@ -61,7 +61,7 @@ function agregarUsuarioAgenciaEnTabla(res, counter){
 
      var userTable = $('#dataTable-usuarios-agencias').DataTable();   
      var info = userTable.page.info(); 
-     console.log("-----------------> info page: "+info.page);
+     //console.log("-----------------> info page: "+info.page);
 
 
       if(ajaxActionUsuarioAgencia=="consultar"){
@@ -105,15 +105,15 @@ function agregarUsuarioAgenciaEnTabla(res, counter){
  
         }else{ 
 
-           console.log('--------------> $("#"+id_usuario_agencia_row).length' )
-              console.log($("#"+id_usuario_agencia_row).length)
-                console.log("----------------> id_usuario_agencia_row");
-           console.log(id_usuario_agencia_row);
+           //console.log('--------------> $("#"+id_usuario_agencia_row).length' )
+             // console.log($("#"+id_usuario_agencia_row).length)
+             //   console.log("----------------> id_usuario_agencia_row");
+          // console.log(id_usuario_agencia_row);
             userTable.page(info.page).draw( 'page' );  
             //var id_poliza_row = "idPolizaRow"+res.id_poliza;
             var dataToUpdate=[ frontEndId, res.nombre, res.apellidos, res.email, res.telefono, res.puesto, "x" ]
-            console.log("--------------> dataToUpdate");
-            console.log(dataToUpdate);
+          //  console.log("--------------> dataToUpdate");
+          // console.log(dataToUpdate);
             userTable.row( $("#"+id_usuario_agencia_row) ).data([ frontEndId, res.nombre, res.apellidos, res.email, res.telefono, res.puesto, "x" ]).draw();
             //console.log( polizaTable.row( this ).data("x","x","x","x","x","x","x","x","x") );
  
@@ -147,7 +147,7 @@ function agregarUsuarioAgenciaEnTabla(res, counter){
  
 function agregarUsuarioAgenciaAjaxDone(res){ 
   if(res.estado == "ok"){ // si la respuesta es correcta: 
-        console.log(res);  
+        //console.log(res);  
         seAgregoNuevoUsuario=true;
  
       agregarUsuarioAgenciaEnTabla(res, 0); 
@@ -191,7 +191,7 @@ function actualizarUsuarioAgenciaAjaxDone(res){
    //console.log("ajaxActionUsuarioAgencia "+ajaxActionUsuarioAgencia); 
 
    idUsuarioAgenciaToEdit=frontEndId;
-   console.log("usuariosAgencias[frontEndId]: "+usuariosAgencias[frontEndId]);
+   //console.log("usuariosAgencias[frontEndId]: "+usuariosAgencias[frontEndId]);
    id_usuario_agencia = usuariosAgencias[frontEndId].id_usuario_agencia;
 
 
@@ -205,7 +205,7 @@ function actualizarUsuarioAgenciaAjaxDone(res){
 
   ajaxActionUsuarioAgencia="agregar"; 
  
-  console.log("ajaxActionUsuarioAgencia "+ajaxActionUsuarioAgencia); 
+  //console.log("ajaxActionUsuarioAgencia "+ajaxActionUsuarioAgencia); 
    
 } 
 
@@ -237,7 +237,7 @@ function mostrarUsuariosAgencia(){
 
    $(".frontEndIdColumn").hide();
  
-  console.log(usuariosAgencias);
+ // console.log(usuariosAgencias);
        
   })// end ajax done  
     .fail(function() { 
@@ -248,7 +248,7 @@ function mostrarUsuariosAgencia(){
 function pruebaMostrarUsuarios(res, i){
         
         if(i>=res.length){
-          console.log("terminamos "+res.length);
+          //console.log("terminamos "+res.length);
         }else{
               usuariosAgencias[i+1]=res[i];
               agregarUsuarioAgenciaEnTabla(res[i]);
@@ -270,7 +270,7 @@ function populateUsuarioAgenciaForm(data) {
       } else if(key == "email"){
         $("#emailUsuarioAgencia").val(value);
       }else if(key == "clave"){
-        console.log("populating clave:"+value);
+        //console.log("populating clave:"+value);
          claveUsuarioAgencia="&claveUsuarioAgencia="+value;
         $("#claveUsuarioAgencia").val(value);
       }else{

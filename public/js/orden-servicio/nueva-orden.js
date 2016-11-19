@@ -6,12 +6,12 @@ var pathOrdenServicioController="public/ordenCreacion/"
 var idAgenciaActual;
 var idMotivo;
 var productos_todos={};
+//var productos_agencia={};
 
 //$('input[name=name_of_your_radiobutton]:checked').val();
 
 //console.log("loading nueva orden")
 //var datosAgenciaSeleccionada={};
-var actualizarVistas = {"vistaDatos":false, "vistaServicio":false};
 
 $(document).ready(function() { 
 
@@ -43,24 +43,18 @@ $(document).ready(function() {
 		}
     });
 
-
+  // consultar todos los productos disponibles
+     consultarProductos();
 	// cuando se eliga una agencia de la lista se llama a la función cunslutar agencia
 	$("#select_agencias").change(function(){
 		idAgenciaActual =$("#select_agencias").val();
 		consultarAgencia(idAgenciaActual);
-		//console.log("idAgenciaActual: "+idAgenciaActual);
-
-		actualizarVistas.vistaUsuarioAgencia=false;
 		var tablePolizas = $('#dataTable-polizas-vigentes').DataTable();
 		tablePolizas.clear().draw();
-		//mostrarProductos();
-         mostrarProductosEnSelect(idAgenciaActual);
 		mostrarPolizas();
-	 	//mostrarProductosEnTabla();
-        actualizarVistas.vistaUsuarioAgencia =true;
-   
-        mostrarUsuariosAgenciaEnSelect(idAgenciaActual);
-	});
+    mostrarUsuariosAgenciaEnSelect(idAgenciaActual);
+	
+  });
 
   $("#motivo").change(function(){
     idMotivo =$("#motivo").val();
@@ -105,7 +99,6 @@ function consultarAgencia(id_agencia){
 		dataType: "html"
 	})
 	.done(function(res) { 
-		console.log(res);	
 		datosAgenciaSeleccionada=$.parseJSON(res);;
 		mostarDatosAgencia(res);
 		//console.log("res.id_usuario_soporte_titular: " +datosAgenciaSeleccionada.id_usuario_soporte_titular);
@@ -173,43 +166,14 @@ function mostrarPolizas(){
 			polizas[res[i].id_poliza]=res[i];
 			agregarPolizaEnTabla(res[i]);
 		}
-   		//$(".frontEndIdColumn").hide();
-  		//console.log("polizas despues de consulta");
-  		//console.log(polizas);
   	})// end ajax done  
     .fail(function() { 
       swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
   	}); 
 }
 
-function mostrarProductos(){
-
-  productos_todos={};
-  ajaxActionProducto="consultarproductos"
-  //var addIdAgencia="id_agencia="+idAgenciaActual;
- $.ajax({ 
-      url: pathProductoController+ajaxActionProducto, 
-      method: "post", 
-      //data: addIdAgencia,
-      dataType: "json" 
-    }) 
-    .done(function(res) {  
-      var i=0;
-      for (i;i<res.length;i++){
-        if(res[i].vigente_prod=="S"){
-        	productos_todos[res[i].id_producto]=res[i];
-        }
-      }
-  })// end ajax done  
-    .fail(function() { 
-      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
-  }); 
-}
-
 
 function agregarPolizaEnTabla(res){ 
-	// console.log("entrando a agregarUsuarioAgenciaEnTabla"); 
-	// var frontEndId = Object.keys(polizas).length + 1; 
 	var polizaTable = $('#dataTable-polizas-vigentes').DataTable();   
 	var estatusUsuario; 
 	var info = polizaTable.page.info(); 
@@ -237,26 +201,32 @@ function agregarPolizaEnTabla(res){
 
 	var nombre_producto_poliza="";
 	var clave_producto_poliza="";
-    console.log("-----------------------------> ");
-  console.log(productos_todos);
+
+  //console.log(productos_todos);
   //console.log("$(productos_todos[res.id_producto]).length: "+$(productos_todos[res.id_producto]).length);
   //console.log("---------------------> id_producto: "+res.id_producto);
 	//if ($(productos_todos[res.id_producto]).length){
    // console.log("productos_todos[res.id_producto].nombre_prod: "+productos_todos[res.id_producto].nombre_prod);
 	//nombre_producto_poliza=productos_todos[res.id_producto].nombre_prod;
-    nombre_producto_poliza="Producto";
+    nombre_producto_poliza=productos_todos[res.id_producto].nombre_prod;
 	//}else{
 //		nombre_producto_poliza="no vigente"
 //	}
 
 	var id_poliza_row = "idPolizaRow"+res.id_poliza;
 	// borrar despues 
-	console.log("datos poliza: ");
-	console.log(res);
-	//console.log("productos_todos[res.id_producto].nombre_prod: "+productos_todos[res.id_producto].nombre_prod);
+
+          // calcular horas restantes
+  var horas_us;
+  if(res.horas_consumidas!=null){
+    horas_us= res.horas_poliza-res.horas_consumidas;
+  }else{
+    horas_us=res.horas_poliza;
+  }
+
 	polizaTable.row.add( [ 
 	//"X", res.clave, "x", "x", '0',  "X" 
-		"", res.clave, nombre_producto_poliza, res.horas_poliza, '0', estadoPoliza 
+		"", res.clave, nombre_producto_poliza, res.horas_poliza, horas_us, estadoPoliza 
 	]).draw(); 
 
 	polizaTable.page( 'last' ).draw( 'page' );  
@@ -287,34 +257,24 @@ function agregarPolizaEnTabla(res){
 
 
 
-function mostrarProductosEnSelect(idAgenciaActual){
+function consultarProductos(){
 //$('#nombre_prod').html('').selectpicker('refresh');
- // productos_todos={};
-  ajaxActionProducto="productosdisponiblesadquiridosporidagencia"
-  var id_agencia_seleccionada="id_agencia="+idAgenciaActual;
+ // productos_todos={};// //productosdisponiblesadquiridosporidagencia
+  ajaxActionProducto="consultarproductos"
+  //var id_agencia_seleccionada="id_agencia="+idAgenciaActual;
   //var addIdAgencia="id_agencia="+idAgenciaActual;
  $.ajax({ 
       url: pathProductoController+ajaxActionProducto, 
       method: "post", 
-      data: id_agencia_seleccionada,
+      data: "",
       dataType: "json" 
     }) 
     .done(function(res) {  
-    	console.log("productos de la agencia");
-    	console.log(res);
         var i=0;
-
-
       for (i;i<res.length;i++){
-        console.log("id_agencia: "+res[i].id_agencia);
-       // if(res[i].id_agencia!="0"){
         productos_todos[res[i].id_producto]=res[i];
-        //agregarProductoEnTabla(res[i]);
-        console.log("producto agencia: "+res[i].nombre_prod)
-
-       // }
       }
-    console.log("---------------------->productos_todos: ");
+      console.log("productos_todos");
     console.log(productos_todos);
  
   })// end ajax done  
@@ -336,26 +296,14 @@ $('#solicito').html('').selectpicker('refresh');
       dataType: "json" 
     }) 
     .done(function(res) {  
-    	console.log("usuarios de la agencia");
-    	console.log(res);
         var i=0;
-
-
       for (i;i<res.length;i++){
-
-        //if(res[i].id_agencia!=0){
-        //productos_todos[res[i].id_producto]=res[i];
-        //agregarProductoEnTabla(res[i]);
-       // console.log("producto agencia: "+res[i].nombre_prod)
         $('#solicito').append($('<option>').text(res[i].nombre + " " + res[i].apellidos)
           .attr('value', res[i].id_usuario_agencia)
           .attr('id', "id_usuario_agencia"+res[i].id_usuario_agencia)
           .attr('class',"productSelect")
           ).selectpicker('refresh');
         }
-     // }
-
-
   })// end ajax done  
     .fail(function() { 
       swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
@@ -365,8 +313,6 @@ $('#solicito').html('').selectpicker('refresh');
 //consultarejecutivosporid
 
 function mostrarEjecutivosEnSelect(id_ejecutivo_principal, id_ejecutivo_aux){
-	console.log("id_ejecutivo_principal"+id_ejecutivo_principal);
-
 $('#ejecutivo').html('').selectpicker('refresh');
  // productos_todos={};
   //ajaxActionUsuarioAgencia="consultar"
@@ -384,8 +330,7 @@ $('#ejecutivo').html('').selectpicker('refresh');
       dataType: "json" 
     }) 
     .done(function(res) {  
-    	console.log("ejecutivos: ");
-    	console.log(res);
+
         var i=0;
 
 
@@ -394,7 +339,6 @@ $('#ejecutivo').html('').selectpicker('refresh');
         //if(res[i].id_agencia!=0){
         //productos_todos[res[i].id_producto]=res[i];
         //agregarProductoEnTabla(res[i]);
-       console.log("ejecutivo: "+res[i]);
         $('#ejecutivo').append($('<option>').text(res[i].nombre + " " + res[i].apellido_paterno)
           .attr('value', res[i].id_usuario)
           .attr('id', "ejecutivo"+res[i].id_usuario)
@@ -412,7 +356,6 @@ $('#ejecutivo').html('').selectpicker('refresh');
 
 
 function submitNuevaOrden(){
-	console.log('$("#datosFormServicio").serialize(): '+ $("#datosFormServicio").serialize());
 	var id_agencia_seleccionada="id_agencia="+idAgenciaActual;
 	var tipo_soporte="&tipo_soporte=" + $("#tipo_soporte").val();
 	var id_poliza_seleccionada="&id_poliza="+$('input[name=id_poliza]:checked').val();
@@ -429,7 +372,6 @@ $.ajax({
       data: id_agencia_seleccionada +tipo_soporte+ id_poliza_seleccionada+id_producto_seleccionado+solicito+ejecutivo+motivo+descripcion,
       dataType: "json" 
     }).done(function(res) {  
-      console.log("ajax submitFormNueva orden done");
       if(res.estado=="ok"){
       		//swal("La orden de servicio ha sido registrada exitosamente", " ", "success");
           swal({title: "La orden de servicio ha sido registrada exitosamente",   

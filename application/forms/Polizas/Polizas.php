@@ -36,7 +36,7 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         $producto = new Zend_Form_Element_Select('producto');
         $producto->setAttribs ( array (
                 'autocomplete'=>'off'))
-                ->addMultiOptions($lista)
+                //->addMultiOptions($lista)
                 ->setAttrib("class","form-control")                
                 ->removeDecorator('label')
                 //->setValue('producto1')
@@ -180,8 +180,8 @@ class Application_Form_Polizas_Polizas extends Zend_Form
 
 
         // Estatus
-        $estatus_poliza = new Zend_Form_Element_Select('estatus_poliza');
-        $estatus_poliza->setRequired(true)
+        $id_poliza_estatus = new Zend_Form_Element_Select('id_poliza_estatus');
+        $id_poliza_estatus->setRequired(true)
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
@@ -195,7 +195,7 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
         ;
-        $this->addElement($estatus_poliza);
+        $this->addElement($id_poliza_estatus);
 
         // Observaciones
         $observaciones_poliza = new Zend_Form_Element_TextArea('observaciones_poliza');
