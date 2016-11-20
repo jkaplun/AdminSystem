@@ -67,9 +67,16 @@ $(document).ready(function() {
 		tablePolizas.clear().draw();
 		productoTable.clear().draw();
 
-	 	mostrarUsuariosAgencia();
-	 	mostrarPolizas();
-	 	mostrarProductosEnTabla();
+		// limpiar select producto de polizas
+		$('#producto').empty();
+
+
+
+		// mostrar información correspondiente a esa agencia
+	 	mostrarUsuariosAgencia();   //usuarioagencia/index.js
+	 	mostrarPolizas(); 			//polizas/index.js
+	 	mostrarProductosEnTabla();  //productos/index.js
+
 	 	mostrarFolios();
 	 	
         actualizarVistas.vistaUsuarioAgencia =true;
@@ -194,7 +201,7 @@ function consultarAgencia(id_agencia){
 		  dataType: "html"
 		})
 		.done(function(res) { 
-			console.log(res);	
+			//console.log(res);	
 			mostarDatosAgencia(res);
 			editarAgenciaForm(res);
   })// end ajax done 
@@ -359,7 +366,7 @@ function mostrarFolios(){
 function submitEditarFolios(){
 
 	var valoresForm =  $("#form-agregar-folios-agencia").serialize();
-	console.log(valoresForm);
+	//console.log(valoresForm);
 	$.ajax({
 		  url: path + "editarfolios",
 		  method: "post",

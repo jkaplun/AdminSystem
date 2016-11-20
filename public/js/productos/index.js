@@ -5,22 +5,14 @@
 var pathProductoController="public/productos/"; 
 var productos_todos={};
 var productos_agencia={};
+//var productos_agencia_array=[];
 var id_Producto="";
 var clave_Producto="";
 var id_producto_seleccionado="";
- 
-
-// accion que se realiza en el ajax, esta se define en 
 var ajaxActionProducto; 
  
-//Variable donde se almacena el id que asigna la base de datos ala Producto 
+//Variable donde se almacena el id que asigna la base de datos al Producto 
 var idDataBaseProducto=""; 
- 
- 
-// borrar en master 
-//var falseId=0; 
-
-
 
 $(document).ready(function() {
 
@@ -63,32 +55,6 @@ $(document).ready(function() {
 }); // end  $(document).ready(function() { 
  
  
- 
- function probarAgenciaProducto(){
-  //var id_agencia_prueba="id_agencia=156"
-    var id_agencia_prueba="id_agencia=" + $("#probarAgenciaProducto").val();
-
-  $.ajax({ 
-      url: pathProductoController + "productosdisponiblesadquiridosporidagencia", 
-      method: "post", 
-      data: id_agencia_prueba,
-      dataType: "json" 
-    }).done(function(res) {  
-
-      console.log("---------------> respuesta del método: productosdisponiblesadquiridosporidagencia");
-      console.log(id_agencia_prueba);
-      console.log("objetos en arreglo: "+ res.length);
-      console.log(res);
- 
- 
-       
-  })// end ajax done  
-    .fail(function() { 
-      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
-  });
-
-}
-
 function submitFormProducto(){   
   //console.log("----------> ajaxActionProducto: "+ajaxActionProducto);
   addIdAgencia="&id_agencia="+idAgenciaActual;
@@ -108,7 +74,6 @@ function submitFormProducto(){
       data: $("#formProducto").serialize() + addIdAgencia + id_producto,
       dataType: "json" 
     }).done(function(res) {  
-      console.log("ajax submitFormProducto done");
 
     if (ajaxActionProducto == "agregar"){ 
        agregarProductoAjaxDone(res); 
@@ -168,11 +133,10 @@ function agregarProductoEnTabla(res){
 
         $("#id_producto_"+res.id_producto).hide();
 
+
+
         }else{  //  ajaxActionProducto=="editar"
  
-          
-          console.log("res after updating");
-          console.log(res);
             //var id_Producto_row = "idProductoRow"+res.id_Producto;
             productoTable.row( $("#"+id_producto_row) ).data([
             	 res.id_producto, productos_todos[res.id_producto].nombre_prod, res.numero_licencias, res.estatus, "x"
@@ -202,13 +166,10 @@ function agregarProductoEnTabla(res){
  
 
 function agregarProductoAjaxDone(res){ 
-  console.log("agregarProductoAjaxDone");
   if(res.estado == "ok"){ // si la respuesta es correcta: 
-        console.log(res);  
-      
-
       agregarProductoEnTabla(res); 
       productos_agencia[res.id_producto] = res;
+      agregarProductoEnSelectPoliza(res); // poliza/index.js
       swal("El producto ha sido actualizado exitosamente", " ", "success");  
  
    } else{ 
@@ -223,6 +184,7 @@ function actualizarProductoAjaxDone(res){
  
   if(res.estado == "ok"){ 
     agregarProductoEnTabla(res); 
+
     // Actualizar modelo
     productos_agencia[res.id_producto]=res;
 
@@ -240,7 +202,6 @@ function actualizarProductoAjaxDone(res){
  
  function datosFormProducto(frontEndIdProducto){ 
    //alert("no es necesario llenar los campos, se simulan los datos desde un JSON en el public/js/usuariosagencia/index.js ") 
-   console.log("frontEndId "+frontEndIdProducto);
    //id_producto="&id_producto=" +frontEndIdProducto;
    id_producto_seleccionado=frontEndIdProducto;
    ajaxActionProducto="actualizar"; 
@@ -294,9 +255,7 @@ function mostrarProductosEnSelect(){
       }
 
    //$(".frontEndIdColumn").hide();
-  console.log("Productos despues de consulta");
-  console.log(productos_todos);
-       
+
   })// end ajax done  
     .fail(function() { 
       swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
@@ -306,13 +265,10 @@ function mostrarProductosEnSelect(){
 
 
 function populateProductoForm(data) {  
-    console.log("populating form"); 
-    console.log(data);
     $.each(data, function(key, value){  
      if(key == "id_producto"){
       //$("#id_producto_"+value).show();
 
-      console.log("productos_todos[value].nombre_prod: "+productos_todos[value].nombre_prod);
      	$("#titulo_form_producto").html(productos_todos[value].nombre_prod);
      } else{
       //console.log("key: "+key + " value: " +value);
@@ -343,17 +299,19 @@ function mostrarProductosEnTabla(){
       for (i;i<res.length;i++){
         if(res[i].id_agencia!=0){
             productos_agencia[res[i].id_producto]=res[i];
+            //productos_agencia_array.push(res[i]);
             $("#id_producto_"+res[i].id_producto).hide();
             agregarProductoEnTabla(res[i]);
         }
-      
+    
        
 
       }
+      
+      mostrarProductosEnSelectPolizas() //polizas/index.js
+
 
    //$(".frontEndIdColumn").hide();
-  console.log("productos_agencia despues de consulta");
-  console.log(productos_agencia);
        
   })// end ajax done  
     .fail(function() { 

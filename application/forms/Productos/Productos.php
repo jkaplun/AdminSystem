@@ -51,7 +51,7 @@ class Application_Form_Productos_Productos extends Zend_Form
                 ->addMultiOptions(array())
                 ->setAttrib("class","form-control")                
                 ->removeDecorator('label')
-                ->setValue('producto1')
+                //->setValue('producto1')
                 ->removeDecorator('HtmlTag');
         ;
         $this->addElement($nombre_prod);
