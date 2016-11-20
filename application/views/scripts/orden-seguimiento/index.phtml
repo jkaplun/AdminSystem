@@ -1,8 +1,5 @@
 <link rel="stylesheet" type="text/css" href="public/css/flipclock.css">
 
-<h1 class="page-header">Seguimiento Ordenes de Servicio</h1>
-
-
 <div class="row">
 	<table width="100%" class="table">
 		<thead>
@@ -17,7 +14,7 @@
 	</table>
 </div>
 <form class="form-inline" method="get" name="filtroform" id="filtroform">
-<form>
+</form>
 
 
 <h2>Se muestra(n) <b id="total_ordenes"></b> resultado(s):</h2>
@@ -165,21 +162,24 @@
 			  	  
 
 				<hr style=" margin-top: 5px; margin-bottom: 10px;">	
+
+
+
 				<div id="orden_<?= $registro["id_orden_servicio"]?>" class="collapse">
-				  	<div class="row">
+					<div class="row">
 					  	<div class="col-md-6 form-group">
-					  		<label>Motivo:</label>
-					  		<textarea id="motivo_<?= $registro["id_orden_servicio"]?>" class="form-control" rows="3" value="<?= $registro["motivo"] ?>"><?= $registro["motivo"] ?></textarea>
+				  				<label>Motivo:</label>
+					  			<textarea id="motivo_<?= $registro["id_orden_servicio"]?>" class="form-control" rows="3" value="<?= $registro["motivo"] ?>"><?= $registro["motivo"] ?></textarea>							  			
 					  	</div>
 					  	<div class="col-md-6 form-group">
 					  		<label>Solución:</label>
 					  		<textarea id="solucion_<?= $registro["id_orden_servicio"]?>" class="form-control" rows="3" value="<?= $registro["solucion"] ?>"><?= $registro["solucion"] ?></textarea>
 					  	</div>				  	
-				  	</div>
+					</div>
 				  	<br/>
 				  	<hr style=" margin-top: 5px; margin-bottom: 10px;">	  		    
 				  	<div class="row">
-					  	<div class="col-md-4 form-group">
+					  	<div class="col-md-6 form-group">
 					  		<label>Conformidad:</label>
 					  		<input id="conformidad_<?= $registro["id_orden_servicio"]?>" class="form-control">
 					  	</div>
@@ -187,11 +187,11 @@
 					  		<div class="row">
 					  			<div class="col-md-3">
 					  			</div>
-					  			<div class="col-md-2">
+					  			<div class="col-md-2 form-group">
 					  				<button id="concluirServicio_<?= $registro["id_orden_servicio"] ?>" onclick="concluirSercicioAjax(this.id)" type="button" class="btn btn-primary">Servicio Concluido</button>
 					  			</div>
 								<div class="col-md-2"></div>
-					  			<div class="col-md-2">
+					  			<div class="col-md-2 form-group">
 					  				<button id="guardarServicio_<?= $registro["id_orden_servicio"] ?>" onclick="guardarSercicioAjax(this.id)" type="button" class="btn btn-primary">Guardar Servicio</button>
 					  			</div>					  			
 					  			<div class="col-md-3"></div>

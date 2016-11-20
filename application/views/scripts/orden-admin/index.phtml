@@ -50,11 +50,18 @@
 			<td><?php echo $registro['id_orden_servicio'] ?></td>
 			<td><?php echo $registro['fecha_alta'] ?></td>
 			<td><?php echo $registro['producto'] ?></td>
-			<td><?php echo $registro['nombre_agencia'] ?></td>
+			<td style="font-size: smaller !important;"><?php echo $registro['nombre_agencia'] ?></td>
 			<td><?php echo $registro['nombre_usuario'].' '.$registro['apellidos_usuario'] ?></td>
 			<td><?php echo $registro['nombre_atiende'].' '.$registro['apellido_paterno'] ?></td>
 			<td><?php echo $registro['motivo'] ?></td>
-			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary btn-sm btn-circle"
+					data-toggle="modal" data-target="#myModal"
+					value='<?= json_encode($registro) ?>'
+					onclick="datosform_edita_orden(this.value)">
+					<i class="fa fa-info-circle"></i>
+				</button>				
+			</td>
 		</tr>
 		<?php } ?>
 	</tbody>
