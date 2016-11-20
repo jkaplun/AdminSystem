@@ -46,14 +46,19 @@
 							<?php foreach ($ordenes as $solicitud) { ?>
 							<tr id='<?php echo $solicitud['id_orden_servicio'] ?>'
 								<?php
-								switch ($solicitud['id_orden_servicio_estatus']) {
-								    case "1":echo 'class="amarillo"';break;
-								    case "2":echo 'class="naranja"';break;
-								    case "3":echo 'class="rojo"';break;
-								    case "4":echo 'class=""';break;
-								    case "5":echo 'class="morado"';break;
-								    default:echo 'class=""';
-								}?>
+									if($solicitud['estatus_reloj']!=0){
+										echo 'class="verde"';
+									}else{								
+										switch ($solicitud['id_orden_servicio_estatus']) {
+										    case "1":echo 'class="amarillo"';break;
+										    case "2":echo 'class="naranja"';break;
+										    case "3":echo 'class="rojo"';break;
+										    case "4":echo 'class=""';break;
+										    case "5":echo 'class="morado"';break;
+										    default:echo 'class=""';
+										}
+									}
+								?>
 							>
 								<td><?php echo $num; $num++; ?></td>
 								<td><?php echo $solicitud['fecha_alta'] ?></td>

@@ -33,13 +33,28 @@
 	<?php $duracion_servicio_todos=","?>
 	<?php $control_cron_estatus_todos=","?>
 	<?php $motivo_todos=","?>
-
-	
-
-
-
   	<?php foreach ($this->paginator as $registro) { 
   		$color='';
+
+		if($registro['control_cron_estatus']!=0){
+  		switch ($registro["id_orden_servicio_estatus"]){
+  			case '1':
+  				$color='bs-callout-amarillo-verde';
+  			break;
+  			case '2':
+  				$color='bs-callout-naranja-verde';
+  			break;
+  			case '3':
+  				$color='bs-callout-rojo-verde';
+  			break;
+  			case '4':
+  				$color='bs-callout-gris-verde';
+  			break;
+  			case '5':
+  				$color='bs-callout-morado-verde';
+  			break;
+  		}
+		}else{
   		switch ($registro["id_orden_servicio_estatus"]){
   			case '1':
   				$color='bs-callout-amarillo';
@@ -56,7 +71,10 @@
   			case '5':
   				$color='bs-callout-morado';
   			break;
-  		}
+  		}		
+		}
+
+
   		if($registro["control_cron_estatus"]!=3){
   		?>
 	
@@ -114,7 +132,7 @@
 	                    <!-- AQUI ES EL CRONOMETRO -->
 
 
-	                    <div class="panel panel-green" >
+	                    <div class="panel <?= $color ?>2" >
 	                        <div class="panel-heading">
 	                            <div class="row">
 	                                <div value="pause" id="mainBtn_<?= $registro["id_orden_servicio"]?>" onclick="clickPausePlayBtn(this.id)" class="col-xs-3">
@@ -141,7 +159,7 @@
                             </div> -->
 	                    </div>
 	                    <div align="right">
-	                    <a class="btn btn-info" href="#orden_<?= $registro["id_orden_servicio"]?>" data-toggle="collapse">v</a></div>
+	                    <a class="btn <?= $color ?>2" href="#orden_<?= $registro["id_orden_servicio"]?>" data-toggle="collapse"><i class="fa fa-chevron-down"></i></a></div>
 	                </div>
 				</div>
 			  	  

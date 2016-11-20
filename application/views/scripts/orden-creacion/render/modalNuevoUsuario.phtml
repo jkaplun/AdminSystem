@@ -1,0 +1,86 @@
+<!-- Modal -->
+<div class="modal fade" id="nuevoUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="nuevoUsuarioModal">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="row">
+					<div class="col-md-10">
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div class="col-md-2" align="right">
+							<button type="button" class="btn btn-info btn-circle" data-dismiss="modal"><i class="fa fa-times"></i></button>
+					</div> 			    		
+				</div>
+			</div>
+ 		<form method="post" id="formUsuarioAgencia"> 
+		  	<input type="hidden" name="edita_id_user" id="edita_id_user">
+		  	<input name="accion" value="editar" type="hidden">
+		    <div class="modal-body">
+				<fieldset>
+					<h4 class="h4Form">Datos Personales</h4>
+					<hr class="hrForm">
+					<div class="row">
+			    		<div class="col-md-4">
+							<div class="form-group input-group">
+				                <span class="input-group-addon"><i class="fa fa-user"></i>
+				                </span>
+				                  <?= $this->formUsuarioAgencia->nombreUsuarioAgencia ?>
+				            </div>
+			    		</div>	    			    		
+			    		<div class="col-md-4">
+							<div class="form-group input-group">
+				                <span class="input-group-addon"><i class="fa fa-user"></i>
+				                </span>
+								<?= $this->formUsuarioAgencia->apellidos ?>
+				            </div>
+			    		</div>			    		
+			    	</div>
+			    	<h4 class="h4Form">Contacto</h4>
+					<hr class="hrForm">
+					<div class="row">
+			    		<div class="col-md-3">
+							<div class="form-group input-group">
+				                <span class="input-group-addon"><i class="fa fa-phone"></i>
+				                </span>
+				                <?= $this->formUsuarioAgencia->telefono ?>
+				            </div>
+			    		</div>	    			    		
+			    		<div class="col-md-2">
+							<div class="form-group input-group">
+				                <span class="input-group-addon"><i class="fa fa-tags"></i>
+				                </span>
+				               <!-- No existe en la BD -->
+				                <?= $this->formUsuarioAgencia->ext ?>
+				               <!--  <input disabled type="text" class="form-control" placeholder="Ext."> -->
+				            </div>
+			    		</div>
+			    		<div class="col-md-3">
+							<div class="form-group input-group">
+				                <span class="input-group-addon"><i class="fa fa-mobile"></i>
+				                </span>
+       							<?= $this->formUsuarioAgencia->celular ?>
+				            </div>	    		
+			    		</div>  
+			    		<div class="col-md-4">
+							<div class="form-group input-group">
+				                <span class="input-group-addon"><i class="fa fa-envelope-o"></i>
+				                </span>
+				                 <?= $this->formUsuarioAgencia->emailUsuarioAgencia ?>
+				            </div>	    		
+			    		</div>  			    		 			    		
+			    	</div>
+			    </fieldset>
+		    </div>
+		    <div class="modal-footer">  
+		    	<div class="row">
+					<div class="col-md-3"></div>			    	
+		    		<div class="col-md-6">
+		       			<span id="submitNuevoUsuarioAgenciaBtn" type="button" class="btn btn-block btn-outline btn-success" onclick="submitFormUsuarioAgencia()">Guardar</span>	
+		    		</div>
+					<div class="col-md-3"></div>			    		
+		    	</div>	  		       
+		    </div>
+ 		 </form> 
+		</div>
+	</div>
+</div>

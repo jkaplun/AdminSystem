@@ -532,6 +532,29 @@ table.dataTable thead .sorting:after {
   background-color: rgba(170, 180, 248, 0.13);
 }
 
+
+.bs-callout-amarillo-verde {
+    border-left-color: #f8f5aa;
+    background-color: rgba(93, 184, 92, 0.14);
+}
+.bs-callout-naranja-verde {
+  border-left-color: #f0ad4e;
+  background-color: rgba(93, 184, 92, 0.14);
+}
+.bs-callout-rojo-verde {
+  border-left-color: #d9534f;
+  background-color: rgba(93, 184, 92, 0.14);
+}
+.bs-callout-gris-verde {
+  border-left-color: #777;
+  background-color: rgba(93, 184, 92, 0.14);
+}
+.bs-callout-morado-verde {
+  border-left-color: rgb(170, 180, 248);
+  background-color: rgba(93, 184, 92, 0.14);
+}
+
+
 .bs-callout-amarillo2 {
     background-color: rgba(240, 235, 78, 0.48) !important;
 }
@@ -548,6 +571,21 @@ table.dataTable thead .sorting:after {
   background-color: rgba(78, 98, 240, 0.48) !important;
 }
 
+.bs-callout-amarillo-verde2 {
+    background-color: rgba(240, 235, 78, 0.48) !important;
+}
+.bs-callout-naranja-verde2 {
+  background-color: rgba(240, 173, 78, 0.54) !important;
+}
+.bs-callout-rojo-verde2 {
+  background-color: rgba(239, 8, 8, 0.38) !important;
+}
+.bs-callout-gris-verde2 {
+  background-color: rgba(119, 119, 119, 0.48) !important;
+}
+.bs-callout-morado-verde2 {
+  background-color: rgba(78, 98, 240, 0.48) !important;
+}
 
 .bs-callout-primary h4 {
     color: #428bca;
@@ -591,6 +629,10 @@ table.dataTable thead .sorting:after {
 
 .table>tbody>tr.morado>td, .table>tbody>tr.morado>th, .table>tbody>tr>td.morado, .table>tbody>tr>th.morado, .table>tfoot>tr.morado>td, .table>tfoot>tr.morado>th, .table>tfoot>tr>td.morado, .table>tfoot>tr>th.morado, .table>thead>tr.morado>td, .table>thead>tr.morado>th, .table>thead>tr>td.morado, .table>thead>tr>th.morado {
     background-color: rgba(78, 98, 240, 0.48);
+}
+
+.table>tbody>tr.verde>td, .table>tbody>tr.verde>th, .table>tbody>tr>td.verde, .table>tbody>tr>th.verde, .table>tfoot>tr.verde>td, .table>tfoot>tr.verde>th, .table>tfoot>tr>td.verde, .table>tfoot>tr>th.verde, .table>thead>tr.verde>td, .table>thead>tr.verde>th, .table>thead>tr>td.verde, .table>thead>tr>th.verde {
+    background-color: rgba(76, 169, 123, 0.65);
 }
 
 .centrado{

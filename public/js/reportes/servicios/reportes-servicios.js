@@ -94,11 +94,11 @@ function agregarEnTabla(res,op){
 	var reporteTable = $('#dataTable-servicios-clientes').DataTable();   
   if(op){
 	 reporteTable.row.add( [
-        res.id_orden_servicio,res.producto,res.fecha_alta,res.fecha_cierre,res.duracion_servicio,res.nombre_usuario+res.apellidos_usuario,res.nombre_atiende+" "+res.apellido_paterno,'Pots'
+        res.id_orden_servicio,res.producto,res.fecha_alta,res.fecha_cierre,res.duracion_servicio,res.nombre_usuario+res.apellidos_usuario,res.nombre_atiende+" "+res.apellido_paterno,res.conformidad
   ]).draw(); 
   }else{
     reporteTable.row.add( [
-        res.id_orden_servicio,res.producto,res.fecha_alta,res.fecha_cierre,res.duracion_servicio,res.nombre_usuario+res.apellidos_usuario,res.nombre_agencia,'Pots'
+        res.id_orden_servicio,res.producto,res.fecha_alta,res.fecha_cierre,res.duracion_servicio,res.nombre_usuario+res.apellidos_usuario,res.nombre_agencia,res.conformidad
 
   ]).draw(); 
   }

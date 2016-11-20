@@ -117,6 +117,7 @@ class ReporteAgenciasController extends Zend_Controller_Action
     
         $agenciaDbTable = new Application_Model_DbTable_Agencia();
         $where = array();
+        $whereOr = array();
         foreach ($params as $clave => $param)
         {
             if($clave == "nombre")
@@ -192,12 +193,14 @@ class ReporteAgenciasController extends Zend_Controller_Action
             if($clave=="lice"){
                 if(!empty($param))
                 {
+                    //array_push($whereOr, "ag_p.id_producto in ('".$param."')");
                     array_push($where, "ag_p.id_producto in ('".$param."')");
-
                 }                
             }
         }
         $numero_filas = count($where);
+        //$numero_filas_or = count($whereOr);
+        
         if($numero_filas>0){
             //Cuento el número de filas de la query
             $indice = 0;
@@ -215,6 +218,21 @@ class ReporteAgenciasController extends Zend_Controller_Action
                     $clausulaWhere .= $clausula;    
                 }
             }
+            // if($numero_filas_or>0){
+            //     $indice = 0;
+            //     foreach ($whereOr as $clausula)
+            //     {
+            //         $indice +=1;
+            //         if($indice != $numero_filas)
+            //         {
+            //             $clausulaWhere .= $clausula." or ";
+            //         }
+            //         else 
+            //         {
+            //             $clausulaWhere .= $clausula;    
+            //         }
+            //     }                
+            // }
             $productos = $agenciaDbTable->obtenerAgenciaPorAvanzado($clausulaWhere);
             //$this->view->prueba = 'Llega al mensaje';
         }
