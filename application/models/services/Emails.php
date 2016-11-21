@@ -6,14 +6,14 @@ class Application_Model_Services_Emails {
 		
 		if( trim($values['email'] ) != '' ){
 			$config = array('auth' => 'login',
-					'username' => 'jgarfias@mig.com.mx',
-					'password' => 'ThinkCentre',
-					'port' => 26
+					'username' => 'geremias0903@gmail.com',
+					'password' => 'sdsad',
+					'port' => 465
 			);
 				
 			
 			
-			$transport = new Zend_Mail_Transport_Smtp('mail.mig.com.mx', $config);
+			$transport = new Zend_Mail_Transport_Smtp('smtp.gmail.com', $config);
 				
 			$mail = new Zend_Mail();
 		

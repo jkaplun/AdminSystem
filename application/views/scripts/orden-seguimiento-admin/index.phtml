@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="public/css/flipclock.css">
-
+<h1 class="page-header">Seguimiento Ordenes de Servicio Admin</h1>
 <div class="row">
 	<table width="100%" class="table">
 		<thead>
@@ -15,8 +15,6 @@
 </div>
 <form class="form-inline" method="get" name="filtroform" id="filtroform">
 </form>
-
-
 
 <div class="alert alert-info alert-dismissable">
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -97,12 +95,12 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="form-group">
                             <label >Fecha Solicitud:</label>
-							<p><?= $registro["fecha_alta"] ?></p>
+                            <input id="fecha_solicitud_<?= $registro["id_orden_servicio"]?>" class="form-control" value="<?= $registro["fecha_alta"] ?>" disabled>
                         </div>
- 						<div class="form-group">
-                            <label>Fecha Respuesta:</label>
-							<p><?= $registro["fecha_cierre"] ?></p>
-                        </div>  
+					  	<div class="form-group">
+					  		<label>Fecha Respuesta:</label>
+					  		<input id="fecha_respuesta_<?= $registro["id_orden_servicio"]?>" class="form-control" value="____-__-__  __:__:__" data-mask="____-__-__  __:__:__">
+					  	</div>                        
  						<div class="form-group">
                             <label>Producto:</label>
 							<p></p>
@@ -111,12 +109,12 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="form-group">
                             <label>Usuario Solicitante:</label>
-							<p><?= $registro["usuario_agencia_nombre"] ?> <?= $registro["usuario_agencia_apellidos"] ?></p>
+                            <input id="solicito_<?= $registro["id_orden_servicio"]?>" class="form-control" value="<?= $registro["usuario_agencia_nombre"] ?> <?= $registro["usuario_agencia_apellidos"] ?>">
+							
                         </div>
-                        <br/>
  						<div class="form-group">
                             <label>Usuario Atenci&oacute;n:</label>
-							<p><?= $registro["clave"] ?></p>
+                            <input id="atendio_<?= $registro["id_orden_servicio"]?>" class="form-control" value="<?= $registro["clave"] ?>">
                         </div>    
 					</div>
 					<div class="col-lg-3 col-md-6">
@@ -135,29 +133,9 @@
 
 	                    <div class="panel <?= $color ?>2" >
 	                        <div class="panel-heading">
-	                            <div class="row">
-	                                <div value="pause" id="mainBtn_<?= $registro["id_orden_servicio"]?>" onclick="clickPausePlayBtn(this.id)" class="col-xs-3">
-	                                    <i id="playPauseBtn_<?= $registro["id_orden_servicio"]?>" class="fa  fa-play-circle fa-5x"></i>
-	                                   <!--  <div>Comenzar</div> -->
-
-	                                </div>
-	                                <div class="col-xs-9 text-right">
-
-	                                <div style="font-size:25px;"id="cron_<?= $registro["id_orden_servicio"]?>"></div>
-	                                  	<svg class="recSVG" id="recSVG_<?= $registro["id_orden_servicio"]?>" width="20" height="20">
-										   <circle cx="10" cy="10" r="8"  stroke-width="1" fill="red" />
-										</svg>
-	                                    
-	                                    
-	                                </div>
-	                            </div>
+								<label class="control-label">Duraci&oacute;n del Servicio</label>
+								<input id="duracion_<?= $registro["id_orden_servicio"]?>" class="form-control" value="__:__:__" data-mask="__:__:__" style="text-align:center; font-size: x-large;">
 	                        </div>
-<!--                             <div class="panel-footer">
-                                <span class="pull-left">Duraci&oacute;n del Servicio:  </span>
-                                <span class="pull-left"><?= $registro["duracion_servicio"] ?></span>
-                                <span class="pull-right"><i class="fa fa-times-circle-o"></i></span>
-                                <div class="clearfix"></div>
-                            </div> -->
 	                    </div>
 	                    <div align="right">
 	                    <a class="btn <?= $color ?>2" href="#orden_<?= $registro["id_orden_servicio"]?>" data-toggle="collapse"><i class="fa fa-chevron-down"></i></a></div>
@@ -189,14 +167,18 @@
 					  	</div>
 					  	<div class="col-md-6">
 					  		<div class="row">
-					  			<div class="col-md-3">
+					  			<div class="col-md-3 form-group">
+
 					  			</div>
 					  			<div class="col-md-2 form-group">
-					  				<button id="concluirServicio_<?= $registro["id_orden_servicio"] ?>" onclick="concluirSercicioAjax(this.id)" type="button" class="btn btn-primary">Servicio Concluido</button>
+					  				<label></label>
+					  				<button id="guardarServicio_<?= $registro["id_orden_servicio"] ?>" onclick="guardarSercicioAjax(this.id)" type="button" class="btn btn-primary">Guardar Servicio</button>
 					  			</div>
 								<div class="col-md-2"></div>
 					  			<div class="col-md-2 form-group">
-					  				<button id="guardarServicio_<?= $registro["id_orden_servicio"] ?>" onclick="guardarSercicioAjax(this.id)" type="button" class="btn btn-primary">Guardar Servicio</button>
+					  				<label></label>
+					  				<button id="concluirServicio_<?= $registro["id_orden_servicio"] ?>" onclick="concluirSercicioAjax(this.id)" type="button" class="btn btn-primary">Servicio Concluido</button>
+					  				
 					  			</div>					  			
 					  			<div class="col-md-3"></div>
 					  		</div>

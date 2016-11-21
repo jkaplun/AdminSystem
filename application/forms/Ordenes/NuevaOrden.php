@@ -58,7 +58,7 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		//->removeDecorator('Errors')
 		->setAttrib("class","form-control")
 		->setAttrib("autocomplete","off")
-		->setAttrib("placeholder",utf8_encode("Solicitó"))
+		->setAttrib("placeholder","Solicitó")
 		->setAttrib("maxlength","45")
 		;
 
@@ -113,11 +113,27 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		->removeDecorator('Errors')
 		;
 
+		// duracion
+		$duracion = new Zend_Form_Element_Text('duracion');
+		$duracion->setRequired(true)
+		->addErrorMessage("- Es necesario indicar la duración del servicio.")
+		->removeDecorator('label')
+		->removeDecorator('HtmlTag')
+		//->removeDecorator('Errors')
+		->setAttrib("class","form-control")
+		->setAttrib("autocomplete","off")
+		->setAttrib("placeholder","Duración del Servicio")
+		->setAttrib("maxlength","45")
+        ->setAttrib("data-mask","__:__:__")
+        ->setValue("__:__:__")
+		;
+
+
 		$idcliente = new Zend_Form_Element_Hidden('idclientes');
 
 		$this
 		->setMethod('post')
 		->setAction('public/ordenes/nueva-orden')
-		->addElements(array($empresa, $id_poliza, $producto, $solicito, $ejecutivo, $motivo, $descripcion, $submit, $idcliente));
+		->addElements(array($empresa, $id_poliza, $producto, $solicito, $ejecutivo, $motivo, $descripcion, $submit, $idcliente,$duracion));
 		}
 }
