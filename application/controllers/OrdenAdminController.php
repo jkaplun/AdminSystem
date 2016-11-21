@@ -6,6 +6,7 @@ class OrdenAdminController extends Zend_Controller_Action
     public function init()
     {
         $this->orden = new Application_Model_DbTable_OrdenServicio();
+        $this->view->formOrdenes = new Application_Form_Ordenes_NuevaOrden();
     }
 
     public function indexAction(){   

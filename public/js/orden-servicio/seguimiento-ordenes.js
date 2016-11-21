@@ -27,13 +27,13 @@ $(document).ready(function() {
         }
     });
 
-
   $("#pagination a").click(function(){
     var page = $(this).attr('data-page');
     //alert('pushado'+page+'-'+n_rows);
     $("#filtroform").append('<input type="hidden" name="page" value="'+page+'" id="page">').trigger("submit");
   });
 
+  Array.prototype.forEach.call(document.body.querySelectorAll("*[data-mask]"), applyDataMask);
 
 // ocultar boton de recording
 $(".recSVG").hide();
@@ -74,7 +74,6 @@ $(".recSVG").hide();
   $("#total_ordenes").html(current_total_ordenes_global);
 
 }); // end  $(document).ready(function() { 
-
 
 function clickPausePlayBtn(button_id){
    //var timer = new Timer();
@@ -306,6 +305,46 @@ function guardarSercicioAjax(button_id){
     });
 
 }
+
+function applyDataMask(field) {
+
+    var mask = field.dataset.mask.split('');
+    
+    // For now, this just strips everything that's not a number
+    function stripMask(maskedData) {
+        function isDigit(char) {
+            return /\d/.test(char);
+        }
+        return maskedData.split('').filter(isDigit);
+    }
+    
+    // Replace `_` characters with characters from `data`
+    function applyMask(data) {
+        return mask.map(function(char) {
+            if (char != '_') return char;
+            if (data.length == 0) return char;
+            return data.shift();
+        }).join('')
+    }
+    
+    function reapplyMask(data) {
+        return applyMask(stripMask(data));
+    }
+    
+    function changed() {   
+        var oldStart = field.selectionStart;
+        var oldEnd = field.selectionEnd;
+        
+        field.value = reapplyMask(field.value);
+        
+        field.selectionStart = oldStart;
+        field.selectionEnd = oldEnd;
+    }
+    
+    field.addEventListener('click', changed)
+    field.addEventListener('keyup', changed)
+}
+
 
 
 

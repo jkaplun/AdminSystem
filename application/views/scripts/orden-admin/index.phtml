@@ -7,28 +7,29 @@
 	<table width="100%" class="table">
 		<thead>
 			<tr>
-				<th class="amarillo">Lamada sin Contestar</th>
-				<th class="naranja">Reportarse</th>
-				<th class="rojo">Reportarse Urgente</th>
-				<th class="">Otros Servicios</th>
-				<th class="morado">Externos</th>
-				<th class="verde">Atendiendose</th>		
+				<th class="amarillo centrado">Lamada sin Contestar</th>
+				<th class="naranja centrado">Reportarse</th>
+				<th class="rojo centrado">Reportarse Urgente</th>
+				<th class="centrado">Otros Servicios</th>
+				<th class="morado centrado">Externos</th>
+				<th class="verde centrado">Atendiendose</th>		
 			</tr>
 		</thead>	
 	</table>
 </div>
-
+<br/>
 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-servicios-clientes">
 	<thead>
 		<tr>
-			<th>ID Orden</th>
-			<th>Fecha Solicitud</th>
-			<th>Producto</th>
-			<th>Solicit&oacute;</th>
-			<th>Agencia</th>
-			<th>Atendio</th>			
-			<th>Motivo</th>
-			<th>Info</th>
+			<th class="centrado">ID Orden</th>
+			<th class="centrado">Fecha Solicitud</th>
+			<th class="centrado">Producto</th>
+			<th class="centrado">Agencia</th>			
+			<th class="centrado">Solicit&oacute;</th>
+			<th class="centrado">Atendio</th>			
+			<th class="centrado">Motivo</th>
+			<th class="centrado">Duraci&oacute;n</th>
+			<th class="centrado">Info</th>
 		</tr>
 	</thead>
 	<tbody align="center">
@@ -54,6 +55,7 @@
 			<td><?php echo $registro['nombre_usuario'].' '.$registro['apellidos_usuario'] ?></td>
 			<td><?php echo $registro['nombre_atiende'].' '.$registro['apellido_paterno'] ?></td>
 			<td><?php echo $registro['motivo'] ?></td>
+			<td><?php echo $registro['duracion_servicio'] ?></td>
 			<td>
 				<button type="button" class="btn btn-primary btn-sm btn-circle"
 					data-toggle="modal" data-target="#myModal"
@@ -66,3 +68,86 @@
 		<?php } ?>
 	</tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="row">
+					<div class="col-md-10">
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div class="col-md-2" align="right">
+							<button type="button" class="btn btn-info btn-circle" data-dismiss="modal"><i class="fa fa-times"></i></button>
+					</div> 			    		
+				</div>
+			</div>
+	 		<form method="post" id="formProducto"> 
+			    <div class="modal-body">
+					<fieldset>
+						<h4 id="titulo_form_producto" class="h4Form">Informaci&oacute;n Servicio</h4>
+						<hr class="hrForm">
+
+						<div class="row">
+				    		<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label">Producto</label>
+									<?= $this->formOrdenes->producto ?>
+								</div>
+				    		</div>	    			    		
+				    	</div>
+				    	<div class="row">
+				    		
+				    		<div class="col-md-12">
+								<div class="form-group">
+					                <label class="control-label"> Solicit&oacute; </label>
+					                <?= $this->formOrdenes->solicito ?>
+					                  
+					            </div>
+				    		</div>
+				    		
+				    	</div>   
+						<div class="row">
+				    		<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label">Atendio</label>
+									   <?= $this->formOrdenes->ejecutivo ?>
+								</div>
+				    		</div>	    			    		
+				    	</div>
+						<div class="row">
+				    		<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label">Duraci&oacute;n del Servicio</label>
+									   <?= $this->formOrdenes->duracion ?>
+								</div>
+				    		</div>	    			    		
+				    	</div>				    	
+						<div class="row">
+				    		<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label">Cancelar</label>
+									<span id="cancelarBoton" type="button" class="btn btn-block btn-outline btn-danger" onclick="submitCancelarOrden()">Cancelar Orden</span>	
+								</div>
+				    		</div>	    			    		
+				    	</div>     			    		
+				    </fieldset>
+			    </div>
+			    <div class="modal-footer"> 
+			    	<div class="row">
+						<div class="col-md-3"></div>			    	
+			    		<div class="col-md-6">
+			       			<span id="submitFormProductoBtn" type="button" class="btn btn-block btn-outline btn-success" onclick="submitFormProducto()">Actualizar Orden</span>			
+			    		</div>
+						<div class="col-md-3"></div>			    		
+			    	</div>	  		        
+
+			    </div>
+	 		</form> 
+		</div>
+	</div>
+</div>
+
+
+

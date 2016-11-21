@@ -640,5 +640,12 @@ table.dataTable thead .sorting:after {
   text-align: center;
 }
 
-
-
+div.marquee {
+    white-space:no-wrap;
+    overflow:hidden;
+}
+div.marquee > div.marquee-text {
+    white-space:nowrap;
+    display:inline;
+    width:auto;
+}

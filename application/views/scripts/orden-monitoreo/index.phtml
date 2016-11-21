@@ -22,8 +22,8 @@
 	<?php if($titulo==1){?>
 		<div class="row">
 	<?php }?>
-	<div class="col-md-4 tablaMonitoreo2">
-		<div class="panel panel-info">
+	<div class="col-md-4 tablaMonitoreo2" style="height:270px;">
+		<div class="panel panel-info" style="height:270px;">
 		    <div class="panel-heading">
 		    	<?php $num=1; foreach ($ordenes as $solicitud) { ?>
 		        	<center><?php echo $solicitud['nombre_atiende'].' '.$solicitud['apellido_paterno'] ?></center>
@@ -31,7 +31,7 @@
 		        <?php } ?>
 		    </div>
 		    <div class="panel-body tablaMonitoreo">
-				<div class="table-responsive">
+				<div class="table-responsive" style="height:270px; overflow: auto;">
 					<table width="100%" class="table table-striped table-bordered table-hover fz2">
 						<thead>
 							<tr>
@@ -79,4 +79,43 @@
 <?php } ?>	
 	</div>
 </div>
-<br/>
+<div class="row">
+	<div class="col-md-12 alert alert-info marquee">
+	    <div class='marquee-text'>
+	        <h4 id="toptitle" style="margin-bottom: 0px;"><b>Testing this marquee function</b></h4>
+	    </div>
+	</div>	
+</div>
+
+
+
+
+<script type="text/javascript">
+	$(document).ready(function() { 
+		var marquee = $('div.marquee');
+
+		marquee.each(function() {
+		    var mar = $(this),indent = mar.width();
+		    mar.marquee = function() {
+		        indent--;
+		        mar.css('text-indent',indent);
+		        if (indent < -1 * mar.children('div.marquee-text').width()) {
+		            indent = mar.width();
+		        }
+		    };
+		    mar.data('interval',setInterval(mar.marquee,900/60));
+		});
+		var info="";
+		$.ajax({
+		  url      : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent('http://feeds.abcnews.com/abcnews/travelheadlines'),
+		  dataType : 'json',
+		  success  : function (data) {
+		    if (data.responseData.feed && data.responseData.feed.entries) {
+		      $.each(data.responseData.feed.entries, function (i, e) {
+		        info+="--"+"title: " + e.title+"--"+"author: " + e.author;
+		      });
+		      $("#toptitle").text(info);		    }
+		  }
+		});
+	}); // end  $(document).ready(function() { 
+</script>
