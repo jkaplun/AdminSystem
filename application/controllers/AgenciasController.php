@@ -13,6 +13,43 @@ class AgenciasController extends Zend_Controller_Action
 
     public function indexAction()
     {
+
+            $config = array('ssl' => 'ssl',
+                    'auth' => 'login',
+                    'port' => 465,
+                    'username' => 'geremias0903@gmail.com',
+                    'password' => '03089303'
+                    
+            );
+                
+            $transport = new Zend_Mail_Transport_Smtp('smtp.gmail.com', $config);
+                
+            $mail = new Zend_Mail();
+        
+            $mail->setFrom($config['username'], $config['username']);
+            
+            $mail->addTo('pco0903@gmail.com', 'Paco');
+
+            $mail->setSubject('Orden de compra.');
+            
+            $body='
+                <p>Se hace de su conocimiento la solicitud de comprobante fiscal.</p>
+                    <p>La referencia en el concepto es la siguiente:</p>';
+            
+            $mail->setBodyHtml($body);
+        
+            try {
+                $mail->send($transport);
+            } catch (Exception $e){
+                
+                echo $e;die;
+            }
+    
+    
+            echo 'Enviado';die;
+
+
+
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
