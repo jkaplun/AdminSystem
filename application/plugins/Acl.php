@@ -34,44 +34,32 @@ public function preDispatch(Zend_Controller_Request_Abstract $request)
         $acl->allow('usuario', array('index'));
         
         if ( $roleName != '') {
-	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['admin'] == 'S'){
+	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_admin'] == 'S'){
 	    		$acl->allow('usuario', array('usuarios','ordenes','clientes'));
 	    		//$acl->deny('usuario', array('clientes'));
 	    	}	
 	    	
-	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['supervisor'] == 'S'){
+	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_supervisor'] == 'S'){
 	    		//$acl->allow('usuario', array('reportes'));
 	    	}
 	    	
-	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['folios'] == 'S'){
+	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_agrega_folios'] == 'S'){
 	    		//$acl->allow('usuario', array('folios'));
 	    	}
 	    	
-	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['compila'] == 'S'){
+	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_ejecutivo'] == 'S'){
+	    		//$acl->allow('usuario', array('compila'));
+	    	}
+	    	
+	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_edita_poliza'] == 'S'){
+	    		//$acl->allow('usuario', array('compila'));
+	    	}
+	    	
+	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_recepcionista'] == 'S'){
 	    		//$acl->allow('usuario', array('compila'));
 	    	}
         }
-    	/*	
-    		switch ($rol){
-    			case '1':
-    				$roleName = 'superadmin';
-    				$acl->allow('superadmin', array('index','admin','clientes'));
-    				break;
-    			case '2':
-    				$roleName = 'gerencial';
-    				$acl->allow('gerencial', array('index'));
-    				break;
-    			case '3':
-    				$roleName = 'operador';
-    				$acl->allow('operador', array('index'));
-    				//$acl->deny('operador', array('chart'));
-    				
-    				break;
-    			default:
-    				$roleName = '';
-    				break;
-    		}
-    		*/
+
  		// if the resource exists in the ACL
 		if ( $acl->has($controllerName, $actionName)==true ) {
 			

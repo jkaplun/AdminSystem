@@ -1,9 +1,9 @@
 <?php
 
-class Application_Model_DbTable_UsuarioAgencia extends Zend_Db_Table_Abstract
+class Application_Model_DbTable_AgenciaUsuario extends Zend_Db_Table_Abstract
 {
 
-	protected $_name = 'usuario_agencia';
+	protected $_name = 'agencia_usuario';
 
 	public function obtenerUsuariosDeAgenciaPorIdAgencia ($id_agencia)
 	{

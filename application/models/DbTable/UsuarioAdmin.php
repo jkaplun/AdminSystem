@@ -79,7 +79,7 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
 
   public function obtenerTodosEjecutivos ()
   { 
-    $cond = 'clave is not null and ejecutivo="S"';
+    $cond = 'clave is not null and es_ejecutivo="S"';
 
     $select = $this->_db->select()->
         from ( $this->_name,'*')

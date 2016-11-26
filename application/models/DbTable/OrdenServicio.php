@@ -46,7 +46,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 		->joinleft(array('a' => 'agencia'),
 						'p.id_agencia = a.id_agencia',
 						array('nombre as nombre_agencia'))
-		->where("u_ad.ejecutivo = 'S'");
+		->where("u_ad.es_ejecutivo = 'S'");
 		//->where("(concluido = 'N' or concluido is null) and u_ad.ejecutivo = 'S'");
 		return $this->getAdapter ()->fetchAll( $select );
 	}

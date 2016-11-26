@@ -14,42 +14,6 @@ class AgenciasController extends Zend_Controller_Action
     public function indexAction()
     {
 
-            $config = array('ssl' => 'ssl',
-                    'auth' => 'login',
-                    'port' => 465,
-                    'username' => 'geremias0903@gmail.com',
-                    'password' => '03089303'
-                    
-            );
-                
-            $transport = new Zend_Mail_Transport_Smtp('smtp.gmail.com', $config);
-                
-            $mail = new Zend_Mail();
-        
-            $mail->setFrom($config['username'], $config['username']);
-            
-            $mail->addTo('pco0903@gmail.com', 'Paco');
-
-            $mail->setSubject('Orden de compra.');
-            
-            $body='
-                <p>Se hace de su conocimiento la solicitud de comprobante fiscal.</p>
-                    <p>La referencia en el concepto es la siguiente:</p>';
-            
-            $mail->setBodyHtml($body);
-        
-            try {
-                $mail->send($transport);
-            } catch (Exception $e){
-                
-                echo $e;die;
-            }
-    
-    
-            echo 'Enviado';die;
-
-
-
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
@@ -247,6 +211,7 @@ class AgenciasController extends Zend_Controller_Action
                         //'http' => $params['http'],
                         //'cfdi' => $params['cfdi'],
                         'dba_pwd' => $params['update_pwd_bd'],
+        				'dba_user' => $params['update_login_bd'],
                         //'layout_login' => $params['layout_login'],
                         //'layout_pwd' => $params['layout_pwd'],
         				//'fecha' => $params['fecha'],
@@ -258,18 +223,6 @@ class AgenciasController extends Zend_Controller_Action
                         'iatas3' => $params['iatas3'],
                         'iatas4' => $params['iatas4'],
                         'iatas5' => $params['iatas5'],
-        				//'activa_nuevos_sp' => $params['activa_nuevos_sp'],
-        				//'addenda' => $params['addenda'],
-        				//'ftp_add_login' => $params['ftp_add_login'],
-        		     	//'ftp_add_pwd' => $params['ftp_add_pwd'],
-        				//'ip_portal_fe' => $params['ip_portal_fe'],
-        				//'prov_timbrado' => $params['prov_timbrado'],
-        				//'facturacion_boleto' => $params['facturacion_boleto'],
-        			//	'nombre_comercial' => $params['nombre_comercial'],
-        				//'markup' => $params['markup'],
-        				//'agencias_consolidadas' => $params['agencias_consolidadas'],
-        				//'id_usuario_soporte_titular' => 1,
-        				//'id_usuario_soporte_auxiliar' => 1,
                         'id_usuario_soporte_titular' => $params['id_usuario_soporte_titular'],
         				'id_usuario_soporte_auxiliar' => $params['id_usuario_soporte_auxiliar']
         );
@@ -344,6 +297,7 @@ class AgenciasController extends Zend_Controller_Action
         $params=$this->_request->getParams(); 
         $datosAgencia = $this->agencia->find($params['id_agencia'])->toArray();
         $datosAgencia[0]['update_pwd_bd'] = $datosAgencia[0]['dba_pwd'];
+        $datosAgencia[0]['update_login_bd'] = $datosAgencia[0]['dba_user'];
         
         $this->_helper->json($datosAgencia[0]);
 

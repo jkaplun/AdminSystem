@@ -7,7 +7,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
 
     public function init()
     {
-        $this->usuario_agencia = new Application_Model_DbTable_UsuarioAgencia();
+        $this->usuario_agencia = new Application_Model_DbTable_AgenciaUsuario();
          
         /* Initialize action controller here */
     }
@@ -15,7 +15,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
     public function indexAction()
     {
          
-         $usuarioAgencia = new Application_Model_DbTable_UsuarioAgencia();
+         $usuarioAgencia = new Application_Model_DbTable_AgenciaUsuario();
          $params=$this->_request->getParams();
          //$this->view->form = new Application_Form_UsuariosAgencia_UsuariosAgencia();
          $registros = $usuarioAgencia->obtenerUsuariosDeAgenciaPorIdAgencia($params['id_agencia']);
