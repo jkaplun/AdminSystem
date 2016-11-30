@@ -2,10 +2,13 @@ var pathAgencias="public/agencias/";
 var pathPolizaController="public/polizas/"; 
 var pathProductoController="public/productos/"; 
 var pathUsuarioAgenciaController="public/usuariosAgencia/"; 
-var pathOrdenServicioController="public/ordenCreacion/"
+var pathOrdenServicioController="public/ordenCreacion/";
+var pathConsultarTodosLosUsuarios="/AdminSystem/public/usuarios/consultartodoslosusuarios";
+var pathAgregarUsuarioAgencia="public/usuariosAgencia/agregar"; 
 var idAgenciaActual;
 var idMotivo;
 var productos_todos={};
+var ejectivos_todos=[];
 //var productos_agencia={};
 
 //$('input[name=name_of_your_radiobutton]:checked').val();
@@ -45,6 +48,8 @@ $(document).ready(function() {
 
   // consultar todos los productos disponibles
      consultarProductos();
+     consultarTodosLosEjectuvos();
+     //consultarTodasLasAgencias();
 	// cuando se eliga una agencia de la lista se llama a la función cunslutar agencia
 	$("#select_agencias").change(function(){
 		idAgenciaActual =$("#select_agencias").val();
@@ -166,6 +171,7 @@ function mostrarPolizas(){
 			polizas[res[i].id_poliza]=res[i];
 			agregarPolizaEnTabla(res[i]);
 		}
+    //console.log(polizas);
   	})// end ajax done  
     .fail(function() { 
       swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
@@ -274,8 +280,8 @@ function consultarProductos(){
       for (i;i<res.length;i++){
         productos_todos[res[i].id_producto]=res[i];
       }
-      console.log("productos_todos");
-    console.log(productos_todos);
+    //  console.log("productos_todos");
+    // console.log(productos_todos);
  
   })// end ajax done  
     .fail(function() { 
@@ -301,7 +307,6 @@ $('#solicito').html('').selectpicker('refresh');
         $('#solicito').append($('<option>').text(res[i].nombre + " " + res[i].apellidos)
           .attr('value', res[i].id_usuario_agencia)
           .attr('id', "id_usuario_agencia"+res[i].id_usuario_agencia)
-          .attr('class',"productSelect")
           ).selectpicker('refresh');
         }
   })// end ajax done  
@@ -333,6 +338,7 @@ $('#ejecutivo').html('').selectpicker('refresh');
 
         var i=0;
 
+     // agregar a todos los ejectivos asignados a esta agencia
 
       for (i;i<res.length;i++){
 
@@ -342,10 +348,24 @@ $('#ejecutivo').html('').selectpicker('refresh');
         $('#ejecutivo').append($('<option>').text(res[i].nombre + " " + res[i].apellido_paterno)
           .attr('value', res[i].id_usuario)
           .attr('id', "ejecutivo"+res[i].id_usuario)
-          .attr('class',"productSelect")
           ).selectpicker('refresh');
         }
      // }
+
+
+     // agregar a todos los demás ejectivos
+      var ii=0;
+      //console.log(ejectivos_todos.length);
+      for (ii;ii<ejectivos_todos.length;ii++){
+       // console.log(ejectivos_todos[i]);
+        //if(res[i].id_agencia!=0){
+        //productos_todos[res[i].id_producto]=res[i];
+        //agregarProductoEnTabla(res[i]);
+        $('#ejecutivo').append($('<option>').text(ejectivos_todos[ii].nombre + " " + ejectivos_todos[ii].apellido_paterno)
+          .attr('value', ejectivos_todos[ii].id_usuario)
+          .attr('id', "ejecutivo"+ejectivos_todos[ii].id_usuario)
+          ).selectpicker('refresh');
+        }
 
 
   })// end ajax done  
@@ -366,14 +386,33 @@ function submitNuevaOrden(){
 	var descripcion="&descripcion=" + $("#descripcion").val();
 
 
-$.ajax({ 
+  var datos_orden= "Agencia : " + $("#select_agencias option:selected").text() + 
+                   "\n Producto :    " +  productos_todos[polizas[$('input[name=id_poliza]:checked').val()].id_producto].nombre_prod + 
+                   "\n Clave poliza :    " +  polizas[$('input[name=id_poliza]:checked').val()].clave  +
+                   "\n Solicitó :    " + $("#solicito option:selected").text() +
+                   "\n Ejecutivo :    " +  $("#ejecutivo option:selected").text() +
+                   "\n Tipo de soporte :    "  + $("#tipo_soporte option:selected").text() + 
+                   "\n Motivo :    " + $("#motivo option:selected").text() //+ 
+                   //"\n Descripción: "+  $("#descripcion").val();
+
+swal({
+  title: "Verifique que los datos sean correctos",
+  text: datos_orden,
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "Continuar",
+  closeOnConfirm: false
+},
+function(){
+  $.ajax({ 
       url: pathOrdenServicioController + "agregar", 
       method: "post", 
       data: id_agencia_seleccionada +tipo_soporte+ id_poliza_seleccionada+id_producto_seleccionado+solicito+ejecutivo+motivo+descripcion,
       dataType: "json" 
     }).done(function(res) {  
       if(res.estado=="ok"){
-      		//swal("La orden de servicio ha sido registrada exitosamente", " ", "success");
+          //swal("La orden de servicio ha sido registrada exitosamente", " ", "success");
           swal({title: "La orden de servicio ha sido registrada exitosamente",   
            text: "Redireccionando . .", 
            type: "success",   
@@ -384,20 +423,103 @@ $.ajax({
         setTimeout(function(){location.reload();}, 2600);
         
       }else{
-      		swal(res.descripcion, " ", "error"); 
+          swal(res.descripcion, " ", "error"); 
       }
-       
-
-
- 
-       
   })// end ajax done  
     .fail(function() { 
       swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
   });
 
+});
+
 
 }
+
+function consultarTodosLosEjectuvos(){
+  $.ajax({ 
+      url: pathConsultarTodosLosUsuarios, 
+      method: "post", 
+      data: "",
+      dataType: "json" 
+    }).done(function(res) {  
+      // console.log("mostrar todos los usuarios");
+      //  console.log(res);
+
+        for (var i=0; i<res.length;i++){
+            if(res[i].es_ejecutivo=="S"){
+              //console.log("es eje");
+              ejectivos_todos.push(res[i]);
+            }
+        }
+  //  console.log("mostrar todos los ejectivos");
+  //  console.log(ejectivos_todos);
+               
+  })// end ajax done  
+    .fail(function() { 
+      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+  });
+}
+
+
+
+function submitFormUsuarioAgencia(){
+
+  //console.log("idAgenciaActual")
+  //console.log(idAgenciaActual);
+  // en la siguiente variable se almacenan en String los parametros que se deben de incluir para dar de alta un usuario y que no pueden ser nulos
+  var parametros_obligatorios="&activo=S" +
+                              "&id_agencia="+idAgenciaActual +  
+                              "&lider_proy=N" + 
+                              "&director=N" + 
+                              "&admin_fe=N" + 
+                              "&nuevo=N" + 
+                              "&actualizar_pass=N" +
+                              "&enviar_reporte_portal_mig=N" +
+                              "&bajar_updates=N"+
+                              "&puesto=" +
+                              "&pwd=" + 
+                              "&clave=" +$("#emailUsuarioAgencia").val(); 
+
+  //console.log('$("#formUsuarioAgencia").serialize(),');
+  //console.log($("#formUsuarioAgencia").serialize());
+  $.ajax({ 
+      url: pathAgregarUsuarioAgencia , 
+      method: "post", 
+      data: $("#formUsuarioAgencia").serialize() + parametros_obligatorios,
+      dataType: "json" 
+    }) 
+    .done(function(res) {  
+  
+  //console.log(res);
+  if(res.estado == "ok"){ // si la respuesta es correcta:
+        //console.log(res); 
+          $('#solicito').append($('<option>').text(res.nombre + " " + res.apellidos)
+          .attr('value', res.id_usuario_agencia)
+          .attr('id', "id_usuario_agencia"+res.id_usuario_agencia)
+          ).selectpicker('refresh');
+  
+          $('#solicito').val(res.id_usuario_agencia).selectpicker('refresh');;
+
+      swal("el usuario ha sido guardado exitosamente", " ", "success"); 
+
+  } else{
+    swal(res.descripcion, " ", "error"); 
+    }
+
+    $('#nuevoUsuarioModal').modal('toggle')
+       
+  })// end ajax done  
+    .fail(function() { 
+      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+      $('#nuevoUsuarioModal').modal('toggle')
+  }); 
+}
+
+
+
+
+
+
 
 
 ///////

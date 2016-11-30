@@ -251,4 +251,23 @@ class UsuariosController extends Zend_Controller_Action
     }
 
 
+    public function consultartodoslosusuariosAction(){
+
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+        $params=$this->_request->getParams(); 
+        $usuarios = new Application_Model_DbTable_UsuarioAdmin();
+        $usuarios = $usuarios->obtenerUsuarios();
+        
+        $this->_helper->json($usuarios);
+
+    }    
+
+
+
+
+
+
+
+
 }
