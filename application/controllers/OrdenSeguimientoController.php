@@ -233,6 +233,7 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	$fecha = date('Y-m-d H:i:s', $zendDate);
     	$ordenServicioDbTable = new Application_Model_DbTable_OrdenServicio();
     	$ordenes = $ordenServicioDbTable->obtenerOrdenesPorIdEjecutivo($_SESSION['Zend_Auth']['USER_VALUES']['id_usuario']);
+    	$ordenesActualizadas = array();
     	foreach ($ordenes as $orden)
     	{
     		//Si la orden está en play
@@ -242,14 +243,16 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     			$duracionServicio = $orden['duracion_servicio'];
     			$diferenciaFechas = $ordenServicioDbTable->
     			obtenerDiferenciaDeFechas(
-    					$fecha, $data['control_cron_inicial']);
+    					$fecha, $orden['control_cron_inicial']);
+    			var_dump($diferenciaFechas);
     			$horasConvertidos = $diferenciaFechas['hora']*60;
     			$duracionServicio = $duracionServicio + $horasConvertidos + $diferenciaFechas['minuto'];
     			$orden['duracion_servicio'] = $duracionServicio;
+    			array_push($ordenesActualizadas, $orden);
     		}
     		//Si la orden está en pause se envía el tiempo acumulado en duracion_servicio
     	}
-    	$this->_helper->json($orden);
+    	$this->_helper->json($ordenesActualizadas);
     }
 
 }

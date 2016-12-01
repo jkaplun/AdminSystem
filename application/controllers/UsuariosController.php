@@ -41,10 +41,12 @@ class UsuariosController extends Zend_Controller_Action
                                 'apellido_materno' => $params['apellido_materno'],
                                 'puesto' => $params['puesto'],
                                 'email' => $params['email'],
-                                'admin' => $params['admin'],
-                                'supervisor' => $params['supervisor'],
-                                'folios' => $params['folios'],
-                                'compila' => $params['compila'],
+                                'p_admin' => $params['admin'],
+                                'p_supervisor' => $params['supervisor'],
+                                'p_agrega_folios' => $params['folios'],
+        						//'p_ejecutivo' => $params['ejecutivo'],
+        						//'p_edita_poliza => $params['editaPoliza'],
+        						//'p_recepcionista' => $params['recepcionista'],
                                 'activo' => $params['activo']
                         );
         
@@ -125,19 +127,20 @@ class UsuariosController extends Zend_Controller_Action
         $params=$this->_request->getParams();
     
         	$data = array(
-                'id_usuario' => $params['id_usuario'],
-                'clave' => $params['clave'],
-                'pwd' => $params['pwd'],
-                'nombre' => $params['nombre'],
-                'apellido_paterno' => $params['apellido_paterno'],
-                'apellido_materno' => $params['apellido_materno'],
-                'puesto' => $params['puesto'],
-                'email' => $params['email'],
-                'admin' => $params['admin'],
-                'supervisor' => $params['supervisor'],
-                'folios' => $params['folios'],
-                'compila' => $params['compila'],
-                'activo' => $params['activo']
+                				'clave' => $params['clave'],
+                                //'pwd' => $contraEncrip, se define más abajo
+                                'nombre' => $params['nombre'],
+                                'apellido_paterno' => $params['apellido_paterno'],
+                                'apellido_materno' => $params['apellido_materno'],
+                                'puesto' => $params['puesto'],
+                                'email' => $params['email'],
+                                'p_admin' => $params['admin'],
+                                'p_supervisor' => $params['supervisor'],
+                                'p_agrega_folios' => $params['folios'],
+        						//'p_ejecutivo' => $params['ejecutivo'],
+        						//'p_edita_poliza => $params['editaPoliza'],
+        						//'p_recepcionista' => $params['recepcionista'],
+                                'activo' => $params['activo']
        		 );
         
         	$form = new Application_Form_Usuarios_Usuarios();
