@@ -11,7 +11,7 @@ class Application_Model_Services_Utiles
 				if (substr_count($email,".")>= 1){
 					//obtengo la terminacion del dominio
 					$term_dom = substr(strrchr ($email, '.'),1);
-					//compruebo que la terminación del dominio sea correcta
+					//compruebo que la terminaciï¿½n del dominio sea correcta
 					if (strlen($term_dom)>1 && strlen($term_dom)<5 && (!strstr($term_dom,"@")) ){
 						//compruebo que lo de antes del dominio sea correcto
 						$antes_dom = substr($email,0,strlen($email) - strlen($term_dom) - 1);
@@ -31,7 +31,7 @@ class Application_Model_Services_Utiles
 	
 	function validarRFC($rfc)
 	{
-		$regex = '/^([a-z]{4})([0-9]{2})(1[0-2]|0[1-9])([0-3][0-9])([a-z0-9]{3})$/';
+		$regex = '/^(([a-z]{4})|([a-z]{3}))([0-9]{2})(1[0-2]|0[1-9])([0-3][0-9])([a-z0-9]{3})$/';
 		$esRfcValido = preg_match($regex, $rfc);
 		if($esRfcValido == 1)
 		{
