@@ -40,7 +40,6 @@ $(".recSVG").hide();
 
   //ordenesEjecutivo()
 
-
 // crear arreglo con todos los id de las ordenes
    var array_ordenes_id=  $("#info_id_ordenes").html().split(',');
    array_ordenes_id.shift();
@@ -343,8 +342,29 @@ function applyDataMask(field) {
     
     field.addEventListener('click', changed)
     field.addEventListener('keyup', changed)
+    
+    
 }
 
+
+function ajaxPrueba(){   
+
+
+  $.ajax({ 
+      url: pathOrdenServicioController + "obtenerordenesporejecutivo", 
+      method: "post", 
+      data: "",
+      dataType: "json" 
+    }).done(function(res) { 
+    console.log(res) ;
+      //console.log(res);
+ 
+       
+  })// end ajax done  
+    .fail(function() { 
+      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+  });
+} // end submitFormPoliza(){ 
 
 
 
