@@ -32,8 +32,8 @@ class AuthController extends Zend_Controller_Action
 						);
 	
 				$adapter->setIdentity($params['clave']);
-				$adapter->setCredential(sha1($params['pwd']));
-	
+				$adapter->setCredential(sha1($params['pwd']));	
+				
 				$auth   = Zend_Auth::getInstance();
 				$result = $auth->authenticate($adapter);
 
@@ -60,7 +60,7 @@ class AuthController extends Zend_Controller_Action
 						return;
 					}
 				} else {
-					// datos incorrectos, podríamos mostrar un mensaje de error
+					// datos incorrectos, podrï¿½amos mostrar un mensaje de error
 	
 					switch ($result->getCode()) {
 						case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
@@ -85,7 +85,7 @@ class AuthController extends Zend_Controller_Action
 
 	/**
 	 * @method finalize the session of user
-	 * @author Juan Garfias Vázquez
+	 * @author Juan Garfias Vï¿½zquez
 	 */
 	public function logoutAction() {
 		$storage = new Zend_Auth_Storage_Session();

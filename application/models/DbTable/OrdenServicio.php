@@ -86,7 +86,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 					'conformidad'
 					)
 			)
-		->joinleft(array('u_a' => 'usuario_agencia'),
+		->joinleft(array('u_a' => 'agencia_usuario'),
 						'p.id_usuario_agencia_solicito = u_a.id_usuario_agencia',
 						array('nombre as nombre_usuario', 'apellidos as apellidos_usuario'))
 		->joinleft(array('u_ad' => 'usuario_admin'),
@@ -115,7 +115,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 					'conformidad'
 					)
 			)
-		->joinleft(array('u_a' => 'usuario_agencia'),
+		->joinleft(array('u_a' => 'agencia_usuario'),
 						'p.id_usuario_agencia_solicito = u_a.id_usuario_agencia',
 						array('nombre as nombre_usuario', 'apellidos as apellidos_usuario'))
 		->joinleft(array('u_ad' => 'usuario_admin'),
@@ -148,7 +148,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 					'conformidad'
 					)
 			)
-		->joinleft(array('u_a' => 'usuario_agencia'),
+		->joinleft(array('u_a' => 'agencia_usuario'),
 						'p.id_usuario_agencia_solicito = u_a.id_usuario_agencia',
 						array('nombre as nombre_usuario', 'apellidos as apellidos_usuario'))
 		->joinleft(array('u_ad' => 'usuario_admin'),

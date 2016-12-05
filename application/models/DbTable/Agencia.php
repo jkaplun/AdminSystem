@@ -48,7 +48,7 @@ class Application_Model_DbTable_Agencia extends Zend_Db_Table_Abstract
 		$select = $this->_db->select()
 		->from(array('ag' => 'agencia'),
 				array('*'))
-				->joinleft(array('u_ag' => 'usuario_agencia'),
+				->joinleft(array('u_ag' => 'agencia_usuario'),
 						'ag.id_usuario_soporte_titular = u_ag.id_usuario_agencia',
 						array('nombre as contacto'))
 				->joinleft(array('u_ad' => 'usuario_admin'),
