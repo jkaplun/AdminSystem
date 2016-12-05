@@ -51,7 +51,8 @@ class UsuariosController extends Zend_Controller_Action
 			        			'p_recepcionista' => $params['p_recepcionista'],
 			        			'p_ventas' => $params['p_ventas'],
 			        			'es_ejecutivo' => $params['es_ejecutivo'],
-                                'activo' => $params['activo']
+                                'activo' => $params['activo'],
+        						'p_edita_poliza' => $params['p_edita_poliza']
        		 );
         
         $form = new Application_Form_Usuarios_Usuarios();
@@ -146,7 +147,8 @@ class UsuariosController extends Zend_Controller_Action
 			        			'p_recepcionista' => $params['p_recepcionista'],
 			        			'p_ventas' => $params['p_ventas'],
 			        			'es_ejecutivo' => $params['es_ejecutivo'],
-                                'activo' => $params['activo']
+                                'activo' => $params['activo'],
+        						'p_edita_poliza' => $params['p_edita_poliza']
        		 );
         
         	$form = new Application_Form_Usuarios_Usuarios();
