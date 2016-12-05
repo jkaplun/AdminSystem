@@ -16,7 +16,7 @@ var idDataBaseProducto="";
 
 $(document).ready(function() {
 
-    $('#dataTable-productos-adquiridos').DataTable({
+    $('#dataTable-productos-adquiridos,#dataTable-productos').DataTable({
         responsive: true,
         "language":{
 			"sProcessing":     "Procesando...",

@@ -79,38 +79,43 @@
 				<legend>Datos Generales:</legend>
 				<div class="row">
 		    		<div class="col-md-8">
-						<div class="form-group input-group">
-			                <span class="input-group-addon"><i class="fa fa-user"></i>
-			                </span>
+						<div class="form-group">
+			                <!-- <span class="input-group-addon"><i class="fa fa-user"></i>
+			                </span> -->
+			                <label>Usuario</label>
 			                <?= $this->form->clave ?>
 			            </div>
 		    		</div>
 		    		<div class="col-md-4">
-						<div class="form-group input-group">
-			                <span class="input-group-addon">Estatus</span>
+						<div class="form-group">
+			                <!-- <span class="input-group-addon">Estatus</span> -->
+			                <label>Estatus</label>
 			                <?= $this->form->activo ?>
 			            </div>	   
 		    		</div>		    			    			    		
 		    	</div>
 		    	<div class="row">
 		    		<div class="col-md-4">
-						<div class="form-group input-group">
-			                <span class="input-group-addon"><i class="fa fa-user"></i>
-			                </span>
+						<div class="form-group">
+			                <!-- <span class="input-group-addon"><i class="fa fa-user"></i>
+			                </span> -->
+			                <label>Nombre</label>
 			                <?= $this->form->nombre ?>
 			            </div>
 		    		</div>
 		    		<div class="col-md-4">
-						<div class="form-group input-group">
-			                <span class="input-group-addon"><i class="fa fa-user"></i>
-			                </span>
+						<div class="form-group">
+			                <!-- <span class="input-group-addon"><i class="fa fa-user"></i>
+			                </span> -->
+			                <label>Apellido Paterno</label>
 			                <?= $this->form->apellido_paterno ?>
 			            </div>	    		
 		    		</div>
 		    		<div class="col-md-4">
-						<div class="form-group input-group">
-			                <span class="input-group-addon"><i class="fa fa-user"></i>
-			                </span>
+						<div class="form-group">
+			                <!-- <span class="input-group-addon"><i class="fa fa-user"></i>
+			                </span> -->
+			                <label>Apellido Materno</label>
 			                <?= $this->form->apellido_materno ?>
 			            </div>	    		
 		    		</div>	    			    		
@@ -118,16 +123,18 @@
 	
 		    	<div class="row">
 		    		<div class="col-md-6">
-						<div class="form-group input-group">
-			                <span class="input-group-addon"><i class="fa fa-lock"></i>
-			                </span>
+						<div class="form-group">
+			                <!-- <span class="input-group-addon"><i class="fa fa-lock"></i>
+			                </span> -->
+			                <label>Contraseña</label>
 			                <?= $this->form->pwd ?>
 			            </div>
 		    		</div>
 		    		<div class="col-md-6">
-						<div class="form-group input-group">
-			                <span class="input-group-addon"><i class="fa fa-lock"></i>
-			                </span>
+						<div class="form-group">
+			                <!-- <span class="input-group-addon"><i class="fa fa-lock"></i>
+			                </span> -->
+			                <label>Confirmar Contraseña</label>
 			                <?= $this->form->pwd_conf ?>
 			            </div>	    		
 		    		</div>	    			    		
@@ -135,16 +142,18 @@
 	
 		    	<div class="row">
 		    		<div class="col-md-6">
-						<div class="form-group input-group">
-			                <span class="input-group-addon"><i class="fa fa-suitcase"></i>
-			                </span>
+						<div class="form-group">
+			                <!-- <span class="input-group-addon"><i class="fa fa-suitcase"></i>
+			                </span> -->
+			                <label>Puesto</label>
 			                <?= $this->form->puesto ?>
 			            </div>
 		    		</div>
 		    		<div class="col-md-6">
-						<div class="form-group input-group">
-			                <span class="input-group-addon"><i class="fa fa-envelope"></i>
-			                </span>
+						<div class="form-group">
+			                <!-- <span class="input-group-addon"><i class="fa fa-envelope"></i>
+			                </span> -->
+			                <label>Correo</label>
 			                <?= $this->form->email ?>
 			            </div>	    		
 		    		</div>	    			    		
@@ -154,13 +163,13 @@
 				<legend>Permisos:</legend>
 		    	<div class="row">
 		    		<div class="col-md-6">
-						<div class="form-group input-group">
+						<div class="form-group">
 			                <label>Admin</label>
 			                <?= $this->form->p_admin ?>
 			            </div>	   
 		    		</div>
 		    		<div class="col-md-6">
-						<div class="form-group input-group">
+						<div class="form-group">
 			                <label>Supervisor</label>
 			                <?= $this->form->p_supervisor ?>
 			            </div>	    		
@@ -168,13 +177,13 @@
 		    	</div>
 		    	<div class="row">
 		    		<div class="col-md-6">
-						<div class="form-group input-group">
+						<div class="form-group">
 			                <label>Agregar Folios</label>
 			                <?= $this->form->p_agrega_folios ?>
 			            </div>	   
 		    		</div>
 		    		<div class="col-md-6">
-						<div class="form-group input-group">
+						<div class="form-group">
 			                <label>Ejecutivo</label>
 			                <?= $this->form->p_ejecutivo ?>
 			            </div>	    		
@@ -182,13 +191,13 @@
 		    	</div>
 		    	<div class="row">
 		    		<div class="col-md-6">
-						<div class="form-group input-group">
+						<div class="form-group">
 			                <label>Recepcionista</label>
 			                <?= $this->form->p_recepcionista ?>
 			            </div>	   
 		    		</div>
 		    		<div class="col-md-6">
-						<div class="form-group input-group">
+						<div class="form-group">
 			                <label>Ventas</label>
 			                <?= $this->form->p_ventas ?>
 			            </div>	    		
@@ -196,13 +205,13 @@
 		    	</div>
 		    	<div class="row">
 		    		<div class="col-md-6">
-						<div class="form-group input-group">
+						<div class="form-group">
 			                <label>Es ejecutivo</label>
 			                <?= $this->form->es_ejecutivo ?>
 			            </div>	   
 		    		</div>   
 		    		<div class="col-md-6">
-						<div class="form-group input-group">
+						<div class="form-group">
 			                <label>Edita Poliza</label>
 			                <?= $this->form->p_edita_poliza ?>
 			            </div>	    		
