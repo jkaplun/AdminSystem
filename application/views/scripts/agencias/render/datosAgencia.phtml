@@ -48,7 +48,7 @@
 							<hr class="hrForm">										
 							<p>Titular:  <span class="text-primary" id="cve_usopor_tit-info"></span>  </p>
 							<p>Auxiliar:  <span class="text-primary" id="cve_usopor_aux-info"> </p>
-					    	
+					    	<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_ejecutivo']=='S') {?>
 					    	<div class="row">
 								<div class="col-md-9"></div>			    	
 								<div class="col-md-2">
@@ -56,7 +56,8 @@
 										<span class="fa fa-edit"></span>Editar
 									</button>										
 								</div>			    		
-					    	</div>	  
+					    	</div>	
+					    	<?php } ?>  
 						</div>
 					</div>
 					<div class="col-md-8">
@@ -71,11 +72,13 @@
 			   	<div class="row">
 					<div class="col-md-10">
 					</div>
+					<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_ventas']=='S') {?>
 					<div class="col-md-2" align="right">
 					    <button type="button" id="addNewProductoBtn" class="btn btn-block btn-outline btn-primary" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#modalNuevoProducto">
 					    &nbsp;<i class="fa fa-plus"></i>&nbsp;Producto&nbsp;
 					    </button>
 					</div>
+					<?php } ?>
 				</div>    
 				<br/>            
 				<div class="row">
@@ -110,11 +113,13 @@
 				   	<div class="row">
 						<div class="col-md-10">
 						</div>
+						<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_ejecutivo']=='S') {?>
 						<div class="col-md-2" align="right">
 						    <button type="button" class="btn btn-block btn-outline btn-primary" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#nuevoUsuarioModal" id="agregarUsuarioAgenciaBtn" style="padding-left: 6px;">
 						    &nbsp;<i class="fa fa-plus"></i>&nbsp;Usuario Agencia&nbsp;&nbsp;&nbsp;
 						    </button>
 						</div>
+						<?php } ?>
 					</div>
 					<br/>
 						<table width="100%" class="table table-striped table-bordered table-hover display" id="dataTable-usuarios-agencias">
@@ -139,11 +144,14 @@
 				   	<div class="row">
 						<div class="col-md-10">
 						</div>
+						<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_edita_poliza']=='S') {?>
 						<div class="col-md-2" align="right">
 						    <button type="button" id="addNewPolizaBtn" class="btn btn-block btn-outline btn-primary" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#modalNuevaPoliza">
 						    &nbsp;<i class="fa fa-plus"></i>&nbsp;P&oacute;liza&nbsp;
 						    </button>
 						</div>
+						<?php } ?>
+						
 					</div>
 					<br/>
 					<div class="row">
@@ -290,6 +298,8 @@
 							<div class="col-md-10">
 
 							</div>
+							<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_agrega_folios']=='S') {?>
+							
 							<div class="col-md-2" align="right">
 								<button type="button" class="btn btn-block btn-outline btn-primary"
 									data-dismiss="modal" onclick="abrirModalAgregarFolios()"
@@ -297,6 +307,7 @@
 									&nbsp;<i class="fa fa-plus"></i>&nbsp;Folios&nbsp;
 								</button>
 							</div>
+							<?php } ?>
 						</div>	  
 						<br/>                  
 						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-foliosFE">

@@ -131,21 +131,26 @@
                             <li>
                                 <a href="<?= $this->baseUrl() ?>/ordenes/"><i class="fa fa-files-o fa-fw"></i> Ordenes de Servicio<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
+                                    <?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_recepcionista']=='S') {?>
                                     <li>
                                         <a href="<?= $this->baseUrl() ?>/orden-creacion/"><i class="fa fa-plus"></i> Nueva Orden</a>
                                     </li>
-<!--                                     <li>
-                                        <a href="public/orden-servicio/atencion-orden"> Atenci&oacute;n de Ordenes</a>
-                                    </li> -->
+									<?php } ?>
+									<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['es_ejecutivo']=='S') {?>
                                     <li>
                                         <a href="<?= $this->baseUrl() ?>/orden-seguimiento/"><i class="fa fa-eye"></i> Seguimiento de Ordenes</a>
-                                    </li>  
+                                    </li>
+                                    <?php } ?>
+                                    <?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_admin']=='S') {?>
                                     <li>
                                         <a href="<?= $this->baseUrl() ?>/orden-seguimiento-admin/"><i class="fa fa-eye"></i> Seguimiento Admin </a>
-                                    </li>                                      
+                                    </li>   
+                                    <?php } ?>
+                                    <?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_supervisor']=='S') {?>
                                     <li>
                                         <a href="<?= $this->baseUrl() ?>/orden-admin/"><i class="fa fa-table"></i> Tabla Seguimiento Admin </a>
-                                    </li>                                                                     
+                                    </li>
+                                    <?php } ?>                                                                 
                                     <li>
                                         <a target="_blank" href="<?= $this->baseUrl() ?>/orden-monitoreo/"><i class="fa fa-desktop"></i> Monitor de Seguimiento</a>
                                     </li>
@@ -158,9 +163,11 @@
                                     <li>
                                         <a href="<?= $this->baseUrl() ?>/agencias/"><i class="fa fa-plane"></i> Agencias</a>
                                     </li>
+                                    <?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_admin']=='S') {?>
                                     <li>
                                         <a href="<?= $this->baseUrl() ?>/usuarios/"><i class="fa fa-user"></i> Usuarios</a>
                                     </li>
+                                    <?php } ?>
                                     <li>
                                         <a href="<?= $this->baseUrl() ?>/productos/"><i class="fa fa-suitcase"></i> Productos</a>
                                     </li>

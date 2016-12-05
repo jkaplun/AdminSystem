@@ -37,7 +37,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 					'control_cron_estatus as estatus_reloj'
 					)
 		)
-		->joinleft(array('u_a' => 'usuario_agencia'),
+		->joinleft(array('u_a' => 'agencia_usuario'),
 						'p.id_usuario_agencia_solicito = u_a.id_usuario_agencia',
 						array('nombre as nombre_usuario', 'apellidos as apellidos_usuario', 'puesto'))
 		->joinRight(array('u_ad' => 'usuario_admin'),

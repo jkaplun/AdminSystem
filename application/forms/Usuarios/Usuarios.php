@@ -15,6 +15,7 @@ class Application_Form_Usuarios_Usuarios extends Zend_Form
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Usuario"))
         ->setAttrib("maxlength","45")
+        ->setAttrib('disabled', true)
         //->setAttrib('disabled', 'disabled');
         ;
         
@@ -104,58 +105,33 @@ class Application_Form_Usuarios_Usuarios extends Zend_Form
         ->setAttrib("maxlength","100")
         ;
         
-        // Admin
-        $admin = new Zend_Form_Element_Select('admin');
-        $admin->setRequired(true)
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
+        $_PERMISOS = array(
+        		'p_admin',
+        		'p_supervisor',
+        		'p_agrega_folios',
+        		'p_ejecutivo',
+        		'p_edita_poliza',
+        		'p_recepcionista',
+        		'p_ventas',
+        		'es_ejecutivo'
+        );
         
-        // Supervisor
-        $supervisor = new Zend_Form_Element_Select('supervisor');
-        $supervisor->setRequired(true)
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        
-        // Folios
-        $folios = new Zend_Form_Element_Select('folios');
-        $folios->setRequired(true)
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        
-        // Compila
-        $compila = new Zend_Form_Element_Select('compila');
-        $compila->setRequired(true)
-        ->removeDecorator('label')
-        ->removeDecorator('HtmlTag')
-        ->addMultiOptions(array(
-                'S'=>'Activo',
-                'N'=>'Inactivo'
-        ))
-        ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
-        
+        foreach ($_PERMISOS as $permiso){
+	        // Campos
+	        $element = new Zend_Form_Element_Select($permiso);
+	        $element->setRequired(true)
+	        ->removeDecorator('label')
+	        ->removeDecorator('HtmlTag')
+	        ->addMultiOptions(array(
+	                'S'=>'Si',
+	                'N'=>'No'
+	        ))
+	        ->setAttrib("class","form-control")
+	        ->setAttrib("autocomplete","off")
+	        ;
+	        $this->addElement($element);
+    	}
+    	
         // Activo
         $activo = new Zend_Form_Element_Select('activo');
         $activo->setAttribs ( array (
@@ -184,8 +160,7 @@ class Application_Form_Usuarios_Usuarios extends Zend_Form
         ->setMethod('post')
         ->addElements(array(
                 $clave, $password, $password_conf, $nombre, $apellido_paterno, 
-                $apellido_materno, $puesto, $email, $admin, 
-                $supervisor, $folios, $compila, $activo, $id_usuario, $submit
+                $apellido_materno, $puesto, $email, $activo, $id_usuario, $submit
                 ));
         }
 }

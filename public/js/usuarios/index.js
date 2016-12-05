@@ -19,6 +19,7 @@ var path="public/usuarios/";
 //var urlEditar= "public/usuarios/actualizar";
 
 function datosform_edita_usuario(json_values){
+	$("#clave").prop('disabled',true);
 	ajaxAction="actualizar";
 	var obj = jQuery.parseJSON( json_values );
 	//$("#"+obj.id_usuario).addClass('selected');
@@ -92,7 +93,10 @@ function abrirModalAgregarUsuario(){
 	ajaxAction="agregar";
 
 }
-
+function habilitaClave(){
+	$("#clave").prop('disabled',false);
+	abrirModalAgregarUsuario();
+}
 
 function agregarAjaxDone(res){
 	if(res.estado == "ok"){ // si la respuesta es correcta:

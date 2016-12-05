@@ -24,16 +24,7 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
     }
     
     $select = $this->_db->select()->
-    from ( $this->_name, 
-        array(
-            'id_usuario',
-            'clave',
-            'nombre',
-            'apellido_paterno',
-            'apellido_materno',
-        	'puesto',
-            'activo',
-            'email'))
+    from ( $this->_name, '*')
         ->where($cond);;
   
     return $this->getAdapter ()->fetchAll ( $select );
@@ -88,5 +79,14 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
     return $this->getAdapter ()->fetchAll ( $select );
   }
 
+  public function getUserValuesById ($values)
+  {
+  	$select = $this->_db->select()->
+  	from ( $this->_name, '*' )
+  	->where('id_usuario='.$values['id_usuario']);
+  
+  	return $this->getAdapter ()->fetchRow ( $select );
+  }
+  
 }
 

@@ -45,6 +45,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		return $moduleLoader;
 	}
 	
+	protected function _initMyDb() {
+		$this->bootstrap('db');
+		$resource = $this->getPluginResource('db');
+		$db = $resource->getDbAdapter();
+		$db->query('SET CHARACTER SET \'UTF8\'');
+	}
+	
 	/**
 	 * Initializing session
 	 */
@@ -64,6 +71,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 			$this->view->errorMessageTimeout = "<strong>" . $this->view->translate('Alert') .":</strong>" . $this->view->translate('Su Sesi&oacute;n ha caducado por inactividad en el sistema');
 	
 		}
+		if(isset($_SESSION['Zend_Auth']['USER_VALUES'])){
+
+			$userDetails= new Application_Model_DbTable_UsuarioAdmin();
+			$_SESSION['Zend_Auth']['USER_VALUES'] = $userDetails->getUserValuesById(
+				array(
+						'id_usuario'=>$_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'])
+				);
+				
+		}
 	}
+	
+
 }
 

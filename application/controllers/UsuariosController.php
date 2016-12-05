@@ -33,22 +33,26 @@ class UsuariosController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
-        $data = array(
-                                'clave' => $params['clave'],
+        
+        
+        
+        	$data = array(
+                				'clave' => $params['clave'],
                                 //'pwd' => $contraEncrip, se define más abajo
                                 'nombre' => $params['nombre'],
                                 'apellido_paterno' => $params['apellido_paterno'],
                                 'apellido_materno' => $params['apellido_materno'],
                                 'puesto' => $params['puesto'],
                                 'email' => $params['email'],
-                                'p_admin' => $params['admin'],
-                                'p_supervisor' => $params['supervisor'],
-                                'p_agrega_folios' => $params['folios'],
-        						//'p_ejecutivo' => $params['ejecutivo'],
-        						//'p_edita_poliza => $params['editaPoliza'],
-        						//'p_recepcionista' => $params['recepcionista'],
+			        			'p_admin' => $params['p_admin'],
+			        			'p_supervisor' => $params['p_supervisor'],
+			        			'p_agrega_folios' => $params['p_agrega_folios'],
+			        			'p_ejecutivo' => $params['p_ejecutivo'],
+			        			'p_recepcionista' => $params['p_recepcionista'],
+			        			'p_ventas' => $params['p_ventas'],
+			        			'es_ejecutivo' => $params['es_ejecutivo'],
                                 'activo' => $params['activo']
-                        );
+       		 );
         
         $form = new Application_Form_Usuarios_Usuarios();
         
@@ -125,21 +129,23 @@ class UsuariosController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
-    
+        //echo '<pre>'.print_r($params,true).'</pre>';die;
+        
         	$data = array(
-                				'clave' => $params['clave'],
+                				//'clave' => $params['clave'],
                                 //'pwd' => $contraEncrip, se define más abajo
                                 'nombre' => $params['nombre'],
                                 'apellido_paterno' => $params['apellido_paterno'],
                                 'apellido_materno' => $params['apellido_materno'],
                                 'puesto' => $params['puesto'],
                                 'email' => $params['email'],
-                                'p_admin' => $params['admin'],
-                                'p_supervisor' => $params['supervisor'],
-                                'p_agrega_folios' => $params['folios'],
-        						//'p_ejecutivo' => $params['ejecutivo'],
-        						//'p_edita_poliza => $params['editaPoliza'],
-        						//'p_recepcionista' => $params['recepcionista'],
+			        			'p_admin' => $params['p_admin'],
+			        			'p_supervisor' => $params['p_supervisor'],
+			        			'p_agrega_folios' => $params['p_agrega_folios'],
+			        			'p_ejecutivo' => $params['p_ejecutivo'],
+			        			'p_recepcionista' => $params['p_recepcionista'],
+			        			'p_ventas' => $params['p_ventas'],
+			        			'es_ejecutivo' => $params['es_ejecutivo'],
                                 'activo' => $params['activo']
        		 );
         
@@ -150,45 +156,17 @@ class UsuariosController extends Zend_Controller_Action
         	$cantidadDeErrores = count($mensajesDeError);
         	if ($cantidadDeErrores == 0)
         	{
-        		if ($params['pwd'] == $params['pwd_conf'])
-        		{ // ¿Qué se verifica aquí?
-        			$contraEncrip = sha1($params['pwd']);
-        			$data['pwd']=$contraEncrip;
+        		if ($params['pwd'] == $params['pwd_conf'] && $params['pwd']=='')
+        		{
+        			if($params['pwd']==''){
+        				$contraEncrip = sha1($params['pwd']);
+        				$data['pwd']=$contraEncrip;
+        			}
         			$utiles = new Application_Model_Services_Utiles();
         			$esEmailCorrecto = $utiles->comprobar_email($params['email']);
         			if ($esEmailCorrecto)
         			{
-        				if ($usuarioActual['clave'] != $params['clave'])
-        				{
-        					$usuario = $this->usuario_admin->obtenerUsuarioPorClave($params['clave']);
-        					if (!$usuario)
-        					{ // Si se intenta modificaar la clave
-
-        						// se inyecta el ID, estado y descripción en la respuesta al cliente
-        						//$data['id_usuario']=$params['id_usuario'];
-        						$data['estado']='error';
-        						$data['descripcion']='No se permite modificar la clave';
-        						// se responde al cliente
-        						$this->_helper->json($data);
-        						$this->_redirect('usuarios/');
-        						
-        					}
-        					else
-        					{ // si la clave no se modifica
-        						$where = "id_usuario = {$params['id_usuario']}";
-        						// 	se actualiza en la base de datos al usuario
-        						$this->usuario_admin->update($data, $where);
-        						// se inyecta el estado y descripción en la respuesta al cliente
-        						$data['estado']='ok';
-        						//$data['descripcion']='El usuario ha sido actualizado exitosamente';
-        						// se responde al cliente
-        						$this->_helper->json($data);
-        						$this->_redirect('usuarios/');
-        					}
-        			}
-        			else
-        			{ 
-        				// 	se actualiza en la base de datos al usuario
+						// 	se actualiza en la base de datos al usuario
         				$where = "id_usuario = {$params['id_usuario']}";
         				$this->usuario_admin->update($data, $where);
         				// se inyecta el estado y descripción en la respuesta al cliente
@@ -197,7 +175,7 @@ class UsuariosController extends Zend_Controller_Action
         				// se responde al cliente
         				$this->_helper->json($data);
         				$this->_redirect('usuarios/');
-        			}
+        			
         		}
         		else
         		{ // else cuando el email es incorrecto
@@ -220,6 +198,10 @@ class UsuariosController extends Zend_Controller_Action
         			$this->_helper->json($data);
         			$this->_redirect('usuarios/');
         	}
+        	
+        	
+        	
+        	
     	}
 	    else
     	{ // else cuando existe un error encontrado en el form

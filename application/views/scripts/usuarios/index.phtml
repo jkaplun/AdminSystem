@@ -3,7 +3,7 @@
 		<div class="col-md-10">
 		</div>
 		<div class="col-md-2" align="right">
-	    <button type="button" class="btn btn-primary btn-circle" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#myModal">
+	    <button type="button" class="btn btn-primary btn-circle" data-dismiss="modal" onclick="habilitaClave()" data-toggle="modal" data-target="#myModal">
 	    &nbsp;<i class="fa fa-plus"></i>&nbsp;<i class="fa fa-user"></i>&nbsp;
 	    </button>
 	</div>
@@ -21,7 +21,8 @@
 		</tr>
 	</thead>
 	<tbody align="center">
-		<?php foreach ($this->registros as $registro) { ?>
+		<?php foreach ($this->registros as $registro) {
+				$registro['pwd']='';			 ?>
 	<tr id='<?php echo $registro['id_usuario'] ?>'
 		<?php 
 			if ( $registro['activo'] == 0 ){
@@ -154,44 +155,52 @@
 		    	<div class="row">
 		    		<div class="col-md-6">
 						<div class="form-group input-group">
-			                <span class="input-group-addon" >Admin</span>
-			                <?= $this->form->admin ?>
+			                <label>Admin</label>
+			                <?= $this->form->p_admin ?>
 			            </div>	   
 		    		</div>
 		    		<div class="col-md-6">
 						<div class="form-group input-group">
-			                <span class="input-group-addon" >Supervisor</span>
-			                <?= $this->form->supervisor ?>
+			                <label>Supervisor</label>
+			                <?= $this->form->p_supervisor ?>
 			            </div>	    		
 		    		</div>	    			    		
 		    	</div>
 		    	<div class="row">
 		    		<div class="col-md-6">
 						<div class="form-group input-group">
-			                <span class="input-group-addon" >Folios</span>
-			                <?= $this->form->folios ?>
+			                <label>Agregar Folios</label>
+			                <?= $this->form->p_agrega_folios ?>
 			            </div>	   
 		    		</div>
 		    		<div class="col-md-6">
 						<div class="form-group input-group">
-			                <span class="input-group-addon" >Ejecutivo</span>
-			                <?= $this->form->compila ?>
+			                <label>Ejecutivo</label>
+			                <?= $this->form->p_ejecutivo ?>
 			            </div>	    		
 		    		</div>	    			    		
 		    	</div>
 		    	<div class="row">
 		    		<div class="col-md-6">
 						<div class="form-group input-group">
-			                <span class="input-group-addon" >Recepcionista</span>
-			                <?= $this->form->folios ?>
+			                <label>Recepcionista</label>
+			                <?= $this->form->p_recepcionista ?>
 			            </div>	   
 		    		</div>
 		    		<div class="col-md-6">
 						<div class="form-group input-group">
-			                <span class="input-group-addon" >Ventas ??</span>
-			                <?= $this->form->compila ?>
+			                <label>Ventas</label>
+			                <?= $this->form->p_ventas ?>
 			            </div>	    		
 		    		</div>	    			    		
+		    	</div>
+		    	<div class="row">
+		    		<div class="col-md-6">
+						<div class="form-group input-group">
+			                <label>Es ejecutivo</label>
+			                <?= $this->form->es_ejecutivo ?>
+			            </div>	   
+		    		</div>    			    		
 		    	</div>
 	    	</fieldset>
 	    </div>

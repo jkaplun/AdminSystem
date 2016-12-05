@@ -3,6 +3,7 @@
 	<div class="col-md-10">
 		<?= $this->selectAgencias->select_agencias?>
 	</div>
+	<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_admin']=='S') {?>
 	<div class="col-md-2" align="right">
 		<button type="button" class="btn btn-success"
 			data-dismiss="modal" onclick="abrirModalAgregarAgencia()"
@@ -10,6 +11,7 @@
 			&nbsp;<i class="fa fa-plus"></i>&nbsp;Agencia&nbsp;
 		</button>
 	</div>
+	<?php } ?>
 </div>
 <div class="salto"></div>
 <div id="datos-agencia">
@@ -23,11 +25,21 @@
 		</div>
 	</div>
 </div>
-<?= $this->render('agencias/render/modalAgregarAgencia.phtml') ?>
-<?= $this->render('agencias/render/modalNuevoUsuario.phtml') ?>
-<?= $this->render('agencias/render/modalPoliza.phtml') ?>
-<?= $this->render('agencias/render/modalNuevosFolios.phtml') ?>
-<?= $this->render('agencias/render/modalNuevoProducto.phtml') ?>
+<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_admin']=='S') {?>
+	<?= $this->render('agencias/render/modalAgregarAgencia.phtml') ?>
+<?php } ?>
+<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_ejecutivo']=='S') {?>
+	<?= $this->render('agencias/render/modalNuevoUsuario.phtml') ?>
+<?php } ?>
+<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_edita_poliza']=='S') {?>
+	<?= $this->render('agencias/render/modalPoliza.phtml') ?>
+<?php } ?>
+<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_agrega_folios']=='S') {?>
+	<?= $this->render('agencias/render/modalNuevosFolios.phtml') ?>
+<?php } ?>
+<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_ventas']=='S') {?>
+	<?= $this->render('agencias/render/modalNuevoProducto.phtml') ?>
+<?php } ?>
 <script type="text/javascript">
 	function buscar(){
 		document.getElementById('datosAgencia').style.display = 'block';
