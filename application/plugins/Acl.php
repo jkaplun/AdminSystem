@@ -15,10 +15,9 @@ public function preDispatch(Zend_Controller_Request_Abstract $request)
     	if(isset( $_SESSION['Zend_Auth'])){
     		$roleName = 'usuario';
     	}
-    	
     	$actionName=$request->getActionName();
     	$controllerName=$request->getControllerName();
-    	 
+    	//echo $controllerName;die;
     	/** Creating the ACL object */
     	$acl = new Zend_Acl();
     	
@@ -26,16 +25,43 @@ public function preDispatch(Zend_Controller_Request_Abstract $request)
     	$acl->addRole(new Zend_Acl_Role('usuario'));
     	
     	// 		Resources
+    	$acl->add(new Zend_Acl_Resource('admin'));
+    	$acl->add(new Zend_Acl_Resource('agencias'));
     	$acl->add(new Zend_Acl_Resource('index'));
-    	$acl->add(new Zend_Acl_Resource('ordenes'));
+    	$acl->add(new Zend_Acl_Resource('orden-admin'));
+    	$acl->add(new Zend_Acl_Resource('orden-creacion'));
+        $acl->add(new Zend_Acl_Resource('orden-seguimiento-admin'));
+        $acl->add(new Zend_Acl_Resource('orden-seguimiento'));
+        $acl->add(new Zend_Acl_Resource('polizas'));
+        $acl->add(new Zend_Acl_Resource('productos'));
+        $acl->add(new Zend_Acl_Resource('reporte-agencias'));
+        $acl->add(new Zend_Acl_Resource('reporte-servicios'));
+        $acl->add(new Zend_Acl_Resource('usuarios-agencias'));
         $acl->add(new Zend_Acl_Resource('usuarios'));
-        $acl->add(new Zend_Acl_Resource('clientes'));
-    	
-        $acl->allow('usuario', array('index'));
         
+        
+    	
         if ( $roleName != '') {
+        	
+	    	$acl->allow('usuario', array(
+				'admin',
+				'agencias',
+				'index',
+				'orden-admin',
+				'orden-creacion',
+				'orden-seguimiento-admin',
+				'orden-seguimiento',
+				'polizas',
+				'productos',
+				'reporte-agencias',
+				'reporte-servicios',
+				'usuarios-agencias',
+				'usuarios'
+	    	));
+        	
+        	 
 	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_admin'] == 'S'){
-	    		$acl->allow('usuario', array('usuarios','ordenes','clientes'));
+	    		//$acl->allow('usuario', array('usuarios','ordenes','clientes'));
 	    		//$acl->deny('usuario', array('clientes'));
 	    	}	
 	    	
@@ -60,9 +86,9 @@ public function preDispatch(Zend_Controller_Request_Abstract $request)
 	    	}
         }
 
+        
  		// if the resource exists in the ACL
 		if ( $acl->has($controllerName, $actionName)==true ) {
-			
 			if($roleName=='') { 
 				$r = new Zend_Controller_Action_Helper_Redirector;
 				$r->gotoUrl('/auth/login')->redirectAndExit();
