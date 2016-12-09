@@ -19,7 +19,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		// Initialize view
 		$view = new Zend_View();
 		$view->doctype('XHTML1_STRICT');
-		$view->headTitle('MIG ERP');
+		$view->headTitle('MIG CRM');
 	
 		// Add it to the ViewRenderer
 		$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(
