@@ -161,8 +161,9 @@ class UsuariosController extends Zend_Controller_Action
         		if ($params['pwd'] == $params['pwd_conf'] && $params['pwd']=='')
         		{
         			if($params['pwd']==''){
-        				$contraEncrip = sha1($params['pwd']);
-        				$data['pwd']=$contraEncrip;
+        				$data['pwd']= sha1($params['pwd']);
+        			} else {
+        				unset($data['pwd']);
         			}
         			$utiles = new Application_Model_Services_Utiles();
         			$esEmailCorrecto = $utiles->comprobar_email($params['email']);
