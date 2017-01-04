@@ -4,7 +4,7 @@ var pathProductoController="public/productos/";
 var pathUsuarioAgenciaController="public/usuarios-agencia/"; 
 var pathOrdenServicioController="public/orden-creacion/";
 var pathConsultarTodosLosUsuarios="public/usuarios/consultartodoslosusuarios";
-var pathAgregarUsuarioAgencia="public/usuariosAgencia/agregar"; 
+var pathAgregarUsuarioAgencia="public/usuarios-agencia/agregar"; 
 var idAgenciaActual;
 var idMotivo;
 var productos_todos={};
