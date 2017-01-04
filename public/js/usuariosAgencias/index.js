@@ -1,5 +1,5 @@
 //ruta para el controlador de usuarioAgencia 
-var pathUsuarioAgenciaController="public/usuariosAgencia/"; 
+var pathUsuarioAgenciaController="public/usuarios-agencia/"; 
 var usuariosAgencias={};
 var seAgregoNuevoUsuario=false;
 var idUsuarioAgenciaToEdit;
