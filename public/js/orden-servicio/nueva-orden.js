@@ -1,8 +1,8 @@
 var pathAgencias="public/agencias/";
 var pathPolizaController="public/polizas/"; 
 var pathProductoController="public/productos/"; 
-var pathUsuarioAgenciaController="public/usuariosAgencia/"; 
-var pathOrdenServicioController="public/ordenCreacion/";
+var pathUsuarioAgenciaController="public/usuarios-agencia/"; 
+var pathOrdenServicioController="public/orden-creacion/";
 var pathConsultarTodosLosUsuarios="public/usuarios/consultartodoslosusuarios";
 var pathAgregarUsuarioAgencia="public/usuariosAgencia/agregar"; 
 var idAgenciaActual;
