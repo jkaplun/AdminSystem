@@ -198,7 +198,7 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         $this->addElement($id_poliza_estatus);
 
         // Observaciones
-        $observaciones_poliza = new Zend_Form_Element_TextArea('observaciones_poliza');
+        $observaciones_poliza = new Zend_Form_Element_Textarea('observaciones_poliza');
         $observaciones_poliza
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
