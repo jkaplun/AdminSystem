@@ -237,8 +237,7 @@ class UsuariosController extends Zend_Controller_Action
         $this->_helper->json($result);
 
     }
-
-
+    
     public function consultartodoslosusuariosAction(){
 
         $this->_helper->layout()->disableLayout();

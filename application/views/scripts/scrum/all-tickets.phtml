@@ -1,0 +1,31 @@
+<h1 class="page-header">Tickets</h1>
+<div class="table-responsive">
+<table class="table">
+	<thead>
+		<tr>
+			<th>T&iacute;tulo</th>
+			<th>Descripci&oacute;n Estatus</th>
+			<th>RH Clave</th>
+			<th>Fecha Alta</th>	
+			<th>Fecha Inicio</th>
+			<th>Fecha Cierre</th>	
+			<th>Dificultad</th>
+			<th>Sprint</th>		
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($this->tickets as $ticket ) { ?>
+		<tr>	
+			<td><?= $ticket['titulo'] ?></td>
+			<td><?= $ticket['descripcion'] ?></td>
+			<td><?= $ticket['clave'] ?></td>
+			<td><?= $ticket['fecha_alta'] ?></td>
+			<td><?= $ticket['fecha_inicio'] ?></td>
+			<td><?= $ticket['fecha_cierre'] ?></td>
+			<td><?= $ticket['dificultad'] ?></td>
+			<td><?= $ticket['sprint'] ?></td>
+		</tr>
+	<?php } ?>
+	</tbody>
+</table>
+</div>
