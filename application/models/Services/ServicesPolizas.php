@@ -97,11 +97,56 @@ class Application_Model_Services_ServicesPolizas
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
+	public function actualizaProductosPorPoliza($params){
+		
+		$date = new Zend_Date();
+
+	//	$fecha_ini = new Zend_Date($params['fecha_ini'],Zend_Date::ISO_8601);
+	//	$fecha_fin = new Zend_Date($params['fecha_fin'],Zend_Date::ISO_8601);
+		
+/*		echo $date.'<hr>';
+		echo $fecha_ini.'<hr>';
+		echo $fecha_fin.'<hr>';
+		
+		echo $fecha_ini->compare($date).'<hr>';
+		echo $fecha_fin->compare($date).'<hr>';
+	*/	
+	//	if ( !($fecha_ini->compare($date) == -1 && $fecha_fin->compare($date)==1) ) {
+		
+			$modelProductoTipoPoliza = new Application_Model_DbTable_ProductoTipoPoliza();
+			
+			$productos = $modelProductoTipoPoliza->obtenerProductoTiposPoliza($params['tipo']);
+			
+			$modelAgenciaProducto = new Application_Model_DbTable_AgenciaProducto();
+			
+			$dataProductos = array('estatus'=>'N');
+			$where = 'id_agencia='.$params['id_agencia']. ' and id_producto<>3' ;
+			$modelAgenciaProducto->update($dataProductos, $where);
+			
+			foreach ($productos as $value){
+				$dataProductos = array();
+				$exist=0;
+				$where = "id_agencia={$params['id_agencia']} and id_producto={$value['id_producto']}";
+				$agenciaProducto = $modelAgenciaProducto->fetchAll($where)->toArray();
+				//echo "<pre>".print_r($agenciaProducto,true)."</pre>";die;
+				 
+				if (count($agenciaProducto)==0) {
+					$dataProductos = array(
+							'id_agencia' => $params['id_agencia'],
+							'id_producto' => $value['id_producto'],
+							'numero_licencias' => 0,
+							'estatus' => 'S',
+					);
+					$modelAgenciaProducto->insert($dataProductos);
+				} else {
+					$dataProductos = array(
+							'estatus' => 'S',
+					);
+					$where = "id_agencia={$params['id_agencia']} and id_producto={$value['id_producto']}";
+					$modelAgenciaProducto->update($dataProductos, $where);
+				}
+			}
+		//}
+	}
 	
 }

@@ -375,13 +375,18 @@ function mostrarProductosEnSelectPolizas(){
         // });
         // console.log("nothing works :(  ")
           for (var key in productos_agencia) {
+        	  
+        	  
+        	  
             if (productos_agencia.hasOwnProperty(key)) {
               var val = productos_agencia[key];
-
-                $('#producto').append($('<option>').text(val.nombre_prod)
-                .attr('value', val.id_producto)
-                //.attr('id', "id_producto_"+val.id_producto)
-                );
+              //console.log(val);
+              if(val.tiene_poliza=='S'){
+	                $('#producto').append($('<option>').text(val.nombre_prod)
+	                .attr('value', val.id_producto)
+	                //.attr('id', "id_producto_"+val.id_producto)
+	                );
+            	}
               //console.log(val);
             }
           }

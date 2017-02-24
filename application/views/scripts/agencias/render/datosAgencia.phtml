@@ -146,7 +146,7 @@
 						</div>
 						<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_edita_poliza']=='S') {?>
 						<div class="col-md-2" align="right">
-						    <button type="button" id="addNewPolizaBtn" class="btn btn-block btn-outline btn-primary" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#modalNuevaPoliza">
+						    <button type="button" id="addNewPolizaBtn" class="btn btn-block btn-outline btn-primary" data-dismiss="modal" onclick="openPolizaModal()" data-toggle="modal" data-target="#modalNuevaPoliza">
 						    &nbsp;<i class="fa fa-plus"></i>&nbsp;P&oacute;liza&nbsp;
 						    </button>
 						</div>
@@ -154,36 +154,7 @@
 						
 					</div>
 					<br/>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-info">
-		                        <div class="panel-heading">
-		                            <b>P&oacute;lizas renovadas anticipadamente</b>
-		                        </div>
-		                        <div class="panel-body">
-									<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-anticipadas">
-										<thead>
-											<tr>
-												<th class="FrontEndIdPoliza" >id</th>
-												<th class="centrado">Clave</th>
-												<th class="centrado">Producto</th>
-												<th class="centrado">Horas<br/>Contratadas</th>
-												<th class="centrado">Horas<br/>Restantes</th>
-												<th class="centrado">Facturacion</th>
-												<th class="centrado">Fecha<br/>Inicial</th>
-												<th class="centrado">Fecha<br/>Termino</th>
-												<th class="centrado">Detalles</th>
-											</tr>
-										</thead>
-										<tbody align="center">
-					
-										</tbody>
-									</table>
-
-		                        </div>
-		                    </div>							
-						</div>
-					</div>						
+				
 					<div class="row">
 						<div class="col-md-12">
 							<div class="panel panel-green">

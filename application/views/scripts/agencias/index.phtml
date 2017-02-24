@@ -45,3 +45,11 @@
 		document.getElementById('datosAgencia').style.display = 'block';
 	}
 </script>
+
+<?php 
+foreach ( $this->tipoPoliza as $value ){
+	?>
+	<input id='tipo_poliza_<?= $value['tipo'] ?>' type="hidden" value="<?= $value['horas_soporte_anual'] ?>">
+	<?php 
+}
+?>

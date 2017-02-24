@@ -36,7 +36,7 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 	{
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
-		->where('id_producto="'.$idProducto.'" and id_agencia="'.$idAgencia.'"')
+		->where('id_producto="'.$idProducto.'" and id_agencia="'.$idAgencia.'" and id_poliza_estatus=1 ')
 		->order('fecha_ini');
 
 		//echo $select;die;
@@ -91,7 +91,7 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
 		->where(' id_agencia="'.$id_agencia.'" and id_producto="'.$id_producto.'"
-				and fecha_fin>'.$fecha_inicialNueva);
+				and fecha_fin>'.$fecha_inicialNueva.' and id_poliza_estatus=1');
 		
 		return $this->getAdapter ()->fetchAll( $select );
 	}

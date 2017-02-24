@@ -60,6 +60,12 @@ class AgenciasController extends Zend_Controller_Action
          
          $this->view->formFoliosAgencia = new Application_Form_Agencias_FoliosAgencia();
          
+
+         $tipoPoliza = new Application_Model_DbTable_TipoPoliza();
+          
+         $result = $tipoPoliza->obtenerTiposPoliza();
+         
+         $this->view->tipoPoliza = $result;
     }
 
     public function agregarAction()

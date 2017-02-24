@@ -105,7 +105,7 @@ function agregarProductoEnTabla(res){
         var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#modalNuevoProducto" value='+ res.id_producto +   
         ' onclick="datosFormProducto('+ res.id_producto +  ')" >' +  // 
         '<i class="fa fa-info-circle"></i>'+  
-        '</button>'   
+        '</button>' ;  
     
 
         var id_producto_row = "idProductoRow"+res.id_producto;
@@ -205,23 +205,23 @@ function actualizarProductoAjaxDone(res){
    //id_producto="&id_producto=" +frontEndIdProducto;
    id_producto_seleccionado=frontEndIdProducto;
    ajaxActionProducto="actualizar"; 
-
    //console.log("ajaxAction "+ajaxActionProducto); 
    // console.log(usuariosAgencias[frontEndId - 1]);
    //console.log("Productos[frontEndIdProducto]");
    //console.log(Productos[frontEndIdProducto]);
    populateProductoForm(productos_agencia[frontEndIdProducto]);
-
+   
+   
+   $("#nombre_prod_div").hide();
  } 
  
  function abrirModalAgregarProducto(){ 
   //$('#myModalLabel').html("Agregar Usuario"); 
   document.getElementById("formProducto").reset(); 
-  $("#titulo_form_producto").html("Nuevo producto");
+  $("#myModalLabelProducto").html("Nuevo producto");
   ajaxActionProducto="agregar"; 
- 
   //console.log("ajaxActionProducto "+ajaxActionProducto); 
-   
+  $("#nombre_prod_div").show();
 } 
 
 
@@ -248,7 +248,7 @@ function mostrarProductosEnSelect(){
         //agregarProductoEnTabla(res[i]);
         $('#nombre_prod').append($('<option>').text(res[i].nombre_prod)
           .attr('value', res[i].id_producto)
-          .attr('id', "id_producto_"+res[i].id_producto)
+          //.attr('id', "id_producto_"+res[i].id_producto)
           .attr('class',"productSelect")
           );
         }
@@ -264,24 +264,30 @@ function mostrarProductosEnSelect(){
 
 
 
-function populateProductoForm(data) {  
-    $.each(data, function(key, value){  
-     if(key == "id_producto"){
-      //$("#id_producto_"+value).show();
-
-     	$("#titulo_form_producto").html(productos_todos[value].nombre_prod);
-     } else{
-      //console.log("key: "+key + " value: " +value);
-      $("#"+key).val(value);
-     	 }
-    });
+function populateProductoForm(data) { 
+	
+	console.log(data);
+	
+	$("#id_producto_formProducto").val(data.id_producto);
+	$("#myModalLabelProducto").html(data.nombre_prod);
+	$("#numero_licencias").val(data.numero_licencias);
+	$("#estatus_producto").val(data.estatus);
+	
+	if (data.tiene_licencia == 'N') {
+		$("#numero_licencias_div").hide();
+	} 
+	
+	if (data.tiene_licencia == 'S') {
+		$("#numero_licencias_div").show();
+	} 
+	
 }
 
 function mostrarProductosEnTabla(){
 
   $(".productSelect").show();
   productos_agencia={};
-  ajaxActionProducto="productosdisponiblesadquiridosporidagencia"
+  ajaxActionProducto="productosdisponiblesadquiridosporidagencia";
   var addIdAgencia="id_agencia="+idAgenciaActual;
  $.ajax({ 
       url: pathProductoController+ajaxActionProducto, 

@@ -31,13 +31,13 @@ class Application_Model_DbTable_Producto extends Zend_Db_Table_Abstract
 		where vigente_prod = 'S' and (id_agencia =  or id_agencia is null) order by id_agencia desc;*/
 		
 		$select = $this->_db->select()
-		->from(array('p' => 'producto'),
-				array('id_producto', 'nombre_prod', 'tiene_licencia'))
-				->joinleft(array('a_p' => 'agencia_producto'),
-						'p.id_producto = a_p.id_producto',
-						array('ifnull(id_agencia,0) as id_agencia', 'ifnull(estatus,"N") as estatus', 'numero_licencias'))
-				->where('p.vigente_prod="S" and 
-						(a_p.id_agencia ="'.$id_agencia.'" or a_p.id_agencia is null)'); // empty list of columns
+		->from(array('ap' => 'agencia_producto'),
+				'*')
+				->join(array('p' => 'producto'),
+						'p.id_producto =ap.id_producto')
+				->where("p.vigente_prod='S' and ap.id_agencia = $id_agencia "); // empty list of columns
+		//echo $select;die;
+				
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	

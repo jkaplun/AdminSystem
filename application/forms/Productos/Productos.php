@@ -56,18 +56,21 @@ class Application_Form_Productos_Productos extends Zend_Form
         ;
         $this->addElement($nombre_prod);
 
-                // numero de licencias
-        $numero_licencias = new Zend_Form_Element_Text('numero_licencias');
+        $options = array();
+ 
+        for ( $i=0 ; $i <= 100 ; $i++ ) {
+        	$options[$i] = $i;
+        }
+        
+        // numero de licencias
+        $numero_licencias = new Zend_Form_Element_Select('numero_licencias');
         $numero_licencias
-       // ->setRequired(true)
-       // ->addErrorMessage("- Es necesario que introduzca el número de licencias.")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder","Número de licencias")
-        ->setAttrib("maxlength","11")
-        ;
+        ->addMultiOptions($options);
+        
         $this->addElement($numero_licencias);
 
 
@@ -90,6 +93,17 @@ class Application_Form_Productos_Productos extends Zend_Form
         ->addElements(array(
                 $clave, $nombre_prod, $vigente_prod
                 ));
+        
+        
+        // Clave
+        $id_producto = new Zend_Form_Element_Hidden('id_producto_formProducto');
+        $id_producto
+	        ->removeDecorator('label')
+	        ->removeDecorator('HtmlTag')
+	        ->setAttrib("class","form-control")
+	        ->setAttrib("autocomplete","off");
+        $this->addElement($id_producto);
+        
 
 
     }

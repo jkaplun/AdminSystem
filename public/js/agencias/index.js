@@ -90,7 +90,19 @@ $(document).ready(function() {
 	soloLetras('colonia');
 
 	soloLetrasDot('nombre_comercial');
-}); // end  $(document).ready(function() {
+	
+	$( "#tipo" ).change(function() {
+		openPolizaModal();
+	});
+	
+}); 
+// end  $(document).ready(function() {
+
+
+function openPolizaModal(){
+	var horas = $("#tipo_poliza_"+$("#tipo").val()).val();
+	$("#horas_poliza").val( horas );	
+}
 
 function abrirModalAgregarAgencia(){
 	$('#myModalLabel').html("Crear Nueva Agencia");

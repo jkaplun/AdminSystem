@@ -42,6 +42,9 @@ class PolizasController extends Zend_Controller_Action
   
          $this->view->prueba = 'Llega al mensaje';
          //echo '<pre>'.print_r($agencias,true).'</pre>';die;
+         
+
+         
     }
 
     public function agregarAction(){
@@ -49,7 +52,8 @@ class PolizasController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
-
+        ///echo "<pre>".print_r($params,true)."</pre>";die;
+        
         $data = array(
     		'id_agencia' => $params['id_agencia'],
     		'id_producto' => $params['id_producto'],
@@ -63,7 +67,7 @@ class PolizasController extends Zend_Controller_Action
             'observaciones' => $params['observaciones_poliza'],
             'id_poliza_estatus' => $params['id_poliza_estatus']
         );
-              
+
         $form = new Application_Form_Polizas_Polizas();
         
         $mensajesDeError = $form->getMessages();
@@ -80,6 +84,56 @@ class PolizasController extends Zend_Controller_Action
         	 	$data['clave'] = $v1ClavePoliza;
         	 	//Se crea la póliza con una clave sin el id
         		$idNuevaPoliza = $this->poliza->insert($data);
+        		
+        		
+        		if ($params['id_producto']==3) {
+        			$servicePoliza = new Application_Model_Services_ServicesPolizas();
+        			$servicePoliza->actualizaProductosPorPoliza($params);
+        		}
+        		/*
+        		$modelProductoTipoPoliza = new Application_Model_DbTable_ProductoTipoPoliza();
+
+        		$productos = $modelProductoTipoPoliza->obtenerProductoTiposPoliza($params['tipo']);
+        		
+        		$modelAgenciaProducto = new Application_Model_DbTable_AgenciaProducto();
+        		
+        		$dataProductos = array('estatus'=>'N');
+        		$where = 'id_agencia='.$params['id_agencia'];
+        		$modelAgenciaProducto->update($dataProductos, $where);
+        		
+        		foreach ($productos as $value){
+        			$dataProductos = array();
+        			$exist=0;
+        			$where = "id_agencia={$params['id_agencia']} and id_producto={$value['id_producto']}";
+        			$agenciaProducto = $modelAgenciaProducto->fetchAll($where)->toArray();
+        			//echo "<pre>".print_r($agenciaProducto,true)."</pre>";die;
+        			
+        			if (count($agenciaProducto)==0) {
+	        			$dataProductos = array(
+	        				'id_agencia' => $params['id_agencia'],
+	        				'id_producto' => $value['id_producto'],
+	        				'numero_licencias' => 0,
+	        				'estatus' => 'S',
+	        			);
+	        			
+	        			$modelAgenciaProducto->insert($dataProductos);
+        			} else {
+        				$dataProductos = array(
+        						'estatus' => 'S',
+        				);
+        				$where = "id_agencia={$params['id_agencia']} and id_producto={$value['id_producto']}";
+        				$modelAgenciaProducto->update($dataProductos, $where);
+        			}
+        		}
+        		*/
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
         		//Se concatena el id de la nueva póliza
         		$data['clave'] = $v1ClavePoliza.$idNuevaPoliza;
         		// 	se actualiza en la base de datos la clave de la p�liza
@@ -95,7 +149,7 @@ class PolizasController extends Zend_Controller_Action
         	 else 
         	 {//Si las fechas de la nueva p�liza se traslapan con las de alguna vigente
         	 	$data['estado']='error';
-        	 	$data['descripcion']='La fecha de la póliza que intenta crear se traslapa con otra.';
+        	 	$data['descripcion']='Hay un error al intentar crear la Póliza. Verifique los datos.';
         	 	// se responde al cliente
         	 	$this->_helper->json($data);
         	 	//$this->_redirect('agencias/');

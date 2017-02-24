@@ -230,11 +230,18 @@ function agregarPolizaEnTabla(res){
     horas_us=res.horas_poliza;
   }
 
+  
+  if (horas_us < 0){
+	  horas_us = "<span style='color: red'><b>" + horas_us + "</b></span>";
+  } 
+  
 	polizaTable.row.add( [ 
 	//"X", res.clave, "x", "x", '0',  "X" 
 		"", res.clave, nombre_producto_poliza, res.horas_poliza, horas_us, estadoPoliza 
 	]).draw(); 
 
+	console.log(horas_us);
+	
 	polizaTable.page( 'last' ).draw( 'page' );  
 
 

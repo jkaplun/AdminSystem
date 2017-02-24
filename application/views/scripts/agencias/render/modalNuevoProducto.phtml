@@ -5,50 +5,39 @@
 			<div class="modal-header">
 				<div class="row">
 					<div class="col-md-10">
-						<h4 class="modal-title" id="myModalLabel"></h4>
+						<h4 class="modal-title" id="myModalLabelProducto">Nuevo Producto</h4>
 					</div>
 					<div class="col-md-2" align="right">
 							<button type="button" class="btn btn-info btn-circle" data-dismiss="modal"><i class="fa fa-times"></i></button>
 					</div> 			    		
 				</div>
 			</div>
-	 		<form method="post" id="formProducto"> 
+	 		<form method="post" id="formProducto">
+	 			<?= $this->formProductos->id_producto_formProducto ?> 
 			    <div class="modal-body">
 					<fieldset>
-						<h4 id="titulo_form_producto" class="h4Form">Nuevo Producto</h4>
-						<hr class="hrForm">
-
 						<div class="row">
-				    		<div class="col-md-12">
+				    		<div class="col-md-12" id="nombre_prod_div">
 								<div class="form-group">
 									<label class="control-label">Producto</label>
 									<?= $this->formProductos->nombre_prod ?>
 								</div>
 				    		</div>	    			    		
 				    	</div>
-
-				    	<div class="row">
-				    		
-				    		<div class="col-md-12">
+				    	<div class="row" align="center">
+				    		<div class="col-md-6" id="numero_licencias_div">
 								<div class="form-group">
 					                <label class="control-label"> N&uacute;mero de licencias </label>
 					                <?= $this->formProductos->numero_licencias ?>
-					                  
 					            </div>
 				    		</div>
-				    		
-				    	</div>   
-
-
-						<div class="row">
-				    		<div class="col-md-12">
+				    		<div class="col-md-6">
 								<div class="form-group">
 									<label class="control-label">Estado</label>
 									   <?= $this->formProductos->estatus_producto ?>
 								</div>
 				    		</div>	    			    		
 				    	</div>
-     			    		
 				    </fieldset>
 			    </div>
 			    <div class="modal-footer"> 
@@ -59,7 +48,6 @@
 			    		</div>
 						<div class="col-md-3"></div>			    		
 			    	</div>	  		        
-
 			    </div>
 	 		</form> 
 		</div>
