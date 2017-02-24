@@ -62,31 +62,39 @@ class ProductosController extends Zend_Controller_Action
     	$this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
-        $data = array(
+        
+        $dataResponse = array(
                        	'id_agencia' => $params['id_agencia'],
-                       	'id_producto' => $params['id_producto'],
+                       	'id_producto' => $params['id_producto_formProducto'],
                        	'numero_licencias' => $params['numero_licencias'],
                         'estatus' => $params['estatus_producto']
                       );
-
+        
+        $data = array(
+        		'numero_licencias' => $params['numero_licencias'],
+        		'estatus' => $params['estatus_producto']
+        );
+        
         $agencia_producto = new Application_Model_DbTable_AgenciaProducto();
 
-        $where = "id_agencia = '{$params['id_agencia']}' and id_producto = '{$params['id_producto']}'";
-        if($params['estatus_producto'] == 'N')
-        {
+        $where = "id_agencia = '{$params['id_agencia']}' and id_producto = '{$params['id_producto_formProducto']}'";
+        
+        if($params['estatus_producto'] == 'N') {
             //// Hay que cambiar el estatus en lugar de eliminar;
-        	$agencia_producto->delete($where);
+        	//$agencia_producto->delete($where);
         	$data['descripcion']='El producto ha sido eliminado exitosamente';
-        }
-        else 
-        {
+        } else {
         	$agencia_producto->update($data, $where);
         	$data['descripcion']='El producto ha sido actualizado exitosamente';
         }
+        
         //$data['id_agencia']=$params['id_agencia'];
         //$data['id_producto']=$params['id_producto'];
-        $data['estado']='ok';
-        $this->_helper->json($data);
+        $dataResponse['estado']='ok';
+        
+        
+        
+        $this->_helper->json($dataResponse);
         $this->_redirect('agencias/');
     }
 
