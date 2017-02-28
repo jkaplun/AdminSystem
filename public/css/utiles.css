@@ -17,3 +17,10 @@
     padding: 0px;
    
 }
+
+.check-green {
+	color: green;
+}
+.x-red {
+	color: red;	
+}

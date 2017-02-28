@@ -102,6 +102,15 @@ $(document).ready(function() {
 function openPolizaModal(){
 	var horas = $("#tipo_poliza_"+$("#tipo").val()).val();
 	$("#horas_poliza").val( horas );	
+	var tipo = $( "#tipo" ).val();
+	//console.log(tipo);
+	if( tipo == "G" || tipo == "X"  ){
+		$("#div-costo-poliza").hide();
+		$("#costo_poliza").val("");
+	} else {
+		$("#div-costo-poliza").show();
+	}
+	$("#div-id-poliza-estatus").hide();
 }
 
 function abrirModalAgregarAgencia(){

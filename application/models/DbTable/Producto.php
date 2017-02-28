@@ -25,18 +25,12 @@ class Application_Model_DbTable_Producto extends Zend_Db_Table_Abstract
 	public function obtenerProductosDisponiblesAdquiridosPorIdAgencia($id_agencia)
 	{
 		
-		/*SELECT producto.id_producto, nombre_prod, tiene_licencia, numero_licencias,
-		ifnull(id_agencia,0) as id_agencia, agencia_producto.estatus FROM producto
-		left JOIN agencia_producto on producto.id_producto = agencia_producto.id_producto
-		where vigente_prod = 'S' and (id_agencia =  or id_agencia is null) order by id_agencia desc;*/
-		
 		$select = $this->_db->select()
 		->from(array('ap' => 'agencia_producto'),
 				'*')
 				->join(array('p' => 'producto'),
 						'p.id_producto =ap.id_producto')
 				->where("p.vigente_prod='S' and ap.id_agencia = $id_agencia "); // empty list of columns
-		//echo $select;die;
 				
 		return $this->getAdapter ()->fetchAll( $select );
 	}

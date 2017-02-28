@@ -130,7 +130,6 @@ function submitFormPoliza(){
 function agregarPolizaEnTabla(res){ 
       // var frontEndId = Object.keys(polizas).length + 1; 
         var polizaTable = $('#dataTable-polizas-vigentes').DataTable();   
-        var estatusUsuario; 
         var info = polizaTable.page.info(); 
         if(res.id_poliza_estatus == "1"){ 
           estadoPoliza="Activa"; 
@@ -153,30 +152,14 @@ function agregarPolizaEnTabla(res){
           // BLQ - Bloqueado
           // CAN - Cancelado
            
- 
-        //var apellido = res.apellido_paterno+ " " + res.apellido_materno;  
- 
- 
-        //res.id_usuario_agencia=falseId; 
         res.descripcion=""; 
 
-        // se agrega la nueva columna a la tabla  
-        //$(".frontEndIdColumn").show()
-        // polizaTable.row.add( [  
-        //   res.id_poliza, res.clave, res.id_producto, res.horas_poliza, '0', res.costo_poliza, res.fecha_ini, res.fecha_fin, estadoPoliza , "x"
-        //   ]).draw(); 
- 
         var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#modalNuevaPoliza" value='+ res.id_poliza +   
         ' onclick="datosFormPoliza('+ res.id_poliza +  ')" >' +  // 
         '<i class="fa fa-info-circle"></i>'+  
-        '</button>'   
+        '</button>'   ;
         var nombre_producto_poliza="";
-        var clave_producto_poliza="";
         if ($(productos_todos[res.id_producto]).length){
-         // console.log("productos_todos")
-         // console.log(productos_todos)
-          console.log("res");
-          console.log(res);
 
           nombre_producto_poliza=productos_todos[res.id_producto].nombre_prod
 
@@ -297,6 +280,8 @@ function actualizarPolizaAjaxDone(res){
 
     populatePolizaForm(polizas[frontEndIdPoliza]);
 
+	$("#div-id-poliza-estatus").show();
+
  } 
  
  function abrirModalAgregarPoliza(){ 
@@ -357,7 +342,7 @@ function populatePolizaForm(data) {
     } else if(key=="id_producto"){
       $("#producto").val(value);
     }else{
-      console.log("key: "+key + " value: " +value);
+      //console.log("key: "+key + " value: " +value);
       $("#"+key).val(value);
       }
     });

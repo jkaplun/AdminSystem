@@ -35,6 +35,25 @@ class ProductosController extends Zend_Controller_Action
     	$params=$this->_request->getParams();
     	$productos = $producto->obtenerProductosDisponiblesAdquiridosPorIdAgencia($params['id_agencia']);
     	
+    	
+    	
+    	foreach ( $productos as &$producto ){
+    		if( $producto['tiene_licencia'] == 'N' ){
+    			$producto['numero_licencias_table']='N/A';
+    		 } else {
+    		 	$producto['numero_licencias_table']='<b>'.$producto['numero_licencias'].'</b>';
+    		 }
+    		
+    		
+    		if( $producto['estatus'] == 'S' ){
+    			$producto['estatus_table']='<i class="fa fa-check check-green" aria-hidden="true"></i>';
+    		} else {
+    			$producto['estatus_table']='<i class="fa fa-times x-red" aria-hidden="true"></i>';
+    		}
+    	}
+    	
+    	//echo "<pre>".print_r($productos,true)."</pre>";die;
+    	 
     	$this->_helper->json($productos);
     }
     
@@ -78,24 +97,20 @@ class ProductosController extends Zend_Controller_Action
         $agencia_producto = new Application_Model_DbTable_AgenciaProducto();
 
         $where = "id_agencia = '{$params['id_agencia']}' and id_producto = '{$params['id_producto_formProducto']}'";
+
+        $agencia_producto->update($data, $where);
+       	
+        $data['descripcion']='El producto ha sido actualizado exitosamente';
         
-        if($params['estatus_producto'] == 'N') {
-            //// Hay que cambiar el estatus en lugar de eliminar;
-        	//$agencia_producto->delete($where);
-        	$data['descripcion']='El producto ha sido eliminado exitosamente';
+        if( $dataResponse['estatus'] == 'S' ){
+        	$dataResponse['estatus_table']='<i class="fa fa-check check-green" aria-hidden="true"></i>';
         } else {
-        	$agencia_producto->update($data, $where);
-        	$data['descripcion']='El producto ha sido actualizado exitosamente';
+        	$dataResponse['estatus_table']='<i class="fa fa-times x-red" aria-hidden="true"></i>';
         }
         
-        //$data['id_agencia']=$params['id_agencia'];
-        //$data['id_producto']=$params['id_producto'];
         $dataResponse['estado']='ok';
-        
-        
-        
         $this->_helper->json($dataResponse);
-        $this->_redirect('agencias/');
+
     }
 
     public function consultarproductosAction(){
@@ -105,7 +120,7 @@ class ProductosController extends Zend_Controller_Action
         $params=$this->_request->getParams(); 
     	$producto = new Application_Model_DbTable_Producto();
         $productos = $producto->obtenerProductos();
-        
+
         $this->_helper->json($productos);
 
     }

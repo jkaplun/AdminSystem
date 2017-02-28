@@ -81,11 +81,11 @@ class PolizasController extends Zend_Controller_Action
         	 if($esFechaDePolizaValida)
         	 {
         	 	$v1ClavePoliza = $servicesPolizas->obtenerV1DeClavePoliza($params['id_producto'], $params['id_agencia']);        	 	
-        	 	$data['clave'] = $v1ClavePoliza;
+        	 	$data['clave'] = strtoupper($v1ClavePoliza);
         	 	//Se crea la póliza con una clave sin el id
         		$idNuevaPoliza = $this->poliza->insert($data);
         		
-        		
+        		// Validación cuando es una poliza para ICAAV la cual tiene id 3 en la tabla de productos.
         		if ($params['id_producto']==3) {
         			$servicePoliza = new Application_Model_Services_ServicesPolizas();
         			$servicePoliza->actualizaProductosPorPoliza($params);

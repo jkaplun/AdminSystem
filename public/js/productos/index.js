@@ -95,12 +95,12 @@ function submitFormProducto(){
 }
  
 
-function agregarProductoEnTabla(res){ 
+function agregarProductoEnTabla(res){
       // console.log("entrando a agregarUsuarioAgenciaEnTabla"); 
       // var frontEndId = Object.keys(Productos).length + 1; 
         var productoTable = $('#dataTable-productos-adquiridos').DataTable();   
         var info = productoTable.page.info(); 
- 
+       // console.log(res);
 
         var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#modalNuevoProducto" value='+ res.id_producto +   
         ' onclick="datosFormProducto('+ res.id_producto +  ')" >' +  // 
@@ -115,8 +115,8 @@ function agregarProductoEnTabla(res){
  
  		       res.id_producto,
  		       productos_todos[res.id_producto].nombre_prod, 
- 		       res.numero_licencias, 
- 		       res.estatus, 
+ 		       res.numero_licencias_table, 
+ 		       res.estatus_table, 
  		       "x"
         			];
 
@@ -266,7 +266,7 @@ function mostrarProductosEnSelect(){
 
 function populateProductoForm(data) { 
 	
-	console.log(data);
+	//console.log(data);
 	
 	$("#id_producto_formProducto").val(data.id_producto);
 	$("#myModalLabelProducto").html(data.nombre_prod);
