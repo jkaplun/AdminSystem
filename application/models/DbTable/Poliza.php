@@ -46,9 +46,21 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 	public function obtenerPolizasPorIdAgencia ($idAgencia)
 	{
 		$select = $this->_db->select()->
-		from ( $this->_name, '*' )
-		->where(' id_agencia="'.$idAgencia.'"');
+		from ( array( 'p' => $this->_name), '*' )
+		->join( array( 'tp'=> 'tipo_poliza') , 'p.tipo=tp.tipo' )
+		->where(' p.id_agencia="'.$idAgencia.'" and current_timestamp between fecha_ini and fecha_fin');
 
+		//echo $select;die;
+		return $this->getAdapter ()->fetchAll( $select );
+	}
+	
+	public function obtenerTodasLasPolizasPorIdAgencia ($idAgencia)
+	{
+		$select = $this->_db->select()->
+		from ( array( 'p' => $this->_name), '*' )
+		->join( array( 'tp'=> 'tipo_poliza') , 'p.tipo=tp.tipo' )
+		->where(' p.id_agencia='.$idAgencia);
+	
 		//echo $select;die;
 		return $this->getAdapter ()->fetchAll( $select );
 	}
@@ -127,5 +139,15 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		return $this->getAdapter ()->fetchRow( $select );
 	}
 
+	
+	public function obtienePolizaConGarantiaPorProducto($values){
+		$select = $this->_db->select()->
+		from ( $this->_name, '*' )
+		->where("id_agencia={$values['id_agencia']}
+					AND id_producto = {$values['id_producto']}
+        			AND (tipo = '{$values['tipo']}')");
+		return $this->getAdapter ()->fetchAll( $select );
+	}
+	
 }
 

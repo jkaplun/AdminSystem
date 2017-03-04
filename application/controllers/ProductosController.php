@@ -142,12 +142,24 @@ class ProductosController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams(); 
     	$producto = new Application_Model_DbTable_Producto();
-        $productos = $producto->obtenerProductosDisponiblesPorIdAgencia($params['id_agencia']);
+        $productos = $producto->obtenerProductosRegistradosPorAgencia($params['id_agencia']);
         
         $this->_helper->json($productos);
 
     }
     
 
+    public function consultaSelectProductoAction(){
+    
+    	$this->_helper->layout()->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	$params=$this->_request->getParams();
+    	$producto = new Application_Model_DbTable_Producto();
+    	$productos = $producto->obtenerProductosFaltantesPorAgencia($params['id_agencia']);
+    
+    	$this->_helper->json($productos);
+    
+    }
+    
 }
 

@@ -1,9 +1,10 @@
 <?php
 class Application_Model_Services_ServicesPolizas
 {
-	function esPolizaValida($idProducto, $idAgencia, $fechaInicialNuevaPoliza, $fechaFinalNuevaPoliza)
+	function esPolizaValida($idProducto, $idAgencia, $fechaInicialNuevaPoliza, $fechaFinalNuevaPoliza, $tipo = null)
 	{
 		$polizaValida = false;
+		$errorDesc='';
 		$polizaDbTable = new Application_Model_DbTable_Poliza();
 		$polizas = $polizaDbTable->obtenerPolizasPorIdProductoYIdAgencia($idProducto, $idAgencia);
 		$polizasViejasConFechaMayorAPolizaNueva = $polizaDbTable->obtenerPolizasConFechaFinalMayorAInicialNueva($idAgencia, $idProducto, $fechaInicialNuevaPoliza);
@@ -57,8 +58,28 @@ class Application_Model_Services_ServicesPolizas
 				}
 			}
 		}
+
+		if ($tipo == 'G' || $tipo == 'X'){
+			$poliza = new Application_Model_DbTable_Poliza();
+			
+			$values = array('id_agencia' => $idAgencia , 'id_producto' => $idProducto, 'tipo' => $tipo );
+			$pruebaPoliza = $poliza->obtienePolizaConGarantiaPorProducto($values);
+			
+			if ( count( $pruebaPoliza) > 0) {
+				$polizaValida = FALSE;
+			}
+			
+			$errorDesc = 'Ya cuenta con una garantía previamente registrada.';
+			
+		}
 		
-		return $polizaValida;
+		
+		$estatus = array(
+			'valida' => $polizaValida,
+			'errorDesc' => $errorDesc,
+		);
+		
+		return $estatus;
 	}
 	
 	function obtenerV1DeClavePoliza($idProducto, $id_agencia)

@@ -45,10 +45,14 @@ $(document).ready(function() {
  
   $("#addNewPolizaBtn").click(function(){ 
      abrirModalAgregarPoliza();
-  }) 
+  }); 
  
   $("#submitPolizaBtn").click(function(){
+	$('#modalNuevaPoliza').modal('hide');
+	  
+	  
       submitFormPoliza();
+
   });
 
  $(".FrontEndIdPoliza").hide()//.css("display", "none");
@@ -76,14 +80,28 @@ $(document).ready(function() {
  
  
  
-function submitFormPoliza(){   
+function submitFormPoliza(){
+	
+	var productoTable = $('#dataTable-productos-adquiridos').DataTable();
+	productoTable.clear().draw();
+	
+	$.blockUI({ css: { 
+	    border: 'none', 
+	    padding: '15px', 
+	    backgroundColor: '#000', 
+	    '-webkit-border-radius': '10px', 
+	    '-moz-border-radius': '10px', 
+	    opacity: .5, 
+	    color: '#fff' 
+	} }); 
+	
   addIdAgencia="&id_agencia="+idAgenciaActual;
   var id_product="&id_producto="+ $("#producto").val();
   var clave;
   if(ajaxActionPoliza=="actualizar"){
     clave="&clave="+clave_poliza;
   }else{
-    clave=""
+    clave="";
   }
 
   $.ajax({ 
@@ -93,16 +111,17 @@ function submitFormPoliza(){
       dataType: "json" 
     }).done(function(res) {  
     if (ajaxActionPoliza == "agregar"){ 
-       agregarPolizaAjaxDone(res); 
+    	agregarPolizaAjaxDone(res); 
      }else{ 
-       actualizarPolizaAjaxDone(res); 
-     } 
- 
- 
-       
-  })// end ajax done  
-    .fail(function() { 
-      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+    	 actualizarPolizaAjaxDone(res); 
+    } 
+
+
+    mostrarProductosEnTabla();
+    $.unblockUI();
+    })// end ajax done  
+    .fail(function() {
+    	swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
   });
 } // end submitFormPoliza(){ 
 
@@ -128,7 +147,6 @@ function submitFormPoliza(){
  
  
 function agregarPolizaEnTabla(res){ 
-      // var frontEndId = Object.keys(polizas).length + 1; 
         var polizaTable = $('#dataTable-polizas-vigentes').DataTable();   
         var info = polizaTable.page.info(); 
         if(res.id_poliza_estatus == "1"){ 
@@ -152,7 +170,7 @@ function agregarPolizaEnTabla(res){
           // BLQ - Bloqueado
           // CAN - Cancelado
            
-        res.descripcion=""; 
+        //res.descripcion=""; 
 
         var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#modalNuevaPoliza" value='+ res.id_poliza +   
         ' onclick="datosFormPoliza('+ res.id_poliza +  ')" >' +  // 
@@ -161,111 +179,94 @@ function agregarPolizaEnTabla(res){
         var nombre_producto_poliza="";
         if ($(productos_todos[res.id_producto]).length){
 
-          nombre_producto_poliza=productos_todos[res.id_producto].nombre_prod
+        	nombre_producto_poliza=productos_todos[res.id_producto].nombre_prod;
 
         }else{
-          nombre_producto_poliza="no vigente"
+        	nombre_producto_poliza="no vigente";
         }
-
 
         // calcular horas restantes
         var horas_us;
         if(res.horas_consumidas!=null){
-          horas_us= res.horas_poliza-res.horas_consumidas;
+        	horas_us= res.horas_poliza-res.horas_consumidas;
         }else{
-          horas_us=res.horas_poliza;
+        	horas_us=res.horas_poliza;
         }
 
         var id_poliza_row = "idPolizaRow"+res.id_poliza;
        // borrar despues 
         if(ajaxActionPoliza=="agregar" || ajaxActionPoliza=="consultar"){ 
 
-        polizaTable.row.add( [  
-        res.id_poliza, res.clave, nombre_producto_poliza, res.horas_poliza,horas_us, res.costo_poliza, res.fecha_ini, res.fecha_fin, estadoPoliza , "x"
-        ]).draw(); 
-
-        polizaTable.page( 'last' ).draw( 'page' );  
-        
- 
-        $('#dataTable-polizas-vigentes tr:last-child td:first-child').attr('class', 'frontEndIdPoliza'); 
-        $('#dataTable-polizas-vigentes tr:last-child td:first-child').css('background-color', 'red'); 
-        $('#dataTable-polizas-vigentes tr:last-child td:last-child').html(boton);  
-        $('#dataTable-polizas-vigentes tr:last-child td:last-child').attr('id', "editarPolizaBtn"+res.id_poliza); 
-        //$('#dataTable-polizas-vigentes tr:last-child td:last-child').attr('class', "frontEndIdPoliza"); 
-        $("#editarPolizaBtn"+res.id_poliza).closest('tr').attr('id', id_poliza_row); 
- 
+	        polizaTable.row.add( [  
+		        res.id_poliza, 
+		        res.clave, 
+		        nombre_producto_poliza, 
+		        res.descripcion, 
+		        res.horas_poliza,
+		        horas_us, 
+		        res.costo_poliza, 
+		        res.fecha_ini, 
+		        res.fecha_fin, 
+		        estadoPoliza , 
+		        "x"
+	        ]).draw(); 
+	
+	        polizaTable.page( 'last' ).draw( 'page' );  
+	        
+	 
+	        $('#dataTable-polizas-vigentes tr:last-child td:first-child').attr('class', 'frontEndIdPoliza'); 
+	        $('#dataTable-polizas-vigentes tr:last-child td:first-child').css('background-color', 'red'); 
+	        $('#dataTable-polizas-vigentes tr:last-child td:last-child').html(boton);  
+	        $('#dataTable-polizas-vigentes tr:last-child td:last-child').attr('id', "editarPolizaBtn"+res.id_poliza); 
+	        $("#editarPolizaBtn"+res.id_poliza).closest('tr').attr('id', id_poliza_row); 
+	 
         }else{ 
 
-            //console.log("")
-            //var id_poliza_row = "idPolizaRow"+res.id_poliza;
-            polizaTable.row( $("#"+id_poliza_row) ).data([res.id_poliza, res.clave, nombre_producto_poliza, res.horas_poliza, horas_us, res.costo_poliza, res.fecha_ini, res.fecha_fin, estadoPoliza , "x"]).draw();
-            //console.log( polizaTable.row( this ).data("x","x","x","x","x","x","x","x","x") );
-            polizaTable.page(info.page).draw( 'page' );  
-    
-
-          // $("#editarPolizaBtn"+res.id_poliza).closest('tr').next('tr').attr('id', id_poliza_row);
-
-          //$("#"+res.id_usuario) 
-          // polizaTable.row('#'+id_poliza_row).remove().draw( false ); 
-          $('#'+id_poliza_row + " td:first-child").css('background-color', 'red'); 
-          $('#'+id_poliza_row + " td:first-child").attr('class', 'frontEndIdPoliza');
-
-          $("#"+id_poliza_row + " td:last-child").html(boton);  
-          // if (!$("#"+id_poliza_row).length){ // es el último elemento en la tabla 
-          //      console.log("ultimoElemento") 
-          //      $('#dataTable-polizas-vigentes tr:last-child td:last-child').html(boton);  
-          // } 
-           
-            // Actualizar modelo
-           polizas[res.id_poliza]=res;
+			polizaTable.row( $("#"+id_poliza_row) ).data([res.id_poliza, res.clave, nombre_producto_poliza, res.descripcion, res.horas_poliza, horas_us, res.costo_poliza, res.fecha_ini, res.fecha_fin, estadoPoliza , "x"]).draw();
+			polizaTable.page(info.page).draw( 'page' );  
+			$('#'+id_poliza_row + " td:first-child").css('background-color', 'red'); 
+			$('#'+id_poliza_row + " td:first-child").attr('class', 'frontEndIdPoliza');
+			
+			$("#"+id_poliza_row + " td:last-child").html(boton);  
+			// Actualizar modelo
+			polizas[res.id_poliza]=res;
 
         } 
 
-      
-
           if(ajaxActionPoliza=="agregar" || ajaxActionPoliza=="actualizar" ) {
                $('#modalNuevaPoliza').modal('toggle'); 
-             //$('#').modal('modalNuevaPoliza');  
-               //$(".frontEndIdColumn").hide();
           }
            
           // ocultar front-end-id
           $(".frontEndIdPoliza").hide();  
 
-} // end function agregarUsuarioAgenciaEnTabla(res){ 
+} // end function agregarPolizaEnTabla(res){ 
  
 
  
 function agregarPolizaAjaxDone(res){ 
   if(res.estado == "ok"){ // si la respuesta es correcta: 
- 
-      
-
       agregarPolizaEnTabla(res); 
       polizas[res.id_poliza] = res;
       swal("La póliza ha sido actualizado exitosamente", " ", "success");  
- 
+      $('#modalNuevaPoliza').modal('hide');
+
    } else{ 
-     swal(res.descripcion, " ", "error");  
+	   $('#modalNuevaPoliza').modal('show');
+	   swal(res.descripcion, " ", "error");  
      } 
 } // end agregarAjaxDone() 
  
- 
- 
 function actualizarPolizaAjaxDone(res){ 
-  //var polizaTable = $('#dataTable-usuarios').DataTable();   
- 
   if(res.estado == "ok"){ 
     agregarPolizaEnTabla(res); 
-    swal("La póliza ha sido actualizado exitosamente", " ", "success"); 
+    swal("La póliza ha sido actualizado exitosamente", " ", "success");
+    $('#modalNuevaPoliza').modal('hide');
  
   }else{ 
+	$('#modalNuevaPoliza').modal('show');
     swal(res.descripcion, " ", "error"); 
   } 
-   
-  //dataTable.row('.selected').remove().draw( false ); 
-   
- 
 } 
  
  
@@ -349,38 +350,18 @@ function populatePolizaForm(data) {
 }
 
 function mostrarProductosEnSelectPolizas(){
-        //console.log("hi from mostrarProductosEnPolizas");
-        //console.log(productos_agencia);
 
-        // $.each(productos_agencia, function(key, value) {
-        //     console.log(key, value);
-        // });
-        // jQuery.each(productos_agencia_array, function(i, val) {
-        //   console.log("hola");
-        // });
-        // console.log("nothing works :(  ")
-          for (var key in productos_agencia) {
-        	  
-        	  
-        	  
-            if (productos_agencia.hasOwnProperty(key)) {
-              var val = productos_agencia[key];
-              //console.log(val);
-              if(val.tiene_poliza=='S'){
-	                $('#producto').append($('<option>').text(val.nombre_prod)
-	                .attr('value', val.id_producto)
-	                //.attr('id', "id_producto_"+val.id_producto)
-	                );
-            	}
-              //console.log(val);
-            }
-          }
-
-        // for (var key in productos_agencia) {
-        //   if (productos_agencia.hasOwnProperty(key)) {
-        //     console.log(key + " -> " + productos_agencia[key]);
-        //   }
-        // }
+  for (var key in productos_agencia) {
+    if (productos_agencia.hasOwnProperty(key)) {
+      var val = productos_agencia[key];
+      //console.log(val);
+      if(val.tiene_poliza=='S'){
+            $('#producto').append($('<option>').text(val.nombre_prod)
+            .attr('value', val.id_producto)
+            );
+    	}
+    }
+  }
 }
 
 

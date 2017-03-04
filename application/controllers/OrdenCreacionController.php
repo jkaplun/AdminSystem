@@ -65,6 +65,7 @@ class ordenCreacionController extends Zend_Controller_Action
         $zendForm->addElement($tipoSoporte);
  		$this->view->selectAgencias=$zendForm;
         $this->view->formUsuarioAgencia = new Application_Form_UsuariosAgencia_UsuariosAgencia();
+        
     }
 
     public function agregarAction()

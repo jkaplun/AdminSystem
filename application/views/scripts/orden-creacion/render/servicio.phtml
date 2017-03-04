@@ -1,6 +1,5 @@
 <div class="salto"></div>
 <div id="alertas">
-	
 </div>
 <div class="panel panel-default">
 	<div class="panel-body" id="datos-agencia">
@@ -37,6 +36,15 @@
 					</div>
 				</div>  
 				<div class="row">
+					<div class="col-md-4">
+						<label>Observaciones:</center>
+						<p>
+							<span id="observaciones_agencia-info"></span>
+						</p>
+			    	</label>
+			    	</div>
+			    </div>	
+				<div class="row">
 					<div class="col-md-12 table-responsive">
 					<h2 class="page-header">Seleccione una póliza: </h2>
 						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-vigentes">
@@ -47,6 +55,7 @@
 									<th>Producto</th>
 									<th>Horas</th>
 									<th>Horas Restantes</th>
+									<th>Vigencia</th>
 									<th>Estado</th>
 								</tr>
 							</thead>
@@ -55,72 +64,107 @@
 						</table>
 					</div>
 				</div>
-				<form id="datosFormServicio">
-					<h2 class="page-header">Servicio</h2>
-					<div class="row">				
-		    			<div class="form-group col-md-4">
-		    				<label>Solicit&oacute;:</label>
-		    				<div class="input-group">
-			    			    <select id="solicito" class="form-control"></select>
-							    <span class="input-group-btn">
-							    	<button class="btn btn-success" type="button" data-dismiss="modal" onclick="" data-toggle="modal" data-target="#nuevoUsuarioModal" id="agregarUsuarioAgenciaBtn">+</button>
-							    </span>
-						    </div>
-							<br/>
-		 					<label>Ejecutivo:</label>
-		      				<select id="ejecutivo" class="form-control"></select> 
-		    			</div>                         
-		    			<div class="form-group col-md-4">
-							<label>Motivo:</label>
-							<select id="motivo" class="form-control">
-								<option value="motivo1">Actualizaci&oacute;n</option>
-								<option value="motivo2">Configuraci&oacute;n</option>
-								<option value="motivo3">Error del Sistema</option>
-								<option value="motivo4">Factura Electr&oacute;nica</option>
-								<option value="motivo5">Formatos e Impresoras</option>	
-								<option value="motivo6">Implementaci&oacute;n</option>
-								<option value="motivo7">Informaci&oacute;n</option>
-								<option value="motivo8">Instalaci&oacute;n</option>
-								<option value="motivo9">Interfases</option>
-								<option value="motivo10">Operaci&oacute;n</option>
-								<option value="motivo11">Reportarse</option>
-								<option value="motivo12">Reportarse Urgentemente</option>
-								<option value="motivo13">Reportes</option>
-								<option value="motivo14">Seguimiento</option>
-						  	</select>
-						  	<br/>
-							<label>Tipo de Soporte:</label>
-							<select id="tipo_soporte" class="form-control">
-								<option>Curso</option>
-								<option>Demostracion</option>
-								<option>Desarrollo</option>
-								<option>Implementacion</option>
-								<option>Paginas Web</option>
-								<option>Reportarse</option>
-								<option>Reportarse Urgente</option>
-								<option>Revision MIG</option>
-								<option>Soporte en Sitio</option>
-								<option>Soporte Interno</option>
-								<option>Soporte Remoto</option>
-								<option>Soporte Telefonico</option>
-								<option>Ventas</option>
-							</select>							  						
-		    			</div>  
-		    			<div class="form-group col-md-4">
-		      				<label class="control-label">Descripci&oacute;n:</label>
-		      				<textarea id="descripcion" class="form-control" rows="5"></textarea>
-		    			</div>                  
-		  			</div>
-				  	<div class="row">
-				  		<div class="col-md-10"></div>
-				    	<div class="col-md-2">
-				      		<button type="button" class="btn btn-outline btn-success btn-lg btn-block" id="submitNuevaOrdenBtn">Guardar</button>
-				    	</div>
-				  	</div>  					
-				</form>
+				<div class="row">
+					<div class="col-md-12">
+						<form id="datosFormServicio">
+							<h2 class="page-header">Servicio</h2>
+							<div class="row">				
+				    			<div class="form-group col-md-2">
+				    				<label>Solicit&oacute;:</label>
+				    				<div class="input-group">
+					    			    <select id="solicito" class="form-control"></select>
+								    </div>
+				    			</div>
+				    			<div class="form-group col-md-2" id="div_otro" >
+				    				<label>Otro:</label>
+				    				<div class="input-group">
+					    				<input type="text" class="form-control" id="solicito_otro" name="solicito_otro" placeholder="Otro">
+									</div>
+				    			</div>
+				    			<div class="form-group col-md-2">
+				    			
+				    			</div>
+				    		</div>
+				    		<div class="row">				
+				    			<div class="form-group col-md-2">
+				    				<label>Producto:</label>
+				    				<div class="input-group">
+					    			    <select id="producto" class="form-control"></select>
+								    </div>
+				    			</div>
+				    			<div class="form-group col-md-2">
+					    			<label>Motivo:</label>
+				    				<div class="input-group">
+										<select id="motivo" class="form-control">
+											<option value="motivo1">Actualizaci&oacute;n</option>
+											<option value="motivo2">Configuraci&oacute;n</option>
+											<option value="motivo3">Error del Sistema</option>
+											<option value="motivo4">Factura Electr&oacute;nica</option>
+											<option value="motivo5">Formatos e Impresoras</option>	
+											<option value="motivo6">Implementaci&oacute;n</option>
+											<option value="motivo7">Informaci&oacute;n</option>
+											<option value="motivo8">Instalaci&oacute;n</option>
+											<option value="motivo9">Interfases</option>
+											<option value="motivo10">Operaci&oacute;n</option>
+											<option value="motivo11">Reportarse</option>
+											<option value="motivo12">Reportarse Urgentemente</option>
+											<option value="motivo13">Reportes</option>
+											<option value="motivo14">Seguimiento</option>
+									  	</select>
+									</div>
+				    			</div>
+				    			<div class="form-group col-md-2">
+				    			
+				    			</div>
+				    		</div>	
+				    		
+				    		<div class="row">				
+				    			<div class="form-group col-md-2">
+				    				<label>Ejecutivo:</label>
+				    				<div class="input-group">
+					      				<select id="ejecutivo" class="form-control"></select> 
+								    </div>
+				    			</div>
+				    			<div class="form-group col-md-2">
+					    			<label>Tipo de Soporte:</label>
+				    				<div class="input-group">
+										<select id="tipo_soporte" class="form-control">
+											<option>Curso</option>
+											<option>Demostracion</option>
+											<option>Desarrollo</option>
+											<option>Implementacion</option>
+											<option>Paginas Web</option>
+											<option>Reportarse</option>
+											<option>Reportarse Urgente</option>
+											<option>Revision MIG</option>
+											<option>Soporte en Sitio</option>
+											<option>Soporte Interno</option>
+											<option>Soporte Remoto</option>
+											<option>Soporte Telefonico</option>
+											<option>Ventas</option>
+										</select>						
+									</div>
+				    			</div>
+				    			<div class="form-group col-md-2">
+				    			
+				    			</div>
+				    		</div>	
+			    			<div class="row">
+			    				<div class="col-md-10">
+		      						<label class="control-label">Descripci&oacute;n:</label>
+		      						<textarea id="descripcion" class="form-control" rows="5"></textarea>
+			      				</div>
+			    			</div>                  
+						  	<div class="row">
+						    	<div class="col-md-2">
+						      		<button type="button" class="btn btn-outline btn-success btn-lg btn-block" id="submitNuevaOrdenBtn">Guardar</button>
+						    	</div>
+						    	<div class="col-md-10"></div>
+						  	</div>  					
+						</form>
+					</div>
+				</div>
 			</div>
-			<div class="panel-footer">
-					<p>Observaciones:</p>
-		    		<p><span class="text-primary" id="observaciones_agencia-info"></span></p>
-		    </div>	
 		</div>
+	</div>
+</div>

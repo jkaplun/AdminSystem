@@ -46,7 +46,8 @@ $(document).ready(function() {
 
   $("#addNewProductoBtn").click(function(){ 
      abrirModalAgregarProducto();
-  }) 
+
+  });
  
     mostrarProductosEnSelect();
 
@@ -56,7 +57,23 @@ $(document).ready(function() {
  
  
 function submitFormProducto(){   
-  //console.log("----------> ajaxActionProducto: "+ajaxActionProducto);
+	$('#modalNuevoProducto').modal('hide');
+
+	var productoTable = $('#dataTable-productos-adquiridos').DataTable();
+	productoTable.clear().draw();
+	
+	$.blockUI({ css: { 
+	    border: 'none', 
+	    padding: '15px', 
+	    backgroundColor: '#000', 
+	    '-webkit-border-radius': '10px', 
+	    '-moz-border-radius': '10px', 
+	    opacity: .5, 
+	    color: '#fff' 
+	} }); 	
+	
+	
+//console.log("----------> ajaxActionProducto: "+ajaxActionProducto);
   addIdAgencia="&id_agencia="+idAgenciaActual;
   //console.log("ajaxActionProducto" +ajaxActionProducto);
   var id_producto="&id_producto="+$("#nombre_prod").val();
@@ -75,16 +92,19 @@ function submitFormProducto(){
       dataType: "json" 
     }).done(function(res) {  
 
-    if (ajaxActionProducto == "agregar"){ 
-       agregarProductoAjaxDone(res); 
-     }else{ 
-       actualizarProductoAjaxDone(res); 
-     } 
- 
- 
+//    if (ajaxActionProducto == "agregar"){ 
+//       agregarProductoAjaxDone(res); 
+//     }else{ 
+//       actualizarProductoAjaxDone(res); 
+//     } 
+ 	mostrarProductosEnTabla();  //productos/index.js
+    	$.unblockUI();
+    productosSelectAgencia();
        
   })// end ajax done  
     .fail(function() { 
+    	$('#modalNuevoProducto').modal('show');
+
       swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
   });
 } // end submitFormProducto(){ 
@@ -222,6 +242,15 @@ function actualizarProductoAjaxDone(res){
   ajaxActionProducto="agregar"; 
   //console.log("ajaxActionProducto "+ajaxActionProducto); 
   $("#nombre_prod_div").show();
+	if (productos_todos[$( "#nombre_prod" ).val()].tiene_licencia == 'N') {
+		$("#numero_licencias_div").hide();
+	} 
+	if (productos_todos[$( "#nombre_prod" ).val()].tiene_licencia == 'S') {
+		$("#numero_licencias_div").show();
+	} 
+
+  
+  
 } 
 
 
@@ -229,7 +258,7 @@ function actualizarProductoAjaxDone(res){
 function mostrarProductosEnSelect(){
 
   productos_todos={};
-  ajaxActionProducto="consultarproductos"
+  ajaxActionProducto="consultarproductos";
   //var addIdAgencia="id_agencia="+idAgenciaActual;
  $.ajax({ 
       url: pathProductoController+ajaxActionProducto, 
@@ -246,11 +275,11 @@ function mostrarProductosEnSelect(){
         if(res[i].vigente_prod=="S"){
         productos_todos[res[i].id_producto]=res[i];
         //agregarProductoEnTabla(res[i]);
-        $('#nombre_prod').append($('<option>').text(res[i].nombre_prod)
-          .attr('value', res[i].id_producto)
-          //.attr('id', "id_producto_"+res[i].id_producto)
-          .attr('class',"productSelect")
-          );
+//        $('#nombre_prod').append($('<option>').text(res[i].nombre_prod)
+//          .attr('value', res[i].id_producto)
+//          //.attr('id', "id_producto_"+res[i].id_producto)
+//          .attr('class',"productSelect")
+//          );
         }
       }
 
@@ -297,11 +326,6 @@ function mostrarProductosEnTabla(){
     }) 
     .done(function(res) {  
       var i=0;
-
-      
-      //pruebaMostrarUsuarios(res, i);
-       
-
       for (i;i<res.length;i++){
         if(res[i].id_agencia!=0){
             productos_agencia[res[i].id_producto]=res[i];
@@ -309,21 +333,55 @@ function mostrarProductosEnTabla(){
             $("#id_producto_"+res[i].id_producto).hide();
             agregarProductoEnTabla(res[i]);
         }
-    
-       
-
       }
       
-      mostrarProductosEnSelectPolizas() //polizas/index.js
-
-
-   //$(".frontEndIdColumn").hide();
+      mostrarProductosEnSelectPolizas(); //polizas/index.js
        
   })// end ajax done  
     .fail(function() { 
       swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
   }); 
 }
+
+function productosSelectAgencia(){
+	idAgenciaActual =$("#select_agencias").val();
+
+	$('#nombre_prod')
+	    .find('option')
+	    .remove()
+	    .end();
+
+
+$.ajax({
+	  method: "POST",
+	  url: "public/productos/consulta-select-producto",
+	  data: { id_agencia: idAgenciaActual }
+	})
+	  .done(function( msg ) {
+	    
+		    $.each(msg, function(key, value){  
+		    	$('#nombre_prod').append($('<option>').text(value.nombre_prod)
+		    			.attr('value', value.id_producto)
+		            );
+		    });
+
+	    
+	    
+	  });
+
+}
+
+$(document).ready(function() {
+	$( "#nombre_prod" ).change(function() {
+		if (productos_todos[$( "#nombre_prod" ).val()].tiene_licencia == 'N') {
+			$("#numero_licencias_div").hide();
+		} 
+		if (productos_todos[$( "#nombre_prod" ).val()].tiene_licencia == 'S') {
+			$("#numero_licencias_div").show();
+		} 
+	});
+});
+
 
 
 

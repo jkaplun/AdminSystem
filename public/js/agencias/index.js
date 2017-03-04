@@ -55,6 +55,9 @@ $(document).ready(function() {
 
 	// cuando se eliga una agencia de la lista se llama a la función cunslutar agencia
 	$("#select_agencias").change(function(){
+		
+		blockUI();
+		
 		idAgenciaActual =$("#select_agencias").val();
 		consultarAgencia(idAgenciaActual);
 
@@ -76,12 +79,15 @@ $(document).ready(function() {
 	 	mostrarUsuariosAgencia();   //usuarioagencia/index.js
 	 	mostrarPolizas(); 			//polizas/index.js
 	 	mostrarProductosEnTabla();  //productos/index.js
-
 	 	mostrarFolios();
+	 	productosSelectAgencia();
+	 	
 	 	
         actualizarVistas.vistaUsuarioAgencia =true;
-	});
+        
 
+	});
+	/*
 	soloNumeros('cp');
 
 	soloLetrasNumeros('nombre')
@@ -90,7 +96,7 @@ $(document).ready(function() {
 	soloLetras('colonia');
 
 	soloLetrasDot('nombre_comercial');
-	
+	*/
 	$( "#tipo" ).change(function() {
 		openPolizaModal();
 	});

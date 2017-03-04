@@ -135,5 +135,22 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		->setMethod('post')
 		->setAction('public/ordenes/nueva-orden')
 		->addElements(array($empresa, $id_poliza, $producto, $solicito, $ejecutivo, $motivo, $descripcion, $submit, $idcliente,$duracion));
-		}
+		
+		$solicito_otro = new Zend_Form_Element_Text('solicito_otro');
+		
+		$solicito_otro->setRequired(false)
+			->removeDecorator('label')
+			->removeDecorator('HtmlTag')
+			->setAttrib("class","form-control")
+			->setAttrib("autocomplete","off")
+			->setAttrib("placeholder",utf8_encode("Otro"))
+			->setAttrib("maxlength","245");
+		
+		$this->addElement($solicito_otro);
+	
+	}
+		
+		
+
+		
 }
