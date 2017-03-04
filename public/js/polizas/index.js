@@ -55,27 +55,7 @@ $(document).ready(function() {
 
   });
 
- $(".FrontEndIdPoliza").hide()//.css("display", "none");
-
-//   $("#tabUsuariosAgencia").click(function(){
-//         if(actualizarVistas.vistaUsuarioAgencia == false){
-//           console.log("actualizarVistas.vistaUsuarioAgencia: "+actualizarVistas.vistaUsuarioAgencia);
-//           mostrarUsuariosAgencia();
-//             actualizarVistas.vistaUsuarioAgencia =true;
-//         }
-      
-//   })
-
-
-// $('#dataTable-usuarios-agencias').on( 'page.dt', function () {
-//     console.log("cambiando de página");
-//     $(".frontEndIdColumn").hide();
-// } );
-
-
-
- 
-
+ $(".FrontEndIdPoliza").hide();
 }); // end  $(document).ready(function() { 
  
  
@@ -121,6 +101,7 @@ function submitFormPoliza(){
     $.unblockUI();
     })// end ajax done  
     .fail(function() {
+    	$.unblockUI();
     	swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
   });
 } // end submitFormPoliza(){ 
