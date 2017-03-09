@@ -67,13 +67,13 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 
 	public function obtenerPolizasVigentesPorIdAgencia ($idAgencia)
 	{
+		
 		$select = $this->_db->select()->
-		from ( $this->_name, '*' )
-		->where(' id_agencia="'.$idAgencia.'" and now() between fecha_ini and fecha_fin 
+		from ( $this->_name, array("*","(if ( now() between fecha_ini and fecha_fin_servicio,'si','no')) as vigente" ) )
+		->where(' id_agencia="'.$idAgencia.'" and fecha_fin_servicio > now() 
 				and tiempo_agotado = "N" and id_poliza_estatus = 1 
 				and (horas_poliza-horas_consumidas) > 0')
 		->order('fecha_ini');
-
 		//echo $select;die;
 		return $this->getAdapter ()->fetchAll( $select );
 	}

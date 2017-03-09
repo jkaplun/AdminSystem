@@ -65,7 +65,8 @@ class PolizasController extends Zend_Controller_Action
             'costo_poliza' => $params['costo_poliza'],
             'tipo' => $params['tipo'],
             'observaciones' => $params['observaciones_poliza'],
-            'id_poliza_estatus' => $params['id_poliza_estatus']
+            'id_poliza_estatus' => $params['id_poliza_estatus'],
+       		'fecha_fin_servicio' => $params['fecha_fin_servicio']
         );
 
         $form = new Application_Form_Polizas_Polizas();
@@ -144,17 +145,18 @@ class PolizasController extends Zend_Controller_Action
         $params=$this->_request->getParams();
 
         $data = array(
-        				'id_poliza' => $params['id_poliza'],
-        				'id_agencia' => $params['id_agencia'],
-        				'id_producto' => $params['id_producto'],
-                        'horas_poliza' => $params['horas_poliza'], 
-                        'clave' => $params['clave'], 
-                        'fecha_ini' => $params['fecha_ini'], 
-                        'fecha_fin' => $params['fecha_fin'],
-                        'costo_poliza' => $params['costo_poliza'],
-                        'observaciones' => $params['observaciones_poliza'],
-                        'tipo' => $params['tipo'],
-                        'id_poliza_estatus' => $params['id_poliza_estatus']
+      				'id_poliza' => $params['id_poliza'],
+       				'id_agencia' => $params['id_agencia'],
+       				'id_producto' => $params['id_producto'],
+                    'horas_poliza' => $params['horas_poliza'], 
+                    'clave' => $params['clave'], 
+                    'fecha_ini' => $params['fecha_ini'], 
+                    'fecha_fin' => $params['fecha_fin'],
+                    'costo_poliza' => $params['costo_poliza'],
+                    'observaciones' => $params['observaciones_poliza'],
+                    'tipo' => $params['tipo'],
+                    'id_poliza_estatus' => $params['id_poliza_estatus'],
+       				'fecha_fin_servicio' => $params['fecha_fin_servicio']
                 );
         
         	$form = new Application_Form_Polizas_Polizas();

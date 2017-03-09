@@ -93,6 +93,20 @@ class Application_Form_Polizas_Polizas extends Zend_Form
         ->setAttrib("data-date-format","yyyy-mm-dd");
         $this->addElement($fecha_fin);
         
+        // Fecha corte servi
+        $fecha_fin_servicio = new Zend_Form_Element_Text('fecha_fin_servicio');
+        $fecha_fin_servicio->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->removeDecorator('Errors')
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("class","form-control datepicker")
+        ->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
+        ->setAttrib("maxlength","10")
+        ->setAttrib("data-provide","datepicker")
+        ->setAttrib("readonly","readonly")
+        ->setAttrib("data-date-format","yyyy-mm-dd");
+        $this->addElement($fecha_fin_servicio);
+        
         // Cantidad facturar
         $costo_poliza = new Zend_Form_Element_Text('costo_poliza');
         $costo_poliza->removeDecorator('label')

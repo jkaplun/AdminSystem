@@ -257,8 +257,11 @@ function actualizarPolizaAjaxDone(res){
    id_poliza="&id_poliza=" +frontEndIdPoliza;
    ajaxActionPoliza="actualizar"; 
 
-   //console.log("ajaxAction "+ajaxActionPoliza); 
-   // console.log(usuariosAgencias[frontEndId - 1]);
+   $('#fecha_ini').hide();
+   $('#fecha_fin').hide();
+   
+   $('#fecha_ini_txt').show();
+   $('#fecha_fin_txt').show();
 
     populatePolizaForm(polizas[frontEndIdPoliza]);
 
@@ -269,17 +272,16 @@ function actualizarPolizaAjaxDone(res){
  function abrirModalAgregarPoliza(){ 
   //$('#myModalLabel').html("Agregar Usuario"); 
   document.getElementById("formPoliza").reset(); 
-
   ajaxActionPoliza="agregar"; 
- 
-
    
+  $('#fecha_ini').show();
+  $('#fecha_fin').show();
+  
+  $('#fecha_ini_txt').hide();
+  $('#fecha_fin_txt').hide();
 } 
 
-
-
 function mostrarPolizas(){
-
   polizas={};
   ajaxActionPoliza="consultar"
   var addIdAgencia="id_agencia="+idAgenciaActual;
@@ -311,22 +313,37 @@ function mostrarPolizas(){
   }); 
 }
 
-
-
 function populatePolizaForm(data) {  
 
     $.each(data, function(key, value){  
-    if(key == "clave"){
-        clave_poliza=value;
-    } else if(key == "observaciones"){
-        $("#observaciones_poliza").val(value);
-        
-    } else if(key=="id_producto"){
-      $("#producto").val(value);
-    }else{
-      //console.log("key: "+key + " value: " +value);
-      $("#"+key).val(value);
-      }
+	    if(key == "clave"){
+	        clave_poliza=value;
+	    } else if(key == "observaciones"){
+	        $("#observaciones_poliza").val(value);
+	        
+	    } else if(key=="id_producto"){
+	      $("#producto").val(value);
+	    }else{
+	      //console.log("key: "+key + " value: " +value);
+	      $("#"+key).val(value);
+	      }
+	    if(key == "fecha_ini"){
+	    	$("#fecha_ini").datepicker("update",value);
+	    	$('#fecha_ini_txt').html(value);	
+	    	
+	    }
+	    if(key == "fecha_fin"){
+			$("#fecha_fin").datepicker("update",value);
+			$('#fecha_fin_txt').html(value);
+			
+	    }
+	    if(key == "fecha_fin_servicio"){
+	    	console.log(key + " - " + value);
+	    	if (value == "0000-00-00") {
+	    		value = '';
+	    	}
+			$("#fecha_fin_servicio").datepicker("update",value);
+	    }
     });
 }
 
@@ -351,5 +368,4 @@ function agregarProductoEnSelectPoliza(val){
                 $('#producto').append($('<option>').text(productos_todos[val.id_producto].nombre_prod)
                 .attr('value', val.id_producto)
                 );
-
 }

@@ -101,6 +101,24 @@ $(document).ready(function() {
 		openPolizaModal();
 	});
 	
+	$( "#fecha_ini" ).change(function() {
+		//$("#fecha_fin_servicio").val($("#fecha_fin").val());
+		
+		var fecha = $("#fecha_ini").val();
+		var res = fecha.split("-");
+		var anio = res[0];
+		var aniomasuno = parseInt(anio) +1 ;
+		var d = new Date( aniomasuno , (res[1]-1), res[2]);
+		
+		$("#fecha_fin").datepicker("update",d);
+	});
+	
+	$( "#fecha_fin" ).change(function() {
+		//$("#fecha_fin_servicio").val($("#fecha_fin").val());
+		$("#fecha_fin_servicio").datepicker("update", $("#fecha_fin").val());
+	});
+	
+	
 }); 
 // end  $(document).ready(function() {
 

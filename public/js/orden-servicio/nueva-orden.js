@@ -167,10 +167,9 @@ function mostarDatosAgencia(datosAgencia){
 
 function mostrarPolizas(){
 	polizas={};
-  	ajaxActionPoliza="consultar"
  	var addIdAgencia="id_agencia="+idAgenciaActual;
  	$.ajax({ 
-		url: pathPolizaController+"consultar", 
+		url: pathPolizaController+"consultarpolizasvigentes", 
 		method: "post", 
 		data: addIdAgencia,
 		dataType: "json" 
@@ -245,15 +244,22 @@ function agregarPolizaEnTabla(res){
   } 
   
 	polizaTable.row.add( [ 
-		"", res.clave, nombre_producto_poliza, res.horas_poliza, horas_us, res.fecha_ini +" a "+ res.fecha_fin , estadoPoliza 
+		"", res.clave, nombre_producto_poliza, res.horas_poliza, horas_us, res.fecha_ini +" a "+ res.fecha_fin , res.fecha_fin_servicio ,estadoPoliza 
 	]).draw(); 
 
-	console.log(horas_us);
+	//console.log(horas_us);
 	
 	polizaTable.page( 'last' ).draw( 'page' );  
 
   if(res.id_poliza_estatus == "1"){ 
-    $('#dataTable-polizas-vigentes tr:last-child td:first-child').html(' <input type="radio" name="id_poliza" id value="'+res.id_poliza+'">'); 
+	if (res.vigente=='si') {
+		$('#dataTable-polizas-vigentes tr:last-child td:first-child').html(' <input type="radio" name="id_poliza" id value="'+res.id_poliza+'">');	
+	}  
+
+	if (res.vigente=='no') {
+		$('#dataTable-polizas-vigentes tr:last-child td:first-child').html('');	
+	}  
+    
         
     }else if(res.id_poliza_estatus="null"){
       $('#dataTable-polizas-vigentes tr:last-child td:last-child').css('background-color', '#ffd6d6');  
@@ -524,9 +530,7 @@ function submitFormUsuarioAgencia(){
 
 
 function getProductosByAgencia(){
-	
 	var select_agencias = $("#select_agencias").val();
-	console.log(select_agencias);
 	
 	$.ajax({
 		  method: "POST",
@@ -535,20 +539,10 @@ function getProductosByAgencia(){
 		  dataType: "json"
 		})
 		  .done(function( msg ) {
-			  
-			  console.log(msg);
-			  
 			  $('#producto').find('option').remove();
 			  
 			  $.each(msg, function( index, value ) {
 				  $('#producto').append('<option value="'+value.id_producto+'">'+value.nombre_prod+'</option>');
 				});
-			  
 		  });
-	
 }
-
-
-
-
-///////
