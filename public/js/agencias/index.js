@@ -98,6 +98,7 @@ $(document).ready(function() {
 	
 }); // end  $(document).ready(function() {
 
+
 function updateFechaFin(){
 	var fecha = $("#fecha_ini").val();
 	var res = fecha.split("-");
