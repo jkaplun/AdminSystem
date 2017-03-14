@@ -66,7 +66,7 @@ class Application_Model_DbTable_Producto extends Zend_Db_Table_Abstract
 	public function obtenerProductosRegistradosPorAgencia($id_agencia){
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
-		->where("id_producto in ( select id_producto from agencia_producto where id_agencia={$id_agencia} ) and vigente_prod='S'");
+		->where("id_producto in ( select id_producto from agencia_producto where id_agencia={$id_agencia} and estatus='S' ) and vigente_prod='S'");
 		return $this->getAdapter()->fetchAll( $select );
 	}
 }

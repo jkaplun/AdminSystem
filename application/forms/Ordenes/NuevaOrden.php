@@ -50,18 +50,15 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		;
 
 		// solicito
-		$solicito = new Zend_Form_Element_Text('solicito');
+		$solicito = new Zend_Form_Element_Select('solicito');
 		$solicito->setRequired(true)
-		->addErrorMessage("- Es necesario indicar quién solicitó el servicio.")
-		->removeDecorator('label')
-		->removeDecorator('HtmlTag')
-		//->removeDecorator('Errors')
-		->setAttrib("class","form-control")
-		->setAttrib("autocomplete","off")
-		->setAttrib("placeholder","Solicitó")
-		->setAttrib("maxlength","45")
-		;
-
+			->addErrorMessage("- Es necesario indicar quién solicitó el servicio.")
+			->removeDecorator('label')
+			->removeDecorator('HtmlTag')
+			->setAttrib("class","form-control")
+			->setAttrib("autocomplete","off");
+		$this->addElement($solicito);
+		
 		// ejecutivo
 		$ejecutivo = new Zend_Form_Element_Text('ejecutivo');
 		$ejecutivo->setRequired(true)
@@ -75,31 +72,56 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		->setAttrib("maxlength","45")
 		;
 
-		// motivo
-		$motivo = new Zend_Form_Element_Text('motivo');
-		$motivo->setRequired(true)
-		->addErrorMessage("- Es necesario que introduzca el motivo del servicio.")
-		->removeDecorator('label')
-		->removeDecorator('HtmlTag')
-		//->removeDecorator('Errors')
-		->setAttrib("class","form-control")
-		->setAttrib("autocomplete","off")
-		->setAttrib("placeholder",utf8_encode("Motivo"))
-		->setAttrib("maxlength","45")
-		;
 
-		// descripcion
-		$descripcion = new Zend_Form_Element_Text('descripcion');
-		$descripcion->setRequired(true)
-		->addErrorMessage("- Es necesario que introduzca la descripción de la ayuda.")
+		$os = new Application_Model_DbTable_OrdenServicio();
+		$result = $os->obtenerMotivos();
+		
+		$options = array();
+		
+		foreach ($result as $key => $value){
+			$options[$value['id_motivo']] = $value['motivo'];
+		}
+		
+		// numero de licencias
+		$motivo = new Zend_Form_Element_Select('id_motivo');
+		$motivo
 		->removeDecorator('label')
 		->removeDecorator('HtmlTag')
-		//->removeDecorator('Errors')
 		->setAttrib("class","form-control")
 		->setAttrib("autocomplete","off")
-		->setAttrib("placeholder",utf8_encode("Descripcion"))
-		->setAttrib("maxlength","45")
-		;
+		->addMultiOptions($options);
+		
+		$this->addElement($motivo);
+		
+		$result = $os->obtenerTipoDeSoporte();
+		
+		$options = array();
+		
+		foreach ($result as $key => $value){
+			$options[$value['id_tipo_soporte']] = $value['description'];
+		}
+		
+		// numero de licencias
+		$id_tipo_soporte = new Zend_Form_Element_Select('id_tipo_soporte');
+		$id_tipo_soporte
+		->removeDecorator('label')
+		->removeDecorator('HtmlTag')
+		->setAttrib("class","form-control")
+		->setAttrib("autocomplete","off")
+		->addMultiOptions($options);
+		
+		$this->addElement($id_tipo_soporte);
+		
+		// descripcion
+		$descripcion = new Zend_Form_Element_Textarea('descripcion');
+		$descripcion
+			->addErrorMessage("- Es necesario que introduzca la descripción de la ayuda.")
+			->removeDecorator('label')
+			->removeDecorator('HtmlTag')
+			->setAttrib("class","form-control")
+			->setAttrib("autocomplete","off")
+			->setAttrib("rows","5")
+			->setAttrib("placeholder",("Descripción"));
 
 
 		// $username->setRequired(true);

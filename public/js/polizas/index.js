@@ -153,10 +153,17 @@ function agregarPolizaEnTabla(res){
            
         //res.descripcion=""; 
 
-        var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#modalNuevaPoliza" value='+ res.id_poliza +   
-        ' onclick="datosFormPoliza('+ res.id_poliza +  ')" >' +  // 
-        '<i class="fa fa-info-circle"></i>'+  
-        '</button>'   ;
+        
+        if (res.id_poliza_estatus != "4") {
+	        var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#modalNuevaPoliza" value='+ res.id_poliza +   
+	        ' onclick="datosFormPoliza('+ res.id_poliza +  ')" >' +  // 
+	        '<i class="fa fa-info-circle"></i>'+  
+	        '</button>'   ;
+		} else {
+	        var boton = '';        	
+        }
+        
+        
         var nombre_producto_poliza="";
         if ($(productos_todos[res.id_producto]).length){
 
@@ -265,6 +272,12 @@ function actualizarPolizaAjaxDone(res){
 
     populatePolizaForm(polizas[frontEndIdPoliza]);
 
+    $('#producto').attr("disabled","disabled");
+    $('#tipo').attr("disabled","disabled");
+    
+    
+    
+    
 	$("#div-id-poliza-estatus").show();
 
  } 
@@ -279,6 +292,9 @@ function actualizarPolizaAjaxDone(res){
   
   $('#fecha_ini_txt').hide();
   $('#fecha_fin_txt').hide();
+  
+  $('#producto').removeAttr("disabled");
+  $('#tipo').removeAttr("disabled");
 } 
 
 function mostrarPolizas(){

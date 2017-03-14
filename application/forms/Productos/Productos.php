@@ -56,6 +56,9 @@ class Application_Form_Productos_Productos extends Zend_Form
         ;
         $this->addElement($nombre_prod);
 
+        
+
+        
         $options = array();
  
         for ( $i=0 ; $i <= 100 ; $i++ ) {

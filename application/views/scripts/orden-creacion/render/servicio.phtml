@@ -73,7 +73,7 @@
 				    			<div class="form-group col-md-2">
 				    				<label>Solicit&oacute;:</label>
 				    				<div class="input-group">
-					    			    <select id="solicito" class="form-control"></select>
+					    			   	<?php echo $this->formNuevaOrden->solicito?>
 								    </div>
 				    			</div>
 				    			<div class="form-group col-md-2" id="div_otro" >
@@ -96,23 +96,8 @@
 				    			<div class="form-group col-md-2">
 					    			<label>Motivo:</label>
 				    				<div class="input-group">
-										<select id="motivo" class="form-control">
-											<option value="motivo1">Actualizaci&oacute;n</option>
-											<option value="motivo2">Configuraci&oacute;n</option>
-											<option value="motivo3">Error del Sistema</option>
-											<option value="motivo4">Factura Electr&oacute;nica</option>
-											<option value="motivo5">Formatos e Impresoras</option>	
-											<option value="motivo6">Implementaci&oacute;n</option>
-											<option value="motivo7">Informaci&oacute;n</option>
-											<option value="motivo8">Instalaci&oacute;n</option>
-											<option value="motivo9">Interfases</option>
-											<option value="motivo10">Operaci&oacute;n</option>
-											<option value="motivo11">Reportarse</option>
-											<option value="motivo12">Reportarse Urgentemente</option>
-											<option value="motivo13">Reportes</option>
-											<option value="motivo14">Seguimiento</option>
-									  	</select>
-									</div>
+				    					<?php echo $this->formNuevaOrden->id_motivo?>
+				    				</div>
 				    			</div>
 				    			<div class="form-group col-md-2">
 				    			
@@ -126,24 +111,10 @@
 					      				<select id="ejecutivo" class="form-control"></select> 
 								    </div>
 				    			</div>
-				    			<div class="form-group col-md-2">
+				    			<div class="form-group col-md-2" id="id_tipo_soporte_div" style="display: none">
 					    			<label>Tipo de Soporte:</label>
 				    				<div class="input-group">
-										<select id="tipo_soporte" class="form-control">
-											<option>Curso</option>
-											<option>Demostracion</option>
-											<option>Desarrollo</option>
-											<option>Implementacion</option>
-											<option>Paginas Web</option>
-											<option>Reportarse</option>
-											<option>Reportarse Urgente</option>
-											<option>Revision MIG</option>
-											<option>Soporte en Sitio</option>
-											<option>Soporte Interno</option>
-											<option>Soporte Remoto</option>
-											<option>Soporte Telefonico</option>
-											<option>Ventas</option>
-										</select>						
+				    					<?php echo $this->formNuevaOrden->id_tipo_soporte ?>				
 									</div>
 				    			</div>
 				    			<div class="form-group col-md-2">
@@ -151,11 +122,12 @@
 				    			</div>
 				    		</div>	
 			    			<div class="row">
-			    				<div class="col-md-10">
+			    				<div class="col-md-12">
 		      						<label class="control-label">Descripci&oacute;n:</label>
-		      						<textarea id="descripcion" class="form-control" rows="5"></textarea>
+		      						<?php echo $this->formNuevaOrden->descripcion ?>				
 			      				</div>
 			    			</div>                  
+			    			<br>
 						  	<div class="row">
 						    	<div class="col-md-2">
 						      		<button type="button" class="btn btn-outline btn-success btn-lg btn-block" id="submitNuevaOrdenBtn">Guardar</button>

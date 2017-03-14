@@ -2,7 +2,6 @@ var path="public/agencias/";
 var idAgenciaActual;
 var actualizarVistas = {"vistaAgencia":false, "vistaUsuarioAgencia":false, "vistaPoliza":false};
 
-
 $(document).ready(function() {
 	$(function($){
 	    $.fn.datepicker.dates['es'] = {
@@ -73,44 +72,23 @@ $(document).ready(function() {
 		// limpiar select producto de polizas
 		$('#producto').empty();
 
-
-
 		// mostrar información correspondiente a esa agencia
 	 	mostrarUsuariosAgencia();   //usuarioagencia/index.js
 	 	mostrarPolizas(); 			//polizas/index.js
 	 	mostrarProductosEnTabla();  //productos/index.js
 	 	mostrarFolios();
 	 	productosSelectAgencia();
-	 	
-	 	
         actualizarVistas.vistaUsuarioAgencia =true;
-        
 
 	});
-	/*
-	soloNumeros('cp');
 
-	soloLetrasNumeros('nombre')
-	soloLetrasNumeros('direccion')
-
-	soloLetras('colonia');
-
-	soloLetrasDot('nombre_comercial');
-	*/
 	$( "#tipo" ).change(function() {
 		openPolizaModal();
+		updateFechaFin();
 	});
 	
 	$( "#fecha_ini" ).change(function() {
-		//$("#fecha_fin_servicio").val($("#fecha_fin").val());
-		
-		var fecha = $("#fecha_ini").val();
-		var res = fecha.split("-");
-		var anio = res[0];
-		var aniomasuno = parseInt(anio) +1 ;
-		var d = new Date( aniomasuno , (res[1]-1), res[2]);
-		
-		$("#fecha_fin").datepicker("update",d);
+		updateFechaFin();
 	});
 	
 	$( "#fecha_fin" ).change(function() {
@@ -118,10 +96,25 @@ $(document).ready(function() {
 		$("#fecha_fin_servicio").datepicker("update", $("#fecha_fin").val());
 	});
 	
-	
-}); 
-// end  $(document).ready(function() {
+}); // end  $(document).ready(function() {
 
+function updateFechaFin(){
+	var fecha = $("#fecha_ini").val();
+	var res = fecha.split("-");
+	var anio = res[0];
+
+	if (fecha != '') {
+		if($("#tipo").val() == "G"){
+			var d = new Date( parseInt(anio) , (res[1]-1), (parseInt(res[2]) + 60));
+		} else if($("#tipo").val() == "X"){
+			var d = new Date( parseInt(anio) , (res[1]-1), (parseInt(res[2]) + 15));
+		} else {
+			var aniomasuno = parseInt(anio) +1 ;
+			var d = new Date( aniomasuno , (res[1]-1), res[2]);
+		}
+		$("#fecha_fin").datepicker("update",d);
+	}
+}
 
 function openPolizaModal(){
 	var horas = $("#tipo_poliza_"+$("#tipo").val()).val();

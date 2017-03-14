@@ -219,7 +219,17 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 		return $this->getAdapter ()->fetchRow( $select );
 	}
 	
+	public function obtenerMotivos(){
+		$select = $this->_db->select()->
+		from ('orden_servicio_cat_motivo', '*' )->order('motivo');
+		return $this->getAdapter ()->fetchAll( $select );
+	}
 	
+	public function obtenerTipoDeSoporte(){
+		$select = $this->_db->select()->
+		from ('orden_servicio_cat_tipo_soporte', '*' );
+		return $this->getAdapter ()->fetchAll( $select );
+	}
 	
 
 }

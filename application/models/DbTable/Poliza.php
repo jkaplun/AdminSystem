@@ -69,7 +69,9 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 	{
 		
 		$select = $this->_db->select()->
-		from ( $this->_name, array("*","(if ( now() between fecha_ini and fecha_fin_servicio,'si','no')) as vigente" ) )
+		from ( $this->_name, array("*",
+					"(if ( now() between fecha_ini and fecha_fin_servicio,'si','no')) as vigente",
+				 	"((SELECT descripcion FROM tipo_poliza tp WHERE tp.tipo = poliza.tipo)) as tipo_desc" ) )
 		->where(' id_agencia="'.$idAgencia.'" and fecha_fin_servicio > now() 
 				and tiempo_agotado = "N" and id_poliza_estatus = 1 
 				and (horas_poliza-horas_consumidas) > 0')
@@ -132,7 +134,7 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 	{
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
-		->where(' id_poliza="'.$id_poliza.'"  and now() between fecha_ini and fecha_fin 
+		->where(' id_poliza="'.$id_poliza.'"  and now() between fecha_ini and fecha_fin_servicio 
 				 and tiempo_agotado = "N" and id_poliza_estatus = 1 and horas_poliza > 0')
 		->order('fecha_ini');
 		
@@ -145,7 +147,7 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		from ( $this->_name, '*' )
 		->where("id_agencia={$values['id_agencia']}
 					AND id_producto = {$values['id_producto']}
-        			AND (tipo = '{$values['tipo']}')");
+        			AND (tipo = '{$values['tipo']}') AND id_poliza_estatus<>4");
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	

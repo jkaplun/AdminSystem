@@ -66,6 +66,9 @@ class ordenCreacionController extends Zend_Controller_Action
  		$this->view->selectAgencias=$zendForm;
         $this->view->formUsuarioAgencia = new Application_Form_UsuariosAgencia_UsuariosAgencia();
         
+		$this->view->formNuevaOrden = new Application_Form_Ordenes_NuevaOrden();
+        
+        
     }
 
     public function agregarAction()
@@ -74,6 +77,8 @@ class ordenCreacionController extends Zend_Controller_Action
     	$this->_helper->viewRenderer->setNoRender();
     	$params=$this->_request->getParams();
     	
+    	echo "<pre>".print_r($params,true)."</pre>";die;
+    	 
     	$data = array(
     			'id_agencia' => $params['id_agencia'],
     			'id_usuario_admin_alta' => $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'],

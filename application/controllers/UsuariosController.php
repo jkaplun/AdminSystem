@@ -232,9 +232,20 @@ class UsuariosController extends Zend_Controller_Action
         $params=$this->_request->getParams(); 
         $ejecutivoPrincipal = $this->usuario_admin->find($params['id_usuario_soporte_titular'])->toArray();
         $ejecutivoAuxiliar = $this->usuario_admin->find($params['id_usuario_soporte_auxiliar'])->toArray();
+        
+        $user = $this->usuario_admin->getSoporteUsers();
+        
         $result = array_merge($ejecutivoPrincipal, $ejecutivoAuxiliar);
-
-        $this->_helper->json($result);
+        
+        //$result = array_merge($result, $user);
+        
+        $resultProcessed = array();
+        
+        foreach ( $user as $key => $value ){
+        	$resultProcessed[$value['id_usuario']] = $value;
+        }
+        
+        $this->_helper->json($resultProcessed);
 
     }
     

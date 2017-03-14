@@ -80,9 +80,7 @@ class PolizasController extends Zend_Controller_Action
         	$servicesPolizas = new Application_Model_Services_ServicesPolizas();
         	$validaParams = $servicesPolizas ->esPolizaValida($params['id_producto'], $params['id_agencia'], 
         										$params['fecha_ini'], $params['fecha_fin'], $params['tipo']);
-        	
-        	
-        	
+
         	 if($validaParams['valida'])
         	 {
         	 	$v1ClavePoliza = $servicesPolizas->obtenerV1DeClavePoliza($params['id_producto'], $params['id_agencia']);        	 	
@@ -145,16 +143,16 @@ class PolizasController extends Zend_Controller_Action
         $params=$this->_request->getParams();
 
         $data = array(
-      				'id_poliza' => $params['id_poliza'],
+      				//'id_poliza' => $params['id_poliza'],
        				'id_agencia' => $params['id_agencia'],
-       				'id_producto' => $params['id_producto'],
+       				//'id_producto' => $params['id_producto'],
                     'horas_poliza' => $params['horas_poliza'], 
                     'clave' => $params['clave'], 
-                    'fecha_ini' => $params['fecha_ini'], 
-                    'fecha_fin' => $params['fecha_fin'],
+                    //'fecha_ini' => $params['fecha_ini'], 
+                   // 'fecha_fin' => $params['fecha_fin'],
                     'costo_poliza' => $params['costo_poliza'],
                     'observaciones' => $params['observaciones_poliza'],
-                    'tipo' => $params['tipo'],
+                    //'tipo' => $params['tipo'],
                     'id_poliza_estatus' => $params['id_poliza_estatus'],
        				'fecha_fin_servicio' => $params['fecha_fin_servicio']
                 );

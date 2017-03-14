@@ -87,6 +87,14 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
   
   	return $this->getAdapter ()->fetchRow ( $select );
   }
+
+  public function getSoporteUsers(){
+  	$cond = 'id_usuario_admin_puesto=1';
+  	$select = $this->_db->select()
+  	->from( $this->_name,'*')
+  	->where($cond);
   
+  	return $this->getAdapter ()->fetchAll ( $select );
+  }
 }
 
