@@ -93,7 +93,10 @@ $(document).ready(function() {
 	
 	$( "#fecha_fin" ).change(function() {
 		//$("#fecha_fin_servicio").val($("#fecha_fin").val());
-		$("#fecha_fin_servicio").datepicker("update", $("#fecha_fin").val());
+		if( ajaxActionPoliza == 'agregar' ){
+			$("#fecha_fin_servicio").datepicker("update", $("#fecha_fin").val());	
+		}
+		
 	});
 	
 }); // end  $(document).ready(function() {

@@ -178,6 +178,11 @@ class PolizasController extends Zend_Controller_Action
         		
         		$data['estatus_descripcion']='La poliza ha sido actualizada exitosamente';
         		// se responde al cliente
+        		
+        		$data['id_poliza'] = $params['id_poliza'];
+        		$data['id_producto'] = $params['id_producto'];
+        		$data['fecha_ini'] = $params['fecha_ini'];
+        		$data['fecha_fin'] = $params['fecha_fin'];
         		$this->_helper->json($data);
         		$this->_redirect('agencias/');
         	}

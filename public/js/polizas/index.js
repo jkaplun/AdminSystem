@@ -89,10 +89,13 @@ function submitFormPoliza(){
       method: "post", 
       data: $("#formPoliza").serialize() + addIdAgencia + id_product + clave + id_poliza,
       dataType: "json" 
-    }).done(function(res) {  
+    }).done(function(res) { 
+    	
+    	
     if (ajaxActionPoliza == "agregar"){ 
     	agregarPolizaAjaxDone(res); 
-     }else{ 
+    }else{ 
+    	 polizas[res.id_poliza] = res;	
     	 actualizarPolizaAjaxDone(res); 
     } 
 
@@ -233,9 +236,9 @@ function agregarPolizaEnTabla(res){
 
  
 function agregarPolizaAjaxDone(res){ 
-  if(res.estado == "ok"){ // si la respuesta es correcta: 
+	if(res.estado == "ok"){ // si la respuesta es correcta: 
       agregarPolizaEnTabla(res); 
-      polizas[res.id_poliza] = res;
+
       swal("La póliza ha sido actualizado exitosamente", " ", "success");  
       $('#modalNuevaPoliza').modal('hide');
 
@@ -248,9 +251,9 @@ function agregarPolizaAjaxDone(res){
 function actualizarPolizaAjaxDone(res){ 
   if(res.estado == "ok"){ 
     agregarPolizaEnTabla(res); 
+   
     swal("La póliza ha sido actualizado exitosamente", " ", "success");
     $('#modalNuevaPoliza').modal('hide');
- 
   }else{ 
 	$('#modalNuevaPoliza').modal('show');
     swal(res.descripcion, " ", "error"); 
@@ -330,7 +333,9 @@ function mostrarPolizas(){
 }
 
 function populatePolizaForm(data) {  
-
+	// limpiar select producto de polizas
+	//$('#producto').empty();
+	
     $.each(data, function(key, value){  
 	    if(key == "clave"){
 	        clave_poliza=value;
