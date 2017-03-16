@@ -31,6 +31,10 @@ class OrdenSeguimientoController extends Zend_Controller_Action
         // Assign paginator to view
         Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination_sm.phtml');
         $this->view->paginator=$paginator;
+        
+        $this->view->formNuevaOrden = new Application_Form_Ordenes_NuevaOrden();
+        
+        
     }
     
     public function playAction()

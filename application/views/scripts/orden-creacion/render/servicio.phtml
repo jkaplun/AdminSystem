@@ -1,7 +1,10 @@
 <div class="salto"></div>
 <div id="alertas">
 </div>
-<div class="panel panel-default">
+
+
+<form id="datosFormServicio">
+<div class="panel panel-default" style="min-width: 850px">
 	<div class="panel-body" id="datos-agencia">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
@@ -45,12 +48,11 @@
 			    	</div>
 			    </div>	
 				<div class="row">
-					<div class="col-md-12 table-responsive">
-					<h2 class="page-header">Seleccione una póliza: </h2>
-						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-vigentes">
+					<div class="col-md-12">
+						<table class="table table-bordered" style="width: 100%" id="dataTable-polizas-vigentes">
 							<thead>
 								<tr>
-									<th>Seleccionar</th>
+									<th>Selecciona una Poliza</th>
 									<th>Clave</th>
 									<th>Producto</th>
 									<th>Horas</th>
@@ -67,31 +69,18 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<form id="datosFormServicio">
-							<h2 class="page-header">Servicio</h2>
 							<div class="row">				
 				    			<div class="form-group col-md-2">
 				    				<label>Solicit&oacute;:</label>
 				    				<div class="input-group">
-					    			   	<?php echo $this->formNuevaOrden->solicito?>
+					    			   	<?php echo $this->formNuevaOrden->id_usuario_agencia_solicito?>
 								    </div>
 				    			</div>
-				    			<div class="form-group col-md-2" id="div_otro" >
-				    				<label>Otro:</label>
-				    				<div class="input-group">
-					    				<input type="text" class="form-control" id="solicito_otro" name="solicito_otro" placeholder="Otro">
-									</div>
-				    			</div>
-				    			<div class="form-group col-md-2">
-				    			
-				    			</div>
-				    		</div>
-				    		<div class="row">				
 				    			<div class="form-group col-md-2">
 				    				<label>Producto:</label>
 				    				<div class="input-group">
-					    			    <select id="producto" class="form-control"></select>
-								    </div>
+				    					<?php echo $this->formNuevaOrden->id_producto ?>
+				    				</div>
 				    			</div>
 				    			<div class="form-group col-md-2">
 					    			<label>Motivo:</label>
@@ -100,31 +89,73 @@
 				    				</div>
 				    			</div>
 				    			<div class="form-group col-md-2">
-				    			
-				    			</div>
-				    		</div>	
-				    		
-				    		<div class="row">				
-				    			<div class="form-group col-md-2">
 				    				<label>Ejecutivo:</label>
 				    				<div class="input-group">
-					      				<select id="ejecutivo" class="form-control"></select> 
+					      				<?php echo $this->formNuevaOrden->id_usuario_admin_atiende ?>
 								    </div>
 				    			</div>
-				    			<div class="form-group col-md-2" id="id_tipo_soporte_div" style="display: none">
-					    			<label>Tipo de Soporte:</label>
+				    		</div>
+				    		<div class="row">				
+				    			<div class="form-group col-md-2" >
+				    				<span id="div_otro" >
+				    				<label>Otro:</label>
 				    				<div class="input-group">
-				    					<?php echo $this->formNuevaOrden->id_tipo_soporte ?>				
+					    				<?php echo $this->formNuevaOrden->solicito_otro ?>
 									</div>
+									</span>
 				    			</div>
 				    			<div class="form-group col-md-2">
 				    			
 				    			</div>
+				    			<span id="id_tipo_soporte_div" style="display: none">
+					    			<div class="form-group col-md-2">
+						    			<label>Tipo de Soporte:</label>
+					    				<div class="input-group">
+					    					<?php echo $this->formNuevaOrden->id_tipo_soporte ?>				
+										</div>
+					    			</div>
+					    			<span id="fecha_soporte_sitio_div" style="display: none">
+						    			<div class="form-group col-md-2">
+							    			<label>Fecha del Soporte en Sitio:</label>
+						    				<div class="input-group">
+						    					<?php echo $this->formNuevaOrden->fecha_soporte_sitio ?>				
+											</div>
+						    			</div>
+						    			<div class="form-group col-md-2">
+							    			<label>Hora del Soporte en Sitio:</label>
+						    				<div class="input-group">
+						    					<?php echo $this->formNuevaOrden->hora_soporte_sitio ?>				
+											</div>
+						    			</div>
+					    			</span>
+				    			</span>
 				    		</div>	
+				    		<div class="row">
+								<div class="form-group col-md-4 funkyradio">
+									<div class="">
+										<div class="funkyradio-success">
+											<input type="radio" name="id_orden_servicio_estatus" id="radio1" value="1" checked="checked"/>
+											<label for="radio1">En operaci&oacute;n</label>
+										</div>
+									</div>       
+								</div>
+								<div class="form-group col-md-4 funkyradio">
+									<div class="funkyradio-warning">
+										<input type="radio" name="id_orden_servicio_estatus" id="radio2" value="2"/>
+										<label for="radio2">Reportarse</label>
+									</div>
+								</div>
+								<div class="form-group col-md-4 funkyradio">
+									 <div class="funkyradio-danger">
+										<input type="radio" name="id_orden_servicio_estatus" id="radio3" value="3"/>
+										<label for="radio3">Reportarse Urgente</label>
+									</div>
+								</div>
+				    		</div>
 			    			<div class="row">
 			    				<div class="col-md-12">
 		      						<label class="control-label">Descripci&oacute;n:</label>
-		      						<?php echo $this->formNuevaOrden->descripcion ?>				
+		      						<?php echo $this->formNuevaOrden->comentarios_recepcion ?>				
 			      				</div>
 			    			</div>                  
 			    			<br>
@@ -134,10 +165,10 @@
 						    	</div>
 						    	<div class="col-md-10"></div>
 						  	</div>  					
-						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+</form>

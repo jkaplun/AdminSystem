@@ -6,6 +6,8 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 	public function init()
 	{
 
+		$id_orden_servicio = new Zend_Form_Element_Hidden('id_orden_servicio');
+		$this->addElement($id_orden_servicio);
     	$id_agencia = new Zend_Form_Element_Hidden('id_agencia');
     	$this->addElement($id_agencia);
 		
@@ -37,20 +39,16 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		
 		
 		// producto
-		$producto = new Zend_Form_Element_Text('producto');
+		$producto = new Zend_Form_Element_Select('id_producto');
 		$producto->setRequired(true)
-		->addErrorMessage("- Es necesario que introduzca el producto.")
-		->removeDecorator('label')
-		->removeDecorator('HtmlTag')
-		//->removeDecorator('Errors')
-		->setAttrib("class","form-control")
-		->setAttrib("autocomplete","off")
-		->setAttrib("placeholder",utf8_encode("Producto"))
-		->setAttrib("maxlength","45")
-		;
+			->removeDecorator('label')
+			->removeDecorator('HtmlTag')
+			->setAttrib("class","form-control")
+			->setAttrib("autocomplete","off");
+		$this->addElement($producto);
 
 		// solicito
-		$solicito = new Zend_Form_Element_Select('solicito');
+		$solicito = new Zend_Form_Element_Select('id_usuario_agencia_solicito');
 		$solicito->setRequired(true)
 			->addErrorMessage("- Es necesario indicar quién solicitó el servicio.")
 			->removeDecorator('label')
@@ -93,6 +91,16 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		
 		$this->addElement($motivo);
 		
+		// Ejectivo de soporte.
+		$id_usuario_admin_atiende = new Zend_Form_Element_Select('id_usuario_admin_atiende');
+		$id_usuario_admin_atiende
+		->removeDecorator('label')
+		->removeDecorator('HtmlTag')
+		->setAttrib("class","form-control")
+		->setAttrib("autocomplete","off");
+
+		$this->addElement($id_usuario_admin_atiende);
+		
 		$result = $os->obtenerTipoDeSoporte();
 		
 		$options = array();
@@ -101,7 +109,7 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 			$options[$value['id_tipo_soporte']] = $value['description'];
 		}
 		
-		// numero de licencias
+		// Tipo de soporte
 		$id_tipo_soporte = new Zend_Form_Element_Select('id_tipo_soporte');
 		$id_tipo_soporte
 		->removeDecorator('label')
@@ -112,10 +120,71 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		
 		$this->addElement($id_tipo_soporte);
 		
+		
+		
+		
+		
+		// Fecha del Soporte en Sitio
+		$fecha_soporte_sitio = new Zend_Form_Element_Text('fecha_soporte_sitio');
+		$fecha_soporte_sitio
+		->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->removeDecorator('Errors')
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("class","form-control datepicker")
+        ->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
+        ->setAttrib("maxlength","10")
+        ->setAttrib("data-provide","datepicker")
+        ->setAttrib("readonly","readonly")
+        ->setAttrib("data-date-format","yyyy-mm-dd");
+
+		$this->addElement($fecha_soporte_sitio);
+		
+		$options = array(
+			"07:00" =>"07:00",
+			"07:30" =>"07:30",
+			"08:00" =>"08:00",
+			"08:30" =>"08:30",
+			"09:00" =>"09:00",
+			"09:30" =>"09:30",
+			"10:00" =>"10:00",
+			"10:30" =>"10:30",
+			"11:00" =>"11:00",
+			"11:30" =>"11:30",
+			"12:00" =>"12:00",
+			"12:30" =>"12:30",
+			"13:00" =>"13:00",
+			"13:30" =>"13:30",
+			"14:00" =>"14:00",
+			"14:30" =>"14:30",
+			"15:00" =>"15:00",
+			"15:30" =>"15:30",
+			"16:00" =>"16:00",
+			"16:30" =>"16:30",
+			"17:00" =>"17:00",
+			"17:30" =>"17:30",
+			"18:00" =>"18:00",
+			"18:30" =>"18:30",
+			"19:00" =>"19:00",
+			"19:30" =>"19:30",
+			"20:00" =>"20:00",
+			"20:30" =>"20:30",
+			"21:00" =>"21:00"
+		);
+		
+		// Tipo de soporte
+		$hora_soporte_sitio = new Zend_Form_Element_Select('hora_soporte_sitio');
+		$hora_soporte_sitio
+		->removeDecorator('label')
+		->removeDecorator('HtmlTag')
+		->setAttrib("class","form-control")
+		->setAttrib("autocomplete","off")
+		->addMultiOptions($options);
+		$this->addElement($hora_soporte_sitio);
+
 		// descripcion
-		$descripcion = new Zend_Form_Element_Textarea('descripcion');
-		$descripcion
-			->addErrorMessage("- Es necesario que introduzca la descripción de la ayuda.")
+		$comentarios_recepcion = new Zend_Form_Element_Textarea('comentarios_recepcion');
+		$comentarios_recepcion
 			->removeDecorator('label')
 			->removeDecorator('HtmlTag')
 			->setAttrib("class","form-control")
@@ -156,7 +225,7 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		$this
 		->setMethod('post')
 		->setAction('public/ordenes/nueva-orden')
-		->addElements(array($empresa, $id_poliza, $producto, $solicito, $ejecutivo, $motivo, $descripcion, $submit, $idcliente,$duracion));
+		->addElements(array($empresa, $id_poliza, $producto, $solicito, $ejecutivo, $motivo, $comentarios_recepcion, $submit, $idcliente,$duracion));
 		
 		$solicito_otro = new Zend_Form_Element_Text('solicito_otro');
 		
@@ -171,8 +240,5 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		$this->addElement($solicito_otro);
 	
 	}
-		
-		
-
-		
+			
 }

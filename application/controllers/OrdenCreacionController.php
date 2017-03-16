@@ -77,23 +77,25 @@ class ordenCreacionController extends Zend_Controller_Action
     	$this->_helper->viewRenderer->setNoRender();
     	$params=$this->_request->getParams();
     	
-    	echo "<pre>".print_r($params,true)."</pre>";die;
-    	 
     	$data = array(
     			'id_agencia' => $params['id_agencia'],
     			'id_usuario_admin_alta' => $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'],
-    			'id_usuario_admin_atiende' => $params['ejecutivo'],
-    			'id_producto' => $params['producto'],
+    			'id_usuario_admin_atiende' => $params['id_usuario_admin_atiende'],
+    			'id_producto' => $params['id_producto'],
     			'id_poliza' => $params['id_poliza'],
-    			'id_orden_servicio_estatus' => 2,
-    			'duracion_servicio' => 0,
-    			'id_usuario_agencia_solicito' => $params['solicito'],
-    			//Se crea con el estado 0 que indica que es nueva
-    			'control_cron_estatus' => 0,
-    			//'fecha_alta' => se asigna en la base de datos 
-    			'comentarios_recepcion' => $params['descripcion'],
-    			'motivo' => $params['motivo']
+    			'id_orden_servicio_estatus' => $params['id_orden_servicio_estatus'],
+    			'id_usuario_agencia_solicito' => $params['id_usuario_agencia_solicito'],
+    			'solicito_otro' => $params['solicito_otro'],
+    			'comentarios_recepcion' => $params['comentarios_recepcion'],
+    			'id_motivo' => $params['id_motivo'],
+    			'id_tipo_soporte' => $params['id_tipo_soporte'],
+    			'fecha_soporte_sitio' => $params['fecha_soporte_sitio']." ".$params['hora_soporte_sitio'],
     	);
+    	
+    	if ($params['id_usuario_agencia_solicito']=="otro") {
+    		unset($data['id_usuario_agencia_solicito']);
+    	}
+    	
     	
     	$form = new Application_Form_Ordenes_NuevaOrden();
     	

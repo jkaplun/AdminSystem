@@ -15,7 +15,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 		
 		$select = $this->_db->select()->
 		from ( "view_orden_servicio", '*' )
-		->where('id_usuario_admin_atiende="'.$_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'].'" and concluido="N"');
+		->where('id_usuario_admin_atiende="'.$_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'].'" and id_orden_servicio_estatus < 6 ');
 		return $this->getAdapter ()->fetchAll( $select );
 		
 		/*echo $select;

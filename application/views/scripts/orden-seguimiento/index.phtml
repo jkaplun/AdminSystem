@@ -4,7 +4,7 @@
 	<table width="100%" class="table">
 		<thead>
 			<tr>
-				<th class="amarillo centrado">Lamada sin Contestar</th>
+				<th class="amarillo centrado">En operación</th>
 				<th class="naranja centrado">Reportarse</th>
 				<th class="rojo centrado">Reportarse Urgente</th>
 				<th class="centrado">Otros Servicios</th>
@@ -15,21 +15,12 @@
 </div>
 <form class="form-inline" method="get" name="filtroform" id="filtroform">
 </form>
-
-
-
-<div class="alert alert-info alert-dismissable">
-	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 	<h3 style="margin-top: 0px;margin-bottom: 0px;">Se muestra(n) <b id="total_ordenes"></b> resultado(s):</h3>
-</div>
-
 <div class="row">
 	<div class="col-md-12">
-
-
-<div class="row" align="right">
-	<?=$this->paginationControl ($this->paginator, 'Sliding');?>
-</div>
+	<div class="row" align="right">
+		<?=$this->paginationControl ($this->paginator, 'Sliding');?>
+	</div>
 	<?php $id_orden_servicio_todos=","?>
 	<?php $duracion_servicio_todos=","?>
 	<?php $control_cron_estatus_todos=","?>
@@ -78,6 +69,12 @@
 
   		if($registro["control_cron_estatus"]!=3){
   		?>
+  		
+  		<?= "<pre>".print_r($registro,true)."</pre>"; ?>
+  		
+  		<?php $this->formNuevaOrden->populate($registro); ?>
+  		<?= $this->formNuevaOrden ?>
+  		
 	
 		<div id="orden_servicio_<?= $registro["id_orden_servicio"]?>" class="panel panel-default bs-callout2 <?= $color ?>">
 		 	<div class="panel-heading <?= $color ?>2">

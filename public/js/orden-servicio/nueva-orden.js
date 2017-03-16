@@ -43,7 +43,10 @@ $(document).ready(function() {
 			    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
 			    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
 			}
-		}
+		},
+        "paging":   false,
+        "ordering": false,
+        "info":     false
     });
 
   // consultar todos los productos disponibles
@@ -84,14 +87,21 @@ $(document).ready(function() {
     $("#descripcion").val(des);
   });
 
-
+  $("#id_tipo_soporte").change(function(){
+	  if ($("#id_tipo_soporte").val() == 2) {
+		  $("#fecha_soporte_sitio_div").show();
+	  } else {
+		  $("#fecha_soporte_sitio_div").hide();
+	  }
+  });
+  
   $("#div_otro").hide();
 	$("#submitNuevaOrdenBtn").click(function(){
 		submitNuevaOrden();
 	});
 
-	$( "#solicito" ).change(function() {
-		if ( $( "#solicito" ).val() == "otro") {
+	$( "#id_usuario_agencia_solicito" ).change(function() {
+		if ( $( "#id_usuario_agencia_solicito" ).val() == "otro") {
 			$("#div_otro").show();
 		} else {
 			$("#div_otro").hide();
@@ -110,13 +120,13 @@ $(document).ready(function() {
 			$("#solicito_otro").val(0);
 		}
 	});
-	
-	
-	
-	
-	//mostrarProductosEnSelect();
 
 }); // end  $(document).ready(function() { 
+
+
+function radioPoliza(){
+	$("#dataTable-polizas-vigentes").css("background-color" ,'');
+}
 
 function consultarAgencia(id_agencia){
 	var datosAgenciaSeleccionada={};
@@ -261,7 +271,7 @@ function agregarPolizaEnTabla(res){
 
   if(res.id_poliza_estatus == "1"){ 
 	if (res.vigente=='si') {
-		$('#dataTable-polizas-vigentes tr:last-child td:first-child').html(' <input type="radio" name="id_poliza" id value="'+res.id_poliza+'">');	
+		$('#dataTable-polizas-vigentes tr:last-child td:first-child').html(' <input type="radio" name="id_poliza" value="'+res.id_poliza+'" class"radio-poliza" onclick="radioPoliza()">');	
 	}  
 
 	if (res.vigente=='no') {
@@ -305,7 +315,7 @@ function mostrarUsuariosAgenciaEnSelect(idAgenciaActual){
 	
 
 	
-	$('#solicito').html('');
+	$('#id_usuario_agencia_solicito').html('');
  // productos_todos={};
   //ajaxActionUsuarioAgencia="consultar"
   var id_agencia_seleccionada="id_agencia="+idAgenciaActual;
@@ -319,12 +329,12 @@ function mostrarUsuariosAgenciaEnSelect(idAgenciaActual){
     .done(function(res) {  
         var i=0;
       for (i;i<res.length;i++){
-        $('#solicito').append($('<option>').text(res[i].nombre + " " + res[i].apellidos)
+        $('#id_usuario_agencia_solicito').append($('<option>').text(res[i].nombre + " " + res[i].apellidos)
           .attr('value', res[i].id_usuario_agencia)
           .attr('id', "id_usuario_agencia"+res[i].id_usuario_agencia)
           );
         }
-      $('#solicito').append($('<option>').text("[Otro]")
+      $('#id_usuario_agencia_solicito').append($('<option>').text("[Otro]")
               .attr('value', "otro")
               .attr('id', "id_usuario_agencia")
               );
@@ -338,7 +348,7 @@ function mostrarUsuariosAgenciaEnSelect(idAgenciaActual){
 
 //consultarejecutivosporid
 function mostrarEjecutivosEnSelect(id_ejecutivo_principal, id_ejecutivo_aux){
-$('#ejecutivo').html('');
+$('#id_usuario_admin_atiende').html('');
  // productos_todos={};
   //ajaxActionUsuarioAgencia="consultar"
   var id_agencia_seleccionada="id_agencia="+idAgenciaActual;
@@ -360,14 +370,14 @@ $('#ejecutivo').html('');
      // agregar a todos los ejectivos asignados a esta agencia
 
         $.each( res, function( key, value ) {
-        	 $('#ejecutivo').append($('<option>').text(value.nombre + " " + value.apellido_paterno)
+        	 $('#id_usuario_admin_atiende').append($('<option>').text(value.nombre + " " + value.apellido_paterno)
         	          .attr('value', value.id_usuario)
         	 );
         });
         
 //      for (i;i<res.length;i++){
 //
-//        $('#ejecutivo').append($('<option>').text(res[i].nombre + " " + res[i].apellido_paterno)
+//        $('#id_usuario_admin_atiende').append($('<option>').text(res[i].nombre + " " + res[i].apellido_paterno)
 //          .attr('value', res[i].id_usuario)
 //          );
 //        }
@@ -381,64 +391,58 @@ $('#ejecutivo').html('');
 
 
 function submitNuevaOrden(){
-	var id_agencia_seleccionada="id_agencia="+idAgenciaActual;
-	var tipo_soporte="&tipo_soporte=" + $("#tipo_soporte").val();
-	var id_poliza_seleccionada="&id_poliza="+$('input[name=id_poliza]:checked').val();
-	var id_producto_seleccionado="&producto="+$("#nombre_prod").val();
-	var solicito ="&solicito="+$("#solicito").val();
-	var ejecutivo ="&ejecutivo=" +$("#ejecutivo").val();
-	var id_motivo="&id_motivo=" +$("#id_motivo").val();
-	var descripcion="&descripcion=" + $("#descripcion").val();
-	var id_tipo_soporte="&id_tipo_soporte=" + $("#id_tipo_soporte").val();
-
-
-  var datos_orden= "Agencia : " + $("#select_agencias option:selected").text() + 
-                   "\n Producto :    " +  productos_todos[polizas[$('input[name=id_poliza]:checked').val()].id_producto].nombre_prod + 
+	
+	var validar = $('input[name=id_poliza]:checked').val();
+	if ( validar ===  undefined){
+		$("#dataTable-polizas-vigentes").css("background-color" ,'#F5A9BC');
+		alert('No hay poliza selecionada.');
+		return;
+	}
+	
+	var datos_orden= "Agencia : " + $("#select_agencias option:selected").text() + 
+                   "\n Producto :    " +  $("#producto option:selected").text() + 
                    "\n Clave poliza :    " +  polizas[$('input[name=id_poliza]:checked').val()].clave  +
-                   "\n Solicitó :    " + $("#solicito option:selected").text() +
-                   "\n Ejecutivo :    " +  $("#ejecutivo option:selected").text() +
-                   "\n Tipo de soporte :    "  + $("#tipo_soporte option:selected").text() + 
-                   "\n Motivo :    " + $("#motivo option:selected").text(); //+ 
+                   "\n Solicitó :    " + $("#id_usuario_agencia_solicito option:selected").text() +
+                   "\n Ejecutivo :    " +  $("#id_usuario_admin_atiende option:selected").text() +
+                   "\n Motivo :    " + $("#id_motivo option:selected").text() + 
+                   "\n Tipo de soporte :    "  + $("#id_tipo_soporte option:selected").text(); 
                    //"\n Descripción: "+  $("#descripcion").val();
 
-swal({
-  title: "Verifique que los datos sean correctos",
-  text: datos_orden,
-  type: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#DD6B55",
-  confirmButtonText: "Continuar",
-  closeOnConfirm: false
-},
-function(){
-  $.ajax({ 
-      url: pathOrdenServicioController + "agregar", 
-      method: "post", 
-      data: id_agencia_seleccionada +tipo_soporte+ id_poliza_seleccionada+id_producto_seleccionado+solicito+ejecutivo+id_motivo+descripcion+id_tipo_soporte,
-      dataType: "json" 
-    }).done(function(res) {  
-      if(res.estado=="ok"){
-          //swal("La orden de servicio ha sido registrada exitosamente", " ", "success");
-          swal({title: "La orden de servicio ha sido registrada exitosamente",   
-           text: "Redireccionando . .", 
-           type: "success",   
-           timer: 2800,   
-           showConfirmButton: false
-          });
-
-        setTimeout(function(){location.reload();}, 2600);
-        
-      }else{
-          swal(res.descripcion, " ", "error"); 
-      }
-  })// end ajax done  
-    .fail(function() { 
-      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
-  });
-
-});
-
-
+	swal({
+	  title: "Verifique que los datos sean correctos",
+	  text: datos_orden,
+	  type: "warning",
+	  showCancelButton: true,
+	  confirmButtonColor: "#DD6B55",
+	  confirmButtonText: "Continuar",
+	  closeOnConfirm: false
+	},
+	function(){
+	  $.ajax({ 
+	      url: pathOrdenServicioController + "agregar", 
+	      method: "post", 
+	      data: $("#datosFormServicio").serialize()+"&id_agencia="+idAgenciaActual ,
+	      dataType: "json" 
+	    }).done(function(res) {  
+	      if(res.estado=="ok"){
+	          //swal("La orden de servicio ha sido registrada exitosamente", " ", "success");
+	          swal({title: "La orden de servicio ha sido registrada exitosamente",   
+	           text: "Redireccionando . .", 
+	           type: "success",   
+	           timer: 2800,   
+	           showConfirmButton: false
+	          });
+	
+	        setTimeout(function(){location.reload();}, 2600);
+	        
+	      }else{
+	          swal(res.descripcion, " ", "error"); 
+	      }
+	  })// end ajax done  
+	    .fail(function() { 
+	      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+	  });
+	});
 }
 
 function consultarTodosLosEjectuvos(){
@@ -499,12 +503,12 @@ function submitFormUsuarioAgencia(){
   //console.log(res);
   if(res.estado == "ok"){ // si la respuesta es correcta:
         //console.log(res); 
-          $('#solicito').append($('<option>').text(res.nombre + " " + res.apellidos)
+          $('#id_usuario_agencia_solicito').append($('<option>').text(res.nombre + " " + res.apellidos)
           .attr('value', res.id_usuario_agencia)
           .attr('id', "id_usuario_agencia"+res.id_usuario_agencia)
           );
   
-          $('#solicito').val(res.id_usuario_agencia);
+          $('#id_usuario_agencia_solicito').val(res.id_usuario_agencia);
 
       swal("el usuario ha sido guardado exitosamente", " ", "success"); 
 
@@ -532,10 +536,10 @@ function getProductosByAgencia(){
 		  dataType: "json"
 		})
 		  .done(function( msg ) {
-			  $('#producto').find('option').remove();
+			  $('#id_producto').find('option').remove();
 			  
 			  $.each(msg, function( index, value ) {
-				  $('#producto').append('<option value="'+value.id_producto+'">'+value.nombre_prod+'</option>');
+				  $('#id_producto').append('<option value="'+value.id_producto+'">'+value.nombre_prod+'</option>');
 				});
 		  });
 }
