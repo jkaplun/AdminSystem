@@ -3,6 +3,11 @@ var pathOrdenServicioController="public/orden-seguimiento/"
 var current_total_ordenes_global=0;
 
 $(document).ready(function() { 
+	
+	$( ".prevent-default" ).click(function( event ) {
+		  event.preventDefault();
+	});
+	
   $('#dataTable-seguimientoOrdenes').DataTable({
         responsive: true,
         "language":{
@@ -237,67 +242,32 @@ function concluirSercicioAjax(button_id){
   });
 }
 
-function concluirOrden(button_id){
-    var id_orden= button_id.replace("concluirServicio_", "");
-  var id_orden_to_send="id_orden_servicio="+id_orden;
-  var conformidad= "&conformidad="+$("#conformidad_"+id_orden).val();
-  var motivo= "&motivo="+$("#motivo_"+id_orden).val();
-  var solucion= "&solucion="+$("#solucion_"+id_orden).val();
+function guardarServicioAjax(id_orden_servicio,estado){
 
       $.ajax({ 
         url: pathOrdenServicioController + "actualizar", 
         method: "post", 
-        data: id_orden_to_send+conformidad+motivo+solucion+"&concluido=S",
-        dataType: "json" 
-      }).done(function(res) { 
-
-  if(res.estado == "ok"){ // si la respuesta es correcta: 
-      console.log(res);  
-      swal("La orden ha sido concluida exitosamente", " ", "success"); 
-
-      $("#orden_servicio_"+id_orden).hide();
-      current_total_ordenes_global=current_total_ordenes_global-1;
-      $("#total_ordenes").html(current_total_ordenes_global);
-   } else{ 
-    //$("#orden_servicio_"+id_orden).hide();
-     swal(res.descripcion, " ", "error");  
-     } 
-   
-         
-    })// end ajax done  
-      .fail(function() { 
-        swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
-    });
-}
-
-
-function guardarSercicioAjax(button_id){
-   var id_orden= button_id.replace("guardarServicio_", "");
-  var id_orden_to_send="id_orden_servicio="+id_orden;
-  var conformidad= "&conformidad="+$("#conformidad_"+id_orden).val();
-  var motivo= "&motivo="+$("#motivo_"+id_orden).val();
-  var solucion= "&solucion="+$("#solucion_"+id_orden).val();
-
-      $.ajax({ 
-        url: pathOrdenServicioController + "actualizar", 
-        method: "post", 
-        data: id_orden_to_send+conformidad+motivo+solucion+"&concluido=N",
+        data: $("#formOrSr_"+id_orden_servicio).serialize()+"&accion_orden_servicio="+estado,
         dataType: "json" 
       }).done(function(res) { 
 
   if(res.estado == "ok"){ // si la respuesta es correcta: 
       console.log(res);  
       swal("La orden ha sido guardada exitosamente", " ", "success"); 
-
-      //$("#orden_servicio_"+id_orden).hide();
-      //current_total_ordenes_global=current_total_ordenes_global-1;
-      //$("#total_ordenes").html(current_total_ordenes_global);
    } else{ 
-    //$("#orden_servicio_"+id_orden).hide();
      swal(res.descripcion, " ", "error");  
-     } 
-   
-         
+   }
+  	
+  if(res.cambio_ejecutivo == 'S' || estado == 6){
+	  $("#orden_servicio_"+id_orden_servicio ).remove();
+	  var total = $("#total_ordenes").html();
+	  
+	  $("#total_ordenes").html((total-1));
+	  
+	  
+  }
+  
+  
     })// end ajax done  
       .fail(function() { 
         swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 

@@ -18,6 +18,7 @@ class OrdenSeguimientoController extends Zend_Controller_Action
         
         $valores = array();
         $resultado = $orden->obtenerOrdenes($valores);
+        //echo "<pre>".print_r($resultado,true)."</pre>";die;
         
         $this->view->countArray= count($resultado);
 
@@ -30,9 +31,10 @@ class OrdenSeguimientoController extends Zend_Controller_Action
         $paginator->setCacheEnabled(true);
         // Assign paginator to view
         Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination_sm.phtml');
+        
         $this->view->paginator=$paginator;
         
-        $this->view->formNuevaOrden = new Application_Form_Ordenes_NuevaOrden();
+        $this->view->formSeguimientoOrden = new Application_Form_Ordenes_SeguimientoOrden();
         
         
     }
@@ -126,21 +128,21 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	$this->_helper->layout()->disableLayout();
     	$this->_helper->viewRenderer->setNoRender();
     	$params=$this->_request->getParams();
-    
+
     	$data = array(
-    			//'id_usuario_admin_atiende' => $params['ejecutivo'],
-    			//'id_usuario_agencia_solicito' => $params['solicito'],
-    			'solucion' => $params['solucion'],
-    			'concluido' => $params['concluido'],
-    			'motivo' => $params['motivo'],
-                'conformidad' => $params['conformidad']
-    			//'control_cron_estatus' => se define más adelante,
-    			//'fecha_cierre' => se define más adelante,
-    			//'control_cron_inicial' => se define más adelante,
-    			//'control_cron_final' => $params['control_cron_final'],
-    			//'duracion_servicio' => se define más adelante,
+    			'id_producto' => $params['id_producto'],
+    			'id_poliza' => $params['id_poliza'],
+    			'id_usuario_admin_atiende' => $params['id_usuario_admin_atiende'],
+    			'id_motivo' => $params['id_motivo'],
+    			'id_usuario_agencia_solicito' => ($params['id_usuario_agencia_solicito']=='')?null:$params['id_usuario_agencia_solicito'],
+    			'solicito_otro' => $params['solicito_otro'],
+    			'motivo_orden' => $params['motivo_orden'],
+    			'solucion_orden' => $params['solucion_orden'],
+    			'conformidad' => $params['conformidad']
     	);
     
+    	
+    	
     	$form = new Application_Form_Ordenes_NuevaOrden();
     	$zendDate = Zend_Date::now()->getTimestamp();
     	$fecha = date('Y-m-d H:i:s', $zendDate);
@@ -151,13 +153,11 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	{
     		$ordenServicioDbTable = new Application_Model_DbTable_OrdenServicio();
     		$orden = $ordenServicioDbTable->obtenerOrdenPorId($params['id_orden_servicio']);
+    
     		$duracionServicio = $orden['duracion_servicio'];
-    		if($orden['concluido'] != "S")
-    		{
-    			if($params['concluido'] == "N")
-    			{
-    				if($orden['control_cron_inicial'] == null)
-    				{
+    		if($orden['id_orden_servicio_estatus'] < 6 ){ 
+    			if($params['accion_orden_servicio'] < 6 ){
+    				if($orden['control_cron_inicial'] == null){
     					$data['control_cron_inicial'] = $fecha;
     				}
     				$diferenciaFechas = $ordenServicioDbTable->
@@ -172,9 +172,7 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     				$data['duracion_servicio'] = round($duracionServicio);
     				$data['control_cron_final'] = $fecha;
     				$data['control_cron_estatus'] = 2;
-    			}
-    			else 
-    			{
+    			} else {
     				$data['fecha_cierre'] = $fecha;
     				$diferenciaFechas = $ordenServicioDbTable->
     					obtenerDiferenciaDeFechas(
@@ -191,11 +189,18 @@ class OrdenSeguimientoController extends Zend_Controller_Action
 					//Restando minutos a la póliza
     				$servicesPolizas = new Application_Model_Services_ServicesPolizas();
     				$servicesPolizas->restarMinutosAPoliza($orden['id_poliza'], $duracionServicio);
-    				
+    				$data['id_orden_servicio_estatus']=6;
     			}
     			$where = "id_orden_servicio = {$params['id_orden_servicio']}";
     			// 	se actualiza en la base de datos a la p�liza
     			$ordenServicioDbTable->update($data, $where);
+    			 
+    			$data['cambio_ejecutivo']='N';
+    			if ($params['id_usuario_admin_atiende'] != $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario']){
+    				$data['cambio_ejecutivo']='S';
+    			}
+    			
+    			
     			$data['estado']='ok';
     			$data['descripcion']='La orden ha sido concluida exitosamente';
     			// se responde al cliente

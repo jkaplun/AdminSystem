@@ -229,21 +229,13 @@ class UsuariosController extends Zend_Controller_Action
 
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
+        
+        
         $params=$this->_request->getParams(); 
-        $ejecutivoPrincipal = $this->usuario_admin->find($params['id_usuario_soporte_titular'])->toArray();
-        $ejecutivoAuxiliar = $this->usuario_admin->find($params['id_usuario_soporte_auxiliar'])->toArray();
+
+        $utiles = new Application_Model_Services_Utiles();
         
-        $user = $this->usuario_admin->getSoporteUsers();
-        
-        $result = array_merge($ejecutivoPrincipal, $ejecutivoAuxiliar);
-        
-        //$result = array_merge($result, $user);
-        
-        $resultProcessed = array();
-        
-        foreach ( $user as $key => $value ){
-        	$resultProcessed[$value['id_usuario']] = $value;
-        }
+        $resultProcessed = $utiles->consultarejecutivosporidService($params);
         
         $this->_helper->json($resultProcessed);
 

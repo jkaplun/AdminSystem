@@ -1,6 +1,9 @@
 <?php
 class Application_Model_Services_Utiles
 {
+	
+
+	
 	function comprobar_email($email)
 	{
 		$mail_correcto = false;
@@ -53,7 +56,28 @@ class Application_Model_Services_Utiles
 	
 	
 	
+	public function consultarejecutivosporidService($params){
 	
+		$usuario_admin = new Application_Model_DbTable_UsuarioAdmin();
+			
+		
+		$ejecutivoPrincipal = $usuario_admin->find($params['id_usuario_soporte_titular'])->toArray();
+		$ejecutivoAuxiliar = $usuario_admin->find($params['id_usuario_soporte_auxiliar'])->toArray();
+		
+		$user = $usuario_admin->getSoporteUsers();
+		
+		$result = array_merge($ejecutivoPrincipal, $ejecutivoAuxiliar);
+		
+		//$result = array_merge($result, $user);
+		
+		$resultProcessed = array();
+		
+		foreach ( $user as $key => $value ){
+			$resultProcessed[$value['id_usuario']] = $value;
+		}
+		
+		return $resultProcessed;
+	}	
 	
 	
 	
