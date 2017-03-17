@@ -140,8 +140,6 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     			'solucion_orden' => $params['solucion_orden'],
     			'conformidad' => $params['conformidad']
     	);
-    
-    	
     	
     	$form = new Application_Form_Ordenes_NuevaOrden();
     	$zendDate = Zend_Date::now()->getTimestamp();
