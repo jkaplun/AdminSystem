@@ -369,7 +369,7 @@ function populatePolizaForm(data) {
 }
 
 function mostrarProductosEnSelectPolizas(){
-
+	$('#producto').find('option').remove().end();
   for (var key in productos_agencia) {
     if (productos_agencia.hasOwnProperty(key)) {
       var val = productos_agencia[key];

@@ -368,12 +368,20 @@ $('#id_usuario_admin_atiende').html('');
 
 
      // agregar a todos los ejectivos asignados a esta agencia
-
+    	var k= 0;
         $.each( res, function( key, value ) {
-        	 $('#id_usuario_admin_atiende').append($('<option>').text(value.nombre + " " + value.apellido_paterno)
-        	          .attr('value', value.id_usuario)
+        	var n = value.search("[Titular]");
+        	if (n>1){
+        		k = key;
+        	}
+        	
+        	 $('#id_usuario_admin_atiende').append($('<option>').text(value)
+        	          .attr('value', key)
         	 );
         });
+        $("#id_usuario_admin_atiende").val(k);
+        
+       
         
 //      for (i;i<res.length;i++){
 //

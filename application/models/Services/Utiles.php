@@ -59,23 +59,27 @@ class Application_Model_Services_Utiles
 	public function consultarejecutivosporidService($params){
 	
 		$usuario_admin = new Application_Model_DbTable_UsuarioAdmin();
-			
 		
-		$ejecutivoPrincipal = $usuario_admin->find($params['id_usuario_soporte_titular'])->toArray();
-		$ejecutivoAuxiliar = $usuario_admin->find($params['id_usuario_soporte_auxiliar'])->toArray();
-		
-		$user = $usuario_admin->getSoporteUsers();
-		
+		$ejecutivoPrincipal = $usuario_admin->find($params['id_usuario_soporte_titular'])->toArray()[0];
+		$ejecutivoAuxiliar = $usuario_admin->find($params['id_usuario_soporte_auxiliar'])->toArray()[0];
+
+		$resultProcessed[$ejecutivoPrincipal['id_usuario']] = $ejecutivoPrincipal['nombre'].' '.$ejecutivoPrincipal['apellido_paterno'].'[Titular]'; 
+		$resultProcessed[$ejecutivoAuxiliar['id_usuario']] = $ejecutivoAuxiliar['nombre'].' '.$ejecutivoAuxiliar['apellido_paterno'].'[Auxiliar]';
+
 		$result = array_merge($ejecutivoPrincipal, $ejecutivoAuxiliar);
-		
-		//$result = array_merge($result, $user);
-		
-		$resultProcessed = array();
-		
+		$user = $usuario_admin->getSoporteUsers();
+
 		foreach ( $user as $key => $value ){
-			$resultProcessed[$value['id_usuario']] = $value;
+			if ( !array_key_exists( $value['id_usuario'],$resultProcessed ) ) {
+				$resultProcessed[$value['id_usuario']] = $value['nombre']." ". $value['apellido_paterno'];
+			}
+			
+			if ( !array_key_exists( $value['id_usuario'],$resultProcessed ) ) {
+				$resultProcessed[$value['id_usuario']] = $value['nombre']." ". $value['apellido_paterno'];
+			}
+			
 		}
-		
+
 		return $resultProcessed;
 	}	
 	
