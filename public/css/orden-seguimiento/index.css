@@ -1,0 +1,27 @@
+@CHARSET "ISO-8859-1";
+
+.botton-play_green {
+	background-color: white;
+    border: 1px solid green;
+    border-radius: 3px;
+    color: green;
+    padding: 5px;
+}
+
+.botton-play_green:HOVER {
+	cursor: pointer;
+	color: #01DF01;
+}
+
+.botton-play_red {
+	background-color: white;
+    border: 1px solid red;
+    border-radius: 3px;
+    color: red;
+    padding: 5px;
+}
+
+.botton-play_red:HOVER {
+	cursor: pointer;
+	color: #FE2E2E;
+}

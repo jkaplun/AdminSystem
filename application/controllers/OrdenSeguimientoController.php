@@ -13,12 +13,10 @@ class OrdenSeguimientoController extends Zend_Controller_Action
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js'); 
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes.js');  
 
-
         $orden = new Application_Model_DbTable_OrdenServicio();
         
         $valores = array();
         $resultado = $orden->obtenerOrdenes($valores);
-        //echo "<pre>".print_r($resultado,true)."</pre>";die;
         
         $this->view->countArray= count($resultado);
 
@@ -34,8 +32,32 @@ class OrdenSeguimientoController extends Zend_Controller_Action
         
         $this->view->paginator=$paginator;
         
-        $this->view->formSeguimientoOrden = new Application_Form_Ordenes_SeguimientoOrden();
+        foreach ($this->view->paginator as $key => &$value){
+
+        	$total_diff_cron = 0;
+        	
+        	if ( $value['control_cron_estatus'] == 1){
+	        	$datetime1 = new DateTime($value['control_cron_inicial']);
+	        	$zendDate = new Zend_Date();
+	        	$datetime2 = new DateTime($zendDate->toString('YYYY-MM-dd HH:mm:ss'));
+	        	
+	        	$interval = $datetime1->diff($datetime2);
+	        	$d = $interval->format('%d');
+	        	$h = $interval->format('%h');
+	        	$i = $interval->format('%i');
+	        	$s = $interval->format('%s');
+	        	
+	        	$total_diff_cron = $s + ($i * 60) + ($h * 60 * 60) + ( $d * 24 *60 *60);
+        	}
+        	
+        	
+        	$duracion_servicio_segundos = ($value['duracion_servicio']*60)+$total_diff_cron;
+        	
+        	$value['duracion_servicio_segundos'] =  $duracion_servicio_segundos;
+        	
+        }
         
+        $this->view->formSeguimientoOrden = new Application_Form_Ordenes_SeguimientoOrden();
         
     }
     
