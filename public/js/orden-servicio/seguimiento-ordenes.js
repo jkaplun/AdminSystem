@@ -271,13 +271,15 @@ function guardarServicioAjax(id_orden_servicio,estado){
      swal(res.descripcion, " ", "error");  
    }
   	
-  if(res.cambio_ejecutivo == 'S' || estado == 6){
-	  $("#orden_servicio_"+id_orden_servicio ).remove();
-	  var total = $("#total_ordenes").html();
-	  
-	  $("#total_ordenes").html((total-1));
-	  
-	  
+  if( res.administrador == 0 ){
+	  if(res.cambio_ejecutivo == 'S' || estado == 6){
+		  $("#orden_servicio_"+id_orden_servicio ).remove();
+		  var total = $("#total_ordenes").html();
+		  
+		  $("#total_ordenes").html((total-1));
+		  
+		  
+	  }
   }
   
   

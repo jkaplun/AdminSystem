@@ -1,10 +1,11 @@
 <link rel="stylesheet" type="text/css" href="public/css/flipclock.css">
-<h1 class="page-header">Seguimiento Ordenes de Servicio Admin</h1>
+<link rel="stylesheet" type="text/css" href="public/css/orden-seguimiento/index.css">
+
 <div class="row">
 	<table width="100%" class="table">
 		<thead>
 			<tr>
-				<th class="amarillo centrado">Lamada sin Contestar</th>
+				<th class="amarillo centrado">En operación</th>
 				<th class="naranja centrado">Reportarse</th>
 				<th class="rojo centrado">Reportarse Urgente</th>
 				<th class="centrado">Otros Servicios</th>
@@ -15,77 +16,117 @@
 </div>
 <form class="form-inline" method="get" name="filtroform" id="filtroform">
 </form>
-
-<div class="alert alert-info alert-dismissable">
-	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 	<h3 style="margin-top: 0px;margin-bottom: 0px;">Se muestra(n) <b id="total_ordenes"></b> resultado(s):</h3>
-</div>
-
 <div class="row">
 	<div class="col-md-12">
-
-
-<div class="row" align="right">
-	<?=$this->paginationControl ($this->paginator, 'Sliding');?>
-</div>
+	<div class="row" align="right">
+		<?=$this->paginationControl ($this->paginator, 'Sliding');?>
+	</div>
 	<?php $id_orden_servicio_todos=","?>
 	<?php $duracion_servicio_todos=","?>
 	<?php $control_cron_estatus_todos=","?>
 	<?php $motivo_todos=","?>
-  	<?php foreach ($this->paginator as $registro) { 
+
+	<?php foreach ($this->paginator as $registro) { ?>
+  	<form id="formOrSr_<?= $registro['id_orden_servicio'] ?>">
+	<input type="hidden" name="administrador" value="1">
+  	<?php  
   		$color='';
 
 		if($registro['control_cron_estatus']!=0){
-  		switch ($registro["id_orden_servicio_estatus"]){
-  			case '1':
-  				$color='bs-callout-amarillo-verde';
-  			break;
-  			case '2':
-  				$color='bs-callout-naranja-verde';
-  			break;
-  			case '3':
-  				$color='bs-callout-rojo-verde';
-  			break;
-  			case '4':
-  				$color='bs-callout-gris-verde';
-  			break;
-  			case '5':
-  				$color='bs-callout-morado-verde';
-  			break;
-  		}
+	  		switch ($registro["id_orden_servicio_estatus"]){
+	  			case '1':
+	  				$color='bs-callout-amarillo-verde';
+	  			break;
+	  			case '2':
+	  				$color='bs-callout-naranja-verde';
+	  			break;
+	  			case '3':
+	  				$color='bs-callout-rojo-verde';
+	  			break;
+	  			case '4':
+	  				$color='bs-callout-gris-verde';
+	  			break;
+	  			case '5':
+	  				$color='bs-callout-morado-verde';
+	  			break;
+	  		}
 		}else{
-  		switch ($registro["id_orden_servicio_estatus"]){
-  			case '1':
-  				$color='bs-callout-amarillo';
-  			break;
-  			case '2':
-  				$color='bs-callout-naranja';
-  			break;
-  			case '3':
-  				$color='bs-callout-rojo';
-  			break;
-  			case '4':
-  				$color='bs-callout-gris';
-  			break;
-  			case '5':
-  				$color='bs-callout-morado';
-  			break;
-  		}		
+	  		switch ($registro["id_orden_servicio_estatus"]){
+	  			case '1':
+	  				$color='bs-callout-amarillo';
+	  			break;
+	  			case '2':
+	  				$color='bs-callout-naranja';
+	  			break;
+	  			case '3':
+	  				$color='bs-callout-rojo';
+	  			break;
+	  			case '4':
+	  				$color='bs-callout-gris';
+	  			break;
+	  			case '5':
+	  				$color='bs-callout-morado';
+	  			break;
+	  		}		
 		}
+  		//if($registro["control_cron_estatus"]!=3){
+  			
+			// Llena las opciones del formulario de acuerdo a la agencia que corresponda la orden de servicio.  		
+	  		$poliza = new Application_Model_DbTable_Poliza();
+	  		$polizasAgencia = $poliza->obtenerPolizasVigentesPorIdAgencia($registro['id_agencia']);
+	  		$options = array();
+	  		foreach ($polizasAgencia as $key => $value){
+	  			$options[$value['id_poliza']] = $value['clave'];
+	  		}
+	  		$this->formSeguimientoOrden->id_poliza->addMultiOptions($options);
+	  		
+	    	$producto = new Application_Model_DbTable_Producto();
+	        $productos = $producto->obtenerProductosRegistradosPorAgencia($registro['id_agencia']);
+	  		$options = array();
+	  		foreach ($productos as $key => $value){
+	  			$options[$value['id_producto']] = $value['nombre_prod'];
+	  		}
+	  		$this->formSeguimientoOrden->id_producto->addMultiOptions($options);  		
 
+	  		$utiles = new Application_Model_Services_Utiles();
+	  		$params = array(
+	  			'id_usuario_soporte_titular' => $registro['id_usuario_soporte_titular'],
+				'id_usuario_soporte_auxiliar' => $registro['id_usuario_soporte_auxiliar']
+	  		);
+	  		
+	  		$ejecutivos = $utiles->consultarejecutivosporidService($params);
+	  		$options = array();
+	  		foreach ($ejecutivos as $key => $value){
+	  			$options[$key] = $value;
+	  		}
+	  		$this->formSeguimientoOrden->id_usuario_admin_atiende->addMultiOptions($options);
 
-  		if($registro["control_cron_estatus"]!=3){
+			$options = array('' => 'Otro');
+			$usuario_agencia = new Application_Model_DbTable_AgenciaUsuario();
+			$usuariosAgencia = $usuario_agencia->obtenerUsuariosDeAgenciaPorIdAgencia($registro['id_agencia']);
+
+	  		foreach ($usuariosAgencia as $key => $value){
+	  			$options[$value['id_usuario_agencia']] = $value['nombre']." ".$value['apellidos'];
+  			}
+	  		
+	  		$this->formSeguimientoOrden->id_usuario_agencia_solicito->addMultiOptions($options);
+	  		
+	  		$this->formSeguimientoOrden->populate($registro);
+
+	  		//echo "<pre>".print_r($registro,true)."</pre>";
+	  		 
   		?>
-	
+		<?= $this->formSeguimientoOrden->id_orden_servicio ?>
 		<div id="orden_servicio_<?= $registro["id_orden_servicio"]?>" class="panel panel-default bs-callout2 <?= $color ?>">
 		 	<div class="panel-heading <?= $color ?>2">
             	<b>
             	<div class="row">
             		<div class="col-md-9">
-            			<center><?= $registro["agencia_nombre"] ?></center>
+            			<center><?= $registro["nombre"] ?></center>
             		</div>
             		<div class="col-md-3" align="right">
-            			ID Orden Servicio: <?= $registro["id_orden_servicio"].'-'.$registro["id_orden_servicio_estatus"]?>
+            			ID Orden Servicio: <?= $registro["id_orden_servicio"] ?>
             		</div>
             	</div>
             	</b>
@@ -95,112 +136,80 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="form-group">
                             <label >Fecha Solicitud:</label>
-                            <input id="fecha_solicitud_<?= $registro["id_orden_servicio"]?>" class="form-control" value="<?= $registro["fecha_alta"] ?>" disabled>
+							<p><?= $registro["fecha_alta"] ?></p>
                         </div>
-					  	<div class="form-group">
-					  		<label>Fecha Respuesta:</label>
-					  		<input id="fecha_respuesta_<?= $registro["id_orden_servicio"]?>" class="form-control" value="____-__-__  __:__:__" data-mask="____-__-__  __:__:__">
-					  	</div>                        
- 						<div class="form-group">
-                            <label>Producto:</label>
-							<p></p>
-                        </div>                                              
-					</div>
-					<div class="col-lg-3 col-md-6">
-						<div class="form-group">
-                            <label>Usuario Solicitante:</label>
-                            <input id="solicito_<?= $registro["id_orden_servicio"]?>" class="form-control" value="<?= $registro["usuario_agencia_nombre"] ?> <?= $registro["usuario_agencia_apellidos"] ?>">
-							
-                        </div>
- 						<div class="form-group">
-                            <label>Usuario Atenci&oacute;n:</label>
-                            <input id="atendio_<?= $registro["id_orden_servicio"]?>" class="form-control" value="<?= $registro["clave"] ?>">
-                        </div>    
-					</div>
-					<div class="col-lg-3 col-md-6">
- 						<div class="form-group">
-                            <label>Comentarios Recepci&oacute;n:</label>
-							<p><?= $registro["comentarios_recepcion"] ?></p>
-                        </div>   
                         <div class="form-group">
                             <label>Descripci&oacute;n / Soporte:</label>
-				  			<p><?= $registro["descripcion"] ?></p>
+				  			<p><?= $registro["descripcion_estatus"] ?></p>
+                        </div> 
+                        <div class="form-group">
+                            <label>Comentario Recepci&oacute;n:</label>
+				  			<p><?= $registro["comentarios_recepcion"] ?></p>
+                        </div>
+ 						<div class="form-group">
+							<?= $this->formSeguimientoOrden->id_producto ?>
                         </div>   
+                         <div class="form-group">
+							<?= $this->formSeguimientoOrden->id_poliza ?>
+                        </div>
 					</div>
 					<div class="col-lg-3 col-md-6">
-	                    <!-- AQUI ES EL CRONOMETRO -->
+					    <div class="form-group">
+							<?= $this->formSeguimientoOrden->id_usuario_admin_atiende ?>
+                        </div>  
+						<div class="form-group">
+							<?= $this->formSeguimientoOrden->id_motivo ?>
+                        </div>
+						<div class="form-group">
+							<?= $this->formSeguimientoOrden->id_usuario_agencia_solicito ?>
+                        </div>
+						<div class="form-group">
+							<?= $this->formSeguimientoOrden->solicito_otro ?>
+                        </div>
 
-
-	                    <div class="panel <?= $color ?>2" >
-	                        <div class="panel-heading">
-								<label class="control-label">Duraci&oacute;n del Servicio</label>
-								<input id="duracion_<?= $registro["id_orden_servicio"]?>" class="form-control" value="__:__:__" data-mask="__:__:__" style="text-align:center; font-size: x-large;">
-	                        </div>
-	                    </div>
-	                    <div align="right">
-	                    <a class="btn <?= $color ?>2" href="#orden_<?= $registro["id_orden_servicio"]?>" data-toggle="collapse"><i class="fa fa-chevron-down"></i></a></div>
-	                </div>
-				</div>
-			  	  
-
-				<hr style=" margin-top: 5px; margin-bottom: 10px;">	
-
-
-
-				<div id="orden_<?= $registro["id_orden_servicio"]?>" class="collapse">
-					<div class="row">
-					  	<div class="col-md-6 form-group">
-				  				<label>Motivo:</label>
-					  			<textarea id="motivo_<?= $registro["id_orden_servicio"]?>" class="form-control" rows="3" value="<?= $registro["motivo"] ?>"><?= $registro["motivo"] ?></textarea>							  			
-					  	</div>
-					  	<div class="col-md-6 form-group">
-					  		<label>Solución:</label>
-					  		<textarea id="solucion_<?= $registro["id_orden_servicio"]?>" class="form-control" rows="3" value="<?= $registro["solucion"] ?>"><?= $registro["solucion"] ?></textarea>
-					  	</div>				  	
 					</div>
-				  	<br/>
-				  	<hr style=" margin-top: 5px; margin-bottom: 10px;">	  		    
-				  	<div class="row">
-					  	<div class="col-md-6 form-group">
-					  		<label>Conformidad:</label>
-					  		<input id="conformidad_<?= $registro["id_orden_servicio"]?>" class="form-control">
-					  	</div>
-					  	<div class="col-md-6">
-					  		<div class="row">
-					  			<div class="col-md-3 form-group">
-
-					  			</div>
-					  			<div class="col-md-2 form-group">
-					  				<label></label>
-					  				<button id="guardarServicio_<?= $registro["id_orden_servicio"] ?>" onclick="guardarSercicioAjax(this.id)" type="button" class="btn btn-primary">Guardar Servicio</button>
-					  			</div>
-								<div class="col-md-2"></div>
-					  			<div class="col-md-2 form-group">
-					  				<label></label>
-					  				<button id="concluirServicio_<?= $registro["id_orden_servicio"] ?>" onclick="concluirSercicioAjax(this.id)" type="button" class="btn btn-primary">Servicio Concluido</button>
-					  				
-					  			</div>					  			
-					  			<div class="col-md-3"></div>
-					  		</div>
-					  	</div>
-					  	<div class="col-md-2"></div>			  				  	
-				  	</div>	
+					<div class="col-lg-3 col-md-6">
+                        <div class="form-group">
+							<?= $this->formSeguimientoOrden->motivo_orden ?>
+                        </div>
+                        <div class="form-group">
+							<?= $this->formSeguimientoOrden->solucion_orden ?>
+                        </div>
+                        
+                        
+					</div>
+	                
 				</div>
+			  	<hr style=" margin-top: 5px; margin-bottom: 10px;">	  		    
+			  	<div class="row">
+				  	<div class="col-md-6 form-group">
+                        <div class="form-group">
+							<?= $this->formSeguimientoOrden->conformidad ?>
+                        </div>
+				  	</div>
+		  			<div class="col-md-2 form-group" align="center">
+		  			<br>
+
+		  			<button name="accion_os" onclick="guardarServicioAjax(<?= $registro["id_orden_servicio"]?>,1)" class="btn btn-primary prevent-default"/>Guardar Cambios</button>
+		  			</div>					  			
+				  	<div class="col-md-2" align="center">
+				  	</div>			  				  	
+			  	</div>	
 		  </div>
 		</div>
 
 		<?php $id_orden_servicio_todos = $id_orden_servicio_todos . $registro["id_orden_servicio"] . ","  ?>
-		<?php $duracion_servicio_todos = $duracion_servicio_todos . $registro["duracion_servicio"] . ","  ?>
+		<?php $duracion_servicio_todos = $duracion_servicio_todos . $registro["duracion_servicio_segundos"] . ","  ?>
 		<?php $control_cron_estatus_todos = $control_cron_estatus_todos . $registro["control_cron_estatus"] . ","  ?>
 		<?php $motivo_todos = $motivo_todos . $registro["motivo"] . ","  ?>
-	
+	</form>
 	<?php 
-		}
+	//	}
 	} ?>
-	<p id="info_id_ordenes" hidden="true"> <?= $id_orden_servicio_todos ?> </p>
-	<p id="info_duracion_servicio_todos" hidden="true"> <?= $duracion_servicio_todos ?> </p>
-	<p id="info_control_cron_estatus_todos" hidden="true"> <?= $control_cron_estatus_todos ?> </p>
-	<p id="info_motivo_todos" hidden="true"> <?= $motivo_todos ?> </p>
+	<span id="info_id_ordenes" hidden="true"> <?= $id_orden_servicio_todos ?> </span>
+	<span id="info_duracion_servicio_todos" hidden="true"> <?= $duracion_servicio_todos ?> </span>
+	<span id="info_control_cron_estatus_todos" hidden="true"> <?= $control_cron_estatus_todos ?> </span>
+	<span id="info_motivo_todos" hidden="true"> <?= $motivo_todos ?> </span>
 	</div>
 	
 	<div class="row" align="right">

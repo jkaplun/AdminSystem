@@ -22,6 +22,16 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 		
 	}
 	
+	public function obtenerTodasLasOrdenes($valores){
+	
+		$select = $this->_db->select()
+			->from ( "view_orden_servicio", '*' )
+			->order("id_orden_servicio")->limit(100);
+	
+		return $this->getAdapter ()->fetchAll( $select );
+	
+	}
+	
 	public function obtenerOrdenesMonitoreo()
 	{
 		$select = $this->_db->select()->
@@ -176,8 +186,6 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 					'fecha_alta',
 					'duracion_servicio',
 					'fecha_cierre',
-					'concluido',
-					'motivo',
 					'control_cron_estatus as estatus_reloj',
 					'id_orden_servicio_estatus'
 					)
@@ -194,7 +202,8 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 		->joinleft(array('a' => 'agencia'),
 						'p.id_agencia = a.id_agencia',
 						array('nombre as nombre_agencia'))														
-		->where('concluido= "N"');
+		//->where('concluido= "N"')
+		;
 		//echo $select;die;
 		return $this->getAdapter ()->fetchAll( $select );
 	}	

@@ -176,7 +176,8 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     		$orden = $ordenServicioDbTable->obtenerOrdenPorId($params['id_orden_servicio']);
     
     		$duracionServicio = $orden['duracion_servicio'];
-    		if($orden['id_orden_servicio_estatus'] < 6 ){
+    		
+    		if($orden['id_orden_servicio_estatus'] < 6 || isset($params["administrador"])){
     			 
     			if($params['accion_orden_servicio'] == 1 ){
     				if($orden['control_cron_inicial'] == null){
@@ -224,6 +225,10 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     			
     			$data['estado']='ok';
     			$data['descripcion']='La orden ha sido concluida exitosamente';
+    			$data['administrador'] = 0;
+    			if( isset($params["administrador"])){
+    				$data['administrador'] = $params["administrador"];
+    			}
     			// se responde al cliente
     			$this->_helper->json($data);
     			$this->_redirect('orden-servicio/atencion-orden');
