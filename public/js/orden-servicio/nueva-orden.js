@@ -221,7 +221,7 @@ function agregarPolizaEnTabla(res){
 	if(res.id_poliza_estatus == "1"){ 
 		estadoPoliza="Activa"; 
 	} else if (res.id_poliza_estatus == "2"){ 
-		estadoPoliza="Adeudo"; 
+		estadoPoliza="<b>Adeudo</b>"; 
 	} else if (res.id_poliza_estatus == "3"){ 
 		estadoPoliza="Bloqueado"; 
 	} else if (res.id_poliza_estatus == "4"){ 
@@ -255,7 +255,6 @@ function agregarPolizaEnTabla(res){
   }else{
     horas_us=res.horas_poliza;
   }
-
   
   if (horas_us < 0){
 	  horas_us = "<span style='color: red'><b>" + horas_us + "</b></span>";
@@ -264,8 +263,6 @@ function agregarPolizaEnTabla(res){
 	polizaTable.row.add( [ 
 		"", res.clave, nombre_producto_poliza + "<br>" + res.tipo_desc, res.horas_poliza, horas_us, res.fecha_ini +" a "+ res.fecha_fin , res.fecha_fin_servicio ,estadoPoliza 
 	]).draw(); 
-
-	//console.log(horas_us);
 	
 	polizaTable.page( 'last' ).draw( 'page' );  
 
@@ -277,7 +274,6 @@ function agregarPolizaEnTabla(res){
 	if (res.vigente=='no') {
 		$('#dataTable-polizas-vigentes tr:last-child td:first-child').html('');	
 	}  
-    
         
     }else if(res.id_poliza_estatus="null"){
       $('#dataTable-polizas-vigentes tr:last-child td:last-child').css('background-color', '#ffd6d6');  

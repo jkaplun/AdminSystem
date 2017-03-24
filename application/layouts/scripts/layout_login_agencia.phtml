@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<base href="<?= $this->baseUrl() ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="MIG AdminSystem">
+    <meta name="author" content="HopeWare">
+
+	<!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/bootstrap/css/bootstrap.css">
+    <!-- MetisMenu CSS -->
+    <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/metisMenu/metisMenu.min.css" >
+    <!-- DataTables CSS -->
+    <link href="<?= $this->baseUrl() ?>/css_complete/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="<?= $this->baseUrl() ?>/css_complete/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+ 	<!-- Custom CSS -->
+    <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/dist/css/sb-admin-2.css">
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/font-awesome/css/font-awesome.min.css" >
+
+	<link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/datepicker/css/bootstrap-datepicker3.min.css">
+	<link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+
+	<script src="<?= $this->baseUrl() ?>/css_complete/jquery/jquery.min.js"></script>
+	<script src="<?= $this->baseUrl() ?>/css_complete/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?= $this->baseUrl() ?>/css_complete/metisMenu/metisMenu.min.js"></script>
+    <script src="<?= $this->baseUrl() ?>/js/sb-admin-2.js"></script>
+	<script src="<?= $this->baseUrl() ?>/js/carousel.js"></script>
+	<script src="<?= $this->baseUrl() ?>/css_complete/datepicker/js/datepicker.min.js"></script>    
+	<script src="<?= $this->baseUrl() ?>/css_complete/datepicker/js/bootstrap-datepicker.es.js"></script>   
+	<?php echo $this->InlineScript();  ?>
+ <?php echo $this->headLink(); ?>
+</head>
+<body class="imageBody" style="font-family: 'Roboto', sans-serif;">
+<img alt="MIG" src="public/img/empresa_mig.png" height="110px" style="padding: 10px">
+	<?php echo $this->layout()->content; ?>
+</body>
+</html>

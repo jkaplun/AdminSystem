@@ -1,0 +1,85 @@
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+  	<?php if ( isset($this->params['status']) ) { ?>
+	<div class="alert alert-success" role="alert">Se a ralizado la solicitud exitosamente.</div>
+	<?php } ?>
+  
+<table class="table table-condensed">
+<caption>Pólizas.</caption>
+<thead>
+	<tr>
+		<th>Id. Poliza</th>
+		<th>Clave</th>
+		<th>Producto</th>
+		<th>Horas Incluidas</th>
+		<th>Horas Consumidas</th>
+		<th>Horas Restantes</th>
+		<th>Fecha Inicio</th>
+		<th>Fecha Cierre</th>
+		<th>Estatus</th>
+		<th>Nueva Orden</th>
+
+	</tr>
+</thead>
+<tbody>
+
+<?php foreach ($this->polizasAgencia as $value) { ?>
+	<tr>
+		<td scope="row"><?= $value['id_poliza'] ?></td>
+		<td><a href="public/agencia-admin/consultar-ordenes/id_poliza/<?= $value['id_poliza'] ?>"><?= $value['clave_poliza'] ?></a></td>
+		<td><?= $value['nombre_producto'] ?></td>
+		<td><?= $value['horas_poliza'] ?></td>
+		<td><?= $value['horas_consumidas'] ?></td>
+		<td><?= $value['horas_restantes'] ?></td>
+		<td><?= $value['fecha_ini'] ?></td>
+		<td><?= $value['fecha_fin'] ?></td>
+		<td><?= $value['descripcion_estatus'] ?></td>
+		<td>
+		<?php if( $value['id_poliza_estatus']=='1' ) { ?>
+		<button type="button" class="btn btn-info btn-xs" onclick="openFormOrden(<?= $value['id_poliza'] ?>)">
+			<i class="fa fa-plus-square" aria-hidden="true"></i>
+		</button>
+		<?php } ?>
+		</td>
+	</tr>
+<?php } ?>
+</tbody>
+</table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-sm" id="myModalAddOdSr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <form id="nueva-orden" action="public/agencia-admin/agregar-orden" method="post">
+    	<input type="hidden" id="id_poliza" name="id_poliza">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Solicitud de Soporte.</h4>
+	      </div>
+	      <div class="modal-body">
+		<?php echo $this->selectEjecutivo->id_usuario_admin_atiende; ?>	
+		<?php echo $this->selectEjecutivo->id_producto; ?>
+		<?php echo $this->selectEjecutivo->telefono; ?>
+		<?php echo $this->selectEjecutivo->comentarios_recepcion; ?>
+		
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        <button type="submit" class="btn btn-primary">Solicitar</button>
+	      </div>
+	    </div>
+    </form>
+  </div>
+</div>
+
+
+<script>
+function openFormOrden(id_poliza){
+	$("#id_poliza").val(id_poliza);
+	$('#myModalAddOdSr').modal('show');
+}
+</script>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<base href="<?= $this->baseUrl() ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="MIG AdminSystem">
+    <meta name="author" content="HopeWare">
+
+	<!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/bootstrap/css/bootstrap.css">
+    <!-- MetisMenu CSS -->
+    <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/metisMenu/metisMenu.min.css" >
+    <!-- DataTables CSS -->
+    <link href="<?= $this->baseUrl() ?>/css_complete/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="<?= $this->baseUrl() ?>/css_complete/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+ 	<!-- Custom CSS -->
+    <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css_complete/dist/css/sb-admin-2.css">
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/font-awesome/css/font-awesome.min.css" >
+
+	<link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css_complete/datepicker/css/bootstrap-datepicker3.min.css">
+	<link rel="stylesheet" type="text/css" href="<?= $this->baseUrl() ?>/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+
+	<script src="<?= $this->baseUrl() ?>/css_complete/jquery/jquery.min.js"></script>
+	<script src="<?= $this->baseUrl() ?>/css_complete/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?= $this->baseUrl() ?>/css_complete/metisMenu/metisMenu.min.js"></script>
+    <script src="<?= $this->baseUrl() ?>/js/sb-admin-2.js"></script>
+	<script src="<?= $this->baseUrl() ?>/js/carousel.js"></script>
+	<script src="<?= $this->baseUrl() ?>/css_complete/datepicker/js/datepicker.min.js"></script>    
+	<script src="<?= $this->baseUrl() ?>/css_complete/datepicker/js/bootstrap-datepicker.es.js"></script>   
+	<?php echo $this->InlineScript();  ?>
+ <?php echo $this->headLink(); ?>
+</head>
+<body style="font-family: 'Roboto', sans-serif;">
+<header class="imageBody" style="height: 110px">
+<img alt="MIG" src="public/img/empresa_mig.png" height="110px" style="padding: 10px">
+</header>
+<div class="container-fluid panel panel-default">
+	<div class="page-header" style="margin-top: 0px !important">
+		<div class="row">
+		  <div class="col-md-11">
+			<h1>Centro de Servicios <small>Bienvenido <?= $_SESSION['Zend_Auth']['storage']['nombre'] ?> <?= $_SESSION['Zend_Auth']['storage']['apellidos'] ?></small></h1>
+			<?= $this->agencia[0]['nombre'] ?>
+		  </div>
+		  <div class="col-md-1">
+		  <br><br>
+		  	  <a href="public/auth-agency/logout" class="btn btn-primary" >Salir   <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+		  </div>
+		</div>
+	</div>
+	<?php echo $this->layout()->content; ?>
+</div>
+<p>
+<table width="100%">
+<tbody>
+<tr>
+<td bgcolor="#007fae">
+<table width="80%" cellspacing="0" cellpadding="0" border="0" align="center">
+<tbody>
+<tr>
+<td height="55" rowspan="2">
+<div style="margin-bottom:100px; margin-top:100px;">
+<img width="200" height="99" alt="" src="public/img/agencia-admin/certificacionblanco.png">
+<p> </p>
+<p>
+<a href="http://www.mig.com.mx/blog/" style="color: #5bbed3; text-decoration: none;">Blog Sistemas MIG</a>
+</p>
+<p>
+<a href="http://www.mig.com.mx/soluciones/index.php/aviso-de-privacidad/" style="color: #5bbed3; text-decoration: none;">Aviso de Privacidad</a>
+</p>
+</div>
+</td>
+</tr>
+<tr>
+<td style="color:rgba(255,255,255,1.00)" colspan="3">
+<p>
+<strong>SÍGUENOS AQUÍ</strong>
+</p>
+<p> </p>
+<table width="70%" cellspacing="0" cellpadding="0" border="0" align="center">
+<tbody>
+<tr>
+<td>
+<a target="new" href="https://www.facebook.com/sistemasmig">
+<img width="25" height="33" alt="" src="public/img/agencia-admin/facebook.png">
+</a>
+</td>
+<td>
+<a target="new" href="https://twitter.com/sistemasmig">
+<img width="25" height="33" alt="" src="public/img/agencia-admin/twitter.png">
+</a>
+</td>
+<td>
+<a target="new" href="https://plus.google.com/100966032069499021364">
+<img width="25" height="33" alt="" src="public/img/agencia-admin/gmail.png">
+</a>
+</td>
+<td>
+<a target="new" href="https://www.linkedin.com/company/sistemas-mig">
+<img width="25" height="33" alt="" src="public/img/agencia-admin/linkedin.png">
+</a>
+</td>
+<td>
+<a target="new" href="https://www.youtube.com/user/sistemasmig1">
+<img width="25" height="33" alt="" src="public/img/agencia-admin/youtube.png">
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<div style="color:#666; padding-left:20px;">Todos los Derechos Reservados | Sistemas MIG</div>
+
+</body>
+</html>

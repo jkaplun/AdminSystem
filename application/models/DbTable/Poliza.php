@@ -61,7 +61,7 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		->join( array( 'tp'=> 'tipo_poliza') , 'p.tipo=tp.tipo' )
 		->where(' p.id_agencia='.$idAgencia);
 	
-		//echo $select;die;
+		echo $select;die;
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 
@@ -72,9 +72,9 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		from ( $this->_name, array("*",
 					"(if ( now() between fecha_ini and fecha_fin_servicio,'si','no')) as vigente",
 				 	"((SELECT descripcion FROM tipo_poliza tp WHERE tp.tipo = poliza.tipo)) as tipo_desc" ) )
-		->where(' id_agencia="'.$idAgencia.'" and fecha_fin_servicio > now() and id_poliza_estatus = 1')
+		->where(' id_agencia="'.$idAgencia.'" and fecha_fin_servicio > now() and (id_poliza_estatus = 1 || id_poliza_estatus = 2)')
 		->order('fecha_ini');
-		//echo $select;die;
+
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	
@@ -148,6 +148,19 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
         			AND (tipo = '{$values['tipo']}') AND id_poliza_estatus<>4");
 		return $this->getAdapter ()->fetchAll( $select );
 	}
+
+	
+	public function obtenerPolizasVigentesPorIdAgenciaView ($idAgencia)
+	{
+	
+		$select = $this->_db->select()
+			->from ("view_polizas_info", array("*"))
+			->where('id_agencia="'.$idAgencia.'"')
+			->order('fecha_ini');
+	
+		return $this->getAdapter ()->fetchAll( $select );
+	}
+	
 	
 }
 

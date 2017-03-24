@@ -5,28 +5,18 @@ class OrdenMonitoreoController extends Zend_Controller_Action
 
     public function indexAction(){
         $this->_helper->layout->setLayout('layout_monitoreo');  
-    	
-        // $this->_helper->layout()->disableLayout();
-    	// $this->_helper->viewRenderer->setNoRender();
     	$params=$this->_request->getParams();
     	
     	$ordenServicioDbTable = new Application_Model_DbTable_OrdenServicio();
 		$ordenesBd = $ordenServicioDbTable->obtenerOrdenesMonitoreo();
 		$ordenes = array();
 		$ordenAMostrar;
-		foreach ($ordenesBd as $orden)
-		{
-			if($orden['concluido'] == 'S')
-				$ordenAMostrar = $this->reiniciaOrden($orden);
-			else
-				$ordenAMostrar = $orden;
-			$ordenes[$ordenAMostrar['id_usuario']][$ordenAMostrar['id_orden_servicio']] = $ordenAMostrar;
+		
+		foreach ($ordenesBd as $orden){
+			$ordenes[$orden['id_usuario']][$orden['id_orden_servicio']] = $orden;
 		}
-        /*echo'<pre>';
-        print_r($ordenes);
-        die;*/
-        /*echo'</pre>';
-        die;*/
+		
+		//echo "<pre>".print_r($ordenes,true)."</pre>";die;
         $this->view->ordenes = $ordenes;
     }
     

@@ -85,7 +85,7 @@ class AuthController extends Zend_Controller_Action
 
 	/**
 	 * @method finalize the session of user
-	 * @author Juan Garfias V�zquez
+	 * @author Juan Garfias Vázquez
 	 */
 	public function logoutAction() {
 		$storage = new Zend_Auth_Storage_Session();

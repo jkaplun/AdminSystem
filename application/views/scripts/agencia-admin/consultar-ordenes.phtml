@@ -1,0 +1,39 @@
+<ul class="nav nav-tabs">
+  <li role="presentation"><a href="public/agencia-admin/">Regresar</a></li>
+</ul>
+<div class="panel panel-default">
+  <div class="panel-body">
+<table class="table table-condensed">
+<caption>Ordenes de Servicio.</caption>
+<thead>
+	<tr>
+		<th>Id. Orden</th>
+		<th>nombre_producto</th>
+		<th>Fecha Alta</th>
+		<th>Fecha Cierre</th>
+		<th>Conformidad</th>
+		<th>Estatus</th>
+		<th>Ejecutivo</th>
+		<th>Duración (min)</th>
+	</tr>
+</thead>
+<tbody>
+<?php foreach ($this->ordenes as $value) { ?>
+	<tr>
+		<td scope="row"><?= $value['id_orden_servicio'] ?></td>
+
+		<td><?= $value['nombre_producto'] ?></td>
+		<td><?= $value['fecha_alta'] ?></td>
+		<td><?= $value['fecha_cierre'] ?></td>
+		<td><?= $value['conformidad'] ?></td>
+		<td><?= $value['descripcion_estatus'] ?></td>
+		
+		
+		<td><?= $value['nombre_usr_admin_atiende'] ?> <?= $value['ap_usr_admin_atiende'] ?></td>
+		<td><?= $value['duracion_servicio'] ?></td>
+	</tr>
+<?php } ?>
+</tbody>
+</table>
+  </div>
+</div>

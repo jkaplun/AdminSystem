@@ -15,7 +15,8 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 		
 		$select = $this->_db->select()->
 		from ( "view_orden_servicio", '*' )
-		->where('id_usuario_admin_atiende="'.$_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'].'" and id_orden_servicio_estatus < 6 ');
+		->where('id_usuario_admin_atiende="'.$_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'].'" and id_orden_servicio_estatus < 6 ')
+		->order("id_orden_servicio");
 
 		return $this->getAdapter ()->fetchAll( $select );
 		
@@ -24,7 +25,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 	public function obtenerOrdenesMonitoreo()
 	{
 		$select = $this->_db->select()->
-		from (array('p' => $this->_name),
+		from (array('os' => $this->_name),
 				array(
 					'id_orden_servicio',
 					'id_agencia',
@@ -32,20 +33,19 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 					'id_usuario_agencia_solicito',
 					'fecha_alta',
 					'id_orden_servicio_estatus',
-					'concluido',
 					'control_cron_estatus as estatus_reloj'
 					)
 		)
-		->joinleft(array('u_a' => 'agencia_usuario'),
-						'p.id_usuario_agencia_solicito = u_a.id_usuario_agencia',
+		->joinleft(array('au' => 'agencia_usuario'),
+						'os.id_usuario_agencia_solicito = au.id_usuario_agencia',
 						array('nombre as nombre_usuario', 'apellidos as apellidos_usuario', 'puesto'))
 		->joinRight(array('u_ad' => 'usuario_admin'),
-						'p.id_usuario_admin_atiende = u_ad.id_usuario',
+						'os.id_usuario_admin_atiende = u_ad.id_usuario',
 						array('id_usuario','nombre as nombre_atiende', 'apellido_paterno'))
 		->joinleft(array('a' => 'agencia'),
-						'p.id_agencia = a.id_agencia',
+						'os.id_agencia = a.id_agencia',
 						array('nombre as nombre_agencia'))
-		->where("u_ad.es_ejecutivo = 'S'");
+		->where("u_ad.id_usuario_admin_puesto = 1");
 		//->where("(concluido = 'N' or concluido is null) and u_ad.ejecutivo = 'S'");
 		return $this->getAdapter ()->fetchAll( $select );
 	}
@@ -230,6 +230,16 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	
+	public function obtenerOrdenesPorPoliza($id_poliza){
+	
+		$select = $this->_db->select()->
+		from ( "view_orden_servicio", '*' )
+		->where('id_poliza='.$id_poliza.' and id_agencia='.$_SESSION['Zend_Auth']['storage']['id_agencia'])
+		->order("id_orden_servicio");
+	
+		return $this->getAdapter ()->fetchAll( $select );
+	
+	}
 
 }
 

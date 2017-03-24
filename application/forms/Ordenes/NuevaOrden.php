@@ -37,7 +37,6 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		->setAttrib("maxlength","15")
 		;
 		
-		
 		// producto
 		$producto = new Zend_Form_Element_Select('id_producto');
 		$producto->setRequired(true)

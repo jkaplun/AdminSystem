@@ -15,6 +15,7 @@ public function preDispatch(Zend_Controller_Request_Abstract $request)
     	if(isset( $_SESSION['Zend_Auth'])){
     		$roleName = 'usuario';
     	}
+    	//echo $roleName;die;
     	$actionName=$request->getActionName();
     	$controllerName=$request->getControllerName();
     	//echo $controllerName;die;
@@ -41,7 +42,7 @@ public function preDispatch(Zend_Controller_Request_Abstract $request)
         
         
     	
-        if ( $roleName != '') {
+     //   if ( $roleName != '') {
         	
 	    	$acl->allow('usuario', array(
 				'admin',
@@ -59,32 +60,34 @@ public function preDispatch(Zend_Controller_Request_Abstract $request)
 				'usuarios'
 	    	));
         	
-        	 
-	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_admin'] == 'S'){
-	    		//$acl->allow('usuario', array('usuarios','ordenes','clientes'));
-	    		//$acl->deny('usuario', array('clientes'));
-	    	}	
-	    	
-	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_supervisor'] == 'S'){
-	    		//$acl->allow('usuario', array('reportes'));
-	    	}
-	    	
-	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_agrega_folios'] == 'S'){
-	    		//$acl->allow('usuario', array('folios'));
-	    	}
-	    	
-	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_ejecutivo'] == 'S'){
-	    		//$acl->allow('usuario', array('compila'));
-	    	}
-	    	
-	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_edita_poliza'] == 'S'){
-	    		//$acl->allow('usuario', array('compila'));
-	    	}
-	    	
-	    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_recepcionista'] == 'S'){
-	    		//$acl->allow('usuario', array('compila'));
-	    	}
-        }
+// 	    	if ( !isset($_SESSION['Zend_Auth']['storage']['agencia_usuario'])) {
+		    	
+// 		    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_admin'] == 'S'){
+// 		    		//$acl->allow('usuario', array('usuarios','ordenes','clientes'));
+// 		    		//$acl->deny('usuario', array('clientes'));
+// 		    	}	
+		    	
+// 		    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_supervisor'] == 'S'){
+// 		    		//$acl->allow('usuario', array('reportes'));
+// 		    	}
+		    	
+// 		    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_agrega_folios'] == 'S'){
+// 		    		//$acl->allow('usuario', array('folios'));
+// 		    	}
+		    	
+// 		    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_ejecutivo'] == 'S'){
+// 		    		//$acl->allow('usuario', array('compila'));
+// 		    	}
+		    	
+// 		    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_edita_poliza'] == 'S'){
+// 		    		//$acl->allow('usuario', array('compila'));
+// 		    	}
+		    	
+// 		    	if ( $_SESSION['Zend_Auth']['USER_VALUES']['p_recepcionista'] == 'S'){
+// 		    		//$acl->allow('usuario', array('compila'));
+// 		    	}
+// 	    	}
+  //      }
 
         
  		// if the resource exists in the ACL

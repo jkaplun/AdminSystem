@@ -33,5 +33,12 @@ class Application_Model_DbTable_AgenciaUsuario extends Zend_Db_Table_Abstract
     	return $this->getAdapter ()->fetchAll ( $select );
   	}
 
+  	public function obtenerUsuarioDeAgencia ($email , $pwd) {
+  		$select = $this->_db->select()->
+  		from ( $this->_name, '*' )
+  		->where("email = '{$email}' and pwd='{$pwd}'");
+  	
+  		return $this->getAdapter ()->fetchRow( $select );
+  	}
 }
 

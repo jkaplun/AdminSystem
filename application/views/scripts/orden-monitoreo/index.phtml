@@ -39,7 +39,7 @@
 								<th>Fecha</th>			
 								<th>Agencia</th>
 								<th>Solicito</th>
-								<th>Reporte</th>
+								<th>Id O.S.</th>
 							</tr>
 						</thead>
 						<tbody align="center">
@@ -79,43 +79,4 @@
 <?php } ?>	
 	</div>
 </div>
-<div class="row">
-	<div class="col-md-12 alert alert-info marquee">
-	    <div class='marquee-text'>
-	        <h4 id="toptitle" style="margin-bottom: 0px;"><b>Testing this marquee function</b></h4>
-	    </div>
-	</div>	
-</div>
 
-
-
-
-<script type="text/javascript">
-	$(document).ready(function() { 
-		var marquee = $('div.marquee');
-
-		marquee.each(function() {
-		    var mar = $(this),indent = mar.width();
-		    mar.marquee = function() {
-		        indent--;
-		        mar.css('text-indent',indent);
-		        if (indent < -1 * mar.children('div.marquee-text').width()) {
-		            indent = mar.width();
-		        }
-		    };
-		    mar.data('interval',setInterval(mar.marquee,900/60));
-		});
-		var info="";
-		$.ajax({
-		  url      : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent('http://feeds.abcnews.com/abcnews/travelheadlines'),
-		  dataType : 'json',
-		  success  : function (data) {
-		    if (data.responseData.feed && data.responseData.feed.entries) {
-		      $.each(data.responseData.feed.entries, function (i, e) {
-		        info+="--"+"title: " + e.title+"--"+"author: " + e.author;
-		      });
-		      $("#toptitle").text(info);		    }
-		  }
-		});
-	}); // end  $(document).ready(function() { 
-</script>

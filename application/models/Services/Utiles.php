@@ -62,9 +62,9 @@ class Application_Model_Services_Utiles
 		
 		$ejecutivoPrincipal = $usuario_admin->find($params['id_usuario_soporte_titular'])->toArray()[0];
 		$ejecutivoAuxiliar = $usuario_admin->find($params['id_usuario_soporte_auxiliar'])->toArray()[0];
-
-		$resultProcessed[$ejecutivoPrincipal['id_usuario']] = $ejecutivoPrincipal['nombre'].' '.$ejecutivoPrincipal['apellido_paterno'].'[Titular]'; 
-		$resultProcessed[$ejecutivoAuxiliar['id_usuario']] = $ejecutivoAuxiliar['nombre'].' '.$ejecutivoAuxiliar['apellido_paterno'].'[Auxiliar]';
+		
+		$resultProcessed[$ejecutivoPrincipal['id_usuario']] = $ejecutivoPrincipal['nombre'].' '.$ejecutivoPrincipal['apellido_paterno'].' [Titular]'; 
+		$resultProcessed[$ejecutivoAuxiliar['id_usuario']] = $ejecutivoAuxiliar['nombre'].' '.$ejecutivoAuxiliar['apellido_paterno'].' [Auxiliar]';
 
 		$result = array_merge($ejecutivoPrincipal, $ejecutivoAuxiliar);
 		$user = $usuario_admin->getSoporteUsers();
