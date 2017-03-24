@@ -60,8 +60,7 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		from ( array( 'p' => $this->_name), '*' )
 		->join( array( 'tp'=> 'tipo_poliza') , 'p.tipo=tp.tipo' )
 		->where(' p.id_agencia='.$idAgencia);
-	
-		echo $select;die;
+
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 

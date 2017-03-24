@@ -22,8 +22,8 @@
 	<?php if($titulo==1){?>
 		<div class="row">
 	<?php }?>
-	<div class="col-md-4 tablaMonitoreo2" style="height:270px;">
-		<div class="panel panel-info" style="height:270px;">
+	<div class="col-md-4 tablaMonitoreo2">
+		<div class="panel panel-info">
 		    <div class="panel-heading">
 		    	<?php $num=1; foreach ($ordenes as $solicitud) { ?>
 		        	<center><?php echo $solicitud['nombre_atiende'].' '.$solicitud['apellido_paterno'] ?></center>
@@ -31,7 +31,7 @@
 		        <?php } ?>
 		    </div>
 		    <div class="panel-body tablaMonitoreo">
-				<div class="table-responsive" style="height:270px; overflow: auto;">
+				<div class="table-responsive" overflow: auto;">
 					<table width="100%" class="table table-striped table-bordered table-hover fz2">
 						<thead>
 							<tr>
