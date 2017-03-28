@@ -120,27 +120,46 @@
 		<?= $this->formSeguimientoOrden->id_orden_servicio ?>
 		<div id="orden_servicio_<?= $registro["id_orden_servicio"]?>" class="panel panel-default bs-callout2 <?= $color ?>">
 		 	<div class="panel-heading <?= $color ?>2">
-            	<b>
+            	
             	<div class="row">
-            		<div class="col-md-9">
-            			<center><?= $registro["nombre"] ?></center>
+            		
+            		<div class="col-md-1">
+            			ID: <?= $registro["id_orden_servicio"] ?>
             		</div>
-            		<div class="col-md-3" align="right">
-            			ID Orden Servicio: <?= $registro["id_orden_servicio"] ?>
+            		<div class="col-md-2">
+                        <?= $registro["fecha_alta"] ?>
+                    </div>
+            		<div class="col-md-4">
+            			<?= $registro["nombre"] ?>
             		</div>
+            		<div class="col-md-2">
+                        <?= $registro["descripcion_estatus"] ?>
+                    </div> 
+                    <div class="col-md-2">
+                        <?= $registro["nombre_usr_admin_atiende"].' '. $registro["ap_usr_admin_atiende"]?>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-default btn-xs" type="button" onclick="showEditOrdServ(<?= $registro["id_orden_servicio"] ?>)">Editar  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                    </div>
             	</div>
-            	</b>
+            	
             </div>
-		 	<div class="panel-body">
+		 	<div class="panel-body" id="panel-body-<?= $registro["id_orden_servicio"] ?>" style="display: none">
 			 	<div class="row">
-					<div class="col-lg-3 col-md-6">
+					<div class="col-lg-4 col-md-6">
 						<div class="form-group">
                             <label >Fecha Solicitud:</label>
 							<p><?= $registro["fecha_alta"] ?></p>
                         </div>
                         <div class="form-group">
                             <label>Descripci&oacute;n / Soporte:</label>
-				  			<p><?= $registro["descripcion_estatus"] ?></p>
+				  			<p>
+				  			<?php if ($registro['id_tipo_soporte']==2) {  ?>
+							<b>  Soporte en Sitio</b>
+                        	<?php } else { ?>
+                        	<?= $registro["descripcion_estatus"] ?>
+                        	<?php } ?>
+				  			</p>
                         </div> 
                         <div class="form-group">
                             <label>Comentario Recepci&oacute;n:</label>
@@ -153,13 +172,16 @@
 							<?= $this->formSeguimientoOrden->id_poliza ?>
                         </div>
 					</div>
-					<div class="col-lg-3 col-md-6">
+					<div class="col-lg-4 col-md-6">
 					    <div class="form-group">
 							<?= $this->formSeguimientoOrden->id_usuario_admin_atiende ?>
                         </div>  
+						<?php if ($registro['id_tipo_soporte']==2) {  ?>
+                        <?php } else { ?>
 						<div class="form-group">
 							<?= $this->formSeguimientoOrden->id_motivo ?>
-                        </div>
+                        </div>                        
+                        <?php } ?>
 						<div class="form-group">
 							<?= $this->formSeguimientoOrden->id_usuario_agencia_solicito ?>
                         </div>
@@ -168,7 +190,7 @@
                         </div>
 
 					</div>
-					<div class="col-lg-3 col-md-6">
+					<div class="col-lg-4 col-md-6">
                         <div class="form-group">
 							<?= $this->formSeguimientoOrden->motivo_orden ?>
                         </div>

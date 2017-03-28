@@ -237,6 +237,83 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 			->setAttrib("maxlength","245");
 		
 		$this->addElement($solicito_otro);
+		
+		$element = new Zend_Form_Element_Text('conformidad');
+		$element->setRequired(false)
+		->setLabel("Conformidad")
+		->removeDecorator('HtmlTag')
+		->setAttrib("class","form-control")
+		->setAttrib("autocomplete","off")
+		->setAttrib("placeholder",utf8_encode("Conformidad"))
+		->setAttrib("maxlength","245");
+		
+		$this->addElement($element);
+		
+		$element = new Zend_Form_Element_Textarea('motivo_orden');
+		$element->setRequired(false)
+		->setLabel("Motivo")
+		->removeDecorator('HtmlTag')
+		->setAttrib("class","form-control")
+		->setAttrib("autocomplete","off")
+		->setAttrib("rows","5")
+		->setAttrib("placeholder",("Descripción"));
+		
+		$this->addElement($element);
+		
+		$element = new Zend_Form_Element_Textarea('solucion_orden');
+		$element->setRequired(false)
+		->setLabel("Solución")
+		->removeDecorator('HtmlTag')
+		->setAttrib("class","form-control")
+		->setAttrib("autocomplete","off")
+		->setAttrib("rows","5")
+		->setAttrib("placeholder",("Descripción"));
+		
+		$this->addElement($element);
+		
+
+		$options = array(
+			"10" =>"00:10",
+			"20" =>"00:20",
+			"30" =>"00:30",
+			"40" =>"00:40",
+			"50" =>"00:50",
+			"60" =>"01:00",
+			"70" =>"01:10",
+			"80" =>"01:20",
+			"90" =>"01:30",
+			"100" =>"01:40",
+			"110" =>"01:50",
+			"120" =>"02:00",
+			"130" =>"02:10",
+			"140" =>"02:20",
+			"150" =>"02:30",
+			"160" =>"02:40",
+			"170" =>"02:50",
+			"180" =>"03:00",
+			"190" =>"03:10",
+			"200" =>"03:20",
+			"210" =>"03:30",
+			"220" =>"03:40",
+			"230" =>"03:50",
+			"240" =>"04:00",
+			"250" =>"04:10",
+			"260" =>"04:20",
+			"270" =>"04:30",
+			"280" =>"04:40",
+			"290" =>"04:50",
+			"300" =>"05:00"
+		);
+		
+		// Tipo de soporte
+		$element = new Zend_Form_Element_Select('duracion_servicio');
+		$element
+		->setLabel("Duración del Servicio (hh:mm)")
+		->removeDecorator('HtmlTag')
+		->setAttrib("class","form-control")
+		->setAttrib("autocomplete","off")
+		->addMultiOptions($options);
+		$this->addElement($element);
 	
 	}
 			

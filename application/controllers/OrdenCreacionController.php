@@ -77,6 +77,9 @@ class ordenCreacionController extends Zend_Controller_Action
     	$this->_helper->viewRenderer->setNoRender();
     	$params=$this->_request->getParams();
     	
+   // 	echo "<pre>".print_r($params,true)."</pre>";die;
+    	 
+    	
     	$data = array(
     			'id_agencia' => $params['id_agencia'],
     			'id_usuario_admin_alta' => $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'],
@@ -102,33 +105,51 @@ class ordenCreacionController extends Zend_Controller_Action
     	$mensajesDeError = $form->getMessages();
     	$cantidadDeErrores = count($mensajesDeError);
         $ordenServicioDbTable = new Application_Model_DbTable_OrdenServicio();
-    	if ($cantidadDeErrores == 0)
-    	{
+    	if ($cantidadDeErrores == 0){
         	$polizaDbTable = new Application_Model_DbTable_Poliza();
         	$polizaVigente = $polizaDbTable->obtenerPolizaVigentePorId($params['id_poliza']);
-        	if($polizaVigente != null)
-        	{
+        	
+        	if($polizaVigente != null){
+    			
     			//Obteniendo el id del producto
     			$data['id_producto'] = $polizaVigente['id_producto'];
     			//Se crea la orden de servicio
-    			$idNuevaOrden = $ordenServicioDbTable->insert($data);
+    			
+    			if ($params['id_tipo_soporte']==2 && $params['id_motivo']==21) {
+    				$data['id_orden_servicio_estatus'] = 6;
+    				
+    				$data['motivo_orden'] = $params['motivo_orden'];
+    				$data['solucion_orden'] = $params['solucion_orden'];
+    				$data['conformidad'] = $params['conformidad'];
+    				
+    				$idNuevaOrden = $ordenServicioDbTable->insert($data);
+
+    				$data['duracion_servicio'] = $params['duracion_servicio'];
+    				$data['control_cron_inicial'] = null;
+    				$data['control_cron_final'] = null;
+    				$data['control_cron_estatus'] = 3;
+    				//Restando minutos a la póliza
+    				$servicesPolizas = new Application_Model_Services_ServicesPolizas();
+    				$servicesPolizas->restarMinutosAPoliza($params['id_poliza'], $data['duracion_servicio']);
+    				
+    			} else {
+    				$idNuevaOrden = $ordenServicioDbTable->insert($data);
+    			}
 	    		// se inyecta el ID, estado y descripción en la respuesta al cliente
+    			
     			$data['id_orden_servicio']=$idNuevaOrden;
     			$data['estado']='ok';
     			$data['descripcion']='La orden ha sido creada exitosamente';
-    			$this->_helper->json($data);    
-        	}
-        	else 
-        	{
+    			$this->_helper->json($data);
+    			
+        	} else {
 				//else cuando no hay pólizas vigentes
     			$data['estado']='error';
         	 	$data['descripcion']='Elija una póliza vigente';
         	 	// se responde al cliente
         	 	$this->_helper->json($data);
         	}
-    	}
-    	else
-    	{ 
+    	} else { 
     		// else cuando existe un error encontrado en el form
     		$this->_helper->json($mensajesDeError);
     		$this->_redirect('orden-servicio/nueva-orden');

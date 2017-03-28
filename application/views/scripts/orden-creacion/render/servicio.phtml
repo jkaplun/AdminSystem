@@ -114,7 +114,7 @@
 					    					<?php echo $this->formNuevaOrden->id_tipo_soporte ?>				
 										</div>
 					    			</div>
-					    			<span id="fecha_soporte_sitio_div" style="display: none">
+					    			<span class="soporte-sitio-divs" style="display: none">
 						    			<div class="form-group col-md-2">
 							    			<label>Fecha del Soporte en Sitio:</label>
 						    				<div class="input-group">
@@ -157,7 +157,26 @@
 		      						<label class="control-label">Descripci&oacute;n:</label>
 		      						<?php echo $this->formNuevaOrden->comentarios_recepcion ?>				
 			      				</div>
-			    			</div>                  
+			    			</div>
+			    			<span class="soporte-sitio-divs" style="display: none;">
+			    			
+			    			<div class="row">
+			    				<div class="col-md-6">
+		      						<?php echo $this->formNuevaOrden->motivo_orden ?>				
+			      				</div>
+			      				<div class="col-md-6">
+		      						<?php echo $this->formNuevaOrden->solucion_orden ?>				
+			      				</div>
+			    			</div>
+			    			<div class="row">
+			    				<div class="col-md-6">
+		      						<?php echo $this->formNuevaOrden->conformidad ?>				
+			      				</div>
+			      				<div class="col-md-6">
+		      						<?php echo $this->formNuevaOrden->duracion_servicio ?>				
+			      				</div>
+			    			</div>  
+			    			</span>            
 			    			<br>
 						  	<div class="row">
 						    	<div class="col-md-2">

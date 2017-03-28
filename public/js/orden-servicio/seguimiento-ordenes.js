@@ -353,3 +353,6 @@ function ajaxPrueba(){
 
 
 
+function showEditOrdServ(id){
+	$( "#panel-body-"+id ).toggle("blind");
+}

@@ -92,6 +92,15 @@ class AgenciaAdminController extends Zend_Controller_Action
     	$params=$this->_request->getParams();
     	$ordser = new Application_Model_DbTable_OrdenServicio();
     	$this->view->ordenes = $ordser->obtenerOrdenesPorPoliza($params['id_poliza']);
+    	
+    	foreach ($this->view->ordenes as &$value) {
+    		$fecha = new Zend_Date($value['fecha_alta']);
+    		$fechaString = $fecha->toString('d MMMM yyyy , H:m:s');
+    		$value['fecha_alta'] = $fechaString;
+    		$fecha = new Zend_Date($value['fecha_cierre']);
+    		$fechaString = $fecha->toString('d MMMM yyyy , H:m:s');
+    		$value['fecha_cierre'] = $fechaString;
+    	}
     }
     
     public function agregarOrdenAction(){

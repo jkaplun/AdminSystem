@@ -26,7 +26,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 	
 		$select = $this->_db->select()
 			->from ( "view_orden_servicio", '*' )
-			->order("id_orden_servicio")->limit(100);
+			->order("id_orden_servicio desc")->limit(100);
 	
 		return $this->getAdapter ()->fetchAll( $select );
 	

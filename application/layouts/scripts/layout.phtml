@@ -148,11 +148,6 @@
                                         <a href="<?= $this->baseUrl() ?>/orden-seguimiento-admin/"><i class="fa fa-eye"></i> Seguimiento Admin </a>
                                     </li>   
                                     <?php } ?>
-                                    <?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_supervisor']=='S') {?>
-                                    <li>
-                                        <a href="<?= $this->baseUrl() ?>/orden-admin/"><i class="fa fa-table"></i> Tabla Seguimiento Admin </a>
-                                    </li>
-                                    <?php } ?>                                                                 
                                     <li>
                                         <a target="_blank" href="<?= $this->baseUrl() ?>/orden-monitoreo/"><i class="fa fa-desktop"></i> Monitor de Seguimiento</a>
                                     </li>
@@ -229,7 +224,7 @@
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
-                                
+                                <!-- 
                                 <li>
                                 	<a href="#"><i class="fa fa-check-circle-o fa-fw"></i> SCRUM<span class="fa arrow"></span></a>
                                   	<ul class="nav nav-second-level">
@@ -244,7 +239,7 @@
                                 		</li>
                                 	</ul>
                                 </li>
-                                
+                                 -->
                             </li>                                                   
                         </ul>
                         <br/>

@@ -7,6 +7,7 @@ class Application_Form_Ordenes_SeguimientoOrden extends Zend_Form
 	{
 
 		$id_orden_servicio = new Zend_Form_Element_Hidden('id_orden_servicio');
+		$id_orden_servicio->removeDecorator('HtmlTag')->removeDecorator('label');
 		$this->addElement($id_orden_servicio);
 		
 		$options = array();

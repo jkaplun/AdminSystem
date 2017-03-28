@@ -89,9 +89,9 @@ $(document).ready(function() {
 
   $("#id_tipo_soporte").change(function(){
 	  if ($("#id_tipo_soporte").val() == 2) {
-		  $("#fecha_soporte_sitio_div").show();
+		  $(".soporte-sitio-divs").show();
 	  } else {
-		  $("#fecha_soporte_sitio_div").hide();
+		  $(".soporte-sitio-divs").hide();
 	  }
   });
   
@@ -117,6 +117,8 @@ $(document).ready(function() {
 			$("#id_tipo_soporte_div").show();
 		} else {
 			$("#id_tipo_soporte_div").hide();
+			$("#id_tipo_soporte").val(1);
+			$(".soporte-sitio-divs").hide();
 			$("#solicito_otro").val(0);
 		}
 	});
