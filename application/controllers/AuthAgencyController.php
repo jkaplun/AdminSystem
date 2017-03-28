@@ -34,16 +34,17 @@ class AuthAgencyController extends Zend_Controller_Action
 					// Save logged user data in (default) namespace session Zend_Auth
 					$auth = Zend_Auth::getInstance();
 					$authStorage = $auth->getStorage();
-					$authStorage->write($usuarioAgencia);
+					$authStorage->write($usuarioAgencia[0]);
 
 				
 					//$_SESSION['Zend_Auth']['USER_VALUES'] = $userDetails->obtenerUsuarioDeAgencia( $params['clave'] , $params['pwd']);
 					$_SESSION['Zend_Auth']['storage']['agencia_usuario']=true;
-						
-					if($usuarioAgencia['activo']=='N'){
+
+					if($usuarioAgencia[0]['activo']=='N'){
 						unset($_SESSION);
 						$this->view->error='El usuario est&aacute; inactivo.';
 					} else {
+
 							$this->_redirect('/agencia-admin/');
 						return;
 					}

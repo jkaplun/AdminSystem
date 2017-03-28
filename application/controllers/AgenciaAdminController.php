@@ -5,6 +5,9 @@ class AgenciaAdminController extends Zend_Controller_Action
 
     private $agencia;
     public function init(){
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
     	if( !isset( $_SESSION['Zend_Auth'] )){
     		$this->_redirect('/auth-agency/login');
     	}
@@ -45,6 +48,7 @@ class AgenciaAdminController extends Zend_Controller_Action
 		 
 		$zendForm->addElement($element);
 
+		
 		$producto = new Application_Model_DbTable_Producto();
 		$productos = $producto->obtenerProductosRegistradosPorAgencia($_SESSION['Zend_Auth']['storage']['id_agencia']);
 		 

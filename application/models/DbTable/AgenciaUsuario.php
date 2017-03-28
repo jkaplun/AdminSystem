@@ -38,7 +38,7 @@ class Application_Model_DbTable_AgenciaUsuario extends Zend_Db_Table_Abstract
   		from ( $this->_name, '*' )
   		->where("email = '{$email}' and pwd='{$pwd}'");
   	
-  		return $this->getAdapter ()->fetchRow( $select );
+  		return $this->getAdapter ()->fetchAll( $select );
   	}
 }
 

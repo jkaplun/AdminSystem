@@ -1,4 +1,3 @@
-
 <div class="panel panel-default">
   <div class="panel-body">
 
@@ -6,7 +5,7 @@
 	<div class="alert alert-success" role="alert">Se a ralizado la solicitud exitosamente.</div>
 	<?php } ?>
   
-<table class="table table-condensed">
+<table class="table table-condensed" id="polizas">
 <caption>Pólizas.</caption>
 <thead>
 	<tr>
@@ -24,7 +23,6 @@
 	</tr>
 </thead>
 <tbody>
-
 <?php foreach ($this->polizasAgencia as $value) { ?>
 	<tr>
 		<td scope="row"><?= $value['id_poliza'] ?></td>
@@ -35,11 +33,39 @@
 		<td><?= $value['horas_restantes'] ?></td>
 		<td><?= $value['fecha_ini'] ?></td>
 		<td><?= $value['fecha_fin'] ?></td>
-		<td><?= $value['descripcion_estatus'] ?></td>
 		<td>
+				<?php 
+			$label = '';
+			
+			switch ($value['id_poliza_estatus']){
+				case 1:
+					$label = 'label-success';
+					break;
+				case 2:
+					$label = 'label-warning';
+					break;
+				case 4:
+					$label = 'label-danger';
+					break;
+				case 3:
+					$label = 'label-info';
+					break;
+				case 5:
+					$label = 'label-primary';
+					break;
+				case 6:
+					$label = 'label-default';
+					break;
+			}
+		?>
+			<span class="label <?= $label ?>">
+			<?= $value['descripcion_estatus'] ?>
+			</span>
+		</td>
+		<td align="center">
 		<?php if( $value['id_poliza_estatus']=='1' ) { ?>
-		<button type="button" class="btn btn-info btn-xs" onclick="openFormOrden(<?= $value['id_poliza'] ?>)">
-			<i class="fa fa-plus-square" aria-hidden="true"></i>
+		<button type="button" class="btn btn-success" onclick="openFormOrden(<?= $value['id_poliza'] ?>)">
+			Click <i class="fa fa-plus-square" aria-hidden="true"></i>
 		</button>
 		<?php } ?>
 		</td>
@@ -82,4 +108,37 @@ function openFormOrden(id_poliza){
 	$("#id_poliza").val(id_poliza);
 	$('#myModalAddOdSr').modal('show');
 }
+
+$(document).ready(function() {
+    $('#polizas').DataTable({
+        responsive: true,
+        "language":{
+			"sProcessing":     "Procesando...",
+			"sLengthMenu":     "Mostrar _MENU_ registros",
+			"sZeroRecords":    "No se encontraron resultados",
+			"sEmptyTable":     "Ning&uacute;n dato disponible en esta tabla",
+			"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+			"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+			"sInfoPostFix":    "",
+			"sSearch":         "Buscar:",
+			"sUrl":            "",
+			"sInfoThousands":  ",",
+			"sLoadingRecords": "Cargando...",
+			"oPaginate": {
+			    "sFirst":    "Primero",
+			    "sLast":     "&Uacute;timo",
+			    "sNext":     "Siguiente",
+			    "sPrevious": "Anterior"
+			},
+			"oAria": {
+			    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+			    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+			}
+		}
+    });
+    
+} );
+
+
 </script>

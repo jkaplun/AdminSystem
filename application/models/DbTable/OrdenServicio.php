@@ -5,31 +5,35 @@
  * Clase de Orden de Servicio.
  *
  */
-class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
-{
+class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 
 	protected $_name = 'orden_servicio';
-
 	
 	public function obtenerOrdenes($valores){
-		
 		$select = $this->_db->select()->
 		from ( "view_orden_servicio", '*' )
 		->where('id_usuario_admin_atiende="'.$_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'].'" and id_orden_servicio_estatus < 6 ')
 		->order("id_orden_servicio");
 
 		return $this->getAdapter ()->fetchAll( $select );
-		
 	}
 	
 	public function obtenerTodasLasOrdenes($valores){
-	
 		$select = $this->_db->select()
 			->from ( "view_orden_servicio", '*' )
 			->order("id_orden_servicio desc")->limit(100);
 	
-		return $this->getAdapter ()->fetchAll( $select );
+		if (isset($valores['id_usuario_admin_atiende']) && $valores['id_usuario_admin_atiende']!='') {
+			$select->where("id_usuario_admin_atiende=?",$valores['id_usuario_admin_atiende']);
+		}
+		if (isset($valores['id_motivo']) && $valores['id_motivo']!='') {
+			$select->where("id_motivo=?",$valores['id_motivo']);
+		}
+		if  (isset($valores['id_orden_servicio_estatus']) && $valores['id_orden_servicio_estatus']!='') {
+			$select->where("id_orden_servicio_estatus=?",$valores['id_orden_servicio_estatus']);
+		}
 	
+		return $this->getAdapter ()->fetchAll( $select );
 	}
 	
 	public function obtenerOrdenesMonitoreo()
@@ -250,5 +254,15 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract
 	
 	}
 
+	public function obtenerOrdenesEstatus(){
+	
+		$select = $this->_db->select()->
+		from ( "orden_servicio_estatus", '*' )
+		->where('activo="S"')
+		->order("id_orden_servicio_estatus");
+	
+		return $this->getAdapter ()->fetchAll( $select );
+	
+	}
 }
 

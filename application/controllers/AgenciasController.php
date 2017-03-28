@@ -244,8 +244,8 @@ class AgenciasController extends Zend_Controller_Action
     		$esRfcValido = true;
     		if ($esRfcValido)
     		{ // Si es RFC es válido
-    			$esEmailCorrecto = $utiles->comprobar_email($params['email']);
-    			$esEmailAltCorrecto = true;
+    			//$esEmailCorrecto = $utiles->comprobar_email($params['email']);
+    			//$esEmailAltCorrecto = true;
     			/*if($params['email_alt'] != null)
     			 {
     			 $esEmailAltCorrecto = $utiles->comprobar_email($params['email_alt']);
@@ -254,8 +254,8 @@ class AgenciasController extends Zend_Controller_Action
     			 {
     			 $esEmailAltCorrecto = true;
     			 }*/
-    			if($esEmailCorrecto && $esEmailAltCorrecto)
-		    	{ // si el emal es correcto:
+    			//if($esEmailCorrecto && $esEmailAltCorrecto)
+		    	//{ // si el emal es correcto:
     				$where = "id_agencia = {$params['id_agencia']}";
     				//se actualiza en la base de datos a la agencia
 		    		$this->agencia->update($data, $where);
@@ -264,17 +264,17 @@ class AgenciasController extends Zend_Controller_Action
 		    		// se responde al cliente
 		    		$this->_helper->json($data);
 		    		$this->_redirect('clientes/');
-	    		}
-	    		else
-	    		{ // else cuando el email es incorrecto
+	    		//}
+	    		//else
+	    		//{ // else cuando el email es incorrecto
 		    		// se inyecta el ID, estado y descripción en la respuesta al cliente
-		    		$data['id_agencia']='0';
-		    		$data['estado']='error';
-		    		$data['descripcion']='Email en formato incorrecto';
-		    		// se responde al cliente
-		    		$this->_helper->json($data);
-		    		$this->_redirect('clientes/');
-	    		}
+// 		    		$data['id_agencia']='0';
+// 		    		$data['estado']='error';
+// 		    		$data['descripcion']='Email en formato incorrecto';
+// 		    		// se responde al cliente
+// 		    		$this->_helper->json($data);
+// 		    		$this->_redirect('clientes/');
+	    		//}
     		}
     		else
     		{ // else cuando el formato del RFC no es correcto

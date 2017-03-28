@@ -14,9 +14,11 @@ class OrdenSeguimientoAdminController extends Zend_Controller_Action
     	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes.js');
     	
     	$orden = new Application_Model_DbTable_OrdenServicio();
-    	
-    	$valores = array();
-    	$resultado = $orden->obtenerTodasLasOrdenes($valores);
+    	$this->view->formFiltroSeguimientoOrdenAdmin = new Application_Form_Ordenes_FiltroSeguimientoOrdenAdmin();
+    	$params=$this->_request->getParams();
+    	 
+    	$this->view->formFiltroSeguimientoOrdenAdmin->populate($params);
+    	$resultado = $orden->obtenerTodasLasOrdenes($params);
     	
     	$this->view->countArray= count($resultado);
     	
@@ -56,6 +58,10 @@ class OrdenSeguimientoAdminController extends Zend_Controller_Action
     		$value['duracion_servicio_segundos'] =  $duracion_servicio_segundos;
     		 
     	}
+    	
+
+    	
+    	
     	
     	$this->view->formSeguimientoOrden = new Application_Form_Ordenes_SeguimientoOrden();
     	

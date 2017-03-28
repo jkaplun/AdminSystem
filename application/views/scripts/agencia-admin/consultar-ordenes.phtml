@@ -3,12 +3,12 @@
 </ul>
 <div class="panel panel-default">
   <div class="panel-body">
-<table class="table table-condensed">
+<table class="table table-condensed" id="ordenes">
 <caption>Ordenes de Servicio.</caption>
 <thead>
 	<tr>
 		<th>Id. Orden</th>
-		<th>nombre_producto</th>
+		<th>Nombre del Producto</th>
 		<th>Fecha Alta</th>
 		<th>Fecha Cierre</th>
 		<th>Conformidad</th>
@@ -22,13 +22,40 @@
 	<tr>
 		<td scope="row"><?= $value['id_orden_servicio'] ?></td>
 
-		<td><?= $value['nombre_producto'] ?></td>
+		<td>
+		<?= $value['nombre_producto'] ?></td>
 		<td><?= $value['fecha_alta'] ?></td>
 		<td><?= $value['fecha_cierre'] ?></td>
 		<td><?= $value['conformidad'] ?></td>
-		<td><?= $value['descripcion_estatus'] ?></td>
-		
-		
+		<td>
+		<?php 
+			$label = '';
+			
+			switch ($value['id_orden_servicio_estatus']){
+				case 1:
+					$label = 'label-success';
+					break;
+				case 2:
+					$label = 'label-warning';
+					break;
+				case 3:
+					$label = 'label-danger';
+					break;
+				case 4:
+					$label = 'label-info';
+					break;
+				case 5:
+					$label = 'label-primary';
+					break;
+				case 6:
+					$label = 'label-default';
+					break;
+			}
+		?>
+			<span class="label <?= $label ?>">
+			<?= $value['descripcion_estatus'] ?>
+			</span>
+		</td>
 		<td><?= $value['nombre_usr_admin_atiende'] ?> <?= $value['ap_usr_admin_atiende'] ?></td>
 		<td><?= $value['duracion_servicio'] ?></td>
 	</tr>
@@ -37,3 +64,36 @@
 </table>
   </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    $('#ordenes').DataTable({
+        responsive: true,
+        "language":{
+			"sProcessing":     "Procesando...",
+			"sLengthMenu":     "Mostrar _MENU_ registros",
+			"sZeroRecords":    "No se encontraron resultados",
+			"sEmptyTable":     "Ning&uacute;n dato disponible en esta tabla",
+			"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+			"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+			"sInfoPostFix":    "",
+			"sSearch":         "Buscar:",
+			"sUrl":            "",
+			"sInfoThousands":  ",",
+			"sLoadingRecords": "Cargando...",
+			"oPaginate": {
+			    "sFirst":    "Primero",
+			    "sLast":     "&Uacute;timo",
+			    "sNext":     "Siguiente",
+			    "sPrevious": "Anterior"
+			},
+			"oAria": {
+			    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+			    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+			}
+		}
+    });
+
+} );
+</script>

@@ -14,14 +14,42 @@
 		</thead>	
 	</table>
 </div>
+
 <form class="form-inline" method="get" name="filtroform" id="filtroform">
-</form>
-	<h3 style="margin-top: 0px;margin-bottom: 0px;">Se muestra(n) <b id="total_ordenes"></b> resultado(s):</h3>
+
 <div class="row">
-	<div class="col-md-12">
-	<div class="row" align="right">
+
+	<div class="col-md-3">
+		<?= $this->formFiltroSeguimientoOrdenAdmin->id_usuario_admin_atiende ?>            		
+	</div>
+	<div class="col-md-3">
+		<?= $this->formFiltroSeguimientoOrdenAdmin->id_motivo ?>                    
+	</div>
+	<div class="col-md-3">
+		<?= $this->formFiltroSeguimientoOrdenAdmin->id_orden_servicio_estatus ?>
+	</div>
+	<div class="col-md-3">
+		<?= $this->formFiltroSeguimientoOrdenAdmin->filtrar ?>
+	</div>
+</div>
+
+</form>
+
+<br>
+	
+	
+<div class="row">
+	<div class="col-md-6" align="left">
+		<h3>Se muestra(n) <b id="total_ordenes"></b> resultado(s):</h3>
+	</div>
+	<div class="col-md-6" align="right">
 		<?=$this->paginationControl ($this->paginator, 'Sliding');?>
 	</div>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">
+
 	<?php $id_orden_servicio_todos=","?>
 	<?php $duracion_servicio_todos=","?>
 	<?php $control_cron_estatus_todos=","?>
