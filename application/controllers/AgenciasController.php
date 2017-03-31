@@ -329,7 +329,9 @@ class AgenciasController extends Zend_Controller_Action
     			'id_agencia' => $params['id_agencia_folios'],
     			'fecha_compra' => $params['fecha_compra_folios'],
     			'folios_comprados' => $params['folios_comprados'],
-    			'observaciones' => $params['observaciones_folios']
+    			'observaciones' => $params['observaciones_folios'],
+    			'id_folios_agencia_cat_tipo' => $params['id_folios_agencia_cat_tipo']
+    			
     	);
     	try {
     		$foliosAgencia->insert($data);
@@ -376,7 +378,8 @@ class AgenciasController extends Zend_Controller_Action
     	$data = array(
     			'fecha_compra' => $params['fecha_compra_folios'],
     			'folios_comprados' => $params['folios_comprados'],
-    			'observaciones' => $params['observaciones_folios']
+    			'observaciones' => $params['observaciones_folios'],
+    			'id_folios_agencia_cat_tipo' => $params['id_folios_agencia_cat_tipo']
     	);
     	try {
     		$where ='id_folios_agencia='.$params['id_folios_agencia_form'];
@@ -388,4 +391,23 @@ class AgenciasController extends Zend_Controller_Action
     	$this->_helper->json($params);
     
     }
+    
+    public  function configfoliosAction(){
+    	$this->_helper->layout()->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	$params=$this->_request->getParams();
+    	
+    	$data = array(
+    			'cfdi' => $params['cfdi'],
+    			'prov_timbrado' =>  $params['prov_timbrado']
+    	);
+    	
+    	$params['success'] = true;
+    	try{
+			$this->agencia->update($data, "id_agencia=".$params['id_agencia']);
+    	} catch (Exception $e) {
+    		$params['success'] = false;
+    	}
+	   	$this->_helper->json($params);
+   }
 }

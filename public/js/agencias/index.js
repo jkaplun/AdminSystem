@@ -258,6 +258,8 @@ function mostarDatosAgencia(datosAgencia){
 	$("#boton-editar-agencia").val(datosAgencia);
 	$("#datos-agencia").show();
  	$("#observaciones_agencia").val(datosAgencia.observaciones);
+ 	$("#cfdi").val(datosAgencia.cfdi);
+ 	$("#prov_timbrado").val(datosAgencia.prov_timbrado);
  	
 
  	if(datosAgencia.tel1 != null && datosAgencia.tel1.length != 0){
@@ -380,6 +382,7 @@ function mostrarFolios(){
 	    		  		"<td>"+ value.folios_comprados +"</td>" +
 	    		  		"<td>"+ (parseInt(value.folios_comprados) - parseInt(value.folios_comprados)) +"</td>" +
 	    		  		"<td>"+ value.observaciones +"</td>" +
+	    		  		"<td>"+ value.descripcion +"</td>" +
 	    		  		"<td><button class='btn btn-primary btn-sm btn-circle' type='button' data-toggle='modal' data-target='#AgregarFolios' value='1' " +
 	    		  		'onclick=\'abrirModalEditarFolios("'+value.id_folios_agencia+'","'+ value.fecha_compra +'","'+ value.folios_comprados +'","'+ obs +'")\'' +
 	    		  				"><i class='fa fa-info-circle'></i></button></td></tr>");
@@ -419,3 +422,25 @@ function submitEditarFolios(){
 	  	swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );
 	});
 }
+
+function saveFEConfig(){
+	console.log(idAgenciaActual);
+	$.ajax({
+		  url: path + "configfolios?id_agencia="+idAgenciaActual,
+		  method: "post",
+		  data: $("#config-CFDI-Pack").serialize(),
+		  dataType: "json"
+		})
+		.done(function(res) { 
+			if (res.success == true) {
+				 swal("Guardado", " ", "success"); 
+			} else {
+				 swal("Hubo un error", " ", "error"); 
+			}
+	})// end ajax done 
+			.fail(function() {
+				swal("Error en la conexión.", " ", "error"); 
+	});
+	
+}
+

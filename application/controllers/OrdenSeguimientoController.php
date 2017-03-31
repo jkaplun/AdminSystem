@@ -282,5 +282,15 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	$this->_helper->json($ordenesActualizadas);
     }
 
+    public function consultaPorAgenciaAction(){
+    	
+    	$this->_helper->layout->setLayout('layout_login_sin_menus');
+    	$this->view->params=$this->_request->getParams();
+    	$ordenServicioDbTable = new Application_Model_DbTable_OrdenServicio();
+    	
+    	$this->view->ordServ = $ordenServicioDbTable->obtenerOrdenesPorAgencia($this->view->params['id_agencia']);
+    	$agencia = new Application_Model_DbTable_Agencia();
+    	$this->view->datosAgencia = $agencia->find( $this->view->params['id_agencia'] )->toArray()[0];
+    	
+    }   
 }
-

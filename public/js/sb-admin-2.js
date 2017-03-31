@@ -74,3 +74,10 @@ $(document).ready(function() {
 	});
 
 });
+
+$(document).ready(function() {
+
+	$( "#guardar" ).click(function() {
+		$( "#guardar" ).hide();
+	});
+});

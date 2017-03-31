@@ -1,0 +1,36 @@
+<table class="table">
+	<caption>Ordenes de servicio de la agencia: <?php echo $this->datosAgencia['nombre']?></caption>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Fecha de Alta</th>
+			<th>Comentarios de Recepción</th>
+			<th>Motivo</th>
+			<th>Solución</th>
+			<th>Conformidad</th>
+			<th>Descripción</th>
+			<th>Tipo de Soporte</th>
+			<th>Motivo</th>
+			<th>Usuario Atendió</th>
+			<th>Producto</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ( $this->ordServ as $value) { ?>	
+		<tr>
+			<td><?= $value['id_orden_servicio'] ?></td>
+			<td><?= $value['fecha_alta'] ?></td>
+			<td><?= $value['comentarios_recepcion'] ?></td>
+			<td><?= $value['motivo_orden'] ?></td>
+			<td><?= $value['solucion_orden'] ?></td>
+			<td><?= $value['conformidad'] ?></td>
+			<td><?= $value['descripcion_estatus'] ?></td>
+			<td><?= $value['description_tipo_soporte'] ?></td>
+			<td><?= $value['motivo'] ?></td>
+			<td><?= $value['nombre_usr_admin_atiende'].' '. $value['ap_usr_admin_atiende'] ?></td>
+			<td><?= $value['nombre_producto'] ?></td>
+		</tr>
+		<?php } ?>
+	</tbody>
+</table>
+

@@ -1,0 +1,27 @@
+ <table class="table">
+    <thead>
+      <tr>
+      <?php  foreach ( $this->agendaArray as $key => $value ) { ?>
+        <th><?php
+        $fecha = new Zend_Date($key);
+        $fechaString = $fecha->toString('d MMMM yyyy');
+        echo $fechaString;
+        ?></th>
+       <?php } ?>
+      </tr>
+    </thead>
+<tbody>
+      <tr>
+<?php  foreach ( $this->agendaArray as $key => $value ) { ?>
+        <td>
+        	<?php foreach($value as $val) { ?>
+        		Agencia: <?= $val['nombre_agencia'] ?><br>
+        		Hora Inicial: <?= $val['hora_inicial'] ?><br>
+        		Hora Final: <?= $val['hora_final'] ?><br>
+        		<hr>
+        	<?php } ?>
+        </td>
+<?php } ?>
+      </tr>
+</tbody>
+</table>

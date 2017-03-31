@@ -531,7 +531,6 @@ function submitFormUsuarioAgencia(){
   }); 
 }
 
-
 function getProductosByAgencia(){
 	var select_agencias = $("#select_agencias").val();
 	
@@ -549,3 +548,11 @@ function getProductosByAgencia(){
 				});
 		  });
 }
+
+function vinculo(){
+	window.open('http://localhost/AdminSystem/public/orden-seguimiento/consulta-por-agencia/id_agencia/'+idAgenciaActual,'720x720','toolbar=no,status=no,scrollbars=yes,location=no,menubar=no,directories=no,width=720,heiaght=720');
+}
+
+$( "#consulta-ordenes" ).click(function( event ) {
+	  event.preventDefault();
+	});

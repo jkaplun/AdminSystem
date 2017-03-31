@@ -264,5 +264,20 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 		return $this->getAdapter ()->fetchAll( $select );
 	
 	}
+	
+	public function obtenerOrdenesPorAgencia($id_agencia){
+		
+		$select = $this->_db->select()->
+		from ( "view_orden_servicio", '*' )
+		->where('id_agencia='.$id_agencia)
+		->order("id_orden_servicio desc")
+		->limit(100);
+		
+		return $this->getAdapter ()->fetchAll( $select );
+		
+	}
+	
+	
+	
 }
 

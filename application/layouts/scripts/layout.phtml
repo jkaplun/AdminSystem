@@ -172,6 +172,21 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
+                                <a href="#"><i class="fa fa-calendar fa-fw"></i> Agenda<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<?= $this->baseUrl() ?>/agenda/"><i class="fa fa-plus"></i> Agregar Entrada</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= $this->baseUrl() ?>/agenda/personal"><i class="fa fa-user"></i> Personal</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= $this->baseUrl() ?>/agenda/general"><i class="fa fa-list-alt"></i> General</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
                                 <a href="#"><i class="fa fa-clipboard fa-fw"></i> Reportes<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
@@ -249,7 +264,6 @@
                 </b>
                 <!-- /.navbar-static-side -->
             </nav>
-
         </div>
         <div id="page-wrapper" style="min-height: 184px;">
             <div class="container-fluid">
@@ -261,7 +275,6 @@
                 </div>
             </div>
         </div>
-
     	<!-- Modal -->
     	<div class="modal fade" id="myModalUserEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     	  <div class="modal-dialog" role="document">

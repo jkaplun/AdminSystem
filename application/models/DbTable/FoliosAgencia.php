@@ -9,9 +9,18 @@ class Application_Model_DbTable_FoliosAgencia extends Zend_Db_Table_Abstract
 	{
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
-		->where('id_agencia="'.$id.'"')->order("id_folios_agencia desc");
+		->join("folios_agencia_cat_tipo", "folios_agencia_cat_tipo.id_folios_agencia_cat_tipo={$this->_name}.id_folios_agencia_cat_tipo")
+		->where('id_agencia="'.$id.'"')
+		->order("id_folios_agencia desc");
 	
 		//echo $select;die;
+		return $this->getAdapter ()->fetchAll( $select );
+	}
+	
+	public function obtenerTipoFolios (){
+		$select = $this->_db->select()->
+		from ( $this->_name.'_cat_tipo', '*' );
+
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 }

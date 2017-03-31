@@ -171,10 +171,29 @@ class Application_Form_Agencias_Agencias extends Zend_Form
                 'N'=>'Inactivo'
         ))
         ->setAttrib("class","form-control")
-        ->setAttrib("autocomplete","off")
-        ;
+        ->setAttrib("autocomplete","off");
         $this->addElement($cfdi);
-               
+        
+        $fa = new Application_Model_DbTable_FoliosAgencia();
+        $result_fa = $fa->obtenerTipoFolios();
+
+        $options = array();
+        
+        foreach ( $result_fa as $value ){
+        	$options[$value['id_folios_agencia_cat_tipo']] = $value['descripcion'];
+        }
+        
+        // Tipo de folios
+        $element = new Zend_Form_Element_Select('id_folios_agencia_cat_tipo');
+        $element
+	        ->setLabel("Tipo de Folios")
+	        ->removeDecorator('HtmlTag')
+	        ->addMultiOptions($options)
+	        ->setAttrib("class","form-control")
+	        ->setAttrib("autocomplete","off");
+        $this->addElement($element);
+        
+        
         // DBA pwd
         $dba_pwd = new Zend_Form_Element_Text('dba_pwd');
         $dba_pwd->removeDecorator('label')
@@ -349,11 +368,14 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         // prov_timbrado
         $prov_timbrado = new Zend_Form_Element_Select('prov_timbrado');
         $prov_timbrado
-        ->removeDecorator('label')
+        ->setLabel("Proveedor de Timbrado")
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
-                'mig'=>'Mig',
-                'sabre'=>'Sabre'
+                'X'=>'EDX',
+                'E'=>'Edicom',
+        		'I'=>'Factura Inteligente',
+        		'N'=>'No tiene',
+        		''=>'Otro'
         ))
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
