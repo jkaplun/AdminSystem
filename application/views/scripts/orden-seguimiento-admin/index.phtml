@@ -1,5 +1,8 @@
 <link rel="stylesheet" type="text/css" href="public/css/flipclock.css">
 <link rel="stylesheet" type="text/css" href="public/css/orden-seguimiento/index.css">
+<link rel="stylesheet" type="text/css" href="public/css/daterangepicker.css">
+<script type="text/javascript" src="public/js/moment.js"></script>
+<script type="text/javascript" src="public/js/daterangepicker.js"></script>
 
 <div class="row">
 	<table width="100%" class="table">
@@ -16,28 +19,33 @@
 </div>
 
 <form class="form-inline" method="get" name="filtroform" id="filtroform">
-
+<?= $this->formFiltroSeguimientoOrdenAdmin->fecha_de ?>         
+<?= $this->formFiltroSeguimientoOrdenAdmin->fecha_hasta ?>
 <div class="row">
-
-	<div class="col-md-3">
+	<div class="col-md-2">
+		<?= $this->formFiltroSeguimientoOrdenAdmin->id_agencia ?>            		
+	</div>
+	<div class="col-md-2">
 		<?= $this->formFiltroSeguimientoOrdenAdmin->id_usuario_admin_atiende ?>            		
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<?= $this->formFiltroSeguimientoOrdenAdmin->id_motivo ?>                    
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<?= $this->formFiltroSeguimientoOrdenAdmin->id_orden_servicio_estatus ?>
 	</div>
-	<div class="col-md-3">
-		<?= $this->formFiltroSeguimientoOrdenAdmin->filtrar ?>
+	<div class="col-md-2">
+		<?= $this->formFiltroSeguimientoOrdenAdmin->daterange ?>
+	</div>
+	<div class="col-md-2">
+		<?= $this->formFiltroSeguimientoOrdenAdmin->Filtrar ?>
 	</div>
 </div>
 
 </form>
 
 <br>
-	
-	
+
 <div class="row">
 	<div class="col-md-6" align="left">
 		<h3>Se muestra(n) <b id="total_ordenes"></b> resultado(s):</h3>
@@ -158,7 +166,10 @@
                         <?= $registro["fecha_alta"] ?>
                     </div>
             		<div class="col-md-4">
+            			<span  id='consulta-ordenes' class="btn btn-default" onClick="vinculo(<?= $registro['id_agencia'] ?>)">
             			<?= $registro["nombre"] ?>
+            			</span>
+            			
             		</div>
             		<div class="col-md-2">
                         <?= $registro["descripcion_estatus"] ?>

@@ -4,6 +4,42 @@
 class Application_Form_Ordenes_FiltroSeguimientoOrdenAdmin extends Zend_Form
 {
 	public function init(){
+		
+		$agencia = new Application_Model_DbTable_Agencia();
+		$selectAgencias = new Zend_Form_Element_Select('id_agencia');
+		$agencias = $agencia->obtenerTodasLasAgencias();
+		
+		$listaAgencias = array();
+		foreach ( $agencias as $agencias){
+			$listaAgencias[$agencias['id_agencia']]=$agencias['nombre'];
+		}
+		
+		$selectAgencias
+		->setLabel("Agencia:")
+		->setRequired(true)
+		->addErrorMessage("Es necesario que seleccione la Agencia")
+		->removeDecorator('HtmlTag')
+		->addMultiOptions($listaAgencias)
+		->setAttrib("class","form-control selectpicker input-sm")
+		->setAttrib("data-max-options",10)
+		->setAttrib("data-live-search","true")
+		->setAttrib("title","Ingresa nombre de la agencia...")
+		->setAttrib("autocomplete","off");
+		
+		$this->addElement($selectAgencias);
+		
+		$element = new Zend_Form_Element_Hidden('fecha_de');
+		$element
+		->removeDecorator('HtmlTag')
+		->removeDecorator('label');
+		$this->addElement($element);
+		
+		$element = new Zend_Form_Element_Hidden('fecha_hasta');
+		$element
+		->removeDecorator('HtmlTag')
+		->removeDecorator('label');
+		$this->addElement($element);
+		
 		$options = array();
 		$usuario_admin = new Application_Model_DbTable_UsuarioAdmin();
 		
@@ -18,7 +54,7 @@ class Application_Form_Ordenes_FiltroSeguimientoOrdenAdmin extends Zend_Form
 		$element
 			->setLabel("Ejecutivo:")
 			->removeDecorator('HtmlTag')
-			->setAttrib("class","form-control")
+			->setAttrib("class","form-control input-sm")
 			->setAttrib("autocomplete","off")
 			->addMultiOptions($options);
 		$this->addElement($element);
@@ -28,7 +64,7 @@ class Application_Form_Ordenes_FiltroSeguimientoOrdenAdmin extends Zend_Form
 		$element
 			->setLabel("Motivo:")
 			->removeDecorator('HtmlTag')
-			->setAttrib("class","form-control")
+			->setAttrib("class","form-control input-sm")
 			->setAttrib("autocomplete","off")
 			->addMultiOptions($this->getOrdenMotivo());
 		$this->addElement($element);
@@ -38,17 +74,27 @@ class Application_Form_Ordenes_FiltroSeguimientoOrdenAdmin extends Zend_Form
 		$element
 		->setLabel("Estatus de la orden:")
 		->removeDecorator('HtmlTag')
-		->setAttrib("class","form-control")
+		->setAttrib("class","form-control input-sm")
 		->setAttrib("autocomplete","off")
 		->addMultiOptions($this->getOrdenEstatus());
 		$this->addElement($element);
 		
-		$element = new Zend_Form_Element_Submit('filtrar');
+		$element = new Zend_Form_Element_Submit('Filtrar');
 		$element
 		->removeDecorator('HtmlTag')
-		->setAttrib("class","form-control");
+		->setAttrib("class","btn btn-primary form-control input-sm");
 		$this->addElement($element);
 		
+		
+		// Fecha del Soporte en Sitio
+		$element= new Zend_Form_Element_Text('daterange');
+		$element
+		->setLabel("Rango de Fechas:")
+		->removeDecorator('HtmlTag')
+		->removeDecorator('Errors')
+		->setAttrib("autocomplete","off")
+		->setAttrib("class","form-control input-sm");
+		$this->addElement($element);
 	}
 			
 	public function getOrdenMotivo(){

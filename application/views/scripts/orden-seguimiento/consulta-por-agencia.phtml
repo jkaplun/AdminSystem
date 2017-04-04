@@ -1,36 +1,128 @@
+<link rel="stylesheet" type="text/css" href="public/css/daterangepicker.css">
+<script type="text/javascript" src="public/js/moment.js"></script>
+<script type="text/javascript" src="public/js/daterangepicker.js"></script>
+
+<form class="form-inline" method="get" name="filtroform" id="filtroform">
+<?= $this->formFiltroSeguimientoOrdenAdmin->fecha_de ?>         
+<?= $this->formFiltroSeguimientoOrdenAdmin->fecha_hasta ?>
+	<div class="row">
+		<div class="col-md-2">
+			<?= $this->formFiltroSeguimientoOrdenAdmin->id_usuario_admin_atiende ?>            		
+		</div>
+		<div class="col-md-2">
+			<?= $this->formFiltroSeguimientoOrdenAdmin->id_motivo ?>                    
+		</div>
+		<div class="col-md-2">
+			<?= $this->formFiltroSeguimientoOrdenAdmin->id_orden_servicio_estatus ?>
+		</div>
+		<div class="col-md-2">
+			<?= $this->formFiltroSeguimientoOrdenAdmin->daterange ?>
+		</div>
+		<div class="col-md-2">
+			<?= $this->formFiltroSeguimientoOrdenAdmin->Filtrar ?>
+		</div>
+	</div>
+</form>
 <table class="table">
-	<caption>Ordenes de servicio de la agencia: <?php echo $this->datosAgencia['nombre']?></caption>
+	<caption>Ordenes de servicio de la agencia: <?php echo $this->datosAgencia['nombre']?> 	<h3>Se muestra(n): <?php echo $this->totalOrdServ ?> Orden(es)</h3> </caption>
 	<thead>
 		<tr>
-			<th>ID</th>
-			<th>Fecha de Alta</th>
-			<th>Comentarios de Recepción</th>
-			<th>Motivo</th>
-			<th>Solución</th>
-			<th>Conformidad</th>
-			<th>Descripción</th>
-			<th>Tipo de Soporte</th>
-			<th>Motivo</th>
-			<th>Usuario Atendió</th>
-			<th>Producto</th>
+			<th style="min-width: 250px; max-width: 250px;">Datos Generales</th>
+			<th>Detalles de la Orden</th>
 		</tr>
 	</thead>
 	<tbody>
 		<?php foreach ( $this->ordServ as $value) { ?>	
 		<tr>
-			<td><?= $value['id_orden_servicio'] ?></td>
-			<td><?= $value['fecha_alta'] ?></td>
-			<td><?= $value['comentarios_recepcion'] ?></td>
-			<td><?= $value['motivo_orden'] ?></td>
-			<td><?= $value['solucion_orden'] ?></td>
-			<td><?= $value['conformidad'] ?></td>
-			<td><?= $value['descripcion_estatus'] ?></td>
-			<td><?= $value['description_tipo_soporte'] ?></td>
-			<td><?= $value['motivo'] ?></td>
-			<td><?= $value['nombre_usr_admin_atiende'].' '. $value['ap_usr_admin_atiende'] ?></td>
-			<td><?= $value['nombre_producto'] ?></td>
+		
+		<td>
+			<b>Id Orden: </b><?= $value['id_orden_servicio'] ?><br>
+			<b>Fecha Alta: </b><?= $value['fecha_alta'] ?><br>
+			<b>Estatus: </b><?= $value['descripcion_estatus'] ?><br>
+			<b>Tipo de Soporte: </b><?= $value['description_tipo_soporte'] ?><br>
+			<b>Motivo: </b><?= $value['motivo'] ?><br>
+			<b>Ejecutivo: </b><?= $value['nombre_usr_admin_atiende'].' '. $value['ap_usr_admin_atiende'] ?><br>
+			<b>Producto: </b><?= $value['nombre_producto'] ?><br>
+			<b>Conformidad: </b><?= $value['conformidad'] ?>
+		</td>
+			<td>
+				<div class="row">
+					<div class="col-md-12">
+						<b>Descripción de Recepción:</b> <?= $value['comentarios_recepcion'] ?>      		
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<b>Motivo:</b> <?= $value['motivo_orden'] ?>  
+					</div>
+					<div class="col-md-6">
+						<b>Solución:</b> <?= $value['solucion_orden'] ?>        		
+					</div>
+				</div>
+			</td>
 		</tr>
 		<?php } ?>
 	</tbody>
 </table>
+
+
+<script type="text/javascript">
+$(function() {
+    $('input[name="daterange"]').daterangepicker({ 
+    	autoUpdateInput: false,
+        locale: {
+        format: 'YYYY-MM-DD'},
+	    "applyLabel": "Aplicar",
+	    "cancelLabel": "Limpiar",
+	    "fromLabel": "De",
+	    "toLabel": "Hasta",
+	    "customRangeLabel": "Custom",
+	    "daysOfWeek": [
+	        "Do",
+	        "Lu",
+	        "Ma",
+	        "Mi",
+	        "Ju",
+	        "Vi",
+	        "Sa"
+	    ],
+	    "monthNames": [
+	        "Enero",
+	        "Febrero",
+	        "Marzo",
+	        "Abril",
+	        "Mayo",
+	        "Junio",
+	        "Julio",
+	        "Agusto",
+	        "Septiembre",
+	        "Octubre",
+	        "Noviembre",
+	        "Diciembre"
+	    ]
+    }, function(start, end, label) {
+
+       // console.log("New date range selected: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+		$("#fecha_de").val(start.format('YYYY-MM-DD'));
+		$("#fecha_hasta").val(end.format('YYYY-MM-DD'));
+
+      
+    });
+
+    $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+    });
+
+    $('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
+		$("#fecha_de").val('');
+		$("#fecha_hasta").val('');
+        
+        $(this).val('');
+        
+    });
+    
+    
+});
+
+</script>
 

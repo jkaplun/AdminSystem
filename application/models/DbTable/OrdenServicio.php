@@ -32,7 +32,15 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 		if  (isset($valores['id_orden_servicio_estatus']) && $valores['id_orden_servicio_estatus']!='') {
 			$select->where("id_orden_servicio_estatus=?",$valores['id_orden_servicio_estatus']);
 		}
-	
+		
+		if  (isset($valores['id_agencia']) && $valores['id_agencia']!='') {
+			$select->where("id_agencia=?",$valores['id_agencia']);
+		}
+		
+		if  (isset($valores['daterange']) && $valores['daterange']!='') {
+			$select->where("fecha_alta between '{$valores['fecha_de']} 00:00:00' and '{$valores['fecha_hasta']} 23:59:59'");
+		}
+		
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	
@@ -265,7 +273,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 	
 	}
 	
-	public function obtenerOrdenesPorAgencia($id_agencia){
+	public function obtenerOrdenesPorAgencia($id_agencia, $valores= null){
 		
 		$select = $this->_db->select()->
 		from ( "view_orden_servicio", '*' )
@@ -273,11 +281,23 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 		->order("id_orden_servicio desc")
 		->limit(100);
 		
-		return $this->getAdapter ()->fetchAll( $select );
+
+	
+		if (isset($valores['id_usuario_admin_atiende']) && $valores['id_usuario_admin_atiende']!='') {
+			$select->where("id_usuario_admin_atiende=?",$valores['id_usuario_admin_atiende']);
+		}
+		if (isset($valores['id_motivo']) && $valores['id_motivo']!='') {
+			$select->where("id_motivo=?",$valores['id_motivo']);
+		}
+		if  (isset($valores['id_orden_servicio_estatus']) && $valores['id_orden_servicio_estatus']!='') {
+			$select->where("id_orden_servicio_estatus=?",$valores['id_orden_servicio_estatus']);
+		}
 		
+		if  (isset($valores['daterange']) && $valores['daterange']!='') {
+			$select->where("fecha_alta between '{$valores['fecha_de']} 00:00:00' and '{$valores['fecha_hasta']} 23:59:59'");
+		}
+	
+		return $this->getAdapter ()->fetchAll( $select );
 	}
-	
-	
-	
 }
 

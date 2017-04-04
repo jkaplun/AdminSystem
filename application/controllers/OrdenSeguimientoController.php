@@ -288,7 +288,19 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	$this->view->params=$this->_request->getParams();
     	$ordenServicioDbTable = new Application_Model_DbTable_OrdenServicio();
     	
-    	$this->view->ordServ = $ordenServicioDbTable->obtenerOrdenesPorAgencia($this->view->params['id_agencia']);
+    	
+    	$orden = new Application_Model_DbTable_OrdenServicio();
+    	$this->view->formFiltroSeguimientoOrdenAdmin = new Application_Form_Ordenes_FiltroSeguimientoOrdenAdmin();
+    	$params=$this->_request->getParams();
+    	
+
+    	$this->view->formFiltroSeguimientoOrdenAdmin->populate($params);
+    	
+    	
+    	$this->view->ordServ = $ordenServicioDbTable->obtenerOrdenesPorAgencia($this->view->params['id_agencia'], $params);
+    	
+    	$this->view->totalOrdServ = count($this->view->ordServ);
+    	
     	$agencia = new Application_Model_DbTable_Agencia();
     	$this->view->datosAgencia = $agencia->find( $this->view->params['id_agencia'] )->toArray()[0];
     	

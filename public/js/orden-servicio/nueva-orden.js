@@ -364,18 +364,15 @@ $('#id_usuario_admin_atiende').html('');
     }) 
     .done(function(res) {  
 
-
      // agregar a todos los ejectivos asignados a esta agencia
     	var k= 0;
         $.each( res, function( key, value ) {
-        	var n = value.search("[Titular]");
-        	if (n>1){
+        	var n = value.includes("[Titular]");
+        	if (n){
         		k = key;
         	}
         	
-        	 $('#id_usuario_admin_atiende').append($('<option>').text(value)
-        	          .attr('value', key)
-        	 );
+        	 $('#id_usuario_admin_atiende').append($('<option>').text(value).attr('value', key));
         });
         $("#id_usuario_admin_atiende").val(k);
         
@@ -549,10 +546,3 @@ function getProductosByAgencia(){
 		  });
 }
 
-function vinculo(){
-	window.open('http://localhost/AdminSystem/public/orden-seguimiento/consulta-por-agencia/id_agencia/'+idAgenciaActual,'720x720','toolbar=no,status=no,scrollbars=yes,location=no,menubar=no,directories=no,width=720,heiaght=720');
-}
-
-$( "#consulta-ordenes" ).click(function( event ) {
-	  event.preventDefault();
-	});

@@ -52,10 +52,16 @@ class AgendaController extends Zend_Controller_Action{
 		
 		$i=0;
 		do {
+			if ( $date->toString("e") == 6 ) {
+				$date->addDay(2);
+			}
+			
 			$a = new Application_Model_DbTable_Agenda();
 			$agendaArray[$date->toString("Y-MM-dd")] = $a->agendaPersonal($_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'] , $date->toString("Y-MM-dd"));
 			
-			$date->addDay(1);
+			if ( $date->toString("e") != 6 ) {
+				$date->addDay(1);
+			}
 			$i++;
 		}while ($i<7);
 
@@ -71,13 +77,21 @@ class AgendaController extends Zend_Controller_Action{
 		
 		$i=0;
 		do {
+			
+			if ( $date->toString("e") == 6 ) {
+				$date->addDay(2);
+			}
+			
 			$a = new Application_Model_DbTable_Agenda();
 			$agendaArray[$date->toString("Y-MM-dd")] = $a->agendaGeneral($date->toString("Y-MM-dd"));
+
+			if ( $date->toString("e") != 6 ) {
+				$date->addDay(1);
+			}
 			
-			$date->addDay(1);
 			$i++;
+			
 		}while ($i<7);
-		
 		$this->view->agendaArray = $agendaArray;
 		
 	}

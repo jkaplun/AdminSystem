@@ -356,3 +356,73 @@ function ajaxPrueba(){
 function showEditOrdServ(id){
 	$( "#panel-body-"+id ).toggle("blind");
 }
+
+
+
+$(function() {
+    $('input[name="daterange"]').daterangepicker({ 
+    	autoUpdateInput: false,
+        locale: {
+        format: 'YYYY-MM-DD'},
+	    "applyLabel": "Aplicar",
+	    "cancelLabel": "Limpiar",
+	    "fromLabel": "De",
+	    "toLabel": "Hasta",
+	    "customRangeLabel": "Custom",
+	    "daysOfWeek": [
+	        "Do",
+	        "Lu",
+	        "Ma",
+	        "Mi",
+	        "Ju",
+	        "Vi",
+	        "Sa"
+	    ],
+	    "monthNames": [
+	        "Enero",
+	        "Febrero",
+	        "Marzo",
+	        "Abril",
+	        "Mayo",
+	        "Junio",
+	        "Julio",
+	        "Agusto",
+	        "Septiembre",
+	        "Octubre",
+	        "Noviembre",
+	        "Diciembre"
+	    ]
+    }, function(start, end, label) {
+
+       // console.log("New date range selected: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+		$("#fecha_de").val(start.format('YYYY-MM-DD'));
+		$("#fecha_hasta").val(end.format('YYYY-MM-DD'));
+
+      
+    });
+
+    $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+    });
+
+    $('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
+		$("#fecha_de").val('');
+		$("#fecha_hasta").val('');
+        
+        $(this).val('');
+        
+    });
+    
+    
+});
+
+
+function vinculo(id_agencia){
+	var baseHref = document.getElementsByTagName('base')[0].href
+	console.log(baseHref);
+	window.open(baseHref+'/orden-seguimiento/consulta-por-agencia/id_agencia/'+id_agencia,'_blank','toolbar=no,status=no,scrollbars=yes,location=no,menubar=no,directories=no,width=1180,height=620');
+}
+
+$( "#consulta-ordenes" ).click(function( event ) {
+	  event.preventDefault();
+	});

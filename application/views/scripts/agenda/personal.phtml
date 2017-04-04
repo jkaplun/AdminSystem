@@ -4,9 +4,11 @@
       <?php  foreach ( $this->agendaArray as $key => $value ) { ?>
         <th><?php
         $fecha = new Zend_Date($key);
-        $fechaString = $fecha->toString('d MMMM yyyy');
-        echo $fechaString;
-        ?></th>
+        $fechaString = $fecha->toString('EEEE <br> d MMMM yyyy'); ?>
+        <?= $fecha->toString('EEEE') ?>
+        <br>
+        <?= $fecha->toString('d MMMM yyyy') ?>
+        </th>
        <?php } ?>
       </tr>
     </thead>
@@ -18,6 +20,8 @@
         		Agencia: <?= $val['nombre_agencia'] ?><br>
         		Hora Inicial: <?= $val['hora_inicial'] ?><br>
         		Hora Final: <?= $val['hora_final'] ?><br>
+        		<b>Contacto:</b> <?= $val['contacto'] ?><br>
+        		<b>Motivo:</b> <?= $val['motivo'] ?><br>
         		<hr>
         	<?php } ?>
         </td>
