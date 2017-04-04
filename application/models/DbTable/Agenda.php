@@ -25,5 +25,14 @@ class Application_Model_DbTable_Agenda extends Zend_Db_Table_Abstract
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	
+	public function agendaDelDiaPorUsuario($id)
+	{
+		$select = $this->_db->select()->
+		from ( 'view_'.$this->_name, '*' )
+		->where("(id_usuario_admin={$id}) && date( fecha ) = current_date()");
+		
+		return $this->getAdapter ()->fetchAll( $select );
+	}
+	
 }
 

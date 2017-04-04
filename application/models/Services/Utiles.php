@@ -83,6 +83,19 @@ class Application_Model_Services_Utiles
 		return $resultProcessed;
 	}	
 	
-	
+	public function consultarEjecutivosEnAgendaService($params){
+		
+		$ag = new Application_Model_DbTable_Agenda();
+		
+		$usuario_admin = new Application_Model_DbTable_UsuarioAdmin();
+		
+		$resultProcessed['ejecutivoPrincipal'] = $ag->agendaDelDiaPorUsuario($params['id_usuario_soporte_titular']);
+		$resultProcessed['ejecutivoAuxiliar'] = $ag->agendaDelDiaPorUsuario($params['id_usuario_soporte_auxiliar']);
+		
+		
+		//SELECT * FROM adminsystem.view_agenda where (id_usuario_admin=37) && date( fecha ) = current_date();
+		
+		return $resultProcessed;
+	}	
 	
 }

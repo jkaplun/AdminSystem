@@ -347,26 +347,20 @@ function mostrarUsuariosAgenciaEnSelect(idAgenciaActual){
 //consultarejecutivosporid
 function mostrarEjecutivosEnSelect(id_ejecutivo_principal, id_ejecutivo_aux){
 $('#id_usuario_admin_atiende').html('');
- // productos_todos={};
-  //ajaxActionUsuarioAgencia="consultar"
   var id_agencia_seleccionada="id_agencia="+idAgenciaActual;
-  // var id_ejecutivos ={
-  // 	 "id_usuario_soporte_titular":datosAgenciaSeleccionada.id_usuario_soporte_titular,
-  // 	 "id_usuario_soporte_auxiliar":datosAgenciaSeleccionada.id_usuario_soporte_auxiliar
-  // }  
-  //var addIdAgencia="id_agencia="+idAgenciaActual;
-  // console.log("atosAgenciaSeleccionada.id_usuario_soporte_titular"+datosAgenciaSeleccionada.id_usuario_soporte_titular);
- $.ajax({ 
+  $('#agenda_ejecutivo_auxiliar').html('');
+  $('#agenda_ejecutivo_principal').html('');
+
+  $.ajax({ 
       url: "public/usuarios/consultarejecutivosporid", 
       method: "post", 
       data: "id_usuario_soporte_titular="+id_ejecutivo_principal+"&id_usuario_soporte_auxiliar="+id_ejecutivo_aux,
       dataType: "json" 
-    }) 
-    .done(function(res) {  
+  }).done(function(res) {  
 
      // agregar a todos los ejectivos asignados a esta agencia
     	var k= 0;
-        $.each( res, function( key, value ) {
+        $.each( res.ejecutivos, function( key, value ) {
         	var n = value.includes("[Titular]");
         	if (n){
         		k = key;
@@ -376,15 +370,17 @@ $('#id_usuario_admin_atiende').html('');
         });
         $("#id_usuario_admin_atiende").val(k);
         
-       
+       $.each( res.agenda.ejecutivoAuxiliar , function( key, value ) {
+    	   $('#agenda_ejecutivo_auxiliar').append('Agencia: '+ value.nombre_agencia +'<br>');
+    	   $('#agenda_ejecutivo_auxiliar').append('Horario: de '+ value.hora_inicial +' a '+  value.hora_final +'<br>');
+    	   $('#agenda_ejecutivo_auxiliar').append('Ejecutivo: '+ value.nombre +' '+ value.apellido_paterno +'<hr>');
+       });
         
-//      for (i;i<res.length;i++){
-//
-//        $('#id_usuario_admin_atiende').append($('<option>').text(res[i].nombre + " " + res[i].apellido_paterno)
-//          .attr('value', res[i].id_usuario)
-//          );
-//        }
-
+       $.each( res.agenda.ejecutivoPrincipal , function( key, value ) {
+    	   $('#agenda_ejecutivo_principal').append('Agencia: '+ value.nombre_agencia +'<br>');
+    	   $('#agenda_ejecutivo_principal').append('Horario: de '+ value.hora_inicial +' a '+  value.hora_final +'<br>');
+    	   $('#agenda_ejecutivo_principal').append('Ejecutivo: '+ value.nombre +' '+ value.apellido_paterno +'<hr>');
+       });
 
   })// end ajax done  
     .fail(function() { 

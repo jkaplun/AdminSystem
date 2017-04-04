@@ -235,9 +235,16 @@ class UsuariosController extends Zend_Controller_Action
 
         $utiles = new Application_Model_Services_Utiles();
         
-        $resultProcessed = $utiles->consultarejecutivosporidService($params);
+        //$resultProcessed = $utiles->consultarejecutivosporidService($params);
+//        [id_usuario_soporte_titular] => 61
+//        [id_usuario_soporte_auxiliar] => 40
         
-        $this->_helper->json($resultProcessed);
+        $result['ejecutivos'] = $utiles->consultarejecutivosporidService($params);
+        $result['agenda'] = $utiles->consultarEjecutivosEnAgendaService($params);
+        
+       // echo "<pre>".print_r($result,true)."</pre>";
+        
+        $this->_helper->json($result);
 
     }
     
