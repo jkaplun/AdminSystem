@@ -1,6 +1,10 @@
 <?php	
-// located at application/forms/Auth/Login.php
- 
+
+/**
+ * 
+ * @author jgarfias
+ *
+ */
 class Application_Form_Ordenes_FiltroSeguimientoOrdenAdmin extends Zend_Form
 {
 	public function init(){

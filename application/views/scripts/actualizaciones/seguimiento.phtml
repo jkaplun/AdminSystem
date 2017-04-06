@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="col-md-6">
+		<table class="table">
+			<caption>Actualizaciones Pendientes.</caption>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Agencia</th>
+					<th>Producto</th>
+					<th>Solicita</th>
+					<th>Fecha solicitud</th>
+					<th>Editar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ( $this->actualizacionesPendientes as $values ) {	?>
+				<tr>
+					<th scope="row"><?= $values['id_update'] ?></th>
+					<td><?= $values['nombre'] ?></td>
+					<td><?= $values['nombre_prod'] ?></td>
+					<td><?= $values['nombre_usuario_solicita'] ?></td>
+					<td><?= $values['fecha_solicitud'] ?></td>
+					<td><a href="public/actualizaciones/editar/id_update/<?= $values['id_update'] ?>" style="color: black;">Editar</a></td>
+				</tr>
+				<?php } ?>
+			</tbody>
+		</table>
+	</div>
+</div>

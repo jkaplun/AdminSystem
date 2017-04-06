@@ -13,6 +13,14 @@ class Application_Model_DbTable_Producto extends Zend_Db_Table_Abstract
 		->order('vigente_prod');
 		return $this->getAdapter ()->fetchAll ( $select );
 	}
+	
+	public function obtenerProductosVigentes(){
+		$select = $this->_db->select()->
+		from ( $this->_name,'*')
+		->where("vigente_prod='S'")
+		->order('nombre_prod');
+		return $this->getAdapter ()->fetchAll ( $select );
+	}	
 
 	public function obtenerProductoPorId ($id_producto)
 	{
