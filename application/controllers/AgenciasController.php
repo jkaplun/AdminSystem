@@ -199,29 +199,20 @@ class AgenciasController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
-        //echo '<pre>'.print_r($params,true).'</pre>';die;
-        
-        
+
         $data = array(
         				'clave' => $params['clave'], 
                         'nombre' => $params['nombre'], 
                         'direccion' => $params['direccion'], 
                         'colonia' => $params['colonia'],
                         'cp' => $params['cp'],
-                        //'clave_ciudad' => '51',
                         'tel1' => $params['tel1'],
                         'tel2' => $params['tel2'],
                         'rfc' => $params['rfc'],
                         'email' => $params['email'],
         				'email_alt' => $params['email_alt'],
-                        //'http' => $params['http'],
-                        //'cfdi' => $params['cfdi'],
                         'dba_pwd' => $params['update_pwd_bd'],
         				'dba_user' => $params['update_login_bd'],
-                        //'layout_login' => $params['layout_login'],
-                        //'layout_pwd' => $params['layout_pwd'],
-        				//'fecha' => $params['fecha'],
-        				//'observaciones' => $params['observaciones'],
         				'sucursales' => $params['sucursales'],
         				'update_login' => $params['update_login'],
         				'iatas1' => $params['iatas1'],
@@ -230,7 +221,13 @@ class AgenciasController extends Zend_Controller_Action
                         'iatas4' => $params['iatas4'],
                         'iatas5' => $params['iatas5'],
                         'id_usuario_soporte_titular' => $params['id_usuario_soporte_titular'],
-        				'id_usuario_soporte_auxiliar' => $params['id_usuario_soporte_auxiliar']
+        				'id_usuario_soporte_auxiliar' => $params['id_usuario_soporte_auxiliar'],
+		        		'nombre_bd' => $params['nombre_bd'],
+		        		'host' => $params['host'],
+		        		'puerto' => $params['puerto'],
+		        		'data_source_name' => $params['data_source_name'],
+		        		'observaciones_conexion' => $params['observaciones_conexion']
+
         );
 
     	$form = new Application_Form_Agencias_Agencias();

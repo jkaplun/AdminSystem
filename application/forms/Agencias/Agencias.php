@@ -16,7 +16,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->addErrorMessage("- Es necesario que introduzca la clave de la agencia.")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Clave de agencia"))
         ->setAttrib("maxlength","15")
@@ -29,7 +29,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->addErrorMessage("- Es necesario que introduzca el nombre.")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Nombre"))
         ->setAttrib("maxlength","255")
@@ -39,10 +39,10 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         // Direcci�n
         $direccion = new Zend_Form_Element_Text('direccion');
         $direccion->setRequired(true)
-        ->addErrorMessage("- Es necesario que introduzca la direcci�n.")
+        ->addErrorMessage("- Es necesario que introduzca la dirección.")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder","Dirección")
         ->setAttrib("maxlength","120")
@@ -54,7 +54,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $colonia->setRequired(true)
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Colonia"))
         ->setAttrib("maxlength","100")
@@ -66,7 +66,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $cp->setRequired(true)
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder","Código Postal")
         ->setAttrib("maxlength","5")
@@ -80,7 +80,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->addErrorMessage("- Es necesario que introduzca la clave de la ciudad")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Clave de Ciudad"))
         ->setAttrib("maxlength","10")
@@ -93,7 +93,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->addErrorMessage("- Es necesario que introduzca el telefono 1")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder","Teléfono 1")
         ->setAttrib("maxlength","10")
@@ -105,7 +105,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $tel2 = new Zend_Form_Element_Text('tel2');
         $tel2->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder","Teléfono 2")
         ->setAttrib("maxlength","10")
@@ -118,7 +118,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $rfc->setRequired(true)
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("R.F.C."))
         ->setAttrib("maxlength","13")
@@ -131,7 +131,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $email->setRequired(true)
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Email"))
         ->setAttrib("maxlength","100")
@@ -143,7 +143,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $email_alt
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Email"))
         ->setAttrib("maxlength","100")
@@ -154,7 +154,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $http = new Zend_Form_Element_Text('http');
         $http->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("HTTP"))
         ->setAttrib("maxlength","100")
@@ -170,7 +170,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
                 'S'=>'Activo',
                 'N'=>'Inactivo'
         ))
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off");
         $this->addElement($cfdi);
         
@@ -189,7 +189,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
 	        ->setLabel("Tipo de Folios")
 	        ->removeDecorator('HtmlTag')
 	        ->addMultiOptions($options)
-	        ->setAttrib("class","form-control")
+	        ->setAttrib("class","form-control input-sm")
 	        ->setAttrib("autocomplete","off");
         $this->addElement($element);
         
@@ -198,7 +198,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $dba_pwd = new Zend_Form_Element_Text('dba_pwd');
         $dba_pwd->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("DBA Password"))
         ->setAttrib("maxlength","15")
@@ -209,7 +209,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $layout_login = new Zend_Form_Element_Text('layout_login');
         $layout_login->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Layout Login"))
         ->setAttrib("maxlength","15")
@@ -220,7 +220,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $layout_pwd = new Zend_Form_Element_Text('layout_pwd');
         $layout_pwd->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Layout Password"))
         ->setAttrib("maxlength","15")
@@ -233,7 +233,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->removeDecorator('HtmlTag')
         ->removeDecorator('Errors')
         ->setAttrib("autocomplete","off")
-        ->setAttrib("class","form-control datepicker")
+        ->setAttrib("class","form-control input-sm datepicker")
         ->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
         ->setAttrib("maxlength","10");
         $this->addElement($fecha);
@@ -242,7 +242,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $observaciones = new Zend_Form_Element_Textarea('observaciones');
         $observaciones->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Observaciones"))
         ;
@@ -252,7 +252,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $sucursales = new Zend_Form_Element_Text('sucursales');
         $sucursales->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Sucursales"))
         ->setAttrib("maxlength","11")
@@ -263,7 +263,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $update_login = new Zend_Form_Element_Text('update_login');
         $update_login->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Update Login"))
         ->setAttrib("maxlength","50")
@@ -274,7 +274,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $update_pwd = new Zend_Form_Element_Text('update_pwd');
         $update_pwd->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Update Password"))
         ->setAttrib("maxlength","50")
@@ -284,7 +284,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $update_login_bd = new Zend_Form_Element_Text('update_login_bd');
         $update_login_bd->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Update Login BD"))
         ->setAttrib("maxlength","50")
@@ -295,7 +295,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $update_pwd_bd = new Zend_Form_Element_Text('update_pwd_bd');
         $update_pwd_bd ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Update Password BD"))
         ->setAttrib("maxlength","50")
@@ -313,7 +313,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
                 'S'=>'Activo',
                 'N'=>'Inactivo'
         ))
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ;
         $this->addElement($activa_nuevos_sp);
@@ -327,7 +327,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
                 'S'=>'Activo',
                 'N'=>'Inactivo'
         ))
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ;
         $this->addElement($addenda);
@@ -336,7 +336,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $ftp_add_login = new Zend_Form_Element_Text('ftp_add_login');
         $ftp_add_login->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("FTP Login"))
         ->setAttrib("maxlength","50")
@@ -347,7 +347,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $ftp_add_pwd = new Zend_Form_Element_Text('ftp_add_pwd');
         $ftp_add_pwd->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("FTP Password"))
         ->setAttrib("maxlength","50")
@@ -358,7 +358,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $ip_portal_fe = new Zend_Form_Element_Text('ip_portal_fe');
         $ip_portal_fe->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("IP Portal FE"))
         ->setAttrib("maxlength","255")
@@ -377,7 +377,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         		'N'=>'No tiene',
         		''=>'Otro'
         ))
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ;
         $this->addElement($prov_timbrado);
@@ -386,7 +386,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $facturacion_boleto = new Zend_Form_Element_Text('facturacion_boleto');
         $facturacion_boleto->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder","Facturación boleto")
         ->setAttrib("maxlength","11")
@@ -397,7 +397,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $nombre_comercial = new Zend_Form_Element_Text('nombre_comercial');
         $nombre_comercial->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("Nombre Comercial"))
         ->setAttrib("maxlength","255")
@@ -413,7 +413,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
                 'S'=>'Activo',
                 'N'=>'Inactivo'
         ))
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ;
         $this->addElement($markup); 
@@ -427,7 +427,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
                 'S'=>'Activo',
                 'N'=>'Inactivo'
         ))
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ;
         $this->addElement($agencias_consolidadas);  
@@ -447,12 +447,11 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $observaciones_agencia
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder","Observaciones de la Agencia")
         ->setAttrib("maxlength","256")
-        ->setAttrib("rows","10")
-        ;
+        ->setAttrib("rows","10");
         $this->addElement($observaciones_agencia);
 
         
@@ -470,7 +469,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions($arregloUsuariosSelect)
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ;
         $this->addElement($id_usuario_soporte_titular);
@@ -481,7 +480,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->addMultiOptions($arregloUsuariosSelect)
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ;
         $this->addElement($id_usuario_soporte_auxiliar);
@@ -490,7 +489,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $iatas1 = new Zend_Form_Element_Text('iatas1');
         $iatas1->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("IATA 1"))
         ->setAttrib("maxlength","255")
@@ -502,7 +501,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $iatas2 = new Zend_Form_Element_Text('iatas2');
         $iatas2->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("IATA 2"))
         ->setAttrib("maxlength","255")
@@ -514,7 +513,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $iatas3 = new Zend_Form_Element_Text('iatas3');
         $iatas3->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("IATA 3"))
         ->setAttrib("maxlength","255")
@@ -526,7 +525,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $iatas4 = new Zend_Form_Element_Text('iatas4');
         $iatas4->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("IATA 4"))
         ->setAttrib("maxlength","255")
@@ -538,12 +537,67 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         $iatas5 = new Zend_Form_Element_Text('iatas5');
         $iatas5->removeDecorator('label')
         ->removeDecorator('HtmlTag')
-        ->setAttrib("class","form-control")
+        ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder",utf8_encode("IATA 5"))
-        ->setAttrib("maxlength","255")
-        ;
+        ->setAttrib("maxlength","255");
         $this->addElement($iatas5);
-
+        
+        // nombre_bd
+        $element = new Zend_Form_Element_Text('nombre_bd');
+        $element
+      	->setLabel("Nombre de la BD")
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control input-sm")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("Nombre de la Base de Datos"))
+        ->setAttrib("maxlength","45");
+        $this->addElement($element);
+        
+        // host
+        $element = new Zend_Form_Element_Text('host');
+        $element
+        ->setLabel("Host")
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control input-sm")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("http://example.com"))
+        ->setAttrib("maxlength","1000");
+        $this->addElement($element);
+        
+        // puerto
+        $element = new Zend_Form_Element_Text('puerto');
+        $element
+        ->setLabel("Puerto:")
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control input-sm")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder",utf8_encode("5432"))
+        ->setAttrib("maxlength","10");
+        $this->addElement($element);
+        
+        // observaciones_conexion
+        $element = new Zend_Form_Element_Textarea('observaciones_conexion');
+        $element
+        ->setLabel("Observaciones:")
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control input-sm")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder","Observaciones")
+        ->setAttrib("maxlength","1000")
+        ->setAttrib("rows","4");
+        $this->addElement($element);
+        
+        // data_source_name
+        $element = new Zend_Form_Element_Text('data_source_name');
+        $element
+        ->setLabel("Data Source Name:")
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control input-sm")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder","Data Source Name")
+        ->setAttrib("maxlength","1000");
+        $this->addElement($element);
+        
         }
 }

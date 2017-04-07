@@ -151,17 +151,14 @@ class ActualizacionesController extends Zend_Controller_Action
     
     public function historicoAction(){
     	$params=$this->_request->getParams();
-    	
+    	    	
     	$a = new Application_Model_DbTable_Actualizaciones();
-    	
-    	$where = 'fecha_cierre is null';
+
     	$this->view->actualizacionesPendientes = $a->actualizacionesTodas($params);
-    	//echo "<pre>".print_r($this->view->actualizacionesPendientes,true)."</pre>";die;
     	
+    	$form = new Application_Form_Actualizaciones_FiltroActualizaciones();
     	
-    	
-    	
-    	
+    	$this->view->formUpdate = $form->populate($params);
     	
     }
     

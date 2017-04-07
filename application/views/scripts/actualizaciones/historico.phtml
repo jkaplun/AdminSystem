@@ -1,5 +1,10 @@
 <div class="row">
-	<div class="col-md-9">
+	<div class="col-md-2">
+		<?= $this->formUpdate ?>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
 		<table class="table">
 			<caption>Historico de Actualizaciones.</caption>
 			<thead>
@@ -30,7 +35,7 @@
 					<td><?= $values['version_update'] ?></td>
 					<td><?= $values['archivo_update'] ?></td>
 					<td><?= $values['descripcion'] ?></td>
-					<td><a href="public/actualizaciones/editar/id_update/<?= $values['id_update'] ?>" style="color: black;">Editar</a></td>
+					<td><a class='btn btn-primary btn-xs' href="public/actualizaciones/editar/id_update/<?= $values['id_update'] ?>">Editar</a></td>
 				</tr>
 				<?php } ?>
 			</tbody>

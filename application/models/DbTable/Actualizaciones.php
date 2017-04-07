@@ -25,6 +25,9 @@ class Application_Model_DbTable_Actualizaciones extends Zend_Db_Table_Abstract{
 		->order('id_update desc')
 		->limit(100);
 		
+		if (isset($params['id_agencia']) && $params['id_agencia']!='') {
+			$select->where("id_agencia=?",$params['id_agencia']);
+		}
 		
 		
 		return $this->getAdapter ()->fetchAll( $select );

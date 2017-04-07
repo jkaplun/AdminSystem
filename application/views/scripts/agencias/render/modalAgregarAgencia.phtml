@@ -193,114 +193,90 @@
 									</div>
 								</div>
 		                        <div class="tab-pane fade" id="tabConfiguraciones">
-		                   
-									<h4 class="h4Form">Credenciales Update</h4>
-									<hr class="hrForm">
+									
 		                        	<div class="row">
 										<div class="col-md-12">
-		                        			<div class="row">
-		                        				<div class="col-lg-5">
+											<div class="row">
+		                        				<div class="col-lg-3">
 													<div class="form-group">
 														<label class="control-label">Login Update</label>
 														<?= $this->form->update_login ?>
 													</div>
 		                        				</div>
-		                        				<div class="col-lg-5">
+		                        				<div class="col-lg-3">
 													<div class="form-group">
 										                <label class="control-label">Password Update</label>
 														<?= $this->form->update_pwd ?> 
 													</div>
 		                        				</div>
-		                        				<div class="col-lg-2">
-													<div class="form-group">
-										                <label class="control-label">Modificar</label>
-										                <select class="form-control">
-										                    <option value="1">Si</option>
-										                    <option value="0" selected="selected">No</option>
-										                </select>
-													</div>		                        				
-		                        				</div>		                        				
-		                        			</div>
-										</div>
-									</div>
-									<h4 class="h4Form">Credenciales BD</h4>
-									<hr class="hrForm">
-		                        	<div class="row">
-										<div class="col-md-12">
-		                        			<div class="row">
-		                        				<div class="col-lg-5">
+		                        				<div class="col-lg-3">
 													<div class="form-group">
 														<label class="control-label">Login BD</label>
 														<?= $this->form->update_login_bd ?>
 													</div>
 		                        				</div>
-		                        				<div class="col-lg-5">
+		                        				<div class="col-lg-3">
 													<div class="form-group">
 										                <label class="control-label">Password BD</label>
 														<?= $this->form->update_pwd_bd ?> 
 													</div>
 		                        				</div>
-		                        				<div class="col-lg-2">
-													<div class="form-group">
-										                <label class="control-label">Modificar</label>
-										                <select class="form-control">
-										                    <option value="1">Si</option>
-										                    <option value="0" selected="selected">No</option>
-										                </select>
-													</div>		                        				
-		                        				</div>		                        				
-		                        			</div>
+		                        			</div>	
 										</div>
-									</div>									
-									<h4 class="h4Form">Ejecutivos</h4>
-									<hr class="hrForm">
-									<div class="row">
-										<div class="col-md-12">
-										<div class="form-group">
-										<div class="row">
-										    <div class="col-xs-6">
-										        <label class="control-label">Ejecutivo Titular</label>
-										        <?= $this->form->id_usuario_soporte_titular ?>
-										    </div>
-
-										    <div class="col-xs-6">
-										        <label class="control-label">Ejecutivo Auxiliar</label>
-										         <?= $this->form->id_usuario_soporte_auxiliar ?>
-										    </div>
-										</div>
-										</div>												
-										</div>
+									</div>
+								     <div class="row">
+							    		<div class="col-lg-3">
+							        	<label class="control-label">Ejecutivo Titular</label>
+							        	<?= $this->form->id_usuario_soporte_titular ?>
+							    		</div>
+									    <div class="col-lg-3">
+									        <label class="control-label">Ejecutivo Auxiliar</label>
+									         <?= $this->form->id_usuario_soporte_auxiliar ?>
+									    </div>
 									</div>
 									<h4 class="h4Form">IATAS</h4>
 									<hr class="hrForm">
 									<div class="row">
-										<div class="col-md-6">
+										<div class="col-md-2">
 									        <label class="control-label">IATA 1</label>
 									        <?= $this->form->iatas1 ?>				
 										</div>
-										<div class="col-md-2"></div>
-										<div class="col-md-6">
+										<div class="col-md-2">
 									        <label class="control-label">IATA 2</label>
 									        <?= $this->form->iatas2 ?>				
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6">
+										<div class="col-md-2">
 									        <label class="control-label">IATA 3</label>
 									        <?= $this->form->iatas3 ?>				
 										</div>
-										<div class="col-md-2"></div>
-										<div class="col-md-6">
+										<div class="col-md-2">
 									        <label class="control-label">IATA 4</label>
 									        <?= $this->form->iatas4 ?>				
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6">
+										<div class="col-md-2">
 									        <label class="control-label">IATA 5</label>
 									        <?= $this->form->iatas5 ?>				
 										</div>
-									</div>														
+									</div>	
+									<h4 class="h4Form">Datos de Conexión</h4>
+									<hr class="hrForm">
+									<div class="row">
+										<div class="col-md-2">
+									        <?= $this->form->nombre_bd ?>				
+										</div>
+										<div class="col-md-2">
+									        <?= $this->form->host ?>				
+										</div>
+										<div class="col-md-2">
+									        <?= $this->form->puerto ?>				
+										</div>
+										<div class="col-md-2">
+									        <?= $this->form->data_source_name ?>				
+										</div>
+										<div class="col-md-4">
+									        <?= $this->form->observaciones_conexion ?>				
+										</div>
+									</div>	
 		                        </div>	                        
 		                    </div>
 		                </div>
