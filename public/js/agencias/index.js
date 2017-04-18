@@ -227,11 +227,11 @@ function consultarAgencia(id_agencia){
 		  url: path + "consultar",
 		  method: "post",
 		  data: "id_agencia="+id_agencia,
-		  dataType: "html"
+		  dataType: "json"
 		})
-		.done(function(res) { 
-			//console.log(res);	
+		.done(function(res) {		
 			mostarDatosAgencia(res);
+			mostrarDatosDeConexiones(res.conexiones)
 			editarAgenciaForm(res);
   })// end ajax done 
 		.fail(function() {
@@ -242,7 +242,7 @@ function consultarAgencia(id_agencia){
 
 // Se muestran los datos de la gencia
 function mostarDatosAgencia(datosAgencia){
-	var datosAgencia = jQuery.parseJSON( datosAgencia );
+	//var datosAgencia = jQuery.parseJSON( datosAgencia );
 
 	//jQuery.parseJSON( datosAgencia );
 	//console.log("actulizando datos agencia");
@@ -296,7 +296,7 @@ function mostarDatosAgencia(datosAgencia){
 
 function editarAgenciaForm(json_values){
 	$('#myModalLabel').html("Editar Datos de la Agencia");
-	var obj = jQuery.parseJSON( json_values );
+	var obj = json_values ;
 	populate(obj);
 	$("#action-form-agencia").attr('onclick','submitFormUpdateAgencia()');
 }
@@ -444,3 +444,122 @@ function saveFEConfig(){
 	
 }
 
+function agregarConexion() {
+	
+	if ( $("#nombre_bd").val()=='' ) {
+		alert('Se requiere el nombre de la Base de Datos.');
+		return;
+	}
+	
+	var id_agencia = idAgenciaActual;
+	$.ajax({
+			url: path + "agregar-datos-conexion",
+		  	method: "post",
+		  	dataType: "json",
+		  	data: {
+			  "nombre_bd" : $("#nombre_bd").val(),
+			  "host" : $("#host").val(),
+			  "puerto" : $("#puerto").val(),
+			  "data_source_name" : $("#data_source_name").val(),
+			  "observaciones_conexion" : $("#observaciones_conexion").val(),
+			  "id_producto" : $("#id_producto_d_c").val(),
+			  "id_agencia" : id_agencia }
+			  
+		})
+		.done(function(res) { 
+			if (res.success == true) {
+				 swal("Guardado", " ", "success"); 
+				  $("#nombre_bd").val("");
+				  $("#host").val("");
+				  $("#puerto").val("");
+				  $("#data_source_name").val("");
+				  $("#observaciones_conexion").val("");
+				  $("#id_producto_d_c").val(3);
+			} else {
+				 swal("Hubo un error", " ", "error"); 
+			}
+			consultaDatosConexion(id_agencia);
+	})// end ajax done 
+			.fail(function() {
+				swal("Error en la conexión.", " ", "error"); 
+	});
+	
+}
+
+function consultaDatosConexion(id_agencia){
+	
+	$.ajax({
+		url: path + "consultar-datos-conexion",
+	  	method: "post",
+	  	dataType: "json",
+	  	data: {
+		  "id_agencia" : id_agencia }
+		  
+	})
+	.done(function(res) { 
+		//console.log(res.conexiones);
+		mostrarDatosDeConexiones(res.conexiones)
+	})// end ajax done 
+			.fail(function() {
+				swal("Error en la conexión.", " ", "error"); 
+	});
+
+}
+
+/**
+ * Recive un json con las conexiones
+ */
+function mostrarDatosDeConexiones(conexiones){
+	
+	$("#datos-de-conexiones").empty();
+    $.each(conexiones, function(key, value){  
+    	$("#datos-de-conexiones").append(
+    			"<tr><td>"+value.id_agencia_conexion_datos+"</td>" +
+    			"<td>"+value.nombre_prod+"</td>" +
+    			"<td>"+value.nombre_bd+"</td>" +
+    			"<td>"+value.host+"</td>" +
+    			"<td>"+value.puerto+"</td>" +
+    			"<td>"+value.data_source_name+"</td>" +
+    			"<td>"+value.observaciones_conexion+"</td>" +
+    			'<td>' +
+    			"<button type='button' class='btn btn-default btn-xs' onclick='editarDatosDeConexion(\""+value.id_agencia_conexion_datos + 
+    			'","'+value.nombre_bd+
+    			'","'+value.id_producto+
+    			'","'+value.host+
+    			'","'+value.puerto+
+    			'","'+value.data_source_name+
+    			'","'+value.observaciones_conexion+
+    			'")\'>Editar</button>' +
+    			'<button type="button" class="btn btn-default btn-xs" onclick="eliminarDatosDeConexion('+value.id_agencia_conexion_datos+')">Eliminar</button></td></tr>');
+    });
+    
+    if ( conexiones.length < 11) {
+    	$("#form-agregar-conexion").show();
+    } else {
+    	$("#form-agregar-conexion").hide();
+    }
+    
+}
+
+function eliminarDatosDeConexion(id_agencia_conexion_datos){
+	$.ajax({
+		url: path + "eliminar-datos-conexion",
+	  	method: "post",
+	  	dataType: "json",
+	  	data: {
+		  "id_agencia_conexion_datos" : id_agencia_conexion_datos ,
+		  "id_agencia" : idAgenciaActual }
+	})
+	.done(function(res) { 
+		//console.log(res.conexiones);
+		mostrarDatosDeConexiones(res.conexiones)
+	})// end ajax done 
+			.fail(function() {
+				swal("Error en la conexión.", " ", "error"); 
+	});
+}
+
+
+function editarDatosDeConexion( id_agencia_conexion_datos , nombre_bd , id_producto , host , puerto , data_source_name , observaciones_conexion){
+	console.log( id_agencia_conexion_datos +"-"+ nombre_bd +"-"+ id_producto +"-"+ host +"-"+ puerto +"-"+ data_source_name +"-"+ observaciones_conexion);
+} 

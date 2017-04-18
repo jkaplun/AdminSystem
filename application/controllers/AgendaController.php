@@ -13,6 +13,7 @@ class AgendaController extends Zend_Controller_Action{
     	$agendaForm = new Application_Form_Agenda_Agenda();
     	
     	if ( $this->_request->isPost() ) {
+
     		$agendaForm->populate($params);
     		
     		if ( $agendaForm->isValid($params) ) {
@@ -21,14 +22,17 @@ class AgendaController extends Zend_Controller_Action{
     					"id_usuario_admin" => $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'],
     					"id_agencia" => $params['id_agencia'],
     					"fecha" => $params['fecha'],
-    					"hora_inicial" => $params['hora_inicial'],
-    					"hora_final" => $params['hora_final'],
+    					"hora_inicial" => $params['fecha'].' '.$params['hora_inicial'].':00',
+    					"hora_final" => $params['fecha'].' '.$params['hora_final'].':00',
     					"contacto" => $params['contacto'],
     					"motivo" => $params['motivo']
-    			);
+    				);
+    			try {
+    				$agendaDB->insert($data);
+    			} catch (Exception $e) {
+    				echo $e;die;
     			
-    			$agendaDB->insert($data);
-    			
+    			}
     			$this->redirect('agenda/confirmacion');
     			
     		} else {

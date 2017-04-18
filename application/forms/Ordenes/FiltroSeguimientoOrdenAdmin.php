@@ -13,7 +13,7 @@ class Application_Form_Ordenes_FiltroSeguimientoOrdenAdmin extends Zend_Form
 		$selectAgencias = new Zend_Form_Element_Select('id_agencia');
 		$agencias = $agencia->obtenerTodasLasAgencias();
 		
-		$listaAgencias = array();
+		$listaAgencias = array(''=>'Todas las Agencias');
 		foreach ( $agencias as $agencias){
 			$listaAgencias[$agencias['id_agencia']]=$agencias['nombre'];
 		}
@@ -89,6 +89,11 @@ class Application_Form_Ordenes_FiltroSeguimientoOrdenAdmin extends Zend_Form
 		->setAttrib("class","btn btn-primary form-control input-sm");
 		$this->addElement($element);
 		
+		$element = new Zend_Form_Element_Submit('exportar');
+		$element
+		->removeDecorator('HtmlTag')
+		->setAttrib("class","btn btn-primary form-control input-sm");
+		$this->addElement($element);
 		
 		// Fecha del Soporte en Sitio
 		$element= new Zend_Form_Element_Text('daterange');

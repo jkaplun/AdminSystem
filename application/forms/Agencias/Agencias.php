@@ -599,5 +599,26 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("maxlength","1000");
         $this->addElement($element);
         
+        
+        
+        $producto = new Application_Model_DbTable_Producto();
+        $resultados = $producto->obtenerProductos();
+        $lista = array();
+        foreach ( $resultados as $resultado){
+        	$lista[$resultado['id_producto']]=$resultado['nombre_prod'];
+        }
+        
+        // Producto
+        $producto = new Zend_Form_Element_Select('id_producto_d_c');
+        $producto->setAttribs ( array (
+        	'autocomplete'=>'off'))
+        	->addMultiOptions($lista)
+        	->setAttrib("class","form-control")
+        	->setLabel("Producto:")
+        //	->setValue('producto1')
+        	->removeDecorator('HtmlTag');
+        
+        $this->addElement($producto);
+        
         }
 }

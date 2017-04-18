@@ -37,6 +37,8 @@ class Application_Form_Agenda_Agenda extends Zend_Form{
     	
     	$this->addElement($selectAgencias);
     	
+    	$fecha = date("Y-m-d");
+    	
     	// Fecha
     	$element = new Zend_Form_Element_Text('fecha');
     	$element
@@ -49,7 +51,9 @@ class Application_Form_Agenda_Agenda extends Zend_Form{
 	    	->setAttrib("placeholder",utf8_encode("yyyy-mm-dd"))
 	    	->setAttrib("maxlength","10")
 	    	->setAttrib("data-date-format","yyyy-mm-dd")
-	    	->setAttrib("readonly",true);
+	    	->setAttrib("readonly",true)
+	    	->setValue($fecha);
+	    	
     	$this->addElement($element);
     	
     	$horasArray = array(
@@ -146,4 +150,30 @@ class Application_Form_Agenda_Agenda extends Zend_Form{
     	$this->addElement($element);
     	
     }
+    
+    public function isValid($params){
+    
+    	$isValid = parent::isValid($params);
+    
+	    $a = new Application_Model_DbTable_Agenda();
+	    
+	    $validaExistencia = $a->validarFechaDeAlta($_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'],  $params['fecha'], $params['hora_inicial'].':00', $params['hora_final'].':00');
+	    
+	    if ( count($validaExistencia) != 0 ){
+	    	
+	    	$view = Zend_Controller_Front::getInstance()
+	    	->getParam('bootstrap')
+	    	->getResource('view');
+	    	
+	    	$view->validaExistencia = $validaExistencia;
+	    	
+	    	$isValid = false;
+	    	$this->getElement('hora_inicial')->addError("Las horas se traslapan");
+	    	$this->getElement('hora_final')->addError("Las horas se traslapan");
+	    	
+	    }
+    
+	    return $isValid;
+    }
+    
 }

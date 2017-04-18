@@ -284,8 +284,18 @@ class OrdenSeguimientoController extends Zend_Controller_Action
 
     public function consultaPorAgenciaAction(){
     	
+    	
+    	
     	$this->_helper->layout->setLayout('layout_login_sin_menus');
+    	
+    	
+    	
     	$this->view->params=$this->_request->getParams();
+    	
+    	if (isset($this->view->params['exportar'])) {
+    		$this->_helper->layout()->disableLayout();
+    	}
+    	
     	$ordenServicioDbTable = new Application_Model_DbTable_OrdenServicio();
     	
     	

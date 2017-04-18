@@ -1,7 +1,9 @@
+<?php
+	if(!isset($_GET['exportar'])){
+?>
 <link rel="stylesheet" type="text/css" href="public/css/daterangepicker.css">
 <script type="text/javascript" src="public/js/moment.js"></script>
 <script type="text/javascript" src="public/js/daterangepicker.js"></script>
-
 <form class="form-inline" method="get" name="filtroform" id="filtroform">
 <?= $this->formFiltroSeguimientoOrdenAdmin->fecha_de ?>         
 <?= $this->formFiltroSeguimientoOrdenAdmin->fecha_hasta ?>
@@ -18,11 +20,53 @@
 		<div class="col-md-2">
 			<?= $this->formFiltroSeguimientoOrdenAdmin->daterange ?>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-1">
 			<?= $this->formFiltroSeguimientoOrdenAdmin->Filtrar ?>
+		</div>
+		<div class="col-md-1">
+			<?= $this->formFiltroSeguimientoOrdenAdmin->exportar ?>
 		</div>
 	</div>
 </form>
+<?php } ?>
+<?php if(isset($_GET['exportar'])){ ?>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<table>
+	<caption>Ordenes de servicio de la agencia: <?php echo $this->datosAgencia['nombre']?> 	<h3>Se muestra(n): <?php echo $this->totalOrdServ ?> Orden(es)</h3> </caption>
+	<thead>
+		<tr>
+			<th>Id Orden</th>
+			<th>Fecha Alta</th>
+			<th>Estatus</th>
+			<th>Tipo de Soporte</th>
+			<th>Motivo</th>
+			<th>Ejecutivo</th>
+			<th>Producto</th>
+			<th>Conformidad</th>
+			<th>Descripción de Recepción</th>
+			<th>Motivo</th>
+			<th>Solución</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ( $this->ordServ as $value) { ?>	
+		<tr>
+			<td style="vertical-align: top;"><?= $value['id_orden_servicio'] ?></td>
+			<td style="vertical-align: top;"><?= $value['fecha_alta'] ?></td>
+			<td style="vertical-align: top;"><?= $value['descripcion_estatus'] ?></td>
+			<td style="vertical-align: top;"><?= $value['description_tipo_soporte'] ?></td>
+			<td style="vertical-align: top;"><?= $value['motivo'] ?></td>
+			<td style="vertical-align: top;"><?= $value['nombre_usr_admin_atiende'].' '. $value['ap_usr_admin_atiende'] ?></td>
+			<td style="vertical-align: top;"><?= $value['nombre_producto'] ?></td>
+			<td style="vertical-align: top;"><?= $value['conformidad'] ?></td>
+			<td style="vertical-align: top;"><?= $value['comentarios_recepcion'] ?></td>
+			<td style="vertical-align: top;"><?= $value['motivo_orden'] ?></td>
+			<td style="vertical-align: top;"><?= $value['solucion_orden'] ?></td>
+		</tr>
+		<?php } ?>
+	</tbody>
+</table>
+<?php } else {?>
 <table class="table">
 	<caption>Ordenes de servicio de la agencia: <?php echo $this->datosAgencia['nombre']?> 	<h3>Se muestra(n): <?php echo $this->totalOrdServ ?> Orden(es)</h3> </caption>
 	<thead>
@@ -36,26 +80,27 @@
 		<tr>
 		
 		<td>
-			<b>Id Orden: </b><?= $value['id_orden_servicio'] ?><br>
-			<b>Fecha Alta: </b><?= $value['fecha_alta'] ?><br>
-			<b>Estatus: </b><?= $value['descripcion_estatus'] ?><br>
-			<b>Tipo de Soporte: </b><?= $value['description_tipo_soporte'] ?><br>
-			<b>Motivo: </b><?= $value['motivo'] ?><br>
-			<b>Ejecutivo: </b><?= $value['nombre_usr_admin_atiende'].' '. $value['ap_usr_admin_atiende'] ?><br>
-			<b>Producto: </b><?= $value['nombre_producto'] ?><br>
-			<b>Conformidad: </b><?= $value['conformidad'] ?>
+			<p><b>Id Orden: </b><?= $value['id_orden_servicio'] ?></p>
+			<p><b>Fecha Alta: </b><?= $value['fecha_alta'] ?></p>
+			<p><b>Estatus: </b><?= $value['descripcion_estatus'] ?></p>
+			<p><b>Tipo de Soporte: </b><?= $value['description_tipo_soporte'] ?></p>
+			<p><b>Motivo: </b><?= $value['motivo'] ?></p>
+			<p><b>Ejecutivo: </b><?= $value['nombre_usr_admin_atiende'].' '. $value['ap_usr_admin_atiende'] ?></p>
+			<p><b>Producto: </b><?= $value['nombre_producto'] ?></p>
+			<p><b>Conformidad: </b><?= $value['conformidad'] ?></p>
 		</td>
 			<td>
-				<div class="row">
-					<div class="col-md-12">
+				<div class="row" style="padding-bottom: 5px;">
+					<div class="col-md-12" style="background-color: #BCF5A9">
 						<b>Descripción de Recepción:</b> <?= $value['comentarios_recepcion'] ?>      		
 					</div>
 				</div>
+				
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-6" style="background-color: #CEECF5">
 						<b>Motivo:</b> <?= $value['motivo_orden'] ?>  
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6" style="background-color: #F6E3CE">
 						<b>Solución:</b> <?= $value['solucion_orden'] ?>        		
 					</div>
 				</div>
@@ -64,8 +109,15 @@
 		<?php } ?>
 	</tbody>
 </table>
-
-
+<?php } ?>
+<?php
+	if(isset($_GET['exportar'])){
+	header ( "Content-type: application/octet-stream" );
+	header ( "Content-Disposition: attachment; filename=reporte_ordenes_de_servicio.xls" );
+	header ( "Pragma: no-cache" );
+	header ( "Expires: 0" );
+	} else {
+?>
 <script type="text/javascript">
 $(function() {
     $('input[name="daterange"]').daterangepicker({ 
@@ -101,12 +153,9 @@ $(function() {
 	        "Diciembre"
 	    ]
     }, function(start, end, label) {
-
        // console.log("New date range selected: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
 		$("#fecha_de").val(start.format('YYYY-MM-DD'));
 		$("#fecha_hasta").val(end.format('YYYY-MM-DD'));
-
-      
     });
 
     $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
@@ -118,11 +167,7 @@ $(function() {
 		$("#fecha_hasta").val('');
         
         $(this).val('');
-        
     });
-    
-    
 });
-
 </script>
-
+<?php } ?>

@@ -5,5 +5,13 @@
 </div>
 
 <script>
+$( document ).ready(function() {
+	$('#fecha').datepicker('setStartDate', $("#fecha").val());
+});
+
 
 </script>
+
+<?php 
+echo "<pre>".print_r($this->validaExistencia,true)."</pre>";
+?>

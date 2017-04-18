@@ -221,13 +221,7 @@ class AgenciasController extends Zend_Controller_Action
                         'iatas4' => $params['iatas4'],
                         'iatas5' => $params['iatas5'],
                         'id_usuario_soporte_titular' => $params['id_usuario_soporte_titular'],
-        				'id_usuario_soporte_auxiliar' => $params['id_usuario_soporte_auxiliar'],
-		        		'nombre_bd' => $params['nombre_bd'],
-		        		'host' => $params['host'],
-		        		'puerto' => $params['puerto'],
-		        		'data_source_name' => $params['data_source_name'],
-		        		'observaciones_conexion' => $params['observaciones_conexion']
-
+        				'id_usuario_soporte_auxiliar' => $params['id_usuario_soporte_auxiliar']
         );
 
     	$form = new Application_Form_Agencias_Agencias();
@@ -301,6 +295,17 @@ class AgenciasController extends Zend_Controller_Action
         $datosAgencia = $this->agencia->find($params['id_agencia'])->toArray();
         $datosAgencia[0]['update_pwd_bd'] = $datosAgencia[0]['dba_pwd'];
         $datosAgencia[0]['update_login_bd'] = $datosAgencia[0]['dba_user'];
+        
+        $acd = new Application_Model_DbTable_AgenciaConexionDatos();
+        
+        $datosAgencia[0]['conexiones'] = $acd->fetchAll("id_agencia=".$params['id_agencia'],'id_agencia_conexion_datos')->toArray();
+        
+        $objProducto = new Application_Model_DbTable_Producto();
+        
+        foreach (  $datosAgencia[0]['conexiones'] as  $key => $value) {
+        	$result = $objProducto->obtenerProductoPorId($value['id_producto']);
+        	$datosAgencia[0]['conexiones'][$key]['nombre_prod'] = $result['nombre_prod'];
+        }
         
         $this->_helper->json($datosAgencia[0]);
 
@@ -407,4 +412,74 @@ class AgenciasController extends Zend_Controller_Action
     	}
 	   	$this->_helper->json($params);
    }
+   
+   
+   public function agregarDatosConexionAction(){
+   	$this->_helper->layout()->disableLayout();
+   	$this->_helper->viewRenderer->setNoRender();
+   	$params=$this->_request->getParams();
+   	
+   	$params['success'] = true;
+   	
+   	$acd = new Application_Model_DbTable_AgenciaConexionDatos();
+   	
+   	$data = array(
+   			"id_agencia" => $params["id_agencia"],
+   			"nombre_bd" => $params["nombre_bd"],
+   			"host" => $params["host"],
+   			"puerto" => $params["puerto"],
+   			"observaciones_conexion" => $params["observaciones_conexion"],
+   			"data_source_name" => $params["data_source_name"],
+   			"id_producto" => $params["id_producto"]
+   	);
+   	$acd->insert($data);
+   	
+   	$this->_helper->json($params);
+   }
+
+   public function consultarDatosConexionAction(){
+	   	$this->_helper->layout()->disableLayout();
+	   	$this->_helper->viewRenderer->setNoRender();
+	   	$params=$this->_request->getParams();
+	   	
+	   	$params['success'] = true;
+	   	
+	   	$acd = new Application_Model_DbTable_AgenciaConexionDatos();
+	   	
+	   	$params['conexiones'] = $acd->fetchAll("id_agencia=".$params['id_agencia'],'id_agencia_conexion_datos')->toArray();
+	   	
+	   	$objProducto = new Application_Model_DbTable_Producto();
+	   	
+	   	foreach ( $params['conexiones']as  $key => $value) {
+	   		$result = $objProducto->obtenerProductoPorId($value['id_producto']);
+	   		$params['conexiones'][$key]['nombre_prod'] = $result['nombre_prod'];
+	   	}
+	   	
+	   	$this->_helper->json($params);
+   }
+ 
+   public function eliminarDatosConexionAction(){
+   	$this->_helper->layout()->disableLayout();
+   	$this->_helper->viewRenderer->setNoRender();
+   	$params=$this->_request->getParams();
+   	
+   	$params['success'] = true;
+   	
+   	$acd = new Application_Model_DbTable_AgenciaConexionDatos();
+   	
+   	$acd->delete("id_agencia_conexion_datos = ". $params['id_agencia_conexion_datos']);
+   	
+   	$params['conexiones'] = $acd->fetchAll("id_agencia=".$params['id_agencia'],'id_agencia_conexion_datos')->toArray();
+   	
+   	$objProducto = new Application_Model_DbTable_Producto();
+   	
+   	foreach ( $params['conexiones']as  $key => $value) {
+   		$result = $objProducto->obtenerProductoPorId($value['id_producto']);
+   		$params['conexiones'][$key]['nombre_prod'] = $result['nombre_prod'];
+   	}
+   	
+   	$this->_helper->json($params);
+   }
+   
+   
 }

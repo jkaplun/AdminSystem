@@ -29,6 +29,8 @@
 		                        <ul class="nav nav-tabs">
 		                            <li class="active"><a href="#tabGenerales" data-toggle="tab">Datos Generales</a></li>
 		                            <li><a href="#tabConfiguraciones" data-toggle="tab">Configuraciones</a></li>
+		                            <li><a href="#tabDatosConexion" data-toggle="tab">Datos de Conexión</a></li>
+		                            
 		                        </ul>
 		                </div>
 		                <div class="panel-body container-fluid">
@@ -258,26 +260,60 @@
 									        <?= $this->form->iatas5 ?>				
 										</div>
 									</div>	
-									<h4 class="h4Form">Datos de Conexión</h4>
-									<hr class="hrForm">
+		                        </div>	
+		                        <div class="tab-pane fade" id="tabDatosConexion">
 									<div class="row">
-										<div class="col-md-2">
-									        <?= $this->form->nombre_bd ?>				
+										<div class="col-md-12">
+											<table class="table">
+												<caption>Optional table caption.</caption>
+												<thead>
+													<tr>
+														<th>Id</th>
+														<th>Producto</th>
+														<th>Nombre de la BD</th>
+														<th>Host</th>
+														<th>Puerto</th>
+														<th>Data Source Name</th>
+														<th>Observaciones</th>
+														<th>Eliminar</th>
+													</tr>
+												</thead>
+												<tbody id="datos-de-conexiones">
+
+												</tbody>
+											</table>
 										</div>
-										<div class="col-md-2">
-									        <?= $this->form->host ?>				
+									</div>
+									<div class="row" id="form-agregar-conexion" style="padding: 15px">
+										<div class="row">
+											<div class="col-md-2">
+										        <?= $this->form->id_producto_d_c?>				
+											</div>
+											<div class="col-md-2">
+										        <?= $this->form->nombre_bd ?>				
+											</div>
+											<div class="col-md-2">
+										        <?= $this->form->host ?>				
+											</div>
+											<div class="col-md-1">
+										        <?= $this->form->puerto ?>				
+											</div>
+											<div class="col-md-2">
+										        <?= $this->form->data_source_name ?>				
+											</div>
+											<div class="col-md-3">
+										        <?= $this->form->observaciones_conexion ?>				
+											</div>
 										</div>
-										<div class="col-md-2">
-									        <?= $this->form->puerto ?>				
-										</div>
-										<div class="col-md-2">
-									        <?= $this->form->data_source_name ?>				
-										</div>
-										<div class="col-md-4">
-									        <?= $this->form->observaciones_conexion ?>				
+										<div class="row">
+											<div class="col-md-2">
+												<button type="button" class="btn btn-primary" onclick="agregarConexion()">Agregar Conexi&oacute;n</button>
+												<button type="button" class="btn btn-primary" onclick="actualizarConexion()">Actualizar Conexión</button>
+											</div>
 										</div>
 									</div>	
-		                        </div>	                        
+									
+		                        </div>	                         
 		                    </div>
 		                </div>
 		            </div>

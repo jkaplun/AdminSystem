@@ -132,7 +132,9 @@
             	<b>
             	<div class="row">
             		<div class="col-md-9">
-            			<center><?= $registro["nombre"] ?></center>
+            			<span  id='consulta-ordenes' class="btn btn-default" onClick="vinculo(<?= $registro['id_agencia'] ?>)">
+            			<?= $registro["nombre"] ?>
+            			</span>
             		</div>
             		<div class="col-md-3" align="right">
             			ID Orden Servicio: <?= $registro["id_orden_servicio"] ?>
