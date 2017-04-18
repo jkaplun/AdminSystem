@@ -539,6 +539,8 @@ function mostrarDatosDeConexiones(conexiones){
     	$("#form-agregar-conexion").hide();
     }
     
+	$("#div-edita-conexion").hide();
+	$("#div-agrega-conexion").show();
 }
 
 function eliminarDatosDeConexion(id_agencia_conexion_datos){
@@ -561,5 +563,73 @@ function eliminarDatosDeConexion(id_agencia_conexion_datos){
 
 
 function editarDatosDeConexion( id_agencia_conexion_datos , nombre_bd , id_producto , host , puerto , data_source_name , observaciones_conexion){
+	
 	console.log( id_agencia_conexion_datos +"-"+ nombre_bd +"-"+ id_producto +"-"+ host +"-"+ puerto +"-"+ data_source_name +"-"+ observaciones_conexion);
+	
+	$("#nombre_bd").val(nombre_bd);
+	$("#host").val(host);
+	$("#puerto").val(puerto);
+	$("#data_source_name").val(data_source_name);
+	$("#observaciones_conexion").val(observaciones_conexion);
+	$("#id_producto_d_c").val(id_producto);
+	$("#id_agencia_conexion_datos").val(id_agencia_conexion_datos);
+	
+	$("#div-edita-conexion").show();
+	$("#div-agrega-conexion").hide();
+	
+	
 } 
+
+function cancelarActualizarConexion(){
+	 $("#nombre_bd").val("");
+	  $("#host").val("");
+	  $("#puerto").val("");
+	  $("#data_source_name").val("");
+	  $("#observaciones_conexion").val("");
+	  $("#id_producto_d_c").val(3);
+	$("#div-edita-conexion").hide();
+	$("#div-agrega-conexion").show();
+}
+
+function actualizarConexion() {
+	
+	if ( $("#nombre_bd").val()=='' ) {
+		alert('Se requiere el nombre de la Base de Datos.');
+		return;
+	}
+	
+	var id_agencia = idAgenciaActual;
+	$.ajax({
+			url: path + "actualizar-datos-conexion",
+		  	method: "post",
+		  	dataType: "json",
+		  	data: {
+			  "nombre_bd" : $("#nombre_bd").val(),
+			  "host" : $("#host").val(),
+			  "puerto" : $("#puerto").val(),
+			  "data_source_name" : $("#data_source_name").val(),
+			  "observaciones_conexion" : $("#observaciones_conexion").val(),
+			  "id_producto" : $("#id_producto_d_c").val(),
+			  "id_agencia_conexion_datos" : $("#id_agencia_conexion_datos").val(),
+			  "id_agencia" : id_agencia }
+			  
+		})
+		.done(function(res) { 
+			if (res.success == true) {
+				 swal("Guardado", " ", "success"); 
+				  $("#nombre_bd").val("");
+				  $("#host").val("");
+				  $("#puerto").val("");
+				  $("#data_source_name").val("");
+				  $("#observaciones_conexion").val("");
+				  $("#id_producto_d_c").val(3);
+			} else {
+				 swal("Hubo un error", " ", "error"); 
+			}
+			consultaDatosConexion(id_agencia);
+	})// end ajax done 
+			.fail(function() {
+				swal("Error en la conexión.", " ", "error"); 
+	});
+	
+}

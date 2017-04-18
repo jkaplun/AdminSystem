@@ -481,5 +481,28 @@ class AgenciasController extends Zend_Controller_Action
    	$this->_helper->json($params);
    }
    
+
+   public function actualizarDatosConexionAction(){
+   	$this->_helper->layout()->disableLayout();
+   	$this->_helper->viewRenderer->setNoRender();
+   	$params=$this->_request->getParams();
+   	
+   	$params['success'] = true;
+   	
+   	$acd = new Application_Model_DbTable_AgenciaConexionDatos();
+   	
+   	$data = array(
+   			"nombre_bd" => $params["nombre_bd"],
+   			"host" => $params["host"],
+   			"puerto" => $params["puerto"],
+   			"observaciones_conexion" => $params["observaciones_conexion"],
+   			"data_source_name" => $params["data_source_name"],
+   			"id_producto" => $params["id_producto"]
+   	);
+   	$where = 'id_agencia_conexion_datos='.$params["id_agencia_conexion_datos"];
+   	$acd->update($data, $where);
+   	
+   	$this->_helper->json($params);
+   }
    
 }
