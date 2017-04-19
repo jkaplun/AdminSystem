@@ -510,9 +510,9 @@ function consultaDatosConexion(id_agencia){
  * Recive un json con las conexiones
  */
 function mostrarDatosDeConexiones(conexiones){
-	
+
 	$("#datos-de-conexiones").empty();
-    $.each(conexiones, function(key, value){  
+    $.each(conexiones, function(key, value){
     	$("#datos-de-conexiones").append(
     			"<tr><td>"+value.id_agencia_conexion_datos+"</td>" +
     			"<td>"+value.nombre_prod+"</td>" +
@@ -533,12 +533,12 @@ function mostrarDatosDeConexiones(conexiones){
     			'<button type="button" class="btn btn-default btn-xs" onclick="eliminarDatosDeConexion('+value.id_agencia_conexion_datos+')">Eliminar</button></td></tr>');
     });
     
-    if ( conexiones.length < 11) {
+    if ( conexiones.length < 10) {
     	$("#form-agregar-conexion").show();
     } else {
     	$("#form-agregar-conexion").hide();
     }
-    
+
 	$("#div-edita-conexion").hide();
 	$("#div-agrega-conexion").show();
 }
@@ -564,7 +564,7 @@ function eliminarDatosDeConexion(id_agencia_conexion_datos){
 
 function editarDatosDeConexion( id_agencia_conexion_datos , nombre_bd , id_producto , host , puerto , data_source_name , observaciones_conexion){
 	
-	console.log( id_agencia_conexion_datos +"-"+ nombre_bd +"-"+ id_producto +"-"+ host +"-"+ puerto +"-"+ data_source_name +"-"+ observaciones_conexion);
+//	console.log( id_agencia_conexion_datos +"-"+ nombre_bd +"-"+ id_producto +"-"+ host +"-"+ puerto +"-"+ data_source_name +"-"+ observaciones_conexion);
 	
 	$("#nombre_bd").val(nombre_bd);
 	$("#host").val(host);
@@ -576,19 +576,19 @@ function editarDatosDeConexion( id_agencia_conexion_datos , nombre_bd , id_produ
 	
 	$("#div-edita-conexion").show();
 	$("#div-agrega-conexion").hide();
-	
-	
+	$("#form-agregar-conexion").show();
 } 
 
 function cancelarActualizarConexion(){
-	 $("#nombre_bd").val("");
-	  $("#host").val("");
-	  $("#puerto").val("");
-	  $("#data_source_name").val("");
-	  $("#observaciones_conexion").val("");
-	  $("#id_producto_d_c").val(3);
+	$("#nombre_bd").val("");
+	$("#host").val("");
+	$("#puerto").val("");
+	$("#data_source_name").val("");
+	$("#observaciones_conexion").val("");
+	$("#id_producto_d_c").val(3);
 	$("#div-edita-conexion").hide();
 	$("#div-agrega-conexion").show();
+	consultaDatosConexion(idAgenciaActual);
 }
 
 function actualizarConexion() {
