@@ -96,6 +96,24 @@ class AgendaController extends Zend_Controller_Action{
 			$i++;
 			
 		}while ($i<7);
+		
+	//	echo "<pre>".print_r($agendaArray,true)."</pre>";
+		
+		$usuarios = array();
+		$agendaTabla = array();
+		
+		foreach ( $agendaArray  as $key => $value ) {
+			$agendaTabla[$key] = array();
+			foreach ( $value as $key2 => $value2 ){
+				$agendaTabla[$key][$value2['id_usuario_admin']][] = $value2;
+				$usuarios[$value2['id_usuario_admin']] = $value2['nombre'].' ' . $value2['apellido_paterno'];
+			}
+		}
+		
+	//	echo "<pre>".print_r($agendaTabla,true)."</pre>";die;
+		
+		$this->view->usuarios= $usuarios;
+		$this->view->agendaTabla= $agendaTabla;
 		$this->view->agendaArray = $agendaArray;
 		
 	}

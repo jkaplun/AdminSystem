@@ -152,7 +152,7 @@ class Application_Form_Agenda_Agenda extends Zend_Form{
     }
     
     public function isValid($params){
-    
+
     	$isValid = parent::isValid($params);
     
 	    $a = new Application_Model_DbTable_Agenda();

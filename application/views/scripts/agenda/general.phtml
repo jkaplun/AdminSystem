@@ -13,21 +13,133 @@
        <?php } ?>
       </tr>
     </thead>
-<tbody>
-      <tr>
-<?php  foreach ( $this->agendaArray as $key => $value ) { ?>
-        <td>
-        	<?php foreach($value as $val) { ?>
-        		<b>Ejecutivo:</b> <?= $val['nombre'] ?> <?= $val['apellido_paterno'] ?> <br>
-        		<b>Agencia:</b> <?= $val['nombre_agencia'] ?><br>
-        		<b>Hora Inicial:</b> <?= $val['hora_inicial'] ?><br>
-        		<b>Hora Final:</b> <?= $val['hora_final'] ?><br>
-        		<b>Contacto:</b> <?= $val['contacto'] ?><br>
-        		<b>Motivo:</b> <?= $val['motivo'] ?><br>
-        		<hr>
-        	<?php } ?>
-        </td>
-<?php } ?>
-      </tr>
-</tbody>
+	<tbody>
+	      <tr>
+	<?php  foreach ( $this->agendaArray as $key => $value ) { ?>
+	        <td>
+	        	<?php foreach($value as $val) { ?>
+	        		<b>Ejecutivo:</b> <?= $val['nombre'] ?> <?= $val['apellido_paterno'] ?> <br>
+	        		<b>Agencia:</b> <?= $val['nombre_agencia'] ?><br>
+	        		<b>Hora Inicial:</b> <?= $val['hora_inicial'] ?><br>
+	        		<b>Hora Final:</b> <?= $val['hora_final'] ?><br>
+	        		<b>Contacto:</b> <?= $val['contacto'] ?><br>
+	        		<b>Motivo:</b> <?= $val['motivo'] ?><br>
+	        		<hr>
+	        	<?php } ?>
+	        </td>
+	<?php } ?>
+	      </tr>
+	</tbody>
+</table>
+
+<table class="table table-bordered">
+	<thead>
+	<tr>
+		<th></th>
+		<th colspan="25" align="center"> Hora</th>
+	</tr>
+	<tr>
+		<th width="50px">Ejecutivo</th>
+		<th class="celda-tabla" >8:00</th>
+		<th class="celda-tabla" ></th>
+		<th class="celda-tabla" >9:00</th>
+		<th class="celda-tabla" ></th>
+		<th class="celda-tabla" >10:00</th>
+		<th class="celda-tabla" ></th>
+		<th class="celda-tabla" >11:00</th>
+		<th class="celda-tabla" ></th>
+		<th class="celda-tabla" >12:00</th>
+		<th class="celda-tabla" ></th>
+		<th class="celda-tabla" >13:00</th>
+		<th class="celda-tabla" ></th>
+		<th class="celda-tabla" >14:00</th>
+		<th class="celda-tabla" ></th>
+		<th class="celda-tabla" >15:00</th>
+		<th class="celda-tabla" ></th>
+		<th class="celda-tabla" >16:00</th>
+		<th class="celda-tabla" ></th>
+		<th class="celda-tabla" >17:00</th>
+		<th class="celda-tabla" ></th>
+		<th class="celda-tabla" >18:00</th>
+		<th class="celda-tabla" ></th>
+		<th class="celda-tabla" >19:00</th>
+		<th class="celda-tabla" ></th>
+		<th class="celda-tabla" >20:00</th>
+	</tr>
+		
+	</thead>
+	<tbody>
+		<?php  foreach ( $this->agendaTabla as $key => $value ) { ?>
+			<tr>
+				<td colspan="24" align="center" style="background-color: #F5BCA9"><b>
+		<?php 
+			$fecha = new Zend_Date($key);
+        	$fechaString = $fecha->toString('EEEE d MMMM yyyy');
+        ?>
+        <?= $fecha->toString('EEEE').' ' ?>
+        
+        <?= $fecha->toString('d MMMM yyyy') ?>
+				
+				
+				</b></td>
+			</tr>
+	        	<?php foreach( $value as $key2 => $val2 ) { 
+	        		$horasArray = array(
+		        		"08:00" =>"08:00",
+		        		"08:30" =>"08:30",
+		        		"09:00" =>"09:00",
+		        		"09:30" =>"09:30",
+		        		"10:00" =>"10:00",
+		        		"10:30" =>"10:30",
+		        		"11:00" =>"11:00",
+		        		"11:30" =>"11:30",
+		        		"12:00" =>"12:00",
+		        		"12:30" =>"12:30",
+		        		"13:00" =>"13:00",
+		        		"13:30" =>"13:30",
+		        		"14:00" =>"14:00",
+		        		"14:30" =>"14:30",
+		        		"15:00" =>"15:00",
+		        		"15:30" =>"15:30",
+		        		"16:00" =>"16:00",
+		        		"16:30" =>"16:30",
+		        		"17:00" =>"17:00",
+		        		"17:30" =>"17:30",
+		        		"18:00" =>"18:00",
+		        		"18:30" =>"18:30",
+		        		"19:00" =>"19:00",
+		        		"19:30" =>"19:30",
+		        		"20:00" =>"20:00"
+		        	);
+		        ?>
+		    <tr>
+				<td><b><?= $this->usuarios[$key2] ?></b></td>
+				<?php 
+					$tieneCitaColor = '';
+					foreach ( $horasArray as $value3) {
+					
+						foreach ( $val2 as $key4 => $value4) {
+							$tieneCita = '';
+							
+							if ( $value3 == substr ( $value4['hora_inicial'],11,5) ) {
+								$tieneCita = 'Inicia';
+								$tieneCitaColor = '#FAAC58';
+								break;
+							} else {
+								$tieneCita = 'No' ;
+							}
+							if ( $value3 == substr ( $value4['hora_final'],11,5) ) {
+								$tieneCita = 'Cierra';
+								$tieneCitaColor = '';
+								break;
+							} else {
+								$tieneCita = 'No' ;
+							}
+		        		} ?>
+					<td style="background-color: <?= $tieneCitaColor?>">&nbsp;</td>					
+				<?php } ?>
+			</tr>
+	        <?php } ?>
+	<?php } ?>
+	</tbody>
 </table>
