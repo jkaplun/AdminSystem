@@ -1,0 +1,39 @@
+<a class="btn btn-default" href="<?= $this->baseUrl() ?>/agencia-admin/" role="button">Regresar</a>
+
+<div class="row">
+	<div class="col-md-12">
+		<table class="table">
+			<caption>Historico de Actualizaciones.</caption>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Agencia</th>
+					<th>Producto</th>
+					<th>Usuario Solicita</th>
+					<th>Fecha solicitud</th>
+					<th>Fecha Cierre</th>
+					<th>Usuario Atiende</th>
+					<th>Versión</th>
+					<th>Archivo</th>
+					<th>Descripcion</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ( $this->actualizaciones as $values ) {	?>
+				<tr>
+					<th scope="row"><?= $values['id_update'] ?></th>
+					<td><?= $values['nombre'] ?></td>
+					<td><?= $values['nombre_prod'] ?></td>
+					<td><?= $values['nombre_usuario_solicita'] ?></td>
+					<td><?= $values['fecha_solicitud'] ?></td>
+					<td><?= $values['fecha_cierre'] ?></td>
+					<td><?= $values['nombre_usuario_cierra'] ?></td>
+					<td><?= $values['version_update'] ?></td>
+					<td><?= $values['archivo_update'] ?></td>
+					<td><?= $values['descripcion'] ?></td>
+				</tr>
+				<?php } ?>
+			</tbody>
+		</table>
+	</div>
+</div>

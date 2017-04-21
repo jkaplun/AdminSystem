@@ -13,11 +13,9 @@
                 <li><a  id="tabUsuariosAgencia" href="#tabUsuarios" data-toggle="tab">Usuarios de Agencia</a></li>
                 <li><a href="#tabPolizas" data-toggle="tab">P&oacute;lizas</a></li>
               	<li><a href="#tabLicencias" data-toggle="tab">Productos</a></li>
-				<li class="dropdown">
-					<a href="#tabFoliosFE" data-toggle="tab" >Facturaci&oacute;n Electr&oacute;nica
-					</a>
-				</li>
+				<li><a href="#tabFoliosFE" data-toggle="tab">Facturaci&oacute;n Electr&oacute;nica</a></li>
                 <li><a href="#tabObservaciones" data-toggle="tab">Observaciones</a></li>
+                <li><a href="#tabHistorialActualizaciones" data-toggle="tab">Historial de Actualizaciones</a></li>
             </ul>
     </div>
     <div class="panel-body">
@@ -186,6 +184,35 @@
 					</div>
 				</form>
 			</div>
+	    	<div class="tab-pane fade" id="tabHistorialActualizaciones">
+				
+				<div class="row">
+						<div class="col-md-12">
+							<table class="table">
+							<caption>Historico de Actualizaciones.</caption>
+							<thead>
+							<tr>
+							<th>Id</th>
+							<th>Agencia</th>
+							<th>Producto</th>
+							<th>Usuario Solicita</th>
+							<th>Fecha solicitud</th>
+							<th>Fecha Cierre</th>
+							<th>Usuario Atiende</th>
+							<th>Versión</th>
+							<th>Archivo</th>
+							<th>Descripcion</th>
+							</tr>
+							</thead>
+							<tbody id="tabla-actualizaciones">
+							</tbody>
+							</table>
+						</div>
+					</div>		
+			</div>			
+
+			
+			
 			<div class="tab-pane fade" id="tabFoliosFE">
 			<div class="panel-body">
 				<form id="config-CFDI-Pack">

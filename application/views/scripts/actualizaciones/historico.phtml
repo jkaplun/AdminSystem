@@ -3,13 +3,9 @@
 <link rel="stylesheet" type="text/css" href="public/css/daterangepicker.css">
 <script type="text/javascript" src="public/js/moment.js"></script>
 <script type="text/javascript" src="public/js/daterangepicker.js"></script>
-
-
 <form class="form-inline" method="get" name="filtroform" id="filtroform">
 <?= $this->formUpdate->fecha_de ?>         
 <?= $this->formUpdate->fecha_hasta ?>
-
-
 <div class="row">
 	<div class="col-md-2">
 		<?= $this->formUpdate->id_agencia ?>
@@ -65,7 +61,6 @@
 		</table>
 	</div>
 </div>
-
 <script>
 $(function() {
     $('input[name="daterange"]').daterangepicker({ 
@@ -101,12 +96,9 @@ $(function() {
 	        "Diciembre"
 	    ]
     }, function(start, end, label) {
-
        // console.log("New date range selected: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
 		$("#fecha_de").val(start.format('YYYY-MM-DD'));
 		$("#fecha_hasta").val(end.format('YYYY-MM-DD'));
-
-      
     });
 
     $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
@@ -121,7 +113,5 @@ $(function() {
         
     });
     
-    
 });
-
 </script>

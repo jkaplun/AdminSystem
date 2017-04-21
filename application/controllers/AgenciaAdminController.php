@@ -132,4 +132,15 @@ class AgenciaAdminController extends Zend_Controller_Action
     	$this->_redirect('/agencia-admin/index/status/1');    	
     }
     
+    
+    public function historicoActualizacionesAction(){
+    	
+    	$params=$this->_request->getParams();
+    	$params['id_agencia']= $_SESSION['Zend_Auth']['storage']['id_agencia'];
+    	
+    	$a = new Application_Model_DbTable_Actualizaciones();
+    	$this->view->actualizaciones = $a->actualizacionesTodas($params);
+    
+    	
+    }
 }

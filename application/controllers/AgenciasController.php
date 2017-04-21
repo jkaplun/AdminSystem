@@ -308,6 +308,12 @@ class AgenciasController extends Zend_Controller_Action
         	$datosAgencia[0]['conexiones'][$key]['nombre_prod'] = $result['nombre_prod'];
         }
         
+        $a = new Application_Model_DbTable_Actualizaciones();
+        
+        $actualizaciones = $a->actualizacionesTodas($params);
+        
+        $datosAgencia[0]['actualizaciones'] = $actualizaciones;
+        
         $this->_helper->json($datosAgencia[0]);
 
     }

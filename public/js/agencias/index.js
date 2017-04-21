@@ -237,6 +237,7 @@ function consultarAgencia(id_agencia){
 			mostarDatosAgencia(res);
 			mostrarDatosDeConexiones(res.conexiones)
 			editarAgenciaForm(res);
+			mostrarActualizaciones(res.actualizaciones)
   })// end ajax done 
 		.fail(function() {
     	swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" );
@@ -635,5 +636,28 @@ function actualizarConexion() {
 			.fail(function() {
 				swal("Error en la conexión.", " ", "error"); 
 	});
-	
+
 }
+
+/*
+ * 
+ * 
+ */
+function mostrarActualizaciones(actualizaciones){
+	$("#tabla-actualizaciones").empty();
+    $.each(actualizaciones, function(key, value){
+    	$("#tabla-actualizaciones").append(
+    			"<tr><td>"+value.id_update+"</td>" +
+    			"<td>"+value.nombre+"</td>" +
+    			"<td>"+value.nombre_prod+"</td>" +
+    			"<td>"+value.nombre_usuario_solicita+"</td>" +
+    			"<td>"+value.fecha_solicitud+"</td>" +
+    			"<td>"+value.fecha_cierre+"</td>" +
+    			"<td>"+value.nombre_usuario_cierra+"</td>" +
+    			"<td>"+value.version_update+"</td>" +
+    			"<td>"+value.archivo_update+"</td>" +
+    			"<td>"+value.descripcion+"</td>" +
+    			'</tr>');
+    });
+}
+
