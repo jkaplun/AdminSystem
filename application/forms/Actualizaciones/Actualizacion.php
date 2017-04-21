@@ -59,31 +59,36 @@ class Application_Form_Actualizaciones_Actualizacion extends Zend_Form{
     					'name' => 'titulo_update',
     					'label' => 'Título:',
     					'placeholder' => 'Título',
-    					'maxlength' => 100
+    					'maxlength' => 100,
+    					'valor' => ''
     			),
     			array(
     					'name' => 'version_update',
     					'label' => 'Vérsion:',
     					'placeholder' => 'Vérsión',
-    					'maxlength' => 10
+    					'maxlength' => 10,
+    					'valor' => ''
     			),
     			array(
     					'name' => 'http_update',
     					'label' => 'HTTP:',
     					'placeholder' => 'HTTP://',
-    					'maxlength' => 1000
+    					'maxlength' => 1000,
+    					'valor' => 'http://www.icaav.com.mx'
     			),
     			array(
     					'name' => 'path_update',
     					'label' => 'Ruta:',
     					'placeholder' => 'Ruta',
-    					'maxlength' => 1000
+    					'maxlength' => 1000,
+    					'valor' => '/dominios/sistemasmig/downloads/icaavwin/'
     			),
     			array(
     					'name' => 'archivo_update',
     					'label' => 'Nombre del Archivo:',
     					'placeholder' => 'Nombre del Archivo',
-    					'maxlength' => 400
+    					'maxlength' => 400,
+    					'valor' => ''
     			),
     	);
 
@@ -134,7 +139,8 @@ class Application_Form_Actualizaciones_Actualizacion extends Zend_Form{
     	->setAttrib("class","form-control")
     	->setAttrib("autocomplete","off")
     	->setAttrib("placeholder",$values['placeholder'])
-    	->setAttrib("maxlength",$values['maxlength']);
+    	->setAttrib("maxlength",$values['maxlength'])
+    	->setValue($values['valor']);
     	
     	$this->addElement($element);
     }

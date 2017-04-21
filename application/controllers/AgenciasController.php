@@ -183,9 +183,10 @@ class AgenciasController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
-        //echo '<pre>';print_r($params);echo '</pre>';
         $idAgencia=$params['id_agencia'];
         $data['observaciones']=$params['observaciones'];
+        $data['observaciones_internas']=$params['observaciones_internas'];
+        
         //  se actualiza en la base de datos la clave de la p�liza
         $where = "id_agencia= {$idAgencia}";
         $this->agencia->update($data, $where);

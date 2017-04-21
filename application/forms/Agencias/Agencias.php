@@ -445,7 +445,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         // Observaciones
         $observaciones_agencia = new Zend_Form_Element_TextArea('observaciones_agencia');
         $observaciones_agencia
-        ->removeDecorator('label')
+        ->setLabel("Observaciones del Cliente:")
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
@@ -453,6 +453,21 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("maxlength","256")
         ->setAttrib("rows","10");
         $this->addElement($observaciones_agencia);
+        
+        
+        // Observaciones
+        $element = new Zend_Form_Element_TextArea('observaciones_internas');
+        $element
+        ->setLabel("Observaciones Internas (Para Uso del Area de Soporte):")
+        ->removeDecorator('HtmlTag')
+        ->setAttrib("class","form-control input-sm")
+        ->setAttrib("autocomplete","off")
+        ->setAttrib("placeholder","Observaciones de la Agencia")
+        ->setAttrib("maxlength","256")
+        ->setAttrib("rows","10");
+        $this->addElement($element);
+        
+        
 
         
         $usuarioAdmin = new Application_Model_DbTable_UsuarioAdmin();

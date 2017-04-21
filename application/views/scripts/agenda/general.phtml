@@ -1,37 +1,3 @@
- <table class="table">
-    <thead>
-      <tr>
-      <?php  foreach ( $this->agendaArray as $key => $value ) { ?>
-        <th width="15%"><?php
-        $fecha = new Zend_Date($key);
-        $fechaString = $fecha->toString('EEEE d MMMM yyyy');
-        ?>
-        <?= $fecha->toString('EEEE') ?>
-        <br>
-        <?= $fecha->toString('d MMMM yyyy') ?>
-        </th>
-       <?php } ?>
-      </tr>
-    </thead>
-	<tbody>
-	      <tr>
-	<?php  foreach ( $this->agendaArray as $key => $value ) { ?>
-	        <td>
-	        	<?php foreach($value as $val) { ?>
-	        		<b>Ejecutivo:</b> <?= $val['nombre'] ?> <?= $val['apellido_paterno'] ?> <br>
-	        		<b>Agencia:</b> <?= $val['nombre_agencia'] ?><br>
-	        		<b>Hora Inicial:</b> <?= $val['hora_inicial'] ?><br>
-	        		<b>Hora Final:</b> <?= $val['hora_final'] ?><br>
-	        		<b>Contacto:</b> <?= $val['contacto'] ?><br>
-	        		<b>Motivo:</b> <?= $val['motivo'] ?><br>
-	        		<hr>
-	        	<?php } ?>
-	        </td>
-	<?php } ?>
-	      </tr>
-	</tbody>
-</table>
-
 <table class="table table-bordered">
 	<thead>
 	<tr>
@@ -141,5 +107,40 @@
 			</tr>
 	        <?php } ?>
 	<?php } ?>
+	</tbody>
+</table>
+
+<hr>
+ <table class="table">
+    <thead>
+      <tr>
+      <?php  foreach ( $this->agendaArray as $key => $value ) { ?>
+        <th width="15%"><?php
+        $fecha = new Zend_Date($key);
+        $fechaString = $fecha->toString('EEEE d MMMM yyyy');
+        ?>
+        <?= $fecha->toString('EEEE') ?>
+        <br>
+        <?= $fecha->toString('d MMMM yyyy') ?>
+        </th>
+       <?php } ?>
+      </tr>
+    </thead>
+	<tbody>
+	      <tr>
+	<?php  foreach ( $this->agendaArray as $key => $value ) { ?>
+	        <td>
+	        	<?php foreach($value as $val) { ?>
+	        		<b>Ejecutivo:</b> <?= $val['nombre'] ?> <?= $val['apellido_paterno'] ?> <br>
+	        		<b>Agencia:</b> <?= $val['nombre_agencia'] ?><br>
+	        		<b>Hora Inicial:</b> <?= $val['hora_inicial'] ?><br>
+	        		<b>Hora Final:</b> <?= $val['hora_final'] ?><br>
+	        		<b>Contacto:</b> <?= $val['contacto'] ?><br>
+	        		<b>Motivo:</b> <?= $val['motivo'] ?><br>
+	        		<hr>
+	        	<?php } ?>
+	        </td>
+	<?php } ?>
+	      </tr>
 	</tbody>
 </table>

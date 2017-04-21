@@ -203,7 +203,11 @@ function submitFormUpdateObservaciones(){
 	$.ajax({
 		  url: path + "observaciones",
 		  method: "post",
-		  data:$("#form_agregar_agencia").serialize()+"&id_agencia="+$("#select_agencias").val()+"&observaciones="+$("#observaciones_agencia").val(),
+		  data:{
+			  id_agencia: idAgenciaActual,
+			  observaciones : $("#observaciones_agencia").val() ,
+			  observaciones_internas : $("#observaciones_internas").val() ,
+				},
 		  dataType: "json"
 		})
 		.done(function(res) { 

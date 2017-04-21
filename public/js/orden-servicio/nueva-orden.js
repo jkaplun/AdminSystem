@@ -158,8 +158,8 @@ function mostarDatosAgencia(datosAgencia){
 	$("#telefono1-info").html(datosAgencia.tel1);
 	$("#telefono2-info").html(datosAgencia.tel2);
 	
- 	$("#observaciones_agencia-info").html(datosAgencia.observaciones);
-
+ 	$("#observaciones").val(datosAgencia.observaciones);
+ 	
  	if(datosAgencia.tel1 != null && datosAgencia.tel1.length != 0){
  		$("#telefono1-info").html(datosAgencia.tel1);
  		$('#te1').show();
