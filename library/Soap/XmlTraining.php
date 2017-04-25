@@ -1,7 +1,7 @@
 <?php
 /**
  * Xml
-* @author Juan Garfias Vázquez
+* @author Juan Garfias Vï¿½zquez
 * Create July 17, 2014
 */
 Class XmlTraining{
@@ -14,55 +14,42 @@ Class XmlTraining{
 	public function Execute($xmlRequest){
 		
 		// Initializing the params array to sent it to the information Hotel model
-		$params = array();
 		$xmlResponse = "";
 		$xmlClass = new Xml();
-
 		$validate = $xmlClass->XmlValidate($xmlRequest);
-
-		if($validate !== TRUE){
-			//return $validate;
-		}
 
 		$xml = new DOMDocument();
 		$xml->loadXML($xmlRequest);
-		 
+		
 		$responseElement = $xml->documentElement;
 		$path = new DOMXPath($xml);
-		 
+		$values = array();
+		$xmlAcceso = new Application_Model_DbTable_UsuarioWebService();
+		
+		$getCredentials = $path->query('//XmlTrainingRequest', $responseElement);
+
+		// Validate Login
+		$values['user'] = $getCredentials->item(0)->getAttribute('user');
+		$values['pwd']= $getCredentials->item(0)->getAttribute('password');
+
+		$dataAccess = $xmlAcceso->getUser($values)[0];
+		
+		if ($dataAccess['activo'] != 1) {
+			// Error 1031
+			$xmlResponse = $xmlClass->XmlError(1031);
+			return $xmlResponse;
+		}
+		// Fin Validacion de usuario.
+		
 		$getinfo = $path->query('//nombre', $responseElement);
 		$nombre = $getinfo->item(0)->textContent;
-		
-	/*	$xmlResponse = "<?xml version='1.0' encoding='UTF-8'?>\n";
-		$xmlResponse .= "<TrainingResponse>\n";
-		$xmlResponse.= "<nombre>$nombre</nombre>\n";
-		$xmlResponse .= "</TrainingResponse>\n";
-		
-		return $xmlResponse; */
-		// User
-//		$user = $getinfo->item(0)->getAttribute('user');
-		 
-//		$objLanguage = $path->query('//BookingHotelRequest/Language', $responseElement);
-//		$lang = $objLanguage->item(0)->textContent;
-		
-		
-		$trainingArray['errortext']='';
-		// Making the Error response structure
-		if($trainingArray['errortext'] != ''){
-			$xmlResponse = "<?xml version='1.0' encoding='UTF-8'?>\n";
-			$xmlResponse .= "<TrainingResponse>\n";
-			$xmlResponse .= "<TrainingResponse>Error prueba</TrainingResponse>\n";
-			$xmlResponse .= "</TrainingResponse>";
-			//return  $xmlResponse;
-		}
 
 		// Making the response structure
-		$xmlResponse = "<?xml version='1.0' encoding='UTF-8'?>\n";
-		$xmlResponse .= "<TrainingResponse>\n";
-		$xmlResponse .= "<prueba>XML de entrenamiento a nombre de ".$nombre." El mero mero!!!!</prueba>\n";
-		$xmlResponse .= "</TrainingResponse>";
+		$xmlResponse = "<?xml version='1.0' encoding='UTF-8'?>
+							<TrainingResponse>
+							<prueba>XML de entrenamiento a nombresito de ".$nombre." El mero mero!!!!</prueba>
+						</TrainingResponse>";
 
 		return  $xmlResponse;
 	}
 }
-?>

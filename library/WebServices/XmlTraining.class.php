@@ -15,10 +15,10 @@ class xmltraining{
 	public $timeOut		= 60;		// Timeout: Ensure a 5 second socket timeout to prevent lockups
 		
 	function XMLBodyRequest(){
-		$request = "<?xml version='1.0' encoding='UTF-8'?>\n";
-		$request .= "<XmlTrainingRequest>\n";
-		$request .= "<nombre>Carlitos</nombre>\n";
-		$request .= "</XmlTrainingRequest>";
+		$request = "<?xml version='1.0' encoding='UTF-8'?>
+					<XmlTrainingRequest user='icaav' password='m1G#!c44V'>
+						<nombre>Carlitos</nombre>
+					</XmlTrainingRequest>";
 		//echo "$request";die;
 		return $request;
 	}
@@ -38,7 +38,6 @@ class xmltraining{
 		/**For debugging purposes*/
 		header ("Content-Type:text/xml");
 		echo $responseDoc->SaveXML(); exit;
-
 
 		return  ;
 	}
