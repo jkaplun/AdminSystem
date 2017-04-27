@@ -137,7 +137,7 @@ function agregarProductoEnTabla(res){
  		       productos_todos[res.id_producto].nombre_prod, 
  		       res.numero_licencias_table, 
  		       res.estatus_table, 
- 		       "x"
+ 		      boton
         			];
 
         var rowNode = productoTable
