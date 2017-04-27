@@ -24,11 +24,11 @@ Class XmlTraining{
 		$responseElement = $xml->documentElement;
 		$path = new DOMXPath($xml);
 		$values = array();
-		$xmlAcceso = new Application_Model_DbTable_UsuarioWebService();
 		
-		$getCredentials = $path->query('//XmlTrainingRequest', $responseElement);
-
+		$xmlName = 'XmlTrainingRequest';
 		// Validate Login
+		$getCredentials = $path->query('//'.$xmlName, $responseElement);
+		$xmlAcceso = new Application_Model_DbTable_UsuarioWebService();
 		$values['user'] = $getCredentials->item(0)->getAttribute('user');
 		$values['pwd']= $getCredentials->item(0)->getAttribute('password');
 

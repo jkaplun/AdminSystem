@@ -75,4 +75,19 @@ Class SoapController extends Zend_Controller_Action
     	print_r ($xmlResponse);
     }
 
+    public function getcompilationvaluesAction() {
+
+    	ini_set("soap.wsdl_cache_enabled", "0");
+    	$this->_helper->Layout->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	
+    	$xml_post = file_get_contents('php://input');
+    	
+    	// Get WSDL URI
+    	$wsdl_url = $this->getWSDL_URI();
+    	$client = new Zend_Soap_Client($wsdl_url,  array('soap_version' => SOAP_1_2));
+    	
+    	$xmlResponse = $client->getCompilationValues($xml_post);
+    	print_r ($xmlResponse);
+    }
 }

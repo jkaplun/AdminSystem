@@ -22,6 +22,22 @@ Class Webservice
 	
 		return $xmlResponse;
 	}
+	
+	/**
+	 * Get configuration values for the icaav compilation.
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 */
+	public function getCompilationValues($xmlRequest) {
+		$classNameFile='GetCompilationValues';
+		require_once $classNameFile.".php";
+		$webService = new $classNameFile();
+		$xmlResponse = $webService->Execute($xmlRequest);
+		
+		return $xmlResponse;
+	}
 }
 
 ?>
