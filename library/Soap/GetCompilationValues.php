@@ -55,10 +55,6 @@ Class GetCompilationValues{
 		$getinfo = $path->query('//ClientPassword', $responseElement);
 		$array['client_pasw'] = $getinfo->item(0)->textContent;
 		
-		$file = fopen('C:/logs/arreglo_'.uniqid().'.txt', "w");
-		fwrite($file, print_r($array,true));
-		fclose($file);
-		
 		$admin = new Application_Model_DbTable_StoredProcedures();
 		$result = $admin->getCompilationValues($array);
 		
