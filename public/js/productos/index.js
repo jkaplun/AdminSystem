@@ -116,71 +116,28 @@ function submitFormProducto(){
  
 
 function agregarProductoEnTabla(res){
-      // console.log("entrando a agregarUsuarioAgenciaEnTabla"); 
-      // var frontEndId = Object.keys(Productos).length + 1; 
-        var productoTable = $('#dataTable-productos-adquiridos').DataTable();   
-        var info = productoTable.page.info(); 
-       // console.log(res);
 
-        var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#modalNuevoProducto" value='+ res.id_producto +   
-        ' onclick="datosFormProducto('+ res.id_producto +  ')" >' +  // 
-        '<i class="fa fa-info-circle"></i>'+  
-        '</button>' ;  
-    
+	var productoTable = $('#dataTable-productos-adquiridos').DataTable();   
+	var info = productoTable.page.info(); 
+	
+	var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#modalNuevoProducto" value='+ res.id_producto +   
+	' onclick="datosFormProducto('+ res.id_producto +  ')" >' +  // 
+	'<i class="fa fa-info-circle"></i>'+  
+	'</button>' ;  
 
-        var id_producto_row = "idProductoRow"+res.id_producto;
-       // borrar despues 
-        if(ajaxActionProducto=="agregar" || ajaxActionProducto=="productosdisponiblesadquiridosporidagencia"){ 
-			var data = [
- 
- 		       res.id_producto,
- 		       productos_todos[res.id_producto].nombre_prod, 
- 		       res.numero_licencias_table, 
- 		       res.estatus_table, 
- 		      boton
-        			];
+	var id_producto_row = "idProductoRow"+res.id_producto;
 
-        var rowNode = productoTable
-			    .row.add( data )
-			    .draw()
-			    .node();
-			 
-			$( rowNode ).attr('id', id_producto_row); ;
+	var data = [res.id_producto, productos_todos[res.id_producto].nombre_prod, res.numero_licencias_table, res.estatus_table, boton];
+	var rowNode = productoTable.row.add( data ).draw().node();
+	$( rowNode ).attr('id', id_producto_row); ;
+	$('#'+id_producto_row+' td:last-child').html(boton);  
+	$('#'+id_producto_row+' td:last-child').attr('id', "editarProductoBtn"+res.id_producto); 
+	$("#id_producto_"+res.id_producto).hide();
 
-        $('#'+id_producto_row+' td:last-child').html(boton);  
-        $('#'+id_producto_row+' td:last-child').attr('id', "editarProductoBtn"+res.id_producto); 
-
-
-        $("#id_producto_"+res.id_producto).hide();
-
-
-
-        }else{  //  ajaxActionProducto=="editar"
- 
-            //var id_Producto_row = "idProductoRow"+res.id_Producto;
-            productoTable.row( $("#"+id_producto_row) ).data([
-            	 res.id_producto, productos_todos[res.id_producto].nombre_prod, res.numero_licencias, res.estatus, "x"
-            						]).draw();
-            //console.log( ProductoTable.row( this ).data("x","x","x","x","x","x","x","x","x") );
-            productoTable.page(info.page).draw( 'page' );  
-    
-
-          $("#"+id_producto_row + " td:last-child").html(boton);  
-
-
-
-        } 
-
-      
-
-          if(ajaxActionProducto=="agregar" || ajaxActionProducto=="actualizar" ) {
-               $('#modalNuevoProducto').modal('toggle'); 
-             //$('#').modal('modalNuevoProducto');  
-               //$(".frontEndIdColumn").hide();
-          }
-           
+	if(ajaxActionProducto=="agregar" || ajaxActionProducto=="actualizar" ) {
+		$('#modalNuevoProducto').modal('toggle'); 
+	}
           // ocultar front-end-id
-          //$(".frontEndIdProducto").hide();  
 
 } // end function agregarUsuarioAgenciaEnTabla(res){ 
  
