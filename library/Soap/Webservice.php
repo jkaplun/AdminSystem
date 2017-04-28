@@ -38,6 +38,71 @@ Class Webservice
 		
 		return $xmlResponse;
 	}
+	
+	/**
+	 * Get invoice values for the 'timbrado' with EDX
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 */
+	public function addUsedFolios($xmlRequest) {
+		$classNameFile='AddUsedFolios';
+		require_once $classNameFile.".php";
+		$webService = new $classNameFile();
+		$xmlResponse = $webService->Execute($xmlRequest);
+		
+		return $xmlResponse;
+	}
+	
+	/**
+	 * Get search of avaiable folios for Icaav.
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 */
+	public function availableFolios($xmlRequest) {
+		$classNameFile='AvailableFolios';
+		require_once $classNameFile.".php";
+		$webService = new $classNameFile();
+		$xmlResponse = $webService->Execute($xmlRequest);
+		
+		return $xmlResponse;
+	}
+	
+	/**
+	 * Get invoice values for the 'timbrado' with EDX
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 */
+	public function foliosPerMonth($xmlRequest) {
+		$classNameFile='FoliosPerMonth';
+		require_once $classNameFile.".php";
+		$webService = new $classNameFile();
+		$xmlResponse = $webService->Execute($xmlRequest);
+		
+		return $xmlResponse;
+	}
+	
+	
+	/**
+	 * Update the number of folios used from icaav to the admin.
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 */
+	public function syncFolios($xmlRequest) {
+		$classNameFile='SyncFolios';
+		require_once $classNameFile.".php";
+		$webService = new $classNameFile();
+		$xmlResponse = $webService->Execute($xmlRequest);
+		
+		return $xmlResponse;
+	}
 }
 
 ?>

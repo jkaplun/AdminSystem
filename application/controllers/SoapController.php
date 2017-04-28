@@ -90,4 +90,68 @@ Class SoapController extends Zend_Controller_Action
     	$xmlResponse = $client->getCompilationValues($xml_post);
     	print_r ($xmlResponse);
     }
+    
+    public function addusedfoliosAction() {
+    	
+    	ini_set("soap.wsdl_cache_enabled", "0");
+    	$this->_helper->Layout->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	
+    	$xml_post = file_get_contents('php://input');
+    	
+    	// Get WSDL URI
+    	$wsdl_url = $this->getWSDL_URI();
+    	$client = new Zend_Soap_Client($wsdl_url,  array('soap_version' => SOAP_1_2));
+    	
+    	$xmlResponse = $client->addUsedFolios($xml_post);
+    	print_r ($xmlResponse);
+    }
+    
+    public function availablefoliosAction() {
+    	
+    	ini_set("soap.wsdl_cache_enabled", "0");
+    	$this->_helper->Layout->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	
+    	$xml_post = file_get_contents('php://input');
+    	
+    	// Get WSDL URI
+    	$wsdl_url = $this->getWSDL_URI();
+    	$client = new Zend_Soap_Client($wsdl_url,  array('soap_version' => SOAP_1_2));
+    	
+    	$xmlResponse = $client->availableFolios($xml_post);
+    	print_r ($xmlResponse);
+    }
+    
+    public function foliospermonthAction() {
+    	
+    	ini_set("soap.wsdl_cache_enabled", "0");
+    	$this->_helper->Layout->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	
+    	$xml_post = file_get_contents('php://input');
+    	
+    	// Get WSDL URI
+    	$wsdl_url = $this->getWSDL_URI();
+    	$client = new Zend_Soap_Client($wsdl_url,  array('soap_version' => SOAP_1_2));
+    	
+    	$xmlResponse = $client->foliosPerMonth($xml_post);
+    	print_r ($xmlResponse);
+    }
+    
+    public function syncfoliosAction() {
+    	
+    	ini_set("soap.wsdl_cache_enabled", "0");
+    	$this->_helper->Layout->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	
+    	$xml_post = file_get_contents('php://input');
+    	
+    	// Get WSDL URI
+    	$wsdl_url = $this->getWSDL_URI();
+    	$client = new Zend_Soap_Client($wsdl_url,  array('soap_version' => SOAP_1_2));
+    	
+    	$xmlResponse = $client->syncFolios($xml_post);
+    	print_r ($xmlResponse);
+    }
 }
