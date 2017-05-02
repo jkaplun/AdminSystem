@@ -213,7 +213,7 @@ class AgenciasController extends Zend_Controller_Action
                         'email' => $params['email'],
         				'email_alt' => $params['email_alt'],
                         'dba_pwd' => $params['update_pwd_bd'],
-        				'dba_user' => $params['update_login_bd'],
+        				#'dba_user' => $params['update_login_bd'],
         				'sucursales' => $params['sucursales'],
         				'update_login' => $params['update_login'],
         				'iatas1' => $params['iatas1'],
@@ -295,7 +295,7 @@ class AgenciasController extends Zend_Controller_Action
         $params=$this->_request->getParams(); 
         $datosAgencia = $this->agencia->find($params['id_agencia'])->toArray();
         $datosAgencia[0]['update_pwd_bd'] = $datosAgencia[0]['dba_pwd'];
-        $datosAgencia[0]['update_login_bd'] = $datosAgencia[0]['dba_user'];
+        # $datosAgencia[0]['update_login_bd'] = $datosAgencia[0]['dba_user'];
         
         $acd = new Application_Model_DbTable_AgenciaConexionDatos();
         
