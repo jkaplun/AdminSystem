@@ -89,7 +89,7 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
   }
 
   public function getSoporteUsers(){
-  	$cond = 'id_usuario_admin_puesto=1';
+  	$cond = 'activo="S"';
   	$select = $this->_db->select()
   	->from( $this->_name,'*')
   	->where($cond);

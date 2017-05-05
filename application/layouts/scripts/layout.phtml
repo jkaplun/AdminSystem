@@ -133,16 +133,12 @@
                             <li>
                                 <a href="<?= $this->baseUrl() ?>/ordenes/"><i class="fa fa-files-o fa-fw"></i> Ordenes de Servicio<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_recepcionista']=='S') {?>
                                     <li>
                                         <a href="<?= $this->baseUrl() ?>/orden-creacion/"><i class="fa fa-plus"></i> Nueva Orden</a>
                                     </li>
-									<?php } ?>
-									<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['es_ejecutivo']=='S') {?>
                                     <li>
                                         <a href="<?= $this->baseUrl() ?>/orden-seguimiento/"><i class="fa fa-eye"></i> Seguimiento de Ordenes</a>
                                     </li>
-                                    <?php } ?>
                                     <?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_admin']=='S') {?>
                                     <li>
                                         <a href="<?= $this->baseUrl() ?>/orden-seguimiento-admin/"><i class="fa fa-eye"></i> Seguimiento Admin </a>
