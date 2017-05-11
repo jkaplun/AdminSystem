@@ -53,3 +53,20 @@ foreach ( $this->tipoPoliza as $value ){
 	<?php 
 }
 ?>
+
+<?php
+
+	if ( $this->id_agencia != null ) { ?>
+	
+	<script type="text/javascript">
+
+	$(document).ready(function() {
+		
+		$("#select_agencias").val(<?= $this->id_agencia?>);
+
+		selectAgenciaChange();
+		
+	}); // end  $(document).ready(function() {
+	</script>
+
+<?php } ?>

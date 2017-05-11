@@ -76,18 +76,23 @@
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach ( $this->ordServ as $value) { ?>	
+		<?php foreach ( $this->ordServ as $value) { 
+			
+			$fecha = new Zend_Date($value["fecha_alta"]);
+			$fechaString = $fecha->toString('d MMMM yyyy, H:m:s');
+			$value["fecha_alta"]= $fechaString;
+			?>	
 		<tr>
 		
 		<td>
-			<p><b>Id Orden: </b><?= $value['id_orden_servicio'] ?></p>
-			<p><b>Fecha Alta: </b><?= $value['fecha_alta'] ?></p>
-			<p><b>Estatus: </b><?= $value['descripcion_estatus'] ?></p>
-			<p><b>Tipo de Soporte: </b><?= $value['description_tipo_soporte'] ?></p>
-			<p><b>Motivo: </b><?= $value['motivo'] ?></p>
-			<p><b>Ejecutivo: </b><?= $value['nombre_usr_admin_atiende'].' '. $value['ap_usr_admin_atiende'] ?></p>
-			<p><b>Producto: </b><?= $value['nombre_producto'] ?></p>
-			<p><b>Conformidad: </b><?= $value['conformidad'] ?></p>
+			<p>Id Orden: <b><?= $value['id_orden_servicio'] ?></b></p>
+			<p>Fecha Alta: <b><?= $value['fecha_alta'] ?></b></p>
+			<p>Estatus: <b><?= $value['descripcion_estatus'] ?></b></p>
+			<p>Tipo de Soporte: <b><?= $value['description_tipo_soporte'] ?></b></p>
+			<p>Motivo: <b><?= $value['motivo'] ?></b></p>
+			<p>Ejecutivo: <b><?= $value['nombre_usr_admin_atiende'].' '. $value['ap_usr_admin_atiende'] ?></b></p>
+			<p>Producto: <b><?= $value['nombre_producto'] ?></b></p>
+			<p>Conformidad: <b><?= $value['conformidad'] ?></b></p>
 		</td>
 			<td>
 				<div class="row" style="padding-bottom: 5px;">

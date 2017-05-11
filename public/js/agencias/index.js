@@ -41,32 +41,7 @@ $(document).ready(function() {
 
 	// cuando se eliga una agencia de la lista se llama a la función cunslutar agencia
 	$("#select_agencias").change(function(){
-		
-		blockUI();
-		
-		idAgenciaActual =$("#select_agencias").val();
-		consultarAgencia(idAgenciaActual);
-
-		actualizarVistas.vistaUsuarioAgencia=false;
-		var tableUsuariosAgencias = $('#dataTable-usuarios-agencias').DataTable();
-		var tablePolizas = $('#dataTable-polizas-vigentes').DataTable();
-		var productoTable = $('#dataTable-productos-adquiridos').DataTable();
-
-		tableUsuariosAgencias.clear().draw();
-		tablePolizas.clear().draw();
-		productoTable.clear().draw();
-
-		// limpiar select producto de polizas
-		$('#producto').empty();
-
-		// mostrar información correspondiente a esa agencia
-	 	mostrarUsuariosAgencia();   //usuarioagencia/index.js
-	 	mostrarPolizas(); 			//polizas/index.js
-	 	mostrarProductosEnTabla();  //productos/index.js
-	 	mostrarFolios();
-	 	productosSelectAgencia();
-        actualizarVistas.vistaUsuarioAgencia =true;
-
+		selectAgenciaChange();
 	});
 
 	$( "#tipo" ).change(function() {
@@ -88,6 +63,32 @@ $(document).ready(function() {
 	
 }); // end  $(document).ready(function() {
 
+function selectAgenciaChange(){
+	blockUI();
+	
+	idAgenciaActual =$("#select_agencias").val();
+	consultarAgencia(idAgenciaActual);
+
+	actualizarVistas.vistaUsuarioAgencia=false;
+	var tableUsuariosAgencias = $('#dataTable-usuarios-agencias').DataTable();
+	var tablePolizas = $('#dataTable-polizas-vigentes').DataTable();
+	var productoTable = $('#dataTable-productos-adquiridos').DataTable();
+
+	tableUsuariosAgencias.clear().draw();
+	tablePolizas.clear().draw();
+	productoTable.clear().draw();
+
+	// limpiar select producto de polizas
+	$('#producto').empty();
+
+	// mostrar información correspondiente a esa agencia
+ 	mostrarUsuariosAgencia();   //usuarioagencia/index.js
+ 	mostrarPolizas(); 			//polizas/index.js
+ 	mostrarProductosEnTabla();  //productos/index.js
+ 	mostrarFolios();
+ 	productosSelectAgencia();
+    actualizarVistas.vistaUsuarioAgencia =true;
+}
 
 function updateFechaFin(){
 	var fecha = $("#fecha_ini").val();
@@ -262,7 +263,8 @@ function mostarDatosAgencia(datosAgencia){
 	$("#facturacion_boleto-info").html(datosAgencia.facturacion_boleto);
 	$("#boton-editar-agencia").val(datosAgencia);
 	$("#datos-agencia").show();
- 	$("#observaciones_agencia").val(datosAgencia.observaciones);
+ 	$("#observaciones_agencia").val(datosAgencia.observaciones );
+ 	$("#observaciones_internas").val(datosAgencia.observaciones_internas );
  	$("#cfdi").val(datosAgencia.cfdi);
  	$("#prov_timbrado").val(datosAgencia.prov_timbrado);
  	

@@ -10,8 +10,19 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-
-    
+    	$formulario= new Application_Form_Agencias_FiltroAgencias();
+    	$params=$this->_request->getParams();
+    	
+    	if ( $this->_request->isPost() ) {
+    		$formulario->populate($params);
+    		$agencia = new Application_Model_DbTable_Agencia();
+    		$resultado = $agencia->filtrarAgencias($params);
+    		
+    		$this->view->agencias = $resultado;
+    		
+    	}
+    	$this->view->formulario = $formulario;
+    	
     }
 
     public function seguimientoAction()

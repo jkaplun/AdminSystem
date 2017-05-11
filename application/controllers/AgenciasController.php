@@ -13,7 +13,15 @@ class AgenciasController extends Zend_Controller_Action
 
     public function indexAction()
     {
-
+    	$params=$this->_request->getParams();
+    	
+    	//echo "<pre>".print_r($params,true)."</pre>";die;
+    	$this->view->id_agencia = null;
+    	if (isset( $params['id_agencia'] )) {
+    		$this->view->id_agencia = $params['id_agencia'];
+    	}
+    	
+    	
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
@@ -312,6 +320,29 @@ class AgenciasController extends Zend_Controller_Action
         
         $actualizaciones = $a->actualizacionesTodas($params);
         
+        foreach ( $actualizaciones as &$actualizacion ){
+        	
+        	
+        	$fecha = new Zend_Date($actualizacion['fecha_solicitud']);
+        	$fechaString = $fecha->toString('d MMMM yyyy, H:m:s');
+        	$actualizacion['fecha_solicitud'] = $fechaString;
+        	
+        	if ( $actualizacion['fecha_cierre'] == null ) {
+	        	$actualizacion['fecha_cierre'] = "<span style='color: red'>Pendiente</span>";
+	        	$actualizacion['http_update'] = "<span style='color: red'>Pendiente</span>";
+	        	$actualizacion['nombre_usuario_cierra'] = "<span style='color: red'>Pendiente</span>";
+	        	$actualizacion['path_update'] = "<span style='color: red'>Pendiente</span>";
+	        	$actualizacion['version_update'] = "<span style='color: red'>Pendiente</span>";
+	        	$actualizacion['archivo_update'] = "<span style='color: red'>Pendiente</span>";
+	        	
+        	} else {
+        		$fecha = new Zend_Date( $actualizacion['fecha_cierre'] );
+        		$fechaString = $fecha->toString( 'd MMMM yyyy, H:m:s' );
+        		$actualizacion['fecha_cierre'] = $fechaString;
+        		
+        	}
+        }
+        
         $datosAgencia[0]['actualizaciones'] = $actualizaciones;
         
         $this->_helper->json($datosAgencia[0]);
@@ -362,6 +393,16 @@ class AgenciasController extends Zend_Controller_Action
     	$foliosAgencia = new Application_Model_DbTable_FoliosAgencia();
     	
     	$result = $foliosAgencia->obtenerFoliosPorId($params['id_agencia']);
+    	
+    	foreach ( $result as &$compra) {
+    		$fecha = new Zend_Date($compra['fecha_compra']);
+    		$fechaString = $fecha->toString('d MMMM yyyy');
+    		$compra['fecha_compra'] = $fechaString;
+    		
+    	}
+    	
+    	
+    	
     	$this->_helper->json($result);
     
     }

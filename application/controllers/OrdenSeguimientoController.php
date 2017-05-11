@@ -50,7 +50,6 @@ class OrdenSeguimientoController extends Zend_Controller_Action
 	        	$total_diff_cron = $s + ($i * 60) + ($h * 60 * 60) + ( $d * 24 *60 *60);
         	}
         	
-        	
         	$duracion_servicio_segundos = ($value['duracion_servicio']*60)+$total_diff_cron;
         	
         	$value['duracion_servicio_segundos'] =  $duracion_servicio_segundos;

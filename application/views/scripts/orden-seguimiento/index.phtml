@@ -125,6 +125,10 @@
 
 	  		//echo "<pre>".print_r($registro,true)."</pre>";
 	  		 
+	  		$fecha = new Zend_Date($registro["fecha_alta"]);
+	  		$fechaString = $fecha->toString('d MMMM yyyy, H:m:s');
+	  		$registro["fecha_alta"]= $fechaString;
+	  		
   		?>
 		<?= $this->formSeguimientoOrden->id_orden_servicio ?>
 		<div id="orden_servicio_<?= $registro["id_orden_servicio"]?>" class="panel panel-default bs-callout2 <?= $color ?>">
@@ -135,6 +139,7 @@
             			<span  id='consulta-ordenes' class="btn btn-default" onClick="vinculo(<?= $registro['id_agencia'] ?>)">
             			<?= $registro["nombre"] ?>
             			</span>
+           				<a  class="btn btn-info" href="<?= $this->baseUrl() ?>/agencias/index/id_agencia/<?= $registro['id_agencia'] ?>" target="_blank"> Detalles</a>
             		</div>
             		<div class="col-md-3" align="right">
             			ID Orden Servicio: <?= $registro["id_orden_servicio"] ?>

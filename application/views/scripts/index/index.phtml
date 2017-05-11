@@ -1,2 +1,52 @@
 <h1 class="page-header">MIG</h1>
+<form method="post" enctype="application/x-www-form-urlencoded">
+<div class="row">
+	<div class="col-md-2">
+		<?= $this->formulario->id_agencia?>
+	</div>
+	<div class="col-md-2">
+		<?= $this->formulario->id_usuario_soporte_titular?>
+	</div>	
+		<div class="col-md-1">
+		<?= $this->formulario->Filtrar?>
+	</div>	
+</div>
+</form>
 
+<?php if ( isset($this->agencias) ) { ?>
+<div class="row">
+<div class="col-md-12">
+<table class="table">
+	<caption>Optional table caption.</caption>
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Datos Generales</th>
+			<th>Configuración</th>
+			<th>Productos</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($this->agencias as $agencia) { ?>
+		<tr>
+			<th scope="row"><?= $agencia['id_agencia'] ?></th>
+			<td>
+				<p><b><?= $agencia['nombre'] ?> </b> <?= $agencia['clave'] ?></p>			
+				<p><?= $agencia['tel1'] ?></p>
+				<p><?= $agencia['tel2'] ?></p>
+				<a  class="btn btn-info" href="<?= $this->baseUrl() ?>/agencias/index/id_agencia/<?= $agencia['id_agencia'] ?>" target="_blank"> Detalles</a>
+				
+			</td>
+			<td>
+			
+			</td>
+			<td>
+			
+			</td>
+		</tr>
+		<?php } ?>
+	</tbody>
+</table>
+</div>
+</div>
+<?php } ?>

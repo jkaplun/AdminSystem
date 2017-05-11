@@ -86,6 +86,7 @@ class Application_Form_Ordenes_NuevaOrden extends Zend_Form
 		->removeDecorator('HtmlTag')
 		->setAttrib("class","form-control")
 		->setAttrib("autocomplete","off")
+		->setValue(21)
 		->addMultiOptions($options);
 		
 		$this->addElement($motivo);

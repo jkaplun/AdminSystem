@@ -199,6 +199,17 @@ class PolizasController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams(); 
         $polizasAgencia = $this->poliza->obtenerTodasLasPolizasPorIdAgencia($params['id_agencia']);
+        
+        
+        foreach ( $polizasAgencia as &$poliza) { 
+        	$fecha = new Zend_Date($poliza['fecha_ini']);
+        	$fechaString = $fecha->toString('d MMMM yyyy');
+        	$poliza['fecha_ini'] = $fechaString;
+        	$fecha = new Zend_Date($poliza['fecha_fin']);
+        	$fechaString = $fecha->toString('d MMMM yyyy');
+        	$poliza['fecha_fin'] = $fechaString;
+        }
+
         $this->_helper->json($polizasAgencia);
 
     }
@@ -209,6 +220,24 @@ class PolizasController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams(); 
         $polizasAgencia = $this->poliza->obtenerPolizasVigentesPorIdAgencia($params['id_agencia']);
+        
+        foreach ($polizasAgencia as &$polizas){
+        	$fecha = new Zend_Date($polizas['fecha_ini']);
+        	$fechaString = $fecha->toString('d MMMM yyyy');
+        	$polizas['fecha_ini'] = $fechaString;
+        	
+        	$fecha = new Zend_Date($polizas['fecha_fin']);
+        	$fechaString = $fecha->toString('d MMMM yyyy');
+        	$polizas['fecha_fin'] = $fechaString;
+        	
+        	$fecha = new Zend_Date($polizas['fecha_fin_servicio']);
+        	$fechaString = $fecha->toString('d MMMM yyyy');
+        	$polizas['fecha_fin_servicio'] = $fechaString;
+        }
+        //echo "<pre>".print_r($polizasAgencia,true)."</pre>";die;
+        
+        
+        
         $this->_helper->json($polizasAgencia);
 
     }

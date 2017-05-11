@@ -150,6 +150,11 @@
 	  		
 	  		$this->formSeguimientoOrden->populate($registro);
 
+	  		
+	  		$fecha = new Zend_Date($registro["fecha_alta"]);
+	  		$fechaString = $fecha->toString('d MMMM yyyy, H:m:s');
+	  		$registro["fecha_alta"]= $fechaString;
+	  		
 	  		//echo "<pre>".print_r($registro,true)."</pre>";
 	  		 
   		?>

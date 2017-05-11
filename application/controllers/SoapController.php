@@ -154,4 +154,14 @@ Class SoapController extends Zend_Controller_Action
     	$xmlResponse = $client->syncFolios($xml_post);
     	print_r ($xmlResponse);
     }
+    
+    public function timestampwsAction() {
+    	$this->_helper->Layout->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	
+    	$timeStampXml = new Application_Model_Services_SatVerification();
+    	$xmlResponse = $timeStampXml->getTimeStamp();
+    	
+    	print_r ($xmlResponse);
+    }
 }

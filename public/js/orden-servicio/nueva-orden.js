@@ -263,7 +263,7 @@ function agregarPolizaEnTabla(res){
   } 
   
 	polizaTable.row.add( [ 
-		"", res.clave, nombre_producto_poliza + "<br>" + res.tipo_desc, res.horas_poliza, horas_us, res.fecha_ini +" a "+ res.fecha_fin , res.fecha_fin_servicio ,estadoPoliza 
+		"", res.clave, nombre_producto_poliza + "<br>" + res.tipo_desc, res.horas_poliza, horas_us, res.fecha_ini +"<br> a<br> "+ res.fecha_fin , res.fecha_fin_servicio ,estadoPoliza 
 	]).draw(); 
 	
 	polizaTable.page( 'last' ).draw( 'page' );  

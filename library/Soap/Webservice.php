@@ -103,6 +103,23 @@ Class Webservice
 		
 		return $xmlResponse;
 	}
+	
+	/**
+	 * Training web service
+	 *
+	 * @Author Juan Garfias
+	 * @param string $xmlRequest
+	 * @return string
+	 */
+	public function timestampWS($xmlRequest) {
+		$classNameFile='TimestampWS';
+		require_once $classNameFile.".php";
+		$webService = new $classNameFile();
+		$xmlResponse = $webService->Execute($xmlRequest);
+		
+		return $xmlResponse;
+	}
+	
 }
 
 ?>
