@@ -30,15 +30,16 @@ Class FoliosPerMonth{
 		 
 		$responseElement = $xml->documentElement;
 		$path = new DOMXPath($xml);
-		$getCredentials = $path->query('//FoliosPerMonthRequest', $responseElement);
-		$user = $getCredentials->item(0)->getAttribute('user');
-		$password = $getCredentials->item(0)->getAttribute('password');
 		
-		//$login= new Model_DbTable_XmlAccess();
+		$xmlName = 'FoliosPerMonthRequest';
+		
 		// Validate Login
-		$pass = sha1($password);
+		$getCredentials = $path->query('//'.$xmlName, $responseElement);
 		$xmlAcceso = new Application_Model_DbTable_UsuarioWebService();
-		$dataAccess = $xmlAcceso->getUser($user,$pass);
+		$values['user'] = $getCredentials->item(0)->getAttribute('user');
+		$values['pwd']= $getCredentials->item(0)->getAttribute('password');
+		
+		$dataAccess = $xmlAcceso->getUser($values)[0];
 		
 		// Making the response structure
 		
