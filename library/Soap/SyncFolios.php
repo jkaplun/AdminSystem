@@ -37,7 +37,7 @@ Class SyncFolios{
 		
 		// Validate Login
 		$pass = sha1($password);
-		$xmlAcceso = new Model_DbTable_XmlAccess();
+		$xmlAcceso = new Application_Model_DbTable_UsuarioWebService();
 		$dataAccess = $xmlAcceso->getUser($user,$pass);
 		
 		// Making the response structure

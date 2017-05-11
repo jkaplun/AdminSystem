@@ -76,7 +76,7 @@ Class SoapController extends Zend_Controller_Action
     }
 
     public function getcompilationvaluesAction() {
-
+    	
     	ini_set("soap.wsdl_cache_enabled", "0");
     	$this->_helper->Layout->disableLayout();
     	$this->_helper->viewRenderer->setNoRender();

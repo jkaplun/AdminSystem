@@ -12,7 +12,7 @@ Class GetCompilationValues{
 	 * @param string $xmlRequest
 	 */
 	public function Execute($xmlRequest){
-
+		
 		// Initializing the params array to sent it to the information Hotel model
 		$params = array();
 		$xmlResponse = "";
