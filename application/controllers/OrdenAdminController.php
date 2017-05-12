@@ -25,5 +25,29 @@ class OrdenAdminController extends Zend_Controller_Action
 
      }
 
+     
+     
+     public function cambiarAgenciaDeOrdenAction() {
+     	
+     	$this->_helper->layout()->disableLayout();
+     	$this->_helper->viewRenderer->setNoRender();
+     	$params=$this->_request->getParams();
+     	
+     	$os = new Application_Model_DbTable_OrdenServicio();
+     	
+     	$where = "id_agencia=".$params['id_agencia_original']. " and id_orden_servicio=".$params['id_orden_servicio'];
+     	
+     	$data = array(
+     			'id_agencia' => $params['id_agencia_cambio'],
+     			'id_usuario_agencia_solicito' => $params['id_usuario_agencia_solicito'],
+     			'id_poliza' => $params['id_poliza'],
+     			'solicito_otro' => $params['solicito_otro']
+     	);
+     	
+     	$os->update( $data, $where );
+     	
+     	$this->_helper->json($data);
+     }
+     
 }
 

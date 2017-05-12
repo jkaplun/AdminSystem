@@ -139,7 +139,8 @@
             			<span  id='consulta-ordenes' class="btn btn-default" onClick="vinculo(<?= $registro['id_agencia'] ?>)">
             			<?= $registro["nombre"] ?>
             			</span>
-           				<a  class="btn btn-info" href="<?= $this->baseUrl() ?>/agencias/index/id_agencia/<?= $registro['id_agencia'] ?>" target="_blank"> Detalles</a>
+           				<a class="btn btn-info" href="<?= $this->baseUrl() ?>/agencias/index/id_agencia/<?= $registro['id_agencia'] ?>" target="_blank"> Detalles</a>
+           				<span class="btn btn-info" onclick="abrirModalCambiarAgencia(<?= $registro["id_orden_servicio"]?>,<?= $registro['id_agencia'] ?>)"> Cambiar Agencia</span>
             		</div>
             		<div class="col-md-3" align="right">
             			ID Orden Servicio: <?= $registro["id_orden_servicio"] ?>
@@ -262,3 +263,58 @@
 </div>
 
 
+<form enctype="application/x-www-form-urlencoded" id="form-cambiar-agencia-orden">
+<input type="hidden" id="id_agencia_modal">
+<input type="hidden" id="id_orden_servicio_modal">
+<div class="modal fade" id="cambiar-agencia-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+    		<div class="modal-header">
+				<div class="row">
+					<div class="col-md-10">
+						<h4 class="modal-title">Cambiar Agencia</h4>
+					</div>
+					<div class="col-md-2" align="right">
+						<button type="button" class="btn btn-info btn-circle" data-dismiss="modal"><i class="fa fa-times"></i></button>
+					</div> 			    		
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>Agencia:</label>
+						<?= $this->selectAgencias ?>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="optional" for="Solicitó">Solicitó</label>
+							<select id="id_usuario_agencia_solicito_modal" class="form-control" autocomplete="off" name="id_usuario_agencia_solicito_modal">
+								<option value="">Otro</option>
+							</select>					
+						</div>
+						<div class="form-group" id="solicito_otro_modal_div">
+							<dt id="solicito_otro-label">
+							<label class="optional" for="solicito_otro">Solicitó [Otro]</label>
+							</dt>
+							<input id="solicito_otro_modal" class="form-control" type="text" maxlength="245" placeholder="Otro" autocomplete="off" value="" name="solicito_otro_modal">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<dt id="id_poliza-label">
+							<label class="optional" for="id_poliza">Poliza</label>
+							</dt>
+							<select id="id_poliza_modal" class="form-control" autocomplete="off" name="id_poliza_modal">
+	
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+      		<div class="modal-footer">
+				<span class="btn btn-info" onclick="ejecutaCambiarAgencia()"> Cambiar Agencia</span>			
+      		</div>
+    </div>
+  </div>
+</div>
+</form>

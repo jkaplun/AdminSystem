@@ -49,4 +49,23 @@ class PruebasController extends Zend_Controller_Action
 	{
 		//$_SESSION['counterdownBanamexHotel'] = new Zend_Date();
 	}
+	
+	public function mailAction()
+	{
+		$email = new Application_Model_Services_Emails();
+		$values = array (
+			'emails' => array (
+					'jgarfias@mig.com.mx' => 'Juanelo'
+								),
+			'subject' => 'test',
+			'body' => 'Prueba'
+			);
+		
+		$status = $email->sendEmail($values);
+		
+		echo $status;
+		
+		die("Envío mail");
+	}
+
 }

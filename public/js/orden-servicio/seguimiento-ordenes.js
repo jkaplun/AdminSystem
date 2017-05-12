@@ -93,7 +93,7 @@ function clickPausePlayBtn(id){
       $("#playPauseBtn_"+id_orden).addClass("botton-play_red");
 
     }else{ // el tiempo está corriendo
-      console.log($("#mainBtn_"+id_orden).attr('value'));
+      //console.log($("#mainBtn_"+id_orden).attr('value'));
       $("#playPauseBtn_"+id_orden).removeClass("fa-pause-circle botton-play_red");
       $("#playPauseBtn_"+id_orden).addClass("fa-play-circle botton-play_green");
       JSON_timers_global[id_orden].pause();
@@ -126,7 +126,7 @@ function botonPlayAjax(id_orden){
       data: id_orden_to_send,
       dataType: "json" 
     }).done(function(res) { 
-    console.log("resupuesta del ajax") ;
+    //console.log("resupuesta del ajax") ;
       //console.log(res);
  
        
@@ -146,8 +146,8 @@ function botonPauseAjax(id_orden){
       data: id_orden_to_send,
       dataType: "json" 
     }).done(function(res) { 
-    console.log("resupuesta del ajax") ;
-      console.log(res);
+   // console.log("resupuesta del ajax") ;
+     // console.log(res);
     
        
   })// end ajax done  
@@ -165,8 +165,8 @@ function ordenesEjecutivo(){
       data: "",//id_orden_to_send,
       dataType: "json" 
     }).done(function(res) { 
-    console.log("resupuesta del ajax") ;
-      console.log(res);
+    //console.log("resupuesta del ajax") ;
+      //console.log(res);
  
        
   })// end ajax done  
@@ -194,8 +194,8 @@ function mostrar_duracion_servicio_status_crono(duracion_servicio, cron_estatus,
 
     }else{
       //console.log("cron_estatus[i]=='2'")
-        console.log("duracion_servicio[i]: "+duracion_servicio[i]);
-         console.log("ordenes_id[i]: "+ordenes_id[i]);
+        //console.log("duracion_servicio[i]: "+duracion_servicio[i]);
+         //console.log("ordenes_id[i]: "+ordenes_id[i]);
         JSON_timers_global[ordenes_id[i]].start({precision: 'seconds', startValues: {seconds: parseInt(duracion_servicio[i])}});
         $('#cron_'+ordenes_id[i]).html( JSON_timers_global[ordenes_id[i]].getTimeValues().toString());
         JSON_timers_global[ordenes_id[i]].pause(); 
@@ -265,7 +265,7 @@ function guardarServicioAjax(id_orden_servicio,estado){
       }).done(function(res) { 
 
   if(res.estado == "ok"){ // si la respuesta es correcta: 
-      console.log(res);  
+      //console.log(res);  
       swal("La orden ha sido guardada exitosamente", " ", "success"); 
    } else{ 
      swal(res.descripcion, " ", "error");  
@@ -341,7 +341,7 @@ function ajaxPrueba(){
       data: "",
       dataType: "json" 
     }).done(function(res) { 
-    console.log(res) ;
+    //console.log(res) ;
       //console.log(res);
  
        
@@ -416,13 +416,114 @@ $(function() {
     
 });
 
-
 function vinculo(id_agencia){
 	var baseHref = document.getElementsByTagName('base')[0].href
-	console.log(baseHref);
+	//console.log(baseHref);
 	window.open(baseHref+'/orden-seguimiento/consulta-por-agencia/id_agencia/'+id_agencia,'_blank','toolbar=no,status=no,scrollbars=yes,location=no,menubar=no,directories=no,width=1180,height=620');
 }
 
 $( "#consulta-ordenes" ).click(function( event ) {
 	  event.preventDefault();
+});
+
+function abrirModalCambiarAgencia(id_orden_servicio , id_agencia) {
+	$("#id_orden_servicio_modal").val(id_orden_servicio);
+	$("#id_agencia_modal").val(id_agencia);
+	$('#cambiar-agencia-modal').modal('show');
+	$('#solicito_otro_modal_div').hide();
+
+}
+
+$(function() {
+	$("#select_agencias").change(function(){
+		$('#id_usuario_agencia_solicito_modal').html('');
+		$('#id_poliza_modal').html('');
+
+		$.ajax({
+			url: "public/orden-seguimiento/consultar-datos-agencia",
+			method: "post",
+			data: "id_agencia="+$("#select_agencias").val(),
+			dataType: "json"
+		})
+		.done(function(res) { 
+			$('#solicito_otro_modal_div').hide();
+			$.each( res.usuariosAgencia , function( key, value ) {
+		          $('#id_usuario_agencia_solicito_modal').append($('<option>').text(value.nombre + " " + value.apellidos)
+		            .attr('value', value.id_usuario_agencia)
+		            );
+			});
+		    $('#id_usuario_agencia_solicito_modal').append($('<option>').text("[Otro]")
+		        .attr('value', "otro")
+		    );
+		    $.each( res.polizas , function( key, value ) {
+		          $('#id_poliza_modal').append($('<option>').text(value.clave)
+		            .attr('value', value.id_poliza)
+		            );
+			});
+	  	})// end ajax done 
+			.fail(function() {
+	    	alert("Error!!");
+	  	});
 	});
+	
+	$("#id_usuario_agencia_solicito_modal").change(function(){
+		var id_usuario_agencia_solicito_modal = $("#id_usuario_agencia_solicito_modal").val();
+		
+		if (id_usuario_agencia_solicito_modal == "otro") {
+			$('#solicito_otro_modal_div').show();
+		} else {
+			$('#solicito_otro_modal_div').hide();
+		}
+	});
+	
+});
+
+function ejecutaCambiarAgencia(){
+	var error = 0;
+	
+	console.log($("#select_agencias").val());
+	if ($("#select_agencias").val() == "") {
+		error = 1;
+		alert("Seleccione una Agencia.");
+	}
+	
+	if ($("#id_usuario_agencia_solicito_modal").val() == "") {
+		error = 1;
+	}
+	
+	if ($("#id_poliza_modal").val() == "") {
+		error = 1;
+	}
+	
+	if ( error == 0 ) {
+		
+		var id_agencia_original = $("#id_agencia_modal").val();
+		var id_orden_servicio = $("#id_orden_servicio_modal").val();
+		var id_agencia_cambio = $("#select_agencias").val();
+		var id_usuario_agencia_solicito = $("#id_usuario_agencia_solicito_modal").val();
+		var id_poliza = $("#id_poliza_modal").val();
+		var solicito_otro = $("#solicito_otro_modal").val();
+		
+		$.ajax({
+			url: "public/orden-admin/cambiar-agencia-de-orden",
+			method: "post",
+			data: {
+				id_agencia_cambio : id_agencia_cambio ,
+				id_usuario_agencia_solicito : id_usuario_agencia_solicito ,
+				id_poliza : id_poliza ,
+				solicito_otro : solicito_otro ,
+				id_orden_servicio : id_orden_servicio ,
+				id_agencia_original : id_agencia_original 
+			},
+			dataType: "json"
+		})
+		.done(function(res) {
+			swal("Se ha Cambiado la Orden de Servicio de Agencia Correctamente", " ", "success"); 
+			location.reload(); 
+	  	})// end ajax done 
+			.fail(function() {
+	    	alert("Error!!");
+	  	});
+	}
+	
+}

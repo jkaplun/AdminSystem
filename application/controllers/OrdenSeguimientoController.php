@@ -13,6 +13,31 @@ class OrdenSeguimientoController extends Zend_Controller_Action
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js'); 
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes.js');  
 
+        $agencia = new Application_Model_DbTable_Agencia();
+        
+        $selectAgencias = new Zend_Form_Element_Select('select_agencias');
+        $this->view->agencias = $agencia->obtenerTodasLasAgencias();
+        
+        $listaAgencias = array();
+        foreach ( $this->view->agencias as $agencias){
+        	$listaAgencias[$agencias['id_agencia']]=$agencias['nombre'];
+        }
+        
+        $zendForm = new Zend_Form();
+        
+        $selectAgencias
+        ->removeDecorator('label')
+        ->removeDecorator('HtmlTag')
+        ->addMultiOptions($listaAgencias)
+        ->setAttrib("class","form-control selectpicker")
+        ->setAttrib("data-max-options",10)
+        ->setAttrib("data-live-search","true")
+        ->setAttrib("title","Ingresa nombre de la agencia...")
+        ->setAttrib("autocomplete","off");
+        
+        $zendForm->addElement($selectAgencias);
+        $this->view->selectAgencias=$zendForm;
+        
         $orden = new Application_Model_DbTable_OrdenServicio();
         
         $valores = array();
@@ -313,5 +338,40 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	$agencia = new Application_Model_DbTable_Agencia();
     	$this->view->datosAgencia = $agencia->find( $this->view->params['id_agencia'] )->toArray()[0];
     	
-    }   
+    }
+    
+    public function consultarDatosAgenciaAction(){
+
+    	$poliza = new Application_Model_DbTable_Poliza();
+    	$usuario_agencia = new Application_Model_DbTable_AgenciaUsuario();
+    	
+    	$this->_helper->layout()->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	$params=$this->_request->getParams();
+    	$datosAgencia = array();
+    	
+    	$polizasAgencia = $poliza->obtenerPolizasVigentesPorIdAgencia($params['id_agencia']);
+    	
+    	foreach ($polizasAgencia as &$polizas){
+    		$fecha = new Zend_Date($polizas['fecha_ini']);
+    		$fechaString = $fecha->toString('d MMMM yyyy');
+    		$polizas['fecha_ini'] = $fechaString;
+    		
+    		$fecha = new Zend_Date($polizas['fecha_fin']);
+    		$fechaString = $fecha->toString('d MMMM yyyy');
+    		$polizas['fecha_fin'] = $fechaString;
+    		
+    		$fecha = new Zend_Date($polizas['fecha_fin_servicio']);
+    		$fechaString = $fecha->toString('d MMMM yyyy');
+    		$polizas['fecha_fin_servicio'] = $fechaString;
+    	}
+    	//echo "<pre>".print_r($polizasAgencia,true)."</pre>";die;
+    	
+    	$datosAgencia[0]['polizas'] = $polizasAgencia;
+    	
+    	$datosAgencia[0]['usuariosAgencia'] = $usuario_agencia->obtenerUsuariosDeAgenciaPorIdAgencia($params['id_agencia']);
+    	
+    	$this->_helper->json($datosAgencia[0]);
+    }
+    
 }

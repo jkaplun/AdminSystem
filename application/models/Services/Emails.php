@@ -1,71 +1,114 @@
 <?php
 class Application_Model_Services_Emails {
+	
+	public $emailConfig = array();
 
-	public static function emailAuthirizedPurchaseOrder($values){
+	
+	public function __construct() {
+		$string = file_get_contents('properties.txt', true);
+		$preArray =  explode("\n", $string);
 		
 		
-		if( trim($values['email'] ) != '' ){
-			$config = array('auth' => 'login',
-					'username' => 'geremias0903@gmail.com',
-					'password' => 'sdsad',
-					'port' => 465
-			);
-				
-			
-			
-			$transport = new Zend_Mail_Transport_Smtp('smtp.gmail.com', $config);
-				
-			$mail = new Zend_Mail();
-		
-			$mail->setFrom($config['username'], $config['username']);
-			/*
-			 $mail->addTo('jgarfias@mig.com.mx', 'MAs MEjor')
-			->addTo('pmadrigal@travelnet.com.mx', 'Pambaza')
-			->addTo('ing.juan.garfias@gmail.com', 'Juanin Juan Jarry');*/
-			$mail->addTo($values['email'], $values['denominacion']);
-			$mail->setSubject('Orden de compra.');
-			/*
-			$mail->createAttachment($xmlRQ,
-					'application/xml',
-					Zend_Mime::TYPE_TEXT,Zend_Mime::TYPE_TEXT,$nameWS.'_RQ_'.date('l jS \of F Y h:i:s A').'.xml');
-			$mail->createAttachment($xmlRS,
-					'application/xml',
-					Zend_Mime::TYPE_TEXT,Zend_Mime::TYPE_TEXT,$nameWS.'_RS_'.date('l jS \of F Y h:i:s A').'.xml');
-			$mail->setBodyText('This is the text of the mail.');
-			*/
-			
-			$body='
-				<p>Se hace de su conocimiento la solicitud de comprobante fiscal.</p>
-					<p>La referencia en el concepto es la siguiente:</p>
-					
-					<p>Detalle de la Orden : '.$values['descripcion'].'</p>
-					
-					<p>
-					<b>Clave de Orden de Compra : '.$values['referencia'].'</b>
-					</p>
-												
-							
-					
-					<p>Por el monto de : $ '.number_format($values['monto'],2).'</p>
-					<p>Con fecha programada de pago : '.substr($values['fecha_programacion_pago'],0,10).'</p>
-							
-				<p>Debe ingresar el texto completo en letras negritas para que pueda ser registrada por el sistema.</p>
-					';
-			
-			$mail->setBodyHtml($body);
-		
-			try {
-				$mail->send($transport);
-			} catch (Exception $e){
-				
-				return 'No Enviado';
+		foreach ( $preArray as $value ){
+			$aux = explode("=", $value);
+			if (trim($aux[0])=='email') {
+				$this->emailConfig['email'] = trim($aux[1]);
 			}
+			if (trim($aux[0])=='password') {
+				$this->emailConfig['password'] = trim($aux[1]);
+			}
+			if (trim($aux[0])=='smtp') {
+				$this->emailConfig['smtp'] = trim($aux[1]);
+			}
+			if (trim($aux[0])=='port') {
+				$this->emailConfig['port'] = trim($aux[1]);
+			}
+			if (trim($aux[0])=='nombre_comercial') {
+				$this->emailConfig['nombre_comercial'] = trim($aux[1]);
+			}
+		}
+
+	}
 	
-	
-			return 'Enviado';
-		} else {
+	/**
+	 * 
+	 * @param array $values = array (
+	 *	'emails' => array (
+	 *					mail1@mail.com => mail1 ,
+	 *					mail2@mail.com => mail2 ,
+	 *					mail3@mail.com => mail3 ,
+								.
+	 *							.
+	 *							.
+	 *					mailn@mail.com => mailn ,
+	 *						)
+	 *	'subject' => subject
+	 *	'body' => body
+	 *	);
+	 * @return string
+	 */
+	public function sendEmail($values){
+		
+		$config = array('auth' => 'login',
+			'username' => $this->emailConfig['email'],
+			'password' => $this->emailConfig['password'],
+			'port' => $this->emailConfig['port'],
+		);
+		
+		$transport = new Zend_Mail_Transport_Smtp($this->emailConfig['smtp'], $config);
+		
+		$mail = new Zend_Mail();
+		
+		$mail->setFrom($this->emailConfig['email'], $this->emailConfig['nombre_comercial']);
+		
+		foreach ($values['emails'] as $key => $email){
+			$mail->addTo($key, $email);
+		}
+		$mail->setSubject($values['subject']);
+		
+		$mail->setBodyHtml($values['body']);
+		
+		try {
+			$mail->send($transport);
+		} catch (Exception $e){
+			echo $e;
 			return 'No Enviado';
 		}
+		
+		return 'Enviado';
+		
+	}
+	
+	/**
+	 * 
+	 * @param unknown $values
+	 * @return number
+	 */
+	public function agregarOrdenServicio($values){
+		
+		$agencia = new Application_Model_DbTable_Agencia();
+		$usuarioAdmin = new Application_Model_DbTable_UsuarioAdmin();
+		$agenciaUsuario = new Application_Model_DbTable_AgenciaUsuario();
+		
+		$agenciaDatos = $agencia->find($values['id_agencia'])->toArray()[0];
+		$usuarioAdminDatos = $usuarioAdmin->find($values['id_usuario_admin_atiende'])->toArray()[0];
+		$agenciaUsuarioDatos = $agenciaUsuario->find($values['id_usuario_agencia_solicito'])->toArray()[0];
+		
+		$body="Admin V2 <br>
+<h1>Prueba Nueva orden de servicio.</h1>
+ <p>Se ha creado nueva Orden de Servicio.</p>";
+		
+		$valuesDos = array(
+				'subject' => 'Nueva Orden de Servicio.',
+				'body' => $body
+		);
+		
+		$valuesDos['emails'][$agenciaDatos['email']] = utf8_decode($agenciaDatos['nombre']);
+		$valuesDos['emails'][$usuarioAdminDatos['email']] = utf8_decode($usuarioAdminDatos['nombre'].' '.$usuarioAdminDatos['apellido_paterno']);
+		$valuesDos['emails'][$agenciaUsuarioDatos['email']] =  utf8_decode($agenciaUsuarioDatos['nombre'].' '.$agenciaUsuarioDatos['apellidos']);
+		
+		$this->sendEmail($valuesDos);
+		
 	}
 	
 }

@@ -77,9 +77,6 @@ class ordenCreacionController extends Zend_Controller_Action
     	$this->_helper->viewRenderer->setNoRender();
     	$params=$this->_request->getParams();
     	
-   // 	echo "<pre>".print_r($params,true)."</pre>";die;
-    	 
-    	
     	$data = array(
     			'id_agencia' => $params['id_agencia'],
     			'id_usuario_admin_alta' => $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'],
@@ -117,13 +114,10 @@ class ordenCreacionController extends Zend_Controller_Action
     			
     			if ($params['id_tipo_soporte']==2 && $params['id_motivo']==21) {
     				$data['id_orden_servicio_estatus'] = 6;
-    				
     				$data['motivo_orden'] = $params['motivo_orden'];
     				$data['solucion_orden'] = $params['solucion_orden'];
     				$data['conformidad'] = $params['conformidad'];
-    				
     				$idNuevaOrden = $ordenServicioDbTable->insert($data);
-
     				$data['duracion_servicio'] = $params['duracion_servicio'];
     				$data['control_cron_inicial'] = null;
     				$data['control_cron_final'] = null;
@@ -131,10 +125,13 @@ class ordenCreacionController extends Zend_Controller_Action
     				//Restando minutos a la póliza
     				$servicesPolizas = new Application_Model_Services_ServicesPolizas();
     				$servicesPolizas->restarMinutosAPoliza($params['id_poliza'], $data['duracion_servicio']);
-    				
     			} else {
     				$idNuevaOrden = $ordenServicioDbTable->insert($data);
     			}
+    			
+    			$email = new Application_Model_Services_Emails();
+    			$email->agregarOrdenServicio($data);
+    			
 	    		// se inyecta el ID, estado y descripción en la respuesta al cliente
     			
     			$data['id_orden_servicio']=$idNuevaOrden;

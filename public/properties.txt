@@ -1,0 +1,5 @@
+email = adminv2@mig.com.mx
+nombre_comercial = Sistemas MIG.
+password = V2-4dm1N#2017
+smtp = mail.mig.com.mx
+port = 26
