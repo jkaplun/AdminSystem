@@ -88,6 +88,9 @@ class PolizasController extends Zend_Controller_Action
         	 	//Se crea la póliza con una clave sin el id
         		$idNuevaPoliza = $this->poliza->insert($data);
         		
+        		$email = new Application_Model_Services_Emails();
+        		$email->altaPoliza($data);
+        		
         		// Validación cuando es una poliza para ICAAV la cual tiene id 3 en la tabla de productos.
         		if ($params['id_producto']==3) {
         			$servicePoliza = new Application_Model_Services_ServicesPolizas();
