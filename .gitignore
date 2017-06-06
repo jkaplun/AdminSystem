@@ -1,4 +1,1 @@
-/application/plugins/.svn/*
-
-/library/Soap/.svn/*
-/application/configs/application.ini
+application/configs/*
