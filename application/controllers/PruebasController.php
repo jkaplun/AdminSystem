@@ -55,7 +55,7 @@ class PruebasController extends Zend_Controller_Action
 		$email = new Application_Model_Services_Emails();
 		$values = array (
 			'emails' => array (
-					'jgarfias@mig.com.mx' => 'Juanelo'
+					'mmunoz@mig.com.mx' => 'mau'
 								),
 			'subject' => 'test',
 			'body' => 'Prueba'
