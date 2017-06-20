@@ -46,7 +46,7 @@
 							<hr class="hrForm">										
 							<p>Titular:  <span class="text-primary" id="cve_usopor_tit-info"></span>  </p>
 							<p>Auxiliar:  <span class="text-primary" id="cve_usopor_aux-info"> </p>
-					    	<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_ejecutivo']=='S') {?>
+					    	<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_ejecutivo']=='S' || $_SESSION['Zend_Auth']['USER_VALUES']['p_admin']=='S') {?>
 					    	<div class="row">
 								<div class="col-md-2">
 									<button type="button" class="btn btn-primary" id='boton-editar-agencia' data-dismiss="modal" data-toggle="modal" data-target="#myModal" onclick="abrirModalEditarAgencia()">
@@ -148,7 +148,7 @@
 							<table width="100%" class="table table-striped table-bordered table-hover" id="dataTable-polizas-vigentes">
 								<thead>
 									<tr>
-										<th class="FrontEndIdPoliza" >id</th>
+										
 										<th class="centrado">Clave</th>
 										<th class="centrado">Producto</th>
 										<th class="centrado">Tipo de Poliza</th>
@@ -225,12 +225,6 @@
 					<div class="row">		
 						<div class="col-md-2">
 							<div class="form-group input-group-sm">
-								<label class="control-label">CFDI</label>
-								<?= $this->form->cfdi ?>
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="form-group input-group-sm">
 								<?= $this->form->prov_timbrado ?>
 							</div>
 						</div>	
@@ -263,7 +257,6 @@
 							<th>id</th>
 							<th>Fecha de Compra</th>
 							<th>Folios</th>
-							<th>Folios Utilizados</th>
 							<th>Observaciones</th>
 							<th>Tipo de Folios</th>
 							<th>Detalles</th>

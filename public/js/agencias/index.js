@@ -36,7 +36,9 @@ $(document).ready(function() {
 			    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
 			    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
 			}
-		}
+		},
+        "bSort": false
+    
     });
 
 	// cuando se eliga una agencia de la lista se llama a la función cunslutar agencia
@@ -267,6 +269,7 @@ function mostarDatosAgencia(datosAgencia){
  	$("#observaciones_internas").val(datosAgencia.observaciones_internas );
  	$("#cfdi").val(datosAgencia.cfdi);
  	$("#prov_timbrado").val(datosAgencia.prov_timbrado);
+ 	//$("#id_agencia_folios").val(datosAgencia.id_agencia);
  	
 
  	if(datosAgencia.tel1 != null && datosAgencia.tel1.length != 0){
@@ -387,7 +390,6 @@ function mostrarFolios(){
 	    		  		"<td>"+ value.id_folios_agencia +"</td>" +
 	    		  		"<td>"+ value.fecha_compra +"</td>" +
 	    		  		"<td>"+ value.folios_comprados +"</td>" +
-	    		  		"<td>"+ (parseInt(value.folios_comprados) - parseInt(value.folios_comprados)) +"</td>" +
 	    		  		"<td>"+ value.observaciones +"</td>" +
 	    		  		"<td>"+ value.descripcion +"</td>" +
 	    		  		"<td><button class='btn btn-primary btn-sm btn-circle' type='button' data-toggle='modal' data-target='#AgregarFolios' value='1' " +

@@ -365,20 +365,23 @@ class AgenciasController extends Zend_Controller_Action
     	}
     	$foliosAgencia = new Application_Model_DbTable_FoliosAgencia();
     	
-    	$data = array(
-    			'id_agencia' => $params['id_agencia_folios'],
-    			'fecha_compra' => $params['fecha_compra_folios'],
-    			'folios_comprados' => $params['folios_comprados'],
-    			'observaciones' => $params['observaciones_folios'],
-    			'id_folios_agencia_cat_tipo' => $params['id_folios_agencia_cat_tipo']
-    			
-    	);
-    	try {
-    		$foliosAgencia->insert($data);
-    	} catch (Exception $e){
-    		$params['error']=$e;
-    	}
+		if ($_SESSION['Zend_Auth']['USER_VALUES']['p_agrega_folios']=='S') {
     	
+	    	$data = array(
+	    			'id_agencia' => $params['id_agencia_folios'],
+	    			'fecha_compra' => $params['fecha_compra_folios'],
+	    			'folios_comprados' => $params['folios_comprados'],
+	    			'observaciones' => $params['observaciones_folios'],
+	    			'id_folios_agencia_cat_tipo' => $params['id_folios_agencia_cat_tipo']
+	    	);
+	    	try {
+	    		$foliosAgencia->insert($data);
+	    	} catch (Exception $e){
+	    		$params['error_log']=$e->__toString();
+	    	}
+		} else {
+			$params['error']='Sin permisos';
+		}
     	$this->_helper->json($params);
     
     }
@@ -398,6 +401,7 @@ class AgenciasController extends Zend_Controller_Action
     		$fecha = new Zend_Date($compra['fecha_compra']);
     		$fechaString = $fecha->toString('d MMMM yyyy');
     		$compra['fecha_compra'] = $fechaString;
+    		$compra['folios_comprados'] = number_format( $compra['folios_comprados'] );
     		
     	}
     	
@@ -448,7 +452,7 @@ class AgenciasController extends Zend_Controller_Action
     	$params=$this->_request->getParams();
     	
     	$data = array(
-    			'cfdi' => $params['cfdi'],
+    			//'cfdi' => $params['cfdi'],
     			'prov_timbrado' =>  $params['prov_timbrado']
     	);
     	
@@ -457,6 +461,7 @@ class AgenciasController extends Zend_Controller_Action
 			$this->agencia->update($data, "id_agencia=".$params['id_agencia']);
     	} catch (Exception $e) {
     		$params['success'] = false;
+    		$params['error_log'] = $e->__toString();
     	}
 	   	$this->_helper->json($params);
    }

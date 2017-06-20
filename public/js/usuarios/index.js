@@ -100,11 +100,9 @@ function habilitaClave(){
 
 function agregarAjaxDone(res){
 	if(res.estado == "ok"){ // si la respuesta es correcta:
-	      console.log(res); 
-
-			agregarUsuarioEnTabla(res);
-			swal("el usuario ha sido guardado exitosamente", " ", "success"); 
-
+	    console.log(res); 
+		agregarUsuarioEnTabla(res);
+		swal("el usuario ha sido guardado exitosamente", " ", "success"); 
  	} else{
  		swal(res.descripcion, " ", "error"); 
  		}
@@ -113,17 +111,15 @@ function agregarAjaxDone(res){
 
 
 function actualizarAjaxDone(res){
-	//var userTable = $('#dataTable-usuarios').DataTable();  
 
 	if(res.estado == "ok"){
-		agregarUsuarioEnTabla(res);
+		//agregarUsuarioEnTabla(res);
 		swal("el usuario ha sido actualizado exitosamente", " ", "success");
-
+		location.reload(); 
 	}else{
 		swal(res.descripcion, " ", "error");
 	}
 	
-	//dataTable.row('.selected').remove().draw( false );
 	
 
 }

@@ -398,6 +398,12 @@ function submitNuevaOrden(){
 		return;
 	}
 	
+	var validar = $('#id_usuario_admin_atiende').val();
+	if ( validar == null){
+		alert('Seleccione un Ejecutivo.');
+		return;
+	}
+	
 	var datos_orden= "Agencia : " + $("#select_agencias option:selected").text() + 
                    "\n Producto :    " +  $("#producto option:selected").text() + 
                    "\n Clave poliza :    " +  polizas[$('input[name=id_poliza]:checked').val()].clave  +

@@ -131,7 +131,8 @@ function submitFormPoliza(){
  
  
 function agregarPolizaEnTabla(res){ 
-        var polizaTable = $('#dataTable-polizas-vigentes').DataTable();   
+        var polizaTable = $('#dataTable-polizas-vigentes').DataTable();
+        
         var info = polizaTable.page.info(); 
         if(res.id_poliza_estatus == "1"){ 
           estadoPoliza="Activa"; 
@@ -189,7 +190,7 @@ function agregarPolizaEnTabla(res){
         if(ajaxActionPoliza=="agregar" || ajaxActionPoliza=="consultar"){ 
 
 	        polizaTable.row.add( [  
-		        res.id_poliza, 
+		        //res.id_poliza, 
 		        res.clave, 
 		        nombre_producto_poliza, 
 		        res.descripcion, 
@@ -198,18 +199,13 @@ function agregarPolizaEnTabla(res){
 		        res.costo_poliza, 
 		        res.fecha_ini, 
 		        res.fecha_fin, 
-		        estadoPoliza , 
-		        "x"
+		        estadoPoliza,  
+		        boton
 	        ]).draw(); 
 	
 	        polizaTable.page( 'last' ).draw( 'page' );  
 	        
 	 
-	        $('#dataTable-polizas-vigentes tr:last-child td:first-child').attr('class', 'frontEndIdPoliza'); 
-	        $('#dataTable-polizas-vigentes tr:last-child td:first-child').css('background-color', 'red'); 
-	        $('#dataTable-polizas-vigentes tr:last-child td:last-child').html(boton);  
-	        $('#dataTable-polizas-vigentes tr:last-child td:last-child').attr('id', "editarPolizaBtn"+res.id_poliza); 
-	        $("#editarPolizaBtn"+res.id_poliza).closest('tr').attr('id', id_poliza_row); 
 	 
         }else{ 
 
@@ -229,7 +225,7 @@ function agregarPolizaEnTabla(res){
           }
            
           // ocultar front-end-id
-          $(".frontEndIdPoliza").hide();  
+          //$(".frontEndIdPoliza").hide();  
 
 } // end function agregarPolizaEnTabla(res){ 
  

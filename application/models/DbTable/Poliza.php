@@ -59,7 +59,8 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		$select = $this->_db->select()->
 		from ( array( 'p' => $this->_name), '*' )
 		->join( array( 'tp'=> 'tipo_poliza') , 'p.tipo=tp.tipo' )
-		->where(' p.id_agencia='.$idAgencia);
+		->where(' p.id_agencia='.$idAgencia)
+		->order('fecha_fin desc');
 
 		return $this->getAdapter ()->fetchAll( $select );
 	}

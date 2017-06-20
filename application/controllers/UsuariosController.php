@@ -130,15 +130,11 @@ class UsuariosController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         $params=$this->_request->getParams();
-        //echo '<pre>'.print_r($params,true).'</pre>';die;
         
         	$data = array(
-                				//'clave' => $params['clave'],
-                                //'pwd' => $contraEncrip, se define más abajo
                                 'nombre' => $params['nombre'],
                                 'apellido_paterno' => $params['apellido_paterno'],
                                 'apellido_materno' => $params['apellido_materno'],
-                                'puesto' => $params['puesto'],
                                 'email' => $params['email'],
 			        			'p_admin' => $params['p_admin'],
 			        			'p_supervisor' => $params['p_supervisor'],

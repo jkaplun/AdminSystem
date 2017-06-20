@@ -211,6 +211,8 @@ class PolizasController extends Zend_Controller_Action
         	$fecha = new Zend_Date($poliza['fecha_fin']);
         	$fechaString = $fecha->toString('d MMMM yyyy');
         	$poliza['fecha_fin'] = $fechaString;
+        	$poliza['costo_poliza'] = "$ " . number_format( $poliza['costo_poliza'] ,2);
+        	
         }
 
         $this->_helper->json($polizasAgencia);

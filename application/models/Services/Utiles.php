@@ -60,13 +60,18 @@ class Application_Model_Services_Utiles
 	
 		$usuario_admin = new Application_Model_DbTable_UsuarioAdmin();
 		
-		$ejecutivoPrincipal = $usuario_admin->find($params['id_usuario_soporte_titular'])->toArray()[0];
-		$ejecutivoAuxiliar = $usuario_admin->find($params['id_usuario_soporte_auxiliar'])->toArray()[0];
-		
-		$resultProcessed[$ejecutivoPrincipal['id_usuario']] = $ejecutivoPrincipal['nombre'].' '.$ejecutivoPrincipal['apellido_paterno'].' [Titular]'; 
-		$resultProcessed[$ejecutivoAuxiliar['id_usuario']] = $ejecutivoAuxiliar['nombre'].' '.$ejecutivoAuxiliar['apellido_paterno'].' [Auxiliar]';
+		@$ejecutivoPrincipal = $usuario_admin->find($params['id_usuario_soporte_titular'])->toArray()[0];
+		@$ejecutivoAuxiliar = $usuario_admin->find($params['id_usuario_soporte_auxiliar'])->toArray()[0];
 
-		$result = array_merge($ejecutivoPrincipal, $ejecutivoAuxiliar);
+		$resultProcessed = array();
+		if ( is_array( $ejecutivoPrincipal ) ) {
+			$resultProcessed[$ejecutivoPrincipal['id_usuario']] = $ejecutivoPrincipal['nombre'].' '.$ejecutivoPrincipal['apellido_paterno'].' [Titular]';
+		}
+		
+		if ( is_array( $ejecutivoAuxiliar ) ) {
+			$resultProcessed[$ejecutivoAuxiliar['id_usuario']] = $ejecutivoAuxiliar['nombre'].' '.$ejecutivoAuxiliar['apellido_paterno'].' [Auxiliar]';
+		}
+		
 		$user = $usuario_admin->getSoporteUsers();
 
 		foreach ( $user as $key => $value ){
@@ -77,7 +82,6 @@ class Application_Model_Services_Utiles
 			if ( !array_key_exists( $value['id_usuario'],$resultProcessed ) ) {
 				$resultProcessed[$value['id_usuario']] = $value['nombre']." ". $value['apellido_paterno'];
 			}
-			
 		}
 
 		return $resultProcessed;
