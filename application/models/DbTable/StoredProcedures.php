@@ -25,10 +25,11 @@ class Application_Model_DbTable_StoredProcedures extends Zend_Db_Table_Abstract{
 			
 			$stmt->execute();
 			$result = $stmt->fetchAll();
+
 			return  $result;
 		} catch(Exception $e){
-			//return  array('Error'=>$e);
-			return 0;
+			return  array('Error'=>$e);
+			//return 0;
 		}
 	}
 

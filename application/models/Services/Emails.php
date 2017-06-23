@@ -168,11 +168,13 @@ class Application_Model_Services_Emails {
 				'body' => $body
 		);
 		
-		foreach ( $usuarios as $values){
-			$valuesDos['emails'][$values['email']] = utf8_decode($values['nombre'].' '.$values['apellido_paterno']);
-		}
+		if (count($usuarios)>0){
+			foreach ( $usuarios as $values){
+				$valuesDos['emails'][$values['email']] = utf8_decode($values['nombre'].' '.$values['apellido_paterno']);
+			}
 
-		$this->sendEmail($valuesDos);
+			$this->sendEmail($valuesDos);
+		}
 		
 	}
 	

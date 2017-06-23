@@ -87,7 +87,7 @@ class PolizasController extends Zend_Controller_Action
         	 	$data['clave'] = strtoupper($v1ClavePoliza);
         	 	//Se crea la póliza con una clave sin el id
         		$idNuevaPoliza = $this->poliza->insert($data);
-        		
+
         		$email = new Application_Model_Services_Emails();
         		$email->altaPoliza($data);
         		
@@ -99,7 +99,7 @@ class PolizasController extends Zend_Controller_Action
 
         		//Se concatena el id de la nueva póliza
         		$data['clave'] = $v1ClavePoliza.$idNuevaPoliza;
-        		// 	se actualiza en la base de datos la clave de la p�liza
+        		// 	se actualiza en la base de datos la clave de la póliza
         		$where = "id_poliza= ".$idNuevaPoliza;
         		$this->poliza->update($data, $where);
         		// se inyecta el ID, estado y descripción en la respuesta al cliente

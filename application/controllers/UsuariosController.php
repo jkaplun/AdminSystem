@@ -42,7 +42,7 @@ class UsuariosController extends Zend_Controller_Action
                                 'nombre' => $params['nombre'],
                                 'apellido_paterno' => $params['apellido_paterno'],
                                 'apellido_materno' => $params['apellido_materno'],
-                                'puesto' => $params['puesto'],
+                               // 'puesto' => $params['puesto'],
                                 'email' => $params['email'],
 			        			'p_admin' => $params['p_admin'],
 			        			'p_supervisor' => $params['p_supervisor'],

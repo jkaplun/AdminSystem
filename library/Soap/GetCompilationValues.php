@@ -46,8 +46,7 @@ Class GetCompilationValues{
 			return $xmlResponse;
 		}
 		// Fin Validacion de usuario.
-		
-		
+
 		$array= array('client_user'=>'','client_pasw'=>'');
 		$getinfo = $path->query('//ClientUser', $responseElement);
 		$array['client_user'] = $getinfo->item(0)->textContent;
@@ -61,7 +60,7 @@ Class GetCompilationValues{
 		// Making the response structure
 		$xmlResponse = "<?xml version='1.0' encoding='UTF-8'?>";
 		$xmlResponse .= "<GetCompilationValuesResponse>";
-				
+		
 		if(count($result[0])>0){
 			$xmlResponse .= "<Status>success</Status>";
 			foreach( $result[0] as $key => $value){
@@ -72,6 +71,8 @@ Class GetCompilationValues{
 		}
 		
 		$xmlResponse .= "</GetCompilationValuesResponse>";
+		
+
 		return  $xmlResponse;
 	}
 }
