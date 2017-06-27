@@ -70,6 +70,7 @@ function selectAgenciaChange(){
 	
 	idAgenciaActual =$("#select_agencias").val();
 	consultarAgencia(idAgenciaActual);
+	$("#id_agencia_folios").val(idAgenciaActual);
 
 	actualizarVistas.vistaUsuarioAgencia=false;
 	var tableUsuariosAgencias = $('#dataTable-usuarios-agencias').DataTable();
@@ -269,7 +270,7 @@ function mostarDatosAgencia(datosAgencia){
  	$("#observaciones_internas").val(datosAgencia.observaciones_internas );
  	$("#cfdi").val(datosAgencia.cfdi);
  	$("#prov_timbrado").val(datosAgencia.prov_timbrado);
- 	$("#id_agencia_folios").val(datosAgencia.id_agencia);
+// 	$("#id_agencia_folios").val(datosAgencia.id_agencia);
  	
 
  	if(datosAgencia.tel1 != null && datosAgencia.tel1.length != 0){
