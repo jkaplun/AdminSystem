@@ -269,7 +269,7 @@ function mostarDatosAgencia(datosAgencia){
  	$("#observaciones_internas").val(datosAgencia.observaciones_internas );
  	$("#cfdi").val(datosAgencia.cfdi);
  	$("#prov_timbrado").val(datosAgencia.prov_timbrado);
- 	//$("#id_agencia_folios").val(datosAgencia.id_agencia);
+ 	$("#id_agencia_folios").val(datosAgencia.id_agencia);
  	
 
  	if(datosAgencia.tel1 != null && datosAgencia.tel1.length != 0){
@@ -320,7 +320,6 @@ function populate(data) {
 
 function abrirModalAgregarFolios(){
 	//console.log('Agregar Folio');
-	$("#id_agencia_folios").val($("#id_agencia").val()); 
 	$("#folios_comprados").val(""); 
 	$("#fecha_compra_folios").val("");
 	$("#observaciones_folios").val("");
