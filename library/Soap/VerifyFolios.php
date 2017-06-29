@@ -53,7 +53,7 @@ Class VerifyFolios{
 		$getinfo = $path->query('//RFC', $responseElement);
 		$array['rfc'] = $getinfo->item(0)->textContent;
 		
-		$admin = new Application_Model_DbTable_Admin();
+		$admin = new Application_Model_DbTable_StoredProcedures();
 		$result = $admin->VerifyFolios($array);
 
 		// Making the response structure

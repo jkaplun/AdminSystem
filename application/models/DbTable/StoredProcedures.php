@@ -127,5 +127,27 @@ class Application_Model_DbTable_StoredProcedures extends Zend_Db_Table_Abstract{
 			echo $e;
 		}
 	}
+	
+	
+	/**
+	 * Verify Used Folios from 'Admin'
+	 * @param
+	 * @return 	array	$result
+	 * @author Garfias
+	 * Created February 5, 2016
+	 */
+	public function VerifyFolios($values){
+		try{
+			$sql = "call sp_c_verifica_folios('{$values['rfc']}')";
+			//$stmt = new Zend_Db_Statement_Sqlsrv($this->_db, $sql);
+			$stmt = $this->_db->prepare($sql);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			return  $result;
+		} catch(Exception $e){
+			//return  array('Error'=>$e);
+			return 0;
+		}
+	}
 }
 
