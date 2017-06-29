@@ -19,7 +19,7 @@ class Application_Model_DbTable_StoredProcedures extends Zend_Db_Table_Abstract{
 		try{
 			$clientData = '';
 			
-			$sql = "call sp_datos_compilacion_icaav('{$compilationName['client_user']}','{$compilationName['client_pasw']}')";
+			$sql = "CALL sp_datos_compilacion_icaav('{$compilationName['client_user']}','{$compilationName['client_pasw']}')";
 			//$stmt = new Zend_Db_Statement_Sqlsrv($this->_db, $sql);
 			$stmt = $this->_db->prepare($sql);
 			
@@ -42,7 +42,7 @@ class Application_Model_DbTable_StoredProcedures extends Zend_Db_Table_Abstract{
 	 */
 	public function AddUsedFolios($values){
 		try{
-			$sql = "call sp_i_folios_cte('{$values['rfc']}', '{$values['numFolios']}', '{$values['fecha']}','{$values['foliosTimbrados']}', @resultadoOUT)";
+			$sql = "CALL sp_i_folios_cte('{$values['rfc']}', '{$values['numFolios']}', '{$values['fecha']}','{$values['foliosTimbrados']}', @resultadoOUT)";
 			//$stmt = new Zend_Db_Statement_Sqlsrv($this->_db, $sql);
 			$stmt = $this->_db->prepare($sql);
 			$stmt->execute();
@@ -67,7 +67,7 @@ class Application_Model_DbTable_StoredProcedures extends Zend_Db_Table_Abstract{
 			
 			// Execute a SQLSRV statment
 			//$sql = '{call select_agencias_portalMIG()}';
-			$sql = "EXEC select_folios_cte '{$rfcClient}'";
+			$sql = "CALL select_folios_cte ('".$rfcClient."')";
 			//EXEC  @return_value = [dbo].[select_agencias_portalMIG]
 			//$stmt = new Zend_Db_Statement_Sqlsrv($this->_db, $sql);
 			$stmt = $this->_db->prepare($sql);
@@ -90,7 +90,7 @@ class Application_Model_DbTable_StoredProcedures extends Zend_Db_Table_Abstract{
 	 */
 	public function FoliosPerMonth($values){
 		try{
-			$sql = "call sp_c_verificacion_folios_rango_fecha('{$values['rfc']}','{$values['DateFrom']}','{$values['DateTo']}')";
+			$sql = "CALL sp_c_verificacion_folios_rango_fecha('{$values['rfc']}','{$values['DateFrom']}','{$values['DateTo']}')";
 			//$stmt = new Zend_Db_Statement_Sqlsrv($this->_db, $sql);
 			$stmt = $this->_db->prepare($sql);
 			$stmt->execute();
@@ -115,13 +115,13 @@ class Application_Model_DbTable_StoredProcedures extends Zend_Db_Table_Abstract{
 			$clientData = '';
 			
 			// Execute a SQLSRV statment
-			
-			$sql = "EXEC update_folios_utilizados '{$values['rfc']}','{$values['folios_utilizados']}'";
+			$sql = "CALL update_folios_utilizados('".$values['rfc']."',".$values['folios_utilizados'].")";
+
 			//$stmt = new Zend_Db_Statement_Sqlsrv($this->_db, $sql);
 			$stmt = $this->_db->prepare($sql);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
-			
+
 			return  $result;
 		} catch(Exception $e){
 			echo $e;
