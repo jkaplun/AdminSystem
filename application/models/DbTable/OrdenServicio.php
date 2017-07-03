@@ -67,7 +67,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 		->joinleft(array('a' => 'agencia'),
 						'os.id_agencia = a.id_agencia',
 						array('nombre as nombre_agencia'))
-		->where("id_orden_servicio_estatus<6");
+		->where("id_orden_servicio_estatus<6 AND en_monitor='S'");
 		//->where("u_ad.id_usuario_admin_puesto = 1 and id_orden_servicio_estatus<6");
 		//->where("(concluido = 'N' or concluido is null) and u_ad.ejecutivo = 'S'");
 		return $this->getAdapter ()->fetchAll( $select );
