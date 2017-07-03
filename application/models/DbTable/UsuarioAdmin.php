@@ -89,7 +89,7 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
   }
 
   public function getSoporteUsers(){
-  	$cond = 'activo="S" AND en_monitor="S"';
+  	$cond = 'es_ejecutivo="S" AND activo="S"';
   	$select = $this->_db->select()
   	->from( $this->_name,'*')
   	->where($cond)
