@@ -21,25 +21,21 @@
 					<h4 class="h4Form">Datos Personales</h4>
 					<hr class="hrForm">
 					<div class="row">
-			    		<div class="col-md-4">
+			    		<div class="col-md-2">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-user"></i>
 				                </span>
 				                  <?= $this->formUsuarioAgencia->nombreUsuarioAgencia ?>
 				            </div>
 			    		</div>	    			    		
-			    		<div class="col-md-4">
+			    		<div class="col-md-2">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-user"></i>
 				                </span>
 								<?= $this->formUsuarioAgencia->apellidos ?>
 				            </div>
-			    		</div>			    		
-			    	</div>
-			    	<h4 class="h4Form">Contacto</h4>
-					<hr class="hrForm">
-					<div class="row">
-			    		<div class="col-md-3">
+			    		</div>			    
+			    		<div class="col-md-2">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-phone"></i>
 				                </span>
@@ -55,14 +51,15 @@
 				               <!--  <input disabled type="text" class="form-control" placeholder="Ext."> -->
 				            </div>
 			    		</div>
-			    		<div class="col-md-3">
+			    		
+			    		<div class="col-md-2">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-mobile"></i>
 				                </span>
        							<?= $this->formUsuarioAgencia->celular ?>
 				            </div>	    		
 			    		</div>  
-			    		<div class="col-md-4">
+			    		<div class="col-md-2">
 							<div class="form-group input-group">
 				                <span class="input-group-addon"><i class="fa fa-envelope-o"></i>
 				                </span>
@@ -73,76 +70,68 @@
 			    	<h4 class="h4Form">Puesto</h4>
 					<hr class="hrForm">			    	
 					<div class="row">
-			    		<div class="col-md-4">
+			    		<div class="col-md-2">
 							<div class="form-group">
 								<label class="control-label">Puesto</label>
 								   <?= $this->formUsuarioAgencia->puesto ?>
 							</div>
 			    		</div>	    			    		
-			    		<div class="col-md-4">
+			    		<div class="col-md-1">
 							<div class="form-group">
 								<label class="control-label">Director</label>
 								 <?= $this->formUsuarioAgencia->director ?>
 							</div>
 			    		</div>
-			    		<div class="col-md-4">
+			    		<div class="col-md-2">
 							<div class="form-group">
 								<label class="control-label">Lider de Proyecto</label>
 								 <?= $this->formUsuarioAgencia->lider_proy ?>
 							</div>   		
 			    		</div>   			    		
-			    	</div>
-			    	<h4 class="h4Form">Credenciales de Acceso</h4>
-					<hr class="hrForm">
-			    	<div class="row">
-			    		<div class="col-md-6">
+
+			    		<div class="col-md-2">
 							<div class="form-group input-group">
-				                <span class="input-group-addon"><i class="fa fa-user"></i>
-				                </span>
+				                <label class="control-label">Usuario Portal</label>
 				                 <?= $this->formUsuarioAgencia->claveUsuarioAgencia ?>
 				            </div>
 			    		</div>			    	
-			    		<div class="col-md-6">
+			    		<div class="col-md-2">
 							<div class="form-group input-group">
-				                <span class="input-group-addon"><i class="fa fa-lock"></i>
-				                </span>
+				                <label class="control-label">Contrase&ntilde;a Portal</label>
 				                     <?= $this->formUsuarioAgencia->pwd ?>
 				            </div>
 			    		</div>
-    			    		
 			    	</div>
 				</fieldset>
 				<fieldset>
 					<h4 class="h4Form">Permisos</h4>
 					<hr class="hrForm">
 			    	<div class="row">
-			    		<div class="col-md-4">
+			    		<div class="col-md-3">
 							<div class="form-group">
 								<label class="control-label">Admin Factura Electr&oacute;nica</label>
 	  									<?= $this->formUsuarioAgencia->admin_fe?>
 							</div>
 			    		</div>
-			    		<div class="col-md-4">
+			    		<div class="col-md-3">
 							<div class="form-group">
 								<label class="control-label">Enviar Reporte MIG</label>
 									<?= $this->formUsuarioAgencia->enviar_reporte_portal_mig?>
 							</div>   		
 			    		</div>	    			    		
-			    		<div class="col-md-4">
+			    		<div class="col-md-3">
 							<div class="form-group">
 								<label class="control-label">Bajar Actualizaciones</label>
 									<?= $this->formUsuarioAgencia->bajar_updates?>
 							</div> 
 			    		</div>    			    		
-			    	</div>
-			    	<div class="row">
-		    		<div class="col-md-6">
-						<div class="form-group input-group">
-			                <span class="input-group-addon">Estatus</span>
-			                <?= $this->formUsuarioAgencia->activo ?>
-			            </div>	    		
-		    		</div>	    			    		
-		    	</div>
+			    		<div class="col-md-3">
+							<div class="form-group input-group">
+								<label class="control-label">Estatus</label>
+				                <?= $this->formUsuarioAgencia->activo ?>
+				            </div>	    		
+			    		</div>	    			    		
+		    		</div>
 		    	</fieldset>
 		    </div>
 		    <div class="modal-footer">  

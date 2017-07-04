@@ -3,15 +3,25 @@
 	<div class="col-md-10">
 		<?= $this->selectAgencias->select_agencias?>
 	</div>
-	<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_admin']=='S') {?>
 	<div class="col-md-2" align="right">
-		<button type="button" class="btn btn-success"
+	<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_admin']=='S') {?>
+	
+		<button type="button" class="btn btn-primary"
 			data-dismiss="modal" onclick="abrirModalAgregarAgencia()"
 			data-toggle="modal" data-target="#myModal">
 			&nbsp;<i class="fa fa-plus"></i>&nbsp;Agencia&nbsp;
 		</button>
-	</div>
+	
+	<?php } else { ?>
+
+		<button type="button" class="btn btn-default"
+			data-dismiss="modal" onclick="abrirModalAgregarAgencia()"
+			data-toggle="modal" data-target="#myModal" disabled="disabled">
+			&nbsp;<i class="fa fa-plus"></i>&nbsp;Agencia&nbsp;
+		</button>
+	
 	<?php } ?>
+	</div>
 </div>
 <div class="salto"></div>
 <div id="datos-agencia">
@@ -25,9 +35,7 @@
 		</div>
 	</div>
 </div>
-<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_admin']=='S') {?>
-	<?= $this->render('agencias/render/modalAgregarAgencia.phtml') ?>
-<?php } ?>
+<?= $this->render('agencias/render/modalAgregarAgencia.phtml') ?>
 <?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_ejecutivo']=='S') {?>
 	<?= $this->render('agencias/render/modalNuevoUsuario.phtml') ?>
 <?php } ?>
@@ -37,7 +45,7 @@
 <?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_agrega_folios']=='S') {?>
 	<?= $this->render('agencias/render/modalNuevosFolios.phtml') ?>
 <?php } ?>
-<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_ventas']=='S') {?>
+<?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_add_producto']=='S') {?>
 	<?= $this->render('agencias/render/modalNuevoProducto.phtml') ?>
 <?php } ?>
 <script type="text/javascript">

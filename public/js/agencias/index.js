@@ -136,7 +136,6 @@ function abrirModalEditarAgencia(){
 	$('#myModalLabel').html("Editar Datos de la Agencia");
 	$("#action-form-agencia").attr('onclick','submitFormUpdateAgencia()');
 	idAgenciaActual =$("#select_agencias").val();
-	consultarAgencia(idAgenciaActual);
 }
 
 function submitFormAddAgencia(){
