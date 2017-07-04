@@ -441,7 +441,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder","Observaciones de la Agencia")
-        ->setAttrib("maxlength","256")
+        ->setAttrib("maxlength","50000")
         ->setAttrib("rows","10");
         $this->addElement($observaciones_agencia);
         
@@ -454,7 +454,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setAttrib("class","form-control input-sm")
         ->setAttrib("autocomplete","off")
         ->setAttrib("placeholder","Observaciones de la Agencia")
-        ->setAttrib("maxlength","256")
+        ->setAttrib("maxlength","50000")
         ->setAttrib("rows","10");
         $this->addElement($element);
         
