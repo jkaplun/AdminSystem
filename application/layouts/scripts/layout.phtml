@@ -142,8 +142,11 @@
                                     <?php if ($_SESSION['Zend_Auth']['USER_VALUES']['p_admin']=='S') {?>
                                     <li>
                                         <a href="<?= $this->baseUrl() ?>/orden-seguimiento-admin/"><i class="fa fa-eye"></i> Seguimiento Admin </a>
-                                    </li>   
+                                    </li>
                                     <?php } ?>
+                                    <li>
+                                        <a href="<?= $this->baseUrl() ?>/orden-seguimiento/mi-historico"><i class="fa fa-eye"></i> Mi Hist&oacute;rico </a>
+                                    </li>  
                                     <li>
                                         <a target="_blank" href="<?= $this->baseUrl() ?>/orden-monitoreo/"><i class="fa fa-desktop"></i> Monitor de Seguimiento</a>
                                     </li>

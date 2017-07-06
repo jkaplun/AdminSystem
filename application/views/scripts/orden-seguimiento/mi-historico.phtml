@@ -1,0 +1,288 @@
+<link rel="stylesheet" type="text/css" href="public/css/flipclock.css">
+<link rel="stylesheet" type="text/css" href="public/css/orden-seguimiento/index.css">
+<link rel="stylesheet" type="text/css" href="public/css/daterangepicker.css">
+<script type="text/javascript" src="public/js/moment.js"></script>
+<script type="text/javascript" src="public/js/daterangepicker.js"></script>
+
+<div class="row">
+	<table width="100%" class="table">
+		<thead>
+			<tr>
+				<th class="amarillo centrado">En operación</th>
+				<th class="naranja centrado">Reportarse</th>
+				<th class="rojo centrado">Reportarse Urgente</th>
+				<th class="centrado">Otros Servicios</th>
+				<th class="morado centrado">Externos</th>		
+			</tr>
+		</thead>	
+	</table>
+</div>
+
+<form class="form-inline" method="get" name="filtroform" id="filtroform">
+<?= $this->formFiltroSeguimientoOrdenAdmin->fecha_de ?>         
+<?= $this->formFiltroSeguimientoOrdenAdmin->fecha_hasta ?>
+<div class="row">
+	<div class="col-md-2">
+		<?= $this->formFiltroSeguimientoOrdenAdmin->id_agencia ?>            		
+	</div>
+	<div class="col-md-2">
+		<?= $this->formFiltroSeguimientoOrdenAdmin->id_motivo ?>                    
+	</div>
+	<div class="col-md-2">
+		<?= $this->formFiltroSeguimientoOrdenAdmin->id_orden_servicio_estatus ?>
+	</div>
+	<div class="col-md-2">
+		<?= $this->formFiltroSeguimientoOrdenAdmin->daterange ?>
+	</div>
+	<div class="col-md-2">
+		<?= $this->formFiltroSeguimientoOrdenAdmin->Filtrar ?>
+	</div>
+</div>
+
+</form>
+
+<br>
+
+<div class="row">
+	<div class="col-md-6" align="left">
+		<h3>Se muestra(n) <b id="total_ordenes"></b> resultado(s):</h3>
+	</div>
+	<div class="col-md-6" align="right">
+		<?=$this->paginationControl ($this->paginator, 'Sliding');?>
+	</div>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">
+
+	<?php $id_orden_servicio_todos=","?>
+	<?php $duracion_servicio_todos=","?>
+	<?php $control_cron_estatus_todos=","?>
+	<?php $motivo_todos=","?>
+
+	<?php foreach ($this->paginator as $registro) { ?>
+  	<form id="formOrSr_<?= $registro['id_orden_servicio'] ?>">
+	<input type="hidden" name="administrador" value="1">
+  	<?php  
+  		$color='';
+
+		if($registro['control_cron_estatus']!=0){
+	  		switch ($registro["id_orden_servicio_estatus"]){
+	  			case '1':
+	  				$color='bs-callout-amarillo-verde';
+	  			break;
+	  			case '2':
+	  				$color='bs-callout-naranja-verde';
+	  			break;
+	  			case '3':
+	  				$color='bs-callout-rojo-verde';
+	  			break;
+	  			case '4':
+	  				$color='bs-callout-gris-verde';
+	  			break;
+	  			case '5':
+	  				$color='bs-callout-morado-verde';
+	  			break;
+	  		}
+		}else{
+	  		switch ($registro["id_orden_servicio_estatus"]){
+	  			case '1':
+	  				$color='bs-callout-amarillo';
+	  			break;
+	  			case '2':
+	  				$color='bs-callout-naranja';
+	  			break;
+	  			case '3':
+	  				$color='bs-callout-rojo';
+	  			break;
+	  			case '4':
+	  				$color='bs-callout-gris';
+	  			break;
+	  			case '5':
+	  				$color='bs-callout-morado';
+	  			break;
+	  		}		
+		}
+  		//if($registro["control_cron_estatus"]!=3){
+  			
+			// Llena las opciones del formulario de acuerdo a la agencia que corresponda la orden de servicio.  		
+	  		$poliza = new Application_Model_DbTable_Poliza();
+	  		$polizasAgencia = $poliza->obtenerPolizasVigentesPorIdAgencia($registro['id_agencia']);
+	  		$options = array();
+	  		foreach ($polizasAgencia as $key => $value){
+	  			$options[$value['id_poliza']] = $value['clave'];
+	  		}
+	  		$this->formSeguimientoOrden->id_poliza->addMultiOptions($options);
+	  		
+	    	$producto = new Application_Model_DbTable_Producto();
+	        $productos = $producto->obtenerProductosRegistradosPorAgencia($registro['id_agencia']);
+	  		$options = array();
+	  		foreach ($productos as $key => $value){
+	  			$options[$value['id_producto']] = $value['nombre_prod'];
+	  		}
+	  		$this->formSeguimientoOrden->id_producto->addMultiOptions($options);  		
+
+	  		$utiles = new Application_Model_Services_Utiles();
+	  		$params = array(
+	  			'id_usuario_soporte_titular' => $registro['id_usuario_soporte_titular'],
+				'id_usuario_soporte_auxiliar' => $registro['id_usuario_soporte_auxiliar']
+	  		);
+	  		
+	  		$ejecutivos = $utiles->consultarejecutivosporidService($params);
+	  		$options = array();
+	  		foreach ($ejecutivos as $key => $value){
+	  			$options[$key] = $value;
+	  		}
+	  		$this->formSeguimientoOrden->id_usuario_admin_atiende->addMultiOptions($options);
+
+			$options = array('' => 'Otro');
+			$usuario_agencia = new Application_Model_DbTable_AgenciaUsuario();
+			$usuariosAgencia = $usuario_agencia->obtenerUsuariosDeAgenciaPorIdAgencia($registro['id_agencia']);
+
+	  		foreach ($usuariosAgencia as $key => $value){
+	  			$options[$value['id_usuario_agencia']] = $value['nombre']." ".$value['apellidos'];
+  			}
+	  		
+	  		$this->formSeguimientoOrden->id_usuario_agencia_solicito->addMultiOptions($options);
+	  		
+	  		$this->formSeguimientoOrden->populate($registro);
+
+	  		
+	  		$fecha = new Zend_Date($registro["fecha_alta"]);
+	  		$fechaString = $fecha->toString('d MMMM yyyy, H:m:s');
+	  		$registro["fecha_alta"]= $fechaString;
+	  		
+	  		//echo "<pre>".print_r($registro,true)."</pre>";
+	  		 
+  		?>
+		<?= $this->formSeguimientoOrden->id_orden_servicio ?>
+		<div id="orden_servicio_<?= $registro["id_orden_servicio"]?>" class="panel panel-default bs-callout2 <?= $color ?>">
+		 	<div class="panel-heading <?= $color ?>2">
+            	
+            	<div class="row">
+            		
+            		<div class="col-md-1">
+            			ID: <?= $registro["id_orden_servicio"] ?>
+            		</div>
+            		<div class="col-md-2">
+                        <?= $registro["fecha_alta"] ?>
+                    </div>
+            		<div class="col-md-4">
+            			<span  id='consulta-ordenes' class="btn btn-default" onClick="vinculo(<?= $registro['id_agencia'] ?>)">
+            			<?= $registro["nombre"] ?>
+            			</span>
+            			
+            		</div>
+            		<div class="col-md-2">
+                        <?= $registro["descripcion_estatus"] ?>
+                    </div> 
+                    <div class="col-md-2">
+                        <?= $registro["nombre_usr_admin_atiende"].' '. $registro["ap_usr_admin_atiende"]?>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-default btn-xs" type="button" onclick="showEditOrdServ(<?= $registro["id_orden_servicio"] ?>)">Editar  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                    </div>
+            	</div>
+            	
+            </div>
+		 	<div class="panel-body" id="panel-body-<?= $registro["id_orden_servicio"] ?>" style="display: none">
+			 	<div class="row">
+					<div class="col-lg-4 col-md-6">
+						<div class="form-group">
+                            <label >Fecha Solicitud:</label>
+							<p><?= $registro["fecha_alta"] ?></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripci&oacute;n / Soporte:</label>
+				  			<p>
+				  			<?php if ($registro['id_tipo_soporte']==2) {  ?>
+							<b>  Soporte en Sitio</b>
+                        	<?php } else { ?>
+                        	<?= $registro["descripcion_estatus"] ?>
+                        	<?php } ?>
+				  			</p>
+                        </div> 
+                        <div class="form-group">
+                            <label>Comentario Recepci&oacute;n:</label>
+				  			<p><?= $registro["comentarios_recepcion"] ?></p>
+                        </div>
+ 						<div class="form-group">
+							<?= $this->formSeguimientoOrden->id_producto->setAttrib('disabled','disabled') ?>
+                        </div>   
+                         <div class="form-group">
+							<?= $this->formSeguimientoOrden->id_poliza->setAttrib('disabled','disabled')?>
+                        </div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+					    <div class="form-group">
+							<?= $this->formSeguimientoOrden->id_usuario_admin_atiende->setAttrib('disabled','disabled')?>
+                        </div>  
+						<?php if ($registro['id_tipo_soporte']==2) {  ?>
+                        <?php } else { ?>
+						<div class="form-group">
+							<?= $this->formSeguimientoOrden->id_motivo->setAttrib('disabled','disabled') ?>
+                        </div>                        
+                        <?php } ?>
+						<div class="form-group">
+							<?= $this->formSeguimientoOrden->id_usuario_agencia_solicito->setAttrib('disabled','disabled') ?>
+                        </div>
+						<div class="form-group">
+							<?= $this->formSeguimientoOrden->solicito_otro->setAttrib('disabled','disabled') ?>
+                        </div>
+						<div class="form-group">
+							<?= $this->formSeguimientoOrden->duracion_servicio ?>
+                        </div>
+						
+
+
+					</div>
+					<div class="col-lg-4 col-md-6">
+                        <div class="form-group">
+							<?= $this->formSeguimientoOrden->motivo_orden ?>
+                        </div>
+                        <div class="form-group">
+							<?= $this->formSeguimientoOrden->solucion_orden ?>
+                        </div>
+                        
+                        
+					</div>
+	                
+				</div>
+			  	<hr style=" margin-top: 5px; margin-bottom: 10px;">	  		    
+			  	<div class="row">
+				  	<div class="col-md-6 form-group">
+                        <div class="form-group">
+							<?= $this->formSeguimientoOrden->conformidad ?>
+                        </div>
+				  	</div>
+		  			<div class="col-md-2 form-group" align="center">
+		  			<br>
+
+		  			<button name="accion_os" onclick="guardarDuracionNuevaAjax(<?= $registro["id_orden_servicio"]?>,1)" class="btn btn-primary prevent-default"/>Guardar Cambios</button>
+		  			</div>					  			
+				  	<div class="col-md-2" align="center">
+				  	</div>			  				  	
+			  	</div>	
+		  </div>
+		</div>
+
+		<?php $id_orden_servicio_todos = $id_orden_servicio_todos . $registro["id_orden_servicio"] . ","  ?>
+		<?php $duracion_servicio_todos = $duracion_servicio_todos . $registro["duracion_servicio_segundos"] . ","  ?>
+		<?php $control_cron_estatus_todos = $control_cron_estatus_todos . $registro["control_cron_estatus"] . ","  ?>
+		<?php $motivo_todos = $motivo_todos . $registro["motivo"] . ","  ?>
+	</form>
+	<?php 
+	//	}
+	} ?>
+	<span id="info_id_ordenes" hidden="true"> <?= $id_orden_servicio_todos ?> </span>
+	<span id="info_duracion_servicio_todos" hidden="true"> <?= $duracion_servicio_todos ?> </span>
+	<span id="info_control_cron_estatus_todos" hidden="true"> <?= $control_cron_estatus_todos ?> </span>
+	<span id="info_motivo_todos" hidden="true"> <?= $motivo_todos ?> </span>
+	</div>
+	
+	<div class="row" align="right">
+	<?=$this->paginationControl ($this->paginator, 'Sliding');?>
+</div>
+</div>
+
+

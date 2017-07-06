@@ -290,6 +290,39 @@ function guardarServicioAjax(id_orden_servicio,estado){
 
 }
 
+function guardarDuracionNuevaAjax(id_orden_servicio,estado){
+    $.ajax({ 
+        url: pathOrdenServicioController + "actualizar-duracion", 
+        method: "post", 
+        data: $("#formOrSr_"+id_orden_servicio).serialize()+"&accion_orden_servicio="+estado,
+        dataType: "json" 
+      }).done(function(res) { 
+
+  if(res.estado == "ok"){ // si la respuesta es correcta: 
+      //console.log(res);  
+      swal("La orden se ha actualizado.", " ", "success"); 
+   } else{ 
+     swal(res.descripcion, " ", "error");  
+   }
+  	
+  if( res.administrador == 0 ){
+	  if(res.cambio_ejecutivo == 'S' || estado == 6){
+		  $("#orden_servicio_"+id_orden_servicio ).remove();
+		  var total = $("#total_ordenes").html();
+		  
+		  $("#total_ordenes").html((total-1));
+		  
+		  
+	  }
+  }
+  
+  
+    })// end ajax done  
+      .fail(function() { 
+        swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+    });
+}
+
 function applyDataMask(field) {
 
     var mask = field.dataset.mask.split('');

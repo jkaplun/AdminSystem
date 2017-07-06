@@ -56,6 +56,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	 * Initializing session
 	 */
 	protected function _initSession() {
+		
+		// server should keep session data for AT LEAST 10 hour
+		ini_set('session.gc_maxlifetime', 36000);
+		
+		// each client should remember their session id for EXACTLY 10 hour
+		session_set_cookie_params(36000);
+		
 		Zend_Session::start();
 	
 // 		// Instance namespace Zend_Auth

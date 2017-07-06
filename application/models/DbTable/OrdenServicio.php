@@ -23,9 +23,14 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 			->from ( "view_orden_servicio", '*' )
 			->order("id_orden_servicio desc")->limit(100);
 	
-		if (isset($valores['id_usuario_admin_atiende']) && $valores['id_usuario_admin_atiende']!='') {
-			$select->where("id_usuario_admin_atiende=?",$valores['id_usuario_admin_atiende']);
-		}
+        if ($_SESSION['Zend_Auth']['USER_VALUES']['p_admin']=='S') {
+        	if (isset($valores['id_usuario_admin_atiende']) && $valores['id_usuario_admin_atiende']!='') {
+        		$select->where("id_usuario_admin_atiende=?",$valores['id_usuario_admin_atiende']);
+        	}
+        } else { 
+        	$select->where("id_usuario_admin_atiende=?",$_SESSION['Zend_Auth']['USER_VALUES']['id_usuario']);
+        }
+		
 		if (isset($valores['id_motivo']) && $valores['id_motivo']!='') {
 			$select->where("id_motivo=?",$valores['id_motivo']);
 		}
@@ -40,7 +45,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 		if  (isset($valores['daterange']) && $valores['daterange']!='') {
 			$select->where("fecha_alta between '{$valores['fecha_de']} 00:00:00' and '{$valores['fecha_hasta']} 23:59:59'");
 		}
-		
+
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	

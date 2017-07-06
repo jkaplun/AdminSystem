@@ -127,7 +127,18 @@ class Application_Form_Ordenes_SeguimientoOrden extends Zend_Form
 		->setAttrib("maxlength","245");
 		
 		$this->addElement($element);
-	
+
+		$element = new Zend_Form_Element_Text('duracion_servicio');
+		$element->setRequired(false)
+		->setLabel("Duración [min]")
+		->removeDecorator('HtmlTag')
+		->setAttrib("class","form-control")
+		->setAttrib("autocomplete","off")
+		->setAttrib("placeholder",utf8_encode("Duración [min]"))
+		->setAttrib("maxlength","10");
+		
+		$this->addElement($element);
+
 		$element = new Zend_Form_Element_Textarea('motivo_orden');
 		$element->setRequired(false)
 			->setLabel("Motivo")

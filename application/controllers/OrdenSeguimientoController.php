@@ -310,12 +310,7 @@ class OrdenSeguimientoController extends Zend_Controller_Action
 
     public function consultaPorAgenciaAction(){
     	
-    	
-    	
     	$this->_helper->layout->setLayout('layout_login_sin_menus');
-    	
-    	
-    	
     	$this->view->params=$this->_request->getParams();
     	
     	if (isset($this->view->params['exportar'])) {
@@ -323,15 +318,11 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	}
     	
     	$ordenServicioDbTable = new Application_Model_DbTable_OrdenServicio();
-    	
-    	
     	$orden = new Application_Model_DbTable_OrdenServicio();
     	$this->view->formFiltroSeguimientoOrdenAdmin = new Application_Form_Ordenes_FiltroSeguimientoOrdenAdmin();
     	$params=$this->_request->getParams();
-    	
 
     	$this->view->formFiltroSeguimientoOrdenAdmin->populate($params);
-    	
     	
     	$this->view->ordServ = $ordenServicioDbTable->obtenerOrdenesPorAgencia($this->view->params['id_agencia'], $params);
     	
@@ -374,6 +365,84 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	$datosAgencia[0]['usuariosAgencia'] = $usuario_agencia->obtenerUsuariosDeAgenciaPorIdAgencia($params['id_agencia']);
     	
     	$this->_helper->json($datosAgencia[0]);
+    }
+    
+    public function miHistoricoAction(){
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/flipclock.min.js');
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/easytimer.js');
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes.js');
+    	
+    	$orden = new Application_Model_DbTable_OrdenServicio();
+    	$this->view->formFiltroSeguimientoOrdenAdmin = new Application_Form_Ordenes_FiltroSeguimientoOrdenAdmin();
+    	$params=$this->_request->getParams();
+    	
+    	$this->view->formFiltroSeguimientoOrdenAdmin->populate($params);
+    	$resultado = $orden->obtenerTodasLasOrdenes($params);
+    	
+    	$this->view->countArray= count($resultado);
+    	
+    	// Get a Paginator object using Zend_Paginator's built-in factory.
+    	$page = $this->_request->getParam('page', 0);
+    	$paginator = Zend_Paginator::factory($resultado);
+    	$paginator->setCurrentPageNumber($page)
+    	->setItemCountPerPage(10)
+    	->setPageRange(10);
+    	$paginator->setCacheEnabled(true);
+    	// Assign paginator to view
+    	Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination_sm.phtml');
+    	
+    	$this->view->paginator=$paginator;
+    	
+    	foreach ($this->view->paginator as $key => &$value){
+    		$total_diff_cron = 0;
+    		if ( $value['control_cron_estatus'] == 1){
+    			$datetime1 = new DateTime($value['control_cron_inicial']);
+    			$zendDate = new Zend_Date();
+    			$datetime2 = new DateTime($zendDate->toString('YYYY-MM-dd HH:mm:ss'));
+    			$interval = $datetime1->diff($datetime2);
+    			$d = $interval->format('%d');
+    			$h = $interval->format('%h');
+    			$i = $interval->format('%i');
+    			$s = $interval->format('%s');
+    			$total_diff_cron = $s + ($i * 60) + ($h * 60 * 60) + ( $d * 24 *60 *60);
+    		}
+    		$duracion_servicio_segundos = ($value['duracion_servicio']*60)+$total_diff_cron;
+    		$value['duracion_servicio_segundos'] =  $duracion_servicio_segundos;
+    	}
+    	$this->view->formSeguimientoOrden = new Application_Form_Ordenes_SeguimientoOrden();
+    	
+    }
+ 
+    public function actualizarDuracionAction(){
+    	$this->_helper->layout()->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	$params=$this->_request->getParams();
+    	
+    	if ( !is_numeric( $params['duracion_servicio'] ) ) {
+    		$this->_helper->json(array('estado'=>'error','descripcion' => 'Formato incorrecto de minutos.' ));
+    		die();
+    	}
+    	
+    	$data = array(
+    		'solucion_orden' => $params['solucion_orden'],
+    		'motivo_orden' => $params['motivo_orden'],
+    		'conformidad' => $params['conformidad'],
+    		'duracion_servicio' => $params['duracion_servicio']
+    	);
+    	
+    	$id_orden_servicio = $params['id_orden_servicio'];
+    	
+    	$orden = new Application_Model_DbTable_OrdenServicio();
+    	
+    	$where = "id_orden_servicio=$id_orden_servicio";
+    	$status = $orden->update($data, $where);
+    	
+    	$this->_helper->json(array('estado'=>'ok'));
+    	
     }
     
 }
