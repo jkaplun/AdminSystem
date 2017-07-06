@@ -97,5 +97,16 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
   
   	return $this->getAdapter ()->fetchAll ( $select );
   }
+  
+  
+  public function getSoporteUsersForMonitor(){
+  	$cond = 'activo="S" and en_monitor="S"';
+  	$select = $this->_db->select()
+  	->from( $this->_name,'*')
+  	->where($cond)
+  	->order('nombre');
+  	
+  	return $this->getAdapter ()->fetchAll ( $select );
+  }
 }
 

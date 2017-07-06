@@ -17,7 +17,7 @@ class OrdenMonitoreoController extends Zend_Controller_Action{
 			$ordenes[$orden['id_usuario']][$orden['id_orden_servicio']] = $orden;
 		}
 		$ua = new Application_Model_DbTable_UsuarioAdmin();
-		$usuariosAdmin = $ua->getSoporteUsers();
+		$usuariosAdmin = $ua->getSoporteUsersForMonitor();
 		$usuariosAdminNombres = array();
 		foreach ( $usuariosAdmin as $value ){
 			//$usuariosAdminAux[$value['id_usuario']] = array();
