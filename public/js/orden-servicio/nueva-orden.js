@@ -126,8 +126,9 @@ $(document).ready(function() {
 }); // end  $(document).ready(function() { 
 
 
-function radioPoliza(){
+function radioPoliza(id_poliza){
 	$("#dataTable-polizas-vigentes").css("background-color" ,'');
+	$("#id_producto").val(polizas[id_poliza].id_producto);
 }
 
 function consultarAgencia(id_agencia){
@@ -270,7 +271,7 @@ function agregarPolizaEnTabla(res){
 
   if(res.id_poliza_estatus == "1"){ 
 	if (res.vigente=='si') {
-		$('#dataTable-polizas-vigentes tr:last-child td:first-child').html(' <input type="radio" name="id_poliza" value="'+res.id_poliza+'" class"radio-poliza" onclick="radioPoliza()">');	
+		$('#dataTable-polizas-vigentes tr:last-child td:first-child').html(' <input type="radio" name="id_poliza" value="'+res.id_poliza+'" class"radio-poliza" onclick="radioPoliza(\''+res.id_poliza+'\')">');	
 	}  
 
 	if (res.vigente=='no') {
@@ -310,20 +311,18 @@ function consultarProductos(){
 }
 
 function mostrarUsuariosAgenciaEnSelect(idAgenciaActual){
-	
-
-	
 	$('#id_usuario_agencia_solicito').html('');
+	$("#div_otro").hide();
  // productos_todos={};
   //ajaxActionUsuarioAgencia="consultar"
   var id_agencia_seleccionada="id_agencia="+idAgenciaActual;
   //var addIdAgencia="id_agencia="+idAgenciaActual;
- $.ajax({ 
+ $.ajax({
       url: pathUsuarioAgenciaController+"consultar", 
       method: "post", 
       data: id_agencia_seleccionada,
       dataType: "json" 
-    }) 
+    })
     .done(function(res) {  
         var i=0;
       for (i;i<res.length;i++){
@@ -334,14 +333,15 @@ function mostrarUsuariosAgenciaEnSelect(idAgenciaActual){
         }
       $('#id_usuario_agencia_solicito').append($('<option>').text("[Otro]")
               .attr('value', "otro")
-              .attr('id', "id_usuario_agencia")
-              );
-      
-      
-  })// end ajax done  
-    .fail(function() { 
+              .attr('id', "id_usuario_agencia"));
+      if ( res.length == 0 ) {
+    	  //alert('cero usuario');
+    	  $("#div_otro").show();
+      }
+  })// end ajax done
+    .fail(function() {
       swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
-  }); 
+  });
 }
 
 //consultarejecutivosporid
@@ -392,11 +392,20 @@ $('#id_usuario_admin_atiende').html('');
 function submitNuevaOrden(){
 	
 	var validar = $('input[name=id_poliza]:checked').val();
+	
+	var id_motivo = $("#id_motivo").val();
+	
+
+	var clavePolizaText = "";
+	
+
 	if ( validar ===  undefined){
 		$("#dataTable-polizas-vigentes").css("background-color" ,'#F5A9BC');
 		alert('No hay poliza selecionada.');
 		return;
 	}
+	clavePolizaText = "\n Clave poliza :    " +  polizas[$('input[name=id_poliza]:checked').val()].clave ;
+
 	
 	var validar = $('#id_usuario_admin_atiende').val();
 	if ( validar == null){
@@ -404,14 +413,32 @@ function submitNuevaOrden(){
 		return;
 	}
 	
+	var otro;
+	if ( $("#id_usuario_agencia_solicito").val() == 'otro' ) {
+		otro = $("#solicito_otro").val();
+	} else {
+		otro = $("#id_usuario_agencia_solicito option:selected").text();
+	}
+	
+	var estatus = "";
+	if ( $("input[name=id_orden_servicio_estatus]:checked").val() == '1'){
+		estatus = "En Operación";
+	}
+	if ( $("input[name=id_orden_servicio_estatus]:checked").val() == '2'){
+		estatus = "Reportarse";
+	}	
+	if ( $("input[name=id_orden_servicio_estatus]:checked").val() == '3'){
+		estatus = "Reportarse Urgente";
+	}
+	
 	var datos_orden= "Agencia : " + $("#select_agencias option:selected").text() + 
-                   "\n Producto :    " +  $("#producto option:selected").text() + 
-                   "\n Clave poliza :    " +  polizas[$('input[name=id_poliza]:checked').val()].clave  +
-                   "\n Solicitó :    " + $("#id_usuario_agencia_solicito option:selected").text() +
+                   "\n Producto : " +  $("#id_producto option:selected").text() + 
+                  // clavePolizaText +
+                   "\n Solicitó :    " + otro +
                    "\n Ejecutivo :    " +  $("#id_usuario_admin_atiende option:selected").text() +
                    "\n Motivo :    " + $("#id_motivo option:selected").text() + 
-                   "\n Tipo de soporte :    "  + $("#id_tipo_soporte option:selected").text(); 
-                   //"\n Descripción: "+  $("#descripcion").val();
+                   "\n Tipo de soporte :    "  + $("#id_tipo_soporte option:selected").text() + 
+                   "\n Estatus: "+  estatus;
 
 	swal({
 	  title: "Verifique que los datos sean correctos",
@@ -420,29 +447,33 @@ function submitNuevaOrden(){
 	  showCancelButton: true,
 	  confirmButtonColor: "#DD6B55",
 	  confirmButtonText: "Continuar",
-	  closeOnConfirm: false
+	  closeOnConfirm: true
 	},
 	function(){
+    	blockUI();
+
 	  $.ajax({ 
 	      url: pathOrdenServicioController + "agregar", 
 	      method: "post", 
 	      data: $("#datosFormServicio").serialize()+"&id_agencia="+idAgenciaActual ,
 	      dataType: "json" 
-	    }).done(function(res) {  
-	      if(res.estado=="ok"){
-	          //swal("La orden de servicio ha sido registrada exitosamente", " ", "success");
-	          swal({title: "La orden de servicio ha sido registrada exitosamente",   
-	           text: "Redireccionando . .", 
-	           type: "success",   
-	           timer: 2800,   
-	           showConfirmButton: false
-	          });
-	
-	        setTimeout(function(){location.reload();}, 2600);
-	        
-	      }else{
-	          swal(res.descripcion, " ", "error"); 
-	      }
+	    }).done(function(res) {
+	    	
+		      if(res.estado=="ok"){
+		          //swal("La orden de servicio ha sido registrada exitosamente", " ", "success");
+		          swal({title: "La orden de servicio ha sido registrada exitosamente",   
+		           text: "Redireccionando...", 
+		           type: "success",   
+		           timer: 2800,   
+		           showConfirmButton: false
+		          });
+		
+		        setTimeout(function(){location.reload();}, 2600);
+		        
+		      }else{
+		          swal(res.descripcion, " ", "error"); 
+		      }
+	      
 	  })// end ajax done  
 	    .fail(function() { 
 	      swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 

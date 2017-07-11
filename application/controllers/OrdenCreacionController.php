@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * 
+ * @author jgarfias
+ *
+ */
 class ordenCreacionController extends Zend_Controller_Action
 {
 
@@ -64,15 +68,12 @@ class ordenCreacionController extends Zend_Controller_Action
          
         $zendForm->addElement($tipoSoporte);
  		$this->view->selectAgencias=$zendForm;
-        $this->view->formUsuarioAgencia = new Application_Form_UsuariosAgencia_UsuariosAgencia();
-        
+        $this->view->formUsuarioAgencia = new Application_Form_UsuariosAgencia_UsuariosAgencia();      
 		$this->view->formNuevaOrden = new Application_Form_Ordenes_NuevaOrden();
-        
-        
+		
     }
 
-    public function agregarAction()
-    {
+    public function agregarAction() {
     	$this->_helper->layout()->disableLayout();
     	$this->_helper->viewRenderer->setNoRender();
     	$params=$this->_request->getParams();
@@ -96,7 +97,6 @@ class ordenCreacionController extends Zend_Controller_Action
     		unset($data['id_usuario_agencia_solicito']);
     	}
     	
-    	
     	$form = new Application_Form_Ordenes_NuevaOrden();
     	
     	$mensajesDeError = $form->getMessages();
@@ -106,7 +106,7 @@ class ordenCreacionController extends Zend_Controller_Action
         	$polizaDbTable = new Application_Model_DbTable_Poliza();
         	$polizaVigente = $polizaDbTable->obtenerPolizaVigentePorId($params['id_poliza']);
         	
-        	if($polizaVigente != null){
+        	if( $polizaVigente != null ){
     			
     			//Obteniendo el id del producto
     			$data['id_producto'] = $polizaVigente['id_producto'];
@@ -146,15 +146,10 @@ class ordenCreacionController extends Zend_Controller_Action
         	 	// se responde al cliente
         	 	$this->_helper->json($data);
         	}
-    	} else { 
+    	} else {
     		// else cuando existe un error encontrado en el form
     		$this->_helper->json($mensajesDeError);
     		$this->_redirect('orden-servicio/nueva-orden');
     	}
     }
-    
-    
-
 }
-
-

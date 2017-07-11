@@ -161,9 +161,7 @@
 		<?= $this->formSeguimientoOrden->id_orden_servicio ?>
 		<div id="orden_servicio_<?= $registro["id_orden_servicio"]?>" class="panel panel-default bs-callout2 <?= $color ?>">
 		 	<div class="panel-heading <?= $color ?>2">
-            	
             	<div class="row">
-            		
             		<div class="col-md-1">
             			ID: <?= $registro["id_orden_servicio"] ?>
             		</div>
@@ -174,7 +172,6 @@
             			<span  id='consulta-ordenes' class="btn btn-default" onClick="vinculo(<?= $registro['id_agencia'] ?>)">
             			<?= $registro["nombre"] ?>
             			</span>
-            			
             		</div>
             		<div class="col-md-2">
                         <?= $registro["descripcion_estatus"] ?>
@@ -186,7 +183,6 @@
                         <button class="btn btn-default btn-xs" type="button" onclick="showEditOrdServ(<?= $registro["id_orden_servicio"] ?>)">Editar  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                     </div>
             	</div>
-            	
             </div>
 		 	<div class="panel-body" id="panel-body-<?= $registro["id_orden_servicio"] ?>" style="display: none">
 			 	<div class="row">

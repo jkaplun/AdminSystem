@@ -168,16 +168,19 @@
                         <?= $registro["fecha_alta"] ?>
                     </div>
             		<div class="col-md-4">
-            			<span  id='consulta-ordenes' class="btn btn-default" onClick="vinculo(<?= $registro['id_agencia'] ?>)">
+            			
             			<?= $registro["nombre"] ?>
-            			</span>
+            			
             			
             		</div>
-            		<div class="col-md-2">
+            		<div class="col-md-1">
                         <?= $registro["descripcion_estatus"] ?>
                     </div> 
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <?= $registro["nombre_usr_admin_atiende"].' '. $registro["ap_usr_admin_atiende"]?>
+                    </div>
+                    <div class="col-md-2">
+                        Duración [min]: <b><?= $registro["duracion_servicio"] ?></b>
                     </div>
                     <div class="col-md-1">
                         <button class="btn btn-default btn-xs" type="button" onclick="showEditOrdServ(<?= $registro["id_orden_servicio"] ?>)">Editar  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
