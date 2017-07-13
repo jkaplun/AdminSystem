@@ -203,42 +203,35 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     		
     		if($orden['id_orden_servicio_estatus'] < 6 || isset($params["administrador"])){
     			 
-    			if($params['accion_orden_servicio'] == 1 ){
-    				if($orden['control_cron_inicial'] == null){
-    					$data['control_cron_inicial'] = $fecha;
-    				}
-    				$diferenciaFechas = $ordenServicioDbTable->obtenerDiferenciaDeFechas($fecha, $orden['control_cron_inicial']);
-    				$horasConvertidas = $diferenciaFechas['hora']*60;
-    				$segundosConvertidos = $diferenciaFechas['segundo']/60;
-    				$duracionServicio = $duracionServicio + 
-    									$horasConvertidas + 
-    									$diferenciaFechas['minuto'] + 
-    									$segundosConvertidos;
-    				$data['duracion_servicio'] = round($duracionServicio);
-    				$data['control_cron_final'] = $fecha;
-    				$data['control_cron_estatus'] = 2;
-    			}
-
     			if($params['accion_orden_servicio'] == 6 ){
-    				$data['fecha_cierre'] = $fecha;
-    				$diferenciaFechas = $ordenServicioDbTable->obtenerDiferenciaDeFechas($fecha, $orden['control_cron_inicial']);
-    				$horasConvertidas = $diferenciaFechas['hora']*60;
-    				$segundosConvertidos = $diferenciaFechas['segundo']/60;
-    				$duracionServicio = $duracionServicio + 
-    										$horasConvertidas + 
-    										$diferenciaFechas['minuto'] + 
-    										$segundosConvertidos;
-    				$data['duracion_servicio'] = round($duracionServicio);
-    				$data['control_cron_inicial'] = null;
-    				$data['control_cron_final'] = null;
-    				$data['control_cron_estatus'] = 3;
+    				
+    				if ( $orden['control_cron_estatus'] == 1 ) {
+	    				$data['fecha_cierre'] = $fecha;
+	    				$diferenciaFechas = $ordenServicioDbTable->obtenerDiferenciaDeFechas($fecha, $orden['control_cron_inicial']);
+	    				$horasConvertidas = $diferenciaFechas['hora']*60;
+	    				$segundosConvertidos = $diferenciaFechas['segundo']/60;
+	    				$duracionServicio = $duracionServicio + 
+	    									$horasConvertidas + 
+	    									$diferenciaFechas['minuto'] + 
+	    									$segundosConvertidos;
+	    									
+	    				$data['duracion_servicio'] = round($duracionServicio);
+	    				$data['control_cron_inicial'] = null;
+	    				$data['control_cron_final'] = null;
+	    				$data['control_cron_estatus'] = 3;
+    				}			
+
+					
 					//Restando minutos a la póliza
     				$servicesPolizas = new Application_Model_Services_ServicesPolizas();
     				$servicesPolizas->restarMinutosAPoliza($params['id_poliza'], $duracionServicio);
     				$data['id_orden_servicio_estatus']=6;
+    				
     			}
+    			
     			$where = "id_orden_servicio = {$params['id_orden_servicio']}";
-    			// 	se actualiza en la base de datos a la p�liza
+
+    			// 	se actualiza en la base de datos a la póliza
     			$ordenServicioDbTable->update($data, $where);
     			 
     			$data['cambio_ejecutivo']='N';
