@@ -139,12 +139,15 @@ class Application_Model_Services_ServicesPolizas
 			$productos = $modelProductoTipoPoliza->obtenerProductoTiposPoliza($params['tipo']);
 			
 			$modelAgenciaProducto = new Application_Model_DbTable_AgenciaProducto();
-			
-// 			$dataProductos = array('estatus'=>'N');
-// 			$where = 'id_agencia='.$params['id_agencia']. ' and id_producto<>3' ;
-// 			$modelAgenciaProducto->update($dataProductos, $where);
 
+			$productoTipoPoliza = new Application_Model_DbTable_ProductoTipoPoliza();
+			$productosTipo = $productoTipoPoliza->obtenerProductos();
 			
+			foreach ( $productosTipo as $idProducto ) {
+				$dataProductos = array('estatus'=>'N');
+				$where = 'id_agencia='.$params['id_agencia']. ' and id_producto='.$idProducto['id_producto'];
+				$modelAgenciaProducto->update($dataProductos, $where);
+			}
 			
 			foreach ($productos as $value){
 				$dataProductos = array();

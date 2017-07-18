@@ -14,5 +14,13 @@ class Application_Model_DbTable_ProductoTipoPoliza extends Zend_Db_Table_Abstrac
 	
 		return $this->getAdapter ()->fetchAll ( $select );
 	}
+	
+	public function obtenerProductos () {
+		$select = $this->_db->select()->
+		from ( $this->_name,'id_producto')
+		->group('id_producto');
+		return $this->getAdapter ()->fetchAll ( $select );
+	}
+	
 }
 
