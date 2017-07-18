@@ -140,9 +140,11 @@ class Application_Model_Services_ServicesPolizas
 			
 			$modelAgenciaProducto = new Application_Model_DbTable_AgenciaProducto();
 			
-			$dataProductos = array('estatus'=>'N');
-			$where = 'id_agencia='.$params['id_agencia']. ' and id_producto<>3' ;
-			$modelAgenciaProducto->update($dataProductos, $where);
+// 			$dataProductos = array('estatus'=>'N');
+// 			$where = 'id_agencia='.$params['id_agencia']. ' and id_producto<>3' ;
+// 			$modelAgenciaProducto->update($dataProductos, $where);
+
+			
 			
 			foreach ($productos as $value){
 				$dataProductos = array();
