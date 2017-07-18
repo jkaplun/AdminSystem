@@ -72,11 +72,16 @@ function selectAgenciaChange(){
 	consultarAgencia(idAgenciaActual);
 	$("#id_agencia_folios").val(idAgenciaActual);
 
+	$("#url-portal-fe-agencia").attr('href','http://fe.icaavwin.com.mx/public/login/user/id/'+idAgenciaActual);
+	$("#url-portal-fe-agencia").html('http://fe.icaavwin.com.mx/public/login/user/id/'+idAgenciaActual);
+	
 	actualizarVistas.vistaUsuarioAgencia=false;
 	var tableUsuariosAgencias = $('#dataTable-usuarios-agencias').DataTable();
 	var tablePolizas = $('#dataTable-polizas-vigentes').DataTable();
 	var productoTable = $('#dataTable-productos-adquiridos').DataTable();
 
+	
+	
 	tableUsuariosAgencias.clear().draw();
 	tablePolizas.clear().draw();
 	productoTable.clear().draw();
