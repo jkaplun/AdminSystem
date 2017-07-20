@@ -44,7 +44,7 @@
 			<p><label>Factura Eletrónica: </label> <?= $agencia['factura_electronica'] ?></p>
 		</div>
 		<div class="col-md-6">
-		
+			<h4>Productos</h4>
 			<table class="table table-striped">
 			<thead><tr>
 				<th>Clave</th>
@@ -66,6 +66,36 @@
 			</table>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h4>Polizas Vigentes</h4>
+			<table class="table table-striped">
+			<thead><tr>
+				<th>Clave</th>
+				<th>Nombre Producto</th>
+				<th>Tipo</th>
+				<th>Fecha Inicio</th>
+				<th>Fecha Fin</th>
+				<th>Horas</th>
+				<th>Horas consumidas</th>
+			</tr></thead>
+			<tbody>
+			<?php foreach ( $agencia['polizas_agencia'] as $polizas ) { ?>
+				<tr>
+					<td><?= $polizas['clave_poliza'] ?></td>
+					<td><?= $polizas['nombre_prod'] ?></td>
+					<td><?= $polizas['tipo'] ?></td>
+					<td><?= $polizas['fecha_ini'] ?></td>
+					<td><?= $polizas['fecha_fin'] ?></td>
+					<td><?= $polizas['horas_poliza'] ?></td>
+					<td><?= $polizas['horas_consumidas'] ?></td>
+				</tr>
+			<?php }?>
+			</tbody>
+			</table>
+		</div>
+	</div>
+	<hr>
 	<?php } ?>
 </div>
 <a  class="btn btn-info" href="<?= $this->baseUrl() ?>/agencias/index/id_agencia/<?= $agencia['id_agencia'] ?>" target="_blank"> Detalles</a>

@@ -161,6 +161,20 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	
+	/**
+	 * 
+	 * @param integer $idAgencia
+	 * @return array
+	 */
+	public function obtenerPolizasVigentesView($idAgencia){
+		
+		$select = $this->_db->select()
+		->from ("view_agencia_polizas_vigentes", array("*"))
+		->where('id_agencia="'.$idAgencia.'"');
+		
+		return $this->getAdapter ()->fetchAll( $select );
+		
+	}
 	
 }
 

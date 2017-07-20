@@ -16,6 +16,7 @@ class IndexController extends Zend_Controller_Action
     		$formulario->populate($params);
     		$agencia = new Application_Model_DbTable_Agencia();
 			$agenciaProducto = new Application_Model_DbTable_AgenciaProducto();
+			$poliza = new Application_Model_DbTable_Poliza();
 			
     		$resultado = $agencia->filtrarAgenciasFromDBView($params);
     		
@@ -23,14 +24,13 @@ class IndexController extends Zend_Controller_Action
     		
     		foreach ( $this->view->agencias as &$agenciaAux ){
     			$agenciaAux['productos_agencia'] = $resultado = $agenciaProducto->filtrarAgenciaProductosFromDBView( array('id_agencia' => $agenciaAux['id_agencia'] ));
+    			$agenciaAux['polizas_agencia'] = $resultado = $poliza->obtenerPolizasVigentesView( $agenciaAux['id_agencia'] );
+    			
     		}
     		
     		
     	}
-    	
-    	//echo "<pre>".print_r( $this->view->agencias,true)."</pre>";die;
-    	
-    	
+
     	$this->view->formulario = $formulario;
     	
     }
