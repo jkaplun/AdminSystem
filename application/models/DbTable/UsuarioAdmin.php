@@ -108,5 +108,15 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
   	
   	return $this->getAdapter ()->fetchAll ( $select );
   }
+  
+  public function getSalesUsers(){
+  	$cond = 'activo="S" and (id_usuario_admin_puesto=3 || id_usuario_admin_puesto=8)';
+  	$select = $this->_db->select()
+  	->from( $this->_name,'*')
+  	->where($cond)
+  	->order('id_usuario');
+  	
+  	return $this->getAdapter ()->fetchAll ( $select );
+  }
 }
 

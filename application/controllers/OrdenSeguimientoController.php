@@ -2,12 +2,20 @@
 
 class OrdenSeguimientoController extends Zend_Controller_Action
 {
-
+	public function init()
+	{
+		/* Initialize action controller here */
+		$this->view->InlineScript()->appendFile( $this->view->baseUrl().'/js/orden-seguimiento/ventas.js' );
+		
+		$this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
+		$this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
+		$this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
+		
+	}
+	
     public function indexAction(){
     
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
+
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/flipclock.min.js');  
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/easytimer.js'); 
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js'); 
@@ -374,7 +382,7 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	$params=$this->_request->getParams();
     	
     	$this->view->formFiltroSeguimientoOrdenAdmin->populate($params);
-    	$resultado = $orden->obtenerTodasLasOrdenes($params);
+    	$resultado = $orden->obtenerTodasLasOrdenes($params, true);
     	
     	$this->view->countArray= count($resultado);
     	
@@ -438,4 +446,69 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	
     }
     
+    public function ventasAction(){
+    	
+    	
+    	$params=$this->_request->getParams();
+    	$ordenVentas = new Application_Model_DbTable_OrdenVentas();
+		
+    	if(!isset ($params['id_usuario_admin_atiende']) ) {
+    		$params['id_usuario_admin_atiende'] = $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'];
+    	}
+    	
+    	
+    	//echo "<pre>".print_r($params,true)."</pre>";die;
+    	
+    	$llamadas = $ordenVentas->obtenerLlamadasVentas($params);
+    	
+    	
+    	$this->view->countArray= count($llamadas);
+    	
+    	// Get a Paginator object using Zend_Paginator's built-in factory.
+    	$page = $this->_request->getParam('page', 0);
+    	$paginator = Zend_Paginator::factory($llamadas);
+    	$paginator->setCurrentPageNumber($page)
+    	->setItemCountPerPage(10)
+    	->setPageRange(10);
+    	$paginator->setCacheEnabled(true);
+    	// Assign paginator to view
+    	Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination_sm.phtml');
+    	
+    	$this->view->paginator=$paginator;
+    	
+    	$this->view->formFiltro = new Application_Form_Ordenes_FiltroSeguimientoVentas();
+    	$this->view->formFiltro->populate($params);
+    	
+    	
+    	
+//    	echo "<pre>".print_r($llamadas,true)."</pre>";die;
+    	
+    }
+    
+    
+    public function editaLlamadaAction(){
+    	
+    	$this->_helper->layout()->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	$params=$this->_request->getParams();
+    	$ordenVentas = new Application_Model_DbTable_OrdenVentas();
+    	
+    	$zendDate = Zend_Date::now()->getTimestamp();
+    	$fecha = date('Y-m-d H:i:s', $zendDate);
+    	
+    	$data = array(
+    		'motivo' => $params['motivo'],	
+    		'solucion' => $params['solucion'],
+    		'id_orden_ventas_estatus' => 2,
+    		'fecha_cierre' => $fecha
+    	);
+    	
+    	$where = "id_orden_ventas={$params['id_orden_ventas']}";
+    	$params['status-db'] = $ordenVentas->update($data, $where);
+    	
+    	$this->_helper->json($params);
+    	
+
+    	
+    }
 }

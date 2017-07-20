@@ -226,20 +226,12 @@ class UsuariosController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
         
-        
         $params=$this->_request->getParams(); 
-
         $utiles = new Application_Model_Services_Utiles();
-        
-        //$resultProcessed = $utiles->consultarejecutivosporidService($params);
-//        [id_usuario_soporte_titular] => 61
-//        [id_usuario_soporte_auxiliar] => 40
-        
+
         $result['ejecutivos'] = $utiles->consultarejecutivosporidService($params);
         $result['agenda'] = $utiles->consultarEjecutivosEnAgendaService($params);
-        
-       // echo "<pre>".print_r($result,true)."</pre>";
-        
+
         $this->_helper->json($result);
 
     }

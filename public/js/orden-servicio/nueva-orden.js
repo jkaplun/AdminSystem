@@ -17,7 +17,7 @@ var ejectivos_todos=[];
 //var datosAgenciaSeleccionada={};
 
 $(document).ready(function() { 
-
+	
     $('#dataTable-polizas-vigentes').DataTable({
         responsive: true,
         "language":{
@@ -360,17 +360,19 @@ $('#id_usuario_admin_atiende').html('');
 
      // agregar a todos los ejectivos asignados a esta agencia
     	var k= 0;
-        $.each( res.ejecutivos, function( key, value ) {
+
+    	$.each( res.ejecutivos , function( key, value ) {
         	var n = value.includes("[Titular]");
         	if (n){
         		k = key;
         	}
-        	
         	 $('#id_usuario_admin_atiende').append($('<option>').text(value).attr('value', key));
         });
         $("#id_usuario_admin_atiende").val(k);
         
-       $.each( res.agenda.ejecutivoAuxiliar , function( key, value ) {
+        
+        
+        $.each( res.agenda.ejecutivoAuxiliar , function( key, value ) {
     	   $('#agenda_ejecutivo_auxiliar').append('Agencia: '+ value.nombre_agencia +'<br>');
     	   $('#agenda_ejecutivo_auxiliar').append('Horario: de '+ value.hora_inicial +' a '+  value.hora_final +'<br>');
     	   $('#agenda_ejecutivo_auxiliar').append('Ejecutivo: '+ value.nombre +' '+ value.apellido_paterno +'<hr>');
@@ -383,9 +385,11 @@ $('#id_usuario_admin_atiende').html('');
        });
 
   })// end ajax done  
-    .fail(function() { 
+    .fail(function() {
       swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
   }); 
+  
+
 }
 
 
@@ -577,5 +581,173 @@ function getProductosByAgencia(){
 				  $('#id_producto').append('<option value="'+value.id_producto+'">'+value.nombre_prod+'</option>');
 				});
 		  });
+}
+
+function tipoLlamada(str){
+	
+	if (str=='soporte') {
+		$('#soporte-div').show();
+		$('#ventas-div').hide();
+		$('#cobranza-div').hide();
+	}
+	
+	if (str=='ventas') {
+		$('#ventas-div').show();	
+		$('#soporte-div').hide();
+		$('#cobranza-div').hide();
+	}
+	
+	if (str=='cobranza') {
+		$('#cobranza-div').show();
+		$('#soporte-div').hide();
+		$('#ventas-div').hide();
+	}
+	
+}
+
+$(document).ready(function() { 
+	$( "#Registrar" ).click(function( event ) {
+		event.preventDefault();
+		
+		var error = false;
+		
+		if ( validarCampo( $("#nombre_agencia").val() , 'text' ) == true ) {
+			error = true;
+			setErrorClassCSS ('nombre_agencia-element');
+		} else {
+			unsetErrorClassCSS ('nombre_agencia-element');
+		}
+		
+		var nombre_agencia = $( "#select_agencias_ventas option:selected" ).text();
+		if ( nombre_agencia == "Sin Agencia" ) {
+			if ( validarCampo( $("#email").val() , 'mail' ) == true ) {
+				error = true;
+				setErrorClassCSS ('email-element');
+	
+			} else {
+				unsetErrorClassCSS ('email-element');
+			}
+			
+			if ( validarCampo( $("#nombre_contacto").val() , 'text' ) == true ) {
+				error = true;
+				setErrorClassCSS ('nombre_contacto-element');
+	
+			} else {
+				unsetErrorClassCSS ('nombre_contacto-element');
+			}
+		}
+		if ( error == false ) {
+			$('#Registrar-element').hide();
+			$.ajax({
+				  method: "post",
+				  url: "public/orden-creacion/alta-llamada",
+				  data: $('#form-ventas').serialize(),
+				  dataType: "json"
+				})  .done(function(msg) {
+					alert('Se ha registrado correctamente.');
+					$("#select_agencias_ventas").val('');
+					$("#nombre_agencia").val('');
+					$("#nombre_contacto").val('');
+					$("#email").val('');
+					$("#telefono").val('');
+					$("#motivo").val('');
+					$("#solucion").val('');
+					$("#email-label").show();
+					$("#telefono-element").show();
+					$("#email-element").show();
+					$("#telefono-label").show();
+					$('.selectpicker').selectpicker('refresh');
+				  })
+				  .fail(function() {
+					   alert( "error" );
+				  })
+				  .always(function() {
+					  $('#Registrar-element').show();
+				  });
+		}
+		
+		
+	});
+	
+	$( "#email" ).click(function( event ) { 
+		unsetErrorClassCSS ('email-element');
+	});
+	
+	$( "#nombre_contacto" ).click(function( event ) { 
+		unsetErrorClassCSS ('nombre_contacto-element');
+	});
+	
+	$( "#nombre_agencia" ).click(function( event ) { 
+		unsetErrorClassCSS ('nombre_agencia-element');
+	});
+
+	$("#select_agencias_ventas").change(function(){
+		var id_agencia = $("#select_agencias_ventas").val();
+		
+		var nombre_agencia = $( "#select_agencias_ventas option:selected" ).text();
+		if ( nombre_agencia != "Sin Agencia" ) {
+			$("#nombre_agencia").val(nombre_agencia);
+			$("#email-label").hide();
+			$("#telefono-element").hide();
+			$("#email-element").hide();
+			$("#telefono-label").hide();
+		} else {
+			$("#nombre_agencia").val('');
+			$("#email-label").show();
+			$("#telefono-element").show();
+			$("#email-element").show();
+			$("#telefono-label").show();
+			unsetErrorClassCSS ('email-element');
+			unsetErrorClassCSS ('nombre_contacto-element');
+			unsetErrorClassCSS ('nombre_agencia-element');
+		}
+		
+		
+		
+	});
+	
+});
+
+function validarCampo( value , type ) {
+	var error = false;
+	
+	if ( type == 'mail') {
+		if (validateEmail(value) == false ) {
+			error = true;
+		}
+	}
+	
+	if ( type == 'text') {
+		if ( value.trim() == '') {
+			error = true;
+		}
+	}
+
+	if ( type == 'integer') {
+		if ( !$.isNumeric( value )){
+			error = true;
+		}
+	}
+	
+	if ( type == 'double') {
+		if ( !$.isNumeric( value )){
+			error = true;
+		}
+	}
+	
+	return error;
+}
+
+function validateEmail(email) {
+	  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	  return re.test(email);
+	}
+
+function setErrorClassCSS( inputTag ){
+	$( "#"+inputTag ).addClass("has-error");
+}
+
+function unsetErrorClassCSS( inputTag ){
+	$( "#"+inputTag ).removeClass("has-error");
 }
 

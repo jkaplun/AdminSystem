@@ -1,13 +1,26 @@
 <h1 class="page-header">Nueva Orden de Servicio</h1>
 <div>
 	<div class="row">
-		<div class="col-md-10">
-			<div class="input-group">
-			<?= $this->selectAgencias->select_agencias?>
+		<div class="col-md-6">
+			<div class="btn-group" role="group" aria-label="...">
+	  			<button type="button" class="btn btn-default" onclick="tipoLlamada('soporte')">Llamada de Soporte</button>
+	  			<button type="button" class="btn btn-default" onclick="tipoLlamada('ventas')">Llamadas de Ventas y Cobranza</button>
 			</div>
+
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-6">
+		</div>
 	</div>
+	<br>
+	<span id="soporte-div">
+		<span>
+			<?= $this->selectAgencias->select_agencias?>
+		</span>
 	<?= $this->render('/orden-creacion/render/servicio.phtml') ?>
+	</span>
+	<span id="ventas-div" style="display: none;">
+	<?= $this->render('/orden-creacion/render/llamada_ventas.phtml') ?>
+	</span>
+
 	<?= $this->render('/orden-creacion/render/modalNuevoUsuario.phtml') ?>
 </div>

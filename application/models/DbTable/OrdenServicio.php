@@ -18,16 +18,17 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	
-	public function obtenerTodasLasOrdenes($valores){
+	public function obtenerTodasLasOrdenes($valores, $miHistorico=null){
 		$select = $this->_db->select()
 			->from ( "view_orden_servicio", '*' )
 			->order("id_orden_servicio desc")->limit(100);
 	
-        if ($_SESSION['Zend_Auth']['USER_VALUES']['p_admin']=='S') {
-        	if (isset($valores['id_usuario_admin_atiende']) && $valores['id_usuario_admin_atiende']!='') {
-        		$select->where("id_usuario_admin_atiende=?",$valores['id_usuario_admin_atiende']);
-        	}
-        } else { 
+        
+        if (isset($valores['id_usuario_admin_atiende']) && $valores['id_usuario_admin_atiende']!='') {
+        	$select->where("id_usuario_admin_atiende=?",$valores['id_usuario_admin_atiende']);
+        }
+        
+        if ( $miHistorico == true ) {
         	$select->where("id_usuario_admin_atiende=?",$_SESSION['Zend_Auth']['USER_VALUES']['id_usuario']);
         }
 		

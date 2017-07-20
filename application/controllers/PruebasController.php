@@ -40,6 +40,18 @@ class PruebasController extends Zend_Controller_Action
 		die;
 	}
 	
+	
+	public function testAction()
+	{
+		
+		$productoTipoPoliza = new Application_Model_DbTable_ProductoTipoPoliza();
+		$productosTipo = $productoTipoPoliza->obtenerProductos();
+		
+		echo "<pre>".print_r($productosTipo,true)."</pre>";die;
+		
+		die();
+	}
+	
 	public function stopAction()
 	{
 		//$_SESSION['counterdownBanamexHotel'] = new Zend_Date();

@@ -1,0 +1,90 @@
+<link rel="stylesheet" type="text/css" href="public/css/flipclock.css">
+<link rel="stylesheet" type="text/css" href="public/css/orden-seguimiento/index.css">
+<link rel="stylesheet" type="text/css" href="public/css/daterangepicker.css">
+<script type="text/javascript" src="public/js/moment.js"></script>
+<script type="text/javascript" src="public/js/daterangepicker.js"></script>
+
+<h1>Llamadas de Ventas</h1>
+
+<form class="form-inline" method="get" name="filtroform" id="filtroform">
+	<?= $this->formFiltro->fecha_de ?>         
+	<?= $this->formFiltro->fecha_hasta ?>
+	<div class="row">
+		<div class="col-md-4">
+			<?= $this->formFiltro->id_agencia ?>            		
+		</div>
+		<div class="col-md-2">
+			<?= $this->formFiltro->id_usuario_admin_atiende ?>            		
+		</div>
+		<div class="col-md-2">
+			<?= $this->formFiltro->id_orden_ventas_estatus?>
+		</div>
+		<div class="col-md-2">
+			<?= $this->formFiltro->daterange ?>
+		</div>
+		<div class="col-md-2">
+			<?= $this->formFiltro->Filtrar ?>
+		</div>
+	</div>
+</form>
+
+<div class="row">
+	<div class="col-md-6" align="left">
+		<h3>Se encontraron <b><?= $this->countArray ?></b> llamadas, se muestran 10 por p&aacute;gina.</h3>
+	</div>
+	<div class="col-md-6" align="right">
+		<?=$this->paginationControl ($this->paginator, 'Sliding');?>
+	</div>
+</div>
+<hr>
+	<?php foreach ($this->paginator as $llamada){
+		$class = '';
+		if ( $llamada['id_orden_ventas_estatus'] == 1 ) {
+			$class = "bg-info";
+		}
+		?>
+		<div class="row <?= $class ?>" id="llamada-<?= $llamada['id_orden_ventas'] ?>" style="padding: 10px">
+		  <div class="col-md-2">
+		  	<label>Agencia:</label><?= ' '.$llamada['nombre_agencia'] ?><br>
+		  	<label>Fecha de Llamada:</label><br><?= ' '.$llamada['fecha_llamada'] ?>
+		  </div>
+		  <div class="col-md-2">
+		  	<label>Atiende:</label><?= ' '.$llamada['usuario_atiende'] ?><br>
+		  	<label>Contacto:</label><?= ' '.$llamada['nombre_contacto'] ?><br>
+		  	<label>Tipo de Cliente:</label><?= ' '.$llamada['descripcion_llamada'] ?><br>
+		  	<label>Estatus:</label><span id="estatus-label-<?= $llamada['id_orden_ventas'] ?>"><?= ' '.$llamada['descripcion_estatus'] ?></span>
+		  </div>
+		  <div class="col-md-1"><label>Tel&eacute;fono:</label><?= $llamada['telefono'] ?></div>
+		  <div class="col-md-3"><label>Motivo:</label>
+		  	<br><textarea disabled="disabled" id="motivo_<?= $llamada['id_orden_ventas'] ?>" class="form-control" rows="3"><?= $llamada['motivo'] ?></textarea>
+		  </div>
+		  <div class="col-md-3"><label>Solución:</label>
+		  	<br><textarea disabled="disabled" id="solucion_<?= $llamada['id_orden_ventas'] ?>" class="form-control" rows="3"><?= $llamada['solucion'] ?></textarea>
+		  </div>
+		  <div class="col-md-1" >
+		  
+		  	<?php if( $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'] == $llamada['id_usuario_admin_atiende']) { ?>
+			  <button id="button-editar-<?= $llamada['id_orden_ventas'] ?>" class="btn btn-default btn-xs" title="Editar" onclick="editarLlamada(this,<?= $llamada['id_orden_ventas'] ?>)">
+			  	<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+			  </button>
+			  <button id="button-guardar-<?= $llamada['id_orden_ventas'] ?>" class="btn btn-default btn-xs" title="Guardar" onclick="guardarLlamada(this,<?= $llamada['id_orden_ventas'] ?>)" disabled="disabled">
+			  	<i class="fa fa-floppy-o" aria-hidden="true"></i>
+			  </button>
+			  <button id="button-borrar-<?= $llamada['id_orden_ventas'] ?>" class="btn btn-default btn-xs" title="Borrar" onclick="borrarLlamada(this,<?= $llamada['id_orden_ventas'] ?>)">
+			  	<i class="fa fa-eraser" aria-hidden="true"></i>
+			  </button>
+			  <?php } ?>
+			  
+		  </div>
+		</div>
+
+	<?php }?>
+	<hr>
+<div class="row">
+	<div class="col-md-6" align="left">
+		<h3>Se encontraron: <?= $this->countArray ?> Llamadas</h3>
+	</div>
+	<div class="col-md-6" align="right">
+		<?=$this->paginationControl ($this->paginator, 'Sliding');?>
+	</div>
+</div>

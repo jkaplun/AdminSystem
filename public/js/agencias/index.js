@@ -12,7 +12,7 @@ $(document).ready(function() {
 	
 
     $('#dataTable-usuarios-agencias,#dataTable-productos').DataTable({
-        responsive: true,
+        responsive: false,
         "language":{
 			"sProcessing":     "Procesando...",
 			"sLengthMenu":     "Mostrar _MENU_ registros",
@@ -80,8 +80,6 @@ function selectAgenciaChange(){
 	var tablePolizas = $('#dataTable-polizas-vigentes').DataTable();
 	var productoTable = $('#dataTable-productos-adquiridos').DataTable();
 
-	
-	
 	tableUsuariosAgencias.clear().draw();
 	tablePolizas.clear().draw();
 	productoTable.clear().draw();

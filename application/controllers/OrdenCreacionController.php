@@ -42,19 +42,19 @@ class ordenCreacionController extends Zend_Controller_Action
         $tipoSoporte = new Zend_Form_Element_Select('tipo_soporte');
 
         $tipoSoporteArreglo = array(
-        		'1' => 'Curso',
-        		'2' => 'Demostración',
-        		'3' => 'Desarrollo',
-        		'4' => 'Implementación',
-        		'5' => 'Páginas Web',
-        		'6' => 'Reportarse',
-        		'7' => 'Reportarse Urgente',
-        		'8' => 'Revisión MIG',
-        		'9' => 'Soporte en Sitio',
-        		'10' => 'Soporte Interno',
-        		'10' => 'Soporte Remoto',
-        		'10' => 'Soporte Telefónico',
-        		'10' => 'Ventas',
+        		'1' => 'Curso' ,
+        		'2' => 'Demostración' ,
+        		'3' => 'Desarrollo' ,
+        		'4' => 'Implementación' ,
+        		'5' => 'Páginas Web' ,
+        		'6' => 'Reportarse' ,
+        		'7' => 'Reportarse Urgente' ,
+        		'8' => 'Revisión MIG' ,
+        		'9' => 'Soporte en Sitio' ,
+        		'10' => 'Soporte Interno' ,
+        		'10' => 'Soporte Remoto' ,
+        		'10' => 'Soporte Telefónico' ,
+        		'10' => 'Ventas' ,
         );
         $tipoSoporte
         ->removeDecorator('label')
@@ -70,6 +70,8 @@ class ordenCreacionController extends Zend_Controller_Action
  		$this->view->selectAgencias=$zendForm;
         $this->view->formUsuarioAgencia = new Application_Form_UsuariosAgencia_UsuariosAgencia();      
 		$this->view->formNuevaOrden = new Application_Form_Ordenes_NuevaOrden();
+		
+		$this->view->formVentas = new Application_Form_Ordenes_NuevaOrdenVentas();
 		
     }
 
@@ -151,5 +153,36 @@ class ordenCreacionController extends Zend_Controller_Action
     		$this->_helper->json($mensajesDeError);
     		$this->_redirect('orden-servicio/nueva-orden');
     	}
+    }
+    
+    public function altaLlamadaAction(){
+    	$this->_helper->layout()->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	$params=$this->_request->getParams();
+    	
+    	$ordenVentas = new Application_Model_DbTable_OrdenVentas();
+    	$zendDate = Zend_Date::now()->getTimestamp();
+    	$fecha = date('Y-m-d H:i:s', $zendDate);
+    	$data = array(
+    			
+    			'id_agencia' => ($params['select_agencias_ventas']=='')?null: $params['select_agencias_ventas'] ,
+    			'id_tipo_venta' => ($params['select_agencias_ventas']=='')? 2 : 1,
+    			'fecha_llamada' => $fecha,
+    			'nombre_agencia' => $params['nombre_agencia'],
+    			'nombre_contacto' => $params['nombre_contacto'],
+    			'email' => $params['email'],
+    			'telefono' => $params['telefono'],
+    			'motivo' => $params['motivo'],
+    			'solucion' => $params['solucion'],
+    			'id_usuario_admin_alta' =>$_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'],
+    			'id_usuario_admin_atiende' => $params['select_ejecutivo'],
+    			'id_orden_ventas_estatus' => 1
+    	);
+    	try {
+    	$params ['estatus_db'] = $ordenVentas->insert($data);
+    	} catch ( Exception $e ) {
+    		$params['Error_db'] = $e->__toString();
+    	}
+    	$this->_helper->json($params);
     }
 }
