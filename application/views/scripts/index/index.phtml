@@ -12,41 +12,61 @@
 	</div>	
 </div>
 </form>
-
+<br>
 <?php if ( isset($this->agencias) ) { ?>
 <div class="row">
-<div class="col-md-12">
-<table class="table">
-	<caption>Optional table caption.</caption>
-	<thead>
-		<tr>
-			<th>Id</th>
-			<th>Datos Generales</th>
-			<th>Configuración</th>
-			<th>Productos</th>
-		</tr>
-	</thead>
-	<tbody>
-		<?php foreach ($this->agencias as $agencia) { ?>
-		<tr>
-			<th scope="row"><?= $agencia['id_agencia'] ?></th>
-			<td>
-				<p><b><?= $agencia['nombre'] ?> </b> <?= $agencia['clave'] ?></p>			
-				<p><?= $agencia['tel1'] ?></p>
-				<p><?= $agencia['tel2'] ?></p>
-				<a  class="btn btn-info" href="<?= $this->baseUrl() ?>/agencias/index/id_agencia/<?= $agencia['id_agencia'] ?>" target="_blank"> Detalles</a>
-				
-			</td>
-			<td>
+	<?php foreach ($this->agencias as $agencia) { ?>
+	<div class="row">	
+		<div class="col-md-12">
+			<h1><?= $agencia['nombre'] ?> [<?= $agencia['clave'] ?>]</h1><br>
+		</div>
+	</div>
+	<div class="row">	
+		<div class="col-md-3">
+			<p><label>RFC: </label> <?= $agencia['rfc'] ?></p>			
+			<p><label>Dirección: </label> <?= $agencia['direccion'] ?></p>
+			<p><label>Colonia: </label> <?= $agencia['colonia'] ?></p>
+			<p><label>C.P.: </label> <?= $agencia['cp'] ?></p>
+			<p><label>Clave de Ciudad: </label> <?= $agencia['clave_ciudad'] ?></p>
+			<label>Teléfonos: </label>
+			<p><?= $agencia['tel1'] ?></p>
+			<p><?= $agencia['tel2'] ?></p>
+			<br>
+			<label>Emails: </label>
+			<p><?= $agencia['email'] ?></p>
+			<p><?= $agencia['email_alt'] ?></p>
+		</div>
+		<div class="col-md-3">
+			<p><label>Password B.D.: </label> <?= $agencia['dba_pwd'] ?></p>
+			<p><label>Prov. Timbrado: </label> <?= $agencia['prov_timbrado'] ?></p>
+			<p><label>Titular de Soporte: </label> <?= $agencia['soporte_titular_nombre'] ?></p>
+			<p><label>Auxiliar de Soporte: </label> <?= $agencia['soporte_auxiliar_nombre'] ?></p>
+			<p><label>Factura Eletrónica: </label> <?= $agencia['factura_electronica'] ?></p>
+		</div>
+		<div class="col-md-6">
+		
+			<table class="table table-striped">
+			<thead><tr>
+				<th>Clave</th>
+				<th>Nombre Producto</th>
+				<th>Estatus</th>
+				<th>Numero Licencias</th>
 			
-			</td>
-			<td>
-			
-			</td>
-		</tr>
-		<?php } ?>
-	</tbody>
-</table>
+			</tr></thead>
+			<tbody>
+			<?php foreach ( $agencia['productos_agencia'] as $productos ) { ?>
+				<tr>
+					<td><?= $productos['clave'] ?></td>
+					<td><?= $productos['nombre_prod'] ?></td>
+					<td><?= $productos['estatus'] ?></td>
+					<td><?= $productos['numero_licencias'] ?></td>
+				</tr>
+			<?php }?>
+			</tbody>
+			</table>
+		</div>
+	</div>
+	<?php } ?>
 </div>
-</div>
+<a  class="btn btn-info" href="<?= $this->baseUrl() ?>/agencias/index/id_agencia/<?= $agencia['id_agencia'] ?>" target="_blank"> Detalles</a>
 <?php } ?>

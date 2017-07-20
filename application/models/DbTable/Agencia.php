@@ -105,6 +105,24 @@ class Application_Model_DbTable_Agencia extends Zend_Db_Table_Abstract
 
 		return $this->getAdapter ()->fetchAll( $select );
 	}
+	
+	public function filtrarAgenciasFromDBView($values)
+	{
+		$select = $this->_db->select()
+		->from(array('ag' => 'view_agencia'),
+				array('*'));
+		
+		if ( isset($values['id_agencia']) && $values['id_agencia'] != '') {
+			$select->where("ag.id_agencia=?",$values['id_agencia']);
+		}
+		
+		if ( isset($values['id_usuario_soporte_titular']) && $values['id_usuario_soporte_titular'] != '') {
+			$select->where("ag.id_usuario_soporte_titular=?",$values['id_usuario_soporte_titular']);
+		}
+		
+		return $this->getAdapter ()->fetchAll( $select );
+	}
+	
 
 }
 

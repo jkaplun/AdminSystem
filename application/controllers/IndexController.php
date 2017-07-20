@@ -3,24 +3,34 @@
 class IndexController extends Zend_Controller_Action
 {
 
-    public function init()
-    {
+    public function init(){
         /* Initialize action controller here */
     }
 
-    public function indexAction()
-    {
+    public function indexAction(){
+    	
     	$formulario= new Application_Form_Agencias_FiltroAgencias();
     	$params=$this->_request->getParams();
     	
-    	if ( $this->_request->isPost() ) {
+    	if ( $this->_request->isPost() ){
     		$formulario->populate($params);
     		$agencia = new Application_Model_DbTable_Agencia();
-    		$resultado = $agencia->filtrarAgencias($params);
+			$agenciaProducto = new Application_Model_DbTable_AgenciaProducto();
+			
+    		$resultado = $agencia->filtrarAgenciasFromDBView($params);
     		
     		$this->view->agencias = $resultado;
     		
+    		foreach ( $this->view->agencias as &$agenciaAux ){
+    			$agenciaAux['productos_agencia'] = $resultado = $agenciaProducto->filtrarAgenciaProductosFromDBView( array('id_agencia' => $agenciaAux['id_agencia'] ));
+    		}
+    		
+    		
     	}
+    	
+    	//echo "<pre>".print_r( $this->view->agencias,true)."</pre>";die;
+    	
+    	
     	$this->view->formulario = $formulario;
     	
     }

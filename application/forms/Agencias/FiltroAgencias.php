@@ -61,5 +61,30 @@ class Application_Form_Agencias_FiltroAgencias extends Zend_Form
     	->removeDecorator('HtmlTag')
     	->setAttrib("class","btn btn-primary form-control input-sm");
     	$this->addElement($element);
+    	
+    	
+//     	$element = new Zend_Form_Element_Hidden('fecha_de');
+//     	$element
+//     	->removeDecorator('HtmlTag')
+//     	->removeDecorator('label');
+//     	$this->addElement($element);
+    	
+//     	$element = new Zend_Form_Element_Hidden('fecha_hasta');
+//     	$element
+//     	->removeDecorator('HtmlTag')
+//     	->removeDecorator('label');
+//     	$this->addElement($element);
+    	
+//     	// Fecha del Soporte en Sitio
+//     	$element= new Zend_Form_Element_Text('daterange');
+//     	$element
+//     	->setLabel("Rango de Fechas:")
+//     	->removeDecorator('HtmlTag')
+//     	->removeDecorator('Errors')
+//     	->setAttrib("autocomplete","off")
+//     	->setAttrib("class","form-control input-sm");
+//     	$this->addElement($element);
+    	
+    	
     }
 }
