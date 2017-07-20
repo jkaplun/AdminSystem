@@ -10,6 +10,7 @@ class OrdenSeguimientoController extends Zend_Controller_Action
 		$this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
 		$this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
 		$this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
+		$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
 		
 	}
 	
@@ -507,8 +508,21 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	$params['status-db'] = $ordenVentas->update($data, $where);
     	
     	$this->_helper->json($params);
-    	
-
-    	
-    }
+	}
+	
+	public function borrarLlamadaAction(){
+		
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender();
+		$params=$this->_request->getParams();
+		$ordenVentas = new Application_Model_DbTable_OrdenVentas();
+				
+		$where = "id_orden_ventas={$params['id_orden_ventas']}";
+		$params['status-db'] = $ordenVentas->delete($where);
+		
+		$this->_helper->json($params);
+		
+		
+		
+	}
 }

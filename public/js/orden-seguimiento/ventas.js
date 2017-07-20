@@ -42,6 +42,49 @@ function guardarLlamada( obj , id ) {
 
 function borrarLlamada( obj , id ) {
 	
+	swal({
+		  title: "¿Confirma que va a eliminar la llamada?",
+		  text: '',
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DD6B55",
+		  confirmButtonText: "Si",
+		  cancelButtonText: "No",
+		  closeOnConfirm: true
+		},
+		function(){
+			
+	    	blockUI();
+	    	
+	    	$.ajax({
+	    		  method: "post",
+	    		  url: "public/orden-seguimiento/borrar-llamada",
+	    		  data: {
+	    			  id_orden_ventas : id
+	    		  },
+	    		  dataType: "json"
+	    		})  .done(function(msg) {
+	    			
+	    			$( "#llamada-"+ id ).remove();
+	    			
+	    			
+			          swal({title: "Confirmación",   
+				           text: "El registro ha sido borrado exitosamente.", 
+				           type: "success",   
+				           timer: 2800,   
+				           showConfirmButton: false
+				          });
+	    			
+	    		  })
+	    		  .fail(function() {
+	    			
+	    		  })
+	    		  .always(function() {
+
+	    		  });
+		  
+		});
+	
 }
 
 $(document).ready(function() {
