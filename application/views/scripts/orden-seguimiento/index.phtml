@@ -36,7 +36,9 @@
 	<?php $control_cron_estatus_todos=","?>
 	<?php $motivo_todos=","?>
 
-	<?php foreach ($this->paginator as $registro) { ?>
+	<?php foreach ($this->paginator as $registro) {
+		$this->formSeguimientoOrden = new Application_Form_Ordenes_SeguimientoOrden();
+		?>
   	<form id="formOrSr_<?= $registro['id_orden_servicio'] ?>">
 
   	<?php  
@@ -111,14 +113,16 @@
 	  		}
 	  		$this->formSeguimientoOrden->id_usuario_admin_atiende->addMultiOptions($options);
 
-			$options = array('' => 'Otro');
+			
 			$usuario_agencia = new Application_Model_DbTable_AgenciaUsuario();
 			$usuariosAgencia = $usuario_agencia->obtenerUsuariosDeAgenciaPorIdAgencia($registro['id_agencia']);
 
+			$options = array('' => 'Otro');
 	  		foreach ($usuariosAgencia as $key => $value){
 	  			$options[$value['id_usuario_agencia']] = $value['nombre']." ".$value['apellidos'];
   			}
-	  		
+  			
+  			//$this->formSeguimientoOrden->id_usuario_agencia_solicito->removeMultiOption($options);
 	  		$this->formSeguimientoOrden->id_usuario_agencia_solicito->addMultiOptions($options);
 	  		
 	  		$this->formSeguimientoOrden->populate($registro);

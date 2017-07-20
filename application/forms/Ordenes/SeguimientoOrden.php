@@ -102,7 +102,8 @@ class Application_Form_Ordenes_SeguimientoOrden extends Zend_Form
 		->setLabel("Solicitó")
 		->removeDecorator('HtmlTag')
 		->setAttrib("class","form-control")
-		->setAttrib("autocomplete","off");
+		->setAttrib("autocomplete","off")
+		->addMultiOptions($options);
 		
 		$this->addElement($element);
 		

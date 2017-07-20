@@ -90,7 +90,6 @@ class OrdenSeguimientoController extends Zend_Controller_Action
         	
         }
         
-        $this->view->formSeguimientoOrden = new Application_Form_Ordenes_SeguimientoOrden();
         
     }
     
