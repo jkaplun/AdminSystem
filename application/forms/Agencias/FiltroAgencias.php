@@ -59,7 +59,7 @@ class Application_Form_Agencias_FiltroAgencias extends Zend_Form
     	$element = new Zend_Form_Element_Submit('Filtrar');
     	$element
     	->removeDecorator('HtmlTag')
-    	->setAttrib("class","btn btn-primary form-control input-sm");
+    	->setAttrib("class","btn btn-success form-control input-sm");
     	$this->addElement($element);
     	
     	$options=array();
