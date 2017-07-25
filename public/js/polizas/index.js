@@ -19,29 +19,6 @@ var idDataBasePoliza="";
 
 
 $(document).ready(function() { 
-  $('#dataTable-polizas-vigentes,#dataTable-polizas-proximas-vencer,#dataTable-polizas-vencidas,#dataTable-polizas-anticipadas').DataTable({
-        responsive: true,
-        "language":{
-          "sProcessing":     "Procesando...",
-          "sLengthMenu":     "Mostrar _MENU_ registros",
-          "sZeroRecords":    "No se encontraron resultados",
-          "sEmptyTable":     "Ning&uacute;n dato disponible en esta tabla",
-          "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-          "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-          "sInfoPostFix":    "",
-          "sSearch":         "Buscar:",
-          "sUrl":            "",
-          "sInfoThousands":  ",",
-          "sLoadingRecords": "Cargando...",
-          "oPaginate": {
-              "sFirst":    "Primero",
-              "sLast":     "&Uacute;timo",
-              "sNext":     "Siguiente",
-              "sPrevious": "Anterior"
-          }
-        }
-    });
  
   $("#addNewPolizaBtn").click(function(){ 
      abrirModalAgregarPoliza();
@@ -61,9 +38,6 @@ $(document).ready(function() {
  
  
 function submitFormPoliza(){
-	
-	var productoTable = $('#dataTable-productos-adquiridos').DataTable();
-	productoTable.clear().draw();
 	
 	$.blockUI({ css: { 
 	    border: 'none', 
@@ -90,22 +64,13 @@ function submitFormPoliza(){
       data: $("#formPoliza").serialize() + addIdAgencia + id_product + clave + id_poliza,
       dataType: "json" 
     }).done(function(res) { 
-    	
-    	
-    if (ajaxActionPoliza == "agregar"){ 
-    	agregarPolizaAjaxDone(res); 
-    }else{ 
-    	 polizas[res.id_poliza] = res;	
-    	 actualizarPolizaAjaxDone(res); 
-    } 
-
-
-    mostrarProductosEnTabla();
-    $.unblockUI();
+    	mostrarPolizas(); 
+    	mostrarProductosEnTabla();
+    	$.unblockUI();
     })// end ajax done  
     .fail(function() {
-    	$.unblockUI();
     	swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
+    	$.unblockUI();
   });
 } // end submitFormPoliza(){ 
 
@@ -131,37 +96,11 @@ function submitFormPoliza(){
  
  
 function agregarPolizaEnTabla(res){ 
-        var polizaTable = $('#dataTable-polizas-vigentes').DataTable();
-        
-        var info = polizaTable.page.info(); 
-        if(res.id_poliza_estatus == "1"){ 
-          estadoPoliza="Activa"; 
-        } else if (res.id_poliza_estatus == "2"){ 
-          estadoPoliza="Adeudo"; 
-        } else if (res.id_poliza_estatus == "3"){ 
-          estadoPoliza="Bloqueado"; 
-        } else if (res.id_poliza_estatus == "4"){ 
-          estadoPoliza="Cancelado"; 
-        } else if (res.id_poliza_estatus == "5"){ 
-          estadoPoliza="Caducada"; 
-        }else if (res.id_poliza_estatus == "6"){ 
-          estadoPoliza="Agotada"; 
-        }else{
-          estadoPoliza="Sin estado";
-        }
- 
-          //  ACT - Activo
-          // ADE - Adeudo
-          // BLQ - Bloqueado
-          // CAN - Cancelado
-           
-        //res.descripcion=""; 
 
-        
-        if (res.id_poliza_estatus != "4") {
-	        var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#modalNuevaPoliza" value='+ res.id_poliza +   
+        if (res.vigencia != "Caducada" && res.vigencia != "Cancelada") {
+	        var boton = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalNuevaPoliza" value='+ res.id_poliza +   
 	        ' onclick="datosFormPoliza('+ res.id_poliza +  ')" >' +  // 
-	        '<i class="fa fa-info-circle"></i>'+  
+	        '<i class="fa fa-pencil-square-o"></i>'+  
 	        '</button>'   ;
 		} else {
 	        var boton = '';        	
@@ -189,34 +128,39 @@ function agregarPolizaEnTabla(res){
        // borrar despues 
         if(ajaxActionPoliza=="agregar" || ajaxActionPoliza=="consultar"){ 
 
-	        polizaTable.row.add( [  
-		        //res.id_poliza, 
-		        res.clave, 
-		        nombre_producto_poliza, 
-		        res.descripcion, 
-		        res.horas_poliza,
-		        horas_us, 
-		        res.costo_poliza, 
-		        res.fecha_ini, 
-		        res.fecha_fin, 
-		        estadoPoliza,  
-		        boton
-	        ]).draw(); 
-	
-	        polizaTable.page( 'last' ).draw( 'page' );  
-	        
-	 
+ 
+        	$( "#polizas-table" ).append( "<tr>" +
+        	
+        			 "<td>" + res.clave + '</td>' + 
+		    
+        			 "<td>" +nombre_producto_poliza  + '</td>' + 
+		    
+        			 "<td>" +res.descripcion  + '</td>' +  
+		    
+        			 "<td>" +res.horas_poliza  + '</td>' + 
+		    
+        			 "<td>" +horas_us + '</td>' + 
+		    
+        			 "<td>" +res.costo_poliza + '</td>' +  
+		    
+        			 "<td>" +res.fecha_ini + '</td>' + 
+		    
+        			 "<td>" +res.fecha_fin  + '</td>' + 
+		    
+        			 "<td>" + res.vigencia + '</td>' + 
+		    
+        			 "<td>" + boton  + '</td></tr>'	);
 	 
         }else{ 
 
-			polizaTable.row( $("#"+id_poliza_row) ).data([res.id_poliza, res.clave, nombre_producto_poliza, res.descripcion, res.horas_poliza, horas_us, res.costo_poliza, res.fecha_ini, res.fecha_fin, estadoPoliza , "x"]).draw();
-			polizaTable.page(info.page).draw( 'page' );  
-			$('#'+id_poliza_row + " td:first-child").css('background-color', 'red'); 
-			$('#'+id_poliza_row + " td:first-child").attr('class', 'frontEndIdPoliza');
-			
-			$("#"+id_poliza_row + " td:last-child").html(boton);  
-			// Actualizar modelo
-			polizas[res.id_poliza]=res;
+//			polizaTable.row( $("#"+id_poliza_row) ).data([res.id_poliza, res.clave, nombre_producto_poliza, res.descripcion, res.horas_poliza, horas_us, res.costo_poliza, res.fecha_ini, res.fecha_fin, estadoPoliza , "x"]).draw();
+//			polizaTable.page(info.page).draw( 'page' );  
+//			$('#'+id_poliza_row + " td:first-child").css('background-color', 'red'); 
+//			$('#'+id_poliza_row + " td:first-child").attr('class', 'frontEndIdPoliza');
+//			
+//			$("#"+id_poliza_row + " td:last-child").html(boton);  
+//			// Actualizar modelo
+//			polizas[res.id_poliza]=res;
 
         } 
 
@@ -300,13 +244,15 @@ function mostrarPolizas(){
   polizas={};
   ajaxActionPoliza="consultar"
   var addIdAgencia="id_agencia="+idAgenciaActual;
+  $( "#polizas-table" ).html( "" );
+  
  $.ajax({ 
       url: pathPolizaController+"consultar", 
       method: "post", 
       data: addIdAgencia,
       dataType: "json" 
     }) 
-    .done(function(res) {  
+    .done(function(res) {
       var i=0;
 
       

@@ -57,10 +57,8 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 	public function obtenerTodasLasPolizasPorIdAgencia ($idAgencia)
 	{
 		$select = $this->_db->select()->
-		from ( array( 'p' => $this->_name), '*' )
-		->join( array( 'tp'=> 'tipo_poliza') , 'p.tipo=tp.tipo' )
-		->where(' p.id_agencia='.$idAgencia)
-		->order('fecha_fin desc');
+		from ( array( 'view_polizas_estatus' ), '*' )
+		->where('id_agencia='.$idAgencia);
 
 		return $this->getAdapter ()->fetchAll( $select );
 	}

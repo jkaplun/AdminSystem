@@ -77,11 +77,11 @@ function selectAgenciaChange(){
 	
 	actualizarVistas.vistaUsuarioAgencia=false;
 	var tableUsuariosAgencias = $('#dataTable-usuarios-agencias').DataTable();
-	var tablePolizas = $('#dataTable-polizas-vigentes').DataTable();
+	//var tablePolizas = $('#dataTable-polizas-vigentes').DataTable();
 	var productoTable = $('#dataTable-productos-adquiridos').DataTable();
 
 	tableUsuariosAgencias.clear().draw();
-	tablePolizas.clear().draw();
+	//tablePolizas.clear().draw();
 	productoTable.clear().draw();
 
 	// limpiar select producto de polizas

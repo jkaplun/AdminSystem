@@ -211,7 +211,7 @@ class Application_Form_Polizas_Polizas extends Zend_Form
                 '2'=>'Adeudo',
                 '3'=>'Bloqueado',
                 '4'=>'Cancelado',
-                '5'=>'Caducada',
+               // '5'=>'Caducada',
                 '6'=>'Agotada',
         ))
         ->setAttrib("class","form-control")

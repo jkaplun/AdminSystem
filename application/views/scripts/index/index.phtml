@@ -1,13 +1,13 @@
 <h1 class="page-header">MIG</h1>
 <form method="post" enctype="application/x-www-form-urlencoded">
 <div class="row">
-	<div class="col-md-2">
+	<div class="col-xs-3">
 		<?= $this->formulario->id_agencia?>
 	</div>
-	<div class="col-md-2">
+	<div class="col-xs-3">
 		<?= $this->formulario->id_usuario_soporte_titular?>
 	</div>	
-		<div class="col-md-1">
+		<div class="col-xs-3">
 		<?= $this->formulario->Filtrar?>
 	</div>	
 </div>
@@ -17,12 +17,14 @@
 <div class="row">
 	<?php foreach ($this->agencias as $agencia) { ?>
 	<div class="row">	
-		<div class="col-md-12">
-			<h1><?= $agencia['nombre'] ?> [<?= $agencia['clave'] ?>]</h1><br>
+		<div class="col-xs-12">
+			<h1><?= $agencia['nombre'] ?> [<?= $agencia['clave'] ?>]
+			<a  class="btn btn-info" href="<?= $this->baseUrl() ?>/agencias/index/id_agencia/<?= $agencia['id_agencia'] ?>" target="_blank"> Ir a Configuración de la Agencia</a></h1>
+			<br>
 		</div>
 	</div>
 	<div class="row">	
-		<div class="col-md-3">
+		<div class="col-xs-3">
 			<p><label>RFC: </label> <?= $agencia['rfc'] ?></p>			
 			<p><label>Dirección: </label> <?= $agencia['direccion'] ?></p>
 			<p><label>Colonia: </label> <?= $agencia['colonia'] ?></p>
@@ -36,14 +38,14 @@
 			<p><?= $agencia['email'] ?></p>
 			<p><?= $agencia['email_alt'] ?></p>
 		</div>
-		<div class="col-md-3">
+		<div class="col-xs-3">
 			<p><label>Password B.D.: </label> <?= $agencia['dba_pwd'] ?></p>
 			<p><label>Prov. Timbrado: </label> <?= $agencia['prov_timbrado'] ?></p>
 			<p><label>Titular de Soporte: </label> <?= $agencia['soporte_titular_nombre'] ?></p>
 			<p><label>Auxiliar de Soporte: </label> <?= $agencia['soporte_auxiliar_nombre'] ?></p>
 			<p><label>Factura Eletrónica: </label> <?= $agencia['factura_electronica'] ?></p>
 		</div>
-		<div class="col-md-6">
+		<div class="col-xs-6">
 			<h4>Productos</h4>
 			<table class="table table-striped">
 			<thead><tr>
@@ -67,7 +69,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-xs-12">
 			<h4>Polizas Vigentes</h4>
 			<table class="table table-striped">
 			<thead><tr>
@@ -78,25 +80,31 @@
 				<th>Fecha Fin</th>
 				<th>Horas</th>
 				<th>Horas consumidas</th>
+				<th>Estatus</th>
 			</tr></thead>
 			<tbody>
 			<?php foreach ( $agencia['polizas_agencia'] as $polizas ) { ?>
 				<tr>
 					<td><?= $polizas['clave_poliza'] ?></td>
 					<td><?= $polizas['nombre_prod'] ?></td>
-					<td><?= $polizas['tipo'] ?></td>
+					<td><?= $polizas['descripcion_tipo_poliza'] ?></td>
 					<td><?= $polizas['fecha_ini'] ?></td>
 					<td><?= $polizas['fecha_fin'] ?></td>
 					<td><?= $polizas['horas_poliza'] ?></td>
 					<td><?= $polizas['horas_consumidas'] ?></td>
+					<td><?= $polizas['descripcion_poliza_estatus'] ?></td>
 				</tr>
 			<?php }?>
 			</tbody>
 			</table>
+			
+		</div>
+		<div class="col-xs-6">
+			
 		</div>
 	</div>
 	<hr>
 	<?php } ?>
 </div>
-<a  class="btn btn-info" href="<?= $this->baseUrl() ?>/agencias/index/id_agencia/<?= $agencia['id_agencia'] ?>" target="_blank"> Detalles</a>
+
 <?php } ?>

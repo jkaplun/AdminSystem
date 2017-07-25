@@ -248,7 +248,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 	
 	public function obtenerMotivos(){
 		$select = $this->_db->select()->
-		from ('orden_servicio_cat_motivo', '*' )->order('motivo');
+		from ('orden_servicio_cat_motivo', '*' )->order('motivo')->where("activo=1");
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	
