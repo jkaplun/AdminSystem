@@ -116,6 +116,14 @@ class Application_Model_DbTable_Agencia extends Zend_Db_Table_Abstract
 			$select->where("view_agencia.id_agencia=?",$values['id_agencia']);
 		}
 		
+		if ( isset($values['prov_timbrado']) && $values['prov_timbrado'] != '') {
+			$select->where("view_agencia.prov_timbrado=?",$values['prov_timbrado']);
+		}
+		
+		if ( isset($values['clave_ciudad']) && $values['clave_ciudad'] != '') {
+			$select->where("view_agencia.clave_ciudad=?",$values['clave_ciudad']);
+		}
+		
 		if ( isset($values['id_usuario_soporte_titular']) && $values['id_usuario_soporte_titular'] != '') {
 			$select->where("view_agencia.id_usuario_soporte_titular=?",$values['id_usuario_soporte_titular']);
 		}
@@ -129,10 +137,17 @@ class Application_Model_DbTable_Agencia extends Zend_Db_Table_Abstract
  			}
 			
 		}
-		$select->group("view_agencia.id_agencia")->limit(50);
+		$select->group("view_agencia.id_agencia")->limit(100);
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	
-
+	public function obtenerCiudadesDeAgencias ()
+	{
+		$select = $this->_db->select()->
+		from ( 'view_ciudades_agencias', '*' );
+		
+		return $this->getAdapter ()->fetchAll( $select );
+	}
+	
 }
 

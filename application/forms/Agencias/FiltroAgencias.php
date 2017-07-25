@@ -42,7 +42,7 @@ class Application_Form_Agencias_FiltroAgencias extends Zend_Form
     	$user = $usuario_admin->getSoporteUsers();
     	$options = array(''=>'Todos');
     	foreach ($user as $value){
-    		$options[$value['id_usuario']] = $value['clave'];
+    		$options[$value['id_usuario']] =  $value['nombre'] .' '.$value['apellido_paterno']. ' ['.$value['clave'].']';
     	}
     	
     	// usuario atiende
@@ -50,7 +50,7 @@ class Application_Form_Agencias_FiltroAgencias extends Zend_Form
     	$element
     	->setLabel("Ejecutivo:")
     	->removeDecorator('HtmlTag')
-    	->setAttrib("class","form-control input-sm")
+    	->setAttrib("class","form-control input-sm selectpicker")
     	->setAttrib("autocomplete","off")
     	->addMultiOptions($options);
     	$this->addElement($element);
@@ -96,6 +96,42 @@ class Application_Form_Agencias_FiltroAgencias extends Zend_Form
 //     	->setAttrib("autocomplete","off")
 //     	->setAttrib("class","form-control input-sm");
 //     	$this->addElement($element);
+ 
+    	
+    	$options = array(''=>'Todas las Ciudades');
+   
+    	$productosResult = $agencia->obtenerCiudadesDeAgencias();
+    	foreach ($productosResult as $value){
+    		$options[$value['clave_ciudad']] = $value['nombre_ciudad'].' ['.$value['numero_por_ciudad'].']';
+    	}
+    	
+    	$element = new Zend_Form_Element_Select('clave_ciudad');
+    	$element
+    	->setLabel("Ciudad:")
+    	->removeDecorator('HtmlTag')
+    	->setAttrib("class","form-control input-sm selectpicker")
+    	->setAttrib("autocomplete","off")
+    	->addMultiOptions($options);
+    	$this->addElement($element);
+
+    	
+    	$options = array(
+    			'' => 'Todos',
+    			'B' => 'B',
+    			'E' => 'Edicom',
+    			'I' => 'Factura Inteligente',
+    			'N' => 'No Tiene',
+    			'X' => 'EDX'
+    	);
+    	$element = new Zend_Form_Element_Select('prov_timbrado');
+    	$element
+    	->setLabel("Proveedor de Timbrado:")
+    	->removeDecorator('HtmlTag')
+    	->setAttrib("class","form-control input-sm selectpicker")
+    	->setAttrib("autocomplete","off")
+    	->addMultiOptions($options);
+    	$this->addElement($element);
+    	
     	
     	
     }
