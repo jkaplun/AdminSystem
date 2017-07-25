@@ -109,17 +109,27 @@ class Application_Model_DbTable_Agencia extends Zend_Db_Table_Abstract
 	public function filtrarAgenciasFromDBView($values)
 	{
 		$select = $this->_db->select()
-		->from(array('ag' => 'view_agencia'),
+		->from(array('view_agencia' => 'view_agencia'),
 				array('*'));
 		
 		if ( isset($values['id_agencia']) && $values['id_agencia'] != '') {
-			$select->where("ag.id_agencia=?",$values['id_agencia']);
+			$select->where("view_agencia.id_agencia=?",$values['id_agencia']);
 		}
 		
 		if ( isset($values['id_usuario_soporte_titular']) && $values['id_usuario_soporte_titular'] != '') {
-			$select->where("ag.id_usuario_soporte_titular=?",$values['id_usuario_soporte_titular']);
+			$select->where("view_agencia.id_usuario_soporte_titular=?",$values['id_usuario_soporte_titular']);
 		}
 		
+		if ( isset($values['productos']) && $values['productos'] != '') {
+			$select->join("agencia_producto", 'agencia_producto.id_agencia=view_agencia.id_agencia',array());
+			$select->join("producto", 'producto.id_producto=agencia_producto.id_producto',array());
+
+ 			foreach ( $values['productos'] as $producto ){
+ 				$select->orWhere("agencia_producto.id_producto=".$producto);
+ 			}
+			
+		}
+		$select->group("view_agencia.id_agencia")->limit(50);
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	

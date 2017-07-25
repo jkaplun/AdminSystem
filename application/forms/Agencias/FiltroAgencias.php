@@ -62,6 +62,18 @@ class Application_Form_Agencias_FiltroAgencias extends Zend_Form
     	->setAttrib("class","btn btn-primary form-control input-sm");
     	$this->addElement($element);
     	
+    	$options=array();
+    	$productos = new Application_Model_DbTable_Producto();
+    	
+    	$productosResult = $productos->fetchAll("vigente_prod='S'");
+    	foreach ($productosResult as $value){
+    		$options[$value['id_producto']] = $value['nombre_prod'];
+    	}
+
+    	$element = new Zend_Form_Element_MultiCheckbox('productos');
+    	$element
+    	->addMultiOptions( $options);
+    	$this->addElement($element); 
     	
 //     	$element = new Zend_Form_Element_Hidden('fecha_de');
 //     	$element

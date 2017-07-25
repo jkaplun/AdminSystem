@@ -54,7 +54,6 @@ class Application_Model_DbTable_Producto extends Zend_Db_Table_Abstract
 						array('ifnull(id_agencia,0) as id_agencia', 'ifnull(estatus,"N") as estatus'))
 				->where('p.vigente_prod="S" and 
 						a_p.id_agencia is null'); // empty list of columns
-		echo $select;die;
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	
