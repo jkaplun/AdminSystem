@@ -130,12 +130,8 @@ class AgenciasController extends Zend_Controller_Action
         $cantidadDeErrores = count($mensajesDeError);
         if ($cantidadDeErrores == 0)
         {
-        	// LEER: coment� la siguiente linea por que siempre me manda que el RFC es invalido
-        	$rfcMinusculas = strtolower($params['rfc']);
-        	$esRfcValido = $utiles->validarRFC($rfcMinusculas);
-        	if ($esRfcValido)
-        	{ // Si es RFC es v�lido
-	        	$data['rfc'] = $rfcMinusculas;
+
+        		$data['rfc'] = strtoupper($params['rfc']);
 	        	$esEmailCorrecto = $utiles->comprobar_email($params['email']);
 	        	$esEmailAltCorrecto = true;
 	        	/*if($params['email_alt'] != null)
@@ -169,16 +165,7 @@ class AgenciasController extends Zend_Controller_Action
 	        		$this->_helper->json($data);
 	        		$this->_redirect('clientes/');
 	        	}
-        	}
-        	else
-        	{ // else cuando el formato del RFC no es correcto
-        		// se inyecta el ID, estado y descripción en la respuesta al cliente
-        		$data['estado']='error';
-        		$data['descripcion']='RFC en formato incorrecto';
-        		// se responde al cliente
-        		$this->_helper->json($data);
-        		$this->_redirect('clientes/');
-        	}		
+	
         }
         else
         { // else cuando existe un error encontrado en el form
