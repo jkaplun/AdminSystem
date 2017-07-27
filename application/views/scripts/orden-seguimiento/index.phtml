@@ -122,8 +122,11 @@
 	  			$options[$value['id_usuario_agencia']] = $value['nombre']." ".$value['apellidos'];
   			}
   			
+  			$registro['conformidad']=$options[$registro['id_usuario_agencia_solicito']];
+  			
   			//$this->formSeguimientoOrden->id_usuario_agencia_solicito->removeMultiOption($options);
 	  		$this->formSeguimientoOrden->id_usuario_agencia_solicito->addMultiOptions($options);
+
 	  		
 	  		$this->formSeguimientoOrden->populate($registro);
 

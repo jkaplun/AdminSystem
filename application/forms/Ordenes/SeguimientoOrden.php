@@ -112,7 +112,7 @@ class Application_Form_Ordenes_SeguimientoOrden extends Zend_Form
 			->setLabel("Solicitó [Otro]")
 			->removeDecorator('HtmlTag')
 			->setAttrib("class","form-control")
-			->setAttrib("autocomplete","off")
+			//->setAttrib("autocomplete","off")
 			->setAttrib("placeholder",utf8_encode("Otro"))
 			->setAttrib("maxlength","245");
 		
@@ -123,7 +123,7 @@ class Application_Form_Ordenes_SeguimientoOrden extends Zend_Form
 		->setLabel("Conformidad")
 		->removeDecorator('HtmlTag')
 		->setAttrib("class","form-control")
-		->setAttrib("autocomplete","off")
+		//->setAttrib("autocomplete","off")
 		->setAttrib("placeholder",utf8_encode("Conformidad"))
 		->setAttrib("maxlength","245");
 		
