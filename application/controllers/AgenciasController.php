@@ -291,8 +291,9 @@ class AgenciasController extends Zend_Controller_Action
         $params=$this->_request->getParams(); 
         $datosAgencia = $this->agencia->find($params['id_agencia'])->toArray();
         $datosAgencia[0]['update_pwd_bd'] = $datosAgencia[0]['dba_pwd'];
-        # $datosAgencia[0]['update_login_bd'] = $datosAgencia[0]['dba_user'];
-        
+        $ciudades = new Application_Model_DbTable_Ciudades();
+        $ciudad = $ciudades->find($datosAgencia[0]['clave_ciudad'])->toArray();
+        $datosAgencia[0]['nombre_ciudad'] = $ciudad[0]['nombre_ciudad'];
         $acd = new Application_Model_DbTable_AgenciaConexionDatos();
         
         $datosAgencia[0]['conexiones'] = $acd->fetchAll("id_agencia=".$params['id_agencia'],'id_agencia_conexion_datos')->toArray();

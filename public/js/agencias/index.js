@@ -259,6 +259,12 @@ function mostarDatosAgencia(datosAgencia){
 	//console.log("actulizando datos agencia");
 	$("#nombre_agencia-info").html(datosAgencia.nombre);
 	$("#direccion-info").html(datosAgencia.direccion);
+	
+	$("#colonia_agencia_label").html(datosAgencia.colonia);
+	$("#cp_agencia_label").html(datosAgencia.cp);
+	$("#ciudad_agencia_label").html(datosAgencia.nombre_ciudad);
+	
+	
 	$("#telefono1-info").html(datosAgencia.tel1);
 	$("#telefono2-info").html(datosAgencia.tel2);
 	$("#cve_usopor_tit-info").html(datosAgencia.cve_usopor_tit);
