@@ -306,5 +306,17 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 	
 		return $this->getAdapter ()->fetchAll( $select );
 	}
+	
+	public function obtenerServiciosPorPoliza($id_poliza){
+		$select = $this->_db->select()
+			->from ( "view_orden_servicio", '*' )
+			->where('id_poliza='.$id_poliza)
+			->order("id_orden_servicio desc")
+			->limit(100);
+		
+		return $this->getAdapter ()->fetchAll( $select );
+	}
+	
+	
 }
 

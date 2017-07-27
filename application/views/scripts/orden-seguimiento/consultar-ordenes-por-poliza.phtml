@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+<table class="table table-responsive">
+  <thead>
+	  <tr>
+	  	<th>ID</th>
+	  	<th>Solicitó</th>
+	  	<th>Fecha Alta</th>
+	  	<th>Fecha Cierre</th>
+	  	<th>Duración [min]</th>
+	  	<th>Motivo</th>
+	  	<th>Solución</th>
+	  	<th>Conformidad</th>
+	  	<th>Estatus</th>
+	  	<th>Ejecutivo</th>
+	  </tr>
+  </thead>
+  <tbody>
+  	<?php 
+  	$totalMin = 0;
+  	foreach ( $this->llamadas as $llamada ) { 
+  		$totalMin += $llamada['duracion_servicio'];
+  		?>
+	  <tr>
+	  	<td><?= $llamada['id_orden_servicio'] ?></td>
+	  	<td><?= $llamada['solicito_otro'] ?></td>
+	  	<td><?= $llamada['fecha_alta'] ?></td>
+	  	<td><?= $llamada['fecha_cierre'] ?></td>
+	  	<td><?= $llamada['duracion_servicio'] ?></td>
+	  	<td><?= $llamada['motivo_orden'] ?></td>
+	  	<td><?= $llamada['solucion_orden'] ?></td>
+	  	<td><?= $llamada['conformidad'] ?></td>
+	  	<td><?= $llamada['descripcion_estatus'] ?></td>
+	  	<td><?= $llamada['nombre_usr_admin_atiende'] ?> <?= $llamada['ap_usr_admin_atiende'] ?></td>
+	  </tr>
+	 <?php }
+	 
+	 ?>
+  </tbody>
+  <tfoot>
+    <tr>
+	  	<td></td>
+	  	<td></td>
+	  	<td></td>
+	  	<td></td>
+	  	<td><?= number_format( $totalMin) ?> Mins
+	  		(<?= number_format( $totalMin/60 , 2) ?>Hrs)
+	  	</td>
+	  	<td></td>
+	  	<td></td>
+	  	<td></td>
+	  	<td></td>
+	  	<td></td>
+	  </tr>
+  </tfoot>
+</table>
+
+
+</div>

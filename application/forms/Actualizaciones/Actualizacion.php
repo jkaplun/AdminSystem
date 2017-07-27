@@ -67,22 +67,22 @@ class Application_Form_Actualizaciones_Actualizacion extends Zend_Form{
     					'label' => 'Vérsion:',
     					'placeholder' => 'Vérsión',
     					'maxlength' => 10,
-    					'valor' => ''
+    					'valor' => '1.0'
     			),
     			array(
     					'name' => 'http_update',
     					'label' => 'HTTP:',
     					'placeholder' => 'HTTP://',
     					'maxlength' => 1000,
-    					'valor' => 'http://www.icaav.com.mx'
+    					'valor' => 'http://www.icaav.com.mx/'
     			),
-    			array(
-    					'name' => 'path_update',
-    					'label' => 'Ruta:',
-    					'placeholder' => 'Ruta',
-    					'maxlength' => 1000,
-    					'valor' => '/dominios/sistemasmig/downloads/icaavwin/'
-    			),
+//     			array(
+//     					'name' => 'path_update',
+//     					'label' => 'Ruta:',
+//     					'placeholder' => 'Ruta',
+//     					'maxlength' => 1000,
+//     					'valor' => '/dominios/sistemasmig/downloads/icaavwin/'
+//     			),
     			array(
     					'name' => 'archivo_update',
     					'label' => 'Nombre del Archivo:',

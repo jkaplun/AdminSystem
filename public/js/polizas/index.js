@@ -131,11 +131,11 @@ function agregarPolizaEnTabla(res){
  
         	$( "#polizas-table" ).append( "<tr>" +
         	
-        			 "<td>" + res.clave + '</td>' + 
+        			 "<td>" + '<a class="btn btn-info btn-xs" target="_new" href="public/orden-seguimiento/consultar-ordenes-por-poliza/id_poliza/'+res.id_poliza+'">'+res.clave+'</a>' + '</td>' + 
 		    
         			 "<td>" +nombre_producto_poliza  + '</td>' + 
 		    
-        			 "<td>" +res.descripcion  + '</td>' +  
+        			 "<td>" +res.tipo_poliza_descripcion  + '</td>' +  
 		    
         			 "<td>" +res.horas_poliza  + '</td>' + 
 		    

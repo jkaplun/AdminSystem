@@ -301,7 +301,9 @@ function mostarDatosAgencia(datosAgencia){
  		$('#co2').hide();
  	}
 
- 	var q=encodeURIComponent(datosAgencia.direccion);
+ 	var textoDireccion =  datosAgencia.direccion+', Colonia '+datosAgencia.colonia+', codigo postal '+datosAgencia.cp;
+ 	console.log(textoDireccion);
+ 	var q=encodeURIComponent(textoDireccion);
     $('#map').attr('src',
             'https://www.google.com/maps/embed/v1/place?key=AIzaSyCkxg35_4QHr8ev1erQ9hU5uGnRGL-y49U&q='+q);
 	

@@ -143,8 +143,11 @@
             			<span  id='consulta-ordenes' class="btn btn-default" onClick="vinculo(<?= $registro['id_agencia'] ?>)">
             			<?= $registro["nombre"] ?>
             			</span>
+
            				<a class="btn btn-info" href="<?= $this->baseUrl() ?>/agencias/index/id_agencia/<?= $registro['id_agencia'] ?>" target="_blank"> Detalles</a>
            				<span class="btn btn-info" onclick="abrirModalCambiarAgencia(<?= $registro["id_orden_servicio"]?>,<?= $registro['id_agencia'] ?>)"> Cambiar Agencia</span>
+           				Tel. Agencia: (<?= $registro["tel1"] ?>) - 
+            			(<?= $registro["tel1"] ?>)
             		</div>
             		<div class="col-md-3" align="right">
             			ID Orden Servicio: <?= $registro["id_orden_servicio"] ?>

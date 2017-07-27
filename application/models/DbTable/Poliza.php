@@ -58,7 +58,7 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 	{
 		$select = $this->_db->select()->
 		from ( array( 'view_polizas_estatus' ), '*' )
-		->where('id_agencia='.$idAgencia);
+		->where('id_agencia='.$idAgencia)->order('fecha_fin desc');
 
 		return $this->getAdapter ()->fetchAll( $select );
 	}

@@ -1,57 +1,60 @@
+
 <h1 class="page-header">MIG</h1>
-<form method="post" enctype="application/x-www-form-urlencoded">
-<div class="row">
-	<div class="col-xs-3">
-		<?= $this->formulario->id_agencia?>
+
+	<form method="post" enctype="application/x-www-form-urlencoded">
+	<div class="row">
+		<div class="col-md-3">
+			<?= $this->formulario->id_agencia?>
+		</div>
+		<div class="col-md-3">
+			<?= $this->formulario->id_usuario_soporte_titular?>
+		</div>	
+		<div class="col-md-3"><br>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary form-control input-sm" data-toggle="modal" data-target="#productos-modal-filtro">
+			  <i class="fa fa-list" aria-hidden="true"></i>
+			  Filtro por productos
+			</button>
+			
+			<!-- Modal -->
+			<div class="modal fade" id="productos-modal-filtro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Filtro por productos</h4>
+			      </div>
+			      <div class="modal-body">
+					<?= $this->formulario->productos?>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		
+	
 	</div>
-	<div class="col-xs-3">
-		<?= $this->formulario->id_usuario_soporte_titular?>
-	</div>	
-	<div class="col-xs-3"><br>
-		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary form-control input-sm" data-toggle="modal" data-target="#productos-modal-filtro">
-		  <i class="fa fa-list" aria-hidden="true"></i>
-		  Filtro por productos
-		</button>
-		
-		<!-- Modal -->
-		<div class="modal fade" id="productos-modal-filtro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Filtro por productos</h4>
-		      </div>
-		      <div class="modal-body">
-				<?= $this->formulario->productos?>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-		
-		      </div>
-		    </div>
-		  </div>
+	<br>
+	<div class="row">
+		<div class="col-md-3">
+			<?= $this->formulario->clave_ciudad?>
+		</div>
+		<div class="col-md-3">
+			<?= $this->formulario->prov_timbrado?>
+		</div>
+			
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+				<?= $this->formulario->Filtrar?>
 		</div>
 	</div>
-	
+	</form>
 
-</div>
-<br>
-<div class="row">
-	<div class="col-xs-3">
-		<?= $this->formulario->clave_ciudad?>
-	</div>
-	<div class="col-xs-3">
-		<?= $this->formulario->prov_timbrado?>
-	</div>
-		
-</div>
-<div class="row">
-	<div class="col-xs-12">
-			<?= $this->formulario->Filtrar?>
-	</div>
-</div>
-</form>
 <br>
 <div class="well">
 <h2>Resultados: <?php echo count( $this->agencias ) ?> Agencia(s).</h2>
@@ -74,14 +77,14 @@
 <div class="row">
 	<?php foreach ($this->agencias as $agencia) { ?>
 	<div class="row">	
-		<div class="col-xs-12">
+		<div class="col-md-12">
 			<h1><?= $agencia['nombre'] ?> [<?= $agencia['clave'] ?>]
 			<a  class="btn btn-info" href="<?= $this->baseUrl() ?>/agencias/index/id_agencia/<?= $agencia['id_agencia'] ?>" target="_blank"> Ir a Configuración de la Agencia</a></h1>
 			<br>
 		</div>
 	</div>
 	<div class="row">	
-		<div class="col-xs-3">
+		<div class="col-md-3">
 			<p><label>RFC: </label> <?= $agencia['rfc'] ?></p>			
 			<p><label>Dirección: </label> <?= $agencia['direccion'] ?></p>
 			<p><label>Colonia: </label> <?= $agencia['colonia'] ?></p>
@@ -95,14 +98,21 @@
 			<p><?= $agencia['email'] ?></p>
 			<p><?= $agencia['email_alt'] ?></p>
 		</div>
-		<div class="col-xs-3">
+		<div class="col-md-3">
 			<p><label>Password B.D.: </label> <?= $agencia['dba_pwd'] ?></p>
 			<p><label>Prov. Timbrado: </label> <?= $agencia['prov_timbrado'] ?></p>
 			<p><label>Titular de Soporte: </label> <?= $agencia['soporte_titular_nombre'] ?></p>
 			<p><label>Auxiliar de Soporte: </label> <?= $agencia['soporte_auxiliar_nombre'] ?></p>
 			<p><label>Factura Eletrónica: </label> <?= $agencia['factura_electronica'] ?></p>
+			<p><label>URL PFE: </label><br>
+			 <a href="http://fe.icaavwin.com.mx/public/login/user/id/<?= $agencia['id_agencia'] ?>" id="url-portal-fe-agencia" style="color: black;" target="_new" >http://fe.icaavwin.com.mx/public/login/user/id/<?= $agencia['id_agencia'] ?></a>
+			 </p>
+			
+										
+			
+			
 		</div>
-		<div class="col-xs-6">
+		<div class="col-md-6">
 			<h4>Productos</h4>
 			<table class="table table-striped">
 			<thead><tr>
@@ -126,7 +136,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-md-12">
 			<h4>Polizas Vigentes</h4>
 			<table class="table table-striped">
 			<thead><tr>
@@ -142,7 +152,7 @@
 			<tbody>
 			<?php foreach ( $agencia['polizas_agencia'] as $polizas ) { ?>
 				<tr>
-					<td><?= $polizas['clave_poliza'] ?></td>
+					<td><a class="btn btn-info" target="_new" href="<?= $this->baseUrl() ?>/orden-seguimiento/consultar-ordenes-por-poliza/id_poliza/<?= $polizas['id_poliza']?>"> <?= $polizas['clave_poliza'] ?></a></td>
 					<td><?= $polizas['nombre_prod'] ?></td>
 					<td><?= $polizas['descripcion_tipo_poliza'] ?></td>
 					<td><?= $polizas['fecha_ini'] ?></td>
@@ -156,7 +166,7 @@
 			</table>
 			
 		</div>
-		<div class="col-xs-6">
+		<div class="col-md-6">
 			
 		</div>
 	</div>

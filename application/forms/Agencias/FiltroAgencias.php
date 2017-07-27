@@ -29,6 +29,7 @@ class Application_Form_Agencias_FiltroAgencias extends Zend_Form
     	->removeDecorator('HtmlTag')
     	->addMultiOptions($listaAgencias)
     	->setAttrib("class","form-control selectpicker input-sm")
+    	->setAttrib("onchange","this.form.submit()")   	
     	->setAttrib("data-max-options",10)
     	->setAttrib("data-live-search","true")
     	->setAttrib("title","Ingresa nombre de la agencia...")

@@ -38,8 +38,9 @@ class AgenciasController extends Zend_Controller_Action
          $this->view->agencias = $agencia->obtenerTodasLasAgencias();
          
          $listaAgencias = array();
+         
          foreach ( $this->view->agencias as $agencias){
-         	$listaAgencias[$agencias['id_agencia']]=$agencias['nombre'];
+         	$listaAgencias[$agencias['id_agencia']]=$agencias['nombre'].' ['.$agencias['clave'].']';
          }
          
          $zendForm = new Zend_Form();

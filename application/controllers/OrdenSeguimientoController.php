@@ -524,4 +524,13 @@ class OrdenSeguimientoController extends Zend_Controller_Action
 		
 		
 	}
+	
+	public function consultarOrdenesPorPolizaAction(){
+		$params=$this->_request->getParams();
+		
+		$os = new Application_Model_DbTable_OrdenServicio();
+		
+		$this->view->llamadas = $os->obtenerServiciosPorPoliza($params['id_poliza']);		
+	}
+	
 }
