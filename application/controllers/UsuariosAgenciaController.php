@@ -56,7 +56,7 @@ class UsuariosAgenciaController extends Zend_Controller_Action
                 $usuario = $this->usuario_agencia->obtenerUsuariosAgenciaPorEmail($params['emailUsuarioAgencia']);
                 
                 if (!$usuario)
-                { // Â¿QuÃ© se verifica aquÃ­?
+                { // 
                     $utiles = new Application_Model_Services_Utiles();
                     $esEmailCorrecto = $utiles->comprobar_email($params['emailUsuarioAgencia']);
                     if($esEmailCorrecto)
@@ -115,8 +115,8 @@ class UsuariosAgenciaController extends Zend_Controller_Action
             	
         $data = array(
                                 'id_agencia' => $params['id_agencia'],
-                                //'clave' => $params['claveUsuarioAgencia'], no se permite modificación
-                                //'pwd' => $params['pwd'],
+                                'clave' => $params['claveUsuarioAgencia'],
+                                'pwd' => $params['pwd'],
                                 'nombre' => $params['nombreUsuarioAgencia'],
                                 'apellidos' => $params['apellidos'],
                                 'puesto' => $params['puesto'],
@@ -140,11 +140,17 @@ class UsuariosAgenciaController extends Zend_Controller_Action
         	if ($cantidadDeErrores == 0)
         	{
         		$utiles = new Application_Model_Services_Utiles();
-        		$esEmailCorrecto = $utiles->comprobar_email($params['emailUsuarioAgencia']);
+        		
+        		if ( trim($params['emailUsuarioAgencia']) == '') {
+        			$esEmailCorrecto = true;
+        		} else {
+        			$esEmailCorrecto = $utiles->comprobar_email($params['emailUsuarioAgencia']);
+        		}
+        		
         		if ($esEmailCorrecto)
         		{
-                    	$dba_pwdEncoded = base64_encode($params['pwd']);
-                    	$data['pwd']=$dba_pwdEncoded;
+                    	//$dba_pwdEncoded = base64_encode($params['pwd']);
+                    	//$data['pwd']=$dba_pwdEncoded;
         				$where = "id_usuario_agencia = '{$params['id_usuario_agencia']}'";
         				$this->usuario_agencia->update($data, $where);
 	        			// 	se inyecta el estado y descripciÃ³n en la respuesta al cliente

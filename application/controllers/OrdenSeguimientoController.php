@@ -438,8 +438,28 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	$id_orden_servicio = $params['id_orden_servicio'];
     	
     	$orden = new Application_Model_DbTable_OrdenServicio();
+    	$poliza = new Application_Model_DbTable_Poliza();
     	
     	$where = "id_orden_servicio=$id_orden_servicio";
+    	
+    	$ordenRow = $orden->fetchRow($where)->toArray();
+    	$polizaRow = $poliza->fetchRow('id_poliza='.$ordenRow['id_poliza'])->toArray();
+
+    	$dataPoliza = array(
+    			'horas_consumidas' => ($polizaRow['horas_consumidas'] - ($ordenRow['duracion_servicio']/60))
+    	);
+    	
+    	$poliza->update($dataPoliza, 'id_poliza='.$polizaRow['id_poliza']);
+    	
+    	$polizaRow = $poliza->fetchRow('id_poliza='.$ordenRow['id_poliza'])->toArray();
+    	
+    	$dataPoliza = array(
+    			'horas_consumidas' => ($polizaRow['horas_consumidas'] + ($params['duracion_servicio']/60))
+    	);
+    	
+    	$poliza->update($dataPoliza, 'id_poliza='.$polizaRow['id_poliza']);
+    	
+    	
     	$status = $orden->update($data, $where);
     	
     	$this->_helper->json(array('estado'=>'ok'));
