@@ -130,8 +130,8 @@ class ordenCreacionController extends Zend_Controller_Action
     			} else {
     				$idNuevaOrden = $ordenServicioDbTable->insert($data);
     				
-    				$email = new Application_Model_Services_Emails();
-    				$email->agregarOrdenServicio($data);
+    				//$email = new Application_Model_Services_Emails();
+    				//$email->agregarOrdenServicio($data);
     				
     			}
     			
