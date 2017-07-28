@@ -12,7 +12,7 @@ class AdminController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
-    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/admin/index.js');
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/admin/index.js?'.rand());
     	$users = new Application_Model_DbTable_Users();
     	$params=$this->_request->getParams();
 

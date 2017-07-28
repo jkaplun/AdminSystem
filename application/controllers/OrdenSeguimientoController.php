@@ -5,7 +5,7 @@ class OrdenSeguimientoController extends Zend_Controller_Action
 	public function init()
 	{
 		/* Initialize action controller here */
-		$this->view->InlineScript()->appendFile( $this->view->baseUrl().'/js/orden-seguimiento/ventas.js' );
+		$this->view->InlineScript()->appendFile( $this->view->baseUrl().'/js/orden-seguimiento/ventas.js?'.rand() );
 		
 		$this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
 		$this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
@@ -20,7 +20,7 @@ class OrdenSeguimientoController extends Zend_Controller_Action
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/flipclock.min.js');  
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/easytimer.js'); 
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js'); 
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes.js');  
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes.js?'.rand());  
 
         $agencia = new Application_Model_DbTable_Agencia();
         
@@ -375,7 +375,7 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/flipclock.min.js');
     	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/easytimer.js');
     	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
-    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes.js');
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes.js?'.rand());
     	
     	$orden = new Application_Model_DbTable_OrdenServicio();
     	$this->view->formFiltroSeguimientoOrdenAdmin = new Application_Form_Ordenes_FiltroSeguimientoOrdenAdmin();

@@ -27,10 +27,10 @@ class AgenciasController extends Zend_Controller_Action
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/data/validacion.js');
          $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/agencias/index.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/usuariosAgencias/index.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/polizas/index.js');
-         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/productos/index.js');
+         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/agencias/index.js?'.rand());
+         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/usuariosAgencias/index.js?'.rand());
+         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/polizas/index.js?'.rand());
+         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/productos/index.js?'.rand());
 
          $agencia = new Application_Model_DbTable_Agencia();
          

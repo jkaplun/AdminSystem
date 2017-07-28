@@ -15,7 +15,7 @@ class OrdenSeguimientoAdminController extends Zend_Controller_Action
     	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/flipclock.min.js');
     	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/easytimer.js');
     	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js');
-    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes.js');
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes.js?'.rand());
     	
     	$orden = new Application_Model_DbTable_OrdenServicio();
     	$this->view->formFiltroSeguimientoOrdenAdmin = new Application_Form_Ordenes_FiltroSeguimientoOrdenAdmin();

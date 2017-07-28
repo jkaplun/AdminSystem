@@ -37,7 +37,7 @@ class IndexController extends Zend_Controller_Action
     {
     
     	$this->view->activemenu=2;
-    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/index/seguimiento.js');
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/index/seguimiento.js?'.rand());
     	$registroPersonas = new Application_Model_DbTable_RegistroPersonas();
     	$params=$this->_request->getParams();
     	unset($params['controller']);
@@ -101,7 +101,7 @@ class IndexController extends Zend_Controller_Action
     public function modificaregistroAction()
     {
     	$this->view->activemenu=2;
-    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/index/modificaregistro.js');
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/index/modificaregistro.js?'.rand());
     	$params=$this->_request->getParams();
     	$this->view->guardado = 0;
     	
@@ -260,7 +260,7 @@ class IndexController extends Zend_Controller_Action
     	
     	
     	$this->view->activemenu=2;
-    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/index/modificaregistro.js');
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/index/modificaregistro.js?'.rand());
     	$params=$this->_request->getParams();
     	$this->view->guardado = 0;
     	 

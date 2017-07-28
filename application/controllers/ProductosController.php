@@ -16,7 +16,7 @@ class ProductosController extends Zend_Controller_Action
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables/js/jquery.dataTables.min.js');
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-plugins/dataTables.bootstrap.min.js');
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/css_complete/datatables-responsive/dataTables.responsive.js');
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/productos/index.js');
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/productos/index.js?'.rand());
 
         $producto = new Application_Model_DbTable_Producto();
         $params=$this->_request->getParams();

@@ -16,7 +16,7 @@ class OrdenAdminController extends Zend_Controller_Action
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/flipclock.min.js');  
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/flipclock/easytimer.js'); 
         $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/sweetalert.min.js'); 
-        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes-admin.js'); 
+        $this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/orden-servicio/seguimiento-ordenes-admin.js?'.rand()); 
 
 
         $params=$this->_request->getParams();
