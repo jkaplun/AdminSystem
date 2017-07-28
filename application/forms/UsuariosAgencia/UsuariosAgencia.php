@@ -7,16 +7,14 @@ class Application_Form_UsuariosAgencia_UsuariosAgencia extends Zend_Form
     {
                 // Clave
  
-        $clave = new Zend_Form_Element_Text('claveUsuarioAgencia');
+        $clave = new Zend_Form_Element_Text('cve_user_agencia');
         $clave->setRequired(true)
         ->addErrorMessage("- Es necesario que introduzca el nombre de usuario.")
         ->removeDecorator('label')
         ->removeDecorator('HtmlTag')
         ->setAttrib("class","form-control")
         ->setAttrib("autocomplete","off")
-        ->setAttrib("placeholder",utf8_encode("Usuario"))
-        ->setAttrib("disabled","disabled")
-        ;
+        ->setAttrib("placeholder",utf8_encode("Usuario"));
         $this->addElement($clave);
  
         

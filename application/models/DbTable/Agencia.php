@@ -134,10 +134,10 @@ class Application_Model_DbTable_Agencia extends Zend_Db_Table_Abstract
 
  			foreach ( $values['productos'] as $producto ){
  				$select->orWhere("agencia_producto.id_producto=".$producto);
- 			}
-			
+ 			}	
 		}
-		$select->group("view_agencia.id_agencia")->limit(100);
+		$select->group("view_agencia.id_agencia")->order('nombre')->limit(100);
+		
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	

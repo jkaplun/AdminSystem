@@ -62,10 +62,14 @@ class Application_Model_Services_Emails {
 		$mail->setFrom($this->emailConfig['email'], $this->emailConfig['nombre_comercial']);
 		
 		foreach ($values['emails'] as $key => $email){
-			$mail->addTo($key, $email);
+			if ($key!=''){
+				if($email=='') {
+					$email=$key;
+				}
+				$mail->addTo($key, $email);
+			}
 		}
 		$mail->setSubject($values['subject']);
-		
 		$mail->setBodyHtml($values['body']);
 		
 		try {

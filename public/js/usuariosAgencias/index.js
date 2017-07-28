@@ -7,8 +7,8 @@ var idUsuarioAgenciaToEdit;
 // accion que se realiza en el ajax, esta se define en 
 // datosform_edita_usuario_agencia() -> 'actualiza' 
 // datosform_edita_usuario_agencia() -> 'actualiza' 
-var ajaxActionUsuarioAgencia; 
- 
+var ajaxActionUsuarioAgencia="consultar"; 
+
 //Variable donde se almacena el id que asigna la base de datos al usuario 
 var id_usuario_agencia=""; 
 var claveUsuarioAgencia="";
@@ -17,7 +17,8 @@ var claveUsuarioAgencia="";
 $(document).ready(function() { 
  
   $("#agregarUsuarioAgenciaBtn").click(function(){
-    abrirModalAgregarUsuario(); 
+	  $("#edita_usr_age_id_agencia").val(idAgenciaActual);
+	  abrirModalAgregarUsuario(); 
   }) 
  
  }); // end  $(document).ready(function() { 
@@ -25,31 +26,19 @@ $(document).ready(function() {
  
  
 function submitFormUsuarioAgencia(){ 
- 
-    addIdAgencia="&id_agencia="+idAgenciaActual;
-    //console.log("mandando submitFormUsuarioAgencia, clave usuariosagencia: "+claveUsuarioAgencia);
-    claveUsuarioAgencia= "&claveUsuarioAgencia=" + $("#emailUsuarioAgencia").val();
-    if(ajaxActionUsuarioAgencia == "actualizar")
-      id_usuario_agencia_to_send="&id_usuario_agencia="+id_usuario_agencia;
-    else
-      id_usuario_agencia_to_send="";
- 
-  $.ajax({ 
+  $.ajax({
       url: pathUsuarioAgenciaController + ajaxActionUsuarioAgencia, 
       method: "post", 
-      data: $("#formUsuarioAgencia").serialize() + addIdAgencia +claveUsuarioAgencia + id_usuario_agencia_to_send,
+      data: $("#formUsuarioAgencia").serialize(),
       dataType: "json" 
-    }) 
-    .done(function(res) {  
- 
-    if (ajaxActionUsuarioAgencia == "agregar"){ 
-      agregarUsuarioAgenciaAjaxDone(res); 
-    }else{ 
-      actualizarUsuarioAgenciaAjaxDone(res); 
-    } 
- 
- 
-       
+    })
+    .done(function(res) {
+    	if (res.estado == 'error'){
+    		 swal("Error :(", res.descripcion, "error" ); 
+    	} else {
+    		$('#nuevoUsuarioModal').modal('hide')
+    		mostrarUsuariosAgencia();
+    	}
   })// end ajax done  
     .fail(function() { 
       swal("Error :(", "ocurrió un error con el servidor, por favor intentelo más tarde ", "error" ); 
@@ -57,70 +46,33 @@ function submitFormUsuarioAgencia(){
 } // submitForm(){ 
   
  
-function agregarUsuarioAgenciaEnTabla(res, counter){ 
-
-     var userTable = $('#dataTable-usuarios-agencias').DataTable();   
-     var info = userTable.page.info(); 
-     //console.log("-----------------> info page: "+info.page);
-
-
-      if(ajaxActionUsuarioAgencia=="consultar"){
-        var frontEndId = counter;
-      }else if (ajaxActionUsuarioAgencia=="actualizar"){
-        userTable.order([0, 'asc']).draw();
-        var frontEndId = idUsuarioAgenciaToEdit;
-      }
-      else{
-        userTable.order([0, 'asc']).draw();
-        var frontEndId = Object.keys(usuariosAgencias).length + 1; 
-      }
-        var estatusUsuario; 
-
-        res.descripcion=""; 
-
-        var boton = '<button type="button" class="btn btn-primary btn-sm btn-circle" data-toggle="modal" data-target="#nuevoUsuarioModal" value='+ frontEndId +   
-        ' onclick="datosform_edita_usuario_agencia(this.value)" >' +  // 
-        '<i class="fa fa-info-circle"></i>'+  
-        '</button>';   
-        var id_usuario_agencia_row = "idUsuarioAgenciaRow"+frontEndId;
-       // borrar despues 
-
-        if(ajaxActionUsuarioAgencia=="agregar" || ajaxActionUsuarioAgencia=="consultar"){ 
-
-          userTable.row.add( [  
-          frontEndId, res.nombre, res.apellidos, res.email, res.telefono, res.puesto, "x"  
-          ]).draw(); 
-
-        userTable.page( 'last' ).draw( 'page' );  
- 
-
-        $('#dataTable-usuarios-agencias tr:last-child td:last-child').html(boton);  
-        $('#dataTable-usuarios-agencias tr:last-child td:last-child').attr('id', "editarBtn"+frontEndId); 
-        $("#editarBtn"+frontEndId).closest('tr').attr('id', id_usuario_agencia_row); 
- 
-        }else{ 
-
-            userTable.page(info.page).draw( 'page' );  
-            var dataToUpdate=[ frontEndId, res.nombre, res.apellidos, res.email, res.telefono, res.puesto, "x" ]
-
-            userTable.row( $("#"+id_usuario_agencia_row) ).data([ frontEndId, res.nombre, res.apellidos, res.email, res.telefono, res.puesto, "x" ]).draw();
-
-           userTable.page(info.page).draw( 'page' );  
- 
-          $("#"+id_usuario_agencia_row + " td:last-child").html(boton); 
-
-           // Actualizar modelo
-           usuariosAgencias[idUsuarioAgenciaToEdit]=res;
- 
-        } 
-
+function agregarUsuarioAgenciaEnTabla(res){ 
+	$("#dataTable-usuarios-agencias").empty();
+	$.each( res , function( index, value ) {
         
+		 usuariosAgencias[value.id_usuario_agencia]=value;
+		
+		var boton = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#nuevoUsuarioModal" value='+ value.id_usuario_agencia +   
+        ' onclick="datosform_edita_usuario_agencia(this.value)" >' +  // 
+        '<i class="fa fa-pencil-square-o"></i>'+  
+        '</button>';   
+        
+		$("#dataTable-usuarios-agencias").append(
+		"<tr><td>"+ value.cve_user + "</td>"+
+		"<td>" + value.pwd + "</td>" +
+		"<td>" + value.nombre + " " + value.apellidos + "</td>" +
+		"<td>" + value.email + "</td>" +
+		"<td>" + value.telefono + "</td>" +
+		"<td>" + value.puesto + "</td>" +
+		"<td>" + boton + "</td>" +
 
-          if(ajaxActionUsuarioAgencia=="agregar" || ajaxActionUsuarioAgencia=="actualizar" ) {
-             $('#nuevoUsuarioModal').modal('toggle');  
-               $(".frontEndIdColumn").hide();
-          }
-             
+		"</tr>"
+		
+		);
+	});
+	
+	
+	
 } // end function agregarUsuarioAgenciaEnTabla(res){ 
  
  
@@ -173,7 +125,8 @@ function actualizarUsuarioAgenciaAjaxDone(res){
    //console.log("usuariosAgencias[frontEndId]: "+usuariosAgencias[frontEndId]);
    id_usuario_agencia = usuariosAgencias[frontEndId].id_usuario_agencia;
 
-
+   	$("#edita_id_user").val(frontEndId);
+   
     populateUsuarioAgenciaForm(usuariosAgencias[frontEndId ]);
       
  } 
@@ -182,68 +135,37 @@ function actualizarUsuarioAgenciaAjaxDone(res){
   //$('#myModalLabel').html("Agregar Usuario"); 
   document.getElementById("formUsuarioAgencia").reset(); 
 
-  ajaxActionUsuarioAgencia="agregar"; 
- 
-  //console.log("ajaxActionUsuarioAgencia "+ajaxActionUsuarioAgencia); 
+  ajaxActionUsuarioAgencia="agregar";
    
 } 
 
-
-
 function mostrarUsuariosAgencia(){
-  usuariosAgencias={};
-  ajaxActionUsuarioAgencia="consultar"
-  var addIdAgencia="id_agencia="+idAgenciaActual;
- $.ajax({ 
-      url: pathUsuarioAgenciaController+"consultar", 
-      method: "post", 
-      data: addIdAgencia,
-      dataType: "json" 
+	usuariosAgencias={};
+
+	$.ajax({
+		url: pathUsuarioAgenciaController+"consultar", 
+      	method: "post", 
+      	data: {
+    	  'id_agencia' : idAgenciaActual
+      	},
+      	dataType: "json" 
     }) 
-    .done(function(res) {  
-      var i=0;
-
-      
-      //pruebaMostrarUsuarios(res, i);
-       
-
-      for (i;i<res.length;i++){
-
-        usuariosAgencias[i+1]=res[i];
-        agregarUsuarioAgenciaEnTabla(res[i], i+1);
-
-      }
-
-   $(".frontEndIdColumn").hide();
- 
- // console.log(usuariosAgencias);
-       
-  })// end ajax done  
-    .fail(function() { 
+    	.done(function(res) {  
+    		agregarUsuarioAgenciaEnTabla(res);
+    })// end ajax done  
+    	.fail(function() { 
       swal("Error :(", "ocurrió un error con el servidor, por favor inténtelo más tarde ", "error" ); 
-  }); 
+    }); 
 }
-
-function pruebaMostrarUsuarios(res, i){
-        
-        if(i>=res.length){
-          //console.log("terminamos "+res.length);
-        }else{
-              usuariosAgencias[i+1]=res[i];
-              agregarUsuarioAgenciaEnTabla(res[i]);
-              i++;
-         setTimeout(function(){
-        pruebaMostrarUsuarios(res, i);
-            }, 500); 
-        }
-             $(".frontEndIdColumn").hide();
-}
-
 
 function populateUsuarioAgenciaForm(data) {  
     //console.log("populating form"); 
 
-    $.each(data, function(key, value){  
+    $.each(data, function(key, value){
+    		
+    	if(key == "cve_user"){
+    		$("#cve_user_agencia").val(value);
+    	}
       if(key == "nombre"){
           $("#nombreUsuarioAgencia").val(value);
       } else if(key == "email"){

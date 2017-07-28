@@ -9,7 +9,7 @@ class Application_Model_DbTable_AgenciaUsuario extends Zend_Db_Table_Abstract
 	{
 		$select = $this->_db->select()->
 		from ( $this->_name, '*' )
-		->where('id_agencia='.$id_agencia.' and activo="S"')
+		->where('id_agencia='.$id_agencia)
 			->order('nombre');
 
 		return $this->getAdapter ()->fetchAll( $select );

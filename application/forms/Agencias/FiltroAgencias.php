@@ -52,6 +52,7 @@ class Application_Form_Agencias_FiltroAgencias extends Zend_Form
     	->setLabel("Ejecutivo:")
     	->removeDecorator('HtmlTag')
     	->setAttrib("class","form-control input-sm selectpicker")
+    	->setAttrib("data-live-search","true")
     	->setAttrib("autocomplete","off")
     	->addMultiOptions($options);
     	$this->addElement($element);
@@ -111,6 +112,7 @@ class Application_Form_Agencias_FiltroAgencias extends Zend_Form
     	->setLabel("Ciudad:")
     	->removeDecorator('HtmlTag')
     	->setAttrib("class","form-control input-sm selectpicker")
+    	->setAttrib("data-live-search","true")
     	->setAttrib("autocomplete","off")
     	->addMultiOptions($options);
     	$this->addElement($element);

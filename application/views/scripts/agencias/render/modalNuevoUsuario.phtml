@@ -12,8 +12,9 @@
 					</div> 			    		
 				</div>
 			</div>
- 		<form method="post" id="formUsuarioAgencia"> 
+ 		<form method="post" id="formUsuarioAgencia" enctype="application/x-www-form-urlencoded" > 
 		  	<input type="hidden" name="edita_id_user" id="edita_id_user">
+		  	<input type="hidden" name="edita_usr_age_id_agencia" id="edita_usr_age_id_agencia">
 		  	<input name="accion" value="editar" type="hidden">
 
 		    <div class="modal-body">
@@ -92,7 +93,7 @@
 			    		<div class="col-md-2">
 							<div class="form-group input-group">
 				                <label class="control-label">Usuario Portal</label>
-				                 <?= $this->formUsuarioAgencia->claveUsuarioAgencia ?>
+				                 <?= $this->formUsuarioAgencia->cve_user_agencia?>
 				            </div>
 			    		</div>			    	
 			    		<div class="col-md-2">
