@@ -212,6 +212,7 @@ class AgenciasController extends Zend_Controller_Action
         				#'dba_user' => $params['update_login_bd'],
         				'sucursales' => $params['sucursales'],
         				'update_login' => $params['update_login'],
+        				'update_pwd' => $params['update_pwd'],
         				'iatas1' => $params['iatas1'],
                         'iatas2' => $params['iatas2'],
                         'iatas3' => $params['iatas3'],
