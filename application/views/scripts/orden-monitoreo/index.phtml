@@ -13,13 +13,8 @@
 <!-- 
 <meta http-equiv="refresh" content="5; url=http://merca.mig.com.mx">
  -->
-<br/>
+
 <?php $titulo=1;?>
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <center>Monitoreo de Llamadas</center>
-    </div>
-    <div class="panel-body">
 
 <?php foreach ($this->ordenes as $key => $ordenes) { ?>
 	<?php if($titulo==1){?>
@@ -81,6 +76,4 @@
 		</div>
 	<?php $titulo=1;}else{$titulo++;} ?>	
 <?php } ?>	
-	</div>
-</div>
 
