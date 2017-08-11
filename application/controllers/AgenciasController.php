@@ -366,8 +366,8 @@ class AgenciasController extends Zend_Controller_Action
 	    	);
 	    	try {
 	    		$foliosAgencia->insert($data);
-// 	    		$email = new Application_Model_Services_Emails();
-// 	    		$email->agregarFolios($data);
+	    		$email = new Application_Model_Services_Emails();
+	    		$email->agregarFolios($data);
 	    		
 	    	} catch (Exception $e){
 	    		$params['error_log']=$e->__toString();

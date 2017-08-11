@@ -304,7 +304,51 @@ class Application_Model_Services_Emails {
 	}
 	
 
-	public function agregarFolios(){
+	public function agregarFolios($values){
+		$agencia = new Application_Model_DbTable_Agencia();
+		$usuarioAdmin = new Application_Model_DbTable_UsuarioAdmin();
+		
+		$agenciaDatos = $agencia->find($values['id_agencia'])->toArray()[0];
+		$usuarioAdminDatos = $usuarioAdmin->find($_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'])->toArray()[0];
+		$usuarioAdminDatosTitular = $usuarioAdmin->find( $agenciaDatos['id_usuario_soporte_titular'] )->toArray()[0];
+		
+		
+		$bodyCSS = $this->bodyStyleCSS();
+		
+		$body = "
+		<h1>Se han Registrado Nuevos Folios.</h1>
+		<p>Agencia: <b>".$agenciaDatos['nombre'].".</b></p>
+		<p>N&uacute;mero de Folios: <b>".$values['folios_comprados'].".</b></p>
+		<p>Fecha de Compra: <b>".$values['fecha_compra'].".</b></p>
+		<p>Observaciones: <b>".$values['observaciones'].".</b></p>
+		<p>Tipo: <b>".(($values==2)?'Nomina':'Icaav')."</b></p>
+				
+		<p>Saludos Cordiales.</p>";
+		
+		$bodyFooter = $this->bodyFooterHTML();
+		
+		$valuesDos = array(
+				'subject' => 'Registro de Folios.',
+				'body' => $bodyCSS.$body.$bodyFooter
+		);
+
+		if ($usuarioAdminDatosTitular['email']!='') {
+			$valuesDos['emails'][$usuarioAdminDatosTitular['email']] = utf8_decode($usuarioAdminDatosTitular['nombre'].' '.$usuarioAdminDatosTitular['apellido_paterno']);
+		}
+		
+		
+		$where = 'mail_add_folios="S"';
+		$usuarios = $usuarioAdmin->fetchAll($where)->toArray();
+		
+		$valuesDos['emails'][$usuarioAdminDatos['email']] = utf8_decode($usuarioAdminDatos['nombre'].' '.$usuarioAdminDatos['apellido_paterno']);
+		
+		if (count($usuarios)>0){
+			foreach ( $usuarios as $values){
+				$valuesDos['emails'][$values['email']] = utf8_decode($values['nombre'].' '.$values['apellido_paterno']);
+			}
+		}
+		
+		return $this->sendEmail($valuesDos);
 		
 	}
 	
