@@ -133,7 +133,7 @@ class AgenciasController extends Zend_Controller_Action
         {
 
         		$data['rfc'] = strtoupper($params['rfc']);
-	        	$esEmailCorrecto = $utiles->comprobar_email($params['email']);
+	        	$esEmailCorrecto = true;
 	        	$esEmailAltCorrecto = true;
 	        	/*if($params['email_alt'] != null)
 	        	{
@@ -366,6 +366,9 @@ class AgenciasController extends Zend_Controller_Action
 	    	);
 	    	try {
 	    		$foliosAgencia->insert($data);
+// 	    		$email = new Application_Model_Services_Emails();
+// 	    		$email->agregarFolios($data);
+	    		
 	    	} catch (Exception $e){
 	    		$params['error_log']=$e->__toString();
 	    	}
