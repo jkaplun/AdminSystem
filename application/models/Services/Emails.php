@@ -109,8 +109,8 @@ class Application_Model_Services_Emails {
 		
 		$body = "
 		<h1>Nueva orden de servicio.</h1>
-		<p>Agencia: <b>{$agenciaDatos['nombre']}.</b></p>
- 		<p>Se ha creado nueva Orden de Servicio solicitada por: <b>{$agenciaUsuarioDatos['nombre']} {$agenciaUsuarioDatos['apellidos']}.</b></p>
+		<p>Agencia: <b>".utf8_decode($agenciaDatos['nombre']).".</b></p>
+ 		<p>Se ha creado nueva Orden de Servicio solicitada por: <b>".utf8_decode($agenciaUsuarioDatos['nombre'])." ".utf8_decode($agenciaUsuarioDatos['apellidos']).".</b></p>
  		<p>Su llamada est&aacute;: <b>".utf8_decode($estatusDesc['descripcion']).".</b> </p>
 
 		<p>Saludos Cordiales.</p>";
@@ -190,8 +190,8 @@ class Application_Model_Services_Emails {
 		
 		$body = "
 		<h1>Cierre Orden de Servicio.</h1>
-		<p>Agencia: <b>{$agenciaDatos['nombre']}.</b></p>
-		<p>Se ha cerrado Orden de Servicio solicitada por: <b>{$agenciaUsuarioDatos['nombre']} {$agenciaUsuarioDatos['apellidos']}.</b></p>
+		<p>Agencia: <b>".utf8_decode($agenciaDatos['nombre'])."</b></p>
+		<p>Se ha cerrado Orden de Servicio solicitada por: <b>".utf8_decode($agenciaUsuarioDatos['nombre'])." ".utf8_decode($agenciaUsuarioDatos['apellidos']).".</b></p>
 				
 		<p>Saludos Cordiales.</p>";
 		
@@ -303,5 +303,9 @@ class Application_Model_Services_Emails {
 		return $this->sendEmail($valuesDos);
 	}
 	
+
+	public function agregarFolios(){
+		
+	}
 	
 }
