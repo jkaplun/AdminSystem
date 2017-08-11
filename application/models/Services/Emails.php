@@ -321,7 +321,7 @@ class Application_Model_Services_Emails {
 		<p>N&uacute;mero de Folios: <b>".$values['folios_comprados'].".</b></p>
 		<p>Fecha de Compra: <b>".$values['fecha_compra'].".</b></p>
 		<p>Observaciones: <b>".$values['observaciones'].".</b></p>
-		<p>Tipo: <b>".(($values==2)?'Nomina':'Icaav')."</b></p>
+		<p>Tipo: <b>".(($values['id_folios_agencia_cat_tipo']==2)?'Nomina':'Icaav')."</b></p>
 				
 		<p>Saludos Cordiales.</p>";
 		
