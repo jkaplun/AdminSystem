@@ -264,7 +264,7 @@ class Application_Model_Services_Emails {
 		
 		$body = "
 		<h1>Se ha dado de alta una nueva poliza.</h1>
-		<p>Agencia: <b>{$agenciaDatos['nombre']}.</b></p>
+		<p>Agencia: <b>".utf8_decode($agenciaDatos['nombre']).".</b></p>
 		<p>Horas: <b>{$values['horas_poliza']}.</b></p>
 		<p>Fecha Inicial: <b>{$values['fecha_ini']}.</b></p>
 		<p>Fecha Final: <b>{$values['fecha_fin']}.</b></p>
@@ -317,7 +317,7 @@ class Application_Model_Services_Emails {
 		
 		$body = "
 		<h1>Se han Registrado Nuevos Folios.</h1>
-		<p>Agencia: <b>".$agenciaDatos['nombre'].".</b></p>
+		<p>Agencia: <b>".utf8_decode($agenciaDatos['nombre']).".</b></p>
 		<p>N&uacute;mero de Folios: <b>".$values['folios_comprados'].".</b></p>
 		<p>Fecha de Compra: <b>".$values['fecha_compra'].".</b></p>
 		<p>Observaciones: <b>".$values['observaciones'].".</b></p>
