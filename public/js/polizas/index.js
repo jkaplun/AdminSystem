@@ -228,6 +228,12 @@ function actualizarPolizaAjaxDone(res){
  function abrirModalAgregarPoliza(){ 
   //$('#myModalLabel').html("Agregar Usuario"); 
   document.getElementById("formPoliza").reset(); 
+  
+  
+  $('#fecha_ini').val('');
+  $('#fecha_fin').val('');
+  
+  
   ajaxActionPoliza="agregar"; 
    
   $('#fecha_ini').show();

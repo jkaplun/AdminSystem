@@ -1,6 +1,21 @@
 <?php
+
+/**
+ * 
+ * @author jgarfias
+ *
+ */
 class Application_Model_Services_ServicesPolizas
 {
+	/**
+	 * 
+	 * @param unknown $idProducto
+	 * @param unknown $idAgencia
+	 * @param unknown $fechaInicialNuevaPoliza
+	 * @param unknown $fechaFinalNuevaPoliza
+	 * @param unknown $tipo
+	 * @return boolean[]|string[]
+	 */
 	function esPolizaValida($idProducto, $idAgencia, $fechaInicialNuevaPoliza, $fechaFinalNuevaPoliza, $tipo = null)
 	{
 		$polizaValida = false;
@@ -8,6 +23,9 @@ class Application_Model_Services_ServicesPolizas
 		$polizaDbTable = new Application_Model_DbTable_Poliza();
 		$polizas = $polizaDbTable->obtenerPolizasPorIdProductoYIdAgencia($idProducto, $idAgencia);
 		$polizasViejasConFechaMayorAPolizaNueva = $polizaDbTable->obtenerPolizasConFechaFinalMayorAInicialNueva($idAgencia, $idProducto, $fechaInicialNuevaPoliza);
+		
+		//echo "<pre>".print_r($polizasViejasConFechaMayorAPolizaNueva,true)."</pre>";die;
+		
 		if(count($polizasViejasConFechaMayorAPolizaNueva) == 0)
 		{
 			$polizaValida = true;
@@ -72,8 +90,7 @@ class Application_Model_Services_ServicesPolizas
 			$errorDesc = 'Ya cuenta con una garantía previamente registrada.';
 			
 		}
-		
-		
+
 		$estatus = array(
 			'valida' => $polizaValida,
 			'errorDesc' => $errorDesc,

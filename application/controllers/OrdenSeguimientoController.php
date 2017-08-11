@@ -247,8 +247,8 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     				$data['cambio_ejecutivo']='S';
     			}
     			
-    			//$email = new Application_Model_Services_Emails();
-    			//$email->cerrarOrdenServicio($orden);
+    			$email = new Application_Model_Services_Emails();
+    			$email->cerrarOrdenServicio($orden);
  
     			$data['estado']='ok';
     			$data['descripcion']='La orden ha sido concluida exitosamente';

@@ -129,21 +129,15 @@ class ordenCreacionController extends Zend_Controller_Action
     				$servicesPolizas->restarMinutosAPoliza($params['id_poliza'], $data['duracion_servicio']);
     			} else {
     				$idNuevaOrden = $ordenServicioDbTable->insert($data);
-    				
-    				//$email = new Application_Model_Services_Emails();
-    				//$email->agregarOrdenServicio($data);
+    				$email = new Application_Model_Services_Emails();
+    				$email->agregarOrdenServicio($data);
     				
     			}
-    			
-
-    			
 	    		// se inyecta el ID, estado y descripción en la respuesta al cliente
-    			
     			$data['id_orden_servicio']=$idNuevaOrden;
     			$data['estado']='ok';
     			$data['descripcion']='La orden ha sido creada exitosamente';
     			$this->_helper->json($data);
-    			
         	} else {
 				//else cuando no hay pólizas vigentes
     			$data['estado']='error';

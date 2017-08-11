@@ -80,7 +80,7 @@ class PolizasController extends Zend_Controller_Action
         	$servicesPolizas = new Application_Model_Services_ServicesPolizas();
         	$validaParams = $servicesPolizas ->esPolizaValida($params['id_producto'], $params['id_agencia'], 
         										$params['fecha_ini'], $params['fecha_fin'], $params['tipo']);
-
+	
         	 if($validaParams['valida'])
         	 {
         	 	$v1ClavePoliza = $servicesPolizas->obtenerV1DeClavePoliza($params['id_producto'], $params['id_agencia']);        	 	
@@ -88,9 +88,6 @@ class PolizasController extends Zend_Controller_Action
         	 	//Se crea la póliza con una clave sin el id
         		$idNuevaPoliza = $this->poliza->insert($data);
 
-        		// $email = new Application_Model_Services_Emails();
-        		// $email->altaPoliza($data);
-        		
         		// Validación cuando es una poliza para ICAAV la cual tiene id 3 en la tabla de productos.
         		if ($params['id_producto']==3) {
         			$servicePoliza = new Application_Model_Services_ServicesPolizas();
@@ -112,9 +109,13 @@ class PolizasController extends Zend_Controller_Action
         		$tipoPoliza = $tipoPolizaDB->find($poliza['tipo'])->toArray()[0];
         		
         		$data['descripcion']= $tipoPoliza['descripcion'];
+
+        		$email = new Application_Model_Services_Emails();
+        		$data['estatus_mail'] = $email->agregarPoliza($data);
         		
         		$data['estatus_descripcion']='La poliza ha sido guardada exitosamente';
         		$this->_helper->json($data);
+        		
 
         	 }
         	 else 
