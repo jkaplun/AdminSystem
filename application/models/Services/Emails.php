@@ -122,15 +122,17 @@ class Application_Model_Services_Emails {
 				'body' => $bodyCSS.$body.$bodyFooter
 		);
 		
-		$valuesDos['emails'][$agenciaDatos['email']] = utf8_decode($agenciaDatos['nombre']);
-		$valuesDos['emails'][$usuarioAdminDatos['email']] = utf8_decode($usuarioAdminDatos['nombre'].' '.$usuarioAdminDatos['apellido_paterno']);
-		$valuesDos['emails'][$agenciaUsuarioDatos['email']] =  utf8_decode($agenciaUsuarioDatos['nombre'].' '.$agenciaUsuarioDatos['apellidos']);
 		
 		$domain = strpos(strtolower($agenciaDatos['nombre']), 'travelnet');
 		
 		if ($domain==''){
-			$this->sendEmail($valuesDos);
+			$valuesDos['emails'][$agenciaDatos['email']] = utf8_decode($agenciaDatos['nombre']);
+			$valuesDos['emails'][$agenciaUsuarioDatos['email']] =  utf8_decode($agenciaUsuarioDatos['nombre'].' '.$agenciaUsuarioDatos['apellidos']);
 		}
+		
+		$valuesDos['emails'][$usuarioAdminDatos['email']] = utf8_decode($usuarioAdminDatos['nombre'].' '.$usuarioAdminDatos['apellido_paterno']);
+
+		$this->sendEmail($valuesDos);
 	}
 	
 	public function bodyFooterHTML(){
@@ -204,15 +206,16 @@ class Application_Model_Services_Emails {
 				'body' => $bodyCSS.$body.$bodyFooter
 		);
 		
-		$valuesDos['emails'][$agenciaDatos['email']] = utf8_decode($agenciaDatos['nombre']);
-		$valuesDos['emails'][$usuarioAdminDatos['email']] = utf8_decode($usuarioAdminDatos['nombre'].' '.$usuarioAdminDatos['apellido_paterno']);
-		$valuesDos['emails'][$agenciaUsuarioDatos['email']] =  utf8_decode($agenciaUsuarioDatos['nombre'].' '.$agenciaUsuarioDatos['apellidos']);
-		
 		$domain = strpos(strtolower($agenciaDatos['nombre']), 'travelnet');
 		
 		if ($domain==''){
-			$this->sendEmail($valuesDos);
+			$valuesDos['emails'][$agenciaDatos['email']] = utf8_decode($agenciaDatos['nombre']);
+			$valuesDos['emails'][$agenciaUsuarioDatos['email']] =  utf8_decode($agenciaUsuarioDatos['nombre'].' '.$agenciaUsuarioDatos['apellidos']);
 		}
+		
+		$valuesDos['emails'][$usuarioAdminDatos['email']] = utf8_decode($usuarioAdminDatos['nombre'].' '.$usuarioAdminDatos['apellido_paterno']);
+		
+		$this->sendEmail($valuesDos);
 		
 	}
 
