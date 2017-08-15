@@ -235,6 +235,9 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     				$servicesPolizas->restarMinutosAPoliza($params['id_poliza'], $duracionServicio);
     				$data['id_orden_servicio_estatus']=6;
     				
+    				$email = new Application_Model_Services_Emails();
+    				$email->cerrarOrdenServicio($orden);
+    				
     			}
     			
     			$where = "id_orden_servicio = {$params['id_orden_servicio']}";
@@ -246,9 +249,6 @@ class OrdenSeguimientoController extends Zend_Controller_Action
     			if ($params['id_usuario_admin_atiende'] != $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario']){
     				$data['cambio_ejecutivo']='S';
     			}
-    			
-    			$email = new Application_Model_Services_Emails();
-    			$email->cerrarOrdenServicio($orden);
  
     			$data['estado']='ok';
     			$data['descripcion']='La orden ha sido concluida exitosamente';
