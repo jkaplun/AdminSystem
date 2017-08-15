@@ -78,6 +78,9 @@ class ActualizacionesController extends Zend_Controller_Action
     			
     			$a->insert($data);
     			
+    			$email = new Application_Model_Services_Emails();
+    			$email->registrarActualizacion($data);
+    			
     			$this->redirect('actualizaciones/success');
     			
     		} else {

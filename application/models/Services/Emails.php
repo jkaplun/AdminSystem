@@ -370,37 +370,18 @@ class Application_Model_Services_Emails {
 		$usuarioAdminDatosTitular = $usuarioAdmin->find( $agenciaDatos['id_usuario_soporte_titular'] )->toArray()[0];
 		
 		$bodyCSS = $this->bodyStyleCSS();
-		
-		$data = array(
-				'id_producto' => $params['id_producto'],
-				'id_agencia' => $params['id_agencia'],
-				"id_usuario_solicita" => $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'],
-				'fecha_solicitud' => date("Y-m-d H:i:s"),
-				'titulo_update' => $params['titulo_update'],
-				'version_update' => $params['version_update'],
-				'http_update' => $params['http_update'],
-				'path_update' => $params['path_update'],
-				'archivo_update' => $params['archivo_update'],
-				'descripcion' => $params['descripcion'],
-				'id_usuario_cierra' => $params['id_usuario_cierra'],
-				'fecha_cierre' => date("Y-m-d H:i:s"),
-				"id_usuario_cierra" => $_SESSION['Zend_Auth']['USER_VALUES']['id_usuario'],
-		);
-		
+
 		$body = "
 		<h1>Se ha Registrado una Actualizaci&oacute;n.</h1>
 		<p>Agencia: <b>".utf8_decode($agenciaDatos['nombre']).".</b></p>
-		<p>N&uacute;mero de Folios: <b>".$values['folios_comprados'].".</b></p>
-		<p>Fecha de Compra: <b>".$values['fecha_compra'].".</b></p>
-		<p>Observaciones: <b>".$values['observaciones'].".</b></p>
-		<p>Tipo: <b>".(($values['id_folios_agencia_cat_tipo']==2)?'Nomina':'Icaav')."</b></p>
-				
+		<p>Nombre del Archivo: <b>".utf8_decode($values['archivo_update']).".</b></p>
+		<p>HTTP: <b>".utf8_decode($values['http_update']).".</b></p>				
 		<p>Saludos Cordiales.</p>";
 		
 		$bodyFooter = $this->bodyFooterHTML();
 		
 		$valuesDos = array(
-				'subject' => 'Registro de Actualización.',
+				'subject' => utf8_decode('Registro de Actualización.'),
 				'body' => $bodyCSS.$body.$bodyFooter
 		);
 		
@@ -408,16 +389,7 @@ class Application_Model_Services_Emails {
 			$valuesDos['emails'][$usuarioAdminDatosTitular['email']] = utf8_decode($usuarioAdminDatosTitular['nombre'].' '.$usuarioAdminDatosTitular['apellido_paterno']);
 		}
 		
-		$where = 'mail_add_folios="S"';
-		$usuarios = $usuarioAdmin->fetchAll($where)->toArray();
-		
 		$valuesDos['emails'][$usuarioAdminDatos['email']] = utf8_decode($usuarioAdminDatos['nombre'].' '.$usuarioAdminDatos['apellido_paterno']);
-		
-		if (count($usuarios)>0){
-			foreach ( $usuarios as $values){
-				$valuesDos['emails'][$values['email']] = utf8_decode($values['nombre'].' '.$values['apellido_paterno']);
-			}
-		}
 		
 		return $this->sendEmail($valuesDos);
 		
