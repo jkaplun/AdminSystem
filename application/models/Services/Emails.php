@@ -132,7 +132,11 @@ class Application_Model_Services_Emails {
 		
 		$valuesDos['emails'][$usuarioAdminDatos['email']] = utf8_decode($usuarioAdminDatos['nombre'].' '.$usuarioAdminDatos['apellido_paterno']);
 
-		$this->sendEmail($valuesDos);
+		if ($usuarioAdminDatos['mail_new_orden']=='S') {
+			$this->sendEmail($valuesDos);
+		}
+		
+		
 	}
 	
 	public function bodyFooterHTML(){
@@ -215,8 +219,9 @@ class Application_Model_Services_Emails {
 		
 		$valuesDos['emails'][$usuarioAdminDatos['email']] = utf8_decode($usuarioAdminDatos['nombre'].' '.$usuarioAdminDatos['apellido_paterno']);
 		
-		$this->sendEmail($valuesDos);
-		
+		if ($usuarioAdminDatos['mail_new_orden']=='S') {
+			$this->sendEmail($valuesDos);
+		}
 	}
 
 	/**
