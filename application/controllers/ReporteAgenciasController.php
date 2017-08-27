@@ -243,5 +243,53 @@ class ReporteAgenciasController extends Zend_Controller_Action
             $this->_helper->json($productos);
     }
 
+    
+    public function reporteVentasAction(){
+    	$this->view->polizas = array();
+    	$this->view->exportar = false;
+    	$this->view->InlineScript()->appendFile($this->view->baseUrl().'/js/reportes/agencias/ventas.js');
+    	
+    	$formVentas = new Application_Form_Reportes_Ventas();
+    	
+    	
+    	
+    	if ( $this->_request->isPost() ){
+    		$params = $this->_request->getParams();
+    		
+    		
+    		
+    		$data = array();
+    		
+    		if ( $params['fecha_base'] == 1 ) {
+    			$data['fecha_de']=$params['fecha_de'];
+    			$data['fecha_hasta']=$params['fecha_hasta'];
+    		}
+    		
+    		if ( $params['id_agencia'] != '' ) {
+    			$data['id_agencia']=$params['id_agencia'];
+    		}
+    		
+    		if ( $params['tipo'] != '' ) {
+    			$data['tipo']=$params['tipo'];
+    		}
+
+    		if (isset($params['Exportar'])) {
+    			$this->_helper->layout()->disableLayout();
+    			//$this->_helper->viewRenderer->setNoRender();
+    			$this->view->exportar = true;
+    		}
+    		
+    		//if (count($data)>0) {
+    			$polizas = new Application_Model_DbTable_Poliza();
+    			
+    			$this->view->polizas = $polizas->obtenerPolizasVigentesViewFiltroVentas($data);
+    			
+    		//}
+    		$formVentas->populate($params);
+    	}
+    	
+
+    	$this->view->formVentas = $formVentas;
+    }
 }
 

@@ -1,0 +1,45 @@
+<table class="table table-condensed">
+<thead>
+<tr>
+	<th>Clave Agencia</th>
+	<th>Nombre</th>
+	<th>RFC</th>
+	<th>Email</th>
+	<th>Prov. Timbrado</th>
+	<th>Ciudad</th>
+	<th>Horas Póliza</th>
+	<th>Cve. Póliza</th>
+	<th>Fecha Inicial</th>
+	<th>Fecha Final</th>
+	<th>Costo</th>
+	<th>Tipo</th>
+	<th>Horas Consumidas</th>
+	<th>Producto</th>
+	<th>Estatus Póliza</th>
+</tr>
+</thead>
+<tbody>
+<?php foreach ($this->polizas as $poliza) { ?>
+
+<tr>
+	<td><?= $poliza['clave_agencia'] ?></td>
+	<td><?= $poliza['nombre'] ?></td>
+	<td><?= $poliza['rfc'] ?></td>
+	<td><?= $poliza['email_agencia'] ?></td>
+	<td><?= $poliza['prov_timbrado'] ?></td>
+	<td><?= $poliza['clave_ciudad'] ?></td>
+	<td><?= $poliza['horas_poliza'] ?></td>
+	<td><?= $poliza['clave_poliza'] ?></td>
+	<td><?= $poliza['fecha_ini'] ?></td>
+	<td><?= $poliza['fecha_fin'] ?></td>
+	<td><?= $poliza['costo_poliza'] ?></td>
+	<td><?= $poliza['tipo'] ?></td>
+	<td><?= $poliza['horas_consumidas'] ?></td>
+	<td><?= $poliza['nombre_prod'] ?></td>
+	<td><?= $poliza['descripcion_poliza_estatus'] ?></td>
+</tr>
+
+
+<?php } ?>
+</tbody>
+</table>

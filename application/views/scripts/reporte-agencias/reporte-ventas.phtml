@@ -1,0 +1,51 @@
+<?php if ($this->exportar == true )  {
+	header("Content-Type:   application/vnd.ms-excel; ");
+	header("Content-Disposition: attachment; filename=Reporte.xls");  //File name extension was wrong
+	header("Expires: 0");
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header("Cache-Control: private",false);
+
+	?>
+
+	<?= utf8_decode($this->render('reporte-agencias/render/tablaVentas.phtml')) ?>
+
+<?php } else { ?>
+<link rel="stylesheet" type="text/css" href="public/css/daterangepicker.css">
+<script type="text/javascript" src="public/js/moment.js"></script>
+<script type="text/javascript" src="public/js/daterangepicker.js"></script>
+<h1>Reporte Ventas</h1><p>Agencias con Pólizas Vigentes</p>
+
+
+<div class="row">
+<form class="form-inline" method="post" name="filtroform" id="filtroform">
+<?= $this->formVentas->fecha_de ?>         
+<?= $this->formVentas->fecha_hasta ?>
+<div class="row">
+	<div class="col-md-2">
+		<?= $this->formVentas->id_agencia ?>            		
+	</div>
+		<div class="col-md-2">
+		<?= $this->formVentas->tipo ?>            		
+	</div>
+	<div class="col-md-3">
+		<?= $this->formVentas->fecha_base?>            		
+	</div>
+	<div class="col-md-3">
+		<?= $this->formVentas->daterange ?>
+	</div>
+		<div class="col-md-1">
+		<?= $this->formVentas->Exportar?>
+	</div>
+	<div class="col-md-1">
+		<?= $this->formVentas->Filtrar ?>
+	</div>
+</div>
+
+</form>
+</div>
+<br>
+<div class="row">
+	<h2>Se encontraron: <?= count($this->polizas) ?> póliza(s).</h2>
+	<?= $this->render('reporte-agencias/render/tablaVentas.phtml') ?>
+</div>
+<?php } ?>

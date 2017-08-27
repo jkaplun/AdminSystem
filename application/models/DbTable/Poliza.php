@@ -174,5 +174,31 @@ class Application_Model_DbTable_Poliza extends Zend_Db_Table_Abstract
 		
 	}
 	
+	/**
+	 *
+	 * @param integer $idAgencia
+	 * @return array
+	 */
+	public function obtenerPolizasVigentesViewFiltroVentas($params){
+		
+		$select = $this->_db->select()
+		->from ("view_agencia_polizas_vigentes", array("*"));
+		
+		
+		if ( isset($params['id_agencia']) ) {
+			$select->where('id_agencia="'.$params['id_agencia'].'"');
+		}
+		
+		if ( isset($params['tipo']) ) {
+			$select->where('tipo="'.$params['tipo'].'"');
+		}
+		
+		if ( isset($params['fecha_de']) && isset($params['fecha_hasta']) ) {
+			$select->where("fecha_fin between '{$params['fecha_de']}' and '{$params['fecha_hasta']}'");
+		}
+		
+		return $this->getAdapter ()->fetchAll( $select );
+		
+	}
 }
 

@@ -1,4 +1,4 @@
-var pathReportesController="public/reporteAgencias/"; 
+var pathReportesController="public/reporte-agencias/"; 
 var idAgenciaActual;
 
 

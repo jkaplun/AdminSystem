@@ -110,7 +110,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 					'fecha_alta',
 					'duracion_servicio',
 					'fecha_cierre',
-					'concluido',
+					//'concluido',
 					'conformidad'
 					)
 			)
@@ -123,7 +123,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 		->joinleft(array('po' => 'producto'),
 						'p.id_producto = po.id_producto',
 						array('nombre_prod as producto'))							
-		->where('p.id_agencia="'.$idAgencia.'" and p.concluido= "S"');
+		->where('p.id_agencia='.$idAgencia);
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 
@@ -139,7 +139,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 					'fecha_alta',
 					'duracion_servicio',
 					'fecha_cierre',
-					'concluido',
+					//'concluido',
 					'conformidad'
 					)
 			)
@@ -155,7 +155,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 		->joinleft(array('a' => 'agencia'),
 						'p.id_agencia = a.id_agencia',
 						array('nombre as nombre_agencia'))														
-		->where('id_usuario_admin_atiende="'.$idEjecutivo.'" and concluido= "S"');
+		->where('id_usuario_admin_atiende='.$idEjecutivo)->limit(100)->order("id_orden_servicio desc");
 		//echo $select;die;
 		return $this->getAdapter ()->fetchAll( $select );
 	}
@@ -172,7 +172,7 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 					'fecha_alta',
 					'duracion_servicio',
 					'fecha_cierre',
-					'concluido',
+					//'concluido',
 					'conformidad'
 					)
 			)
@@ -187,8 +187,8 @@ class Application_Model_DbTable_OrdenServicio extends Zend_Db_Table_Abstract {
 						array('nombre_prod as producto'))
 		->joinleft(array('a' => 'agencia'),
 						'p.id_agencia = a.id_agencia',
-						array('nombre as nombre_agencia'))														
-		->where('concluido= "S"');
+						array('nombre as nombre_agencia'))->limit(100);														
+		//->where('concluido= "S"');
 		//echo $select;die;
 		return $this->getAdapter ()->fetchAll( $select );
 	}	
