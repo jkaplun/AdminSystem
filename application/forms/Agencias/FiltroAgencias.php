@@ -135,7 +135,20 @@ class Application_Form_Agencias_FiltroAgencias extends Zend_Form
     	->addMultiOptions($options);
     	$this->addElement($element);
     	
-    	
+    	$options = array(
+    			'' => 'Todos',
+    			'1' => 'Con Póliza',
+    			'0' => 'Sin Póliza',
+    			
+    	);
+    	$element = new Zend_Form_Element_Select('con_sin_poliza');
+    	$element
+    	->setLabel("Póliza:")
+    	->removeDecorator('HtmlTag')
+    	->setAttrib("class","form-control input-sm selectpicker")
+    	->setAttrib("autocomplete","off")
+    	->addMultiOptions($options);
+    	$this->addElement($element);
     	
     }
 }

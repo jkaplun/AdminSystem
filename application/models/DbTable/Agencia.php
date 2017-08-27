@@ -136,8 +136,24 @@ class Application_Model_DbTable_Agencia extends Zend_Db_Table_Abstract
  				$select->orWhere("agencia_producto.id_producto=".$producto);
  			}	
 		}
-		$select->group("view_agencia.id_agencia")->order('nombre')->limit(100);
 		
+		
+		if ( isset($values['con_sin_poliza']) && $values['con_sin_poliza'] != '') {
+			if ($values['con_sin_poliza']==1){
+			$cond ="poliza.fecha_ini < CURDATE()
+		            AND poliza.fecha_fin > CURDATE()
+		            AND poliza.id_poliza_estatus <> 4";
+			$select->join("poliza", 'poliza.id_agencia=view_agencia.id_agencia',array());
+			$select->where($cond);
+			}
+			if ($values['con_sin_poliza']==0){
+				$cond = "id_agencia not in (SELECT id_agencia FROM view_agencia_polizas_vigentes)";
+				$select->where($cond);
+			}
+		}
+		
+		$select->group("view_agencia.id_agencia")->order('nombre');
+	//	echo $select;die;
 		return $this->getAdapter ()->fetchAll( $select );
 	}
 	

@@ -46,7 +46,9 @@
 		<div class="col-md-3">
 			<?= $this->formulario->prov_timbrado?>
 		</div>
-			
+		<div class="col-md-3">
+			<?= $this->formulario->con_sin_poliza?>
+		</div>	
 	</div>
 	<div class="row">
 		<div class="col-md-3">
@@ -58,7 +60,6 @@
 <br>
 <div class="well">
 <h2>Resultados: <?php echo count( $this->agencias ) ?> Agencia(s).</h2>
-<p>Nota: Muestra máximo 100 resultados.</p>
 </div>
 <p>
 <?php 
@@ -74,7 +75,7 @@
 </p>
 
 <?php if ( isset($this->agencias) ) { ?>
-<div class="row">
+<div class="row" style="max-height: 700px; overflow: scroll;">
 	<?php foreach ($this->agencias as $agencia) { ?>
 	<div class="row">	
 		<div class="col-md-12">
