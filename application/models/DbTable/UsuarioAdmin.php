@@ -67,6 +67,15 @@ class Application_Model_DbTable_UsuarioAdmin extends Zend_Db_Table_Abstract
   
   	return $this->getAdapter ()->fetchAll ( $select );
   }
+  
+  public function obtenerUsuariosConfigAgencia(){
+  	$select = $this->_db->select()->
+  	from ( $this->_name,'*')
+  	->where("activo='S' and es_ejecutivo='S' and p_ejecutivo='S'")
+  	->order('clave');
+
+  	return $this->getAdapter ()->fetchAll ( $select );
+  }
 
   public function obtenerTodosEjecutivos ()
   { 

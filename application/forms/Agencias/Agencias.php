@@ -462,7 +462,7 @@ class Application_Form_Agencias_Agencias extends Zend_Form
 
         
         $usuarioAdmin = new Application_Model_DbTable_UsuarioAdmin();
-        $usuarios = $usuarioAdmin->obtenerUsuarios();
+        $usuarios = $usuarioAdmin->obtenerUsuariosConfigAgencia();
         
         $arregloUsuariosSelect = array(''=> 'Sin Asignar');
         foreach ($usuarios as $key => $value){
