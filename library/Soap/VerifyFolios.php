@@ -13,6 +13,9 @@ Class VerifyFolios{
 	 */
 	public function Execute($xmlRequest){
 		
+		$xmlRequest = str_replace('<RFC>', '<RFC><![CDATA[', $xmlRequest);
+		$xmlRequest = str_replace('</RFC>', ']]></RFC>', $xmlRequest);
+
 		// Initializing the params array to sent it to the information Hotel model
 		$params = array();
 		$xmlResponse = "";
