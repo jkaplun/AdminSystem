@@ -77,7 +77,7 @@ class Application_Model_Services_ServicesPolizas
 			}
 		}
 
-		if ($tipo == 'G' || $tipo == 'X'){
+		if ($tipo == 'G'){
 			$poliza = new Application_Model_DbTable_Poliza();
 			
 			$values = array('id_agencia' => $idAgencia , 'id_producto' => $idProducto, 'tipo' => $tipo );
