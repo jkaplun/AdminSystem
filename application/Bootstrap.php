@@ -64,7 +64,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		session_set_cookie_params(36000);
 		
 		Zend_Session::start();
-	
+		
+		Zend_Registry::set('Zend_Locale', 'es');
+		
 // 		// Instance namespace Zend_Auth
 // 		$authNamespace = new Zend_Session_Namespace('Zend_Auth');
 	
