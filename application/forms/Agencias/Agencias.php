@@ -362,9 +362,10 @@ class Application_Form_Agencias_Agencias extends Zend_Form
         ->setLabel("Proveedor de Timbrado")
         ->removeDecorator('HtmlTag')
         ->addMultiOptions(array(
-                'X'=>'EDX',
+        		'B'=>'Buzon E',
                 'E'=>'Edicom',
         		'I'=>'Factura Inteligente',
+        		'X'=>'EDX',
         		'N'=>'No tiene',
         		''=>'Otro'
         ))
