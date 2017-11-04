@@ -13,6 +13,8 @@ Class AddUsedFolios{
 	 */
 	public function Execute($xmlRequest){
 		
+		$xmlRequest = str_replace('IT&0002251Q9', "<![CDATA[IT&0002251Q9]]>", $xmlRequest);
+		
 		// Initializing the params array to sent it to the information Hotel model
 		$params = array();
 		$xmlResponse = "";
