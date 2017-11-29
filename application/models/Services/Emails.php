@@ -48,39 +48,47 @@ class Application_Model_Services_Emails {
 	 * @return string
 	 */
 	public function sendEmail($values){
-		
+		$errorConfig = false;
 		$config = array('auth' => 'login',
 			'username' => $this->emailConfig['email'],
 			'password' => $this->emailConfig['password'],
 			'port' => $this->emailConfig['port'],
 		);
-		
-		$transport = new Zend_Mail_Transport_Smtp($this->emailConfig['smtp'], $config);
-		
-		$mail = new Zend_Mail();
-		
-		$mail->setFrom($this->emailConfig['email'], $this->emailConfig['nombre_comercial']);
-		
-		foreach ($values['emails'] as $key => $email){
-			if ($key!=''){
-				if($email=='') {
-					$email=$key;
-				}
-				$mail->addTo($key, $email);
-			}
-		}
-		$mail->setSubject($values['subject']);
-		$mail->setBodyHtml($values['body']);
-		
-		try {
-			$mail->send($transport);
-		} catch (Exception $e){
-			echo $e;
+		try { 
+			$transport = new Zend_Mail_Transport_Smtp($this->emailConfig['smtp'], $config);
+		} catch (Exception $e) {
+			$errorConfig =true;
 			return 'No Enviado';
 		}
+
+		if ( $errorConfig == false ) {
 		
-		return 'Enviado';
-		
+			$mail = new Zend_Mail();
+			
+			$mail->setFrom($this->emailConfig['email'], $this->emailConfig['nombre_comercial']);
+			
+			foreach ($values['emails'] as $key => $email){
+				if ($key!=''){
+					if($email=='') {
+						$email=$key;
+					}
+					$mail->addTo($key, $email);
+				}
+			}
+			$mail->setSubject($values['subject']);
+			$mail->setBodyHtml($values['body']);
+			
+			try {
+				$mail->send($transport);
+			} catch (Exception $e){
+				//echo $e;
+				return 'No Enviado';
+			}
+			
+			return 'Enviado';
+		} else {
+			return 'No Enviado';
+		}
 	}
 	
 	/**
